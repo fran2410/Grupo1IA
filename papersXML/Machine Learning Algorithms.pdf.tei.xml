@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Machine Learning Algorithms -A Review</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Batta</forename><surname>Mahesh</surname></persName>
+						</author>
+						<title level="a" type="main">Machine Learning Algorithms -A Review</title>
+					</analytic>
+					<monogr>
+						<idno type="ISSN">2319-7064</idno>
+					</monogr>
+					<idno type="MD5">80B94E18C8040CB8B3AA1171B057D6C3</idno>
+					<idno type="DOI">10.21275/ART20203995</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2-SNAPSHOT" ident="GROBID" when="2025-02-06T18:52+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Algorithm</term>
+					<term>Machine Learning</term>
+					<term>Pseudo Code</term>
+					<term>Supervised learning</term>
+					<term>Unsupervised learning</term>
+					<term>Reinforcement learning</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without being explicitly programmed. Learning algorithms in many applications that's we make use of daily. Every time a web search engine like Google is used to search the internet, one of the reasons that work so well is because a learning algorithm that</head><p>has learned how to rank web pages. These algorithms are used for various purposes like data mining, image processing, predictive analytics, etc. to name a few. The main advantage of using machine learning is that, once an algorithm learns what to do with data, it can do its work automatically. In this paper, a brief review and future prospect of the vast applications of machine learning algorithms has been made.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Since their evolution, humans have been using many types of tools to accomplish various tasks in a simpler way. The creativity of the human brain led to the invention of different machines. These machines made the human life easy by enabling people to meet various life needs, including travelling, industries, and computing. And Machine learning is the one among them.</p><p>According to Arthur Samuel Machine learning is defined as the field of study that gives computers the ability to learn without being explicitly programmed. Arthur Samuel was famous for his checkers playing program. Machine learning (ML) is used to teach machines how to handle the data more efficiently. Sometimes after viewing the data, we cannot interpret the extract information from the data. In that case, we apply machine learning. With the abundance of datasets available, the demand for machine learning is in rise. Many industries apply machine learning to extract relevant data. The purpose of machine learning is to learn from the data. Many studies have been done on how to make machines learn by themselves without being explicitly programmed. Many mathematicians and programmers apply several approaches to find the solution of this problem which are having huge data sets.</p><p>Machine Learning relies on different algorithms to solve data problems. Data scientists like to point out that there"s no single one-size-fits-all type of algorithm that is best to solve a problem. The kind of algorithm employed depends on the kind of problem you wish to solve, the number of variables, the kind of model that would suit it best and so on.</p><p>Here"s a quick look at some of the commonly used algorithms in machine learning (ML) </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supervised</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Decision Tree</head><p>Decision tree is a graph to represent choices and their results in form of a tree. The nodes in the graph represent an event or choice and the edges of the graph represent the decision rules or conditions. Each tree consists of nodes and branches. Each node represents attributes in a group that is to be classified and each branch represents a value that the node can take.     The procedure follows a simple and easy way to classify a given data set through a certain number of clusters. The main idea is to define k centers, one for each cluster. These centers should be placed in a cunning way because of different location causes different result. So, the better choice is to place them is much as possible far away from each other.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure: K-Means Clustering</head><p>The next step is to take each point belonging to a given data set and associate it to the nearest center. When no point is pending, the first step is completed and an early group age is done. At this point we need to re-calculate k new centroids as bary center of the clusters resulting from the previous step. Semi Supervise Learning: Semi-supervised machine learning is a combination of supervised and unsupervised machine learning methods. It can be fruit-full in those areas of machine learning and data mining where the unlabeled data is already present and getting the labeled data is a tedious process. With more common supervised machine learning methods, you train a machine learning algorithm on a "labeled" dataset in which each record includes the outcome information. The some of Semi Supervise learning algorithms are discussed below</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Transductive SVM</head><p>Transductive support vector machines (TSVM) has been widely used as a means of treating partially labeled data in semisupervised learning. Around it, there has been mystery because of lack of understanding its foundation in generalization. It is used to label the unlabeled data in such a way that the margin is maximum between the labeled and unlabeled data. Finding an exact solution by TSVM is a NPhard problem.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Generative Models</head><p>A Generative model is the one that can generate data. It models both the features and the class (i.e. the complete data). If we model P(x,y): I can use this probability distribution to generate data points -and hence all algorithms modeling P(x,y) are generative. One labeled example per component is enough to confirm the mixture distribution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Self-Training</head><p>In self-training, a classifier is trained with a portion of labeled data. The classifier is then fed with unlabeled data. The unlabeled points and the predicted labels are added together in the training set. This procedure is then repeated further. Since the classifier is learning itself, hence the name self-training.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reinforcement Learning</head><p>Reinforcement learning is an area of machine learning concerned with how software agents ought to take actions in an environment in order to maximize some notion of cumulative reward. Reinforcement learning is one of three basic machine learning paradigms, alongside supervised learning and unsupervised learning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure: Reinforcement Learning</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Multitask Learning</head><p>Multi-Task learning is a sub-field of Machine Learning that aims to solve multiple different tasks at the same time, by taking advantage of the similarities between different tasks. This can improve the learning efficiency and also act as a regularize. Formally, if there are n tasks (conventional deep learning approaches aim to solve just 1 task using 1 particular model), where these n tasks or a subset of them are related to each other but not exactly identical, Multi-Task Learning (MTL) will help in improving the learning of a particular model by using the knowledge contained in all the n tasks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ensemble Learning</head><p>Ensemble learning is the process by which multiple models, such as classifiers or experts, are strategically generated and combined to solve a particular computational intelligence problem. Ensemble learning is primarily used to improve the performance of a model, or reduce the likelihood of an unfortunate selection of a poor one. Other applications of ensemble learning include assigning a confidence to the decision made by the model, selecting optimal features, data fusion, incremental learning, nonstationary learning and error-correcting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Boosting:</head><p>The term "Boosting" refers to a family of algorithms which converts weak learner to strong learners. Boosting is a technique in ensemble learning which is used to decrease bias and variance. Boosting is based on the question posed by Kearns and Valiant "Can a set of weak learners create a single strong learner?" A weak learner is defined to be a classifier, a strong learner is a classifier that is arbitrarily well-correlated with the true classification.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supervised Neural Network</head><p>In the supervised neural network, the output of the input is already known. The predicted output of the neural network is compared with the actual output. Based on the error, the parameters are changed, and then fed into the neural network again. Supervised neural network is used in feed forward neural network.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure: Supervised Neural Network</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Unsupervised Neural Network</head><p>The neural network has no prior clue about the output the input. The main job of the network is to categorize the data according to some similarities. The neural network checks the correlation between various inputs and groups them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure: Unsupervised Neural Network</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reinforced Neural Network</head><p>Reinforcement learning refers to goal-oriented algorithms, which learn how to attain a complex objective (goal) or maximize along a particular dimension over many steps; for example, maximize the points won in a game over many moves. They can start from a blank slate, and under the right conditions they achieve superhuman performance. Like a child incentivized by spankings and candy, these algorithms are penalized when they make the wrong decisions and rewarded when they make the right onesthis is reinforcement.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure: Reinforced Neural Network</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instance-Based Learning</head><p>Instance-based learning refers to a family of techniques for classification and regression, which produce a class label/predication based on the similarity of the query to its nearest neighbor(s) in the training set. In explicit contrast to other methods such as decision trees and neural networks, instance-based learning algorithms do not create an abstraction from specific instances. Rather, they simply store all the data, and at query time derive an answer from an examination of the queries nearest neighbour (s).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>K-Nearest Neighbor</head><p>The k-nearest neighbors (KNN) algorithm is a simple, supervised machine learning algorithm that can be used to solve both classification and regression problems.  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>ISSN</head><figDesc>Figure: Supervised learning Workflow</figDesc><graphic coords="1,313.55,627.30,240.00,102.86" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure :</head><label>:</label><figDesc>Figure: Decision Tree Decision Tree Pseudo Code: def decisionTreeLearning(examples, attributes, parent_examples): if len(examples) == 0: return pluralityValue(parent_examples) # return most probable answer as there is no training data left elif len(attributes) == 0: return pluralityValue(examples) elif (all examples classify the same): return their classification A = max(attributes, key(a)=importance(a, examples) # choose the most promissing attribute to condition on tree = new Tree(root=A) for value in A.values(): exs = examples[e.A == value] subtree = decisionTreeLearning(exs, attributes.remove(A), examples) # note implementation should probably wrap the trivial case returns into trees for consistency tree.addSubtreeAsBranch(subtree, label=(A, value) return tree Navie Bayes It is a classification technique based on Bayes Theorem with an assumption of independence among predictors. In simple terms, a Naive Bayes classifier assumes that the presence of a particular feature in a class is unrelated to the presence of any other feature. Naïve Bayes mainly targets the text classification industry. It is mainly used for clustering and classification purpose depends on the conditional probability of happening.</figDesc><graphic coords="2,52.70,153.94,237.00,138.00" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure</head><figDesc>Figure: Navie Bayes Pseudo Code of Navie Bayes Input: Training dataset T, F= (f1, f2, f3,.., fn) // value of the predictor variable in testing dataset. Output: A class of testing dataset. Steps: 1) Read the training dataset T; 2) Calculate the mean and standard deviation of the predictor variables in each class; 3) Repeat Calculate the probability of fi using the gauss density equation in each class; Until the probability of all predictor variables (f1, f2, f3,.., fn) has been calculated. 4) Calculate the likelihood for each class; 5) Get the greatest likelihoodSupport Vector MachineAnother most widely used state-of-the-art machine learning technique is Support Vector Machine (SVM). In machine learning, support-vector machines are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis. In addition to performing linear classification, SVMs can efficiently perform a non-linear classification using what is called the kernel trick, implicitly mapping their inputs into high-dimensional feature spaces. It basically, draw margins between the classes. The margins are drawn in such a fashion that the distance between the margin and the classes is maximum and hence, minimizing the classification error.</figDesc><graphic coords="2,312.05,50.45,244.50,129.75" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure :</head><label>:</label><figDesc>Figure: Support Vector Machine Pseudo Code of Support Vector Machine initialize Yi = YI for i ⋹ I repeat</figDesc><graphic coords="2,324.05,548.17,218.25,141.00" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure :</head><label>:</label><figDesc>Figure: Unsupervised Learning Principal Component Analysis Principal component analysis is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components. In this the dimension of the data is reduced to make the computations faster and easier. It is used to explain the variance-covariance structure of a set of variables through linear combinations. It is often used as a dimensionality-reduction technique.</figDesc><graphic coords="3,319.55,50.45,228.03,118.52" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure :</head><label>:</label><figDesc>Figure: Principal Component AnalysisK-Means ClusteringK-means is one of the simplest unsupervised learning algorithms that solve the well known clustering problem. The procedure follows a simple and easy way to classify a given data set through a certain number of clusters. The main idea is to define k centers, one for each cluster. These centers should be placed in a cunning way because of different location causes different result. So, the better choice is to place them is much as possible far away from each other.</figDesc><graphic coords="3,92.38,306.94,420.82,214.42" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure : ISSN</head><label>:</label><figDesc>Figure: Pseudo Code of K-Means Clustering</figDesc><graphic coords="3,323.30,612.93,219.75,143.25" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure : Figure :</head><label>::</label><figDesc>Figure: Boosting Pseudo codeBaggingBagging or bootstrap aggregating is applied where the accuracy and stability of a machine learning algorithm needs to be increased. It is applicable in classification and regression. Bagging also decreases variance and helps in handling overfitting.</figDesc><graphic coords="4,324.80,383.92,217.50,224.25" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure :</head><label>:</label><figDesc>Figure: Neural Networks An artificial neural network behaves the same way. It works on three layers. The input layer takes input. The hidden layer processes the input. Finally, the output layer sends the calculated output.</figDesc><graphic coords="5,67.70,335.94,206.25,102.75" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><figDesc>It's easy to implement and understand, but has a major drawback of Commons Attribution CC BY becoming significantly slows as the size of that data in use grows.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure :</head><label>:</label><figDesc>Figure: Pseudo code of KNN 2. Conclusion Machine Learning can be a Supervised or Unsupervised. If you have lesser amount of data and clearly labelled data for training, opt for Supervised Learning. Unsupervised Learning would generally give better performance and results for large data sets. If you have a huge data set easily available, go for deep learning techniques. You also have learned Reinforcement Learning and Deep Reinforcement Learning. You now know what Neural Networks are, their applications and limitations. This paper surveys various machine learning algorithms. Today each and every person is using machine learning knowingly or unknowingly. From getting a recommended product in online shopping to updating photos in social networking sites. This paper gives an introduction to most of the popular machine learning algorithms.</figDesc><graphic coords="6,53.45,84.95,235.50,70.50" type="bitmap"/></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Paper ID: ART20203995 DOI: 10.21275/ART20203995</p></note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Building Machine Learning Systems with Python</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Richert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">P</forename><surname>Coelho</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Packt Publishing Ltd</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">W. Richert, L. P. Coelho, "Building Machine Learning Systems with Python", Packt Publishing Ltd., ISBN 978-1-78216-140-0</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">A Fuzzy K-Nearest Neighbor Algorithm</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Keller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Givens</surname><genName>Jr</genName></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Systems, Man and Cybernetics</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<date type="published" when="1985-08">August 1985</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">J. M. Keller, M. R. Gray, J. A. Givens Jr., "A Fuzzy K- Nearest Neighbor Algorithm", IEEE Transactions on Systems, Man and Cybernetics, Vol. SMC-15, No. 4, August 1985</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Machine learning: an algorithmic perspective</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Marsland</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<publisher>CRC press</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. Marsland, Machine learning: an algorithmic perspective. CRC press, 2015.</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A survey on machine learning techniques in cognitive radios</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bkassiny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Jayaweera</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Communications Surveys &amp; Tutorials</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1136" to="1159"/>
+			<date type="published" when="2012-10">Oct. 2012</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. Bkassiny, Y. Li, and S. K. Jayaweera, "A survey on machine learning techniques in cognitive radios," IEEE Communications Surveys &amp; Tutorials, vol. 15, no. 3, pp. 1136-1159, Oct. 2012.</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Introduction: The Challenge of Reinforcement Learning</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Sutton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Machine Learning</title>
+		<meeting><address><addrLine>Boston</addrLine></address></meeting>
+		<imprint>
+			<publisher>Kluwer Academic Publishers</publisher>
+			<date type="published" when="1992">1992</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="225" to="227"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">R. S. Sutton, "Introduction: The Challenge of Reinforcement Learning", Machine Learning, 8, Page 225-227, Kluwer Academic Publishers, Boston, 1992</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Machine Learning in action</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Harrington</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Manning Publications Co</publisher>
+			<pubPlace>Shelter Island, New York</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">P. Harrington, "Machine Learning in action", Manning Publications Co., Shelter Island, New York, 2012</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Artificial Intelligence in Education: A Review</title>
+				<funder>
+					<orgName type="full">of Educational Commission of Fujian Province</orgName>
+				</funder>
+				<funder ref="#_3x82fPN">
+					<orgName type="full">Humanities and Social Science Planning Funds of Fujian Province</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Lijia</forename><surname>Chen</surname></persName>
+							<affiliation key="aff0">
+								<note type="raw_affiliation"><label>1</label> School of Design , Yango University , Fuzhou 350015 , China</note>
+								<orgName type="department">School of Design</orgName>
+								<orgName type="institution">Yango University</orgName>
+								<address>
+									<postCode>350015</postCode>
+									<settlement>Fuzhou</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pingping</forename><surname>Chen</surname></persName>
+							<affiliation key="aff1">
+								<note type="raw_affiliation"><label>2</label> School of Advanced Manufacturing , Science Park of Fuzhou University , Jinjiang 362251 , China</note>
+								<orgName type="department">School of Advanced Manufacturing</orgName>
+								<orgName type="institution">Science Park of Fuzhou University</orgName>
+								<address>
+									<postCode>362251</postCode>
+									<settlement>Jinjiang</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>Member, IEEE</roleName><forename type="first">Zhijian</forename><surname>Lin</surname></persName>
+							<affiliation key="aff2">
+								<note type="raw_affiliation"><label>3</label> School of Information , Fuzhou University , Fuzhou 35008 , China</note>
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">Fuzhou University</orgName>
+								<address>
+									<postCode>35008</postCode>
+									<settlement>Fuzhou</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Artificial Intelligence in Education: A Review</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">CD94EEFE2C5BC4F6E41615ED56339F25</idno>
+					<idno type="DOI">10.1109/ACCESS.2020.2988510</idno>
+					<note type="submission">Received April 5, 2020, accepted April 14, 2020, date of publication April 17, 2020, date of current version May 5, 2020.</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2-SNAPSHOT" ident="GROBID" when="2025-02-06T18:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Education</term>
+					<term>artificial intelligence</term>
+					<term>leaner</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The purpose of this study was to assess the impact of Artificial Intelligence (AI) on education. Premised on a narrative and framework for assessing AI identified from a preliminary analysis, the scope of the study was limited to the application and effects of AI in administration, instruction, and learning. A qualitative research approach, leveraging the use of literature review as a research design and approach was used and effectively facilitated the realization of the study purpose. Artificial intelligence is a field of study and the resulting innovations and developments that have culminated in computers, machines, and other artifacts having human-like intelligence characterized by cognitive abilities, learning, adaptability, and decision-making capabilities. The study ascertained that AI has extensively been adopted and used in education, particularly by education institutions, in different forms. AI initially took the form of computer and computer related technologies, transitioning to web-based and online intelligent education systems, and ultimately with the use of embedded computer systems, together with other technologies, the use of humanoid robots and web-based chatbots to perform instructors' duties and functions independently or with instructors. Using these platforms, instructors have been able to perform different administrative functions, such as reviewing and grading students' assignments more effectively and efficiently, and achieve higher quality in their teaching activities. On the other hand, because the systems leverage machine learning and adaptability, curriculum and content has been customized and personalized in line with students' needs, which has fostered uptake and retention, thereby improving learners experience and overall quality of learning.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>As illustrated by Henry Ford in the analogy, innovation does not mean working that the society should work only with what has been the norm, such as finding ways of making horses faster. Sometimes, it is necessary to search beyond the norm, develop new ways of doing things. Instead of making horses faster, build the automobile, which will be faster than the horse and take a person from Point A to Point B faster. These principles and approaches have driven the rapid developments in technology experienced over the years, particularly in the education sector.</p><p>The year is 1950. Dr. Potter, a tenured professor at a local university shuffles to a class, a heavy load of papers under his arm. He has just marked all the papers, after reading</p><p>The associate editor coordinating the review of this manuscript and approving it for publication was Xiaochun Cheng. and assessing the grammar and content of each of the papers handed in by the 40 students in his class. Going through some of the papers, Dr. Potter felt that the content in there had been plagiarized from other sources, but he had no sure way of ascertaining from where the student had copied the content materials. Fast forward, in 2019, Dr. Potter now walks into a class, barely carrying any papers, but having read, flagged incidents of plagiarism for disciplinary action, and graded papers for an even larger number of students. Sometimes, when he is off campus, he can dial-in or video conference into the class and can still perform his duties and responsibilities leveraging technology. The introduction, advancements, and proliferation of technology, more particularly, artificial intelligence, has made it easier for instructors to dispense their duties more effectively and efficiently. These technological innovations have also permeated other sectors of the academia, fostering effectiveness and efficiency.</p><p>Prior to the introduction of computers and other related technologies, instructors and students, engaged in instructions and learning mechanically, or through the pure application of natural human effort. With the introduction of microcomputers, and by extension, personal computers in the 1970s, which according to Flamm, provided more computing power and marked an important transition to electronic computers for the mass market <ref type="bibr" target="#b0">[1]</ref>. In agreement, Campbell-Kelly opined that with developments of the electronic computers, more particularly, and the availability of the same for different entities across different sectors of the economy, was precipitated by the developments of personal computers in the 1970s <ref type="bibr" target="#b1">[2]</ref>. Personal computers development made it possible for individuals and other non-governmental entities to own and use computers for different reasons. These transitions harbingered the proliferation of computers in different sectors of the economy and society.</p><p>Leveraging earlier research into programmed instructions from the mid-1900s, developments in computers and related computing technologies saw the use of computers in different parts of the education sector, more specifically, different departments in educational institutions, such as the development of computer aided instruction and learning (CAI/L) in classroom interactions <ref type="bibr" target="#b2">[3]</ref>. Later developments in computers and computer-related technologies, including networking, the internet, the world wide web, and increased processing, computing, and other capabilities, including different programs and software packages that are task oriented, have seen the increased application of computers in different ways in the education sector. More specifically, in different departments in education institutions.</p><p>Computer and information communication technologies have over the years continued to evolve, leading to the development of artificial intelligence. Artificial intelligence, according to Coppin, is the ability of machines to adapt to new situations, deal with emerging situations, solve problems, answer questions, device plans, and perform various other functions that require some level of intelligence typically evident in human beings <ref type="bibr" target="#b3">[4]</ref> (p.4). In another definition, Whitby defined artificial intelligence as the study of intelligence behavior in human beings, animals, and machines and endeavoring to engineer such behavior into an artifact, such as computers and computer-related technologies <ref type="bibr" target="#b4">[5]</ref> (p.1). Drawing from these definitions, it is evident that artificial intelligence is the culmination of computers, computer-related technologies, machines, and information communication technology innovations and developments, giving computers the ability to perform near or human-like functions. In line with the adoption and use of new technologies in education, artificial intelligence has also been extensively leveraged in the education sector.</p><p>For example, Devedžić observed that Web Intelligence (WI) and Artificial Intelligence (AI) research and development focuses on different elements, including machine learning to create distributed intelligence and creating a balance between Web technology and intelligent agent technology, agent self-organization, learning, and adaptation among other aspects of WI and AI that enable it to adapt to its environment and perform intelligent functions, which should be leveraged to foster improvements in the education sector <ref type="bibr" target="#b5">[6]</ref> (p.29). Indeed, artificial intelligence has been adopted and permeated various areas of the education sector, or departments in educational institutions. Use of artificial intelligence in education has had a major impact, including improved efficiency, global learning, customized/personalized learning, smarter content, and improved effectiveness and efficiency in education administration among others <ref type="bibr" target="#b6">[7]</ref>. Artificial intelligence continues to develop, and new ways of application in education emerge.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. ARTIFICIAL INTELLIGENCE IN CURRENT EDUCATION</head><p>The mention of artificial intelligence brings to mind a supercomputer, a computer with immense processing capabilities, including adaptive behavior, such as inclusion of sensors, and other capabilities, that enable it to have human-like cognition and functional abilities, and indeed, which improve the supercomputers interaction with human beings. Indeed, different motion pictures have been made to showcase the abilities of AI, such as in smart buildings, such as the ability to manage air quality in a building, temperatures, and or playing music depending on the sensed mood of the occupants of the space. Within the education sector, there has been increased application of artificial intelligence, going over and above the conventional understanding of AI as a supercomputer to include embedded computer systems.</p><p>For example, embedded into robots, AI, or computers and supporting equipment enable the creation of robots that improve the learning experience of the student, from the most basic unit of education, early childhood education. Indeed, Timms posited that cobots or the application of robots, working together with teachers or colleague robots (cobots) are being applied to teach children routine tasks, including spelling and pronunciation and adjusting to the students' abilities <ref type="bibr" target="#b6">[7]</ref>- <ref type="bibr" target="#b8">[9]</ref>. Similarly, the web-based and online education, as enumerated in different studies, has transitioned from simply availing materials online or on the web for students to simply download, study, and do assignments to just pass, to include intelligent and adaptive web-based systems that learn instructor and learner behavior to adjust accordingly, to enrich the educational experience <ref type="bibr" target="#b5">[6]</ref>, <ref type="bibr" target="#b10">[11]</ref>, <ref type="bibr" target="#b17">[18]</ref>, <ref type="bibr" target="#b18">[19]</ref>. Artificial intelligence in education, according to Chassignol et al. has been incorporated into administration, instruction or teaching, and learning <ref type="bibr" target="#b10">[11]</ref>. These areas, which Chassignol et al. identify as the framework for analyzing and understanding artificial intelligence in education, will form the scope of this study.</p><p>The application of AI algorithms and systems in education are gaining increased interest year by year. Fig. <ref type="figure" target="#fig_0">1</ref> shows the rising number of papers published in the topics ''AI'' and ''Education'' from Web of Science and Google scholar since 2010. Note that the papers published in 2015-2019 accounted for a large proportion, i.e., 70% of all the papers indexed. As education evolves, researchers are trying to apply advanced AI techniques, i.e., deep learning, data mining, to deal with complex issues and customize teaching method for individual student.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. PURPOSE OF THE STUDY</head><p>With the continued application or use of information technology, it is inevitable that it has impacted the education in different ways. This study seeks to assess how the use of AI, in its different forms, in education, has impacted or affected different aspects of education. More particularly, the study will seek to assess how AI has affected teaching, learning, and administration and management areas of education. It is anticipated that the study will ascertain that AI has fostered effectiveness and efficiency in the performance of administrative tasks in education, and overall fostered improved instructional and learning effectiveness in education.</p><p>This study will benefit various stakeholders in the education sector. It will contribute to the growing study and development of knowledge, theory, and empirical findings that identify and discuss the different ways in which AI has affected education. It will benefit scholars, professionals, and policy makers, such as administrators, management and leadership of educational institutions and the education sector, by fostering evidence-based decision-making and management and leadership practices in the sector. The findings will also augment the findings by other studies and inform government policy and actions aimed at fostering meaningful use of information technology, particularly, AI, in the education sector. For example, with an understanding of the impact of AI on education sector, and an evaluation of the exact nature of such impact, including improved instructional and learning effectiveness, the government, working with educational institutions can develop a policy, strategy, and initiatives that promote the beneficial impact or effects and mitigate the possible adverse effects of AI on education.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. REVIEW STRATEGY 1) MATERIALS AND METHODS</head><p>The study seeks to assess the impact of AI on education. More particularly, it seeks to ascertain how AI has affected education, looking at various aspects of education, including administration, instruction, and learning. Accordingly, the study takes a retrogressive approach, entailing assessing secondary data and materials or studies that have been undertaken. Indeed, Snyder posited that a systematic or semisystematic literature review, a review of secondary data, provides a deeper understanding of the study phenomenon <ref type="bibr" target="#b7">[8]</ref>. This approach ensures that the study is premised on empirical or is evidence backed because only studies, including metaanalysis, that have been conducted on the subject matter, support the identification, analysis, understanding, and synthesis of the ways in which AI has affected and impacted education. Generally, a qualitative research design, incorporating qualitative content and thematic analysis is used to assess the different ways. Thematic and content analysis entails undertaking a thorough critique of each piece of text and identifying recurring themes from a review of different texts, which then form the basis for inferences and conclusions for descriptive studies <ref type="bibr" target="#b9">[10]</ref>. It is an appropriate research design and strategy considering the aim of this study, to assess the impact of AI on education.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2) SEARCH STRATEGY</head><p>Key words and search strings will be used to search different databases, including EBSCOhost, ProQuest,Web of Science. In addition, the key words and search strings are used to search Google Scholar to identify articles from different journals that have focused on researching the impact of AI on education. The journals containing the articles are then searched on Scimago and the journals with an H-Index of 20 and above are included in the study. An H-Index is an author level measure of scientific productivity in terms of publications and citations and by extension, contribution to science and scholarly pursuits; and the higher the H-Index, the more reputable the journal and the authors published in the journal are. A total of more than forty articles, including journal articles, professional publications, and government and institutional reports were selected after the use of an eliminative process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3) SAMPLING: EXCLUSION AND INCLUSION CRITERIA</head><p>Initially, a total of 250 articles, published after 2009 were selected premised on the aforementioned criteria; matching the search key words and search strings and inclusion in a journal with an H-Index of 20 and above. A further review and analysis of these articles, identifying articles that focused on the nature of AI and the impact it had on education, together with the H-Index, narrowing down the number of articles for analysis to thirty, a sample size that was considered sufficient to inform conclusions and inferences about the impact of AI on education, taking a retrospective approach. Further, studies that had taken a quantitative approach in identifying and assessing the impact of AI on education, while at the same time, meeting the criteria aforementioned, were given preference.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. ARTIFICIAL INTELLIGENCE IN EDUCATION</head><p>From a review of the convergence of AI with education as discussed by <ref type="bibr">Chassignol et al.</ref>, the scope of this study will cover the impact of AI on the administration and management, instruction or teaching, and learning functions or areas in the education sector. This section of the report provides an overview and brief discussion of the results of the study from a review of various articles that have assessed the nature and impact of artificial intelligence in the education sector.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. NATURE OF ARTIFICIAL INTELLIGENCE</head><p>Artificial intelligence (AI) is conventionally heavily associated with computers. However, it is evident, from a review of the various articles, particularly within the context of the education sector, that while computers may have formed the basis the development of artificial intelligence, there is a gravitation away from the computer alone, the hardware and software, or the equipment, as being artificial intelligence. Embedded computers, sensors, and other emerging technologies have facilitated the transfer of artificial intelligence to machines and other items, such as buildings and robots <ref type="bibr" target="#b10">[11]</ref>. Indeed, Chassignol et al. provides a two-faceted definition and description of AI. They define AI as a field and a theory. As a field of study, they define AI as a study area in computer science whose pursuits are aimed at solving different cognitive problems commonly associated with the human intelligence, such as learning, problem solving, and pattern recognition, and subsequently adapting <ref type="bibr" target="#b10">[11]</ref>. As a theory, Chassignol et al. defined AI as a theoretical framework guiding the development and use of computer systems with the capabilities of human beings, more particularly, intelligence and the ability to perform tasks that require human intelligence, including visual perception, speech recognition, decision-making, and translation between languages <ref type="bibr" target="#b10">[11]</ref> (p.17).</p><p>Other scholars and in other studies, the definition of AI provided brings to the fore near similar elements or characteristics of AI. Sharma et al, defined AI as machines that have the ability to approximate human reasoning <ref type="bibr" target="#b12">[13]</ref> (p.1). Similarly, Pokrivcakova, with a definition and description orientated to the education sector, observed that AI is as a results of many decades of research and development bringing together system designers, data scientists, product designers, statisticians, linguists, cognitivescientists, psychologists, education experts and many others to develop education systems with some level of intelligence and ability to perform different functions, including to help teachers and support learners to develop their knowledge and flexible skills for a constantly changing world <ref type="bibr" target="#b13">[14]</ref> (p.138). The author posited that AI uses improved capabilities of programs and software, such as algorithmic machine learning, which provides the machines with an ability to perform different tasks that require human-like intelligence and ability to adapt to the immediate environment <ref type="bibr" target="#b13">[14]</ref>. Similar observations are made by Wartman et al., who defined artificial intelligence as the ability of computers and machines to mimic human cognition and actions <ref type="bibr" target="#b16">[17]</ref>.</p><p>Generally, artificial intelligence, from these definitions and descriptions, encompasses the development of machines that have some level of intelligence, with the ability to perform human like functions, including cognitive, learning, decisionmaking, and adapting to the environment. As such, there are specific characteristics and tenets that come out as key for AI. Intelligence or machine ability to demonstrate some level of intelligence and perform a wide range of functions and capabilities that require human-like abilities, comes out as a key characteristic of AI from this definition and discussion of AI.</p><p>Recently, AI and machine learning are widely studied to be applied in mobile devices, which aim to enhance computation quality and create possibilities for new applications, such as face unlock, speech recognition, natural language translation, and virtual reality. However, machine learning requires huge computation capability to perform complex training and learning. To address this issue, someplatforms for running computationally efficiently were proposed. In 2016, Qualcomm introduced the Snapdragon Neural Processing Engine to accelerate the execution of neural networks with their GPU processors. HiSilicon proposed the HiAI platform for running neural networks. It should be noted that Android Neural Networks API was designed to quickly execute machine learning models on mobile devices <ref type="bibr" target="#b36">[37]</ref>. This API brings a lot of utility to the mobile by reducing network latency and complexity. With respect to AI-related learning network, SqueezeNet, MobileNet, and Shufflenet are well developed for mobile phones <ref type="bibr" target="#b37">[38]</ref>. The technical development of AI in mobile devices takes mobile education to the higher level, which provides convenience by helping student in less time and achieves interactive and personalized learning. For instance, virtual reality facilitates the learning process beyond the learning space to create a global classroom since AI can connect students to the virtual classroom. In addition, AI-based chatbots provide a personalized online learning, and also turn instructor into chat conversations. This technology can assess the students' level of understanding.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. TECHNICAL ASPECTS OF AI IN EDUCATION</head><p>AI-aided education includes intelligent education, innovative virtual learning, and data analysis and prediction. Major scenarios of AI in education and key technologies supporting are listed in Table <ref type="table">1</ref>. Note that AI-enable education is playing a more important role as learning requirements promotes <ref type="bibr" target="#b11">[12]</ref>. Intelligent education systems provide timely and personalized instruction and feedback for both instructors and learners. They are designed to improve learning value and efficiency by multiple computing technologies, especially machine learning related technologies <ref type="bibr" target="#b17">[18]</ref>, which are closely related to statistics model and cognitive learning theory.</p><p>TABLE 1. Techniques for scenarios of AI education. FIGURE 2. Technological structure of AI education.</p><p>Various techniques are incorporated into AI system for learning analysis, recommendation, knowledge understanding and acquirement, based on machine learning, data mining and knowledge model <ref type="bibr" target="#b38">[39]</ref>. AI education system generally consists of teaching contents, data and intelligent algorithm, which can be divided into two parts, i.e., system model (including learner model, teaching model, and knowledge model) and intelligent technologies <ref type="bibr" target="#b42">[43]</ref>. As shown in Fig. <ref type="figure">2</ref>, model help to build data map is crucial for improving learning, which establishes structures and association rules for collected education data <ref type="bibr">[44]</ref>. Model works as a core in AI system, with technologies providing power for the system.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>1) AI EDUCATION MODEL</head><p>In AI learning system, learner model is critical for improving independent learning capabilities. It is established based on behavior data of learners generated from the learning process. Learners' thinking and capability is analyzed to assess their learning abilities. Then knowledge analysis are mapped to obtain learners' knowledge mastery. Learner modeling establishes connections between learning results and various factors including learning materials, resources and teaching behaviors <ref type="bibr" target="#b38">[39]</ref>. Knowledge model establishes knowledge structure map with detailed learning contents, usually including expert knowledge, rules of making mistakes often made by learners and misunderstanding <ref type="bibr">[44]</ref>. Combining knowledge field model and learner model, teaching model determines the rules to access knowledge field, which enables instructors to tailor teaching strategies and actions. As education evolves, learners are likely to behavior positively, take actions or seek for help. AI system can always be prepared to offer aid from tutoring model's built-in teaching theories. User interface explains learners' performance through multiple input media (voice, typing and click) and provides output (texts, figures, cartoons and agencies). The advanced humanmachine interface provides AI-related functions including natural language interaction, speech recognition and learners' emotion detection.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2) INTELLIGENT EDUCATION TECHNOLOGIES</head><p>Machine learning, learning analytics, and data mining are closely related technologies for education. At present, two communities have evolved based on learning analytics and educational data mining. They overlap in objectives and techniques and benefit from a variety of disciplines, including machine learning, data mining, psychometrics of statistics, and data modelling <ref type="bibr" target="#b40">[41]</ref>. The field of learning analytics is more focused on learning content management systems and large-scale test results. Data mining originates from the community of intelligent tutoring systems, work on very smallscale cognition.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>a: MACHINE LEARNING</head><p>The core of machine learning is knowledge discovery, the process of parsing based on sampling data set known as ''training data'', generating meaningful patterns and a structured knowledge. For instance, machine learning can help create recommendations for students as they select classes, even choose universities. It leverages achievements data, aspirations, preferences of students to ''match-make'' institutions where they can be best developed. Moreover, this technology can help instructors gain an understanding of how every concept is being digested by students <ref type="bibr" target="#b41">[42]</ref>. In this way, instructors can adjust the teaching method to work well based on students' cumulative records, which may help students grasp course material better. In particular, for student assessment, image recognition and prediction of machine learning can be used to grade student assignments and exams, with faster and more reliable results than human being. It should be noted that deep learning, the subfield of machine learning, attracts much attention. This widely used techniques includes decision tree learning, inductive logic programming, clustering, reinforcement learning and Bayesian networks. From technique perspective, deep learning emphasizes on increasingly meaningful representations from learning successive layers. These layer features are extracted via models called neural networks structured in literal layers stacked on top of each other.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>b: LEARNING ANALYTICS</head><p>Learning analytics focuses on data from the characteristics of students and knowledge objects from learner model and knowledge field model. The concept of learning analytics introduces new technology, i.e., machine learning, being applied to a non-technical world as education. The purpose is to tailor educational method to the individual learner's need and ability, such as intervening with students at risk or providing feedback and instructional content <ref type="bibr" target="#b39">[40]</ref>. It uses techniques related to machine learning, data visualization, learning sciences, and semantics. For instance, AI-based competency learning, which generates critical data from the students, can effectively find insights on the students and predict the critical competencies they can pursue, which enables institutions to act proactively. In addition to a competency-based learning, learning analytics also exploit the versatile capability of AI to learn. With respect to drop-out issues, AI can consider various parameters to classify incoming students in likelihood of dropping-out generating early warning systems and actionable data for the institutions. The next challenge for learning analytics is to move out of the comfort zone towards a broader scope including interpersonal skills, arts, literature, among others that raise a whole new level of complexity in terms of measurement and assessment of competencies or learning outcomes. A challenge for learning analytics is to be applied in specific learning contexts, but at the same time need to be general enough to be used across different courses and institutions. Learning analytics will be increasingly used and integrate advanced techniques to support learning for students, instructors, administrators, and institutions.</p><p>c: DATA MINING Educational data mining tries to generate systematic and automated responses to learners. AI-based educational data mining aims for developing inherent association rules, and offering knowledge objects to students to meet their personal needs. For instance, students' demographic characteristic data and grading data can be analyzed from a small number of written assignments <ref type="bibr">[44]</ref>. It can be achieved by a machine learning regression method that can be also used to predict a student's future performance. Furthermore, data mining is becoming a powerful tool to improve the learning process and knowledge mastery, leading to a better understanding of the educational settings and learners. In other words, data mining can be seen as pattern discovery and predictive modeling applied in extract hidden knowledge, which allows instructors to make adjustments to improve curriculum development in educational system. One of important applications is that data mining-based AI can achieve personalized learning from knowledge field data, where students perform their own learning, at their own pace and deciding their own learning method aided by AI. Ideally, using personalized learning, students choose what they're interested in, and instructors adjust teaching course and method to the students' interests <ref type="bibr" target="#b42">[43]</ref>. With data mining, AI can build its intelligence (e.g., using machine learning) more accurately and outcome is more reliable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. THE ROLE OF AI IN EDUCATION</head><p>Timms makes an interesting observation, AI is very powerful and has the potential to permeate and heavily cause changes in different sectors of the society, with the education sector being one that is likely to be majorly impacted by AI. Indeed, from the different articles reviewed, it is evident that AI has been adopted and applied in the education sector, where it has fostered improvements in different areas of the sector. More specifically, within the context of the narrative and framework proposed by Chassignol et al., which also forms the scope of the study, it is evident that AI has been applied in education, more particularly in administration and teaching, and subsequently, influencing or impact students' learning.</p><p>An analysis of the scholarly sources selected for the study showed that AI has indeed been applied in educational institutions in different ways, including in the form of automation of administrative processes and tasks, curriculum and content development, instruction, and students' learning processes. AI has improved efficiency in the performance of administrative tasks, such as reviewing students' work, grading, and providing feedback on assignments through automation using <ref type="bibr">VOLUME 8, 2020</ref> web-based platforms or computer programs. Other areas in which AI has been applied in the education sector include curriculum and content development, and instructions leveraging technologies such as virtual reality, web-based platforms, robotics, video conferencing, audiovisual files, and 3-D technology, which have made it possible for students to learn better. Teachers are more effective and efficient and students have a personalized and richer learning or educational experience.</p><p>Other important findings, from a further scouring of the different sources, is that the application of AI in education, from the analysis, presents an opportunity to break the physical barriers posed by national and internationally borders because learning materials are now domiciled on the Internet and the World Wide Web. Learning online or use of web-based learning platforms means that the material are accessible from anywhere in the world, and leveraging other aspects of AI, such as language translation tools, make it possible for students, to learn best within the context of their individual abilities. Indeed, the study findings demonstrate that administration, instruction, and learning is more efficient and effective, which will be illustrated in the section on the discussion of the findings on the impact of AI in education.</p><p>Different studies discussed and demonstrated the application of AI in education. Chassignol et al. provides an overview and the transitions that have defined the application of AI in the education sector. Chassignol et al. observed that AI, in education, was adopted in the form of computers, and computer-related technologies, such as the Internet and the World Wide Web <ref type="bibr" target="#b10">[11]</ref>. There has been evidence of gradual, in tandem with changes in technology in the macro operating environment, of transitioning from computers to online and web-based technologies and intelligent or AI systems <ref type="bibr" target="#b10">[11]</ref>. AI in the education sector is transitioning from simply computers to embedded systems, such as robots or colleague robots (cobots) that work with instructor or educators or independently, to perform teacher like functions <ref type="bibr" target="#b10">[11]</ref>. In agreement, Timms posited that artificial intelligence in education (AIED0 is taking different forms but there is evidence of dissociating AI with computers or the focus on understanding and using AI as computers only, to include using computer embedded systems such as in smart classrooms and cobots <ref type="bibr" target="#b6">[7]</ref>. AI is no longer computers only or the desktop and other computer applications as conventionally understood. It has gone on to include other elements as already demonstrated from the presentation of findings from other studies.</p><p>Indeed, even from a review of other works, there is evidence of AI, in the context of application in the education sector, going over and above the conventional perception of AIs as computer systems only. Pokrivcakova's definition and description of AI in education provides an overview and summary of the nature of application of the same in education <ref type="bibr" target="#b13">[14]</ref>. Pokrivcakova posited that the design and implementation of AI brings together different professionals, including system designers, data scientists, product designers, statisticians, linguists, cognitive scientists, psychologists, education experts and many other professionals <ref type="bibr" target="#b13">[14]</ref> (p.138). The implication therefore is that AI, in education, is designed to perform more than just the normal computers and computerrelated functions. Indeed, Sharma posited that AI, in its entirety, supersedes the conventional understanding of the different technological applications in education, web-based, online, distance, and computer-assisted instruction courses and learning.</p><p>More specific application of AI in education, as evidenced form the different articles reviewed takes different forms. Making similar observations and arguments, Sharma et al. observed that AI in education has taken the form of adaptive learning systems, intelligent tutoring systems, and other systems that improve the quality of administrative processes, instructions, and learning <ref type="bibr" target="#b12">[13]</ref>. In agreement, Pokrivcakova observed that in education, AI takes the form of intelligent systems with adaptive capabilities <ref type="bibr" target="#b13">[14]</ref>. These tenets andcharacteristics of the systems enable AI in education to perform a wide range of tasks traditionally or conventionally performed by instructors, while at the same time improving students' learning experiences through coaching students and customizing learning to students' expectations and needs <ref type="bibr" target="#b13">[14]</ref>. Mikropoulos and Natsis in their article, also describe another aspect of AI in instructions, virtual reality (VR) and three dimension (3-D) technology, observing that VR presents immense opportunities for the learning process, integration of simulation and 3-D technology because it enables simulation and provides learners with an opportunity for experiential learning.</p><p>Indeed, it is evident, as the United Nations Education Scientific and Cultural Organization (UNESCO) observed, that AI has permeated various sectors of the society, more particularly, the education sector, as discussed for example, instructions or teaching methods, approaches, and tools <ref type="bibr" target="#b15">[16]</ref>. Other areas or ways in which AI has been implemented in education include learning and administration, which has been precipitated by changes in the general environment. Indeed, according to Wartman and Combs education is changing in tandem with changes in the employment or professional world, necessitating the incorporation of AI in instruction and learning <ref type="bibr" target="#b16">[17]</ref>. For example, there is heavy use of AI in the medical profession, which necessitates exposing students to AI through use of the technology in medical education to prepare them for the experiences in the real world <ref type="bibr" target="#b16">[17]</ref>. The trend and arguments identified and presented by Wartman and Combs are echoed in other studies and publications, which demonstrate other applications of AI in education.</p><p>Further, from the analysis of the selected articles, another trend or application of AI in education is in the form of AI in web-based education. For example, Kahraman, Sagiroglu, and Colak, in their study, discussed the development and use of AI in education in the form of Adaptive and intelligent Web-based educational systems (AIWBES), which are fast replacing the simplistic leveraging and use of the Internet and the World Wide Web, what they refer to as the justput-it-on-the-Web approach <ref type="bibr" target="#b17">[18]</ref>. AIWBES is the integration of AI principles and technology into web-based learning platforms, which improves the learners' experiences. Indeed, Peredo et al. also describe the integration of AI into webbased platforms. They posited that intelligent web-based education (IWBE) has emerged as an important component of education, more so with the proliferation of online education because of the power of the platform as a pedagogical tool that incorporates and leverages AI into web-based education (WBE) as well as other intelligent methods, tools, and theories for modelling engineering agent-based systems and technologies <ref type="bibr" target="#b18">[19]</ref> (p.14690). IWBE, according to the findings of their study, involves considering different factors, including learner's knowledge and skill, learning, performance capabilities, and compatibilities, which are then leveraged in the development and use of a platform that improves teachinglearning experiences. From their study, Peredo et al. therefore concluded that studying and understanding of different social agents, teachers and students leads, an integral part of the IWBE ensures the development and use of robust, intelligent, interactive, learning, and adaptive AI systems in education, more particularly on the web, which is accessible from anywhere in the world <ref type="bibr" target="#b18">[19]</ref> (p.14690). Evidently, as demonstrated from the evaluation of the nature of application of AI in education and as enumerated in the report by UNESCO, AI will potentially foster improved access to learning by eliminating barriers to learning, automating management and administrative functions in academic institutions, and optimizing instructions and learning, as well as fostering empirical or evidence-based decisions and initiatives in education <ref type="bibr" target="#b15">[16]</ref>. As a virtual platform, it can create a better professional environment for instructors and learners. AI as an assessment tool can be used grade paper and exams and free up the teacher's time. Moreover, it helps students navigate through different content paths, and personalize learning according to their strengths and weaknesses. Tab. 2 shows the different functions of AI can work as in education scenarios of administration, instruction and learning. The detailed findings of the application of AI in education are summarized in the next subsections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>1) AI IN EDUCATION ADMINISTRATION</head><p>In this section, a summary of the findings on the application of AI in education, with a particular focus on administrative functions is presented. One of the key areas in education, identified as likely to be impacted by AI, is the performance of different administrative tasks in the education process, such as students' assignments and papers reviews, grading, and providing feedback to students. According to Sharma et al. AI in education, particularly in distance and online education, where AI has enhanced efficiencies in institutional and administrative services <ref type="bibr" target="#b12">[13]</ref>. Indeed, specific programs, such as Knewton, ease the burden on instructors because they provide a platform for feedback to students premised on the interaction on the platforms. Similar positions are evident in other studies and publications, which discuss systems that make the administrative tasks easier.</p><p>For example, Rus et al. posited that intelligent tutoring systems (ITSs) perform a wide range of functions, including grading and providing students with feedback on their work <ref type="bibr" target="#b11">[12]</ref>. Instructors, working with ITS achieve improved efficiencies in various administrative tasks, as well as their core responsibilities, providing guidance and instructions to help students excel in their studies. The findings and arguments by Mikropoulos and Natsis augment the arguments and findings in these studies; leveraging and using AI in education has fostered effectiveness and efficiency in the performance of administrative tasks, such as grading of students' assignments <ref type="bibr" target="#b14">[15]</ref>. Indeed, a scrutiny of the online learning environment today, shows programs that make it possible for instructors to perform various administrative tasks, such as TurnItIn and Ecree, which give suggestive grading and check plagiarism on students' assignments. AI has improved efficiencies in the performance of different administrative tasks that instructors, would require a lot of time to perform in the absence of AI.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2) AI IN INSTRUCTION</head><p>From the analysis of the articles identified and included in the analysis, one of the key areas that have seen an influx of AI systems, is teaching or instructions. AI has facilitated the creation and deployment of systems that are evidently very powerful pedagogical tools. These tools have fostered improved instructional quality. Different platforms and applications of AI as an instructional tool are discussed and highlighted in the various articles evaluated. Timms discusses various applications of AI as a pedagogical tool or instructional platforms; simulation-based instructions, which include using different technologies, such as virtual reality to demonstrate or show students concepts or practically demonstrate materials, giving students an experiential or practical learning experience <ref type="bibr" target="#b6">[7]</ref>. The same concept or the application of virtual reality elements as an element of AI in education is discussed in other studies. For example, Mikropoulos and Natsis highlight the use of virtual reality as well as including 3-D technology</p><p>TABLE 2. The functions AI provides in educational scenarios.</p><p>and highly interactive simulation as a pedagogical tool, which helps students have a better understanding of demonstrated concepts <ref type="bibr" target="#b14">[15]</ref>. Similarly, Wartman and Combs highlight the use of AI, in the form of virtual reality and simulation in medical education, which takes medical students through practical aspects of their education, such as operations and understanding human anatomy, among other subjects.</p><p>Other studies have also highlighted the integration of AI into machines or robots and creation of powerful instructional tools and improvement of the quality of the applied pedagogical strategies. Indeed, Timms highlights that another key form of application of AI in education as an instruction tool is the integration of AI in education principles in robots, the development and use of robots as teacher assistants and colleagues, cobots, which can be used to undertake basic and even advanced teaching tasks, such as teaching students to read and pronounce words <ref type="bibr" target="#b6">[7]</ref>. Indeed, Sharma et al. observed that the integration or the use of AI in education, more particularly, integration with other technologies and use as instructional tools, has resulted in the development and use of better teaching tools <ref type="bibr" target="#b12">[13]</ref>. On the other hand, Pokrivcakova also highlights the integration of AI into computer programs, and the development and use of chatbots, or online computerbased robots with conversational and dialogue abilities to answer routine student queries, and in some instances, disseminate instructional materials <ref type="bibr" target="#b13">[14]</ref>. AI equips the humanoid or other robots with cognitive and decision-making abilities, as well as dialogue and conversation abilities, and subsequently, enable their use as instructional and pedagogical tools.</p><p>Further, from the analysis of the articles, other ways of the application of AI in education were identified. For example, intelligent tutoring systems in different forms are discussed in different studies. For example, Rus et al. observe that intelligent tutoring systems or ITS equipped with conversational and dialogue abilities, as well integrated with animated conversational agents, in the form of chatbots or cobots, have fostered realization of effectiveness in teaching <ref type="bibr" target="#b11">[12]</ref>. The same concepts are also highlighted in the AI applications in education discussed by Pokrivcakova; Computer-assisted language learning (CALL), which provides students or learners with customized instructions; as well as the writing and translation assistants in language learning <ref type="bibr" target="#b13">[14]</ref>. Other forms of application of AI in education, particularly, in instructions to perform teacher or instructor functions are also highlighted. Web-based education platforms integrating AI with instructor abilities are discussed by <ref type="bibr">Kahraman et al. and Peredo et al.</ref> in their different publications. Kahraman et al. discuss the integration of AI in web-based education, more particularly, the use of AIWBES in teaching, and incorporating teacher-like functions, making the platform a powerful supportive pedagogical tool <ref type="bibr" target="#b17">[18]</ref>. Similarly, Peredo et al. discuss IWBE or intelligent and adaptive web-based systems, in which teachers are studied and presented as social agents in this system; the system then seeks to understand and support teachers in the discharge of their mandates, to provide instructions and directions to students, with an objective of ensuring that the technology, web-based education, used in education is efficient and systematic way to improve learner experience <ref type="bibr" target="#b18">[19]</ref>. AI has been integrated into different technologies and approaches and used as a stand-alone instructional tool or to support instructors in the discharge of their teaching mandate.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3) AI IN LEARNING</head><p>Learning, which is an integral part of education, is another aspect of education that is within the scope of the study. From an evaluation and analysis of the different articles included in the study, different ways in which AI has been adopted and implemented or leveraged in fostering students' learning were identified. Further, specific programs or applications that leverage AI to improve student learning were identified. An important way in which AI has been applied in improving students' learning is the customization and personalization of curriculum and content in line with the learners needs, abilities, and capabilities <ref type="bibr" target="#b14">[15]</ref>. Other approaches give learners a more pleasant and involving or experiential learning experience, therefore improving the learners' uptake and retention of information, the foundation of learning <ref type="bibr" target="#b14">[15]</ref>, <ref type="bibr" target="#b16">[17]</ref>. From another perspective, AI in education has also eliminated some barriers to access to learning opportunities, such as national and international borders, enabling global access to learning through online and web-based platforms <ref type="bibr" target="#b12">[13]</ref>, <ref type="bibr" target="#b14">[15]</ref>.</p><p>From the articles, different platforms and applications were identified. Some platforms will foster the customization and personalization of content and in so doing foster the uptake and retention of information, which improves the learning experience of the learner. For example, an application such as Knewton makes real-time recommendations for students premised on deciphered learning style as adduced by the technology using machine learning algorithms, and subsequently customizes course materials or content to the learners' needs <ref type="bibr" target="#b10">[11]</ref>. Other platforms with similar capabilities include Cerego, Immersive reader, and CALL, which together with other platforms, have the potential to improving the learning experience of learners at all levels of the education system, from early childhood education to university undergraduate and graduate level <ref type="bibr" target="#b10">[11]</ref>, <ref type="bibr" target="#b13">[14]</ref>. Pokrivcakova also observed that the integration of AI and use of chatbots also improve the learning experiences of students because they leverage machine learning algorithm and deliver content customized to students learning needs and capabilities <ref type="bibr" target="#b13">[14]</ref>. The author also highlights the integration of AI into education through machine translation tools, adaptive education systems, and intelligent tutoring systems, which improve the learners' experience. There are different ways in which AI ensures personalization and customization of content to learners' capabilities and needs.</p><p>On the other hand, as gleaned from other articles, there were other applications of AI that were found to have a major impact on the learners' experiences. For example, the application and use of simulation-based learning and intelligent tutoring systems (ITS) were demonstrated to encourage deep learning, which is a way of improving the students' learning experience <ref type="bibr" target="#b12">[13]</ref>. Mikropoulos also highlights the same concept, observing that virtual reality and simulation fosters students improved learning experiences <ref type="bibr" target="#b14">[15]</ref>. The use of simulation, virtual reality and other aspects of AI in learning was shown to prepare students for futuristic trends with the gradual gravitation towards keeping pace with the application of AI in industry <ref type="bibr" target="#b16">[17]</ref>. Other uses of AI in fostering the students' learning experience is the use of AIWBES. AIWBES is more adaptive and generates content that is based on the learner's needs <ref type="bibr" target="#b17">[18]</ref> (p.156). For example, according to Kahraman et al., interactive problem solving, a component of AIWBES will work with students to offer intelligent help in each of the phases of the problem solving process when students are working on such issues <ref type="bibr" target="#b17">[18]</ref> (p.159). The same capabilities of AI in web-based education are highlighted and discussed by Peredo et al., who observed that IWBE or intelligent and adaptive web-based systems, particularly multi-agent systems (MAS) have a learner component, with the learner integrated as a social agent, in which the system focuses on understanding learner behavior and adjusting accordingly by generating content relevant to the learners' needs <ref type="bibr" target="#b18">[19]</ref>. Evidently, AI integration or adoption and use in education has been focused in improving the learners' experiences, as well as having a major impact on other aspects of the education process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. IMPACT OF AI IN EDUCATION</head><p>A recap of the objective or purpose of the study; the study aims at assessing the impact of AI in education. The evaluation of the different ways in which AI has been implemented in the education, focusing on administration tasks, instruction, and learning, only partly answers the implied research question. Sharma et al observed, the use of AI in education presents an opportunity to majorly revolutionize different aspects of education <ref type="bibr" target="#b12">[13]</ref>. An exploration of the uses of AI partly shows how the impact of AI in education. In this section, a more focused exploration of the actual effects of AI on administration, instructions, and learning is explored and explained premised on the findings from the articles analyzed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. EDUCATION ADMINISTRATION</head><p>AI application in education, in its various forms and serving different functions, has had a major impact on the performance of administrative and management functions in education. It has enabled instructors or teachers to perform their administrative functions, such s as grading and providing feedback to students more effectively. AIWBEs programs have incorporated functions that provide instructors with grading guides, which make it easier to grade students' work and provide feedback <ref type="bibr" target="#b13">[14]</ref>. Similar capabilities and functionalities are available on programs, such as Knewton, provide instructors within built functionalities to evaluate performance, grade, and provide students with feedback to ensure continuous improvement in learning <ref type="bibr" target="#b12">[13]</ref>. AI has made the performance of administrative tasks easier and improve teacher or instructor efficiency and effectiveness in providing instructions and guidance to students. Intelligent tutoring systems provide a wide range of functionalities that <ref type="bibr">VOLUME 8, 2020</ref> enable instructors to perform different administrative tasks, including grading and providing feedback <ref type="bibr" target="#b11">[12]</ref>. Other programs, such as Grammarly, Ecree, PaperRater, and TurnItIn among others, which leverage AI also provide instructors with the functionalities to perform different administrative functions, including plagiarism checking, rating and grading, and providing students with feedback on improvement areas. AI, has significantly reduced the paperwork and workload on instructors, particularly in the performance of various administrative functions, thereby enabling them to focus on their core mandate, instruction, dissemination of content and materials in line with the curriculum in place at the institution or nationally <ref type="bibr" target="#b10">[11]</ref>, <ref type="bibr" target="#b12">[13]</ref>. While this area of education was not a focus for many of the articles evaluated, in the articles it was covered, there was evidence of attainment of improvements in the administrative processes and tasks quality, as well as effectiveness and efficiency of the instructors or educators in the performance of various administrative tasks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. INSTRUCTION</head><p>Another aspect of education that was the focus of this analysis is the use of AI in instructions or by instructors. An analysis of different articles showed rapid uptake and use of AI, in different forms for instructional purposes or as a pedagogical tool by instructors. The use of AI for instructional purposes or as a pedagogical tool has had a major impact on this aspect of education. It has improved effectiveness, efficiency, and quality of the work done by instructors as adduced from the different publications reviewed and analyzed. Efficiency and quality, within this context, is measured by the delivery of the relevant content in line with the curriculum and in line with the learner specific needs and capabilities, while effectiveness is assessed by the implied uptake and retention or the achievement of learning by the students or the learners. Considering these operational definitions and description of efficiency, quality, and effectiveness, the findings of the study therefore indicate AI has fostered the realization of quality, effectiveness, and efficiency in instruction or teaching.</p><p>AI has fostered effectiveness of instructions. Rus et al. posited that ITS, which leverage evidence-based or empiricalevidence backed practices, including the extensive use of cognition and learning models, have ensured the optimal uptake and retention of materials or optimized learning among students <ref type="bibr" target="#b11">[12]</ref>. Indeed, programs, such as DeepTutor and AutoTutor, as discussed by Rus et al. are learnercentered programs that foster customization and personalized content in line with the learner capabilities and needs, thereby improving learners experience and fostering the achievement of the set learning objectives. The arguments presented by Pokrivcakova also demonstrate that AI has fostered instructional quality and effectiveness because the contemporary systems, are technology-based adaptive systems, which means that the materials or the content presented is determined by the learners needs, ensuring an optimized learning experience <ref type="bibr" target="#b13">[14]</ref>. AI ensures improved dissemination of course content, starting from curriculum development phase to actual delivery of content or instructions, more so in online and web-based learning platforms.</p><p>The development and use of AI, particularly integration in online and web-based learning platforms, has indeed, according to Mikropoulos and Natsis, led to realization of improvements in instructions because AI has provided for development and use of better pedagogical tools for these platforms <ref type="bibr" target="#b14">[15]</ref>. The same benefits or improvements to learning are enumerated in other studies that were evaluated. Peredo et al. discuss the importance of adaptive IWEBS and instructions premised on observed and learned learner behavior, which enables the platforms to improve the quality of learning and instructional effectiveness because of the customization capabilities of the AI-backed pedagogical methods used <ref type="bibr" target="#b18">[19]</ref>. The same is highlighted by the study by Phobun and Vicheanpanya, who observed that unlike Computer-Aided Learning (CAL) and Computer-based training (CBT) take a generalized put it all on the web approach and may not address the learning needs of the student unlike ITS, which customizes, individualizes, and personalizes learning <ref type="bibr" target="#b19">[20]</ref>. The impact of AI on education, more particularly in improving instructional effectiveness and efficiency, is summed by Roll and Wylie, who in discussion of the changes in the AI, particularly in application in education, observed that AI, particularly tutoring or instructional systems, have been designed with the objective of solving the different challenges eminent in one-on-one teacher-student tutoring, thereby improving the overall quality of instructors' work <ref type="bibr" target="#b20">[21]</ref>.</p><p>From the analysis other important themes, or ways in which AI has affected the quality of instructors' works were also identified. Some studies highlighted the role of technology in more particularly, AI in fostering academic integrity, using plagiarism checkers and proctoring and online supervision of students' activities on platforms such as Grammarly, TurnItIn and White Smoke among others <ref type="bibr" target="#b22">[23]</ref>- <ref type="bibr" target="#b24">[25]</ref>. Gamification, leveraging AI for instructional purposes, with significant benefits to the instructional quality, which is also an element of or integrates virtual reality and 3-D technologies, in its different forms was discussed in other studies, which highlighted the benefits of simulation, team-viewer applications, and gamification, closely related to VR and 3-D or even leveraging the technologies to the pursuit of instructional effectiveness and efficiency <ref type="bibr" target="#b25">[26]</ref>, <ref type="bibr" target="#b26">[27]</ref>. Other studies also discussed the benefits of expressive humanoid robots with dialogue and conversational capabilities in fostering instructional quality by fostering engagement with learners because of their improved capabilities and human-like appearances <ref type="bibr" target="#b27">[28]</ref>- <ref type="bibr" target="#b32">[33]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. LEARNING</head><p>Another area of education within the scope of this study, which has majorly been impacted by the rollout and the use of AI, is students' learning experiences. Indeed, Rus et al. summing up the effect of AI on learning observed that ITS fosters deep learning because working with the conversational agents that form an integral part of the system, will probe and prod students until the students are able to adequately explain themselves in detail, including the reasoning behind their position, thereby improving the uptake and retention of information <ref type="bibr" target="#b11">[12]</ref> (p.43). This and other studies illustratively discuss the numerous benefits of AI in students' learning experiences in different ways. AI enables the tracking of learning progression, including knowledge and understanding and uses the findings to enhance the capabilities of the system to customize content to the students' needs and capabilities, which motivates students and leverages personal capabilities to enhance uptake and retention <ref type="bibr" target="#b11">[12]</ref>, <ref type="bibr" target="#b13">[14]</ref>. For example, Pokrivcakova observed that AI has enabled the development and use of intelligent learning systems and adaptive content customized for each students learning needs and capabilities, such as intelligent virtual reality and use of the same in simulation teaching and learning, which has been shown to have a positive impact on learning <ref type="bibr" target="#b13">[14]</ref> (p.143). The same benefits of simulation and other related technologies to learning are also discussed by Mikropoulos and Natsis, who observed that simulation and other related technologies provide the students with the practical exposure and experiential learning, which improves the quality of learning, with the studies reviewed by the researchers in their article highlighting the key benefits of VR, 3-D technology in learning, including usability, enjoyment, learner enthusiasm, motivation, and increased interests in students <ref type="bibr" target="#b14">[15]</ref> (p.773).</p><p>Other benefits of AI and its effect on quality of learning are highlighted in other studies, which focused on webbased platforms. For example, Kahraman in discussion of the important tenets or components of AIWBES, such as adaptive hypermedia, information filtering, class monitoring, and collaborative learning, among others, observed that they encourage collaboration, interactions, and learning among students <ref type="bibr" target="#b17">[18]</ref> (p.160). The same benefits of web-based platforms are highlighted by Peredo et al. who discussed the relationship between AIWBE and improved quality of learning because the system adapts and customizes instructions and content to identified and assessed learner behaviors. For example, StudentTracker middleware will work with online information about the learner, including completed activities, learning tracking, time, and other components to adapt the pedagogical approaches for the AIWBE <ref type="bibr" target="#b18">[19]</ref>. Other benefits of web-based platforms and demonstrated benefits to learning include fostering global access to education and affordability <ref type="bibr" target="#b19">[20]</ref>. These platforms have generally offered a better learning experience.</p><p>Other benefits of AI to learning, and impact on learning are highlighted in other studies. For example, AI has been used to encourage and foster honesty and academic integrity <ref type="bibr" target="#b22">[23]</ref>, improve studies and learning through the use of revision and writing assistants, such as TurnItIn tools, such as revision assist and Pearson's Write-to-Learn tools <ref type="bibr" target="#b23">[24]</ref>, <ref type="bibr" target="#b24">[25]</ref>, <ref type="bibr" target="#b26">[27]</ref>- <ref type="bibr" target="#b28">[29]</ref>. Other studies have however, highlighted the possible detrimental or adverse effects of AI on learning. Crowe et al. in their study, observed that AI may encourage dishonesty and jeopardize academic integrity because it may facilitate or enable students to use paper mills and paper churning sites or platforms <ref type="bibr" target="#b23">[24]</ref>. Generally though, the benefits of AI to learning supersede the challenges, as demonstrated in various other studies analyzed <ref type="bibr" target="#b34">[35]</ref>, <ref type="bibr" target="#b35">[36]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. PERFORMANCE OF INSTRUCTOR AND STUDENT</head><p>As intelligent systems, it would be interesting to look at how AI will affect the performance of instructor and student. As the number of students increases in learning institutions, AI systems will work well in easing the burden on instsructors. AI systems help instructors to analyze the syllabus and course material to propose customized content <ref type="bibr" target="#b10">[11]</ref>. These systems can also generate and grade exams after analyzing. This would eventually free instructors to focus on more pressing issues such as student performance. In individualized teaching and autonomous learning, AI solutions can better analyze studying data, in turn helping instructors create personalized learning plans for each student. Human bias is also an emerging issue for AI in education. AI solution can grade papers and exams by preset rubrics and benchmarks to break bias <ref type="bibr" target="#b40">[41]</ref>. This is can be achieved by computer vision-based AI systems that read and detect images of handwritten papers. Apart from reducing bias, such systems also prevent student from cheating and plagiarism.</p><p>By analyzing student data, AI systems has detected learning shortcomings of student and address them early in their education. Most students are treated similarly by the conventional education system <ref type="bibr">[44]</ref>. Thus, the same teaching method to all students cannot achieve the best teaching performance. AI would help to determine the tailored teaching method for each student based on their personality, strengths and complementary skills. In this way, all students can improve and enjoy the learning performance. While increasing students' knowledge, it also helps students build up knowledge system with improved learning capability, habits and creativity. Moreover, AI systems predict the career path for each student by gathering studying data, which in turn customizes the university course selection for students. Considering the individual ability and career path, students can obtain better grades and garnering skills that are applicable in the real world.</p><p>Based on the above discussion, AI has great potential in automating and expediting administrative tasks for both institutions and instructors <ref type="bibr" target="#b6">[7]</ref>- <ref type="bibr" target="#b9">[10]</ref>. AI can already automate the grading homework, evaluating essays which allows instructors to spend more time with students one-on-one. AI developers are creating new ways to grade written paper and exams as well. With respect to learning materials, AI creates create customizable learning digital interfaces that apply to students of all age ranges and grades. Moreover, in learning process, AI enables instructor to gain student insight ''based on the entire ecosystem of learning tools'' according to Nick Oddson, the creator of Brightspace. AI systems tutor a leaner based on the difficulties they're having with class material. In the past, students had a limited window of time in which they could resort to their instructors, meaning office hours or hoping they answer their emails <ref type="bibr" target="#b10">[11]</ref>, <ref type="bibr" target="#b11">[12]</ref>. There are now smart tutoring systems such as Carnegie Learning that use data from specific students in order to give them feedback and work with them directly. AI will soon be able to work as a fullfledged assistant adapt to a wide variety of learning styles to help instructors and students. In specific, it helps instructors and students with their educational needs in just about any area of need.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. DISCUSSION OF THE RESULTS</head><p>From the different articles and studies reviewed, it is evident that with technological innovations and advancements, computers and computer related technologies, and other innovations have encouraged the development of artificial intelligence, which has permeated different sectors of the society, and will potentially have a major impact on different industries in which it is used. One of these areas in which AI has been applied, and is resulting in a major impact, is the education sector. As a foundation, and basis for understanding how AI has impacted education, a definition and description of AI was deemed essential. Different tenets and characteristics and nature of AI were gleaned from the different definitions derived from the studies evaluated. A key characteristic and tenet of AI, as the name intimates, is having some level of intelligence, a characteristic that has only been the preserve of human beings until the onset of AI <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b4">[5]</ref>, <ref type="bibr" target="#b6">[7]</ref>, <ref type="bibr" target="#b10">[11]</ref>, <ref type="bibr" target="#b15">[16]</ref>, <ref type="bibr" target="#b23">[24]</ref>, <ref type="bibr" target="#b34">[35]</ref>. Intelligence gives the AI, computers and by extension, embedded systems, such as robots and facilities, with human like abilities, including cognition, learning, adaptability, and decision-making functions <ref type="bibr" target="#b5">[6]</ref>, <ref type="bibr" target="#b12">[13]</ref>, <ref type="bibr" target="#b15">[16]</ref>, <ref type="bibr" target="#b18">[19]</ref>, <ref type="bibr" target="#b21">[22]</ref>. The innovations and developments, culminating in the development and use of AI, have accorded the education sector, more particularly, academic institutions, with an opportunity to leverage and use of AI.</p><p>Indeed, as adduced from the different sources reviewed and analyzed, the uptake and use of AI in education has taken various forms. AI in education was initially in the form of computers and computer related technologies, used to perform a wide range of administrative tasks, instruction, and to foster learning among students, scope areas determined from the description of AI application in technology <ref type="bibr" target="#b10">[11]</ref>, <ref type="bibr" target="#b14">[15]</ref>, <ref type="bibr" target="#b18">[19]</ref>. Continuous developments and innovations, particularly, with the transitioning of AI from computers only, to include embedded systems, as well as online and web-based platforms, harbingered the development and use of AI in web-based platforms and online platforms, and robotics, evidenced by the development and use of humanoid robots (cobots and chatbots), which perform, independently or working with human instructors, educators' duties, including dissemination of learning materials to learners at various levels of education. In addition, from the analysis, and the descriptions of the platforms provided in the different evaluated articles, it is apparent AI application, in education, in its different forms, has accorded learners a richer and more rewarding learning experience <ref type="bibr" target="#b18">[19]</ref>, <ref type="bibr" target="#b21">[22]</ref>, <ref type="bibr" target="#b24">[25]</ref>, <ref type="bibr" target="#b30">[31]</ref>, <ref type="bibr" target="#b33">[34]</ref>, <ref type="bibr" target="#b34">[35]</ref>.</p><p>Implied therefore, and as adduced from the analysis, is that AI has majorly affected or had a major impact on the education sector in general, and in particular, in application in particular educational institutions. Teachers or instructors using AI or leveraging AI are able to achieve greater efficiency and effectiveness in the performance of different tasks, including completion of administrative tasks, such as reviewing, grading, and providing feedback to students on submitted assignments. In addition, working with AI or the different forms of AI, such as web-based and online intelligent systems, cobots, and chatbots, teachers are able to achieve improvements in instructional quality. Students on the other hand, because AI uses machine learning as adduced from the different studies, are able to have a better and richer learning experience because AI uses machine learning to assess capabilities and needs, and subsequently, with the findings of such an analysis, develop and disseminate personalized or customized content, which ensures higher uptake and retention, thereby improving learning.</p><p>Further, AI provides students with practical or experiential learning experiences, particularly when used together with other technologies, such as virtual reality, 3-D, gaming, and simulation, thereby improving the students' learning experiences. One study discussed or highlighted the adverse impact of AI, degradation of academic integrity and cheating using paper churning and paper mill services facilitated by AI. Most of the studies analyzed demonstrated and explained the different ways in which AI, including integration, benefits, and impact on administration, instruction, and learning when used in education. The positive effects, the pros, outweigh the cons, or the negative effects.</p><p>AI learning is currently considered as education assistant at the early stage, while AI-enable education will play a more important role as learning requirements changes. It now provides courses of different difficulty based on simple rule judgement and has not reached the best intelligence level in intelligent education. There are education studies for AI systems involving knowledge map and probability model. With increasingly frequent interaction of the educational process, AI systems will generate more and more data to provide a clearer picture of the process of teaching and learning, which enables more accurate information recommendation. Aided by learner analytics, machine learning and data mining, AI systems will provide high-quality contents to teachers and students, to support both teaching and learning and make the whole process measurable. In this stage, users will have access to multiple approaches to the correct answer to any question. In the future, the desirable AI system would shape students' imagination and creativity, analyzing their learning style and emotional condition and initiative, to improve learning capabilities and creativity and stimulate subjective initiative. AI systems are likely to be used more widely, which is expect to thrive on all aspects of students, i.e., personal skill, knowledge mastery, learning ability and career development, instead of just assisting students in understanding of specific knowledge.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. CONCLUSION</head><p>The objective or the purpose of this study was to assess the impact of AI on education. A qualitative research study, leveraging literature review as a research design and method was used. Journal articles, professional publications, and professional conference reports were identified and used in an analysis that facilitated the realization of the study purpose. The development and use of computers and computer related technologies harbingered research and innovations that have led to the development and use of AI in different sectors. Particularly, the development of the personal computers, and later developments that have increasing the processing and computing capabilities, as well as the ability to integrate or embed computer technologies in different machines, equipment, and platforms, have encouraged the development and use of AI, which has been shown to have a major impact on the sectors it permeates. AI has been extensively adopted and used in the education sector, particularly, in education institutions, which were the focus of this study. The analysis focused on evaluating the impact of AI on administrative, instruction, and learning aspect of education, with a focus on assessing how AI has been applied and the effects it has had.</p><p>AI in education initially took the form of computers and computer-related systems, and later, the form of web-based and online education platform. Embedded systems have made it possible to use robots, in the form of cobots or humanoid robots as teacher colleagues or independent instructors, as well as chatbots to perform teacher or instructor-like functions. The use of these platforms and tools have enabled or improved teacher effectiveness and efficiency, resulting in richer or improved instructional quality. Similarly, AI has provided students with improved learning experiences because AI has enabled the customization and personalization of learning materials to the needs and capabilities of students. Overall, AI has had a major impact on education, particularly, on administration, instruction, and learning areas of the education sector or within the context of individual learning institutions.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>FIGURE 1 .</head><label>1</label><figDesc>FIGURE 1. Papers in Web of Science and Google Scholar in the last ten year with key words ''AI'' and ''Education''.</figDesc><graphic coords="3,37.77,66.06,238.00,153.73" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><figDesc>Chassignol et al. highlighted the extensive application of AI in different areas, including content development, teaching methods, student assessment, and communication between teacher and students [11] (p. 22). For example, according to the study by Chassignol et al. AI has been extensively applied in curriculum development and content personalization, teaching and pedagogical methods, assessment, and communication exchanges between teachers and students. Chassignol et al. provide examples of different platforms and applications of AI, such as Interactive learning environments (ILEs), which are used to manage performance and provide feedback and exchanges between teachers and students; Intelligent tutoring systems, such as ACTIVE Math, MATHia, Why2Atlas, Comet, and Viper which have been used at different levels of the education system to by educators or instructors for different subjects at different levels of education, as well as extensive use in learning assessment to track performance and improve the available pedagogical tools [11]. Similar applications are evident in other studies.</figDesc></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/ VOLUME 8, 2020</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_1"><p>VOLUME 8, 2020   </p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="75270" xml:id="foot_2"><p>  VOLUME 8, 2020   </p></note>
+		</body>
+		<back>
+
+			<div type="funding">
+<div><p>This work was supported in part by the <rs type="funder">Humanities and Social Science Planning Funds of Fujian Province</rs> under Grant <rs type="grantNumber">275 JAS19453</rs>, and in part by the <rs type="grantName">Distinguished Scholar Grant</rs> <rs type="funder">of Educational Commission of Fujian Province</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_3x82fPN">
+					<idno type="grant-number">275 JAS19453</idno>
+					<orgName type="grant-name">Distinguished Scholar Grant</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">K</forename><surname>Flamm</surname></persName>
+		</author>
+		<title level="m">Creating the Computer: Government, Industry</title>
+		<meeting><address><addrLine>Washington, DC, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Brookings Institution Press</publisher>
+			<date type="published" when="1988">1988</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">K. Flamm, Creating the Computer: Government, Industry, and High Tech- nology. Washington, DC, USA: Brookings Institution Press, 1988.</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Campbell-Kelly</surname></persName>
+		</author>
+		<title level="m">Computer, Student Economy Edition: A History of the Information Machine</title>
+		<meeting><address><addrLine>Evanston, IL, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Routledge</publisher>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. Campbell-Kelly, Computer, Student Economy Edition: A History of the Information Machine. Evanston, IL, USA: Routledge, 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Computers in education: The impact on schools and classrooms</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M L</forename><surname>Cairns</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Life Schools Classrooms</title>
+		<meeting><address><addrLine>Singapore</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="603" to="617"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. M. L. Cairns ''Computers in education: The impact on schools and classrooms,'' in Life Schools Classrooms. Singapore: Springer, 2017, pp. 603-617.</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">B</forename><surname>Coppin</surname></persName>
+		</author>
+		<title level="m">Artificial Intelligence Illuminated</title>
+		<meeting><address><addrLine>Boston, MA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Jones and Bartlett</publisher>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">B. Coppin, Artificial Intelligence Illuminated. Boston, MA, USA: Jones and Bartlett, 2004.</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">B</forename><surname>Whitby</surname></persName>
+		</author>
+		<title level="m">Artificial Intelligence: A Beginner's Guide</title>
+		<meeting><address><addrLine>Oxford, U.K.</addrLine></address></meeting>
+		<imprint>
+			<publisher>Oneworld</publisher>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">B. Whitby, Artificial Intelligence: A Beginner's Guide. Oxford, U.K.: Oneworld, 2008.</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Web intelligence and artificial intelligence in education</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Devedžic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educ. Technol. Soc</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="29" to="39"/>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">V. Devedžic, ''Web intelligence and artificial intelligence in education,'' Educ. Technol. Soc., vol. 7, no. 4, pp. 29-39, 2004.</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Letting artificial intelligence in education out of the box: Educational cobots and smart classrooms</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Timms</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Artif. Intell. Edu</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="701" to="712"/>
+			<date type="published" when="2016-01">Jan. 2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. J. Timms, ''Letting artificial intelligence in education out of the box: Educational cobots and smart classrooms,'' Int. J. Artif. Intell. Edu., vol. 26, no. 2, pp. 701-712, Jan. 2016.</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Literature review as a research methodology: An overview and guidelines</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Snyder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Bus. Res</title>
+		<imprint>
+			<biblScope unit="volume">104</biblScope>
+			<biblScope unit="page" from="333" to="339"/>
+			<date type="published" when="2019-11">Nov. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">H. Snyder, ''Literature review as a research methodology: An overview and guidelines,'' J. Bus. Res., vol. 104, pp. 333-339, Nov. 2019.</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Outagelimit-approaching channel coding for future wireless communications: Root-protograph low-density parity-check codes</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">C M</forename><surname>Lau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Liew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Han</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Veh. Technol. Mag</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="85" to="93"/>
+			<date type="published" when="2019-06">Jun. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Y. Fang, P. Chen, G. Cai, F. C. M. Lau, S. C. Liew, and G. Han, ''Outage- limit-approaching channel coding for future wireless communications: Root-protograph low-density parity-check codes,'' IEEE Veh. Technol. Mag., vol. 14, no. 2, pp. 85-93, Jun. 2019.</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Content analysis and thematic analysis: Implications for conducting a qualitative descriptive study</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vaismoradi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Turunen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bondas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nursing Health Sci</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="398" to="405"/>
+			<date type="published" when="2013-03">Mar. 2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. Vaismoradi, H. Turunen, and T. Bondas, ''Content analysis and thematic analysis: Implications for conducting a qualitative descriptive study,'' Nursing Health Sci., vol. 15, no. 3, pp. 398-405, Mar. 2013.</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence trends in education: A narrative overview</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chassignol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khoroshavin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Klimova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bilyatdinova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Procedia Comput. Sci</title>
+		<imprint>
+			<biblScope unit="volume">136</biblScope>
+			<biblScope unit="page" from="16" to="24"/>
+			<date type="published" when="2018-01">Jan. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. Chassignol, A. Khoroshavin, A. Klimova, and A. Bilyatdinova, ''Arti- ficial intelligence trends in education: A narrative overview,'' Procedia Comput. Sci., vol. 136, pp. 16-24, Jan. 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Recent advances in conversational intelligent tutoring systems</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Rus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>D'mello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Graesser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AI Mag</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="42" to="54"/>
+			<date type="published" when="2013-09">Sep. 2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">V. Rus, S. D'Mello, X. Hu, and A. Graesser, ''Recent advances in conver- sational intelligent tutoring systems,'' AI Mag., vol. 34, no. 3, pp. 42-54, Sep. 2013.</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The landscape of artificial intelligence in open, online and distance education: Promises and concerns</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kawachi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bozkurt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Asian J. Distance Educ</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="2"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">R. C. Sharma, P. Kawachi, and A Bozkurt, ''The landscape of artificial intelligence in open, online and distance education: Promises and con- cerns,'' Asian J. Distance Educ., vol. 14, no. 2, pp. 1-2, 2019.</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Preparing teachers for the application of AI-powered technologies in foreign language education</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pokrivcakova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Lang. Cultural Edu</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="135" to="153"/>
+			<date type="published" when="2019-12">Dec. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. Pokrivcakova, ''Preparing teachers for the application of AI-powered technologies in foreign language education,'' J. Lang. Cultural Edu., vol. 7, no. 3, pp. 135-153, Dec. 2019.</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Educational virtual environments: A ten-year review of empirical research (1999-2009</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Mikropoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Natsis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Edu</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="769" to="780"/>
+			<date type="published" when="2011-04">Apr. 2011</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">T. A. Mikropoulos and A. Natsis, ''Educational virtual environments: A ten-year review of empirical research (1999-2009),'' Comput. Edu., vol. 56, no. 3, pp. 769-780, Apr. 2011.</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<ptr target="https://en.unesco.org/news/how-can-artificial-intelligence-enhance-education"/>
+		<title level="m">United Nations Education Scientific and Cultural Organization (UNESCO). How Can Artificial Intelligence Enhance Education?</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">2019). United Nations Education Scientific and Cultural Organi- zation (UNESCO). How Can Artificial Intelligence Enhance Educa- tion? [Online]. Available: https://en.unesco.org/news/how-can-artificial- intelligence-enhance-education</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Medical education must move from the information age to the age of artificial intelligence</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Wartman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Combs</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Acad. Med</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1107" to="1109"/>
+			<date type="published" when="2018-08">Aug. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. A. Wartman and C. D. Combs, ''Medical education must move from the information age to the age of artificial intelligence,'' Acad. Med., vol. 93, no. 8, pp. 1107-1109, Aug. 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Development of adaptive and intelligent Web-based educational systems</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">T</forename><surname>Kahraman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sagiroglu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Colak</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 4th Int. Conf. Appl. Inf. Commun. Technol</title>
+		<meeting>4th Int. Conf. Appl. Inf. Commun. Technol</meeting>
+		<imprint>
+			<date type="published" when="2010-10">Oct. 2010</date>
+			<biblScope unit="page" from="1" to="5"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">H. T. Kahraman, S. Sagiroglu, and I. Colak, ''Development of adaptive and intelligent Web-based educational systems,'' in Proc. 4th Int. Conf. Appl. Inf. Commun. Technol., Oct. 2010, pp. 1-5.</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Intelligent Webbased education system for adaptive learning</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Peredo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Canales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Menchaca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Peredo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Syst. Appl</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="14690" to="14702"/>
+			<date type="published" when="2011-11">Nov. 2011</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">R. Peredo, A. Canales, A. Menchaca, and I. Peredo, ''Intelligent Web- based education system for adaptive learning,'' Expert Syst. Appl., vol. 38, no. 12, pp. 14690-14702, Nov. 2011.</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Adaptive intelligent tutoring systems for e-learning systems</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Phobun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">J</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Procedia-Social Behav. Sci</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="4064" to="4069"/>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">P. Phobun and V. J. , ''Adaptive intelligent tutoring systems for e-learning systems,'' Procedia-Social Behav. Sci., vol. 2, no. 2, pp. 4064-4069, 2010.</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Evolution and revolution in artificial intelligence in education</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Roll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Wylie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Artif. Intell. Edu</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="582" to="599"/>
+			<date type="published" when="2016-02">Feb. 2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">I. Roll and R. Wylie, ''Evolution and revolution in artificial intelligence in education,'' Int. J. Artif. Intell. Edu., vol. 26, no. 2, pp. 582-599, Feb. 2016.</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Warding off the plagiarism with the applications (Case study at Bina Nusantara university student and faculty member)</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Surjandy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Suparta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">H</forename><surname>Trisetyarso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">S</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Abbas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Int. Conf. Inf. Commun. Technol. (ICOIACT)</title>
+		<meeting>Int. Conf. Inf. Commun. Technol. (ICOIACT)</meeting>
+		<imprint>
+			<date type="published" when="2018-03">Mar. 2018</date>
+			<biblScope unit="page" from="511" to="514"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Surjandy, W. Suparta, A. Trisetyarso, C. H. Kang, and B. S. Abbas, ''Ward- ing off the plagiarism with the applications (Case study at Bina Nusantara university student and faculty member),'' in Proc. Int. Conf. Inf. Commun. Technol. (ICOIACT), Mar. 2018, pp. 511-514.</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Minimize online cheating through proctoring, consequences</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sutton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Recruiting Retaining Adult Learners</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1" to="5"/>
+			<date type="published" when="2019-01">Jan. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">H. Sutton, ''Minimize online cheating through proctoring, consequences,'' Recruiting Retaining Adult Learners, vol. 21, no. 5, pp. 1-5, Jan. 2019.</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Knowledge based artificial augmentation intelligence technology: Next step in academic instructional tools for distance learning</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Crowe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lapierre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kebritchi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">TechTrends</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="494" to="506"/>
+			<date type="published" when="2017-07">Jul. 2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">D. Crowe, M. LaPierre, and M. Kebritchi, ''Knowledge based artificial augmentation intelligence technology: Next step in academic instructional tools for distance learning,'' TechTrends, vol. 61, no. 5, pp. 494-506, Jul. 2017.</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence applications to support K-1 2 teachers and teaching</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">F</forename><surname>Murphy</surname></persName>
+		</author>
+		<idno type="DOI">10.7249/PE315</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Tech. Rep. PE</title>
+		<imprint>
+			<biblScope unit="volume">135</biblScope>
+			<date type="published" when="2019">2019</date>
+			<pubPlace>Santa Monica, CA, USA</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>RAND Corp.</orgName>
+		</respStmt>
+	</monogr>
+	<note type="raw_reference">R. F. Murphy, ''Artificial intelligence applications to support K-1 2 teachers and teaching,'' RAND Corp., Santa Monica, CA, USA, Tech. Rep. PE135, 2019, doi: 10.7249/PE315.</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Gamification in education: What, how, why bother</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kiesler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">E</forename><surname>Kraut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Koedinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Aleven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Mclaren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Academic exchange quarterly</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="5"/>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. Kiesler, R. E. Kraut, K. R. Koedinger, V. Aleven, and B. M. Mclaren, ''Gamification in education: What, how, why bother,'' Academic exchange quarterly, vol. 15, no. 2, pp. 1-5, 2011.</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">A review of AIsupported tutoring approaches for learning programming</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">T</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Strickroth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Pinkwart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advanced Computational Methods for Knowledge Engineering</title>
+		<meeting><address><addrLine>Heidelberg, Germany</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">N. T. Le, S. Strickroth, S. Gross, and N. Pinkwart, ''A review of AI- supported tutoring approaches for learning programming,'' in Advanced Computational Methods for Knowledge Engineering. Heidelberg, Germany: Springer, 2013.</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Expressive robots in education: Varying the degree of social supportive behavior of a robotic tutor</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Saerbeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bartneck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Janse</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 28th Int. Conf. Hum. Factors Comput. Syst. (CHI)</title>
+		<meeting>28th Int. Conf. Hum. Factors Comput. Syst. (CHI)</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1613" to="1622"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">M. Saerbeck, T. Schut, C. Bartneck, and M. D. Janse, ''Expressive robots in education: Varying the degree of social supportive behavior of a robotic tutor,'' in Proc. 28th Int. Conf. Hum. Factors Comput. Syst. (CHI), 2010, pp. 1613-1622.</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Research progress of humanoid robots for mobile operation and artificial intelligence</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">U</forename><surname>Weiguo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Harbin Inst. Technol</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1" to="19"/>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">W. U. Weiguo, ''Research progress of humanoid robots for mobile oper- ation and artificial intelligence,'' J. Harbin Inst. Technol., vol. 47, no. 7, pp. 1-19, 2015.</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Social robots for education: A review</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Belpaeme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kennedy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ramachandran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Scassellati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Tanaka</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Robot</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">21</biblScope>
+			<date type="published" when="2018-08">Aug. 2018</date>
+		</imprint>
+	</monogr>
+	<note>Art. no. eaat5954</note>
+	<note type="raw_reference">T. Belpaeme, J. Kennedy, A. Ramachandran, B. Scassellati, and F. Tanaka, ''Social robots for education: A review,'' Sci. Robot., vol. 3, no. 21, Aug. 2018, Art. no. eaat5954.</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Exploring the possibility of using humanoid robots as instructional tools for teaching a second language in primary school</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">Y</forename><surname>Chao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Educ. Technol. Soc</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="13" to="24"/>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">C. W. Chang, J. H. Lee, P. Y. Chao, C. Y. Wang, and G. D. Chen, ''Explor- ing the possibility of using humanoid robots as instructional tools for teaching a second language in primary school,'' J. Educ. Technol. Soc., vol. 13, no. 2, pp. 13-24, 2015.</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Comparing a humanoid tutor to a human tutor delivering an instructional task to children</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Serholt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Basedow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Barendregt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Obaid</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. IEEE-RAS Int. Conf. Humanoid Robots</title>
+		<meeting>IEEE-RAS Int. Conf. Humanoid Robots</meeting>
+		<imprint>
+			<date type="published" when="2014-11">Nov. 2014</date>
+			<biblScope unit="page" from="1134" to="1141"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. Serholt, C. A. Basedow, W. Barendregt, and M. Obaid, ''Comparing a humanoid tutor to a human tutor delivering an instructional task to children,'' in Proc. IEEE-RAS Int. Conf. Humanoid Robots, Nov. 2014, pp. 1134-1141.</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Adaptive robotic tutors that support selfregulated learning: A longer-term investigation with primary school children</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Castellano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Social Robot</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="357" to="370"/>
+			<date type="published" when="2018-01">Jan. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">A. Jones and G. Castellano, ''Adaptive robotic tutors that support self- regulated learning: A longer-term investigation with primary school chil- dren,'' Int. J. Social Robot., vol. 10, no. 3, pp. 357-370, Jan. 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">'I know that now, I'm going to learn this next' promoting self-regulated learning with a robotic tutor</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bull</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Castellano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Social Robot</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="439" to="454"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">A. Jones, S. Bull, and G. Castellano, '''I know that now, I'm going to learn this next' promoting self-regulated learning with a robotic tutor,'' Int. J. Social Robot., vol. 10, no. 4, pp. 439-454, 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Integrating learning, problem solving, and engagement in narrative-centered learning environments</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Rowe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">R</forename><surname>Shores</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">W</forename><surname>Mott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Lester</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Artif. Intell. Educ</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">1-2</biblScope>
+			<biblScope unit="page" from="115" to="133"/>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">J. P. Rowe, L. R. Shores, B. W. Mott, and J. C. Lester, ''Integrating learning, problem solving, and engagement in narrative-centered learning environments,'' Int. J. Artif. Intell. Educ., vol. 21, nos. 1-2, pp. 115-133, 2011.</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">A time for emoting: When affect-sensitivity is and isn't effective at promoting deep learning</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lehman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sullins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Daigle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Combs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vogt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Graesser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Int. Conf. Intell. Tutoring Syst</title>
+		<meeting>Int. Conf. Intell. Tutoring Syst<address><addrLine>Berlin, Germany</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2010-06">Jun. 2010</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. D'Mello, B. Lehman, J. Sullins, R. Daigle, R. Combs, K. Vogt, and A. Graesser, ''A time for emoting: When affect-sensitivity is and isn't effective at promoting deep learning,'' in Proc. Int. Conf. Intell. Tutoring Syst. Berlin, Germany: Springer, Jun. 2010.</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">AI benchmark: Running deep neural networks on Android smartphones</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ignatov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Timofte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Chou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hartley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Van Gool</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. ECCV Workshops</title>
+		<meeting>ECCV Workshops</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="288" to="314"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">A. Ignatov, R. Timofte, W. Chou, K. Wang, M. Wu, T. Hartley, and L. Van Gool, ''AI benchmark: Running deep neural networks on Android smartphones,'' in Proc. ECCV Workshops, 2018, pp. 288-314.</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Squeeze-and-excitation networks</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Conf. Comput. Vis. Pattern Recognit. (CVPR)</title>
+		<meeting>Conf. Comput. Vis. Pattern Recognit. (CVPR)</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="7132" to="7141"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">J. Hu, L. Shen, and G. Sun, ''Squeeze-and-excitation networks,'' in Proc. Conf. Comput. Vis. Pattern Recognit. (CVPR), 2018, pp. 7132-7141.</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Learning analytics methods, benefits, and challenges in higher education: A systematic literature review</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Nunn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Avella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kanai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kebritchi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Online Learn</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="17"/>
+			<date type="published" when="2016-01">Jan. 2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">S. Nunn, J. T. Avella, T. Kanai, and M. Kebritchi, ''Learning analytics methods, benefits, and challenges in higher education: A systematic lit- erature review,'' Online Learn., vol. 20, no. 2, pp. 1-17, Jan. 2016.</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Learning analytics in higher education-Challenges and policies: A review of eight learning analytics policies</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Yi-Shan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gasevic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 7th Int. Learn. Anal. Knowl. Conf</title>
+		<meeting>7th Int. Learn. Anal. Knowl. Conf</meeting>
+		<imprint>
+			<date type="published" when="2017-03">Mar. 2017</date>
+			<biblScope unit="page" from="233" to="242"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">T. Yi-Shan and D. Gasevic, ''Learning analytics in higher education- Challenges and policies: A review of eight learning analytics policies,'' in Proc. 7th Int. Learn. Anal. Knowl. Conf. Mar. 2017, pp. 233-242.</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Gentle introduction to artificial intelligence for high-school students using scratch</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Estevez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Garate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Graña</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="179027" to="179036"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">J. Estevez, G. Garate, and M. Graña, ''Gentle introduction to artificial intelligence for high-school students using scratch,'' IEEE Access, vol. 7, pp. 179027-179036, 2019.</note>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Machine learning in education-a survey of current research trends</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kučak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Juričić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dambić</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 29th Int. DAAAM Symp</title>
+		<meeting>29th Int. DAAAM Symp</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="406" to="410"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">D. Kučak, V. Juričić, and G. Dambić, ''Machine learning in education-a survey of current research trends,'' in Proc. 29th Int. DAAAM Symp., 2018, pp. 406-410.</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Towards emotionally aware AI smart classroom: Current issues and directions for engineering and education</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Soyata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">F</forename><surname>Behnagh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="5308" to="5331"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Y. Kim, T. Soyata, and R. F. Behnagh, ''Towards emotionally aware AI smart classroom: Current issues and directions for engineering and education,'' IEEE Access, vol. 6, pp. 5308-5331, 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence, the missing piece of online education?</title>
+		<author>
+			<persName><forename type="first">P.-H</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Wooders</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">M</forename><surname>Yuan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Eng. Manag. Rev</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="25" to="28"/>
+			<date type="published" when="2018-09">Sep. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">P.-H. Lin, A. Wooders, J. T.-Y. Wang, and W. M. Yuan, ''Artificial intel- ligence, the missing piece of online education?'' IEEE Eng. Manag. Rev., vol. 46, no. 3, pp. 25-28, Sep. 2018.</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<author>
+			<persName><forename type="first">Lijia</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">S</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename></persName>
+		</author>
+		<title level="m">degrees in fine arts and designs from Jiangxi Normal University, Jiangxi, China, in 2011 and 2014</title>
+		<imprint/>
+	</monogr>
+	<note>respectively. She is currently an Assistant Professor with Yango University. Her researches include art, design, education, and the advanced digital techniques. She has published more than 20 journals in the related design and art fields</note>
+	<note type="raw_reference">LIJIA CHEN received the B.S. and M.S. degrees in fine arts and designs from Jiangxi Normal Uni- versity, Jiangxi, China, in 2011 and 2014, respec- tively. She is currently an Assistant Professor with Yango University. Her researches include art, design, education, and the advanced digital tech- niques. She has published more than 20 journals in the related design and art fields.</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Pingping</forename><surname>Chen</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">Member</orgName>
+			</affiliation>
+		</author>
+		<imprint>
+			<date type="published" when="2013-01">2013. January 2013 to January 2015</date>
+			<publisher>Professor with Fuzhou University, China</publisher>
+			<pubPlace>China; Hong Kong; Hong Kong</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>Xiamen University ; Hong Kong Polytechnic University ; Chinese University of Hong Kong</orgName>
+		</respStmt>
+	</monogr>
+	<note>received the Ph.D. degree in electronic engineering. From May 2012 to September 2012, he was a Research Assistant in electronic and information engineering with The. he was a Postdoctoral Fellow with the Institute of Network Coding. He is currently a. His primary research interests include artificial intelligence, wireless communication, and computer communions</note>
+	<note type="raw_reference">PINGPING CHEN (Member, IEEE) received the Ph.D. degree in electronic engineering, Xiamen University, China, in 2013. From May 2012 to September 2012, he was a Research Assistant in electronic and information engineering with The Hong Kong Polytechnic University, Hong Kong. From January 2013 to January 2015, he was a Postdoctoral Fellow with the Institute of Network Coding, Chinese University of Hong Kong, Hong Kong. He is currently a Professor with Fuzhou University, China. His primary research interests include artificial intelli- gence, wireless communication, and computer communions.</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">degrees in communication engineering from Xiamen University</title>
+		<author>
+			<persName><forename type="first">Zhijian</forename><surname>Lin (member</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">S</forename><surname>Ieee) Received The</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ph</forename><forename type="middle">D</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008. 2011, and 2017</date>
+			<pubPlace>Xiamen, China; Raleigh, NC, USA</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>Department of Electronic and Information Engineering, Fuzhou University, China</orgName>
+		</respStmt>
+	</monogr>
+	<note>respectively. In 2016, he was a Visiting Scholar with the University of NC State. He is currently working as an Assistant Professor with the. His current research interests include D2D communications, D2D caching, and NOMA</note>
+	<note type="raw_reference">ZHIJIAN LIN (Member, IEEE) received the B.S., M.S., and Ph.D. degrees in communication engi- neering from Xiamen University, Xiamen, China, in 2008, 2011, and 2017, respectively. In 2016, he was a Visiting Scholar with the University of NC State, Raleigh, NC, USA. He is currently working as an Assistant Professor with the Department of Electronic and Information Engineering, Fuzhou University, China. His current research interests include D2D communications, D2D caching, and NOMA.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

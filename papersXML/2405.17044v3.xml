@@ -1,0 +1,1461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Interesting Scientific Idea Generation using Knowledge Graphs and LLMs: Evaluations with 100 Research Group Leaders</title>
+				<funder>
+					<orgName type="full">Alexander von Humboldt Foundation</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-01-07">7 Jan 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Xuemei</forename><surname>Gu</surname></persName>
+							<email>xuemei.gu@mpl.mpg.de</email>
+							<affiliation key="aff0">
+								<orgName type="department">Max Planck Institute for the Science of Light</orgName>
+								<address>
+									<addrLine>Staudtstrasse 2</addrLine>
+									<postCode>91058</postCode>
+									<settlement>Erlangen</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Mario</forename><surname>Krenn</surname></persName>
+							<email>mario.krenn@mpl.mpg.de</email>
+							<affiliation key="aff0">
+								<orgName type="department">Max Planck Institute for the Science of Light</orgName>
+								<address>
+									<addrLine>Staudtstrasse 2</addrLine>
+									<postCode>91058</postCode>
+									<settlement>Erlangen</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Interesting Scientific Idea Generation using Knowledge Graphs and LLMs: Evaluations with 100 Research Group Leaders</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-01-07">7 Jan 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">9E5816D9228E2D42D755F0D87434466D</idno>
+					<idno type="arXiv">arXiv:2405.17044v3[cs.AI]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-03-04T12:09+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The rapid growth of scientific literature makes it challenging for researchers to identify novel and impactful ideas, especially across disciplines. Modern artificial intelligence (AI) systems offer new approaches, potentially inspiring ideas not conceived by humans alone. But how compelling are these AI-generated ideas, and how can we improve their quality? Here, we introduce SciMuse, which uses 58 million research papers and a large-language model to generate research ideas. We conduct a large-scale evaluation in which over 100 research group leaders -from natural sciences to humanities -ranked more than 4,400 personalized ideas based on their interest. This data allows us to predict research interest using (1) supervised neural networks trained on human evaluations, and (2) unsupervised zero-shot ranking with large-language models. Our results demonstrate how future systems can help generating compelling research ideas and foster unforeseen interdisciplinary collaborations.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>An interesting idea is often at the heart of successful research projects, crucial for their success and impact. However, with the accelerating growth in the number of scientific papers published each year <ref type="bibr" target="#b0">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr" target="#b2">[3]</ref>, it becomes increasingly difficult for researchers to uncover novel and interesting ideas. This challenge is even more pronounced for those seeking interdisciplinary collaborations, who have to navigate an overwhelming volume of literature.</p><p>Automated systems that extract insights from millions of scientific papers present a promising solution <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b4">5]</ref>. Recent advances have demonstrated that analyzing relationships between research topics across vast scientific literature can reliably predict future research directions <ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref><ref type="bibr" target="#b8">[9]</ref><ref type="bibr" target="#b9">[10]</ref>, forecast the potential impact of emerging work <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b11">12]</ref>, and identify unconventional avenues for discovery <ref type="bibr" target="#b12">[13]</ref>. With the advent of powerful large-language models (LLMs), it is now possible to leverage knowledge from millions of scientific papers to generate concrete research ideas <ref type="bibr" target="#b13">[14]</ref><ref type="bibr" target="#b14">[15]</ref><ref type="bibr" target="#b15">[16]</ref>.</p><p>Yet, a crucial question remains: Are AI-generated research ideas compelling to experienced scientists? Previous studies have only conducted small-scale evaluations with six natural language processing (NLP) PhD students <ref type="bibr" target="#b13">[14]</ref>, three social science PhD students <ref type="bibr" target="#b14">[15]</ref> and ten PhD students in computer science and biomedicine <ref type="bibr" target="#b15">[16]</ref>. However, perspectives from experienced researchers -who define and evaluate research projects through grant applications and shape their group's research agendaare essential for assessing the value of new ideas. Involving a larger group of more experienced evaluators could offer deeper insights into what makes a research idea compelling, how to generate and predict them.</p><p>Here, we introduce SciMuse, a system designed to suggest new personalized research ideas for individual scientists or collaborations. By using 58 million papers and their citation history, and leveraging automated access to GPT-4 <ref type="bibr" target="#b16">[17]</ref>, SciMuse formulates comprehensive research suggestions. The suggestions were evaluated by more than 100 research group leaders from the Max Planck Society across natural sciences and technology (e.g., from the Institutes for Biogeochemistry, Astrophysics, Quantum Optics, and Intelligent Systems) as well as social sciences and humanities (e.g., from the Institutes for Geoanthropology, Demographic Research, and Human Development). These experienced researchers rank the interest-level of more than 4,400 research ideas generated by SciMuse. This large dataset not only allows us to identify connections between properties of ideas and their interest-level, but also enables us to accurately predict the level of interest of new ideas with two fundamentally different methods: <ref type="bibr" target="#b0">(1)</ref> training supervised neural networks and (2) using LLMs for zero-shot prediction without access to human evaluations, which will be important when expensive human-expert data is unavailable. Our results highlight SciMuse's potential to suggest compelling research directions and collaborations, revealing opportunities that might not be readily apparent and positioning AI as a source of inspiration in scientific discovery <ref type="bibr" target="#b17">[18]</ref><ref type="bibr" target="#b18">[19]</ref><ref type="bibr" target="#b19">[20]</ref><ref type="bibr" target="#b20">[21]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head><p>Knowledge graph generation -While we could directly use publicly available large language models such as GPT-4 <ref type="bibr" target="#b16">[17]</ref> or Gemini <ref type="bibr" target="#b25">[26]</ref> or Claude <ref type="bibr" target="#b26">[27]</ref> to suggest new research ideas and collaborations, our control over the generated ideas would be limited to the structure of the prompt. Therefore, we decided to build a large knowledge graph from the scientific literature to identify the personalized research interests of scientists.</p><p>The knowledge graph, depicted in Fig. <ref type="figure">1</ref>(a), consists of vertices, representing scientific concepts, and edges are drawn when two concepts jointly appear in a title or abstract of a scientific paper. The concept list is generated from the titles and abstracts of approximately Fig. <ref type="figure">1</ref>. SciMuse suggests research ideas or collaborations using a knowledge graph and GPT-4. (a), Knowledge graph generation. Nodes represent scientific concepts extracted from 2.44 million paper titles and abstracts using the RAKE algorithm <ref type="bibr" target="#b21">[22]</ref>, further refined with custom NLP techniques, manual review, GPT, and Wikipedia (to restore mistakenly removed concepts), resulting in a final list of 123,128 concepts. Edges are formed when two concepts co-occur in titles or abstracts of over 58 million papers from OpenAlex <ref type="bibr" target="#b22">[23]</ref>, augmented with citation data as a proxy for impact. A mini-knowledge graph illustrates the connections for two example papers <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b24">25]</ref>. (b), AI-generated research collaborations. We extract concepts from the publications of Researchers A and B, refine them using GPT-4, and identify relevant sub-networks in the knowledge graph. GPT-4 then uses these concept pairs, along with the researchers' research information, to generate personalized research ideas or collaboration projects.</p><p>2.44 million papers from arXiv, bioRxiv, ChemRxiv, and medRxiv, with a data cutoff in February 2023. Rapid Automatic Key-word Extraction (RAKE) algorithm based on statistical text analysis is used to extract candidate concepts <ref type="bibr" target="#b21">[22]</ref>. Those candidates are further refined using GPT, Wikipedia, and human annotators, resulting in 123,128 concepts in the natural and social sciences. We then use more than 58 million scientific papers from the open-source database OpenAlex <ref type="bibr" target="#b22">[23]</ref> to create edges. These edges contain information about the co-occurrence of concepts in scientific papers (in titles and abstracts) and their subsequent citation rates. This new knowledge graph representation was recently introduced in <ref type="bibr" target="#b11">[12]</ref> to predict the impact of future research topics. As a result, we have an evolving knowledge graph that captures part of the evolution of science from 1665 (a text by Robert Hooke on the observation of a great spot on Jupiter <ref type="bibr" target="#b28">[29]</ref>) to April 2023. Details of the knowledge graph generation are shown in Fig. <ref type="figure">1</ref>(a) and Supplementary Information.</p><p>Personalized research suggestions -We generate personalized research proposals for collaborations between two Max Planck Society group leaders, with one researcher evaluating the AI-suggested proposal.</p><p>To generate suggestions (Fig. <ref type="figure">1(b</ref>)), we first identify each researcher's interests by analyzing all their publications from the past two years. Specifically, we extract their concepts from the titles and abstracts of these papers using the full concept list shown in Fig. <ref type="figure">1(a)</ref>. The extracted concepts are further refined by GPT-4, allowing us to build personalized subgraphs in the knowledge graph for each researcher.</p><p>With the researchers' subgraphs, we then generate a prompt for GPT-4 to create a research project (details in the Supplementary Information). In the prompt, we provide the titles of up to seven papers from each researcher and ask GPT-4 to create a research project based on two Each suggestion represents a potential collaboration between the evaluating researcher (Researcher A) and another researcher (Researcher B) from the Max Planck Society, visualized as bi-colored edges (orange for Researcher A, green for Researcher B). A purple circle indicates collaborations within the same institute, and edge transparency reflects the number of evaluated suggestions. Blue dots denote natural sciences (nat) and red dots represent social sciences (soc). (c): Distribution of interest ratings on a scale from 1 ('not interesting') to 5 ('very interesting'), with 394 suggestions rated as very interesting and 713 rated 4. Ratings are further categorized by whether the collaborations are within or across institutes, and by research field affiliation in either the natural or social sciences.</p><p>selected scientific concepts. These concepts are chosen in one of three ways: (1) a randomly selected concept pair, (2) the concept pair with the highest predicted impact, or (3) no specific concept pair, relying only on paper titles. We predict the impact (in terms of expected future citations) by adapting the computational methods from <ref type="bibr" target="#b11">[12]</ref>, applying them to a different and much larger knowledge graph. While the third method does not directly use the knowledge graph features, it serves as a valuable sanity check for our approach (see Supplementary Information). The prompt incorporates self-reflection techniques <ref type="bibr" target="#b29">[30]</ref>, where GPT-4 generates three ideas, iteratively refines them twice, and then selects the most suitable one as the final result.</p><p>Large-scale human evaluation -To evaluate the interest level of AI-generated research ideas, we invited 110 research group leaders, who regularly evaluate research proposals and act upon research ideas, from 54 Max Planck Institutes within the Max Planck Society (one of the largest research organizations worldwide), to participate in the evaluation (see Fig. <ref type="figure" target="#fig_0">2</ref>(a) and (b)). Each leader evaluated up to 48 personalized research projects on a scale from 1 ('not interesting') to 5 ('very interesting'). Of the 110 researchers, 104 were from natural science institutes and 6 from social science institutes. On average, evaluators had published 59.7 papers (range: 9 to 402) and received 3,759.7 citations (range: 20 to 85,778). In total, we received 4,451 responses. As shown Fig. <ref type="figure">3</ref>. Analysis of interest levels versus knowledge graph features. We analyzed how eight features of the knowledge graph correlate with researchers' interest levels. After normalizing these features using z-scores, we arranged them from lowest to highest and divided the data into 50 equal groups. For each group, we plotted the average feature value (x-axis) against the average interest level (y-axis) with standard deviations, to identify trends. (a) and (b) show node features, (c)-(e) show node citation metrics, (f ) shows an edge feature, (g) an edge citation metric, and (h) represents semantic distance between researchers' sub-networks (higher values indicate that the researchers' scientific fields are further apart). Data points include all 2,996 responses (blue), the top 50% of concept pairs by predicted impact (green), and the top 25% (red), using the neuralnetwork based impact prediction presented in <ref type="bibr" target="#b11">[12]</ref>.</p><p>in Fig. <ref type="figure" target="#fig_0">2(c</ref>), 1,107 projects (nearly 25%) received a rating of 4 or 5, with 394 rated as very interesting.</p><p>Properties of interesting research suggestions -On average, we find no significant difference in interest levels between projects generated using random concept pairs, high-impact concept pairs, or without concept pairs. The similarity in results for the sanity test (projects generated without a concept pair used in the knowledge graph) and those using concept pairs enables us to analyze which knowledge graph features most strongly influence the perceived interest of a research project. Identifying these features can help us suggest future research projects with higher interest levels.</p><p>We use the 2,996 suggested research projects, which were created using concept pairs from the knowledge graph, and sort them by various knowledge graph features. Then we group them into 50 equal bins and calculated the mean interest and standard deviation for each bin. Fig. <ref type="figure">3</ref> shows these correlations and highlights several notable trends. For instance, the vertex degree and PageRank of the first concept, selected from the evaluating researcher's concept list, are strongly negatively correlated with human-assessed interest levels. This indicates that the more connected a concept is within the knowledge graph, the less appealing the research project appears. A similar trend is observed for citation rates: the more frequently a concept has been cited in the past, the less interesting the project is evaluated. Additionally, the semantic distance feature shows a negative correlation in Fig. <ref type="figure">3(h)</ref>, suggesting that research proposals involving researchers from similar fields are perceived as more interesting than those from more distant fields. This finding aligns with Fig. <ref type="figure" target="#fig_0">2(c)</ref>, where proposals from the same institute are generally rated higher than those from different institutes with distinct research focuses. We present these correlations for all 2,996 responses (blue), as well as for the top 50% and top 25% of concept pairs with the highest predicted impact (green and red, respectively) in Fig. <ref type="figure">3</ref>, indicating that some correlations are more pronounced for suggestions using highimpact concept pairs. Predicting interest -We set out to predict which suggestions would receive high interest ratings (4 or 5 out of 5) using two fundamentally different methods. First, we trained a neural network on researchers' responses, using knowledge graph properties and human-evaluation rankings, without incorporating the GPT-generated text. Second, we employed GPT in a zero-shot manner to rank the 2,996 suggestions independently of human evaluations. Remarkably, both method showed high prediction accuracy despite the absence of crucial information (see Fig. <ref type="figure">4</ref>). This suggests that intelligent concept pair selec-Fig. <ref type="figure">4</ref>. Predicting Scientific Interest. We use two distinct methods to predict interest levels: (1) a supervised neural network trained on human evaluations using only knowledge graph data (not the text of the actual suggestion), and (2) GPT in a zero-shot setting, ranking suggestions without getting any feedback from human evaluations. Both methods classify suggestions as highly interesting (ratings of 4 or 5) or not (below 4). The neural network uses 25 knowledge graph features and employs Monte Carlo cross-validation for accuracy estimation. For GPT, we conduct pairwise comparisons using personalized research details and rank suggestions through an ELO-based tournment system. (a), The ROC curve shows prediction accuracy of 64.5% for the neural network and 67.3% for GPT-4o. (b), The precision for top-N suggestions is significantly higher than random selection, with the top-1 precision reaching 70% for the neural network (51.0% for GPT-4o and 52.9% for GPT-3.5) and top-5 precision at 60.4% (46.7% for GPT-4o, 43.7% for GPT-3.5). (c), The probability of having at least one high-interest suggestion among the top N recommendations is significantly higher for the supervised neural network compared to random selection. Practically, evaluation data from experienced researchers may not always be available, thus it is very encouraging that LLMs, even without human evaluation, can rank suggestions effectively such that the highest interesting ones appear first.</p><p>tion alone can significantly influence interest rankings in the graph-based approach, while GPT's zero-shot ranking is valuable when human evaluations are unavailable.</p><p>For the supervised neural network, we used knowledge graph features to predict whether a research proposal would receive a high rating (4 or 5) or below 4. Given the limited training data -each of the 2,996 data point representing a research group leader's evaluation of a proposal's interest level -we employed a low-data machine learning approach with a small neural network (25 highperforming input features, 50 neurons in a single hidden layer, and one output neuron). Dropout was used for training <ref type="bibr" target="#b30">[31]</ref>, and Monte Carlo cross-validation <ref type="bibr" target="#b31">[32]</ref> (which is also known as repeated random sub-sampling validation) was applied to ensure robust evaluation and maximize the utility of our limited data (see the Supplementary Information). Decision trees <ref type="bibr" target="#b32">[33]</ref> were not able to outperform the quality of neural networks (see Supplementary Information).</p><p>In the second approach, we tasked GPT-3.5 and GPT-4o to rank all 2,996 suggestions from most to least interesting. Because the suggestions are personalized, we included relevant research details, such as recent paper titles, in the prompts. Specifically, GPT is asked to compare pairs of randomly selected suggestions and determine which is more interesting based on the personalized research interests of the evaluating researcher. This comparison was repeated between 22,000 and 45,000 times (depending on the GPT version), and suggestions were ranked using an ELO system, with each suggestion starting at an initial ELO score of 1400. The model's choices adjusted the rankings, resulting in a final sorted list of suggestions based on their predicted interest level.</p><p>For the binary classification task -ranking research ideas in as highly interesting (4 or 5 out of 5) or lowinterest (3 or below) -, both methods achieve an average Area Under the Curve (AUC) of the receiver operating characteristic (ROC) curve <ref type="bibr" target="#b33">[34]</ref> of nearly 2/3 (Fig. <ref type="figure">4(a)</ref>). More importantly, high precision is more relevant for our task, as we want to suggest highly interesting projects within a small subset of overall suggestions. To evaluate this, we calculate the precision for the top-N predicted concept pairs. For small N (e.g., N=3), the supervised approach achieves 66.4% while GPT-4o and GPT-3.5 reached 45.0% and 47.2%, respectively. This means that 66.4% of the top-3 suggestions were rated as highly interesting, significantly higher than random selection (23%), as shown in Fig. <ref type="figure">4(b)</ref>. Additionally, we also measured the probability of finding at least one highly interesting suggestion within the top-N suggestions. As shown in Fig. <ref type="figure">4</ref>(c), our machine learning method offers a significantly higher probability of identifying interesting suggestions within the first few recommendations compared to random sampling. Surprisingly, GPT -without access to human evaluations -also ranks interesting suggestions much higher than a random approach. This capability is highly valuable in scenarios where human evaluations are costly or unavailable. Furthermore, it is encouraging that newer, more powerful models (e.g., GPT-4o) perform better at predicting human interests than earlier versions like GPT-3.5.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>We demonstrate the largest human evaluation of AIgenerated research ideas to date, involving over 100 research group leaders across diverse scientific domains, including the natural sciences and humanities.</p><p>Beyond understanding the correlations between the properties of the generated research ideas and their interest rankings, we introduce two distinct methods to predict interest levels of AI-generated research ideas. First, we use thousands of human evaluations to train a supervised neural network that can predict interest values based on knowledge graph data alone -without needing the full suggestion text. This approach enables us to select more compelling abstract topics before generating specific ideas. Second, we demonstrate that LLMs can autonomously rank the interest levels of ideas with high quality, even without human evaluation data. This capability is especially valuable when human evaluations are unavailable. Furthermore, we observe that ranking quality improves with more advanced LLMs, which is promising for future developments. As publicly available models such as GPT <ref type="bibr" target="#b16">[17]</ref>, Gemini 1.5 <ref type="bibr" target="#b25">[26]</ref>, LLaMa3 <ref type="bibr" target="#b34">[35]</ref>, and Claude <ref type="bibr" target="#b26">[27]</ref> continue to evolve at an accelerated pace <ref type="bibr" target="#b35">[36]</ref> -especially when it comes to scientific domain knowledge <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b37">38]</ref> -we expect personalized research ideas to become increasingly targeted and relevant.</p><p>The methodologies employed by SciMuse have the potential to inspire novel and unexpected cross-disciplinary research on a large scale. By providing a broad view through the analysis of millions of scientific papers, SciMuse facilitates the discovery of interesting research collaborations between scientists from different fields that might otherwise remain undiscovered. Research in distant fields has been shown to have great potential for impactful, award-winning results <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b38">39]</ref>. Therefore, large scientific organizations, national funding agencies, and other stakeholders may find value in adopting methodologies in the line of SciMuse to foster new highly interdisciplinary and interesting collaborations and ideas that might otherwise remain untapped. This, hopefully, could advance the progress and impact of science at a large scale.</p><p>One exciting possibility is in automated scientific experimentation <ref type="bibr" target="#b39">[40]</ref>. Currently, while large-language models have been integrated into laboratories <ref type="bibr" target="#b40">[41,</ref><ref type="bibr" target="#b41">42]</ref>, the main idea of the experiment has been provided by human scientists. In the future, one might envision the entire scientific process becoming fully automated -from the generation of an interesting idea, as we demonstrate here, to its automated execution and implementation.</p><p>We compiled a list of scientific concepts using metadata from arXiv, bioRxiv, medRxiv, and chemRxiv. The arXiv data is available on Kaggle, while metadata for other preprint sources can be accessed through their respective APIs. Our dataset includes ∼2.44 million prapers, with a cutoff date of February 2023.</p><p>For edge generation, we used the OpenAlex database snapshot (available on the OpenAlex bucket) with a cutoff date of April 2023. For more details, refer to the OpenAlex website <ref type="bibr" target="#b22">[23]</ref>. The original dataset was filtered to entries of journal papers that contain titles, abstracts, and citation data, resulting roughly 92 million papers. From these 92 million papers, 58 million contain at least two concepts of our concept list and can therefore for an edge in the knowledge graph.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. The concept list</head><p>We analyzed the titles and abstracts of ∼2.44 million papers from four preprint datasets using the RAKE algorithm, enhanced with additional stopwords, to extract potential concept candidates. Initial filtering retained two-word concepts (e.g. gouy phase) appearing in at least nine articles and concepts with more than three words (e.g. recurrent neural network ) appearing in six or more, reducing the list to 726,439 concepts.</p><p>To further improve the quality of the identified concepts, we developed a suite of automated tools to eliminate domain-independent errors commonly associated with RAKE and performed a manual review to remove inaccuracies like non-conceptual phrases, verbs, and conjunctions. This step refined the list to 368,825 concepts.</p><p>Next, we used GPT-3.5 to further refine the concepts, which resulted in the removal of 286,311 concepts. We then employed Wikipedia to restore 40,614 mistakenly removed entries, resulting in a final refined list of 123,128 concepts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Classification of Max Planck Institutes</head><p>We classified all 87 Max Planck Institutes into two categories: Class 1, abbreviated as nat, includes natural sciences, technology, mathematics, and medicine (68 institutes), while Class 2, abbreviated as soc, includes social sciences and humanities (19 institutes). The initial classification was done manually based on each institute's title and research field. To validate this, we further used GPT-4o for automatic classification, which perfectly matched with our manual classification.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Researcher Statistics</head><p>Over 100 highly experienced researchers, spanning fields from the natural sciences to the humanities, participated in evaluating the personalized research ideas. Table . S1 summarizes the researchers' publication and citation statistics as of January 1, 2024, when the evaluations were conducted. On average, the researchers had published 59 papers and received over 3,750 citations. The prompt to refine the researchers' concept list is shown below:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Prompt to Refine the Researchers' Concept List</head><p>A scientist has written the following papers: 0) title1 1) title2 2) title3 ... I have a noisy list of the researchers' topics of interest, and I would like your help in filtering them. Please look at the list below and return all concepts that are relevant to the scientist's research (based on their paper titles) and meaningful in the context of their research direction. The concepts can be detailed; I mainly want you to filter out concepts that are not meaningful, words that are not concepts, or concepts that are too general for the direction of the scientist (e.g., "artificial intelligence" might be a meaningful concept for a geologist, but not for a machine learning researcher). Do not change or add any conceptsonly remove or keep them. concept list=[c1, c2, c3, c4, c5, c6, ...]</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>F. Prompt to GPT-4 for project idea generation</head><p>The prompt used to suggest research ideas based on concept pairs from the knowledge graph is described as the follows:</p><p>Prompt to GPT-4 for Project Idea Generation Two researchers A and B, with expertise in "con-cept1" and "concept2" respectively, are eager to collaborate on a novel interdisciplinary project that leverages their unique strengths and creates synergy between their fields.</p><p>To better understand their backgrounds, here are the titles of recent publications from each researcher: Researcher A: 1: title1 2: title2 3: title3 ... Researcher B: 1: title1 2: title2 3: title3 ... Please suggest a creative and surprising scientific project that combines "concept1" and "con-cept2". In your response, follow this outline: First, explain "concept1" and "concept2" in one short sentence each.</p><p>Then, do the following three steps 3 times, improving in each time the response: A) Describe 4 interesting and new scientific contexts, in which those two concepts might appear together in a natural and useful way. B) Criticize the 4 contexts (one short sentence each), on how well the contexts merge the idea of the two concepts. C) Give a 2 sentence summary of your reflections above, on how well one can combine these concepts naturally and interestingly.</p><p>Then, start finding a project. Taking your reflections from (A-C) into account, define in your response a project title, followed by a brief explanation of the project's main objective.</p><p>Finally, address the following questions (Take the full reflections (A-C) into account): What specific interesting research questions will this project address, that will lead to innovative novel results? [2 bullet points, one sentence each] Rather than relying on a knowledge graph to supply "concept1" and "concept2", it is also possible to direct GPT-4 to extract these concepts from the research paper titles of Researchers A and B, respectively. GPT-4 can then use these identified concepts within the same prompting context to generate innovative research ideas.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>G. Interest evaluation for three different generation methods</head><p>Fig. <ref type="figure" target="#fig_1">S1</ref> presents the interest-level distributions for research suggestions generated using three different methods. The interest levels are notably similar between suggestions generated with and without concepts from the knowledge graph. This similarity enables us to analyze the correlations between knowledge graph properties and interest levels, and to use these properties for predicting the interest level of generated research proposals. (1) no concepts provided by the knowledge graph, (2) random concepts from the researchers' subnetwork, and (3) predicted high-impact concept pairs from the researchers' subnetwork. The figures displays: (a) overall interest levels (numbers within bars show the number of responses for that evaluation), (b) interest levels for ideas without using concepts from the knowledge graph, (c) interest levels with random concept pairs, and (d) interest levels using high-impact concept pairs (predicted by adapting the computational methods from <ref type="bibr" target="#b11">[12]</ref>, and applying them to a different and much larger knowledge graph).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H. Predicting high interest from knowledge graph features with neural networks</head><p>In Fig. <ref type="figure">4</ref> (main text), we aim to predict whether a research proposal will be rated with high interest. Specifically, using only data from the knowledge graph (excluding the final text generated by GPT), we predict if a proposal will receive an interest rating of 4 or 5 (on a scale of 1 to 5: not interesting to very interesting) or below 4. This is formulated as a binary classification task.</p><p>The input to the neural networks (using PyTorch <ref type="bibr" target="#b43">[44]</ref>) consists of network-theoretical features extracted from the knowledge graph. For each concept pair in a re- search project, we compute 144 features. The first 141 features are derived from those used to predict the future impact of concept pairs, as described in <ref type="bibr" target="#b11">[12]</ref>. These features include node properties (e.g., node degree and PageRank <ref type="bibr" target="#b44">[45]</ref>) and edge properties (e.g., Simpson similarity and Sørensen-Dice coefficient <ref type="bibr" target="#b45">[46]</ref>). Several features also account for impact information, such as recent citation counts. The remaining three features include the predicted impact and two distance metrics between the researchers' subgraphs (Fig. <ref type="figure">1(b)</ref>). The first distance metric measures the distance based solely on the concepts present in Researcher A and Researcher B's concept lists. In contrast, the second metric takes into account the entire neighborhood of these subgraphs by calculating semantic distances between all neighboring concepts and the concepts from the subgraphs. These features serve as the input to the neural network for predicting whether a proposal will achieve a high interest rating.</p><p>Given the small dataset size (2,996 answers with properties from the knowledge graph), we use a data-efficient learning method -a small neural network with dropout. The input layer consists of the 25 best-performing features (see Table. S2), selected from the total 144 by independently analyzing the feature importance of each and choosing the top 25. The neural network has one hidden layer with 50 neurons and a single output neuron. Mean square error is used as the loss function.</p><p>To ensure robust performance estimation for the small dataset, we use Monte Carlo cross-validation. The dataset is repeatedly split into training and validation sets, and the model is trained and evaluated on each split. This approach ensures that the performance metrics are robust and not dependent on a particular split of the data. This iterative process continues until the standard deviation of the mean AUC is less than 10 -2 3 , achieved after 130 iterations. This method provides a reliable estimate of the model's performance, which is crucial for small datasets where individual splits may lead to high variance in the evaluation metrics.</p><p>The neural network performance is not specifically sensitive to hyperparameter choices, thus we refrained from hyperparameter optimization, and instead used a reasonable defaults: learning rate=0.003, dropout=20%, weight decay=0.0007, training dataset=75%, validation dataset=15%, test dataset=10%. In Fig. <ref type="figure" target="#fig_2">S2</ref>, we investigate alternative hyper-parameters of the training process, and find that the results are robust under variations of the hyper-parameters.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. Predicting high interest from knowledge graph features with decision trees</head><p>We experimented with other data-efficient learning methods, specifically with decision trees <ref type="bibr" target="#b32">[33]</ref> using <ref type="bibr" target="#b46">[47]</ref>. However, decision trees did not outperform the neural network predictions, as can be seen in Fig. <ref type="figure" target="#fig_3">S3</ref>. These values confirm that neural networks are advantageous for the task of ranking research ideas by their interest value in a supervised way, which can also be confirmed in Fig. <ref type="figure" target="#fig_5">S5</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>J. Zero-shot ranking of research suggestions by GPT</head><p>We ranked 2,996 research suggestions -previously evaluated by human experts -using GPT-3.5, GPT-4o, and GPT-4o-mini. For each pair of randomly selected suggestions, we asked the LLMs to rank which one was more interesting, considering the personalized research interests of the evaluating human expert. This pairwise comparison was repeated between 22,000 and 45,000 times (for GPT4o and GPT4o-mini, respectively). We treated this task as a tournament where all 2,996 suggestions compete pairwise against each other. Using the ELO ranking system, each suggestion started with an initial ELO score of 1400. Each comparison by GPT updated the ELO rankings based on the outcome, producing a final sorted list of suggestions from highest to lowest ELO score. We evaluated the ranking quality by calculating the AUC to determine how well the ranked list aligns with the human-expert evaluations of interest levels (Fig. <ref type="figure">S4</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>K. Prediction of Interest with different methods</head><p>We show the full data of all five methods (supervised training with neural networks and decision trees, as well as unsupervised zero-shot prediction with GPT3.5, GPT4o and GPT4o-mini), with their corresponding AUC, top-N precision and top-N success probability, in Fig. <ref type="figure" target="#fig_5">S5</ref>. We see that the neural network outperforms decision trees when trained in a supervised way, and that GPT4o is better than the other tested models, when the ranking is performed in a zero-shot manner without giv-Fig. <ref type="figure">S4</ref>. Zero-Shot ranking of research suggestions by LLMs. The research suggestions are generated using the knowledge graph together with GPT4. They are then ranked using GPT4o, GPT4o-mini and GPT3.5, without feedback from the human evaluation. The human evaluation is used to compute the final quality of the ranking. the ranking is performed in a pair-wise choice where we ask the LLM to select the more interesting one given the research background of the researchers. One match is one pairwise selection. The LLMs perform 10,000 of these pairwise selections, which allows us to compute ELO scores for each generated research idea.</p><p>ing any information about the evaluations of humans.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>L. Prompt engineering</head><p>We have explored manual and automated improvements of the prompts, both for the research question design and the zero-shot prediction. Specifically, we attempted to improve the prompts for the idea generation using GPT-4o. While the prompts were more structured, a small-scale evaluation did not show any improvement in terms of more interesting results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>M. GPT-4o and GPT-o1 for idea generation</head><p>We conducted two small-scale tests where GPT-4 and GPT-4o generated ideas using the exact same settings described above.</p><p>In the first test, three research group leaders evaluated 180 pairs of questions (one generated by GPT-4 and the other by GPT-4o using the same prompt). They found 31.1% of GPT-4 answers to be more interesting, while 60.56% favored GPT-4o answers (8.3% were draw). In the second test, a research group leader evaluated 11 pairs of questions (one generated by GPT-4o and the other by GPT-o1 with the same prompt), and all 11 ideas generated by GPT-o1 were ranked as more interesting.</p><p>These additional small-scale tests suggest that improved models can enhance idea generation, thus directly improving the results of SciMuse.</p><p>Prompt for Zero-Shot Ranking of Research Ideas I will present two research ideas. The first idea is for Researchers A1 and B1, and the second idea is for Researchers A2 and B2. Researchers A1 and A2 will evaluate how interesting they find the respective ideas. You will determine which of the two suggestions will be considered more interesting.  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Large-scale human evaluation within the Max Planck Society. (a)-(b), The map of Germany, based on the GISCO statistical unit dataset from Eurostat [28], shows the locations of the Max Planck Institutes and the participating group leaders. A total of 4,451 personalized AI-generated research suggestions were evaluated by 110 research group leaders. Each suggestion represents a potential collaboration between the evaluating researcher (Researcher A) and another researcher (Researcher B) from the Max Planck Society, visualized as bi-colored edges (orange for Researcher A, green for Researcher B). A purple circle indicates collaborations within the same institute, and edge transparency reflects the number of evaluated suggestions. Blue dots denote natural sciences (nat) and red dots represent social sciences (soc). (c): Distribution of interest ratings on a scale from 1 ('not interesting') to 5 ('very interesting'), with 394 suggestions rated as very interesting and 713 rated 4. Ratings are further categorized by whether the collaborations are within or across institutes, and by research field affiliation in either the natural or social sciences.</figDesc><graphic coords="3,59.08,52.07,497.93,368.77" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. S1 .</head><label>S1</label><figDesc>Fig. S1. Interest levels across different generation methods. Research ideas are generated using three methods:(1) no concepts provided by the knowledge graph, (2) random concepts from the researchers' subnetwork, and (3) predicted high-impact concept pairs from the researchers' subnetwork. The figures displays: (a) overall interest levels (numbers within bars show the number of responses for that evaluation), (b) interest levels for ideas without using concepts from the knowledge graph, (c) interest levels with random concept pairs, and (d) interest levels using high-impact concept pairs (predicted by adapting the computational methods from<ref type="bibr" target="#b11">[12]</ref>, and applying them to a different and much larger knowledge graph).</figDesc><graphic coords="10,317.01,192.42,245.06,196.05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. S2 .</head><label>S2</label><figDesc>Fig. S2. Choice of alternative hyper-parameters for training of neural network. We analyse the prediction of interest level quality (in terms of AUC) with different parameters of the neural network, such as different number of features, different number of layers and neurons, learning rate and drop-out rate. We see that the final results are robust under variations of the hyper-parameters.</figDesc><graphic coords="11,54.00,52.08,508.08,195.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. S3 .</head><label>S3</label><figDesc>Fig.S3. Choice of hyper-parameters for training of decision tree. The model is trained using Monte Carlo crossvalidation until a statistical uncertainty of σ=0.001 is reached. We find that no setting of number of features, maximum depth and minimal sample leaf can reach the performance of the data-efficient neural network.</figDesc><graphic coords="12,54.00,52.08,508.09,442.62" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>The suggestions are randomly ordered, and you should evaluate each suggestion independently and without bias. ### Researcher A1 Context and Suggestion 1: Here are a few papers of Researcher A1: (papersA1) Suggestion 1: [suggestion1] **Summary for Researcher A1**: Provide a one-sentence summary of Suggestion 1 in the context of Researcher A1. ### Researcher A2 Context and Suggestion 2: Here are a few papers of Researcher A2: (papersA2) Suggestion 2: [suggestion2] **Summary for Researcher A2**: Provide a one-sentence summary of Suggestion 2 in the context of Researcher A2.### Evaluation:Based on the summaries and the research interests of A1 and A2, evaluate which suggestion is more likely to be ranked higher in terms of interest. **Result**: If Suggestion 1 is ranked higher by Researcher A1 than Suggestion 2 is by Researcher A2, write 'RESULT: SUGGESTION 1'. Otherwise, write 'RESULT: SUGGESTION 2'. Remember, the suggestions are randomly ordered, and your evaluation should be impartial and based solely on the research interests of A1 and A2.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. S5 .</head><label>S5</label><figDesc>Fig.S5. Interest predictions with five methods. We reproduce Fig.4(main text), and add results from a supervised decision tree training, and an unsupervised GPT4o-mini.</figDesc><graphic coords="14,54.00,52.08,508.08,169.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="2,54.00,52.08,508.10,336.53" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,59.08,52.08,497.90,248.95" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="5,54.00,52.08,508.08,169.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table S1 .</head><label>S1</label><figDesc>Summary statistics of researchers' publications and citations.</figDesc><table><row><cell></cell><cell cols="4">Mean Median Min Max</cell></row><row><cell>Number of papers</cell><cell>59.7</cell><cell>36.0</cell><cell>9</cell><cell>402</cell></row><row><cell cols="3">Number of citations 3759.7 1630.0</cell><cell cols="2">20 85778</cell></row><row><cell cols="5">E. Prompt to GPT-4 for concept refinement</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>The authors wholeheartedly thank all the researchers who spent the time participating in our study. The authors also thank the organizers of OpenAlex, arXiv, bioRxiv, medRxiv, and chemRxiv for making scientific resources freely accessible. X.G. acknowledges support from the <rs type="funder">Alexander von Humboldt Foundation</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Data for the knowledge graph is accessible on Zenodo at https://doi.org/10.5281/zenodo.13900962 <ref type="bibr" target="#b42">[43]</ref>. Codes and evaluation data for this work are available on GitHub at https://github.com/artificial-scientist-lab/SciMuse.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ETHICS STATEMENT</head><p>The research was reviewed and approved by the Ethics Council of the Max Planck Society.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DATA AND CODE AVAILABILITY</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary Information</head><p>A. Datasets for creating knowledge graph</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fortunato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Bergstrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Börner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Helbing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Milojević</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Petersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Radicchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sinatra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Uzzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.aao0185</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science of science</title>
+		<imprint>
+			<biblScope unit="volume">359</biblScope>
+			<biblScope unit="page">185</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note>Science</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A.-L</forename><surname>Barabási</surname></persName>
+		</author>
+		<title level="m">The science of science</title>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Growth rates of modern science: a latent piecewise growth curve approach to model publication numbers from established and new literature databases</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bornmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Haunschild</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mutz</surname></persName>
+		</author>
+		<idno type="DOI">10.1057/s41599-021-00903-w</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Humanities and Social Sciences Communications</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Metaknowledge</forename></persName>
+		</author>
+		<idno type="DOI">10.1126/science.1201765</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">331</biblScope>
+			<biblScope unit="page">721</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Sciscinet: A largescale open data lake for the science of science research</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41597-023-02198-9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Scientific Data</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">315</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Choosing experiments to accelerate collective discovery</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rzhetsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">T</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.150975711</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl. Acad. Sci. USA</title>
+		<imprint>
+			<biblScope unit="volume">112</biblScope>
+			<biblScope unit="page">14569</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Predicting research trends with semantic and neural networks with an application in quantum physics</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Krenn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zeilinger</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.1914370116</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl. Acad. Sci. USA</title>
+		<imprint>
+			<biblScope unit="volume">117</biblScope>
+			<biblScope unit="page">1910</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Agatha: automatic graph mining and transformer based hypothesis generation approach</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sybrandt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Tyagin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shtutman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Safro</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3340531.3412684</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 29th ACM International Conference on Information &amp; Knowledge Management</title>
+		<meeting>the 29th ACM International Conference on Information &amp; Knowledge Management</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="2757" to="2764" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nadkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wadden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Beltagy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hajishirzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hope</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2106.09700</idno>
+		<title level="m">Scientific language models for biomedical knowledge base completion: an empirical study</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Forecasting the future of artificial intelligence with machine learning-based link prediction in an exponentially growing knowledge network</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Krenn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Buffoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Coutinho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Eppel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gritsevskiy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Moutinho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Sanjabi</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s42256-023-00735-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Machine Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">1326</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Surprising combinations of research contents and contexts are related to impact and emerge with scientific outsiders from distant disciplines</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Evans</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-023-36741-4</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">1641</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Forecasting high-impact research topics via machine learning on evolving knowledge graphs</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Krenn</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2402.08640</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Accelerating science with human-aware artificial intelligence</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sourati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41562-023-01648-z</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Human Behaviour</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">1682</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Downey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hope</surname></persName>
+		</author>
+		<title level="m">Scimon: Scientific inspiration machines optimized for novelty, Annual Meeting of the Association for Computational Linguistics</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Large language models for automated open-domain scientific hypotheses discovery</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Poria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cambria</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2309.02726</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Researchagent: Iterative research idea generation over scientific literature with large language models</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Baek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Jauhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cucerzan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Hwang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2404.07738</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><surname>Achiam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Adler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ahmad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Akkaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">L</forename><surname>Aleman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Altenschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Altman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Anadkat</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2303.08774</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Gpt-4 technical report</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">On scientific understanding with artificial intelligence</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Krenn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Pollice</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">Y</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Aldeghi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cervera-Lierta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Friederich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dos Passos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gomes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Häse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jinich</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nigam</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s42254-022-00518-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Physics</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">761</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A computational inflection for scientific discovery</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hope</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Downey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Weld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Etzioni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Horvitz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3576896</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="page">62</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Scientific discovery in the age of artificial intelligence</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Chandak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Van Katwyk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Deac</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41586-023-06221-2</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">620</biblScope>
+			<biblScope unit="page">47</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">The impact of large language models on scientific discovery: a preliminary study using gpt-4</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Ai4science</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Quantum</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2311.07361</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Automatic keyword extraction from individual documents</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rose</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Engel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Cramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Cowley</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/9780470689646.ch1</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Text mining: applications and theory</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Priem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Piwowar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Orr</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2205.01833</idno>
+		<title level="m">Openalex: A fullyopen index of scholarly works, authors, venues, institutions, and concepts</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wakonig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Diaz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bonnin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stampanoni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bergamaschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ihli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Guizar-Sicairos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Menzel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X-Ray</forename><surname>Fourier Ptychography</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/sciadv.aav0282</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science advances</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">282</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Ultrafast x-ray imaging of the light-induced phase transition in vo2</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Perez-Salinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Siddiqui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Volckaert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">E</forename><surname>Majchrzak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ulstrup</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Hallman</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41567-022-01848-w</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">215</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Reid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Savinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Teplyashin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lepikhin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lillicrap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>-B. Alayrac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Soricut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lazaridou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Firat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schrittwieser</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2403.05530</idno>
+		<title level="m">Gemini 1.5: Unlocking multi-modal understanding across millions of tokens of context</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The claude 3 model family: Opus, sonnet, haiku</title>
+		<author>
+			<persName><surname>Anthropic</surname></persName>
+		</author>
+		<ptr target="https://paperswithcode.com/paper/the-claude-3-model-family-opus-sonnet-haiku" />
+	</analytic>
+	<monogr>
+		<title level="j">Papers with Code</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">E</forename><surname>Commission</surname></persName>
+		</author>
+		<title level="m">Eurostat gisco -nuts geodata</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A spot in one of the belts of jupiter</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hooke</surname></persName>
+		</author>
+		<idno type="DOI">10.1098/rstl.1665.0005</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Philosophical Transactions of the Royal Society of London</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">3</biblScope>
+			<date type="published" when="1665">1665</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Self-refine: Iterative refinement with self-feedback</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Madaan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Tandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hallinan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wiegreffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Alon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dziri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Prabhumoye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Dropout: A simple way to prevent neural networks from overfitting</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Srivastava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hinton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Krizhevsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Salakhutdinov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">1929</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Monte carlo cross validation</title>
+		<author>
+			<persName><forename type="first">Q.-S</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-Z</forename><surname>Liang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0169-7439(00)00122-2</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Chemometrics and Intelligent Laboratory Systems</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><surname>Breiman</surname></persName>
+		</author>
+		<title level="m">Classification and regression trees</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note>Routledge</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Roc graphs: Notes and practical considerations for researchers</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fawcett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Machine learning</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Llama 3: Open foundation and fine-tuned chat models</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ai</surname></persName>
+		</author>
+		<ptr target="https://github.com/meta-llama/llama3" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">W.-L</forename><surname>Chiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Sheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Angelopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2403.04132</idno>
+		<title level="m">Chatbot arena: An open platform for evaluating llms by human preference</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">P</forename><surname>Wellawatte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Schwaller</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2311.04047</idno>
+		<title level="m">Extracting human interpretable structure-property relationships in chemistry using xai and large language models</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Can large language models provide useful feedback on research papers? a large-scale empirical analysis</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">Y</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vodrahalli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yin</surname></persName>
+		</author>
+		<idno type="DOI">10.1056/AIoa2400196</idno>
+	</analytic>
+	<monogr>
+		<title level="j">NEJM AI</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">2400196</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Atypical combinations and scientific impact</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Uzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mukherjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stringer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jones</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.1240474</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">342</biblScope>
+			<biblScope unit="page">468</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Self-driving laboratories for chemistry and materials science</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Schmid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Baird</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Darvish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pablo-García</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Rajaonson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Skreta</surname></persName>
+		</author>
+		<idno type="DOI">10.1021/acs.chemrev.4c00055</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Chemical Reviews</title>
+		<imprint>
+			<biblScope unit="volume">124</biblScope>
+			<biblScope unit="page">9633</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Autonomous chemical research with large language models</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Boiko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Macknight</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kline</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gomes</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41586-023-06792-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">624</biblScope>
+			<biblScope unit="page">570</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Augmenting large language models with chemistry tools</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Bran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Schilter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Baldassari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Schwaller</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s42256-024-00832-8</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Machine Intelligence</title>
+		<imprint>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Interesting scientific idea generation using knowledge graphs and llms: Evaluations with 100 research group leaders [data set</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Gu</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.13900962</idno>
+		<ptr target="https://doi.org/10.5281/zenodo.13900962" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Pytorch: An imperative style, high-performance deep learning library</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Paszke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Massa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lerer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bradbury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Chanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Killeen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gimelshein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Antiga</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">The pagerank citation ranking : Bringing order to the web</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Page</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Brin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Motwani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Winograd</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<publisher>Stanford InfoLab</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<author>
+			<persName><forename type="first">A.-L</forename><surname>Barabási</surname></persName>
+		</author>
+		<title level="m">Network Science</title>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Scikit-learn: Machine learning in python</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pedregosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Varoquaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gramfort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Thirion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Grisel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Blondel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Prettenhofer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Dubourg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vanderplas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Passos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Cournapeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Perrot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Duchesnay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">2825</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

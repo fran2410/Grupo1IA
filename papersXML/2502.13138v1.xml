@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">AIDE: AI-Driven Exploration in the Space of Code</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-02-18">18 Feb 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Zhengyao</forename><surname>Jiang</surname></persName>
+							<email>zhengyao@weco.ai</email>
+						</author>
+						<author>
+							<persName><forename type="first">Weco</forename><surname>Ai</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dominik</forename><surname>Schmidt</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Runway</forename><surname>Ml</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dixing</forename><surname>Xu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ian</forename><surname>Kaplan</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Deniss</forename><surname>Jacenko</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yuxiang</forename><surname>Wu</surname></persName>
+							<email>yuxiang@weco.ai.</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">Dhruv Srikanth Weco</orgName>
+								<address>
+									<region>AI</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<address>
+									<settlement>Weco</settlement>
+									<region>AI</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">AIDE: AI-Driven Exploration in the Space of Code</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-02-18">18 Feb 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">180CBF08CDCB4431DCEB58AE175AD7AE</idno>
+					<idno type="arXiv">arXiv:2502.13138v1[cs.AI]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-03-04T12:09+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Machine learning, the foundation of modern artificial intelligence, has driven innovations that have fundamentally transformed the world. Yet, behind advancements lies a complex and often tedious process requiring labor and compute intensive iteration and experimentation. Engineers and scientists developing machine learning models spend much of their time on trial-and-error tasks instead of conceptualizing innovative solutions or research hypotheses. To address this challenge, we introduce AI-Driven Exploration (AIDE), a machine learning engineering agent powered by large language models (LLMs). AIDE frames machine learning engineering as a code optimization problem, and formulates trial-anderror as a tree search in the space of potential solutions. By strategically reusing and refining promising solutions, AIDE effectively trades computational resources for enhanced performance, achieving state-of-the-art results on multiple machine learning engineering benchmarks, including our Kaggle evaluations, OpenAI's MLE-Bench and METR's RE-Bench. The implementation of AIDE is publicly available at https://github.com/WecoAI/aideml.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Machine learning engineering supports many modern AI achievements, from basic regression on tabular data to the recent surge in large generative models. However, building a high-performance machine learning model is always time consuming. Due to the inherent stochasticity of both the data and the optimization process, engineers and scientists rely heavily on trial-and-error. Researchers have long sought to automate these iterative processes, leading to advancements in fields like Au-toML <ref type="bibr" target="#b4">(Feurer et al., 2015</ref><ref type="bibr" target="#b5">(Feurer et al., , 2020;;</ref><ref type="bibr">LeDell and Poirier, 2020a;</ref><ref type="bibr" target="#b18">Olson and Moore, 2016;</ref><ref type="bibr" target="#b11">Jin et al., 2023</ref><ref type="bibr" target="#b10">Jin et al., , 2019;;</ref><ref type="bibr">Thornton et al., 2013a,b;</ref><ref type="bibr" target="#b17">Mueller and et al., 2024)</ref>, Neural Architecture Search <ref type="bibr" target="#b31">(Zoph and Le, 2017;</ref><ref type="bibr" target="#b21">Pham et al., 2018;</ref><ref type="bibr" target="#b16">Liu et al., 2019;</ref><ref type="bibr" target="#b22">Real et al., 2019;</ref><ref type="bibr" target="#b2">Elsken et al., 2019)</ref>, and hyperparameter optimization <ref type="bibr" target="#b3">(Falkner et al., 2018;</ref><ref type="bibr" target="#b29">Yang and Shami, 2020)</ref>. These methods typically require a predefined search space of configurations, such as hyperparameters and network architectures, within which the algorithm explores potential solutions <ref type="bibr" target="#b2">(Elsken et al., 2019;</ref><ref type="bibr" target="#b29">Yang and Shami, 2020;</ref><ref type="bibr" target="#b28">White et al., 2023)</ref>. Defining this space often requires significant domain expertise. Furthermore, search algorithms for hyperparameter tuning are often somewhat brute force compared to human experts, resulting in lower compute efficiency and a risk of overfitting to the validation set.</p><p>The emergence of advanced coding capabilities in large language models (LLMs) <ref type="bibr">(OpenAI, 2023;</ref><ref type="bibr" target="#b9">Jimenez et al., 2024;</ref><ref type="bibr" target="#b0">Anthropic, 2024;</ref><ref type="bibr" target="#b6">Google, 2024;</ref><ref type="bibr" target="#b8">Jain et al., 2025;</ref><ref type="bibr">OpenAI, 2025a,b)</ref> has introduced an exciting new possibility: searching directly within the space of code rather than the space of predefined configurations. Code-space optimization offers greater flexibility and leverages the extensive domain-specific knowledge inherent in LLMs, effectively narrowing the search to more promising solutions and thus boosting sample efficiency. This gives it the potential to address compute-bound tasks like deep learning or, presumably, even optimizing LLMs themselves.</p><p>Here, we introduce AI-Driven Exploration (AIDE), a LLM-powered agent * that automates the trialand-error process of machine learning engineering. Unlike the ReACT <ref type="bibr" target="#b30">(Yao et al., 2023)</ref> style agent, which appends historical observations to the LLM's context and relies on the model's capabilities to solve a monolithic optimization problem, AIDE organizes all historical solutions in a tree structure. It then asks the LLM to propose improvements based on individual tree nodes. A hard-coded treesearch algorithm accumulates these incremental improvements, guided by automated evaluations.</p><p>We benchmarked AIDE on a set of Kaggle tasks focusing on tabular machine learning and released these initial results together in April 2024 <ref type="bibr" target="#b27">(Weco AI, 2024)</ref>. Subsequently, OpenAI released MLE-Bench <ref type="bibr" target="#b1">(Chan et al., 2024)</ref>, further showing that AIDE can be applied to even more challenging deep learning tasks from Kaggle while achieving state-of-the-art performance. Most notably, AIDE achieves twice the number of medals compared to a follow-up agent <ref type="bibr" target="#b26">(Wang et al., 2024)</ref> when both use GPT-4o; with o1-preview, the gap widens even further. In parallel, METR assessed AIDE on AI research tasks against human experts under time constraints, showing that AIDE can outperform expert-crafted solutions in limited time windows <ref type="bibr">(METR, 2024)</ref>. Moreover, for tasks with a robust evaluation signal like Triton Kernel optimization, AIDE's final solution surpasses that of human experts, even when the latter had extended development time.</p><p>The first half of this paper provides a formal specification of AIDE for the research community. In the second half, we present and analyze empirical evaluations of AIDE, drawing on both our own experiments and independent benchmark results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Preliminaries</head><p>Many general-purpose LLM agents, including ReACT <ref type="bibr" target="#b30">(Yao et al., 2023)</ref>, frame their tasks as Partially Observable Markov Decision Processes (POMDPs) <ref type="bibr" target="#b12">(Kaelbling et al., 1998)</ref>, a widely used framework in reinforcement learning. In a POMDP, the agent tries to maximize a cumulative reward by choosing actions based on all past observations, essentially treating the entire interaction history as the state. While this approach is flexible and unifies a range of tasks, it lacks a principled way to break down the problem when there is a clear structure available. Moreover, for LLM-based agents, continually appending all historical data can lead to oversized prompts and limit scalability, because the model's context window eventually fills up.</p><p>In this work, we adopt an alternative framework for LLM-driven iterative problem solving by modeling the task as an optimization problem: Let S be a space of possible solutions (e.g., Python scripts), and let h : S → R be a stateless objective function (for example, validation accuracy or loss). The goal is to find an optimal solution:</p><formula xml:id="formula_0">s * = arg max s∈S h(s).</formula><p>(1) Each candidate solution s can be evaluated independently via an objective function h(s). This perspective simplifies the problem considerably: rather than unrolling a single, long-horizon decision process , we can directly evaluate and compare solutions. It also aligns naturally with existing optimization methods, like tree search, which depend on standalone evaluations of candidate solutions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Methodology</head><p>In this section, we introduce our approach to automating machine learning engineering with AIDE. By employing the tree search method, AIDE systematically explores solutions that optimize validation metrics, breaking down the monolithic optimization task into atomic improvement steps. We begin by outlining the high-level optimization algorithm. And then delve into key implementation details, such as the search policy and specialized prompts that drive the iterative generation and refinement of machine learning code.</p><p>Algorithm 1 AI-Driven Exploration (AIDE) 1: Initialize: solution tree T 0 ← ∅ 2: Initialize: base solution s ← s 0 3: for n = 1, 2, ..., N do 4:</p><formula xml:id="formula_1">s n ← f s, Σ(T n-1 ) ▷ Propose a new solution 5: v n ← h(s n ) ▷ Evaluate the solution 6: T n ← T n-1 ∪ {node (s n , v n ), edge (s → s n )}</formula><p>▷ Record node and its score 7:</p><p>s ← π(T n ) ▷ Select the next base node 8: end for 9: return argmax s ′ ∈{s0,...,s N } h(s ′ ) ▷ Best solution found</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">AI-Driven Exploration in the Space of Solutions</head><p>In AIDE, a solution s is the code to be optimized, with s 0 denoting the empty root solution. An evaluator, h : S → R, evaluates the code and provides a scalar score. All discovered solutions are stored in a solution tree, T , whose nodes correspond to scripts and edges represent an improvement attempt (e.g., s → s ′ is an improvement of s). A search policy, π(T ), selects which solution s ∈ T will serve as the base solution to be improved. To keep language model prompts concise while being aware of the historical attempts, a summarization operator, Σ(T ), extracts relevant information from the tree, such as the high level idea of each improvement attempt and its corresponding performance metrics. Finally, a coding operator, f s, Σ(T ) , proposes new scripts by drafting an initial version from s 0 , fixing bugs, or refining a promising solution based on the summarized context.</p><p>With these components in place, AIDE can systematically explore the code solution space, as shown in Algorithm 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">AIDE for Machine Learning</head><p>Here we present more implementation details of AIDE for machine learning engineering, providing a concrete instantiation of the core components from Section 3.1. In particular, we build upon the following design elements:</p><p>Search Policy (π). In AIDE, the search policy π ( algorithm 1, line 7) follows a simple hard-coded rule, determining whether to draft, debug, or improve based on an existing solution. Specifically, it selects:</p><p>• Drafting if we have not yet reached the desired number of initial solutions.</p><p>• Debugging if a buggy node remains within a certain debug depth.</p><p>• Improving otherwise, typically targeting the best (non-buggy) solution.</p><p>This policy imposes practical heuristics, such as 1) first exploring a set of diverse initial solutions and continuously improving the best one, and 2) constraining the number of debug attempts for a broken solution.</p><p>Coding Operator (f ). The coding operator has three main entry points, each with its own specialized prompts:</p><p>• Drafting, which is invoked when we need a completely new solution from scratch. It prompts an LLM to outline a brief plan for a model (e.g., specifying a particular network architecture or feature-engineering idea), then emits a single-file Python program implementing that plan. • Debugging, which focuses on repairing buggy solutions. By inspecting error logs and execution traces, it attempts to rectify issues in the code like broken imports, incorrect tensor dimensions, or other coding errors while preserving the overall approach. • Improving, which is called when a valid, non-buggy solution already exists but could benefit from data preprocessing, architectural or optimization modifications. Here, the LLM</p><formula xml:id="formula_2">s 0 s 1 s 2 s 3 s 4 s 5 s 6 s 7 f : draft f : draft f : draft f : fix f : fix f : improve f : fix Empty Solution Bug Detected</formula><p>Valid Solution</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Optimal Solution</head><p>Figure <ref type="figure">1</ref>: A sample solution tree T for AIDE, where each node is a Python script. Arrows represent transitions proposed by the coding operator f . Some branches terminate in a bug, while others lead to improved or optimal solutions.</p><p>proposes exactly one "atomic" change, such as switching optimizers or adding a regularization technique, so that its effect on performance is directly measurable.</p><p>Combining these three operations keeps the solution tree structured and ensures that each new node arises from a well-defined modification of a parent node.</p><p>Summarization Operator (Σ(T )). Despite the flexibility to generate arbitrarily large numbers of solutions, we avoid saturating the LLM's prompt by applying a context summarization operator, Σ(T ). Instead of appending all historical logs, Σ(T ) selectively extracts:</p><p>• Performance metrics (e.g., accuracy, AUC-ROC, test set loss).</p><p>• Hyperparameter settings if a solution involves a hyperparameter sweep.</p><p>• Relevant hints for debugging (e.g., misaligned array shapes in tracebacks).</p><p>A concise summary is crucial to maintaining a stateless perspective: each code revision stands on its own, but Σ(T ) uses prior information to guide subsequent proposals. This design offers much of the benefit of incremental reasoning without exploding the prompt size.</p><p>Data Preview in Coding Prompts. In addition to dynamic updates from Σ(T ), AIDE for machine learning includes a small static "data preview" in each prompt, giving the LLM basic knowledge of dataset size or feature layouts. In practice, we store relevant metadata (e.g., number of rows, column names, or data splits) in the workspace and insert it into the coding operator's prompt. Although not a complete EDA pipeline, this lightweight approach helps AIDE guide key code decisions. These decisions include selecting a validation split or scaling hyperparameters, without repeatedly including extensive dataset context.</p><p>Putting It All Together. Figure <ref type="figure">1</ref> illustrates how AIDE's instantiation for machine learning uses (i) a search policy π to select which solution to refine next, (ii) a coding operator f for generating code by drafting, debugging, or improving solutions, and (iii) a summarization operator Σ(T ) to keep the LLM prompts concise and targeted. By combining these components under a stateless optimization framework, AIDE can systematically search within the space of possible code solutions for machine learning tasks, avoiding an ever-increasing prompt history while retaining the relevant knowledge needed to achieve high performance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Evaluation</head><p>In this section we report empirical evaluations of AIDE. We did our own evaluation on Kaggle competitions with a focus on tabular machine learning tasks <ref type="bibr" target="#b27">(Weco AI, 2024)</ref>. On the other hand, after the open sourcing of the AIDE in April 2024, the community has done larger scale independent evaluations showing promising results on deep learning <ref type="bibr" target="#b1">(Chan et al., 2024)</ref> and AI R&amp;D (METR, 2024) tasks. We therefore also aggregate relevant results here to provide a better understanding of the AIDE's performance. Readers interested in the extended evaluations are encouraged to read and cite the papers from OpenAI <ref type="bibr" target="#b1">(Chan et al., 2024)</ref> and METR (2024) respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Weco Kaggle Benchmark</head><p>We curated a diverse set of Kaggle competitions to build Weco's internal Kaggle benchmark, called Weco-Kaggle, for evaluating AIDE's performance in machine learning. This set consists of 63 competitions of varied complexity and data size, spanning domains such as tabular machine learning, image classification, and time-series prediction. Some of these competitions require a GPU to solve. Full details of the competitions in Weco-Kaggle are provided in Appendix C. From Weco-Kaggle, we selected a subset of 16 tabular machine learning tasks with relatively lower complexity and primarily CPU-based runtime requirements. This subset, referred to as Weco-Kaggle Lite, is shown in Table <ref type="table" target="#tab_2">2</ref>.</p><p>Evaluation Protocol. We evaluate the performance of AIDE by comparing its results to that of human competitors in each Kaggle competition, and averaging across competitions. We follow the evaluation protocol below to evaluate AIDE's and other frameworks' performance:</p><p>1. Before running the agent on a competition, we split the competition's training data into an agent train set and a holdout test set. This split is defined manually for each competition following similar parameters as Kaggle's official private test set (e.g. similar train-test percentages), but is not necessarily the same, since Kaggle's test set is not released publicly for most competitions. Note that our holdout test set is also distinct from the train-validation split that AIDE itself generates as part of its internal node evaluation protocol.</p><p>2. During code generation, AIDE is given access to the holdout test inputs (but not labels) and prompted to evaluate its model on this data. In particular, we prompt AIDE to generate a submission.csv file, analogously to how human competitors submit their competition results.</p><p>3. We define an Exceeds % of Human metric as 100(1 -q), where q is the quantile of AIDE's score on the official Kaggle leaderboard. This metric represents the percentage of human competitors whose performance AIDE surpasses. Whenever possible, we use Kaggle's private leaderboard because it is less prone to overfitting by competitors; if a private leaderboard is unavailable, we default to the public leaderboard. In addition, we report the Above Median metric, originally proposed by <ref type="bibr" target="#b1">Chan et al. (2024)</ref>, which indicates how frequently AIDE outperforms the median Kaggler performance across competitions.</p><p>4. This metric is then averaged across all competitions.</p><p>We chose our evaluation protocol based on leaderboard-quantiles since, unlike each competition's included metric, these scores are similarly distributed between competitions, making it possible to simply average across competitions to obtain aggregated scores. Leaderboard quantiles are also more fine-grained, allowing us to evaluate, for example, the performance of a single run on a single task, unlike medal-counts <ref type="bibr" target="#b1">(Chan et al., 2024)</ref> which collapse to a binary metric in this case. Finally, our scores are interpretable and useful in assessing AIDE's performance relative to humans. Baselines. To evaluate AIDE's effectiveness, we compare it against three baselines that illustrate different approaches to automated or assisted machine learning:</p><p>1. Conventional H2O AutoML. We select H2O, one of the leading AutoML platforms, to exemplify traditional AutoML tools. In each competition, the data is split into an 80%/20% train/validation set, and model selection is performed within a 600-second search window.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.</head><p>AutoGPT. A workflow automation framework that surged in popularity in early 2024. It generates a plan and automatically executes the necessary steps to complete a task. We adapt its task descriptor to produce solutions for our competitions.</p><p>3. Human Assisted with ChatGPT. An increasingly common scenario involves human engineers leveraging ChatGPT to assist with coding tasks. We adopt this baseline to understand how AIDE performs relative to a human engineer directing ChatGPT to develop solutions.</p><p>These baselines collectively provide a robust comparative foundation for evaluating AIDE against both traditional AutoML workflows and modern LLM-assisted strategies. Further details about the baselines' configuration can be found in Appendix A.  Table <ref type="table" target="#tab_3">3</ref>: Full MLE-Bench results (pass@1) reported by <ref type="bibr" target="#b1">(Chan et al., 2024)</ref> comparing AIDE to other agent frameworks. Valid Subm. (%) is the fraction of all competitions (not just those with a submission) where the submission passed validity checks. Above Median (%) is the fraction of competitions where the score was strictly above the median of human Kaggle participants. Any Medal (%) is the fraction awarded a bronze, silver, or gold medal (the primary success metric).</p><p>Each experiment is repeated with 3 seeds, except for AIDE+o1-preview and AIDE+GPT-4o, which use 16 and 36 seeds respectively. Scores represent the mean ± one standard error of the mean.</p><p>Potential Limitations. Despite the advantages discussed above, our protocol has some limitations. First, because our test set may differ from Kaggle's private test set, scores may not always be directly comparable, which can result in variance in percentiles. Second, there is a risk of contamination since some of the language models used in this work may have been trained on competition-related data. Although we found no significant correlation between agent performance and competition recency, the only way to fully ensure no data contamination would be to submit the agent's solutions to live competitions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">AIDE in MLE-Bench</head><p>MLE-Bench <ref type="bibr" target="#b1">(Chan et al., 2024</ref>) is an offline evaluation framework comprising 75 real Kaggle competitions. Here, we present the results related to AIDE reported by <ref type="bibr" target="#b1">Chan et al. (2024)</ref> and encourage readers to check and cite the original paper if they are interested in the results presented here. In these evaluations, AIDE emerged as the top-performing agent framework when paired with state-ofthe-art large language models. Other agent frameworks such as ResearchAgent from MLAB <ref type="bibr" target="#b7">(Huang et al., 2024)</ref> and OpenHands <ref type="bibr" target="#b26">(Wang et al., 2024)</ref> tended to terminate early or struggle with iterative refinement. AIDE's optimization-centric approach led to better scalability in terms of trial-and-error interactions, therefore higher valid-submission rates and ultimately more competition medals.  AIDE's Key Advantages. By explicitly implementing a solution tree search strategy, AIDE keeps node-level code concise and focuses each language model call on a localized problem (e.g. debugging only the most promising script). This design helps avoid oversized prompts, preserves a clear performance record for each node, and repeatedly refines partial solutions over the entire 24-hour timeframe. Consequently, AIDE systematically addresses coding bugs and suboptimal hyperparameters rather than abandoning failed solutions. As shown in Table <ref type="table" target="#tab_3">3</ref>, these iterative improvements translate into higher medal acquisition rates in comparison to generic agents.</p><p>Moreover, when given additional attempts per competition (increasing k in pass@k), AIDE significantly increases its success rate; for instance, GPT-4o and o1-preview nearly double their medals from pass@1 to pass@6 <ref type="bibr" target="#b1">(Chan et al., 2024)</ref>. These observations underscore the specialized nature of AIDE, which often outperforms other agents through persistent, Kaggle-style iteration, highlighting the efficacy of a competition-targeted design in real-world ML tasks.</p><p>The impact of AIDE becomes particularly evident when comparing performance on the MLE-bench Lite subset, as shown in Figure <ref type="figure" target="#fig_0">3</ref>. Using o1-preview with AIDE significantly improved performance across all metrics compared to using o1-preview alone. The valid submission rate increased from 63.6% ± 4.5% to 92.4% ± 2.6%, demonstrating AIDE's effectiveness in guiding the model through the submission process. More importantly, the fraction of solutions scoring above the median human performance increased dramatically from 13.6% to 59.1% ± 4.5%, and both medal-related metrics showed substantial improvements: the gold medal achievement rate more than tripled from 6.1% ± 2.6% to 21.2% ± 6.9%, while the overall medal achievement rate increased nearly fivefold from 7.6% ± 2.6% to 36.4% ± 7.9%. These improvements are statistically significant (p &lt; 0.01 for all metrics, two-tailed t-test). The dramatic performance gains across all metrics demonstrate that AIDE's iterative optimization approach substantially enhances the model's problem-solving capabilities, enabling more reliable and higher-quality solutions through systematic refinement.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">AIDE in RE-Bench</head><p>While AIDE is designed for building machine learning pipelines, METR applied it to much more challenging AI R&amp;D tasks by formulating these tasks into optimization tasks. The tasks range from optimizing a Triton Kernel to finetuning GPT-2 for QA. Surprisingly, AIDE performs quite well on these tasks, and is even comparable with the top human AI scientists from   5 Related Work</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">LLM Agents</head><p>Recent advances in large language models have spurred the development of agents that combine natural language reasoning with task execution. General-purpose agents such as ReAct <ref type="bibr" target="#b30">(Yao et al., 2023)</ref> and HuggingGPT <ref type="bibr" target="#b23">(Shen et al., 2023)</ref> interleave planning with action selection to perform tasks ranging from information retrieval to multi-modal processing. In contrast, specialized agents like Voyager <ref type="bibr" target="#b26">(Wang et al., 2023)</ref> and AlphaCode <ref type="bibr" target="#b15">(Li and et al., 2022)</ref> are tailored to specific domains such as embodied reasoning and competitive code generation. These systems integrate execution feedback into the LLM's reasoning process, enabling iterative refinement of candidate solutions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Automated Machine Learning</head><p>Automated Machine Learning (AutoML) aims to eliminate manual intervention in model selection, hyperparameter tuning, and pipeline configuration. Early frameworks such as Auto-WEKA <ref type="bibr">(Thornton et al., 2013b)</ref> and TPOT <ref type="bibr" target="#b18">(Olson and Moore, 2016)</ref> employed Bayesian optimization and genetic programming, respectively, to search over predefined model spaces. Later systems like Auto-Sklearn <ref type="bibr" target="#b5">(Feurer et al., 2020)</ref> and AutoGluon <ref type="bibr" target="#b17">(Mueller and et al., 2024)</ref> have leveraged meta-learning and ensemble techniques to further improve performance. Despite their success, many conventional AutoML methods rely on static search spaces and lack the dynamic adaptability required for more complex problem settings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Neural Architecture Search</head><p>Neural Architecture Search (NAS) focuses on automatically designing neural network topologies. Initial methods based on reinforcement learning <ref type="bibr" target="#b31">(Zoph and Le, 2017)</ref> and evolutionary strategies <ref type="bibr" target="#b22">(Real et al., 2019)</ref> demonstrated that automated search could yield competitive architectures. Differentiable approaches such as DARTS <ref type="bibr" target="#b16">(Liu et al., 2019)</ref> have reduced the computational cost by enabling gradient-based optimization over a relaxed search space. However, NAS still faces challenges in computational expense and search space design. AIDE, on the other hand, avoids such problems above with code space search and efficient design exploration powered by LLMs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusion</head><p>In conclusion, we have presented AI-Driven Exploration (AIDE), an LLM Agent for machine learning engineering. By systematically drafting, debugging, and refining solutions, AIDE achieves superior performance on Kaggle tasks as well as on more research-oriented benchmarks. While developed for tabular machine learning tasks, third-party experiments show that this approach can generalize to challenges such as neural architecture search, Triton Kernel optimization, and other AI R&amp;D tasks. We believe AIDE represents a promising step toward the future of automated ML engineering, offering a principled way to combine iterative LLM prompting with a tree-based exploration of code solutions. The machine learning algorithm selection process of H2O AutoML LeDell and Poirier (2020b) proceeds as follows. First, it searches over a set of six algorithms:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Baseline Specifications</head><p>1. Distributed Random Forest (DRF) and Extremely Randomized Trees (XRT)</p><p>2. Generalized Linear Model (GLM) with regularization 3. XGBoost 4. H2O Gradient Boosting Machines 5. Fully connected multi-layer artificial neural network (DeepLearning) 6. Stacked Ensembles (including an ensemble of all base models and ensembles using subsets of the base models)</p><p>It then performs a random search over a predefined grid of hyperparameter combinations, avoiding the computational expense of an exhaustive grid search. After training individual models, H2O AutoML creates stacked ensembles by combining the predictions of the best-performing models from each algorithm. This ensemble method leverages the strengths of multiple models to improve overall performance. All trained models, including individual models and ensembles, are evaluated using cross-validation and ranked based on performance metrics such as accuracy, AUC, or RMSE, depending on the problem type. The configurations are shown in Table <ref type="table" target="#tab_5">4</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2 AutoGPT Baseline</head><p>We use the LangChain implementation of AutoGPT, which includes LangChain primitives such as PromptTemplates, VectorStores, and Embeddings. Inspired by <ref type="bibr" target="#b7">Huang et al. (2024)</ref>, we introduce a task descriptor for AutoGPT in each competition to provide a basic task planner and minimize human intervention. The task descriptor includes information retrieved from the Kaggle page, such as the dataset description, file details (train.csv, test.csv, sample_submission.csv), evaluation metrics, submission file format, and a sample training script. An example task descriptor is shown in Figure <ref type="figure">5</ref>.</p><p>We also provide the agent with tools to read and write files, list directories, and run Python REPL evaluations. The agent reads the task descriptor with predefined goals, as shown below:</p><p>Goal Prompt </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.3 ChatGPT with Human Assistance</head><p>A human operator is tasked with solving a Kaggle competition using only the information provided in the overview and data tabs, which include the available dataset. The operator is permitted to utilize the ChatGPT web interface. The LLM is set to gpt-4-0125-preview in comparison with Auto-GPT. Due to limitations in ChatGPT's capabilities, such as the potential for generating hallucinated results and occasionally using outdated packages, iterative interactions are required. The human operator will continue to issue instructions until a valid submission is produced. Upon completion, the operator submits the results to Kaggle, where the submission is ranked against the competition leaderboard.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Analysis of AIDE B.1 Code Complexity Growth</head><p>In Figure <ref type="figure">6</ref>, we observe that the aggregated code complexity (combining LOC, LLOC, Volume, N1, and MI) exhibits an overall increasing trend as the number of iterative steps grows. Initially, there is a slight dip in complexity, but after the first step, the metrics begin a generally steady rise. This suggests that as AIDE (GPT-4 Turbo) produces successive iterations of code, the solutions tend to become more elaborate, with additional lines of code and logical structures contributing to higher values for traditional software complexity measures. The progressive increase implies that, over multiple generation steps, the model accumulates more intricate functionality-potentially reflecting deeper problem-solving processes or additional features-leading to an increasingly complex codebase by the final iteration.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.2 Cost Analysis</head><p>Figure <ref type="figure">7</ref> illustrates the per-task LLM inference cost for AIDE across the Weco-Kaggle benchmark, using GPT-4 Turbo (gpt-4-0125-preview) with pricing data from early 2024. Although certain tasks incur higher costs due to more extensive prompting (up to approximately $2.50 per task), the majority remain under $1.50, reflecting moderate token usage and minimal manual intervention. Overall, these expenditures are much lower than the investment required for human experts or conventional AutoML services, especially when considering the significant performance gains achieved by AIDE's fully automated design. Moreover, as language model costs continue to decline, AIDE's approach becomes increasingly competitive in terms of both performance and budget.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Weco Kaggle Benchmark</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Performance of o1-preview with and without AIDE on MLE-bench Lite (complexity=low) set.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Average score achieved by AIDE+o1-preview and top human scientists on 7 AI R&amp;D tasks, as report by METR (2024). AIDE managed to surpass human scientists within six hours by enabling faster experiment iterations. However, human scientists eventually caught up, as AIDE adopts a simple greedy policy that may lead to local optima on challenging R&amp;D tasks.</figDesc><graphic coords="9,157.79,72.00,277.20,225.27" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4</head><label>4</label><figDesc>Figure 4 illustrates AIDE's average performance over time across the seven RE-Bench environments. Since LLMs can implement solutions much faster, allowing for more iteration cycles, AIDE managed to outperform humans within the six-hour time limit. Notably, the agent exceeded human performance in Optimize a Kernel, discovering a custom Triton-based solution faster than any of the nine human experts did within 64 hours. However, AIDE fell short in environments that required handling larger codebases or where a single improvement involved multiple steps of interaction. For example, in Agent for Rust CodeContests, AIDE was prone to repeating local patches instead of discovering new strategies.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 5 :Figure 6 :</head><label>56</label><figDesc>Figure 5: The task descriptor for bike-sharing-demand Task Descriptor Prompt</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Comparing AIDE to other agent frameworks on 16 tabular machine learning tasks from Kaggle. Exceeds % of humans indicates the percentage of human Kaggle participants being outperformed by the agents, averaged across the competitions. Above Median (%) is the fraction of competitions where the score was strictly above the median of human Kaggle participants.</figDesc><table><row><cell>Agent</cell><cell>Model</cell><cell cols="2">Exceeds % of humans ↑ Above Median (%) ↑</cell></row><row><cell>AIDE</cell><cell>GPT-4 Turbo</cell><cell>51.38</cell><cell>50.00</cell></row><row><cell>AutoML (H2O)</cell><cell>N/A</cell><cell>35.34</cell><cell>18.75</cell></row><row><cell cols="2">AutoGPT (Langchain) GPT-4 Turbo</cell><cell>32.34</cell><cell>0.00</cell></row><row><cell cols="2">Human with ChatGPT GPT-4 Turbo</cell><cell>41.17</cell><cell>18.75</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>AIDE vs. human performance comparison on Weco-Kaggle Lite. The submissions were made manually in February 2024. All rankings are actual rankings on the private/public Kaggle leaderboard, assessed in February 2024.AIDE's Results on Weco-Kaggle Lite. Table1compares AIDE against multiple baselines, including H2O AutoML, AutoGPT, and a human competitor utilizing ChatGPT, averaged over the 16 tabular Kaggle tasks of Weco-Kaggle Lite. AIDE achieves an Exceeds % of humans score of 51.38%, outperforming half of the Kaggle participants on average, and surpasses the human median in 50% of these tasks. By contrast, H2O AutoML and LangChain AutoGPT attain lower Exceeds % of humans scores (35.34% and 32.34%, respectively). Table2offers a detailed breakdown for each competition, indicating that AIDE's performance ranges from surpassing roughly 13% of human participants (for more challenging tasks) to nearly 92% (for tasks it handles more effectively). Across half of the competitions, AIDE ranks above the human median, underscoring its robustness in consistently delivering competitive results against a diverse set of real-world machine learning challenges.AIDE's Results on Full Weco-Kaggle. Figure2illustrates AIDE's performance distribution across our extended set of Kaggle competitions, sorted by its Exceeds % of Humans value. Notably, AIDE achieves near-top-tier performance on several tasks, surpassing the vast majority of human participants, while on other tasks it exceeds only a small fraction. Overall, the average Exceeds % of Humans rate is 48.23%, and AIDE outperforms the human median in 49.21% of the competitions. These results underscore that AIDE can be highly competitive in certain domains, yet there remains variability in its performance depending on the dataset and task requirements. Figure 2: AIDE's performance distribution on full Weco-Kaggle benchmark. Exceeds % of Humans values are estimated from the leaderboard distribution.</figDesc><table><row><cell></cell><cell>100%</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Exceeds % of humans</cell><cell>20% 40% 60% 80%</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>0%</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell cols="2">Tasks (sorted by performance)</cell><cell></cell></row><row><cell cols="2">Agent</cell><cell>Model</cell><cell cols="4">Valid Subm. (%) Above Median (%) Gold (%) Any Medal (%)</cell></row><row><cell cols="2">AIDE</cell><cell>o1-preview</cell><cell>82.8 ± 1.1</cell><cell>29.4 ± 1.3</cell><cell>9.4 ± 0.8</cell><cell>16.9 ± 1.1</cell></row><row><cell cols="2">AIDE</cell><cell>GPT-4o</cell><cell>54.9 ± 1.0</cell><cell>14.4 ± 0.7</cell><cell>5.0 ± 0.4</cell><cell>8.7 ± 0.5</cell></row><row><cell cols="2">AIDE</cell><cell>Llama 3.1</cell><cell>27.3 ± 2.6</cell><cell>6.7 ± 1.4</cell><cell>1.7 ± 0.7</cell><cell>3.0 ± 1.0</cell></row><row><cell cols="2">AIDE</cell><cell>Claude 3.5</cell><cell>51.1 ± 3.3</cell><cell>12.9 ± 2.2</cell><cell>4.4 ± 1.4</cell><cell>7.6 ± 1.8</cell></row><row><cell cols="2">MLAB</cell><cell>GPT-4o</cell><cell>44.3 ± 2.6</cell><cell>1.9 ± 0.7</cell><cell>0.8 ± 0.5</cell><cell>0.8 ± 0.5</cell></row><row><cell cols="3">OpenHands GPT-4o</cell><cell>52.0 ± 3.3</cell><cell>7.1 ± 1.7</cell><cell>2.7 ± 1.1</cell><cell>4.4 ± 1.4</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3</head><label>3</label><figDesc>highlights key results of AIDE compared to other agents. The reported Any Medal (%) column shows the fraction of competitions on which the agent and model combination achieved a</figDesc><table><row><cell></cell><cell>o1-preview</cell><cell>o1-preview + AIDE</cell><cell></cell></row><row><cell>100%</cell><cell>92.4% ±2.6%</cell><cell></cell><cell></cell></row><row><cell>80%</cell><cell></cell><cell></cell><cell></cell></row><row><cell>60%</cell><cell>63.6% ±4.5%</cell><cell>59.1% ±4.5%</cell><cell></cell></row><row><cell>40%</cell><cell></cell><cell></cell><cell></cell><cell>36.4% ±7.9%</cell></row><row><cell>20%</cell><cell></cell><cell>±0% 13.6%</cell><cell>6.1% ±2.6% 21.2% ±6.9%</cell><cell>±2.6% 7.6%</cell></row><row><cell>0%</cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>Valid Submissions</cell><cell>Above Median</cell><cell>Gold Medal</cell><cell>Any Medal</cell></row></table><note><p>medal (bronze, silver, or gold) in a single pass (i.e. pass@1). AIDE with o1-preview earned medals in 16.9% of competitions, nearly four times that of the follow-up agent OpenHands.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 4 :</head><label>4</label><figDesc>Baseline hyperparameters.</figDesc><table><row><cell></cell><cell>AutoGPT</cell></row><row><cell>Parameter</cell><cell>Value</cell></row><row><cell>agent</cell><cell>LangChain AutoGPT</cell></row><row><cell>model</cell><cell>gpt-4-0125-preview</cell></row><row><cell>seed</cell><cell>1</cell></row><row><cell cols="2">max_runtime 600</cell></row><row><cell cols="2">Human with ChatGPT</cell></row><row><cell>Parameter</cell><cell>Value</cell></row><row><cell>model</cell><cell>gpt-4-0125-preview</cell></row><row><cell>A.1 H2O AutoML Baseline</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>Go through task_descriptor . txt to understand the task and evaluation method . Iterate over different models or feature selections to get a better performance based on evaluation method . You can use following steps as reference : 1. Select a model and fill in the provided python snippet . 2. Train the model and Make predictions on data from test . csv and Prepare submission . csv by executing the script wiith python repl tool . 3. Save the script into local disk such as model_ { model_name }. py Here are some rules to follow : 1. Never try to change the train . csv and test . csv . 2. Never output graphs or figures . 3. Do Not change the capitalization of the column name 4. Do Not read train . csv and test . csv directly .</figDesc><table /></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Claude 3.5 sonnet model card addendum</title>
+		<author>
+			<persName><surname>Anthropic</surname></persName>
+		</author>
+		<ptr target="https://www-cdn.anthropic.com" />
+		<imprint>
+			<date type="published" when="2024">2024. 193a14b84131812372d8d5857f8f304c52</date>
+			<pubPlace>Anthropic</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical report</note>
+	<note>Model_Card_Claude_3_Addendum.pdf</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Chowdhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Jaffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Aung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sherburn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mays</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Starace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Maksin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Patwardhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Weng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Ądry</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2410.07095</idno>
+		<title level="m">MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Neural architecture search: A survey</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Elsken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Metzen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hutter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">55</biblScope>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">BOHB: Robust and Efficient Hyperparameter Optimization at Scale</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Falkner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hutter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ICML</title>
+		<meeting>of ICML</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">35</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Efficient and Robust Automated Machine Learning</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Feurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Eggensperger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Springenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Blum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hutter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of NeurIPS</title>
+		<meeting>of NeurIPS</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">28</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Feurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Eggensperger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bergman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pfisterer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bischl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hutter</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2007.04074</idno>
+		<title level="m">Auto-Sklearn 2.0: Hands-free AutoML via Meta-Learning</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context</title>
+		<author>
+			<persName><surname>Google</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2403.05530</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Mlagentbench: Evaluating language agents on machine learning experimentation</title>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Vora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Percy</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jure</forename><surname>Leskovec</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Forty-first International Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Livecodebench: Holistic and contamination free evaluation of large language models for code</title>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">King</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wen-Ding</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fanjia</forename><surname>Yan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianjun</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sida</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armando</forename><surname>Solar-Lezama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Koushik</forename><surname>Sen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ion</forename><surname>Stoica</surname></persName>
+		</author>
+		<ptr target="https://openreview.net/forum?id=chfJJYC3iL" />
+	</analytic>
+	<monogr>
+		<title level="m">The Thirteenth International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">SWE-bench: Can language models resolve real-world github issues?</title>
+		<author>
+			<persName><forename type="first">Carlos</forename><forename type="middle">E</forename><surname>Jimenez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Wettig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shunyu</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kexin</forename><surname>Pei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ofir</forename><surname>Press</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Karthik R Narasimhan</surname></persName>
+		</author>
+		<ptr target="https://openreview.net/forum?id=VTF8yNQM66" />
+	</analytic>
+	<monogr>
+		<title level="m">The Twelfth International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Auto-Keras: An Efficient Neural Architecture Search System</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Hu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ACM SIGKDD (KDD)</title>
+		<meeting>of ACM SIGKDD (KDD)</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">AutoKeras: An AutoML Library for Deep Learning</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chollet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Hu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1" to="7" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Planning and acting in partially observable stochastic domains</title>
+		<author>
+			<persName><forename type="first">Leslie</forename><surname>Pack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaelbling</forename><surname>Michael L Littman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><forename type="middle">R</forename><surname>Cassandra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">101</biblScope>
+			<biblScope unit="issue">1-2</biblScope>
+			<biblScope unit="page" from="99" to="134" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">H2O AutoML: Scalable Automatic Machine Learning</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ledell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Poirier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of the AutoML Conference</title>
+		<meeting>of the AutoML Conference</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Ledell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastien</forename><surname>Poirier</surname></persName>
+		</author>
+		<ptr target="https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf" />
+		<title level="m">Scalable automatic machine learning. 7th ICML Workshop on Automated Machine Learning (AutoML)</title>
+		<imprint>
+			<date type="published" when="2020-07">July 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Competition-level Code Generation with AlphaCode</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.abq1158</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">378</biblScope>
+			<biblScope unit="page" from="1092" to="1097" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Evaluating frontier AI R&amp;D capabilities of language model agents against human experts</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Simonyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<ptr target="https://metr.org/blog/2024-11-22-evaluating-r-d-capabilities-of-llms/,2024.Blogpost" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ICLR</title>
+		<meeting>of ICLR</meeting>
+		<imprint>
+			<date type="published" when="2019-11">2019. November 2024</date>
+		</imprint>
+	</monogr>
+	<note>DARTS: Differentiable Architecture Search</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">AutoGluon: AutoML for Text, Image, and Tabular Data</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mueller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Scientific Reports</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">72889</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">TPOT: A Tree-based Pipeline Optimization Tool for Automating Machine Learning</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Olson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">H</forename><surname>Moore</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICML AutoML Workshop</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">OpenAI. Openai o1 system card</title>
+		<ptr target="https://cdn.openai.com/o1-system-card-20241205.pdf" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+		<respStmt>
+			<orgName>OpenAI ; OpenAI</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Technical report</note>
+	<note>Gpt-4 technical report</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Openai o3-mini system card</title>
+		<author>
+			<persName><surname>Openai</surname></persName>
+		</author>
+		<ptr target="https://cdn.openai.com/o3-mini-system-card.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">OpenAI, 2025b</title>
+		<imprint/>
+	</monogr>
+	<note type="report_type">Technical report</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Efficient Neural Architecture Search via Parameter Sharing</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Pham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Y</forename><surname>Guan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dean</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ICML</title>
+		<meeting>of ICML</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">35</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Regularized Evolution for Image Classifier Architecture Search</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Real</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aggarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of AAAI</title>
+		<meeting>of AAAI</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhuang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of NeurIPS</title>
+		<meeting>of NeurIPS</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Auto-WEKA 2.0: Automatic Model Selection and Hyperparameter Optimization in WEKA</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Thornton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hutter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">H</forename><surname>Hoos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Leyton-Brown</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="267" to="281" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Auto-WEKA: Combined Selection and Hyperparameter Optimization of Classification Algorithms</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Thornton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Hutter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">H</forename><surname>Hoos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Leyton-Brown</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ACM SIGKDD (KDD)</title>
+		<meeting>of ACM SIGKDD (KDD)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note>b</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Voyager: An Open-Ended Embodied Agent with Large Language Models</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mandlekar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Anandkumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><forename type="middle">X</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">F</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhuge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Singh</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.16291</idno>
+		<idno>arXiv:2407.16741</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Openhands: An open platform for AI software developers as generalist agents</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">I</forename><surname>Weco</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Aide</surname></persName>
+		</author>
+		<ptr target="https://www.weco.ai/blog/technical-report" />
+		<title level="m">Data Science Automation Technical Report</title>
+		<imprint>
+			<date type="published" when="2024-02-03">2024. February 3, 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahmoud</forename><surname>Safari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rhea</forename><surname>Sukthanker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Binxin</forename><surname>Ru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Elsken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arber</forename><surname>Zela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debadeepta</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Hutter</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2301.08727</idno>
+		<title level="m">Neural architecture search: Insights from 1000 papers</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">On hyperparameter optimization of machine learning algorithms: Theory and practice</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shami</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">415</biblScope>
+			<biblScope unit="page" from="295" to="316" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">ReAct: Synergizing Reasoning and Acting in Language Models</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Shafran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Narasimhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ICLR</title>
+		<meeting>of ICLR</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Neural Architecture Search with Reinforcement Learning</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of ICLR</title>
+		<meeting>of ICLR</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

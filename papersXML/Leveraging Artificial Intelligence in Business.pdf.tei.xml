@@ -1,0 +1,2212 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">SEE PROFILE</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown">
+					<licence/>
+					<p type="raw">© Taylor &amp; Francis. © Taylor &amp; Francis. This is the preprint version of the article published on</p>
+				</availability>
+				<date type="published" when="2021-02-09">09 February 2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Andrea</forename><surname>Sestino</surname></persName>
+							<affiliation key="aff1">
+								<note type="raw_affiliation"><label>*</label> University of Rome Tor Vergata 28 PUBLICATIONS 2 , 464 Ionian Department of Law, Economics and Environment ,</note>
+								<orgName type="department">Ionian Department of Law, Economics and Environment</orgName>
+								<orgName type="institution">University of Rome Tor Vergata</orgName>
+								<address>
+									<addrLine>28 PUBLICATIONS 2</addrLine>
+									<postCode>464</postCode>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Andrea</forename><surname>De Mauro</surname></persName>
+							<affiliation key="aff2">
+								<note type="raw_affiliation"><label>†</label> University of Bari Aldo Moro Taranto , Italy Department of Enterprise Engineering ,</note>
+								<orgName type="department">Department of Enterprise Engineering</orgName>
+								<orgName type="institution">University of Bari Aldo Moro Taranto</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<note type="raw_affiliation">Università Cattolica del Sacro Cuore 102 PUBLICATIONS 1 , 315</note>
+								<orgName type="institution">Università Cattolica del Sacro Cuore</orgName>
+								<address>
+									<addrLine>102 PUBLICATIONS 1</addrLine>
+									<postCode>315</postCode>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<note type="raw_affiliation">University of Rome Tor Vergata , Rome , Italy</note>
+								<orgName type="institution">University of Rome Tor Vergata</orgName>
+								<address>
+									<settlement>Rome</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">SEE PROFILE</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2021-02-09">09 February 2021</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">4F2B1053F45D80201EBEC80995DF954E</idno>
+					<idno type="DOI">10.1080/09537325.2021.1883583</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2-SNAPSHOT" ident="GROBID" when="2025-02-06T18:52+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Artificial intelligence</term>
+					<term>Business innovation</term>
+					<term>Business management</term>
+					<term>Big data</term>
+					<term>Marketing</term>
+					<term>Technology management</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The concept of Artificial Intelligence (AI) as a business-disruptive technology has developed in academic and professional literature in a chaotic and unstructured manner. This study aims to provide clarity over the phenomenon of business activation of AI by means of a comprehensive and systematic literature review, aimed at suggesting a clear description of what Artificial Intelligence is today. The study analyses a corpus of 3780 contributions through an original combination of two established machine learning algorithms (LDA and hierarchical clustering). The review produced a structured classification of the various streams of current research and a list of promising emerging trends. Results have shed light on six topics attributable to three different themes, namely Implications, Applications and Methods (IAM model). Our analysis could provide researchers and practitioners with a meaningful overview of the body of knowledge and research agenda, to exploit AI as an effective enabler to drive business value.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Leveraging Artificial Intelligence in Business:</head><p>Implications, Applications and Methods 1. Introduction Today Artificial Intelligence (AI) is a buzzword. The steady growth of its applications has radically penetrated human lives and business organizations. Companies have recognized relevant business opportunities deriving from AI adoption aimed at driving competitiveness, reengineering products or services, or rethinking business strategies <ref type="bibr" target="#b6">(Campbell et al., 2020)</ref>. Although AI appeared as a discipline in the 1950s, its first business application emerged only in the 1980s, spurred by the success of the expert system paradigm. Since then, its success has progressively accelerated thanks to the exponential growth of available computing power as described by <ref type="bibr">Moore's law (1965)</ref>. Organizations are now increasingly relying on AI and related Machine Learning (ML) models to improve human understanding of complex systems and to automate decision making, also requiring constant expert contributions <ref type="bibr">(Galanos, 2019)</ref>. The availability of large, varied and fast-moving information assets, also known as Big Data, ensures large attention to AI applications with substantial advances in calculation, computation, study and design of methodologies based on intelligent algorithms, impacting business and societies. The present study aims to provide a conceptual model of Business Activation of AI by means of a systematic literature review, obtained through the adoption of text mining and ML techniques. The two research questions we aim to answer by means of the systematic review are:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RQ1: what are the fundamental topics dealt with in current literature in relation to the Business Activation of AI? RQ2: what are the most promising strands of research, which require further investigation?</head><p>To address our research questions, we implemented a literature review leveraging on an original combination of established machine learning algorithms (LDA and hierarchical clustering), to design human-meaningful topic structures on a list of 3,780 discovered research papers. The paper is organized as follows: the second section introduces concepts related to AI and a brief overview about this phenomenon. The third section describes the methodology we adopted in this study, including text mining procedures and topic modelling. In the fourth section we present the obtained and the identified main themes, namely: Implications, Applications and Methods. Subsequently, in the fifth section, each topic is discussed in depth, shedding light on practices, challenges and opportunities for each. Finally, the last section offers some conclusions and discusses the limitations of this review.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Toward Artificial Intelligence: concepts and definitions</head><p>Terms such as AI, Big Data, Machine Learning, and Data Analytics are ubiquitous in current academic and business articles dealing with data. To prevent any confusion to the reader, the current section introduces each of these concepts and offers a structured explanation of how they relate to each other. AI aims at reproducing some aspects of human intelligence through technology. The discipline could be defined as a set of studies and techniques, dealing with computer science and mathematical aspects of statistical modelling, carrying significant economic and social implications, aimed to create technological systems capable of solving problems and carrying out tasks and duties, normally attributable to the human mind <ref type="bibr" target="#b38">(Konar, 2018)</ref>. One of the current most recognized definitions describes AI as the process of making a machine display behaviors that would be called intelligent if a human were so behaving. According to Russel and Noving (2010), current literature identifies four conceptual clusters of AI acceptations: AI as Systems that think like humans <ref type="bibr">(Hugeland, 1989)</ref>; AI as Systems that think rationally <ref type="bibr" target="#b80">(Winston, 1992)</ref>; AI as Systems that act like human beings <ref type="bibr" target="#b64">(Rich and Knight, 1991)</ref>; and AI as Systems that act rationally <ref type="bibr">(Nillson and Nillson, 1998)</ref>. The growing attention on AI in the business field is due to the technological maturity achieved both in a computational calculation and in the ability to analyse in real-time and in a short time huge quantities of data in any form: this is Big Data Analytics. From a business perspective, the AI and data analysis systems allow individuals to systematize information, usually already available on the markets in a disaggregated way, transforming data into business decisions, thus only considering those tools useful to facilitate the decisionmaking processes within a company. <ref type="bibr" target="#b12">Davenport and Harris (2007)</ref> define Business Analytics (BA) as the "extensive use of data, statistical and quantitative analysis, explanatory and predictive models, and fact-based management" which ultimately drives decisions and actions. <ref type="bibr">Vidgen et al. (2007)</ref> notice how Business analytics can be considered a mediator between the data at disposal by the organization and the actual economic value that such data can leverage through actions and improved decisions. We argue that the most advanced display of this transformation is obtained by the application of AI techniques. Data Analytics techniques are normally classified as descriptive, predictive and prescriptive, offering a growing level of business potential <ref type="bibr" target="#b16">(Deka, 2014)</ref>. Descriptive analytics is the most traditional application of data analytics and it is historically linked with the concept of Business Intelligence (BI), as introduced by <ref type="bibr" target="#b46">Luhn (1958)</ref>. The more advanced applications of Data Analytics make use of AI in the attempt to anticipate scenarios by promptly implementing useful business strategies <ref type="bibr" target="#b78">(Waller and Fawcett, 2013)</ref>. Exploring and analysing data, might support the construction of AI, facilitating predictive analysis and automation tools <ref type="bibr" target="#b14">(De Mauro et al., 2019)</ref>. The term Big Data usually refers to the technological storage capacities, the huge amount of structured and unstructured data deriving from online transactions <ref type="bibr" target="#b20">(Erevelles et al., 2016;</ref><ref type="bibr">) characterized by volume, variety, speed (McAfee et al., 2012)</ref> and further characteristics such as variability, veracity, value <ref type="bibr" target="#b19">(Ebner et al., 2014)</ref>. Business recognition of Big Data as a strategic resource, radically transformed managerial practices <ref type="bibr" target="#b18">(Dogan and Gurcan, 2019;</ref><ref type="bibr" target="#b31">Holler et al., 2016;</ref><ref type="bibr" target="#b47">Lycett, 2013;</ref><ref type="bibr" target="#b79">Wamba et al., 2017)</ref>. Some studies provided a stronger background toward Big Data opportunities and applications <ref type="bibr" target="#b30">(Hilbert et al., 2016;</ref><ref type="bibr" target="#b54">Mikalef et al., 2018)</ref>, also providing classifications, considering their effects on Information, Technologies, Methods and Impacts <ref type="bibr" target="#b15">(De Mauro et al., 2018)</ref>. Business processes can benefit by the introduction of AI in various ways. Predictive analysis solutions are largely powered by ML and AI tools <ref type="bibr" target="#b28">(Hazen et al., 2014)</ref>, and are profitably leveraged for managerial or marketing purposes aimed such as designing new business strategies or investigating consumer behaviour <ref type="bibr" target="#b49">(Malthouse et al., 2013)</ref>. The biggest challenge is about study techniques and algorithms based on typical approaches, aimed to activate AI in business in order to reduce the gap between human intelligence and AI <ref type="bibr" target="#b39">(Kumar and Thakur, 2012)</ref>. Merging mathematical, statistical and optimization techniques with AI practices can create intelligent environments able to transform organizational structures, processes and services. AI can also refer to the attempt to provide machines (such as information systems and physical devices) with the ability to complete tasks typically related to human intelligence <ref type="bibr" target="#b81">(Yang and Siau, 2018)</ref>. Over the last decade (2010 -2019) web users have increasingly searched for webpages dealing with "Artificial Intelligence" and its related terms "Big Data", "Business Intelligence" and "Machine Learning". As suggested by Figure <ref type="figure" target="#fig_0">1</ref>, Business Intelligence used to be the most popular keyword and has constantly decreased its popularity, as reporting has become increasingly commoditized in companies. Big Data has surged in popularity as of 2011 and, after reaching its peak, is now starting to decline. Artificial intelligence, which was a concept already well established at the beginning of the decade, has benefited from the vast availability of data and cheaper technologies enabling computing power, hence increasing its popularity.</p><p>Within the realm of AI, Machine Learning has lately become the most popular topic as it relates to skills which encounter an increasing demand from companies. Therefore, our prior trend analysis highlighted the chaotic development of these concepts and reaffirmed the need for a robust literature review. Such a review can systematize the domain and provide a useful classification of concepts for both researchers and managers to enable a more effective knowledge development.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Methodology</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Text mining for Literature Reviews</head><p>Preparing a literature review enables the identification of the fundamental contributions to the scientific progress by identifying which ones inspired subsequent research and what are the current gaps on which researchers and experts might focus further in the future. Considering that our literature review encompasses a full decade, a structured analytical approach aimed at detecting meaningful trends is necessary. The spreading of the Internet and the electronic nature of numerous journals and scientific documents allows an indepth analysis of all the existing material on a topic, with a lower probability of neglecting relevant documents. Our systematic literature review has been carried out by applying text mining techniques on the strings of text extracted by papers which served as documents. Research techniques sometimes used traditional clustering techniques to return a set of N clusters of documents, in which each cluster identifies a topic covered in literature consistent with the research objective <ref type="bibr" target="#b55">(Milligan and Cooper, 1985;</ref><ref type="bibr" target="#b70">Sunikka and Bragge, 2012;</ref><ref type="bibr" target="#b74">van Altena et al., 2016)</ref>.</p><p>Considering the complexity of the domain and the inherent multidisciplinary character of the papers in the corpus, we decided to adopt mixed membership models which allow individual units to belong at the same time to multiple categories, at a different extent. Therefore, in each considered element, the grade of belonging to a group is identified by a vector of a positive variable obtained summing up to one, also known as membership proportion <ref type="bibr" target="#b1">(Airoldi et al., 2014)</ref>. By using mixed membership techniques instead of traditional clustering, the assumption according to whom each unit belongs to a single cluster is violated <ref type="bibr" target="#b2">(Airoldi et al., 2008;</ref><ref type="bibr" target="#b24">Grün, 2018)</ref>. One of the most popular mixed membership models is Latent Dirichlet Allocation (LDA)</p><p>which has been previously used to analyse the contents of documents and the meaning of words related to a research topic <ref type="bibr" target="#b4">(Blei, 2012;</ref><ref type="bibr" target="#b69">Steyvers and Griffiths, 2007)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Latent Dirichlet Allocation (LDA)</head><p>LDA is a generative probabilistic model commonly used to identify the thematic structure of a corpus of documents. The input text is treated as a collection of observations, arising from a generative random process, that include hidden variables. Such variables reflect the topic structure of the documents and can define how the relative presence of words is linked with the topic that is dealt with in the text. More specifically, each topic is a probability distribution over terms within the vocabulary made of all the words present in the corpus. Therefore, every document in the corpus, each composed of multiple terms, will be associated with a mixture of K topics. The relative prevalence of K topics in a document can be described as a tuple {𝑥 𝑖 } 𝑖=1 𝑖=𝐾 of K numbers for which the following condition holds:</p><formula xml:id="formula_0">∑ 𝑥 𝑖 𝐾 𝑖=1 = 1 and 𝑥 𝑖 ≥ 0 ∀𝑖 ∈ [1,𝐾]</formula><p>which describes the support of a Dirichlet distribution. The application of LDA will have a threefold output. First, the topic proportion for each single document, resulting in a 𝑁 × 𝐾matrix, where 𝑁 is the number of documents included in the corpus while 𝐾 is the number of topics. Second, the per-word topic assignment, which is the probability of presence of each word within each specific topic. Noticeably, an easy surrogate of such output is the list of the top keywords, i.e. the ones that display the highest level of probability for each topic and are providing hints to a human reader about the essential components of the topic definition. Third, we are also able to obtain the per-corpus topic distribution, which tells us the overall popularity of each topic within the total set of documents being analysed. By reading both the list of topic keywords and considering the documents in the corpus displaying a high level of presence of each topic, a human evaluator is able to deduce the conceptual content of the topic and assign a name to it, as done by multiple previous works <ref type="bibr" target="#b17">(Delen and Crossland, 2008)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Implementation of the methodology 3.3.1 Phase 1, Data collection and preparation</head><p>According to the proposed methodology, a list of input documents was extracted from Elsevier Scopus. We queried Scopus to intercept documents dealing with both Artificial Intelligence and Business activations, by forcing the co-presence of AI (i.e. "Machine Learning", "Artificial Intelligence") and Business studies (i.e. "Business", Marketing") into the Title, Abstract or paper's keywords<ref type="foot" target="#foot_1">foot_1</ref> . On March 28 th , 2020 we exported a list of 6,031 published journal and conference papers. As a first insight, researchers toward Big Data and AI, increased in the recent years, particularly around 2013-2014, as confirmed in the §2 below and in Fig. <ref type="figure">3</ref>. Secondarily, we analysed documents containing the full term "Big Data" or "Artificial Intelligence" in the titles, focusing on the 3,780 remaining articles, then applying the LDA after a previous data preparation. In particular, we removed white spaces and punctuation, obtaining tokens as a single word except for compound words (i.e. with intra-word dashes). Then, we converted all caps to lowercase, thus stemming the corpus by using <ref type="bibr">Porter's algorithm (1980)</ref> which returned the stem of each word with its suffix removed. Furthermore, we removed common English stop words (i.e. articles, conjunctions) and other non-relevant words (i.e., copyright information and years).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.2">Phase 2, Latent Dirichlet Allocation (LDA)</head><p>As done by <ref type="bibr" target="#b17">Delen and Crossland (2008)</ref>, the number of topics k was chosen by selecting the model capable of providing the most readable output in the authors' minds. We have run LDA for all integer values of k included [6, 10] and concluded by human judgement that the most readable model was obtained with k=6. Later, in order to confirm the robustness of the result, we have analysed the words which were most relevant for the definition of each topic and concluded that they were mostly relevant to the conceptual domain under consideration in the study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Results of the Topic Modelling</head><p>We named each of the six topics after their essential conceptual content, resulting in the following list: T01) Business Implications; T02) Human Implications; T03) Industrial Applications; T04) Social Applications; T05) Predictive Methods; T06) Recognition Methods. To achieve our goal, the contents related to the topics were further analysed considering a total of 3,780 contributions in the considered period (2010-2020) as shown in Table <ref type="table">1</ref>.</p><p>Table 1 -Considered contributions grouped by the six topics discovered</p><p>With the aim of analysing the topical structure of the analysed corpus, we have built a network model using the outputs of the LDA. Each topic has been associated to a node of the network while edges represented the inter-topic distance across topics. The inter-topic distance is obtained by analysing the level of correlation of topic presence across the documents in the corpus. We calculated a correlation matrix R by measuring the pairwise Pearson correlation across topics (Table <ref type="table" target="#tab_1">2</ref>). Since a smaller level of correlation can be associated with a larger distance across two topics, we calculated a distance matrix D using the formula D = 1-R as proposed by <ref type="bibr" target="#b23">Glynn (2019)</ref>.</p><p>We have used the matrix D as a distance matrix for the topic network and forced the width of the edges to be proportional to the pair-wise distance stored in D, obtaining the graphical output reported in Figure <ref type="figure" target="#fig_1">2</ref>, where the size of the nodes is proportional to the relative presence of topics in the corpus of documents. Edge-width is proportional to the inter-topic distance obtained from the pair-wise correlation across topics in the corpus.  The identified topics constitute the essential components of scholars' exploration of the domain lying at the interface between Artificial Intelligence and Business Management disciplines. By analysing their conceptual content, we found that the six topics identified by LDA can be organized into three homogenous groups or themes, namely Application, Implications and Methods. The Application theme focuses on the research that describes the business outcome of artificial intelligence, i.e. the transformation of data and algorithms into actual economic value. Within this group we have identified two fundamental areas of application that clarify the ultimate receiver of the AI-enabled service, i.e. humans (Social Applications) and machines or objects (Industrial Applications). The Implications theme aims at illustrating the human-centred (Human Implications) and business process-centred (Business Implications) transformations which are a consequence of the AI integration into twenty-first-century companies. Lastly, the Methods theme refers to the main value-driving uses of artificial intelligence algorithms which can be loosely encompassed into recognizing some businessrelevant aspects in data (Recognition Methods) or anticipating the future (Predictive Methods), as summarized in Table <ref type="table" target="#tab_2">3</ref>. In the next section we will discuss the composition of each topic. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Topic Discussion</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Business Implications</head><p>This topic showed the impact of AI on the processes and management of the organization, thus revealing interesting Business Implications. Papers dealing with this topic explain practices of data-driven decision making, process mining and automation. AI has been leveraged in the implementation of Decision Support Systems (DSS) for some decades already <ref type="bibr" target="#b73">(Turban, 1988)</ref> and proven valuable in creating by transforming raw data into usable information. As noticed by <ref type="bibr" target="#b11">Davenport (2018)</ref>, AI can positively impact organizations in three main ways: firstly, by automating administrative, financial and bureaucratic activities through Robotic Process Automation; secondly, by identifying hidden models in the data and supporting managers in the interpretation of the meaning; lastly, by increasing employee or customer emotional involvement, using chat-boxes and other human-like connections. According to this perspective, AI becomes a promoter of the man-machine symbiosis, allowing researchers to instruct advanced machines by asking AI to express judgments that require high cognitive skills, previously considered as impossible <ref type="bibr" target="#b48">(Mahroof, 2019)</ref>. Nonetheless, it is not uncommon to observe cases in which decision making is entrusted to powerful intelligent machines, specially trained without the need for final human approval <ref type="bibr">(Zlotowski et al., 2017)</ref>. Another business implication of the leverage of AI is the ability to instantiate Expert Systems (ES), which are able to both simulate human reasoning and to explain the criteria used to reach certain conclusions <ref type="bibr" target="#b53">(Metaxiotis and Psarras, 2003)</ref>. Moreover, an additional business implication dealt with in literature within this topic is the growing role of process mining, i.e. the ability of using AI to infer useful trends, patterns and opportunities for improving the effectiveness of business processes through the analysis of log data <ref type="bibr" target="#b85">(Zhang et al., 2020)</ref> </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Human Implications</head><p>AI can support the digitalisation of Human Resource Management (HRM) in the workplace, influencing methods and environments, ensuring greater activity effectiveness and efficiency both in terms of time and costs, and in the quality of the activity carried out offering itself as a valid ally to human work <ref type="bibr" target="#b82">(Zehir et al., 2020)</ref>. Further opportunities might be identified in applying AI to Big Data analysis to automate service-desk business process <ref type="bibr" target="#b45">(Lo et al., 2019)</ref>. The continuous evolution of technology and business environments impose continuous challenges for managers who must face the challenge to create knowledge and develop internal skills <ref type="bibr" target="#b15">(De Mauro et al., 2018;</ref><ref type="bibr">Gatouillat et al., 2018)</ref>. AI has been widely recognized as a business enabling factor, by ensuring a growth of individuals' productivity and a decrease in the cost of executing a project <ref type="bibr" target="#b68">(Shankar, 2012)</ref>. Additionally, as highlighted above in §5.1, AI become an "ally" in management decision, supporting human judgement and decision-making processes in strategy, planning, implementation and actions. The establishment of data science and AI as a mission-critical activity <ref type="bibr" target="#b13">(Davenport, 2020)</ref> forced companies to rethink their organization by acquiring novel professional data-focusing roles like Data Scientists, Data Analysts, Analytics developers and big data Systems Engineers <ref type="bibr" target="#b15">(De Mauro et al., 2018)</ref>. Multiple ethical challenges have arisen, mainly focusing on the evolving definition of Privacy and the decisions that companies may make on the extent they should push the data boundaries and dig into lives of individual <ref type="bibr" target="#b10">(Corea, 2016)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Industrial Applications</head><p>The role of AI in Industrial Applications is yet to be fully comprehended and broadly adapted in companies as managers still struggle with identifying and providing the organizational, cultural and technology enablers <ref type="bibr" target="#b8">(Chen, 2017;</ref><ref type="bibr" target="#b37">Johnson, 2019)</ref>. Within this topic, we have found that papers report opportunities of AI Industrial Applications in several sectors: medical sciences <ref type="bibr" target="#b35">(Jiang et al., 2017;</ref><ref type="bibr">Szolovits, 2019)</ref> and specifically either in diseases cure such as in cardiology <ref type="bibr" target="#b36">(Johnson et al., 2018)</ref> and radiology <ref type="bibr" target="#b32">(Hosny et al., 2018)</ref>, in neuroscience <ref type="bibr" target="#b26">(Hassabis et al., 2017)</ref>, in preventing epidemic diffusion such as the recent COVID-19 as a tool to protect healthcare workers and curb dissemination <ref type="bibr" target="#b52">(McCall, 2020)</ref>; in the chemical industry <ref type="bibr" target="#b75">(Venkatasubramanian, 2019)</ref> of pharmacy <ref type="bibr" target="#b29">(Hessler and Baringhaus, 2018)</ref>; in social sciences such as in politics <ref type="bibr" target="#b33">(Hudson, 2019)</ref>, in marketing <ref type="bibr" target="#b40">(Kumar et. al., 2019)</ref>, and in finance <ref type="bibr" target="#b21">(Faccia et al., 2019)</ref>. Furthermore, AI enables opportunities in the organizational purchasing processes and supply models in the supply chain <ref type="bibr" target="#b41">(Laínez et al., 2010)</ref>, in the definition of price strategies <ref type="bibr" target="#b9">(Chou et al., 2015)</ref>, in product development and scheduling <ref type="bibr" target="#b53">(Metaxiotis and Psarras, 2003)</ref>, in the management of services in markets and simulations <ref type="bibr" target="#b44">(Li and Li, 2010)</ref> and finally web intelligence and e -B2B commerce <ref type="bibr" target="#b43">(Li, 2007;</ref><ref type="bibr" target="#b86">Zhong et al., 2007)</ref>. Interesting opportunities might be activated by AI in integrating the financial accounting cycle <ref type="bibr" target="#b21">(Faccia et al., 2019)</ref> and industrial marketing (Martínez-López and Casillas, 2013).</p><p>Furthermore, our literature review made apparent that AI applications can highly benefit from modern IoT devices, in data collection, in the transmission of results deriving from AI algorithms, in supporting industrial applications by bringing AI into physical objects <ref type="bibr" target="#b3">(Arsénio et al., 2014)</ref>. The maximum contribution is thus shown by Industrial Internet of Things IIoT, when IoT is integrated into the production process with the result of precise data analysis and from connected equipment, operating technology, places, and people or providing smart devices in manufacturing <ref type="bibr" target="#b76">(Vermesan et al., 2017)</ref>. Data collection derived from IIoT is useful for AIbased analysis which can serve in turn the same devices from which it was collected. Therefore, when combined with operational technology monitoring devices, IIoT helps regulate and monitor industrial systems in an integrated manner, monitor events or changes in structural conditions, ensure cost savings, reduced time, better quality, and increased productivity. Moreover, when combined with AI, IIoT proves effective at enabling real-time plan analysis and corrections <ref type="bibr" target="#b34">(Jeschke et al., 2017)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Social Applications</head><p>In papers dealing with Social Applications, AI shows its role in supporting marketing studies to understand consumer social behaviour. On the other hand, fuzzy logic techniques, Artificial Neural Network (ANN) and AI-based methods support the management of the uncertain events that accompany the development of marketing strategies <ref type="bibr" target="#b42">(Li, 2000)</ref>. The major contributions are aimed at completing traditional activities, making knowledge and information of common interest available in order to ultimately provide the end customer with products with increasing value <ref type="bibr" target="#b60">(Prior et al., 2019;</ref><ref type="bibr" target="#b61">Ramaswamy and Ozcan, 2018)</ref>. AI can also support the understanding of consumer choices, by obtaining descriptive models to be used in optimisation schemes <ref type="bibr" target="#b41">(Laínez et al., 2010)</ref>. The greater proximity to consumers enabled by new technologies makes the relationship between a business and its consumers deeper and more robust <ref type="bibr" target="#b83">(Zeithaml et al., 2001)</ref>. Moreover, data plays a key role in enabling personalised offers by means of AI-based inference of their levels of propensity in making a purchase <ref type="bibr" target="#b57">(Moro et al., 2016)</ref> and in supporting strategies that entail extra-sensory experiences and automation <ref type="bibr" target="#b5">(Buhalis et al., 2019)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5">Prediction Methods</head><p>This topic deals with those specific data methodologies aiming at anticipating the future based on the analysis of the past. More precisely, as clarified by Hair, predictive analytics leverages "confirmed relationships between explanatory and criterion variables from past occurrences to predict future outcomes" <ref type="bibr">(2007, p. 304)</ref>.</p><p>Algorithms enabling fast and cheap predictions of the future have been identified as a competitive advantage for companies, as they support an increase of productivity and an improvement of speed and quality of decision making <ref type="bibr" target="#b0">(Agrawal et al., 2018)</ref>. We found that papers dealing with this topic were disproportionally describing the usage of supervised machine learning techniques, both regression and classification techniques, for supporting business processes through a deeper understanding of market, consumer and competitors, or a forecast of forthcoming changes. As we focused on papers dealing with both AI and Business, this topic focuses on how to implement general-use algorithms for business implementation. The most prominent usage scenarios we found in our corpus included: sales forecasting to ensure the sufficiency of companies' plans <ref type="bibr">(Castillo et al., 2014)</ref>, Sentiment analysis and opinion mining to extract subjective information out of consumer-generated comments <ref type="bibr">(Giatsoglou et al., 2017, Rambocas and</ref><ref type="bibr" target="#b62">Pacheco, 2018)</ref>, and Anticipating financial distress of companies and end-users to improve risk evaluation <ref type="bibr" target="#b72">(Tsai et al., 2014;</ref><ref type="bibr" target="#b84">Zhang et al., 2010)</ref>. Moreover, Prediction Models could be exploited in several industries as well, as recent studies suggest in the medical field for instance to prevent and forecast epidemics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.6">Recognition Methods</head><p>The topic deals with the analytical methodologies, often based on machine learning algorithms, which are aimed at recognizing noteworthy patterns in data. One noteworthy example of application is the generation of consumers segments for marketing campaigns <ref type="bibr" target="#b6">(Campbell et al., 2020)</ref>. Algorithms able to identify meaningful segments are exploited within Customer Relationship Management (CRM) systems for tailoring promotional activities to provide significant positive impacts on both profitability and sales for segment-specific direct marketing campaigns <ref type="bibr" target="#b63">(Reutterer et al., 2006)</ref>. Another possible use of recognition methods is to automatically detect anomalies. Business applications of anomaly detection include: the identification of frauds to systematically reduce the risks related to credit issuance <ref type="bibr">(Ryman-Tub et al., 2018)</ref> and the automated detection of potential business process anomalies (Rogge-Solti and Kasneci, 2014).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Conclusions</head><p>The quick development of AI business applications has caused the creation of a disorganised knowledge on the matter. In this paper we presented the results of a systematic review of the literature investigating AI business activation throughout an entire decade <ref type="bibr">(2009)</ref><ref type="bibr">(2010)</ref><ref type="bibr">(2011)</ref><ref type="bibr">(2012)</ref><ref type="bibr">(2013)</ref><ref type="bibr">(2014)</ref><ref type="bibr">(2015)</ref><ref type="bibr">(2016)</ref><ref type="bibr">(2017)</ref><ref type="bibr">(2018)</ref><ref type="bibr">(2019)</ref>. We obtained a double-level hierarchical structure which describes the central topics of current research and possible future developments. We leveraged an original combination of two established machine learning algorithms (LDA and hierarchical clustering), in order to design human-meaningful topic structures. As a response to RQ1, we have identified three different themes (Implications, Applications, Models), namely IAM, each one comprising two topics, namely: Business and Human Implications, Industrial and Social Applications, and Prediction and Recognition Models. In response to RQ2, our findings supported the identification of the most promising further research directions as confirmed quantitatively by the of topic presence reported in</p><p>Table 4. According to our results we anticipate that the following topics require further expansion in future research: 1. Human implications, especially in developing skills able to integrate people and IA in a synergetic ecosystem in which their interaction activates their greatest potential. 2. Industrial applications, strengthening the research towards technological devices and tools (such as IoT) able to support AI practices, algorithms and methods in communicating results of AI strategies, supporting data collection and becoming the peripheral object that "hosts" AI applications. 3. Recognition methods, spurred by the latest development of deep learning techniques requires further investigation for effective business activation. The IAM model presented in this study could support future research and business management in multiple ways. Firstly, AI researchers can position their future contributions in a precise theoretical background within the IAM framework, acknowledging the intrinsic multidisciplinary nature of the domain. Secondly, our classification allows researchers and practitioners to make sense of the development of the domain and to identify the most promising topics to invest on. Lastly, business managers could use the model as a conceptual structure to understand which aspects require more attention and display an opportunity for improving the maturity of their firms. We recognize multiple limitations in the current study that offer the opportunity for future research. Firstly, the corpus of documents we used in our analysis was exclusively sourced from Scopus: despite its extent and authoritativeness this choice could have led to a partial view of the literature. Furthermore, we considered only contributions written in English and relevant documents written in different languages could have been overlooked. Lastly, despite the usage of a replicable combination of methodologies like LDA and hierarchical clustering, the assessment of the model accuracy has been left to human judgement, making it prone to subjective biases.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 -</head><label>1</label><figDesc>Figure 1 -Popularity of Artificial Intelligence, Big Data, Business Intelligence and Machine Learning as a term among web users between 2010 and 2019. The vertical axis shows the relative search frequency of each term included the group of selected terms, normalized within the [0, 100] range.</figDesc><graphic coords="4,93.65,134.09,407.31,195.75" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 -</head><label>2</label><figDesc>Figure 2 -Network visualization of the topic model, grouped by Implications, Applications and Methods</figDesc><graphic coords="7,128.15,70.85,338.33,212.10" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 -</head><label>2</label><figDesc>Inter-topic correlation matrix, R.</figDesc><table><row><cell>Year</cell><cell>Business Implications</cell><cell>Human Implications</cell><cell>Industrial Applications</cell><cell>Social Applications</cell><cell>Prediction Methods</cell><cell>Recognition Methods</cell><cell>Grand Total</cell></row><row><cell>2010</cell><cell>28</cell><cell>7</cell><cell>11</cell><cell>14</cell><cell>15</cell><cell>12</cell><cell>87</cell></row><row><cell>2011</cell><cell>40</cell><cell>12</cell><cell>19</cell><cell>22</cell><cell>19</cell><cell>8</cell><cell>120</cell></row><row><cell>2012</cell><cell>42</cell><cell>10</cell><cell>8</cell><cell>17</cell><cell>21</cell><cell>18</cell><cell>116</cell></row><row><cell>2013</cell><cell>42</cell><cell>5</cell><cell>23</cell><cell>22</cell><cell>27</cell><cell>13</cell><cell>132</cell></row><row><cell>2014</cell><cell>58</cell><cell>8</cell><cell>15</cell><cell>33</cell><cell>26</cell><cell>17</cell><cell>157</cell></row><row><cell>2015</cell><cell>49</cell><cell>20</cell><cell>24</cell><cell>42</cell><cell>47</cell><cell>31</cell><cell>213</cell></row><row><cell>2016</cell><cell>66</cell><cell>23</cell><cell>34</cell><cell>38</cell><cell>54</cell><cell>34</cell><cell>249</cell></row><row><cell>2017</cell><cell>83</cell><cell>49</cell><cell>77</cell><cell>64</cell><cell>61</cell><cell>53</cell><cell>387</cell></row><row><cell>2018</cell><cell>149</cell><cell>113</cell><cell>164</cell><cell>113</cell><cell>109</cell><cell>106</cell><cell>754</cell></row><row><cell>2019</cell><cell>200</cell><cell>191</cell><cell>356</cell><cell>226</cell><cell>176</cell><cell>148</cell><cell>1297</cell></row><row><cell>2020</cell><cell>35</cell><cell>38</cell><cell>76</cell><cell>41</cell><cell>38</cell><cell>40</cell><cell>268</cell></row><row><cell>Grand Total</cell><cell>792</cell><cell>476</cell><cell>807</cell><cell>593</cell><cell>593</cell><cell>480</cell><cell>3780</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 -</head><label>3</label><figDesc>Implications, Applications, and Methods: topics and key focus areas</figDesc><table><row><cell>Theme</cell><cell>Topic</cell><cell>Key focus areas</cell></row><row><cell>Implications</cell><cell>Business Implications</cell><cell>Digital Management</cell></row><row><cell/><cell/><cell>Process Automation</cell></row><row><cell/><cell/><cell>Process Mining</cell></row><row><cell/><cell>Human Implications</cell><cell>Organizational needs</cell></row><row><cell/><cell/><cell>Ethical implications</cell></row><row><cell/><cell/><cell>Talent management</cell></row><row><cell>Applications</cell><cell>Industrial Applications</cell><cell>IoT</cell></row><row><cell/><cell/><cell>Resources management (energy, utilities)</cell></row><row><cell/><cell/><cell>Smart cities</cell></row><row><cell/><cell>Social Applications</cell><cell>Social media analysis</cell></row><row><cell/><cell/><cell>Sentiment analysis</cell></row><row><cell/><cell/><cell>Consumers understanding</cell></row><row><cell>Methods</cell><cell>Prediction Methods</cell><cell>Forecasting</cell></row><row><cell/><cell/><cell>Classification</cell></row><row><cell/><cell/><cell>Supervised learning</cell></row><row><cell/><cell>Recognition Methods</cell><cell>Anomaly recognition</cell></row><row><cell/><cell/><cell>Patterns identification</cell></row><row><cell/><cell/><cell>Unsupervised learning</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 -</head><label>4</label><figDesc>Relative presence of the identified topics in existing literature. The last column shows the shift of topic presence in recent years.</figDesc><table><row><cell/><cell cols="10">2010 2011 2012 2013 2014 2015 2016 2017 2018 2019</cell><cell cols="2">2020 Total</cell><cell>Total</cell><cell>2018/20 vs.</cell></row><row><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell>abs</cell><cell>%</cell><cell>previous</cell></row><row><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell>years</cell></row><row><cell>Business</cell><cell>32%</cell><cell cols="2">33% 36%</cell><cell cols="2">32% 37%</cell><cell cols="2">23% 27%</cell><cell cols="2">21% 20%</cell><cell>15%</cell><cell>13%</cell><cell>792</cell><cell>21%</cell><cell>-14%</cell></row><row><cell>implications</cell><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/></row><row><cell>Human</cell><cell>13%</cell><cell>16%</cell><cell>7%</cell><cell cols="2">17% 10%</cell><cell cols="2">11% 14%</cell><cell cols="2">20% 22%</cell><cell>27%</cell><cell>28%</cell><cell>807</cell><cell>21%</cell><cell>+12%</cell></row><row><cell>implications</cell><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/></row><row><cell>Industrial</cell><cell>8%</cell><cell>10%</cell><cell>9%</cell><cell>4%</cell><cell>5%</cell><cell>9%</cell><cell>9%</cell><cell cols="2">13% 15%</cell><cell>15%</cell><cell>14%</cell><cell>476</cell><cell>13%</cell><cell>+6%</cell></row><row><cell>applications</cell><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/></row><row><cell>Social</cell><cell>17%</cell><cell cols="2">16% 18%</cell><cell cols="2">20% 17%</cell><cell cols="2">22% 22%</cell><cell cols="2">16% 14%</cell><cell>14%</cell><cell>14%</cell><cell>593</cell><cell>16%</cell><cell>-4%</cell></row><row><cell>applications</cell><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/></row><row><cell>Predictive</cell><cell>16%</cell><cell cols="2">18% 15%</cell><cell cols="2">17% 21%</cell><cell cols="2">20% 15%</cell><cell cols="2">17% 15%</cell><cell>17%</cell><cell>15%</cell><cell>632</cell><cell>17%</cell><cell>-1%</cell></row><row><cell>Methods</cell><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/></row><row><cell>Recognition</cell><cell>14%</cell><cell>7%</cell><cell>16%</cell><cell cols="2">10% 11%</cell><cell cols="2">15% 14%</cell><cell cols="2">14% 14%</cell><cell>11%</cell><cell>15%</cell><cell>480</cell><cell>13%</cell><cell>+1%</cell></row><row><cell>methods</cell><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/><cell/></row><row><cell>Grand Total</cell><cell>87</cell><cell>120</cell><cell>116</cell><cell>132</cell><cell>157</cell><cell>213</cell><cell>249</cell><cell>387</cell><cell>754</cell><cell>1,297</cell><cell>268</cell><cell>3,780</cell><cell>100%</cell><cell>-</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>This is the preprint version of the article published on February 7 th , 2021 in Technology Analysis &amp; Strategic Management. DOI: https://doi.org/10.1080/09537325.2021.1883583 © Taylor &amp; Francis.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_1"><p>The full Scopus query was: "TITLE-ABS(("Artificial Intelligence" or "machine learning" )and("business" OR"marketing")) AND PUBYEAR &gt;</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2009" xml:id="foot_2"><p>AND ( LIMIT-TO ( DOCTYPE,"ar" ) OR LIMIT-TO ( DOCTYPE,"cp" ) ) AND ( LIMIT-TO ( LANGUAGE,"English" ) )".</p></note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Prediction machines: the simple economics of artificial intelligence</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>references
+			<persName><forename type="first">J</forename><surname>Gans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Goldfarb</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Harvard Business Press</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Agrawal, A., Gans, J., &amp; Goldfarb, A. (2018). Prediction machines: the simple economics of artificial intelligence. Harvard Business Press.</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Introduction to Mixed Membership Models and Methods</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Airoldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Blei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Erosheva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Fienberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Handbook of mixed membership models and their applications</title>
+		<imprint>
+			<biblScope unit="volume">100</biblScope>
+			<biblScope unit="page" from="3" to="14"/>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Airoldi, E. M., Blei, D. M., Erosheva, E. A., &amp; Fienberg, S. E. (2014). Introduction to Mixed Membership Models and Methods. Handbook of mixed membership models and their applications, 100, 3-14.</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Mixed membership stochastic blockmodels</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Airoldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Blei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Fienberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Xing</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of machine learning research</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="1981" to="2014"/>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Airoldi, E. M., Blei, D. M., Fienberg, S. E., &amp; Xing, E. P. (2008). Mixed membership stochastic blockmodels. Journal of machine learning research, 9, 1981-2014.</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Internet of intelligent things: Bringing artificial intelligence into things and communication networks</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Arsénio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Serra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Francisco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Nabais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Andrade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Serrano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Inter-cooperative collective intelligence: Techniques and applications</title>
+		<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1" to="37"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Arsénio, A., Serra, H., Francisco, R., Nabais, F., Andrade, J., &amp; Serrano, E. (2014). Internet of intelligent things: Bringing artificial intelligence into things and communication networks. In Inter-cooperative collective intelligence: Techniques and applications (pp. 1-37). Springer, Berlin, Heidelberg.</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Probabilistic topic models</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Blei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="77" to="84"/>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Blei, D. M. (2012). Probabilistic topic models. Communications of the ACM, 55(4), 77-84.</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Technological disruptions in services: lessons from tourism and hospitality</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Buhalis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Harwood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Bogicevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Viglia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Beldona</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hofacker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Service Management</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="484" to="506"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Buhalis, D., Harwood, T., Bogicevic, V., Viglia, G., Beldona, S., &amp; Hofacker, C. (2019). Technological disruptions in services: lessons from tourism and hospitality. Journal of Service Management, 30 (4), 484-506.</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">From data to action: How marketers can leverage AI</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sands</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ferraro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">Y J</forename><surname>Tsao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mavrommatis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Business Horizons</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="227" to="243"/>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Campbell, C., Sands, S., Ferraro, C., Tsao, H. Y. J., &amp; Mavrommatis, A. (2020). From data to action: How marketers can leverage AI. Business Horizons, 63(2), 227-243.</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Applying computational intelligence methods for predicting the sales of newly published books in a real editorial business management environment</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Castillo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Mora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Faris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Merelo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>García-Sánchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Fernández-Ares</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>García -Arenas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Knowledge-Based Systems</title>
+		<imprint>
+			<biblScope unit="volume">115</biblScope>
+			<biblScope unit="page" from="133" to="151"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Castillo, P. A., Mora, A. M., Faris, H., Merelo, J. J., García-Sánchez, P., Fernández-Ares, A. J., &amp; García -Arenas, M. I. (2017). Applying computational intelligence methods for predicting the sales of newly published books in a real editorial business management environment. Knowledge-Based Systems, 115, 133-151.</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Integrated and intelligent manufacturing: perspectives and enablers</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Engineering</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="588" to="595"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Chen, Y. (2017). Integrated and intelligent manufacturing: perspectives and enablers. Engineering, 3(5), 588-595.</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Optimized artificial intelligence models for predicting project award price</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Chou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">D</forename><surname>Pham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Y</forename><surname>Shao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Automation in Construction</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="106" to="115"/>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Chou, J. S., Lin, C. W., Pham, A. D., &amp; Shao, J. Y. (2015). Optimized artificial intelligence models for predicting project award price. Automation in Construction, 54, 106-115.</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Key Data Challenges to Strategic Business Decisions</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Corea</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Big Data Analytics: A Management Perspective</title>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="19" to="24"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Corea, F. (2016). Key Data Challenges to Strategic Business Decisions. In Big Data Analytics: A Management Perspective (pp. 19-24). Springer, Cham.</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">From analytics to artificial intelligence</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">H</forename><surname>Davenport</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Business Analytics</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="73" to="80"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Davenport, T. H. (2018). From analytics to artificial intelligence. Journal of Business Analytics, 1(2), 73-80.</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Competing on Analytics</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">H</forename><surname>Davenport</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Harris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The New Science of Winning</title>
+		<meeting><address><addrLine>Boston, MA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Scholar Google Scholar Digital Library Digital Library</publisher>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Davenport, T. H., &amp; Harris, J. G. Competing on Analytics. The New Science of Winning.-Harvard Business School Press, Boston, MA., 2007. Google Scholar Google Scholar Digital Library Digital Library.</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">How artificial intelligence will change the future of marketing</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Davenport</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Guha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Grewal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bressgott</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Academy of Marketing Science</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="24" to="42"/>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Davenport, T., Guha, A., Grewal, D., &amp; Bressgott, T. (2020). How artificial intelligence will change the future of marketing. Journal of the Academy of Marketing Science, 48(1), 24-42.</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Understanding Big Data through a systematic literature review: The ITMI model</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>De Mauro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Greco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Grimaldi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Information Technology &amp; Decision Making</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">04</biblScope>
+			<biblScope unit="page" from="1433" to="1461"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">De Mauro, A., Greco, M., &amp; Grimaldi, M. (2019). Understanding Big Data through a systematic literature review: The ITMI model. International Journal of Information Technology &amp; Decision Making, 18(04), 1433-1461.</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Human resources for Big Data professions: A systematic classification of job roles and required skill sets</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>De Mauro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Greco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Grimaldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ritala</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Processing &amp; Management</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="807" to="817"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">De Mauro, A., Greco, M., Grimaldi, M., &amp; Ritala, P. (2018). Human resources for Big Data professions: A systematic classification of job roles and required skill sets. Information Processing &amp; Management, 54(5), 807-817.</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Big data predictive and prescriptive analytics</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">C</forename><surname>Deka</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of research on cloud infrastructures for Big Data analytics</title>
+		<imprint>
+			<publisher>IGI Global</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="370" to="391"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Deka, G. C. (2014). Big data predictive and prescriptive analytics. In Handbook of research on cloud infrastructures for Big Data analytics (pp. 370-391). IGI Global.</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Seeding the survey and analysis of research literature with text mining</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Delen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Crossland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1707" to="1720"/>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Delen, D., &amp; Crossland, M. D. (2008). Seeding the survey and analysis of research literature with text mining. Expert Systems with Applications, 34(3), 1707-1720.</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Applications of big data and green IoT-enabling technologies for smart cities</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Dogan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">F</forename><surname>Gurcan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Research on Big Data and the IoT</title>
+		<imprint>
+			<publisher>IGI Global</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="22" to="41"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Dogan, O., &amp; Gurcan, O. F. (2019). Applications of big data and green IoT-enabling technologies for smart cities. In Handbook of Research on Big Data and the IoT (pp. 22-41). IGI Global.</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Think big with big data: Identifying suitable big data strategies in corporate environments</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ebner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bühnen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Urbach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2014 47th Hawaii International Conference on System Sciences</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="3748" to="3757"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Ebner, K., Bühnen, T., &amp; Urbach, N. (2014). Think big with big data: Identifying suitable big data strategies in corporate environments. In 2014 47th Hawaii International Conference on System Sciences (pp. 3748-3757). IEEE.</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Big Data consumer analytics and the transformation of marketing</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erevelles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Fukawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Swayne</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of business research</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="897" to="904"/>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Erevelles, S., Fukawa, N., &amp; Swayne, L. (2016). Big Data consumer analytics and the transformation of marketing. Journal of business research, 69(2), 897-904.</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Integrated Cloud Financial Accounting Cycle: How Artificial Intelligence, Blockchain, and XBRL will Change the Accounting, Fiscal and Auditing Practices</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Faccia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Y K</forename><surname>Al Naqbi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Lootah</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 3rd International Conference on Cloud and Big Data Computing</title>
+		<meeting>the 2019 3rd International Conference on Cloud and Big Data Computing</meeting>
+		<imprint>
+			<date type="published" when="2019-08">2019, August</date>
+			<biblScope unit="page" from="31" to="37"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Faccia, A., Al Naqbi, M. Y. K., &amp; Lootah, S. A. (2019, August). Integrated Cloud Financial Accounting Cycle: How Artificial Intelligence, Blockchain, and XBRL will Change the Accounting, Fiscal and Auditing Practices. In Proceedings of the 2019 3rd International Conference on Cloud and Big Data Computing (pp. 31-37).</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Sentiment analysis leveraging emotions and word embeddings</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Giatsoglou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Vozalis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Diamantaras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vakali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sarigiannidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">C</forename><surname>Chatzisavvas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="page" from="214" to="224"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Giatsoglou, M., Vozalis, M. G., Diamantaras, K., Vakali, A., Sarigiannidis, G., &amp; Chatzisavvas, K. C. (2017). Sentiment analysis leveraging emotions and word embeddings. Expert Systems with Applications, 69, 214-224.</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Bayesian analysis of dynamic linear topic models</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Glynn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">T</forename><surname>Tokdar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Howard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Banks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bayesian Analysis</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="53" to="80"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Glynn, C., Tokdar, S. T., Howard, B., &amp; Banks, D. L. (2019). Bayesian analysis of dynamic linear topic models. Bayesian Analysis, 14(1), 53-80.</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Model-based clustering</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Grün</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Handbook of mixture analysis</title>
+		<imprint>
+			<biblScope unit="page" from="163" to="198"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Grün, B. (2018). Model-based clustering. Handbook of mixture analysis, 163-198.</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Knowledge creation in marketing: the role of predictive analytics</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Hair</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Business Review</title>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hair, J. F. (2007). Knowledge creation in marketing: the role of predictive analytics. European Business Review.</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Neuroscience-inspired artificial intelligence</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hassabis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kumaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Summerfield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Botvinick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neuron</title>
+		<imprint>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="245" to="258"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hassabis, D., Kumaran, D., Summerfield, C., &amp; Botvinick, M. (2017). Neuroscience-inspired artificial intelligence. Neuron, 95(2), 245-258.</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Artificial intelligence: The very idea</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Haugeland</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1989">1989</date>
+			<publisher>MIT press</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Haugeland, J. (1989). Artificial intelligence: The very idea. MIT press.</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Data quality for data science, predictive analytics, and big data in supply chain management: An introduction to the problem and suggestions for research and applications</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">T</forename><surname>Hazen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Boone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Ezell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">A</forename><surname>Jones-Farmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Production Economics</title>
+		<imprint>
+			<biblScope unit="volume">154</biblScope>
+			<biblScope unit="page" from="72" to="80"/>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hazen, B. T., Boone, C. A., Ezell, J. D., &amp; Jones-Farmer, L. A. (2014). Data quality for data science, predictive analytics, and big data in supply chain management: An introduction to the problem and suggestions for research and applications. International Journal of Production Economics, 154, 72-80.</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence in drug design</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hessler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H</forename><surname>Baringhaus</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Molecules</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page">2520</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hessler, G., &amp; Baringhaus, K. H. (2018). Artificial intelligence in drug design. Molecules, 23(10), 2520.</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Big data for development: A review of promises and challenges</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hilbert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Development Policy Review</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="135" to="174"/>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hilbert, M. (2016). Big data for development: A review of promises and challenges. Development Policy Review, 34(1), 135-174.</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Understanding the business value of intelligent products for product development in manufacturing industries</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Holler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Uebernickel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Brenner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 8th International Conference on Information Management and Engineering</title>
+		<meeting>the 2016 8th International Conference on Information Management and Engineering</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="18" to="24"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Holler, M., Uebernickel, F., &amp; Brenner, W. (2016). Understanding the business value of intelligent products for product development in manufacturing industries. In Proceedings of the 2016 8th International Conference on Information Management and Engineering (pp. 18-24).</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence in radiology</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hosny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Quackenbush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">H</forename><surname>Schwartz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Aerts</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Cancer</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="500" to="510"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hosny, A., Parmar, C., Quackenbush, J., Schwartz, L. H., &amp; Aerts, H. J. (2018). Artificial intelligence in radiology. Nature Reviews Cancer, 18(8), 500-510.</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">M</forename><surname>Hudson</surname></persName>
+		</author>
+		<title level="m">Artificial intelligence and international politics</title>
+		<imprint>
+			<publisher>Routledge</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hudson, V. M. (2019). Artificial intelligence and international politics. Routledge.</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Industrial internet of things and cyber manufacturing systems</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jeschke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Brecher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Meisen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Özdemir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Eschert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Industrial internet of things</title>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="3" to="19"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Jeschke, S., Brecher, C., Meisen, T., Özdemir, D., &amp; Eschert, T. (2017). Industrial internet of things and cyber manufacturing systems. In Industrial internet of things (pp. 3-19). Springer, Cham.</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence in healthcare: past, present and future</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Stroke and vascular neurology</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="230" to="243"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Jiang, F., Jiang, Y., Zhi, H., Dong, Y., Li, H., Ma, S., &amp; Wang, Y. (2017). Artificial intelligence in healthcare: past, present and future. Stroke and vascular neurology, 2(4), 230-243.</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence in cardiology</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">W</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Soto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">S</forename><surname>Glicksberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Shameer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Miotto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Dudley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American College of Cardiology</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="issue">23</biblScope>
+			<biblScope unit="page" from="2668" to="2679"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Johnson, K. W., Soto, J. T., Glicksberg, B. S., Shameer, K., Miotto, R., Ali, M., &amp; Dudley, J. T. (2018). Artificial intelligence in cardiology. Journal of the American College of Cardiology, 71(23), 2668-2679.</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence, machine learning, and bias in finance: toward responsible innovation</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pasquale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chapman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Fordham Law Review</title>
+		<imprint>
+			<biblScope unit="volume">88</biblScope>
+			<biblScope unit="page">499</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Johnson, K., Pasquale, F., &amp; Chapman, J. (2019). Artificial intelligence, machine learning, and bias in finance: toward responsible innovation. Fordham Law Review, 88, 499.</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Artificial intelligence and soft computing: behavioral and cognitive modeling of the human brain</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Konar</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>CRC press</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Konar, A. (2018). Artificial intelligence and soft computing: behavioral and cognitive modeling of the human brain. CRC press.</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Advanced applications of neural networks and artificial intelligence: A review</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">S M</forename><surname>Thakur</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International journal of information technology and computer science</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">57</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Kumar, K., &amp; Thakur, G. S. M. (2012). Advanced applications of neural networks and artificial intelligence: A review. International journal of information technology and computer science, 4(6), 57.</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Understanding the role of artificial intelligence in personalized engagement marketing</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Rajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Venkatesan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lecinski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">California Management Review</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="135" to="155"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Kumar, V., Rajan, B., Venkatesan, R., &amp; Lecinski, J. (2019). Understanding the role of artificial intelligence in personalized engagement marketing. California Management Review, 61(4), 135-155.</note>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Linking marketing and supply chain models for improved business strategic decision support</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Laínez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">V</forename><surname>Reklaitis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Puigjaner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers &amp; Chemical Engineering</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2107" to="2117"/>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Laínez, J. M., Reklaitis, G. V., &amp; Puigjaner, L. (2010). Linking marketing and supply chain models for improved business strategic decision support. Computers &amp; Chemical Engineering, 34(12), 2107-2117.</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">The development of a hybrid intelligent system for developing marketing strategy</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Decision Support Systems</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="395" to="409"/>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Li, S. (2000). The development of a hybrid intelligent system for developing marketing strategy. Decision Support Systems, 27(4), 395-409.</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">AgentStra: An Internet-based multi-agent intelligent system for strategic decision-making</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="565" to="571"/>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Li, S. (2007). AgentStra: An Internet-based multi-agent intelligent system for strategic decision-making. Expert Systems with Applications, 33(3), 565-571.</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">AgentsInternational: Integration of multiple agents, simulation, knowledge bases and fuzzy logic for international marketing decision making</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Z</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="2580" to="2587"/>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Li, S., &amp; Li, J. Z. (2010). AgentsInternational: Integration of multiple agents, simulation, knowledge bases and fuzzy logic for international marketing decision making. Expert Systems with Applications, 37(3), 2580-2587.</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">An Emperical Study on Application of Big Data Analytics to Automate Service Desk Business Process</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">K</forename><surname>Tiba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Buciumas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ziller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 43rd Annual Computer Software and Applications Conference (COMPSAC)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019-07">2019, July. 2019</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="670" to="675"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Lo, D., Tiba, K. K., Buciumas, S., &amp; Ziller, F. (2019, July). An Emperical Study on Application of Big Data Analytics to Automate Service Desk Business Process. In 2019 IEEE 43rd Annual Computer Software and Applications Conference (COMPSAC) (Vol. 2, pp. 670-675). IEEE.</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">A business intelligence system</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">P</forename><surname>Luhn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IBM Journal of research and development</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="314" to="319"/>
+			<date type="published" when="1958">1958</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Luhn, H. P. (1958). A business intelligence system. IBM Journal of research and development, 2(4), 314-319.</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Datafication': making sense of (big) data in a complex world</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lycett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Journal of Information Systems</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="381" to="386"/>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Lycett, M. (2013). 'Datafication': making sense of (big) data in a complex world. European Journal of Information Systems, 22(4), 381-386.</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">A human-centric perspective exploring the readiness towards smart warehousing: The case of a large retail distribution warehouse</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Mahroof</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Information Management</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page" from="176" to="190"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Mahroof, K. (2019). A human-centric perspective exploring the readiness towards smart warehousing: The case of a large retail distribution warehouse. International Journal of Information Management, 45, 176-190.</note>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Managing customer relationships in the social media era: Introducing the social CRM house</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">C</forename><surname>Malthouse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Haenlein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Skiera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Wege</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of interactive marketing</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="270" to="280"/>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Malthouse, E. C., Haenlein, M., Skiera, B., Wege, E., &amp; Zhang, M. (2013). Managing customer relationships in the social media era: Introducing the social CRM house. Journal of interactive marketing, 27(4), 270-280.</note>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Artificial intelligence-based systems applied in industrial marketing: An historica l overview, current and future insights</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Martínez-López</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Casillas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Industrial Marketing Management</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="489" to="495"/>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Martínez-López, F. J., &amp; Casillas, J. (2013). Artificial intelligence-based systems applied in industrial marketing: An historica l overview, current and future insights. Industrial Marketing Management, 42(4), 489-495.</note>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Big data: the management revolution</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mcafee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Brynjolfsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">H</forename><surname>Davenport</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Patil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Barton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Harvard business review</title>
+		<imprint>
+			<biblScope unit="volume">90</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="60" to="68"/>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">McAfee, A., Brynjolfsson, E., Davenport, T. H., Patil, D. J., &amp; Barton, D. (2012). Big data: the management revolution. Harvard business review, 90(10), 60-68.</note>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">COVID-19 and artificial intelligence: protecting health-care workers and curbing the spread</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mccall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Lancet Digital Health</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="166" to="e167"/>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">McCall, B. (2020). COVID-19 and artificial intelligence: protecting health-care workers and curbing the spread. The Lancet Digital Health, 2(4), e166-e167.</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Expert systems in business: applications and future directions for the operations researcher</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Metaxiotis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Psarras</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Industrial Management &amp; Data Systems</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="361" to="368"/>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Metaxiotis, K., &amp; Psarras, J. (2003). Expert systems in business: applications and future directions for the operations researcher. Industrial Management &amp; Data Systems, 103 (5), 361-368.</note>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Big data analytics capabilities: a systematic literature review and research agenda</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mikalef</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">O</forename><surname>Pappas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Krogstie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Giannakos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Systems and e-Business Management</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="547" to="578"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Mikalef, P., Pappas, I. O., Krogstie, J., &amp; Giannakos, M. (2018). Big data analytics capabilities: a systematic literature review and research agenda. Information Systems and e-Business Management, 16(3), 547-578.</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">An examination of procedures for determining the number of clusters in a data set</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">W</forename><surname>Milligan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename><surname>Cooper</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychometrika</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="159" to="179"/>
+			<date type="published" when="1985">1985</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Milligan, G. W., &amp; Cooper, M. C. (1985). An examination of procedures for determining the number of clusters in a data set. Psychometrika, 50(2), 159-179.</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Moore's law</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Moore</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Electronics Magazine</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">114</biblScope>
+			<date type="published" when="1965">1965</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Moore, G. (1965). Moore's law. Electronics Magazine, 38(8), 114.</note>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">An automated literature analysis on data mining applications to credit risk assessment</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Moro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cortez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rita</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Artificial Intelligence in Financial Markets</title>
+		<meeting><address><addrLine>London</addrLine></address></meeting>
+		<imprint>
+			<publisher>Palgrave Macmillan</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="161" to="177"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Moro, S., Cortez, P., &amp; Rita, P. (2016). An automated literature analysis on data mining applications to credit risk assessment. In Artificial Intelligence in Financial Markets (pp. 161-177). Palgrave Macmillan, London.</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Artificial intelligence: a new synthesis</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Nilsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Nilsson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>Morgan Kaufmann</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Nilsson, N. J., &amp; Nilsson, N. J. (1998). Artificial intelligence: a new synthesis. Morgan Kaufmann.</note>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">An algorithm for suffix stripping</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Porter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Program</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="130" to="137"/>
+			<date type="published" when="1980">1980</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Porter, M. F. (1980). An algorithm for suffix stripping. Program, 14(3), 130-137.</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Customer participation antecedents, profiles and value-in-use goals in complex B2B service exchange</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D</forename><surname>Prior</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Keränen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koskela</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Industrial Marketing Management</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="page" from="131" to="147"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Prior, D. D., Keränen, J., &amp; Koskela, S. (2019). Customer participation antecedents, profiles and value-in-use goals in complex B2B service exchange. Industrial Marketing Management, 82, 131-147.</note>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">What is co-creation? An interactional creation framework and its implications for value creation</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Ramaswamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ozcan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Business Research</title>
+		<imprint>
+			<biblScope unit="volume">84</biblScope>
+			<biblScope unit="page" from="196" to="205"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Ramaswamy, V., &amp; Ozcan, K. (2018). What is co-creation? An interactional creation framework and its implications for value creation. Journal of Business Research, 84, 196-205.</note>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Online sentiment analysis in marketing research: a review</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rambocas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">G</forename><surname>Pacheco</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Research in Interactive Marketing</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="146" to="163"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Rambocas, M., &amp; Pacheco, B. G. (2018). Online sentiment analysis in marketing research: a review. Journal of Research in Interactive Marketing, 12 (2), 146-163.</note>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">A dynamic segmentation approach for targeting and customizing direct marketing campaigns</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Reutterer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mild</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Natter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Taudes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of interactive Marketing</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">3-4</biblScope>
+			<biblScope unit="page" from="43" to="57"/>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Reutterer, T., Mild, A., Natter, M., &amp; Taudes, A. (2006). A dynamic segmentation approach for targeting and customizing direct marketing campaigns. Journal of interactive Marketing, 20(3-4), 43-57.</note>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title level="m" type="main">Introduction to Artificial Networks</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Knight</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<publisher>Mac Graw-Hill Publications</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Rich, E., &amp; Knight, K. (1991). Introduction to Artificial Networks. Mac Graw-Hill Publications, New York.</note>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Temporal anomaly detection in business processes</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rogge-Solti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kasneci</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Business Process Management</title>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014-09">2014, September</date>
+			<biblScope unit="page" from="234" to="249"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Rogge-Solti, A., &amp; Kasneci, G. (2014, September). Temporal anomaly detection in business processes. In International Conference on Business Process Management (pp. 234-249). Springer, Cham.</note>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">Artificial Intelligence-A Modern Approach</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Russell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Norvig</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note>Third International Edition</note>
+	<note type="raw_reference">Russell, S. J., &amp; Norvig, P. (2010). Artificial Intelligence-A Modern Approach, Third International Edition.</note>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">How Artificial Intelligence and machine learning research impacts payment card fraud detection: A survey and industry benchmark</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">F</forename><surname>Ryman-Tubb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Krause</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Garn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Engineering Applications of Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">76</biblScope>
+			<biblScope unit="page" from="130" to="157"/>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Ryman-Tubb, N. F., Krause, P., &amp; Garn, W. (2018). How Artificial Intelligence and machine learning research impacts payment card fraud detection: A survey and industry benchmark. Engineering Applications of Artificial Intelligence, 76, 130-157.</note>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">The cybernetics of enabling competence in people competence building to ensure quality and productivity in people in software industries</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">R</forename><surname>Shankar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2012 IEEE International Conference on Computational Intelligence and Cybernetics (CyberneticsCom)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2012-07">2012, July</date>
+			<biblScope unit="page" from="83" to="87"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Shankar, P. R. (2012, July). The cybernetics of enabling competence in people competence building to ensure quality and productivity in people in software industries. In 2012 IEEE International Conference on Computational Intelligence and Cybernetics (CyberneticsCom) (pp. 83-87). IEEE.</note>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Probabilistic topic models</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Steyvers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Griffiths</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Handbook of latent semantic analysis</title>
+		<imprint>
+			<biblScope unit="volume">427</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="424" to="440"/>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Steyvers, M., &amp; Griffiths, T. (2007). Probabilistic topic models. Handbook of latent semantic analysis, 427(7), 424-440.</note>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Applying text-mining to personalization and customization research literature-Who, what and where?</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sunikka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bragge</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="10049" to="10058"/>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Sunikka, A., &amp; Bragge, J. (2012). Applying text-mining to personalization and customization research literature-Who, what and where?. Expert Systems with Applications, 39(11), 10049-10058.</note>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">Artificial intelligence in medicine</title>
+		<editor>Szolovits, P.</editor>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Routledge</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Szolovits, P. (Ed.). (2019). Artificial intelligence in medicine. Routledge.</note>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Combining cluster analysis with classifier ensembles to predict financial distress</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">F</forename><surname>Tsai</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Fusion</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="46" to="58"/>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Tsai, C. F. (2014). Combining cluster analysis with classifier ensembles to predict financial distress. Information Fusion, 16, 46-58.</note>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Decision support and expert systems: Managerial perspectives</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Turban</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1988">1988</date>
+			<publisher>Macmillan</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Turban, E. (1988). Decision support and expert systems: Managerial perspectives. New York: Macmillan.</note>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Understanding big data themes from scientific biomedical literature through topic modeling</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Van Altena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Moerland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">H</forename><surname>Zwinderman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">D</forename><surname>Olabarriaga</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Big Data</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">23</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">van Altena, A. J., Moerland, P. D., Zwinderman, A. H., &amp; Olabarriaga, S. D. (2016). Understanding big data themes from scientific biomedical literature through topic modeling. Journal of Big Data, 3(1), 23.</note>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">The promise of artificial intelligence in chemical engineering: Is it here, finally?</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Venkatasubramanian</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AIChE Journal</title>
+		<imprint>
+			<biblScope unit="volume">65</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="466" to="478"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Venkatasubramanian, V. (2019). The promise of artificial intelligence in chemical engineering: Is it here, finally?. AIChE Journal, 65(2), 466-478.</note>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Internet of robotic things: converging sensing/actuating, hypoconnectivity, artificial intelligence a nd IoT Platforms</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Vermesan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bröring</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Tragos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Serrano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bacciu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chessa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gallicchio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Cognitive hyperconnected digital transformation: internet of things intelligence evolution</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="35"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Vermesan, O., Bröring, A., Tragos, E., Serrano, M., Bacciu, D., Chessa, S., Gallicchio, C., et al. (2017). Internet of robotic things: converging sensing/actuating, hypoconnectivity, artificial intelligence a nd IoT Platforms. Cognitive hyperconnected digital transformation: internet of things intelligence evolution (pp. 1-35).</note>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Management challenges in creating value from business analytics</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Vidgen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">B</forename><surname>Grant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Journal of Operational Research</title>
+		<imprint>
+			<biblScope unit="volume">261</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="626" to="639"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Vidgen, R., Shaw, S., &amp; Grant, D. B. (2017). Management challenges in creating value from business analytics. European Journal of Operational Research, 261(2), 626-639.</note>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Data science, predictive analytics, and big data: a revolution that will transform supply chain design and management</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Waller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Fawcett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Business Logistics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="77" to="84"/>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Waller, M. A., &amp; Fawcett, S. E. (2013). Data science, predictive analytics, and big data: a revolution that will transform supply chain design and management. Journal of Business Logistics, 34(2), 77-84.</note>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Big data analytics and firm performance: Effects of dynamic capabilities</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Wamba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gunasekaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Akter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J F</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Dubey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Childe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Business Research</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="356" to="365"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Wamba, S. F., Gunasekaran, A., Akter, S., Ren, S. J. F., Dubey, R., &amp; Childe, S. J. (2017). Big data analytics and firm performance: Effects of dynamic capabilities. Journal of Business Research, 70, 356-365.</note>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Learning by building identification trees</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Winston</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial intelligence</title>
+		<imprint>
+			<biblScope unit="page" from="423" to="442"/>
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Winston, P. (1992). Learning by building identification trees. Artificial intelligence, 423-442.</note>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<monogr>
+		<title level="m" type="main">A qualitative research on marketing and sales in the artificial intelligence age</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Siau</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<publisher>Midwest United States Association for Information Systems (MWAIS)</publisher>
+		</imprint>
+	</monogr>
+	<note>proceedings</note>
+	<note type="raw_reference">Yang, Y., &amp; Siau, K. (2018). A qualitative research on marketing and sales in the artificial intelligence age. Midwest United States Association for Information Systems (MWAIS) 2018 proceedings.</note>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">The Transformation of Human Resource Management and Its Impact on Overall Business Performance: Big Data Analytics and AI Technologies in Strategic HRM</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zehir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Karaboğa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Başar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Digital Business Strategies in Blockchain Ecosystems</title>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="265" to="279"/>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Zehir, C., Karaboğa, T., &amp; Başar, D. (2020). The Transformation of Human Resource Management and Its Impact on Overall Business Performance: Big Data Analytics and AI Technologies in Strategic HRM. In Digital Business Strategies in Blockchain Ecosystems (pp. 265-279). Springer, Cham.</note>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">The customer pyramid: creating and serving profitable customers</title>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">A</forename><surname>Zeithaml</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Rust</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">N</forename><surname>Lemon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">California management review</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="118" to="142"/>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Zeithaml, V. A., Rust, R. T., &amp; Lemon, K. N. (2001). The customer pyramid: creating and serving profitable customers. California management review, 43(4), 118-142.</note>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Vertical bagging decision trees model for credit scoring</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Leung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zheng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="7838" to="7843"/>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Zhang, D., Zhou, X., Leung, S. C., &amp; Zheng, J. (2010). Vertical bagging decision trees model for credit scoring. Expert Systems with Applications, 37(12), 7838-7843.</note>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Developing a novel artificial intelligence model to estimate the capital cost of mining projects using deep neural network-based ant colony optimization algorithm</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">N</forename><surname>Bui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Nguyen-Thoi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">T</forename><surname>Bui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Moayedi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Resources Policy</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="page">101604</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Zhang, H., Nguyen, H., Bui, X. N., Nguyen-Thoi, T., Bui, T. T., Nguyen, N., &amp; Moayedi, H. (2020). Developing a novel artificial intelligence model to estimate the capital cost of mining projects using deep neural network-based ant colony optimization algorithm. Resources Policy, 66, 101604.</note>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">Web intelligence (WI)</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Zhong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Wiley Encyclopedia of Computer Science and Engineering</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="11"/>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Zhong, N., Liu, J., &amp; Yao, Y. (2007). Web intelligence (WI). Wiley Encyclopedia of Computer Science and Engineering, 1-11.</note>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Can we control it? Autonomous robots threaten human identity, uniqueness, safety, and resources</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Złotowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Yogeeswaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bartneck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">100</biblScope>
+			<biblScope unit="page" from="48" to="54"/>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Złotowski, J., Yogeeswaran, K., &amp; Bartneck, C. (2017). Can we control it? Autonomous robots threaten human identity, uniqueness, safety, and resources. International Journal of Human-Computer Studies, 100, 48-54.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Recent Advances in Text Analysis</title>
+				<funder>
+					<orgName type="full">Web of Science and Scopus)</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2024-02-08">February 8, 2024</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Zheng</forename><forename type="middle">Tracy</forename><surname>Ke</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Harvard University</orgName>
+								<orgName type="institution" key="instit2">University of Georgia</orgName>
+								<orgName type="institution" key="instit3">Carnegie Mellon University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pengsheng</forename><surname>Ji</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Harvard University</orgName>
+								<orgName type="institution" key="instit2">University of Georgia</orgName>
+								<orgName type="institution" key="instit3">Carnegie Mellon University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jiashun</forename><surname>Jin</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Harvard University</orgName>
+								<orgName type="institution" key="instit2">University of Georgia</orgName>
+								<orgName type="institution" key="instit3">Carnegie Mellon University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Wanshan</forename><surname>Li</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Harvard University</orgName>
+								<orgName type="institution" key="instit2">University of Georgia</orgName>
+								<orgName type="institution" key="instit3">Carnegie Mellon University</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Recent Advances in Text Analysis</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2024-02-08">February 8, 2024</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">98B929EA212688B6A206F051BF1EEBF1</idno>
+					<idno type="arXiv">arXiv:2401.00775v2[stat.AP]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-03-04T12:09+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>BERT</term>
+					<term>journal ranking</term>
+					<term>knowledge graph</term>
+					<term>neural network</term>
+					<term>SCORE</term>
+					<term>Stigler&apos;s model</term>
+					<term>Topic-SCORE</term>
+					<term>topic weight</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Text analysis is an interesting research area in data science and has various applications, such as in artificial intelligence, biomedical research, and engineering. We review popular methods for text analysis, ranging from topic modeling to the recent neural language models. In particular, we review Topic-SCORE, a statistical approach to topic modeling, and discuss how to use it to analyze MADStat -a dataset on statistical publications that we collected and cleaned.</p><p>The application of Topic-SCORE and other methods on MADStat leads to interesting findings. For example, 11 representative topics in statistics are identified. For each journal, the evolution of topic weights over time can be visualized, and these results are used to analyze the trends in statistical research. In particular, we propose a new statistical model for ranking the citation impacts of 11 topics, and we also build a cross-topic citation graph to illustrate how research results on different topics spread to one another.</p><p>The results on MADStat provide a data-driven picture of the statistical research in 1975-2015, from a text analysis perspective.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Text analysis is an interdisciplinary research area in data science, computer science, and linguistics. It aims to use computers to process a large amount of natural language data and extract information or features. Research in text analysis and Natural Language Processing (NLP) is especially useful for developing auto-piloting cars, chatbots (e.g., chatGPT), and artificial intelligence in health care and biomedical engineering. In the past decades, numerous methods were proposed for text analysis. Two approaches are especially popular.</p><p>• Topic modeling. This approach has a strong statistical flavor. Given a large collection of text documents, this approach assumes that all these documents only discuss a few topics (e.g., "finance", "politics", "sports", etc.). Each document discusses the topics with different weights, and given that a particular topic is being discussed, the words in the document are generated from a distribution specific to that topic.</p><p>• Neural network modeling. This is a rapidly developing area. It models the generation of text documents via deep neural networks, and train the model with massive text corpora (e.g., English Wikipedia) and domain knowledge. The trained model will be used for different down-stream tasks.</p><p>The neural network approach has proven effective in many NLP tasks (e.g., text classification and machine translation), and has gained immense popularity, particularly among technology titans such as Google and Meta. However, this approach is internally complex, expensive to train, and resource-intensive. These factors substantially restrict the use of the neural network approach, especially for some common NLP users such as social scientists who only have a few hundreds of text documents from a specific domain of interest. The topic modeling approach provides a valuable alternative and has the following benefits.</p><p>• (Transparency and interpretability). Many users prefer an approach that is (a) not a blackbox but a more transparent step-by-step algorithm, (b) easy to understand and tune (so users can modify it as needed), and (c) where the results (e.g., the extracted features) are easy-to-interpret (see <ref type="bibr" target="#b10">[9,</ref><ref type="bibr" target="#b11">10]</ref>).</p><p>• (Analytical accessibility). Topic modeling approaches are relatively simple and allow for delicate theoretical analysis. Especially, some of these methods are shown to enjoy statistical optimality. In comparison, neural network approaches are much harder to analyze and often have no theoretical guarantee. Topic-SCORE <ref type="bibr" target="#b29">[28]</ref> is an especially interesting topic modeling method. It is fast, effective, and enjoys nice theoretical properties. It is also a flexible idea and can adapt to several different settings. These characteristics make Topic-SCORE especially appealing when we analyze the MADStat data set (to be introduced below).</p><p>One goal of this paper is to review popular topic modeling methods, from the rudimentary topic models in the 1990s to the more recent multi-gram topic models, with a focus on Topic-SCORE and related problems. In addition, we review the neural network approaches. Large neural language model is a rapidly developing area (with new research emerging on a weekly basis), making it hard to conduct a comprehensive review. Since the focus of this paper is on the topic modeling approach and the MADStat data set, we keep the review of neural network approaches relatively brief.</p><p>Another goal of this paper is to analyze the MADStat dataset using text analysis techniques. MADStat <ref type="bibr" target="#b20">[19]</ref> is a large-scale high-quality data set on statistical publications.</p><p>We collected and cleaned the dataset, with substantial time and efforts. It consists of the bibtex (title, author, abstract, keywords, references) and citation information of 83,331 research papers published in 36 representative journals in statistics and related fields during 1975-2015. The dataset contains detailed citation, bibtex, and author information for each paper (aka. paper-level data). It can be used to study research problems that can not be addressed with other data resources that have only journal-level data or include no author information. Using MADStat, for instance, one can easily find the top 30 most-cited papers within our data range, whereas it is unclear how to do so using Google Scholar.</p><p>Text analysis on MADStat yields several findings. First, we use Topic-SCORE to identify 11 representative research topics in statistics, and visualize the evolution of the overall weight of statistical publications on each topic. Second, we extend Topic-SCORE to TR-SCORE, a method for ranking research topics by their citation exchanges, and we also build a knowledge graph to visualize how the research results on one topic disseminate to others. Third, we rank all 36 journals and suggest that Annals of Statistics, Biometrika, JASA, and JRSS-B are the four most influential journals in statistics. Last, we find that the (perauthor) paper counts in statistics were steadily decreasing, suggesting that publishing in statistics has becoming more and more competitive. Our results provide an evidence-based picture of the whole statistics community, and so can be viewed as a data-driven review of statistical research, from a text analysis persective. The results may help administrators or committees for decision making (e.g., promotion and award) and help researchers make research plan and build networks. We use statistics as the object of study, but the same techniques can be used to study other fields (e.g., physics).</p><p>Obtaining a large-scale, high-quality data set such as MADStat is a challenging and time-consuming task. Particularly, many public data (e.g., Google Scholar) are quite noisy, and many online resources do not permit large-volume downloads. The data set must also be carefully cleansed; we accomplish this through a combination of manual labor and custom-developed computer algorithms. See Section A of the supplement for more detailed discussion on data collection and cleaning.</p><p>Below in Section 2, we review the recent advances on topic modeling. In Section 3, we briefly review neural network language models. In Section 4, we present some preliminary results about MADStat (paper counts, network centrality, journal ranking). In <ref type="bibr">Section 5,</ref><ref type="bibr"></ref> we analyze the text data in MADStat using Topic-SCORE as the main tool. In Section 6, we propose TR-SCORE (an extension of Topic-SCORE) for ranking different topics, and we also construct a cross-topic knowledge graph. Section 7 contains a brief discussion.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Topic Models and their Applications</head><p>Topic model is one of the most popular models in text analysis. <ref type="bibr" target="#b8">[7]</ref> proposed the latent semantic indexing (LSI) as an ad-hoc approach to word embedding. Later, <ref type="bibr" target="#b18">[17]</ref> proposed a probabilistic model for LSI, which is nowadays known as the topic model. Hofmann's topic model can be described as follows. Given n documents written with a vocabulary of p words, let X ∈ R p×n be the word-document-count matrix where X(j, i) is the count of the jth vocabulary word in document i. Write X = [x 1 , x 2 , . . . , x n ] so x i ∈ R p is the vector of word counts for document i. Suppose document i has N i words. For a weight vector (all entries are non-negative with a unit sum) Ω i ∈ R p , we assume</p><formula xml:id="formula_0">x i ∼ Multinomial(N i , Ω i ), 1 ≤ i ≤ n. (2.1)</formula><p>Here, Ω i is both the probability mass function (PMF) for x i and the vector of population word frequency; in addition, we implicitly assume the words are drawn independently from the vocabulary with replacement. Next, while there are a large number of documents, we assume there are only K "topics" discussed by these documents, and K is a relatively small integer. Fix 1 ≤ i ≤ n and consider document i. For a weight vector w i ∈ R K and PMFs (2.2)</p><p>We call A and W the topic matrix and the topic weight matrix, respectively.</p><p>From time to time, we may normalize X to the word-document-frequency matrix D = [d 1 , . . . , d n ] ∈ R p×n , where D(j, i) = X(i, j)/N i (N i : total number of words in document i as above). The primary goal of topic modeling is to estimate (A, W ) using X or D.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Anchor words and identifiability of the topic model</head><p>We call a word an anchor word of a given topic if its occurrence almost always indicates that the topic is being discussed. Consider the Associated Press (AP) <ref type="bibr" target="#b16">[15]</ref> data set for example.</p><p>A pre-processed version of the data set consists of 2246 news articles discussing three topics "politics", "finance", and "crime" <ref type="bibr" target="#b29">[28]</ref>. In this example, we may think "gunshot" and "Nasdaq" as anchor words for "crime", and "finance", respectively. In Model (2.1)-</p><formula xml:id="formula_1">(2.</formula><p>2), we can make the concept more rigorously: we call word j an anchor word of topic k</p><formula xml:id="formula_2">if A k (j) ̸ = 0 and A ℓ (j) = 0 for all ℓ ̸ = k.</formula><p>The notion of anchor word is broadly useful. First, it can be used to resolve the identifiability issue of the topic model. Without any extra conditions, Model (2.1)-(2.2) is non-identifiable (i.e., given an Ω, we may have multiple pairs of (A, W ) satisfying Ω = AW ).</p><p>To make the model identifiable, we may assume rank(W ) = K and impose the anchorword condition (which requires that each of the K topics has at least one anchor word).</p><p>The anchor-word condition was first proposed by <ref type="bibr" target="#b3">[2]</ref> for topic models, which in turn was adapted from the separability condition <ref type="bibr" target="#b12">[11]</ref> for nonnegative matrix factorization (NMF).</p><p>Second, anchor words are useful in methodological developments: many topic modeling methods critically depend on the assumption that each topic has one or a few anchor words; for instance, see Section 2.2 and 2.3 for descreptions of Topic-SCORE and anchorword searching methods. Last but not the least, a challenge in real applications is that both the number of topics K and the meanings of each estimated topics are unknown;</p><p>we can tackle this with the (estimated) anchor words. See Section 5 for our analysis of the MADStat data for example, where we use the estimated anchor words to decide K, interpret each estimated topic, and assign an appropriate label for each of them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Topic-SCORE:</head><p>A spectral approach to estimating the topic matrix</p><formula xml:id="formula_3">A In Hofmann's topic model (2.1)-(2.</formula><p>2), we can view D = AW +(D-W ) = "signal"+"noise", where (typically) rank(AW ) = K ≪ min{n, p}. To estimate A in such a "low-rank signal matrix plus noise" scenario, it is preferable to emply a Singular Value Decomposition (SVD) approach, as SVD is effective in both dimension reduction and noise reduction.</p><p>Topic-SCORE <ref type="bibr" target="#b29">[28]</ref> is an SVD approach to topic modeling, consisting of two main ideas: SCORE normalization and utilizing a low-dimensional simplex structure in the spectral domain. In detail, <ref type="bibr" target="#b29">[28]</ref> pointed out that a prominent feature of text data is the severe heterogeneity in word frequency: the chance of one word appears in the documents may be hundreds of times larger than that of another. This heterogeneity poses great challenges for textbook SVD approaches, so the vanilla SVD must be combined with proper normalizations. <ref type="bibr" target="#b29">[28]</ref> proposed a pre-SVD approach, where for a diagonal matrix M they constructed, they mapped the data matrix D to M -1/2 D. Unfortunately, while the pre-SVD normalization may reduce the effects of severe heterogeneity to some extent, a major part of them persists. To overcome the challenge, <ref type="bibr" target="#b29">[28]</ref> proposed a post-SVD normalization as follows. Let ξk be the k-th left singular vector of M -1/2 D. They normalized ξ2 , . . . , ξK by dividing each of them by ξ1 entry by entry. This gives rises to a matrix R ∈ R n,K-1 , where R(i, k) = ξk+1 (i)/ ξ1 (i) (by Perron's theorem <ref type="bibr" target="#b19">[18]</ref>, all entries of ξ1 are positive under a mild condition). <ref type="bibr" target="#b29">[28]</ref> argued that, by combining the pre-SVD normalization and post-SVD normalizations, one can satisfactorily alleviate the effects of severe word-frequency heterogeneity. The post-SVD normalization was inspired by the SCORE normalization (proposed by <ref type="bibr" target="#b21">[20]</ref> for analyzing network data with severe degree heterogeneity), thus the name Topic-SCORE.</p><p>[28] discovered a low-dimensional simplex S with K vertices as follows. For 1 ≤ i ≤ p, let r′ i be the ith row of R, and view each ri as a point in R K-1 . They pointed out: (a) when word i is an anchor word, then (up to small noise; same in (b)) ri falls on one of the vertices of S; (b) when word i is a non-anchor word, ri is in the interior of S.</p><p>This simplex structure reveals a direct relationship between R and A (A is the quantity of interest) and gives rise to the Topic-SCORE approach as follows. Let v1 , . . . , vK be the estimates of the vertices of S. We can write each ri uniquely as a convex linear combination of v1 , . . . , vK , with a barycentric coordinate vector πi ∈ R K . Topic-SCORE estimates A by Â = M 1/2 diag( ξ1 )[π 1 , . . . , πp ] ′ (subject to a column-wise renormalization), where diag( ξ1 ) is the diagonal matrix whose diagonal entries are from ξ1 . In a noiseless case where D = AW , <ref type="bibr" target="#b29">[28]</ref> showed that Â = A, so the approach is valid. An interesting problem here is how to use the rows of R to estimate the vertices of S (i.e., Vertex Hunting (VH)). This problem was studied in hyperspectral unmixing and archetypal analysis, with many available algorithms. <ref type="bibr" target="#b29">[28]</ref> recommended the sketched vertex search (SVS) algorithm <ref type="bibr" target="#b24">[23]</ref> for its superior numerical performance. See <ref type="bibr" target="#b27">[26]</ref> for more discussion on this.</p><p>The major computation cost of Topic-SCORE comes from the SVD step, which can be excuted relatively fast. For this reason, Topic-SCORE is fast and can easily handle large corpora. For example, it takes only a minute to process the MADStat corpus in Section 5.</p><p>Topic-SCORE is also theoretically optimal in a wide parameter regime <ref type="bibr" target="#b29">[28]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.3</head><p>The anchor-word-searching methods for estimating A <ref type="bibr" target="#b3">[2,</ref><ref type="bibr" target="#b2">1]</ref> proposed an anchor-word-searching approach which estimates A by finding anchor words from the word-word co-occurrence matrix Q = DD ′ . This method first normalizes each row of Q to have unit-ℓ 1 -norm, with the resulting matrix denoted by Q. It then applies a successive projection algorithm to rows of Q, to get a subset S ⊂ {1, 2, . . . , p} containing exactly one estimated anchor word per topic. The method then estimates A by either a direct reconstruction or minimizing some objective functions (e.g., KL-divergence). <ref type="bibr" target="#b3">[2,</ref><ref type="bibr" target="#b2">1]</ref> are among the first works that utilize the anchor-word condition for topic modeling and provide explicit error rates. A challenge it faces is that the rows of Q are in a very highdimensional space. Similar to Topic-SCORE, their anchor-word-searching also relies on a K-vertex simplex, except for a major difference: this simplex is in R p while the simplex in Section 2.2 is in R K-1 (e.g., in the aforementioned AP dataset, K = 3, but p is a few thousands). This gives Topic-SCORE an important edge (in both theory and computation) when it comes to vertex hunting (VH) and subsequent steps of estimating A. In particular, Topic-SCORE improves the error rate in <ref type="bibr" target="#b3">[2,</ref><ref type="bibr" target="#b2">1]</ref>. <ref type="bibr" target="#b5">[4]</ref> proposed a different anchor-word-searching approach. Recall that W ∈ R K×n is the topic weight matrix; see Model (2.1)-(2.2). Letting</p><formula xml:id="formula_4">ζ k = ∥W k ∥ 2 /∥W k ∥ 1 , where W k is kth row of W , they assumed W ′ k W ℓ ∥W k ∥∥W ℓ ∥ &lt; ζ k ζ ℓ ∧ ζ ℓ ζ k , for 1 ≤ k ̸ = ℓ ≤ K.</formula><p>For the same Q as above, let S i be the set of indices j such that Q(i, j) attains the maximum value of row i. <ref type="bibr" target="#b5">[4]</ref> proposed an approach and showed that if (a) the above assumption holds, and</p><p>(b) the model is noiseless (i.e., D = AW ), then the approach can fully recover the set of anchor words from the index sets S 1 , S 2 , . . . , S n . Extending the idea to the real case (where D = AW + "noise"), they obtained an estimate for the set of anchor words, and then a procedure for estimating A.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Other approaches for estimating A: EM algorithm and NMF approaches</head><p>The EM algorithm is a well-known approach to fitting latent variable models. It was noted (e.g. <ref type="bibr" target="#b35">[34]</ref>) that Model (2.1)-(2.2) is equivalent to a latent variable model, so we can estimate A using the EM algorithm. Such an approach is interesting but faces some challenges. First, it does not explicitly use any anchor-word condition, so the model being considered is in fact non-identifiable (see Section 2.1). Also, since min{n, p} is typically large, the convergence of the EM algorithm remains unclear; even when the EM algorithm converges, the local minimum it converges to is not necessarily the targeted (A, W ) (which is uniquely defined under a mild anchor-word condition; see Section 2.1).</p><p>Also, note that Model (2.1)-(2.2) implies D = AW + "noise", where (D, A, W ) are all (entry-wise) non-negative matrices; hence, the problem of estimating (A, W ) can be recast as a non-negative matrix factorization (NMF) problem. There are many NMF algorithms (e.g., see <ref type="bibr" target="#b15">[14]</ref>), which are proved to be successful in applications such as image processing <ref type="bibr" target="#b32">[31]</ref>, recommender systems, and bioinformatics. However, a direct use of them in topic modeling faces challenges. The noise in most NMF settings is additive and homoscedastic, but the noise matrix D -E[D] in the topic model is non-additive and severely heteroscedastic, as indicated by the multinomial distribution. In Model (2.1)-(2.2), the variance of D(j, i) is proportional to word j's frequency in document i. Because of severe word-frequency heterogeneity, the variances of D(j, i) may have different magnitudes, hence, a direct application of NMF algorithms often yields non-optimal error rates.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Estimating the topic weight matrix W</head><p>In Model (2.1)-(2.2), D = AW + "noise", and both A and W are unknown. While most existing works focused on estimating A, W is also of interest (e.g., see Section 5). To estimate W , a natural approach is to first obtain an estimate Â for A, and then estimate</p><p>W by fitting the model D = ÂW + "noise". Recall that W = [w 1 , . . . , w n ]. <ref type="bibr" target="#b29">[28]</ref> proposed a weighted least square approach, where for each 1 ≤ i ≤ n, it estimates w i by ŵi = argmin w ∥Θ(d i -Âw)∥ 2 , with Θ ∈ R p×p being a diagonal weight matrix (as w i ∈ R K and K is typically small, this is is a low-dimensional regression problem). To handle severe wordfrequency heterogeneity, <ref type="bibr" target="#b29">[28]</ref> suggested Θ = M -1 2 , with the same M as in Section 2.2. For our study on the MADStat data in Section 5, we find that taking Θ = I p also works fine, if a ridge regularization is added. Noting that the word count vector x i is distributed as Multinomial(N i , Aw i ), we can also estimate w i by some classical approaches, such as MLE, where we replace A by Â in the likelihood.</p><p>The above raises a question: Since D = AW + "noise", can we first estimate W and then use W to estimate A? There are two concerns. First, in some settings, the optimal rate for estimating A is faster than that of estimating W (see Section 2.6). Therefore, if we first estimate W and then use W to estimate A, then we may achieve the optimal rate in estimating W but likely not in estimating A. If we first estimate A and then use A to estimate W , we have optimal rates in estimating both. Second, many approaches for estimating A rely on the assumption that each topic has some anchor words (see Sections 2.2-2.3). If we extend them to estimate W , we need to similarly assume that each topic has some pure documents (document i is pure if w i (k) = 1 and w i (ℓ) = 0 for ℓ ̸ = k). However, in many applications, it is more reasonable to assume the existence anchor words than the existence of pure documents (especially when documents are long). Therefore, though the roles of A and W may appear symmetrical to one other, they are not symmetrical in reality.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.6</head><p>The optimal rates for estimating (A, W )</p><p>For simplicity, as in many theoretical works on topic modeling, we assume N 1 = . . . N n = N ; i.e., documents have the same length. We may have either a long-document (LD) case where N/p = O(1) or a short-document (SD) case where N/p = o(1) (p: size of the vocabulary).</p><p>Consider the rate for estimating A. For any estimate Â, we measure the loss by the ℓ 1 -error: L( Â, A) = K k=1 ∥ Âk -A k ∥ 1 (subject to a permutation in the K columns of Â). The minimax rate is defined as R n = inf Â sup A EL( Â, A). In the LD case, when K is finite, R n ≍ p/(N n) up to a multi-log(p) factor (e.g., log(p)) <ref type="bibr" target="#b29">[28]</ref>; when K grows with (n, p), R n ≍ K Kp/(N n), also up to a multi-log(p) factor <ref type="bibr" target="#b5">[4]</ref>. In the SD case, the optimal rate is unclear. Some minimax upper bounds were derived <ref type="bibr" target="#b3">[2,</ref><ref type="bibr" target="#b29">28]</ref>, but they do not yet match the minimax lower bound. The difficulty of the SD case is that the majority of words have a zero count in most documents, which poses challenges in theoretical analysis.</p><p>Consider the rate for estimating W . Similarly, for any estimate Ŵ , we measure the loss by L( Ŵ , W ) = 1 n n i=1 ∥ ŵiw i ∥ 1 (up to a permutation in the K rows in Ŵ ) and define the minimax rate as R n = inf Ŵ sup W EL( Ŵ , W ). <ref type="bibr" target="#b46">[45]</ref> showed that R n ≍ K/N . In an apparently parallel work, <ref type="bibr" target="#b30">[29]</ref> considered the Frobenius loss n -1/2 ∥ W -W ∥ F and showed that the minimax rate is K 1/N . The minimax rates are flat in n: This is not surprising, because the number of free parameters in W is proportional to n.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.7">Estimating the number of topics K</head><p>Almost all topic learning algorithms assume K as known a priori, but K is rarely known in real applications. How to estimate K is therefore a fundamental problem.</p><p>To estimate K in such a "low-rank matrix plus noise" situation, a standard approach is to use the scree plot: for a threshold t, we estimate K as the number of singular values of X that exceed t. <ref type="bibr" target="#b29">[28]</ref> showed that this estimator is consistent, under some regularity conditions. This method does not need topic model fitting and is fast and easy-to-use, but how to select a data-driven t is an open question. Alternatively, one may select K using BIC or other information criteria: for each candidate of K, we obtain ( Â, Ŵ ) by applying a topic learning algorithm, and estimate K by the candidate that minimizes BIC.</p><p>Also, alternatively, one may use the cross validation (CV) approaches, by estimating a topic model for each candidate K and each training-validation split. A commonly-used validation loss is the perplexity. It measures the predictive power of a trained language model on the held-out test set. To use perplexity, we usually assume w i are iid generated, so the approach is more appropriate for the Bayesian version of the topic model to be introduced in Section 2.9; we can also use a full Bayesian approach by imposing a prior on K and selecting K to minimize the marginal likelihood <ref type="bibr" target="#b42">[41]</ref>. In both the BIC and CV approaches, we need to fit the topic model many times, so the computational cost is high.</p><p>In simulation studies, it has been noted that (a) none of these methods is uniformly better than others, and which method is the best depends on the data set, and (b) the popular perplexity approach often over-estimates K. For these reasons, in real applications, whenever some inside information is available, we hope to use them to help determine K.</p><p>For example, in the study of MADStat (see Section 5), we investigate the estimated anchor words by Topic-SCORE for different K, and use our knowledge of the statistical community to choose the K with the most reasonable results. In some applications, what the best K is depends on the perspectives of the users, and even experts may differ in their opinions. In such a case, we may want to consider several different K. Such a flexibility may be helpful.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.8">Global testing associated with topic models</head><p>The problem of global testing is closely related to the problem of estimating of K. The goal is to test H 0 : K = 1 versus H 1 : K &gt; 1. Global testing is a fundamental problem: if no method can reliably tell between K = 1 and K &gt; 1, it is merely impossible to estimate K or estimate the matrices (A, W ) in Model (2.1)-(2.2).</p><p>Recall that x i ∼ Multinomial(N i , Aw i ), 1 ≤ i ≤ n, in Model (2.1)-(2.2). <ref type="bibr" target="#b7">[6]</ref> proposed a test statistic ψ n called DELVE. They showed that when K = 1, although the model has many unknown parameters, ψ n → N (0, 1), and the limiting distribution does not depend on unknown parameters. This result is practically useful. For example, we can use it to compute an approximate p-value and use the p-value to measure the research diversity of different authors in the MADStat dataset; see Section 3.3 of <ref type="bibr" target="#b20">[19]</ref> for a similar use of global testing in the network setting <ref type="bibr" target="#b22">[21,</ref><ref type="bibr" target="#b23">22]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Denote by λ 2 the second largest (in magnitude) eigenvalue of Σ</head><formula xml:id="formula_5">A = A ′ [diag(A1 K )] -1 A.</formula><p>Similar as in Section 2.6, we assume N i = N for 1 ≤ i ≤ N . Consider the DELVE test that rejects H 0 if |ψ n | ≥ t, for a threshod t &gt; 0. <ref type="bibr" target="#b7">[6]</ref> showed that this test achieves a sharp phase transition as follows. If |λ 2 |/ p/(N n) → ∞, for an appropriate t, the sum of the Type I and Type II errors of the DELVE test converges to 0 as p → ∞. If |λ 2 |/ p/(N n) → 0, for any test, the sum of the Type I and Type II errors converges to 1. Compared with earlier works (e.g., <ref type="bibr" target="#b29">[28,</ref><ref type="bibr" target="#b5">4]</ref>), such a result is more satisfying. In earlier works, we usually assume all eigenvalues of Σ A are at the order of O(1). Here, we may have λ 2 = o(1), especially when p ≪ N n.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.9">The latent Dirichlet topic model and its estimation</head><p>The latent Dirichlet allocation (LDA) model by <ref type="bibr" target="#b6">[5]</ref> is one of the most popular topic models, and it can be viewed as a Bayesian version of the Hofmann's topic model. In the LDA model, we start with Model (2.1)-(2.2) and further assume that the topic weight vectors w 1 , w 2 , . . . , w n are i.i.d. drawn from a Dirichlet distribution with parameters α = (α 1 , . . . , α K ), where α k ≥ 0 and K k=1 α k = 1. The LDA model has parameters (A, α) and treats w i 's as latent variables. In such a setting, (A, α) are estimated by a variational EM algorithm, and the posterior of w i 's can be obtained using MCMC. This is essentially the approach proposed by <ref type="bibr" target="#b6">[5]</ref>. Compared to Model (2.1)-(2.2), LDA does not assume any structure on the topic matrix A. Therefore, if our goal is to estimate A, all those methods in Sections 2.2-2.3 are still applicable. In particular, compared to the variational EM approach of <ref type="bibr" target="#b6">[5]</ref>, Topic-SCORE in Section 2.2 is not only faster but also provides desired theoretical guarantees <ref type="bibr" target="#b29">[28]</ref>. On the other hand, LDA puts a Dirichlet prior on the topic weights w i . This allows us to learn the posterior distribution of w and may provide additional insights. Recall that in Section 2.5, we have proposed a regression approach to estimating W (without any priors on W ). The regression approach is still useful for the LDA model (e.g., we can use this method to estimate the parameter α in the LDA model, and plug the estimated value to the variational EM algorithm).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.10">The m-gram topic models</head><p>Hofmann's topic model and the LDA are so-called bag-of-word or uni-gram models, as they only model the counts of single words, neglecting word orders and word context. There are several ideas about extending these models to incorporate word orders and word context.</p><p>One idea is to simply expand the vocabulary to include phrases. For example, we may include all possible m-grams in the vocabulary (an m-gram is a sequence of m words).</p><p>Unfortunately, even for a small m, the size of this vocabulary is too large, making topic estimation practically infeasible. To address the issue, we may only include a subset of carefully selected m-grams. For example, we may exclude low-frequency phrases or apply a phrase retrieval algorithm <ref type="bibr" target="#b14">[13]</ref>. Once the vocabulary is determined, we treat each item in the vocabulary as a "word" and model them by (2.1)-(2.2) same as before; the resulting model is still a uni-gram model in flavor.</p><p>Another idea is the bigram topic model <ref type="bibr" target="#b45">[44]</ref>. For each 1 ≤ i ≤ n, document i is modeled as an ordered sequence of words satisfying a Markov chain with a transition matrix M i ∈ R p×p (p: vocabulary size), where M i (j, ℓ) is the probability of drawing word ℓ when the word immediately preceding it is word j. For transition matrices A 1 , A 2 , . . . , A K ∈ R p×p ,</p><formula xml:id="formula_6">M i = K k=1 w i (k)A k ,</formula><p>where each A k is treated as a "topic" and w i ∈ R K is the topic weight vector as before. <ref type="bibr" target="#b45">[44]</ref> proposed a Gibbs EM algorithm for estimating the parameters and showed that, compared to the unigram topic model, this bigram model led to a better predictive performance and more meaningful topics on two real-world datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.11">Supervised topic models</head><p>In many applications, we observe not only text documents but also some response variables associated with documents. For example, many online customer reviews contain numeric ratings; we treat a review as a text document and the corresponding rating as the response.</p><p>We would like to build a joint model for text and response, to help predict future ratings.</p><p>The model in <ref type="bibr" target="#b28">[27]</ref> is a supervised topic model of this kind. This paper studied the problem of how to use news articles to improve financial models. They focused on the news articles in Dow Jones Newswire. These articles are tagged with the identifier of a firm (the study excluded articles tagged with multiple firms). They model the news article with Model (2.1)-(2.2) and K = 2 (so there are only two topics), where the two topics are "positive sentiment" and "negative sentiment", respectively. In such a simple case, for any</p><formula xml:id="formula_7">1 ≤ i ≤ n, let w i = (a i , 1 -a i ) ′</formula><p>be the topic weight of document i as before (w i captures the "sentiment" level of article i). Meanwhile, let y i be the stock return of the firm being tagged with document i. They assume that P(y i &gt; 0) = f (a i ) for an (unknown) function f that is monotone increasing. This model jointly models text and return data, allowing for a better estimation of w i (which in turn may lead to a better prediction of stock returns).</p><p>Compared with other approaches that also estimate news sentiment and use it to predict returns, this approach has a substantial improvement on real-data performance. Moreover, see <ref type="bibr" target="#b34">[33]</ref> for other supervised topic models with a similar flavor.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Deep neural network approaches to natural language processing</head><p>The deep neural network approaches to natural language processing (DNN-NLP) have become very popular recently, with successes observed in a variety of NLP tasks such as text classification, question answering, machine translation, among others <ref type="bibr" target="#b37">[36]</ref>.</p><p>In statistics, a "model" is a generative model with some unknown parameters we need to estimate. In DNN-NLP, researchers use the term "model" slightly differently: a neural language model usually refers to a pre-trained neural network equipped with estimated parameters. A neural language model usually consists of three components as follows.</p><p>• A neural network architecture. This is the core of a neural language model. It specifies how an input text is processed to generate the desirable output. The encoder-decoder structure is commonly used: the encoder is a neural network that maps the input text into a numeric vector (a.k.a., the encoder state), and the decoder converts the encoder state to the targeted output (e.g., a variable-length sequence of tokens). Many neural network models were inspired by new architectures proposed in the literature.</p><p>• The NLP tasks used to train the neural networks. A neural language model usually targets on one specific task (e.g., machine translation) or several specific NLP tasks (e.g., the BERT model <ref type="bibr" target="#b9">[8]</ref> outputs document embeddings, which can be used in various downstream tasks). In either case, pre-training the neural networks (i.e., estimating the parameters) must use specific NLP tasks to define the objective function. Hence, the same architecture may lead to different neural language models if they are pre-trained using different NLP tasks.</p><p>• The text corpora and domain knowledge used in training. Even with the same architecture and the same NLP tasks in training, the resulting neural language model still varies with the training corpora. One strategy is selecting training corpora to obtain a domain-specific language model. For example, BERT has variants such as BioBERT <ref type="bibr" target="#b33">[32]</ref> trained using publications in biomedicine. Besides domain-specific corpora, other knowledge such as a domain-specific vocabulary can also be employed.</p><p>The research on DNN-NLP has multiple goals, including but not limited to (a) Prediction of the next word given the previous words in a sentence (e.g., GPT family <ref type="bibr" target="#b38">[37]</ref>), (b) Extraction of numeric features from text (e.g., BERT family <ref type="bibr" target="#b9">[8]</ref>), and (c) modeling the (synatic and semantic) relationships of words (e.g., word2vec <ref type="bibr" target="#b36">[35]</ref>). DNN-NLP is a fast-developing area, which is hard to review comprehensively (especially as our focus is on the topic modeling approaches and the MADStat data). For these reasons, we select a few interesting topics in DNN-NLP to review, focusing on (a) popular DNN architectures for NLP, (b) BERT, a powerful feature extraction tool developed by Google Inc. We also discuss word embedding and how to apply a neural language model (e.g., BERT) to a text corpus in our own research (see Remarks 1-2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Commonly used neural network architectures</head><p>Some well-known network architectures for NLP include the convolutional neural networks (CNNs), recursive neural networks (RNNs), and transformers. CNNs and RNNs are more traditional, and transformers have become very popular in recent years.</p><p>CNNs use structural layers (e.g., convolutional layers and pooling layers) to capture the spacial patterns in the input, and are extensively used in signal (speech, image, video)</p><p>processing. In processing a text document, sometimes it is not important whether certain words appear, but rather whether or not they appear in particular localities. Hence, CNNs are also useful for NLP tasks such as sentence modeling <ref type="bibr" target="#b25">[24]</ref> and sentiment analysis <ref type="bibr" target="#b13">[12]</ref>.</p><p>RNNs are especially useful for sequence data with variable-lengths, making them suitable for text analysis. The long short-term memory (LSTM) network <ref type="bibr" target="#b17">[16]</ref> is the most popular variant of RNNs. In the vanilla RNNs, information may be diluted with successive iterations, preventing the model to "remember" important information from the distant past. LSTMs add neurons (called "gates") to retain, forget, or expose specific information, so it can better capture the dependence between two far-apart words in the sequence. The standard LSTMs are unidirectional (i.e., text is processed left-to-right). It is preferred to process text bidirectionally, as a word may depend on the words behind it. The bidirectional LSTMs combine outputs from left-to-right layers and right-to-left layers.</p><p>The transformers <ref type="bibr" target="#b44">[43]</ref> are a type of architectures based on the attention mechanism <ref type="bibr" target="#b4">[3]</ref>.</p><p>In a traditional encoder-decoder pair, the encoder maps the input sequence into a fixedlength vector, and the decoder has access to this vector only. The attention mechanism allows the encoder to pass all the hidden states (not just the final encoded vector) to the decoder, along with annotation vectors and attention weights to tell the decoder which part of information to "pay attention to". The attention mechanism was shown to be much more effective than RNNs in processing long documents. <ref type="bibr" target="#b44">[43]</ref> proposed a special architecture called transformer that uses self-attention within each of the encoder and decoder and cross-attention between them. The transformer has become the most popular architecture in NLP. For example, the encoder part of the transformer is the building block of models like BERT (see below), and the decoder part of the transformer is the building block of models like GPT <ref type="bibr" target="#b38">[37]</ref> for text generation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">BERT</head><p>The bidirectional encoder representations from transformers (BERT) is a state-of-the-art language model developed by Google AI Language <ref type="bibr" target="#b9">[8]</ref>, which provides a numerical representation for each sentence. As mentioned before, a neural language model consists of three components: architecture, pre-training tasks, and training corpora. For architecture, BERT uses the transformer encoder with bi-directional self-attention. For training corpora, BERT uses the BooksCorpus (800M words) <ref type="bibr" target="#b48">[47]</ref> and English Wikipedia (2,500M words). The main innovation of BERT is in the pre-training tasks it used: BERT was pre-trained using two tasks, the masked language modeling (MLM) and next sentence prediction (NSP). In MLM, some tokens of the input sequence are randomly masked, and the objective is to predict those masked tokens from their left and right contexts. In NSP, the input are two sentences A and B from a corpus, and the objective is to tell if B is the next sentence of A. These tasks do not require manual labeling of text.</p><p>BERT has been applied to different downstream NLP tasks, with superior performances.</p><p>Numerous language models have been created based on BERT, such as modifications of the architecture (e.g., ALBERT and DistillBERT) and pre-training tasks (e.g., RoBERTa and ELECTRA), adaptation to other languages (e.g., XLM and ERNIE), and inclusion of domain-specific corpora (e.g., BioBERT and UmlsBERT). See <ref type="bibr" target="#b39">[38]</ref> for a comprehensive survey.</p><p>Remark 1. Another major goal of NLP is to learn the syntactic and semantic relation-ships between words. To do this, a standard approach is word embedding (i.e., find vector representations of words). Despite the fact that word embedding is frequently used in neural language models (often as the first layer), its primary purpose is to understand or mimic various syntactic and semantic regularities in natural languages. A frequently mentioned example is that vector("king")vector("man") + vector("woman") ≈ vector("queen").</p><p>Word2vec <ref type="bibr" target="#b36">[35]</ref> is a popular word embedding model. It was trained using a Google News corpus, and its performance was tested on a semantic-syntactic relationship question set manually created by the authors.</p><p>Remark 2. Many modern DNN-NLP tools (such as BERT) are owned by high-tech companies. They were trained with a huge amount of data and efforts, and many parts of them are not publicly available. A typical NLP user has his/her own (domain-specific) text corpus (1K to 10K documents), which are not large enough to re-train BERT (say).</p><p>To help these users to apply modern DNN-NLP tools, there are two approaches: transfer learning and fine tuning. In the first approach, the user inputs his/her own documents to the BERT (say) and obtain an embedded vector for each document. The embedded vectors can then be used as features for downstream analysis. In the second approach, a user may alter the parameters of the pre-trained model. By adding additional layers to the neural networks, one can convert the output of a pre-trained neural language model to the targeted output of a downstream task (e.g., document classification). Next, all the parameters-those in the pre-trained model and those for the added layers-are updated together (this can done by running stochastic gradient descents starting from parameters of the pre-trained models).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">MADStat basics: paper counts, journal ranking, and network centrality</head><p>The multi-attribute dataset on statisticians (MADStat) contains the bibtex (e.g., author, title, abstract, journal, year, references, etc.) and citation information of 83,331 papers from 47,311 authors, spanning 41 years . We collected and cleaned the dataset with substantial time and efforts and have made it publicly available (the links to download the dataset can be found in <ref type="bibr" target="#b20">[19]</ref>). In the supplementary material, we present (a) details on data collection and cleaning, (b) the list of the 36 journals and their abbreviations, and (c) supplementary results of the text analysis conducted in this paper (such as selection of K for Topic-SCORE). In this section, we discuss some basic findings on the data set, including paper counts, network centrality, and journal ranking.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Paper counts</head><p>The paper counts provide valuable information for studying how the productivity of statisticians evolve over time. In the left panel of Figure <ref type="figure" target="#fig_1">1</ref>, the red curve presents the number of papers per year and the blue curve presents the number of active authors per year (an author is active in a given year if he/she publishes at least 1 paper in that year). In both  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Network centrality</head><p>Network centrality (e.g., most-collaborative authors) provides information for the leadership and trends in statistical research. Table <ref type="table" target="#tab_1">1</ref> presents the top 10 authors who have the most coauthors, the most citers (a citer for any given author is any other author who has cited this author), and the most citations, respectively. Table <ref type="table" target="#tab_0">4</ref> (Appendix, Section E) presents the top 10 most-cited papers. Note that the numbers of coauthors, citers, and citations here are all counted using only the papers in our data range, so there may be some biases in our ranking. For example, in  on LARS. See Figure <ref type="figure">9</ref>, where for each pattern we present the yearly citation curve of a representative paper. </p><formula xml:id="formula_8">• • • • • • • • • • • • • • • • • • • •<label>1995</label></formula><formula xml:id="formula_9">• • • • • • • • • • • • • • • • • • • • •• • • • • • • • • • •• • • ••• • •• •••• •• • • • •• 1985 1995 2005 2015 0 2 4 6 8 10 •• • • • • • • • • • •• • • ••• • •• •••• •• • • • •• • • • • • •• • • • •• • • • • • ••• • • • • • • • • • • • •• • • • • • • 1980 1990 2000 2010 0 20 60 100 140 • • • • • •• • • • •• • • • • • ••• • • • • • • • • • • • •• • • • • • • •• • • • • • • • • • •• • • • • • • • • • •• • •• • • • 1985 1995 2005 2015 0 20 40 60 •• • • • • • • • • • •• • • • • • • • • • •• • •• • • • Figure 9:</formula><p>Yearly citation curve for 4 papers. Left to right: "sleeping beauty" (Tibshirani (1996)</p><p>on Lasso), "transient", "steadily increasing" (Dempster, Laird and Rubin (1977) on EM algorithm), and "sudden fame" (Liang and Zeger (1986) on GLM). Compare Figure <ref type="figure">7</ref>.</p><p>Sleeping beauty. The "sleeping beauty" pattern is especially interesting. To identify papers with such a pattern, we need a metric. We adapt the approach in <ref type="bibr" target="#b6">[5]</ref>. Fix a paper i.</p><p>Suppose T i years (or months/quarters) have passed since its publication by the end of 2015.</p><p>Let n i (t), 1  t  T i , be the number of citations the paper receives in year t. Suppose the 30 The "sleeping beauty" pattern is especially interesting. To identify the sleeping beautifies in our data range, we use the metric suggested by <ref type="bibr" target="#b26">[25]</ref>. It outputs a measure B i for each paper i (the details are in the supplementary material); the larger B i , the more likely this paper is a sleeping beauty. We select the 300 papers with the largest maximum number of yearly citations and arrange them in the descending order of B i . Table <ref type="table" target="#tab_17">5</ref> and </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Journal ranking</head><p>Journal ranking has been widely used in appointing to academic positions, awarding research grants and ranking universities and departments. A common approach is the Impact Factor (IF), but IF is known to have some issues <ref type="bibr" target="#b43">[42]</ref>. We instead use the Stigler's model <ref type="bibr" target="#b41">[40]</ref> for journal ranking: Given N journals, let µ 1 , . . . , µ N ∈ R be their export scores; for two papers i and j published in journal ℓ and m, respectively, let C ij be the indicator of a citation from i to j. We assume</p><formula xml:id="formula_10">P(C ij = 1|C ij +C ji = 1) = exp(µ ℓ -µ m )/[1+exp(µ ℓ -µ m ))].</formula><p>We fit this model using the quasi-likelihood approach in <ref type="bibr" target="#b43">[42]</ref>. For comparison, we also consider the PageRank approach (with the same tuning parameter α as suggested in <ref type="bibr" target="#b43">[42]</ref>).</p><p>Among the 36 journals (see Table <ref type="table" target="#tab_15">3</ref>), there are relatively few citation exchanges between the 3 journals focusing on probability and the other 33 journals, so we exclude these 3 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q 0 5 10  same as in Section 2, x i ∈ R p contains the word counts of the ith paper abstract.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Anchor words and the 11 identified topics</head><p>To apply Topic-SCORE, we need to decide the number of topics. This is a hard problem (see Section 2.7) and we tackle it by combining the scree plot, substantial manual efforts, and our knowledge of the statistical community (see Section H of the supplementary material).</p><p>We find that that K = 11 is the most reasonable choice.</p><p>Since K = 11, there are 11 discovered research topics by Topic-SCORE. To interpret and label these topics, we introduce a rule for selecting 'representative' words and papers for each topic. The anchor words (see Section 2.1) appear only in one topic. For example, "lasso" and "prior" may be anchor words for the topics of "variable selection" and "Bayes", respectively. Given Â, define the topic loading vector a j ∈ R K for each word j by a j (k) = Âk (j)/[ K ℓ=1 Âℓ (j)], 1 ≤ k ≤ K. Note that 0 ≤ a j (k) ≤ 1 and in theory a j (k) = 1 if and only if word j is an anchor word of topic k. Fix 1 ≤ k ≤ K. The most frequent anchor word in topic k is the word ĵ where ĵ = argmax j {a j (k) : 1 ≤ j ≤ p}. Similarly, we can define the m-th most frequent anchor word for any m ≥ 1. Figure <ref type="figure" target="#fig_9">4</ref> shows the 20 most frequent anchor words for each of the 11 estimated topics. Based on these words, we suggest a name for each topic as in the second column of in Table <ref type="table" target="#tab_3">2</ref>. To check if the proposed labels are reasonable and get more insight of each topic, we also use Ŵ to identify representative papers. For each 1 ≤ k ≤ 11, we pull out the top 300 papers with the largest ŵi (k) (the titles of top-3 within each topic is given in Table <ref type="table" target="#tab_20">8</ref> of the supplementary material). We manually review the titles of these papers and come up with a list of suggested research Our topic learning results are based on abstract similarity (i.e., the research areas covered by the same topic have similar word counts in their abstracts). Such a similarity does not necessarily imply the similarity in the intellectual content of the paper. Also, our goal here is to use statistical methods to identify a few interpretable topics, and it is possible that some research topics in the data set are not well represented here.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Topic weights for representative authors</head><p>How to estimate the research interests of an author is an interesting problem. It helps us understand an author's research profile and may be useful in decision making (e.g., award, funding, promotion); it may also help this author to plan for future research. We estimate  the research interest of an author as follows. For an author a, let N a ⊂ {1, 2, . . . , n} be the collection of papers he/she published in our data range. Each paper i has an estimated topic weight vector ŵi for its abstract. A reasonable metric of author a's interest on topic</p><formula xml:id="formula_11">k is wa (k) = 1 |Na| i∈Na ŵi (k), 1 ≤ k ≤ 11.</formula><p>Let w(k) be the average of ŵi (k) over all 56,500 abstracts. We define the centered topic interest vector of author a by z a = waw ∈ R 11 .</p><p>The entries of z a sum to 0, so it has both positive and negative entries. We are interested in its positive entries, since z a (k) &gt; 0 indicates a greater-than-average weight on topic k.</p><p>We can compute the vector z a for almost every author in our data range. Table <ref type="table">9</ref> of the supplementary contains the results of 80 selected authors. Figure <ref type="figure" target="#fig_10">5</ref>   <ref type="figure" target="#fig_10">5</ref> suggests that the research interests of Peter Bickel, David Donoho, and Kathryn Roeder are relatively diverse, covering many topics; these are consistent with our impression of these authors and the information of 11 topics in Table <ref type="table" target="#tab_3">2</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Topic trends</head><p>How to characterize the evolvements of statistical research over time is an interesting problem <ref type="bibr" target="#b31">[30]</ref>. We tackle it by combining the estimated topic weights and the time and journal information of each paper. q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.04 0.06 0.08 0.10 0.12 0.14 q q q q q q q q q q q q q q q q q q q q q q q q q q q q Math.Stats.  First, we study how the yearly average topic weights change over time. Recall that ŵi is the estimated topic weight vector for paper i by Topic-SCORE. For each year, we compute the average topic weight for all papers published in this year, smoothed by a weighted moving average in a 3-year window (weights: 0.25, 0.50, and 0.25). See Figure <ref type="figure" target="#fig_11">6</ref>.</p><p>We observe that the 5 topics, Math.Stat., Regression, Bio./Med., Bayes, and Hypo.Test, We observe that in some time periods, some journals are clearly in favor of some topics.</p><p>When this happens, we say that this journal is "friendly" to this topic. In Figure <ref type="figure">7</ref>, we list the "friendliest" journals for 11 topics. Note that the short label of a topic may not be accurate for all research topics it covers, and it is preferable to consult by the analysis of MADStat, we focus our discussion on the MADStat dataset in this section but keep in mind that the idea is useful in other applications.</p><p>In Section 4, we have discussed how to use citation exchanges to rank different journals. We can extend the idea to topic ranking, but there is a major challenge: citation exchanges between papers or journals are well-defined and directly observable, but citation exchanges between research topics are not well-defined and directly observable. We tackle this by combining the abstracts and the citation data: we first propose a model that jointly models text abstracts and citations, including an idea to measure the (unobserved) citation exchanges between research topics. We then introduce TR-SCORE, and use it to rank different topics and to construct a knowledge graph visualizing the cross-topic citation exchanges. We assume that all the paper abstracts focus on K different research topics C 1 , C 2 , . . . , C K .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">The Hofmanm-Stigler model for abstract and citation data</head><p>Inspired by the Stigler's model, we introduce µ = (µ 1 , µ 2 , . . . , µ K ) ′ , where µ k is the export score associated with topic k, 1 ≤ k ≤ K. Intuitively, a topic with a larger export score means that it has larger impacts. Now, fix 1 ≤ i ≤ n and consider paper i. Similarly as in Section 2, let w i ∈ R K be the weight vector of document i (i.e., w i (k) is the weight that abstract i puts on topic k). When paper i is cited by another paper j, we have two different ways to attribute this particular citation count.</p><p>• (Orthodox Citation Attribution (OCA)). We simply attribute the citation to paper i.</p><p>• (Topic Weight Citation Attribution (TWCA)). We attribute the citation to each of the K topics, with weights w i (1), . . . , w i (K), respectively (note that K k=1 w i (k) = 1).</p><p>In Section 4.4, we have discussed journal ranking, in which OCA is a good choice. For topic ranking, TWCA is more appropriate. Under TWCA, we view µ ′ w i = K k=1 µ k w i (k) as the export score of paper i and assume the Bernoulli variables C ij and C ji satisfy</p><formula xml:id="formula_12">P(C ij = 1|C ij + C ji ≥ 1) = exp(µ ′ w i -µ ′ w j ) 1 + exp(µ ′ w i -µ ′ w j ) . (6.1)</formula><p>This gives the model of the citation exchange matrix C. To model the word-documentcount matrix X, we use the same model as in Section 2:</p><formula xml:id="formula_13">x i ∼ Multinomial(N i , Aw i ), A ∈ R p×K , w i ∈ R K , (6.2)</formula><p>where A is the topic matrix as in Section 2 and N i is the size (total word count) of document i. For identifiability, we assume median(µ 1 , . . . , µ K ) = 0. Also, for simplicity, we assume X and C are independent (but their distributions are related by w i 's), and this can be relaxed. We call (6.1)-( <ref type="formula">6</ref>.2) the Hofmann-Stigler model.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Topic-Ranking SCORE (TR-SCORE)</head><p>We propose TR-SCORE for topic ranking. The input are X, C, and the number of topics K, and the output is an estimated export score vector μ. TR-SCORE has three steps.</p><p>1. (Topic matrix estimation). Apply Topic-SCORE (e.g., Section 2.2) to get Â ∈ R p×K .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">(Topic weight estimation)</head><p>.</p><formula xml:id="formula_14">For 1 ≤ i ≤ n, estimate w i by ŵi = ( Â′ Â + λI K ) -1 Â′ d i ,</formula><p>where λ &gt; 0 is a regularization parameter which we usually fix at λ = 0.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">(Topic ranking)</head><p>. Plug ŵ1 , . . . , ŵn into (6.1) and obtain an estimate μ for the export score vector µ. Rank topics according to the descending order of μ1 , μ2 , . . . , μK .</p><p>We discuss Step 3 in detail. We use a quasi-likelihood method with over-dispersion to obtain μ. Recall that C is the adjacency matrix of between-paper citations.</p><formula xml:id="formula_15">Write C = C + C ′ (i.e., Cij = C ij + C ji ). Recall that W = [w 1 , w 2 , . . . , w n ] ∈ R K,n</formula><p>is the topic weight matrix.</p><p>Let τ (x) = e x /(1 + e x ) denote the logistic function. We now slightly modify (6.1) to assume</p><formula xml:id="formula_16">E[C| C] = C • Ω, Var(C| C) = ϕ[Ω • (1 -Ω)], with Ω = τ (1 n µ ′ W -W ′ µ1 ′ n ), (6.3)</formula><p>where • is the Hadamard product, Var(C| C) and (1 -Ω) are both element-wise operations, and ϕ &gt; 0 is the dispersion parameter. Model (6.1) corresponds to fixing ϕ = 1, but a better strategy is to estimate ϕ from data, as commonly used in fitting count data (e.g., see <ref type="bibr" target="#b43">[42]</ref> for a similar strategy for fitting the Stigler's model). When W is known, we estimate µ 1 , µ 2 , . . . , µ K by maximizing the quasi-likelihood, which is equivalent to maximizing the likelihood of model <ref type="bibr">(6.1)</ref>. This is done by first fixing µ 1 = 0 and treating (6.1) as a generalized linear model with (K -1) predictors and N := i,j 1{ Cij = 1} samples, so that it can be solved by a standard package. We then re-center μ1 , μ2 , . . . , μK so that their median is 0. The dispersion parameter is estimated by φ =</p><formula xml:id="formula_17">1 N -K+1 (i,j):i&lt;j, Cij ≥1 (C ij - Cij Ωij ) 2 /[ Cij Ωij (1 -Ωij )],</formula><p>where Ωij = τ (μ ′ w i -μ′ w j ). So far, W is assumed known. For unknown W , we use the same procedure, except that W is replaced by the Ŵ from Step 2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Topic-ranking and a cross-citation graph</head><p>In Section 5, we have applied Topic-SCORE to a set of 56,500 (pre-processed) abstracts and identified 11 representative research topics in statistics. We now use TR-SCORE to the same set of abstracts and rank all 11 topics. We also build a cross-topic citation graph (as a type of knowledge graph) to visualize the dissemination of knowledge across areas (an important research topic in the area of modern knowledge discovery <ref type="bibr" target="#b40">[39]</ref>).</p><p>We first build a cross-topic citation graph. This is a weighted and directed graph with 11 nodes, each being a discovered topic. We propose two definitions of edge weights. In the first one, let N k,ℓ = n i,j=1 ŵi (k) ŵj (ℓ)C ij and P kℓ = N kℓ /( K m=1 N km ), for 1 ≤ k, ℓ ≤ 11, where C is the between-paper citation adjacency matrix and ŵi is the topic weight vector of abstract i. Here N kℓ is the (allocated) citation counts from topic k to topic ℓ, and P kℓ is the proportion of citations to topic ℓ among all citations from topic k. We use P ∈ R 11×11 as the weighted adjacency matrix of this graph. In the second definition, we group all papers based on the 'dominant topic' -the topic with the largest weight in ŵi (if there is a tie, pick the smaller k). Let w * i ∈ {e 1 , e 2 , . . . , e K } denote the group label of abstract i.</p><formula xml:id="formula_18">Define N * k,ℓ = n i,j=1 ŵ * i (k) ŵ * j (ℓ)C ij and P * kℓ = N * kℓ /( K m=1 N * km ).</formula><p>We then use P * ∈ R 11×11 as the weighted adjacency matrix. This definition uses "winner takes all" to allocate each      Firth, 2016). We instead use the Stigler's model for journal ranking, which takes in the randomness and skewness of citation counts. Given N journals, let µ 1 , µ 2 , . be their export scores. For two papers i and j published in journal and m, resp C ij be the indicator of a citation from i to j. We assume (2.4)</p><formula xml:id="formula_19">P(C ij = 1|C ij + C ji = 1) = exp(µ ` µ m )/[1 + exp(µ ` µ m ))].</formula><p>This model is in the same spirit of (2.2) but uses OCA for citation contribution uses TWCA for citation contribution). We fit this model using the quasi-likelihoo in Varin, Cattelan and Firth (2016). For comparison, we also consider the PageRan (with the same tuning parameter as suggested in Varin, Cattelan and Firth (201 To apply the two methods to our data set, we construct a between-journal cita G as follows. First, among the 36 journals (see Table <ref type="table" target="#tab_1">S1</ref> of the supplement for journals), there are relatively few citation exchanges between the 3 journals f probability and the other 33 journals, so we exclude the 3 probability journals fo here. Second, for each pair of journals, we count the between-journal citations year time window. For instance, if 2014 is the "current year," then we count one ci journal i to journal j if and only if a paper published in journal i in 2014 has ci published in journal j between 2005 and 2014. This gives rise to a 33 ⇥ 33 betw citation matrix for 2014. Last, for stability and reliability of the rankings, we take the two matrices for 2014 and 2015. This is our final data matrix fed into either methods. The results are in Figure <ref type="figure" target="#fig_9">4</ref>, where each solid black circle represents a j the x-axis and the y-axis are the rankings given by the PageRank approach and t model approach, respectively.</p><p>Both approaches rank AoS, Biometrika, JASA, and JRSSB as the top 4 (Figure <ref type="figure">left</ref>). In particular, both approaches rank AoS as number 1 and Biometrika as num JASA and JRSSB, PageRank ranks them as numbers 2 and 4, respectively, while approach ranks them as numbers 4 and 2, respectively.</p><p>The rankings by two methods are quite consistent with each other. A few exc CSDA, EJS, JMVA, JRSSA, JTSA, and SMed. For example, PageRank ranks CSDA 6 but Stigler's model ranks it as number 23; PageRank ranks JTSA as number 26, b model ranks it as number 12. In fact, PageRank weighs each citation equally, while model gives citations from higher-ranked journals greater weight than citations f ranked journals. The idea behind Stigler's model treats different journals as comp being cited is considered "winning"; being cited by more competitive journals is a nal of being competitive. For these reasons, the results of the PageRank approac close to that of ranking by citation numbers, but the results of the Stigler approa significantly different. A closer look at the citation counts reveals that a large pr  Next, consider the topic ranking. The export scores of 11 topics by TR-SCORE are shown in Figure <ref type="figure" target="#fig_4">3</ref> (right). Math.Stats. is the highest-ranked topic. This is reasonable, as the focus of Math.Stats. is mathematical analysis and probability, which may have a long-lasting impact on other topics in statistics. Regression and Mach.Learning are also highly ranked. This is also understandable, as the two topics cover many "hot" research topics; see Table <ref type="table" target="#tab_3">2</ref>. The rankings of Bio./Med. and Clinic. are relatively low; one reason is that a significant fraction of the impact these topics have may be over research areas that are outside our data range. citation to a single pair of topics. The two matrices P and P * are shown in Tables <ref type="table" target="#tab_1">10</ref><ref type="table" target="#tab_1">11</ref>of the supplementary material. Both definitions make sense, but the second one leads to a 'sparser' graph, which is presented in Figure <ref type="figure" target="#fig_16">8</ref> (the first one is relegated to Figure <ref type="figure" target="#fig_18">13</ref>).</p><p>In Figure <ref type="figure" target="#fig_16">8</ref> (left), the width of the edge from node k to node ℓ is proportional to P * kℓ , and the edge is presented only when P * kℓ ≥ 0.09. We have interesting observations. First, Exp.Design has relatively few citation exchanges with other topics and the majority of the citations it receives are from the topic itself. Since a one-way edge from node k to node ℓ is presented when P * kℓ ≥ 0.09, no edge from or to Exp.Design is shown in Figure <ref type="figure" target="#fig_16">8</ref>. Second, Regression and Math.Stat. are the two topics that have attracted the most citations from other topics, and Bio./Med. and Inference are the two that have cited other topics most often. Third, each of Bayes, Variable Selection, and Mach.Learn. has considerably many outgoing and incoming citations. Last, Hypo.Test and Inference form a close pair, and most in-between citations are from Inference to Hypo.Test; Clinic. and Bio./Med. form a close pair, and the citation exchanges are relatively balanced between them.</p><p>We then consider topic ranking. Figure <ref type="figure" target="#fig_16">8</ref> (right) shows the export scores of 11 topics by TR-SCORE. Math.Stats. is the highest-ranked topic. This is reasonable, as the focus of Math.Stats. is mathematical analysis and probability, which may have a long-lasting impact on other topics in statistics. Regression and Mach.Learning are also highly ranked. This is also understandable, as the two topics cover many "hot" research topics (see Table <ref type="table" target="#tab_3">2</ref>).</p><p>The rankings of Bio./Med. and Clinic. are relatively low; one reason is that a significant fraction of their impacts are over research areas outside our data range.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Conclusion</head><p>Text analysis is a rapidly developing research area in data science. In this paper, we have surveyed recent methods for text analysis, ranging from topic modeling to neural language models. For topic modeling, we have discussed the anchor word condition, several different algorithms, optimal rates, and extensions to bigram and supervised models. In particular, we focus on Topic-SCORE, a fast algorithm that enjoys appealing theoretical properties.</p><p>For neural language models, we provided a brief introduction to its key components, reviewed the popular BERT and word embedding models, and discussed how to apply them to solve downstream NLP tasks.</p><p>We have also presented a data set, MADStat, about academic publications in statistics.</p><p>It was collected and cleaned by ourselves with substantial efforts. We have made it publicly available at http://zke.fas.harvard.edu/MADStat.html. In this paper, we analyzed text abstracts of the papers in MADStat, using the Topic-SCORE algorithm. We discovered 11 representative topics and visualized the trends and pattens in statistical research. We also proposed the Hoffman-Stigler model to jointly model text abstracts and citation data and the TR-SCORE algorithm for ranking the citation impacts of 11 topics. These results are not only applications of text analysis but also can be viewed as a data-driven review of the academic statistical community.</p><p>Nowadays, a vast amount of text data are generated on a daily basis. Recent advancements in Natural Language Processing (NLP) have revolutionized our everyday lives.</p><p>This also provides a big opportunity to statistics. The statistical approaches to NLP are typically transparent, sample-efficient, fast-to-compute, and theoretically tractable, mak-ing them a suitable choice for many ordinary NLP users (who may have a moderate-size domain-specific corpus but cannot access the data and resources owned by those tech giants). On the other hand, statistical text analysis is still quite under-developed. Even for topic modeling, there are still many unresolved problems, such as how to estimate the number of topics and how to improve the accuracy when the documents are extremely short.</p><p>We hope that this review article provides useful information to researchers interested in this area. We also hope that the MADStat dataset, which we collected and shared with public, serves as a good platform for testing existed methods and inspiring new research in text analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Data collection and cleaning</head><p>One might think that our data sets is easy to obtain, as it seems that BibTeX and citation data are easy to download. Unfortunately, when we need a large-volume high-quality data set, this is not the case. For example, the citation data by Google Scholar is not very accurate, and many online resources do not allow for large volume downloads. Our data are downloaded using a handful of techniques including, but not limited to, web scraping.</p><p>The data set was also carefully cleaned by a combination of manual efforts and computer algorithms we developed. Both data collection and cleaning are sophisticated and timeconsuming processes, during which we have encountered a number of challenges.</p><p>The first challenge is that, for many papers, we need multiple online resources to acquire the complete information. For example, to download complete information of a paper, we might need online resources 1, 3, and 5 for paper 1, whereas online resources 2, 4, and 6 for paper 2. Also, each online resource may have a different system to label their papers.</p><p>As a result, we also need to carefully match papers in one online resource to the same ones in another online resource. These make the downloading process rather complicated.</p><p>The second challenge is name matching and cleaning. For example, some journals list the authors only with the last name and first initial, so it is hard to tell whether "D.</p><p>Rubin" is Donald Rubin or Daniel Rubin. Also, the name of the same author may be spelled differently in different papers (e.g., "Kung-Yee Liang" and "Kung Yee Liang"). A more difficult case is that different authors may share the same name (e.g., Hao Zhang at Purdue University and Hao Zhang at Arizona State University). To correctly match the names and authors, we have to combine manual efforts with some computer algorithms.</p><p>Last, an online resource frequently has internal inconsistencies, syntax errors, encoding issues, etc. We need a substantial amount of time and efforts to fix these issues.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Disclaimer</head><p>It is not our intention to rank a researcher (or a paper, or an area) over others. For example, when we say a paper is "highly cited," we only mean that the citation counts are high, and we do not intend to judge how important or influential the paper is. Our results on journal ranking are based on journal citation exchanges, but we do not intend to interpret the ranking more than the numerical results we obtain from the algorithms we use.</p><p>As our data set is drawn from real-world publications, we have to use real names, but we have not used any information that is not publicly available. For interpretation purposes, we frequently need to suggest a label for a research group or a research area, and we wish to clarify that the labels do not always accurately reflect all the authors/papers in the group.</p><p>Our primary interest is the statistics community as a whole, and it is not our intention to label a particular author (or paper, or topic) as belonging to a certain community (group, area).</p><p>While we try very hard to create a large-scale and high-quality data set, the time and effort one can invest in a project is limited. As a result, the scope of our data set is limited. Our data set focuses on the development of statistical methods and theory in the past 40 years, and covers research papers in 36 journals between 1975 and 2015 (we began downloading data in 2015). These journals were selected from the 175 journals on the 2010 ranked list of statistics journals by the Australian Research Council (see Section C). Journals on special themes and most journals on econometrics, interdisciplinary research, and applications are not included (see Section 6.1 for detailed description). As a result, papers on econometrics, interdisciplinary research, and applications may be underrepresented.</p><p>Due to the limited scope of our data set, some of our results may be biased. For example, for the citations a paper has received, we count only those within our data range, so the resultant citation counts may be lower than the real counts the paper has received. information for 83,336 papers as in our data set.</p><p>A full scope study of a scientific community is impossible to accomplish in one paper.</p><p>The primary goal of our paper is to serve as a starting point for this ambitious task by creating a template where researchers in other fields (e.g., physics) can use statisticians' expertise in data analysis to study their fields. For these reasons, the main contributions of our paper are still valid, despite some limitations discussed above.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C The list of 36 journals</head><p>The 36 journals are selected as follows. We start with the 175 journals in the 2010 ranked list of statistics journals provided by the Australian Research Council (ARC). 1 The list was used for performance evaluation of Australian universities, as part of its program of  These results can be further explained using Figure <ref type="figure">9</ref>. In Figure <ref type="figure">9</ref> (left), we present the number of m-authored papers in each year for m = 1, 2, 3 and m ≥ 4, respectively. It is seen  comparisons between ranking with our data set and ranking with the Google Scholar data). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D Additional results on paper counts</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>F The sleeping beauty citation patterns</head><p>The "sleeping beauty" pattern is especially interesting. To identify papers with such a pattern, we need a metric. We adapt the approach in <ref type="bibr" target="#b26">[25]</ref>. Fix a paper i. Suppose T i years (or months/quarters) have passed since its publication by the end of 2015. Let n i (t), 1 ≤ t ≤ T i , be the number of citations the paper receives in year t. Suppose the citation counts reach the peak at year t = t * i . The sleeping beauty metric is defined to be</p><formula xml:id="formula_20">B i = t:1≤t≤t * i n i (t * i )/t * i -n i (t)/t /[(n i (t) ∨ 1)/t]. (F.1)</formula><p>Intuitively, between Year 1 and t 0 , the citation counts may grow superlinearly, linearly, or sublinearly, and B i is positive, approximately 0, or negative, respectively. If paper i is a sleeping beauty, then we expect that (a) n i (t * i ) (maximum number of yearly citations) is large, and (b) B i is large (i.e., we expect the citation counts to grow superlinearly between Year 1 and t * i so B i is large). Note also that for a sleeping beauty, the citation counts may drop after Year t * i but should remain at a relatively high level for at least a few more years. Since "sleeping beauty" is a special kind of highly cited papers, we start by selecting the 300 papers with the largest maximum number of yearly citations. We then arrange all papers according to the sleeping beauty measure B i . Table <ref type="table" target="#tab_17">5</ref> presents the 14 papers (among the 300) with the largest B i , and Figure <ref type="figure" target="#fig_7">10</ref> of the supplement presents the citation curve n i (t) for the first 8 papers on the list. All of these papers show a clear sleeping beauty pattern, suggesting that the introduced measure is reasonable. qq qq q qqq q q q q q q q q q qq q 1995 2005 2015 0 50 100 200 qq qq q qqq q q q q q q q q q qq q B = 145 q qq qqqqqqqq q qqq q q q q q q q q q q q q q q q q 1985 1995 2005 2015 0 10 20 30 q qq qqqqqqqq q qqq q q q q q q q q q q q q q q q q B = 138.7 qqq qqq q q qqq q q q q q q qq q q q q qq q q q q q q 1985 1995 2005 2015 0 5 10 15 20 qqq qqq q q qqq q q q q q q qq q q q q qq q q q q q q B = 114.8 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q 1980 2000 0 5 10 15 20 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q B = 82.3 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q 1980 2000 0 5 10 15 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q B = 80.3 q q q q q q q q q q q q q q q q 2000 2010 0 10 20 30 q q q q q q q q q q q q q q q q B = 78.9 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q 1985 2000 2015 0 10 30 q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q q B = 77.9 qqq q qq q q qq qq q q q q q qq q 1995 2005 2015 0 5 10 15 20 qqq q qq q q qq qq q q q q q qq q B = 77.5  <ref type="table" target="#tab_17">5</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>G Pre-processing of the abstract data</head><p>The standard preprocessing includes: (i) tokenization, which breaks each abstract into a bag of words; (ii) removing numbers and punctuations; (iii) removing stop words, such as a, the, this, those, me; and (iv) stemming, which helps unify different forms of the same word, such as testing, test, and tests. The default functions in the R package tm are not customized for the content of statistical abstracts. We thus add some manual adjustment.</p><p>First, our dictionary only allows single words, and for important phrases we must include, we have to suppress them first. For example, when tokenizing the documents, we encounter phrases such as test error and monte carlo. We suppress them by testerror and montecarlo respectively, before we insert them to the dictionary. Second, stemming may sometimes mistakenly combine words with significantly different meanings. For example, the words measurement and measure have the same stem measur, but very different meaning in our context. To make sure that they are stemmed differently, we replace measurement by measurement1 before stemming, so the stems of measurement and measure become mea-sur1 and measur respectively. Third, the default stop word list in the R package tm does not cover all "topic-irrelevant words" for the analysis of statistical abstracts. We manually add a list of 289 words (some overlap with the default stop words) to the stop word list.</p><p>These words include (a) common words used in statistical abstracts, such as data, estimation, paper, method, propose, and discuss; (b) words related to the copyright information of the journal or the press, such as springer, wiley, royal, and sinica; and (c) words arising from citing references in the abstract, such as bickel, berger, and fan.</p><p>After the above steps, the vocabulary contains more than 60, 000 words, the majority of which have extremely low frequencies in the corpus. Additionally, some abstracts become quite short after removing stop words. As argued in <ref type="bibr" target="#b29">[28]</ref>, removing low-frequency words and short documents can increase the signal-to-noise ratio. To this end, we first remove all words that appear in fewer than 100 abstracts. This reduces the vocabulary to p = 2, 106.</p><p>We then remove approximately the 10% shortest abstracts and retain a total of n = 56, 500 abstracts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H Selection of the number of topics K</head><p>First, we check the scree plot of the text corpus matrix D; see Figure <ref type="figure" target="#fig_20">11</ref>. The elbow points are 4 and 16. We thus consider the range of 4 ≤ K ≤ 16.</p><p>Next, for each 4 ≤ K ≤ 16, we run topic-SCORE (Step 1 of TR-SCORE) to obtain Â and then follow the approach in Section 5 to find the most frequent anchor words for each topic. We use these anchor words to investigate the research areas covered by each discovered topic.</p><p>For example, Table <ref type="table">6</ref> displays the 20 most frequent anchor words of each topic, based on the output of topic-SCORE for K = 4 and K = 5, respectively. We compare the two outputs and re-order the topics for K = 5 so that the first 4 topics have a one-to-one correspondence to the topics for K = 4. After checking the anchor words of the 5th topic for K = 5 and using our knowledge of the field of statistics, we think this topic can be interpreted as "Regression" and is meaningful. We thus prefer K = 5 to K = 4.</p><p>Similarly, we successively compare each pair of nested values of K. For each of 5 ≤ k ≤ 11, we find that increasing K from k -1 to k leads to the discovery of new topics that are meaningful. However, when we increase K from 11 to 12, it is not the case. Table <ref type="table">7</ref> displays the 20 most frequent anchor words for each topic in the output of K = 12. We use the anchor word list to match each topic with one of the 11 topics in the output of K = 11 (see Figure <ref type="figure" target="#fig_9">4</ref> of the main article). We find that 11 out of the 12 discovered topics can be matched to one of 11 topics in Figure <ref type="figure" target="#fig_9">4</ref>. The 12th discovered topic (last row of Table <ref type="table">7</ref>) is not very meaningful to be listed as a new topic (the 'anchor words' such as rootn, longmemori, censorship may be used by abstracts in different research areas of statistics).</p><p>We thus prefer K = 11 to K = 12. We also investigate 12 &lt; K ≤ 16 and find that these results are all less interpretable than that of K = 11. We decide that K = 11 is the most appropriate choice.</p><p>How to select K in a topic model is a well-known challenging problem. To our best knowledge, there exists no method that works universally well. In theory, the singular values of D (i.e., the scree plot) contain information of K <ref type="bibr" target="#b29">[28]</ref>, but the scree plot of our data set is not informative enough for us to pin down the exact value of K (see Figure <ref type="figure" target="#fig_20">11</ref>, Table <ref type="table">6</ref>: The 20 most frequent anchor words of each topic when K = 4 (top) or K = 5 (bottom). We have re-ordered topic labels so that the first 4 topics for K = 5 have similar interpretations as the topics for K = 4. where we only use the plot to determine a range of possible K). The perplexity <ref type="bibr" target="#b6">[5]</ref> is a commonly used metric to assess the goodness-of-fit of a topic model. We may select K by minimizing the perplexity, but this approach is known to be unstable <ref type="bibr" target="#b47">[46]</ref>. It tends to select a very large K on our data set, making the interpretation/labeling of topics difficult.</p><p>Other ideas of estimating K include the Bayesian approach which puts a prior on K and computes the posterior, but it is unclear how to combine this idea with the topic-SCORE algorithm. We have tried many different approaches and found that the most satisfactory one is investigating the interpretability of discovered topics using our knowledge of the field, as described above.</p><p>Table <ref type="table">7</ref>: The 20 most frequent anchor words of each topic when K = 12. We have reordered topic labels so that the first 11 topics have similar interpretations as the topics for K = 11 (see Figure <ref type="figure" target="#fig_9">4</ref> of the main article). In Section 5, we perform topic learning using the abstracts of 56, 500 papers and identify 11 topics. We propose a label for each topic using the topic loading vectors (see Figure <ref type="figure" target="#fig_9">4</ref> of the main article). The short label is often insufficient to describe all the research topics that this topic covers. We further study each topic by investigating papers with high weights on this topic. For each 1 ≤ k ≤ 11, we sort the paper abstracts in the descending order of ŵi (k).</p><p>Table <ref type="table" target="#tab_20">8</ref> shows the titles of the three abstracts with the largest ŵi (k). The results are largely consistent with the proposed topic labels. Moreover, for each topic k, by reading the titles of the 300 papers with highest weights on this topic, we come up with a list of suggested research topics umbrellaed by this topic. See Table <ref type="table" target="#tab_3">2</ref> of the main article.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>J The topic interests of 80 representative authors</head><p>In Section 5, we use the output of topic learning to define a centered topic interest vector z a ∈ R 11 for each author a. To recap, for each author a, let N a ⊂ {1, 2, . . . , n} be the collection of papers published by this author in our data range, where each paper i has an estimated topic weight vector ŵi for its abstract. The centered topic interest vector z a is</p><formula xml:id="formula_21">z a = wa -w,</formula><p>where wa is the average of ŵi over all abstracts in N a and w be the average of ŵi over all (n = 56, 500) abstracts. The entries of z a sum to 0, and so it has both positive and negative entries. We are interested in positive entries of z a : Author a has greater-thanaverage weight on topic k if z a (k) &gt; 0, for 1 ≤ k ≤ 11. See Figure <ref type="figure" target="#fig_10">5</ref> and details therein.</p><p>We now use z a to define the "major topics" of author a and show the results for 80 representative authors. Fix an author a. We call topic k a "major topic" of author a if z a (k) &gt; 50% × max 1≤ℓ≤11 {z a (ℓ)}.</p><p>We may change 50% to (50% ± 5%) but the results are similar.</p><p>Table <ref type="table">9</ref> presents the major topics of 80 authors with highest citations (ordered alphabetically). We remark again that the short topic labels may not be accurate for all research areas each topic covers, and it is always useful to consult Table <ref type="table" target="#tab_3">2</ref> of the main article.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>K Topic trends in 7 representative journals</head><p>In Section 5.3, we have selected a few journals and study how the evolution of the yearly average topic weights for each journal. Based on the journal ranking by the Stigler's model and PageRank (see Section 4.4), we select the 7 journals with highest average ranks: AoS, Bka, JASA, JRSSB, Bcs, JMLR, and Sini. For each journal, we obtain the yearly average topic weight (i.e., the average of ŵi among papers published in this journal each year) and</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>6C</head><label></label><figDesc>TR-SCORE: an extension of Topic-SCORE for topic ranking 6.1 The Hofmanm-Stigler model for abstract and citation data . . . . . . . . . 6.2 Topic-Ranking SCORE (TR-SCORE) . . . . . . . . . . . . . . . . . . . . . 6.3 Topic-ranking and a cross-citation graph . . . . . . . . . . . . . . . . . . . The list of 36 journals D Additional results on paper counts E Additional results on network centrality F The sleeping beauty citation patterns G Pre-processing of the abstract data H Selection of the number of topics K I High-weight papers in each of the 11 topics J The topic interests of 80 representative authors K Topic trends in 7 representative journals L The cross-topic citation weights 1 Introduction</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>A 1 ,</head><label>1</label><figDesc>. . . , A K ∈ R p , we assume: (a) w i (k) is document i's 'weight' on topic k, 1 ≤ k ≤ K, and (b) given that the document is (purely) discussing topic k, the population word frequency vector is A k . Combining (a)-(b) and (2.1), it is reasonable to assumeΩ i = n k=1 w i (k)A k . Write Ω = [Ω 1 , Ω 2 , . . . , Ω n ], A = [A 1 , . . . , A K ],and W = [w 1 , w 2 , . . . , w n ]. It follows that Ω = AW.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>curves, we notice a sharp increase near 2005-2006, possibly because several new journals (AoAS, Bay, EJS) were launched between 2006 and 2008; see Table3of the supplementary material. The middle panel of Figure1presents the yearly paper counts, defined as the average number of papers per active author. We consider both standard count and fractional count, where for an m-author paper, each author is counted as published 1 and 1/m papers, respectively. In the standard count, the yearly paper counts increase between 1975 and 2009, from about 1.2 paper per author to about 1.4 paper per author, and decrease after 2009, to about 1.3 paper per author in 2015. In the fractional count, the yearly paper counts always decrease, from about 0.85 paper per author in 1975 to about 0.5 paper per author in 2015. This can be explained by that the average number of authors per paper has been steadily increaseing over the years. See the right panel of Figure1, where we present the average number of authors per paper; the curve is seen to be steadily increasing.The above counts can be further explained by Figure9of the supplementary material, in which (a) the paper count each year is partitioned into the counts of m-author papers for different m and (b) the author count each year is partitioned into the counts of k-yearsenior author for different k. The results show some interesting patterns, and we refer the readers to Section D of the supplementary material for details.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 ≤ 10 Figure 7 Figure 1 :</head><label>31071</label><figDesc>Figure S1: Left: total numbers of papers and active authors in each year; middle: average number of papers per author in each year; right: average number of authors per paper in each year.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>4. 3</head><label>3</label><figDesc>Citation patterns and the sleeping beautiesIdentification of representative citation patterns is an interesting problem, as it helps distinguish short-term citation effects from long-lasting citation effects. By a careful study of the yearly citation curves of individual papers, we identify four representative citation patterns: "sleeping beauty," "transient," "steadily increasing," and "sudden fame." "Sleeping beauty" refers to the papers that receive low citations within a few years after publication but become frequently cited after a certain point (a.k.a. "waking up"). Representative papers include the lasso paper, Tibshirani (1996), and the FDR paper, Benjamini and Hochberg(1995). "Transient" refers to the papers that receive a good number of citations for a few years shortly after publication, but then their citations drop sharply and remain low for years. "Steadily increasing" refers to those papers whose citations have been increasing at a modest rate for many years, with a large number of citations over a relatively long time period. Representative papers include Dempster et al. (1977) on EM algorithm. "Sudden fame" refers to papers that receive a large number of citations shortly after publication and the citations remain high for many years. Representative papers include Liang and Zeger (1986) on longitudinal data, Gelfand and Smith (1990) on marginal densities, and Efron et al. (2004) on LARS. See Figure 2. longitudinal data, Gelfand and Smith (1990) on marginal densities, and Efron et al. (2004)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Yearly citation curves for 4 papers. Left to right: "sleeping beauty" (Tibshirani (1996) on Lasso), "transient", "steadily increasing" (Dempster, Laird and Rubin (1977) on EM algorithm), and "sudden fame" (Liang and Zeger (1986) on GLM).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 10 in</head><label>10</label><figDesc>Figure 10 in the supplementary material show the papers with largest B i , such as Tibshirani (1996), Azzalini (1985), Hubert &amp; Arabie (1985), Hill (1975), Marcus et al. (1976), Lunn et al. (2000), Rosenbaum &amp; Rubin (1983), Bai &amp; Saranadasa (1996), Holm (1979), Clayton (1978), and Fan &amp; Li (2001).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Journal ranking. Each point is a journal (x-axis: ranking by PageRank, y-axis: ranking by Stigler's model). See Table3of the supplement for the full journal names.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: For 1 ≤ k ≤ K (where K = 11), Panel k is the barplot of the 20 words j that have the largest weight a j (k) among all words (the length of each bar is the value of a j (k)).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5:The overall topic interests of some authors. For interpretation purpose, we select some authors we are familiar with, but similar figures can be generated for other authors.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: The yearly average topic weights (averaged for all 33 journals), 1990 -2015.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head></head><label></label><figDesc>have higher-than-average weights, suggesting that they have attracted more attention; from 1990 to 2015, the weight of Bio./Med. increases relatively fast, the weights of Math.Stat. and Hypo.Test gradually decrease, and the weights of Regression and Bayes are relatively flat. Among the remaining 6 topics, Mach.Learn. increases quickly; its weight has passed the overall average starting from 2014 (Latent.Var. is another topic where the weight is steadily increasing).Second, we select a few journals and study how the evolution of the yearly average topic weights for each journal. In Section 4.4 we have ranked the 33 journals (excluding 3 probability journals) by the Stigler's model and PageRank. We select the 7 journals with highest average ranks: AoS, Bka, JASA, JRSSB, Bcs, JMLR, and Sini. For each journal, we obtain the yearly average topic weight (i.e., the average of ŵi among papers published in this journal each year) and smooth the curves as before. The results are in Figure12of the supplementary material. A partial result is shown in Figure7. Each panel corresponds to a topic. Fixing a topic k, for each journal, we plot the kth entry (subject to smoothing over time) in the yearly average of ŵi 's among papers published in this journal. These curves of different journals for the same topic can be used to study journal friendliness to this topic.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Consider n papers</head><label></label><figDesc>in MADStat, where the abstract data are summarized in a p × n worddocument-count matrix X = [x 1 , x 2 , . . . , x n ] as in Section 2 (p is the vocabulary size), and citation data are summarized in an adjacency matrix C ∈ R n×n , where C ij = 1 if there is a citation from paper i to paper j and C ij = 0 otherwise, 1 ≤ i, j ≤ n. We propose the Hofmann-Stigler model to jointly model the data matrices X and C: It combines the Hofmann's topic model in Section 2 and the Stigler's model in Section 4.4.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Figure 3 :</head><label>3</label><figDesc>Figure3: Left: The weighted directed graph for cross-topic citations. The diameter of a node (topic) is proportional to the total citations the topic has received from other topics, and the width of an edge is proportional to the weight defined in the text. An edge is presented if the weight is bigger than 0.09. Right: The estimated export scores of 11 topics (subject to median(μ 1 , . . . , μ11 ) = 0).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head></head><label></label><figDesc>edge from node k to node `is presented when P k` 0.09, no edge from or to Exp.Design is shown in Figure 3. Second, Regression and Math.Stat. are the two topics that have attracted the most citations from other topics, and Bio./Med. and Inference are the two topics that have cited other topics most often. Third, each of the three topics, Bayes, Variable Selection, and Mach.Learn. has significantly cited and been cited by other topics. Last, Hypo.Test and Inference form a close pair, and most citations between them are from Inference to Hypo.Test. Clinic. and Bio./Med. also form a close pair, and the citation exchanges are relatively balanced between them.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_16"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Left: The weighted directed graph for cross-topic citations. The diameter of a node (topic) is proportional to the total citations the topic has received from other topics, and the width of an edge is proportional to the weight defined in the text. An edge is presented if the weight is bigger than 0.09. Right: The estimated export scores of 11 topics (subject to median(μ 1 , . . . , μ11 ) = 0).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_17"><head></head><label></label><figDesc>Excellence in Research for Australia. The 175 journals are divided into four categories: A * , A, B, and C. For our study, first, we include all 9 Category A * journals, where two of them (AOP and PTRF) are probability journals. Second, we include all Category A journals, except the strongly themed journals in applied probability or in engineering (Advances in Applied Probability, Electronic Journal of Probability, Finance and Stochastics, Journal of Applied Probability, Stochastic Processes and their Applications, Theory of Probability and its Applications, Technometrics, Queueing Systems, Random Structures &amp; Algorithms). Last, there are about 50 journals in Category B covering a wide range of themes, where we only select the journals on methodology and theory, such as Australian &amp; New Zealand Journal of Statistics, Bayesian Analysis, Canadian Journal of Statistics, etc. We do not include any Category C journals.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_18"><head>Figure 1</head><label>1</label><figDesc>Figure 1 presents the number of papers per year and the number of active authors per year.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_19"><head>Figure 10 :</head><label>10</label><figDesc>Figure 10: The yearly citation curves for the first 8 papers in Table5.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_20"><head>Figure 11 :</head><label>11</label><figDesc>Figure 11: Scree plot of the text corpus matrix D. Left: top 30 singular values. Right: omitting first two singular values for a better visualization.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 4</head><label>4</label><figDesc></figDesc><table><row><cell>cleaning such citation data. Compared to Google Scholar, our citation data are of higher</cell></row><row><cell>quality, so our results on network centrality shed new light that Google Scholar cannot</cell></row><row><cell>provide.</cell></row></table><note><p><p><p>, if we instead use the citation counts by Google Scholar on December 31, 2022, then the papers Benjamini &amp; Hochberg (1995) on FDR, Donoho &amp; Johnstone (1994) on wavelets, and Efron et al. (</p>2004</p>) on LARS will receive better rankings, as these papers have many citations from papers outside our data range. Despite this, our approach is still valuable. For example, using our data, we can provide the ranking (e.g., by number of citations) for any author or any paper in our data set, but how to do this using Google Scholar is unclear: We need to build a large database for the citation relationships between many authors and papers and spend substantial time</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>The top 10 authors ordered by the number of coauthors, citers, and citations, respectively (we only count co-authors and citations within the range of MADStat).</figDesc><table><row><cell>Author name</cell><cell cols="2">#Coauthors Author name</cell><cell cols="2">#Citers Author name</cell><cell>#Citations</cell></row><row><cell>Raymond Carroll</cell><cell>234</cell><cell>Donald B. Rubin</cell><cell>5337</cell><cell>Peter Hall</cell><cell>6847</cell></row><row><cell>Peter Hall</cell><cell>222</cell><cell>Nan Laird</cell><cell>5079</cell><cell>Donald B. Rubin</cell><cell>6825</cell></row><row><cell>N. Balakrishnan</cell><cell>186</cell><cell>Bradley Efron</cell><cell>4500</cell><cell>Jianqing Fan</cell><cell>5726</cell></row><row><cell>Jeremy Taylor</cell><cell>159</cell><cell>Robert Tibshirani</cell><cell>4076</cell><cell>Robert Tibshirani</cell><cell>5074</cell></row><row><cell>Joseph Ibrahim</cell><cell>158</cell><cell>Peter Hall</cell><cell>3789</cell><cell>Nan Laird</cell><cell>5040</cell></row><row><cell>Geert Molenberghs</cell><cell>146</cell><cell>Arthur P. Dempster</cell><cell>3406</cell><cell>Bradley Efron</cell><cell>4589</cell></row><row><cell>James S. Marron</cell><cell>130</cell><cell>Scott Zeger</cell><cell>3311</cell><cell>Raymond Carroll</cell><cell>4415</cell></row><row><cell>Malay Ghosh</cell><cell>119</cell><cell>Kung Yee Liang</cell><cell>3231</cell><cell>Scott Zeger</cell><cell>3802</cell></row><row><cell>Emmanuel Lesaffre</cell><cell>119</cell><cell>Trevor Hastie</cell><cell>3174</cell><cell>Trevor Hastie</cell><cell>3582</cell></row><row><cell>Xiaohua Zhou</cell><cell>119</cell><cell>Raymond Carroll</cell><cell>3110</cell><cell>Kung Yee Liang</cell><cell>3366</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 :</head><label>2</label><figDesc>Interpretation of the 11 estimated topics.</figDesc><table><row><cell>Topic Label</cell><cell cols="2">Abbreviation Corresponding Research Topics</cell></row><row><cell cols="2">1 Bayesian statistics Bayes</cell><cell>Bayesian methods</cell></row><row><cell>2 Bio &amp; medical</cell><cell cols="2">Bio/Med. Observational studies, genetics, genomics</cell></row><row><cell>statistics</cell><cell></cell><cell></cell></row><row><cell>3 Clinical trials</cell><cell>Clinic.</cell><cell>Clinical trials, causal inference</cell></row><row><cell>4 Experimental</cell><cell cols="2">Exp.Design Experimental design</cell></row><row><cell>design</cell><cell></cell><cell></cell></row><row><cell cols="3">5 Hypothesis testing Hypo.Test Hypothesis testing, goodness of fit</cell></row><row><cell>6 Statistical</cell><cell cols="2">Inference Confidence intervals, bootstrapping, empirical likelihood</cell></row><row><cell>inference</cell><cell></cell><cell></cell></row><row><cell>7 Latent variables</cell><cell cols="2">Latent.Var. Latent variable model, incomplete data, mixtures, clustering, factor</cell></row><row><cell></cell><cell></cell><cell>model, graphical model, variable selection, categorial data analysis,</cell></row><row><cell></cell><cell></cell><cell>dimension reduction</cell></row><row><cell>8 Machine learning</cell><cell cols="2">Mach.Learn.Machine learning, computation, EM algorithm, Monte Carlo</cell></row><row><cell></cell><cell></cell><cell>methods, clustering</cell></row><row><cell>9 Mathematical</cell><cell cols="2">Math.Stats. Asymptotics, mathematical statistics, probability, stochastic</cell></row><row><cell>statistics</cell><cell></cell><cell>process</cell></row><row><cell>10 Regression</cell><cell cols="2">Regression Linear models, nonparametric regression, quantile regression,</cell></row><row><cell>analysis</cell><cell></cell><cell>semi-parametric models</cell></row><row><cell>11 Time series</cell><cell>Time Se-</cell><cell></cell></row></table><note><p><p><p>ries Time series, longitudinal data, stochastic processes, survival analysis topics umbrellaed by each of the brief topic label. See the third column of Table</p>2</p>.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>presents z a for 12 representative authors. We have some interesting findings. 1) James Berger has a prominently high weight on Bayes; Raymond Carroll and Jianqing Fan have prominently high weights on Regression; and Michael Jordan and Jun Liu have prominently high weights on Mach.Learn. These results are reasonable: Berger has many works in Bayesian statistics and decision theory; Carroll has many works in semiparametric models; Fan has many works in nonparametric regression and high dimensional variable selection; Jordan has many works in machine learning, nonparametric Bayes, and Bayesian computation; and Liu has many works in Bayesian computation and MCMC. 2) Peter Hall has notably high weights on Inference, Mach.Learn., and Regression; Xihong Lin has notably high weights on Clinic., Regression, and Bio./Med.; Larry Wassermann has notably high weights on Inference, Mach.Learn., and Bayes; and Cun-Hui Zhang has notably high weights on Inference, Regression, and Math.Stat.. 3) Figure</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 2</head><label>2</label><figDesc>(e.g. Time Series includes longitudinal data and survival analysis, and it is why this topic has a high weight in the journal Bcs). Among the 7 journals, JMLR has a significantly Furthermore, the 4 journals, AoS, Bka, JASA and JRSSB, are traditionally considered the leading journals in statistical method and theory. Among these 4 journals, AoS is friendlier to Math.Stat., Inference, Hypo.Test, Regression, and Exp.Design; JASA is friendlier to Mach.Learn., Bio./Med., Clinic. and Time Series; JRSSB is friendlier to Mach.Learn., Bayes, and Var.Select.; and Bka is friendlier to Bayes and Regression (JASA publishes more on Clinic. and Bio./Med. than Bka; this is possibly due to that JASA has a casestudy sector).</figDesc><table><row><cell>0.12</cell><cell></cell><cell></cell><cell></cell><cell>Bayes</cell><cell>0.14</cell><cell></cell><cell></cell><cell></cell><cell cols="3">Bio./Med.</cell><cell>0.16 0.18</cell><cell></cell><cell></cell><cell cols="3">Math.Stats.</cell><cell>AoS</cell></row><row><cell>0.11</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.12</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.14</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>0.10</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.10</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.12</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.10</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>0.09</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.08</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>0.08</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>1990</cell><cell>1995</cell><cell>2000</cell><cell>2005</cell><cell>2010</cell><cell>2015</cell><cell>1990</cell><cell>1995</cell><cell>2000</cell><cell>2005</cell><cell>2010</cell><cell>2015</cell><cell>1990</cell><cell>1995</cell><cell>2000</cell><cell>2005</cell><cell>2010</cell><cell>2015</cell></row></table><note><p>higher weight on Mach.Learn. than on the other topics, Bcs has a significantly higher weight on Bio./Med. and Clinic., and AoS has a considerably higher weight on Math.Stat..</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_14"><head></head><label></label><figDesc>1 https://www.righttoknow.org.au/request/616/response/2048/attach/3/2010.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_15"><head>Table 3 :</head><label>3</label><figDesc>For each of the 36 journals, we present the full name, abbreviated name, starting time, total number of authors, total number of papers, and impact factors in 2014 and 2015. For each journal, our data set consists of all papers between a certain year (i.e., the starting time) and 2015. The starting time is not necessarily the year the journal was launched.</figDesc><table><row><cell>Abbrev. Starting</cell><cell># of</cell><cell># of</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_16"><head>Table 4 :</head><label>4</label><figDesc>The most-cited papers (only the citations within MADStat are counted).</figDesc><table><row><cell>Rank Author</cell><cell>Year Title</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_17"><head>Table 5 :</head><label>5</label><figDesc>The 14 papers with the largest sleeping beauty measures B (among the 300 papers that have the largest maximum yearly citation counts). TC is total citation counts.</figDesc><table><row><cell>Paper</cell><cell cols="2">Journal T C</cell><cell>B</cell><cell>Paper</cell><cell cols="2">Journal TC B</cell></row><row><cell>1. Tibshirani (1996)</cell><cell cols="4">JRSSB 1327 145 8. Bai &amp; Saranadasa (1996)</cell><cell>Sini</cell><cell>86</cell></row><row><cell>2. Azzalini (1985)</cell><cell>ScaJS</cell><cell cols="3">288 139 9. Holm (1979)</cell><cell>ScaJS</cell><cell>265</cell></row><row><cell>3. Hubert &amp; Arabie (1985)</cell><cell>JClas</cell><cell cols="3">179 115 10. Clayton (1978)</cell><cell>Bka</cell><cell>393</cell></row><row><cell>4. Hill (1975)</cell><cell>AoS</cell><cell cols="2">280 82</cell><cell>11. Fan &amp; Li (2001)</cell><cell>JASA</cell><cell>775</cell></row><row><cell>5. Marcus et al. (1976)</cell><cell>Bka</cell><cell cols="2">218 80</cell><cell>12. Turnbull (1976)</cell><cell cols="2">JRSSB 346</cell></row><row><cell>6. Lunn et al. (2000)</cell><cell>SCmp</cell><cell cols="2">198 79</cell><cell>13. Pickands (1975)</cell><cell>AoS</cell><cell>234</cell></row><row><cell cols="2">7. Rosenbaum &amp; Rubin (1983) Bka</cell><cell cols="2">413 78</cell><cell cols="3">14. Benjamini &amp; Hochberg (1995) JRSSB 695</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_18"><head></head><label></label><figDesc>, latin, nonregular, twolevel, factori, aberr, twofactor, design, block, satur, prime, resolut, orthogon, cyclic, array, balanc, optim, column, divis 2 hit, queue, semimarkov, traffic, statespac, forecast, evolutionari, shock, markov, repair, markovchain, renew, state, wind, mcmc, hidden, discretetim, segment, epidem, metropolishast 3 noncompli, complianc, metaanalys, depress, causal, metaanalysi, unmeasur, outcom, prognost, particip, coronari, timetoev, surrog, antiretrovir, dropout, physician, confound, smoke, elder, exposur 4 cramervon, kolmogorovsmirnov, null, hotel, omnibus, test, goodnessoffit, lagrang, wald, hypothesi, wilcoxon, twosampl, distributionfre, onesampl, neyman, cointegr, pvalu, chisquar, ttest, permut 5 regress, singleindex, ridg, backfit, explanatori, cook, lasso, spline, regressor, quantil, predictor, varyingcoeffici, curs, penalti, penal, bspline, oracl, coeffici, tensor, variabl</figDesc><table><row><cell cols="2">Topic Frequent anchor words</cell></row><row><cell>1</cell><cell>latin, doptim, block, nonregular, satur, resolut, orthogon, prime, array, cyclic, aoptim,</cell></row><row><cell></cell><cell>neighbor, urn, divis, combinatori, extrapol, optim, search, incomplet, criteria</cell></row><row><cell>2</cell><cell>agespecif, birth, frailti, longitudin, pollut, socioeconom, subjectspecif, timevari, wait,</cell></row><row><cell></cell><cell>age, survivor, air, landmark, regist, missing, femal, day, tempor, geograph, nonignor</cell></row><row><cell>3</cell><cell>noncompli, complianc, antiretrovir, depress, physician, metaanalysi, particip,</cell></row><row><cell></cell><cell>metaanalys, unmeasur, causal, timetoev, propens, prognost, intervent, therapi, chronic,</cell></row><row><cell></cell><cell>symptom, coronari, patient, outcom</cell></row><row><cell>4</cell><cell>cramervon, hotel, lagrang, goodnessoffit, distributionfre, onesampl, pvalu, cointegr,</cell></row><row><cell></cell><cell>hypothes, onesid, chisquar, twosampl, stepdown, fdr, null, score, chi, pearson, diagnost,</cell></row><row><cell></cell><cell>roc</cell></row><row><cell cols="2">Topic Frequent anchor words</cell></row><row><cell>1</cell><cell>aoptim, doptim</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_19"><head></head><label></label><figDesc>Topic Manual label Frequent anchor words 1 Bayes jeffrey, improp, frequentist, default, fuzzi, highthroughput, opinion, dirichlet, speci, probabilist, text, belief, pivot, protein, microarray, dna, census, genom, thousand, dissimilar" 2 Bio./Med. epidemiolog, prospect, undertaken, alzheim, misclassif, environment, polymorph, ascertain, ecolog, retrospect, genomewid, smoke, matern, risk, conduct, suscept, coronari, occup, popul, missing 3 Clinic. treatment, surrog, causal, propens, placebo, assign, unmeasur, effect, benefici, intervent, trial, imbal, subgroup, clinician, therapi, random, clinic, baselin, outcom, physician 4 Exp.Design aoptim, latin, design, twolevel, block, satur, nonregular, twofactor, factori, aberr, minimum, twophas, orthogon, fraction, resolut, experiment, balanc, multistag, doptim, divis 5 Hypo.Test stepdown, familywis, fals, discoveri, bonferroni, twosid, cdf, reject, onesid, pvalu, conserv, realdata, hypothes, configur, competitor, microarray, nomin, favor, bootstrap, control 6 Inference confid, interv, width, shorter, biascorrect, edgeworth, coverag, squar, logarithm, rate, cap, underestim, mse, meansquar, pointwis, toler, upper, deconvolut, discontinu, slower 7 Latent.Var. proxi, instrument, forest, manifest, predictor, insur, latent, household, explanatori, exogen, sex, childhood, nonrespons, concomit, imput, variabl, interview, bernoulli, predict, enter 8 Mach.Learn. metropoli, boost, algorithm, particl, expectationmaxim, descent, faster, iter, svm, slow, updat, metropolishast, mcmc, step, sampler, path, noisi, gibb, heurist, nonsmooth 9 Math.Stats. probab, expans, walk, nonneg, gumbel, mild, theorem, weak, ddimension, compact, equivari, trim, densiti, establish, element, omega, proof, press, stein, random 10 Regression regress, regressor, quantil, coeffici, smoother, band, least, calibr, shrink, linear, ordinari, logist, spline, backfit, scalar, influenti, equivari, leverag, leastsquar, error 11 Time Series time, surviv, intervalcensor, gap, failur, multist, forecast, shock, censor, transplant, semimarkov, repair, periodogram, seri, occurr, event, declin, onset, drift, shortterm 12 (unclear) infinitedimension, nconsist, gamma, twoparamet, rootn, unknown, phi, inadmiss, nuisanc, mles, longmemori, weibul, threeparamet, ornsteinuhlenbeck, frailti, mestim, paramet, censorship, theta, semiparametr I High-weight papers in each of the 11 topics</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_20"><head>Table 8 :</head><label>8</label><figDesc>For each of the 11 topics, the titles of the three papers that have the highest topic weight in that topic (last column: topic weight in that topic).</figDesc><table><row><cell>Topic</cell><cell>Title</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Alternatively, for each paper, we can count the citation by web searching (e.g., <rs type="person">Google Scholar</rs>, which is known to be not very accurate), or by reference matching (e.g., <rs type="funder">Web of Science and Scopus)</rs>. Our approach allows us to perform advanced analysis (e.g., ranking authors/papers by citation counts, reporting the most cited authors and papers, excluding self-citations, and calculating cross-journal citation). For such analysis, it is crucial that we know the title, author, author affiliation, references, and time and place where it is published for each paper under consideration. For each of the two alternative approaches, we can gather such information for a small number of papers, but it is hard to obtain such</p></div>
+			</div>
+			<listOrg type="funding">
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The data and code for text analysis conducted in this article can be found at multiple repositories, including the journal website (https://www.annualreviews.org/ doi/abs/10.1146/annurev-statistics-040522-022138), GitHub (https://github.com/ ZhengTracyKe/MADStat-Text), and Harvard Dataverse (https://dataverse.harvard. edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YIXS6B).</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">TR-SCORE: an extension of Topic-SCORE for topic ranking</head><p>Topic-SCORE is a flexible idea and can be extended in many directions. In this section, we extend Topic-SCORE by proposing Topic-Ranking-SCORE (TR-SCORE) as new approach to ranking the citation impacts of different topics. Since TR-SCORE is directly motivated that the fraction of single author papers have been steadily decreasing, and the fraction of papers with 3 or more authors have been steadily increasing. One possible reason is that, as statistics becomes increasingly more interdisciplinary, publishing in statistical journals has been increasingly more challenging, as statisticians need to coauthor with researchers from other scientific areas, for their data sets or expertise in their areas, and often works on methods and theory alone are not adequate for publication. Figure <ref type="figure">9</ref> (right) presents the number of active authors with k-year seniority in each year for k in some different ranges. We say that an author is k-year-senior in year t if this author's first paper appears in year tk in our data set. The plot shows a significant increase of authors with seniority &lt; 3 years, suggesting that the statistics community has attracted more and more junior authors. The cohort with seniority &lt; 3 years and the cohort with seniority &gt; 10 years have the largest and second largest fractions. One possible explanation is that a more senior author tends to have more junior collaborators (e.g., a senior professor tends to have more Ph.D students than a less senior professor); such forged collaborations have improved the productivity of both the senior cohort and the junior cohort.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E Additional results on network centrality</head><p>Table <ref type="table">4</ref> presents the top 10 most-cited papers. Note that the numbers of coauthors, citers, and citations here are all counted using only the papers in our data range, so there may be some biases in our ranking. See Section 4.2 for more discussion on ranking (and especially smooth the curves as before. The results are in Figure <ref type="figure">12</ref>. While we may plot the average weights of different topics in the same journal, we choose to plot the average weights of the same topic in different journals. In Figure <ref type="figure">12</ref>, each panel corresponds to a topic, and different curves in each panel represent different journals.</p><p>q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.08 0.10 0.12 0.14 0.16 Bayes q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.06 0.08 0.10 0.12 0.14 0.16</p><p>Bio./Med.</p><p>q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.04 0.06 0.08 0.10 0.12 Clinic.</p><p>q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.05 0.10 0.15</p><p>Exp.Design q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.08 0.10 0.12 0.14 Hypo.Test q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.05 0.06 0.07 0.08 0.09 0.10 Inference q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.04 0.05 0.06 0.07 0.08 0.09 0.10 Latent.Var. q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.05 0.10 0.15 0.20 0.25 Mach.Learn. q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.08 0.10 0.12 0.14 0.16 0.18</p><p>Math.Stats. q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000 2005 2010 2015 0.10 0.12 0.14 0.16 Regression q q q q q q q q q q q q q q q q q q q q q q q q q q 1990 1995 2000  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>L The cross-topic citation weights</head><p>In Section 6.3, we have introduced two definitions of the cross-topic-citation graph. In the first definition, for each 1 ≤ k ̸ = ℓ ≤ K, there is a directed edge from topic k to topic ℓ with weight P kℓ = N kℓ /( K m=1 N km ), where</p><p>In the second definition, for each 1 ≤ k ̸ = ℓ ≤ K, there is a directed edge from topic k to topic ℓ with weight P * kℓ = N * kℓ /( K m=1 N * km ), where  It is seen from Tables 10-11 that distribution of elements in P are more heavy tailed.</p><p>As a result, if we apply the same threshold P to P * to get two binary matrices, the one associated with P is sparser and may be more interesting. For this reason, we choose to present the graph associated with P (thresholded at 0.09) in the main text; see Figure <ref type="figure">8</ref>.</p><p>The graph associated with P * (thresholded at 0.11) is shown in Figure <ref type="figure">13</ref>.</p><p>The diagonal elements of P and P * show the proportion of within-topic-citations for each topic. We observe that Exp.Design, Hypo.Test, Math.Stats. and Regression are the topics whose proportions of within-topic-citations are relatively high, and that Bio./Med., Inference and Latent.Var are the topics whose proportions of within-topic-citations are relatively low.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The diagonal elements show the proportions of within-topic-citations. The off-diagonal elements that are ≥ 0.09 are marked grey. This matrix is used to construct the graph in Figure 8 of the main article. Bayes Bio</title>
+	</analytic>
+	<monogr>
+		<title level="j">/Med Clinic. Exp.Des Hypo.Test Inference Latent.Var Mach.Learn Math.Stats Regression Time Seri</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+		</imprint>
+	</monogr>
+	<note>The cross-topic citation matrix P * (by dominant topics)</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Table 11: The cross-topic citation matrix P (by topic weights). The diagonal elements show the proportions of within-topic-citations. The off-diagonal elements that are ≥ 0.11 are marked grey</title>
+		<idno>Bayes .230 .057 .046 .013 .070 .056 .066 .127 .130 .134 .072 Bio./Med. .096 .143 .099 .029 .081 .048 .070 .081 .081 .169 .101 Clinic. .076 .090 .339 .050 .064 .034 .060 .061 .036 .098 .091 Exp.Design .029 .049 .079 .562 .056 .030 .034 .034 .039 .064 .024 Hypo.Test .062 .048 .038 .019 .454 .049 .038 .041 .092 .112 .048 Inference .088 .054 .034 .026 .103 .242 .064 .063 .124 .148 .054 Latent.Var. .092 .053 .047 .014 .048 .046 .256 .116 .079 .203 .046 Mach.Learn. .123 .055 .039 .017 .048 .044 .097 .312 .087 .122 .056 Math.Stats. .102 .041 .018 .013 .068 .071 .077 .073 .347 .126 .064 Regression .073 .047 .030 .015 .055 .050 .096 .061 .087 .431 .055 Time Series .089 .072 .066 .013 .057 .045 .046 .076 .090 .141 .303</idno>
+	</analytic>
+	<monogr>
+		<title level="j">/Med Clinic. Exp.Des Hypo.Test Inference Latent.Var Mach.Learn Math.Stats Regression Time Seri</title>
+		<imprint/>
+	</monogr>
+	<note>This matrix is used to construct the graph in Figure 13. Bayes Bio</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A practical algorithm for topic modeling with provable guarantees</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Arora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Halpern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mimno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moitra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sontag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhu</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">International conference on machine learning</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="280" to="288" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Learning topic models-going beyond SVD</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Arora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moitra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 53rd Annual Symposium on Foundations of Computer Science</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Neural machine translation by jointly learning to align and translate</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bahdanau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bengio</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1409.0473</idno>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A fast algorithm with minimax optimal guarantees for topic models with an unknown number of topics</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Bing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bunea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wegkamp</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bernoulli</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Latent dirichlet allocation</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Blei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Y</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Jordan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="993" to="1022" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">T</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Turner</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2301.01381</idno>
+		<title level="m">Testing high-dimensional multinomials with applications to text analysis</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Indexing by latent semantic analysis</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Deerwester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">T</forename><surname>Dumais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">W</forename><surname>Furnas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">K</forename><surname>Landauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Harshman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Society for Information Science</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="391" to="407" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">BERT: Pre-training of deep bidirectional transformers for language understanding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M.-W</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toutanova</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1810.04805</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">50 years of data science</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Donoho</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Computational and Graphical Statistics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="745" to="766" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Higher criticism for large-scale inference, especially for rare and weak effects</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Donoho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Statistical science</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="25" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">When does non-negative matrix factorization give a correct decomposition into parts?</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Donoho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Stodden</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Deep convolutional neural networks for sentiment analysis of short texts</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dos Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gatti</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of COLING 2014, the 25th international conference on computational linguistics: technical papers</title>
+		<meeting>COLING 2014, the 25th international conference on computational linguistics: technical papers</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="69" to="78" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Experiments in automatic phrase indexing for document retrieval: A comparison of syntactic and nonsyntactic methods</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Fagan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1988">1988</date>
+		</imprint>
+		<respStmt>
+			<orgName>Cornell University</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Fast and robust recursive algorithmsfor separable nonnegative matrix factorization</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gillis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Vavasis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Pattern Analysis and Machine Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="698" to="714" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">The first text retrieval conference (TREC-1)</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">K</forename><surname>Harman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1993">1993</date>
+			<biblScope unit="volume">500</biblScope>
+		</imprint>
+		<respStmt>
+			<orgName>US Department of Commerce, National Institute of Standards and Technology</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Long short-term memory</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hochreiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schmidhuber</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neural computation</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1735" to="1780" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Probabilistic latent semantic indexing</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hofmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 22nd Annual International ACM SIGIR Conference on Research and Development in Information Retrieval</title>
+		<meeting>the 22nd Annual International ACM SIGIR Conference on Research and Development in Information Retrieval</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="1999">1999</date>
+			<biblScope unit="page" from="50" to="57" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Horn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Johnson</surname></persName>
+		</author>
+		<title level="m">Matrix Analysis</title>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note>nd ed.</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Co-citation and co-authorship networks of statisticians</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Business &amp; Economic Statistics</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="469" to="485" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Fast community detection by SCORE</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Annals of Statistics</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="57" to="89" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Network global testing by counting graphlets</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Luo</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="2333" to="2341" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Optimal adaptivity of signed-polygon statistics for network testing</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Luo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Annals of Statistics</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="3408" to="3433" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Mixed membership estimation for social networks</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Luo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Econometrics</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kalchbrenner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Grefenstette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Blunsom</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1404.2188</idno>
+		<title level="m">A convolutional neural network for modelling sentences</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Defining and identifying sleeping beauties in science</title>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ferrara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Radicchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Flammini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">112</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="7426" to="7431" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Special invited paper: The SCORE normalization, especially for heterogeneous network and text data</title>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Stat</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Predicting returns with text data</title>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">T</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Xiu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>National Bureau of Economic Research</publisher>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical report</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Using SVD for topic modeling</title>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">T</forename><surname>Ke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Statistical Association October</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="16" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Assigning topics to documents by successive projections</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Klopp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Panov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sigalla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename><surname>Tsybakov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Annals of Statistics</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1989" to="2014" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Discussion of &quot;Coauthorship and citation networks for statisticians</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kolar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Taddy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Applied Statistics</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1835" to="1841" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Learning the parts of objects by non-negative matrix factorization</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">S</forename><surname>Seung</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">401</biblScope>
+			<biblScope unit="issue">6755</biblScope>
+			<biblScope unit="page" from="788" to="791" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">BioBERT: A pre-trained biomedical language representation model for biomedical text mining</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Yoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">H</forename><surname>So</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1234" to="1240" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Supervised topic models</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mcauliffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Blei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="volume">20</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">A note on EM algorithm for probabilistic latent semantic analysis</title>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Mei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhai</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Information and Knowledge Management</title>
+		<meeting>the International Conference on Information and Knowledge Management</meeting>
+		<imprint>
+			<publisher>CIKM</publisher>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mikolov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Corrado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dean</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1301.3781</idno>
+		<title level="m">Efficient estimation of word representations in vector space</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">A survey of the usages of deep learning for natural language processing</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">W</forename><surname>Otter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Medina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Kalita</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Neural Networks and Learning Systems</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="604" to="624" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Improving language understanding by generative pre-training</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Narasimhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Salimans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">End-to-end transformer-based models in textual-based NLP</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rahali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Akhloufi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AI</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="54" to="110" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Weaving the fabric of science: Dynamic network models of science&apos;s unfolding structure</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Networks</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="73" to="85" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Citation patterns in the journals of statistics and probability</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Stigler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Statistical Science</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="94" to="108" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">On estimation and selection for topic models</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Taddy</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Artificial Intelligence and Statistics</title>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1184" to="1193" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Statistical modeling of citation exchange between statistics journals (with discussions)</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Varin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cattelan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Firth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Royal Statical Society: Series A</title>
+		<imprint>
+			<biblScope unit="volume">179</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="63" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Attention is all you need</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vaswani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Polosukhin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Topic modeling: beyond bag-of-words</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Wallach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 23rd international conference on Machine learning</title>
+		<meeting>the 23rd international conference on Machine learning</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="977" to="984" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Sparse topic modeling: Computational efficiency, near-optimal algorithms, and statistical inference</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">Tony</forename><surname>Cai</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Statistical Association</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="13" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">A heuristic approach to determine an appropriate number of topics in topic modeling</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Perkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">BMC bioinformatics</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Aligning books and movies: Towards story-like visual explanations by watching movies and reading books</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kiros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Zemel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Salakhutdinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Urtasun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Torralba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fidler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE international conference on computer vision</title>
+		<meeting>the IEEE international conference on computer vision</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="19" to="27" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

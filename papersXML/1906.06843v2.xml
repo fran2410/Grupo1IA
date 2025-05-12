@@ -1,0 +1,1510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Predicting Research Trends with Semantic and Neural Networks with an application in Quantum Physics</title>
+				<funder ref="#_6rMAkCG">
+					<orgName type="full">unknown</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2020-01-09">January 9, 2020</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Mario</forename><surname>Krenn</surname></persName>
+							<email>mario.krenn@univie.ac.at</email>
+							<affiliation key="aff0">
+								<orgName type="department">Vienna Center for Quantum Science &amp; Technology (VCQ)</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Faculty of Physics</orgName>
+								<orgName type="institution">University of Vienna</orgName>
+								<address>
+									<country key="AT">Austria</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Institute for Quantum Optics and Quantum Information (IQOQI)</orgName>
+								<orgName type="institution">Austrian Academy of Sciences</orgName>
+								<address>
+									<settlement>Vienna</settlement>
+									<country key="AT">Austria</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="department">Department of Chemistry &amp; Computer Science</orgName>
+								<orgName type="institution">University of Toronto</orgName>
+								<address>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="institution">Vector Institute for Artificial Intelligence</orgName>
+								<address>
+									<settlement>Toronto</settlement>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Anton</forename><surname>Zeilinger</surname></persName>
+							<email>anton.zeilinger@univie.ac.at</email>
+							<affiliation key="aff0">
+								<orgName type="department">Vienna Center for Quantum Science &amp; Technology (VCQ)</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Faculty of Physics</orgName>
+								<orgName type="institution">University of Vienna</orgName>
+								<address>
+									<country key="AT">Austria</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Institute for Quantum Optics and Quantum Information (IQOQI)</orgName>
+								<orgName type="institution">Austrian Academy of Sciences</orgName>
+								<address>
+									<settlement>Vienna</settlement>
+									<country key="AT">Austria</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Predicting Research Trends with Semantic and Neural Networks with an application in Quantum Physics</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2020-01-09">January 9, 2020</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">51CFD748B7306478030BD5C046BC8F25</idno>
+					<idno type="arXiv">arXiv:1906.06843v2[cs.DL]</idno>
+					<note type="submission">arXiv Quantum 100.000 papers from Quantum Physics APS papers 650.000 papers from 01.1919-12.2017</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-03-04T12:09+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>Fabry-Perot cavity</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The vast and growing number of publications in all disciplines of science cannot be comprehended by a single human researcher. As a consequence, researchers have to specialize in narrow subdisciplines, which makes it challenging to uncover scientific connections beyond the own field of research. Thus access to structured knowledge from a large corpus of publications could help pushing the frontiers of science. Here we demonstrate a method to build a semantic network from published scientific literature, which we call SEMNET. We use SEMNET to predict future trends in research and to inspire new, personalized and surprising seeds of ideas in science. We apply it in the discipline of quantum physics, which has seen an unprecedented growth of activity in recent years. In SEMNET, scientific knowledge is represented as an evolving network using the content of 750,000 scientific papers published since 1919. The nodes of the network correspond to physical concepts, and links between two nodes are drawn when two physical concepts are concurrently studied in research articles. We identify influential and prize-winning research topics from the past inside SEMNET thus confirm that it stores useful semantic knowledge. We train a deep neural network using states of SEMNET of the past, to predict future developments in quantum physics research, and confirm high quality predictions using historic data. With the neural network and theoretical network tools we are able to suggest new, personalized, out-of-the-box ideas, by identifying pairs of concepts which have unique and extremal semantic network properties. Finally, we consider possible future developments and implications of our findings.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>A computer algorithm with access to a large corpus of published scientific research could potentially make genuinely new contributions to science. With such a body of knowledge, the algorithm could derive new scientific insights that are unknown to human researchers and note contradictions within existing scientific knowledge <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2]</ref>. This level of automation of science is more in the realm of science-fiction than reality at present. However, algorithms with access to and the capability of extracting semantic knowledge from the scientific literature can be employed in manifold ways to assist scientists and thereby augment scientific progress. As an example, the evaluation of whether an idea is novel or surprising depends crucially on already-existing knowledge. Thus a computer algorithm with the capability to propose new, useful ideas or potential avenues of research will necessarily require access to published scientific literature -which forms at least partially the body of human knowledge in a scientific field.</p><p>Knowledge can be portrayed using semantic networks that represent semantic relations between concepts in a network <ref type="bibr">[3]</ref>. Over the last few years, significant results have been obtained by automatically analyzing the large corpus of scientific literature <ref type="bibr">[4-</ref>Figure <ref type="figure">1</ref>. Creating a semantic network for quantum physics (SEMNET). The nodes represent quantum physical concepts, and the edges (connections between nodes) indicate how frequently two concepts are investigated jointly in the scientific literature. The concept list is created using human-made lists (from Wikipedia categories and quantum physics books) and automatically generated lists using natural language processing tools on 100.000 quantum physics articles from the online preprint repository arXiv (this is indicated by black arrows). An edge between two concepts is drawn when both concepts appear in the abstract of a scientific paper (indicated by blue arrows). The scientific database consists of 750.000 physics papers, 100.000 from arXiv and 650.000 papers published by the American Physical Society (APS) since 1919. Human-generated concept lists (from Wikipedia and books) are combined with automatically generated lists (with natural language processing, using RAKE on 100.000 arXiv articles) to generate a list of quantum physics concepts. Each concept forms a link in a semantic network. The edges are formed when two concepts co-appeare in a title or abstract of any of the 750.000 papers (from arXiv and APS). A mini-version of SEMNET is shown, using parts of three articles from APS. Edges carry temporal information of their formation year, which leads to an evolution of the semantic network SEMNET over time.</p><p>6], including the development of semantic networks in several scientific disciplines.</p><p>In biochemistry, a semantic network has been built using a well-defined list of molecule names (which correspond to the nodes of the network) and forming edges when two components co-appeare in the abstract of a scientific paper. The network was derived from millions of papers published over 30 years, and the authors identify a more efficient, collective strategy to explore the knowledge network of biochemistry <ref type="bibr" target="#b6">[7,</ref><ref type="bibr">8]</ref>. In <ref type="bibr">[9]</ref>, a semantic network was created using 100.000 papers from astronomy, ecology, economy and mathematics. The nodes represent ideas or concepts (generated through automated generation of key-concepts in large bodies of texts <ref type="bibr" target="#b9">[10]</ref>). The authors used the network to draw connections between human innovation process and random walks. In the field of neuroscience, semantic networks have been used to map the landscape of the field <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b11">12]</ref>. Papers from the interdisciplinary journal PNAS have been used to investigate sociological properties such as inter-disciplinary research <ref type="bibr" target="#b12">[13]</ref>.</p><p>Here, we show how to build and use a semantic network for quantum physics, which we call SEMNET. It is built from 750.000 scientific papers in physics published since 1919. In the network we identify a number of historic award-winning concepts, indicating that SEMNET carries useful semantic knowledge. The evolution of such a large network allows us to use an artificial neural network for predicting research concepts that scientists will investigate in the next five years. Finally, we demonstrate the power of SEMNET to suggest personalized, novel and unique directions for future research <ref type="foot" target="#foot_0">1</ref> .</p><p>Our work differs in several aspects from previous semantic networks created from scientific literature. First, we use machine learning to draw conclusions from earlier states to SEMNET's future state, which enables us to make predictions about the future research trends of the discipline. Second, we use network theoretical tools and machine learning to identify pairs of concepts with exceptional network properties. Those concept combinations can be restricted to the research interest of a specific scientist. This ability allows us to not only predict but also suggest uninvestigated concept pairs which human scientifists might not have identified because they are out of the own sub-field, but which have properties that indicate an exceptional relation. They could be a seed of a new, out-of-the-box idea. Third, we apply SEMNET to quantum physics, which has seen an enormouse growth during the last decade due to the potential transformative technologies. The growth can be seen in the establishment of several high-quality journals for quantum research (such as Quantum, npj Quantum Information, IOP's Quantum Science &amp; Technology) and multi-billion dollar fundings from governments and strong involvement of private companies and startups worldwide. The growth rate leads to enormous increase in scientific results and publications, which are difficult to follow for individual researchers -thus quantum physics is an ideal test-bed for SEMNET.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SEMANTIC NETWORK OF QUANTUM PHYSICS</head><p>A semantic network, or knowledge network, represents relations between concepts in the form of a network. Now we describe in more detail how the network is built, especially how the concept list is generated and how links are formed. A schematic illustration can be seen in Figure <ref type="figure">1</ref>, more details in Figure <ref type="figure" target="#fig_0">2</ref>. articles that contain a concept or concept pair per year from 1987 to 2017. (a) Newly-emerged concepts and their growth in popularity over a five-year period after emergence. Shown are the strongest growing concepts of a five-year period, which have not been mentioned before that period. (b) Newly-connected pairs of concepts that become strongly influential in the scientific community in a five-year period. Shown are the strongest growing connections of concept pairs that already existed before the connection was drawn, which have not been connected before that period. Many emergent concepts and connections can be related to important discoveries and understandings in quantum science.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Creation of the concept list</head><p>We generate the concept list via two independent methods. First, we use human-made lists of physical concepts. These concepts are compiled from the indices of 13 quantum physics books (which were available to us in a digital form), as well as titles of Wikipedia articles that are linked in a quantum physics category. This human-made collection contains approximately 5000 entries physical concepts.</p><p>We extend the human-generated list with an automatically generated list of physical concepts. For this, we apply a natural language processing tool called RAKE (Rapid Automatic Keyword Extraction) <ref type="bibr" target="#b13">[14]</ref> to the titles and abstracts of approximately 100.000 articles published in quantum physics categories on the arXiv preprint server, which we chose to optimize the list for current research topics in quantum physics. RAKE is based on statistical text analysis, and can automatically find relevant keywords in texts. We combine the human-and machine-generated lists of concepts and further optimize them to delete incorrectly identified concepts (which were introduced by imperfections of the statistical analysis of RAKE) and names of people (which are not concepts), merge synonyms and normalize for the singular and plural of the same concept. Ultimately, this yields a list of 6,300 terms. As an example, five randomly chosen examples are three level system, photon antibunching, chemical shift, neutron radiation and unconditionally secure quantum bit commitment. Each of these quantum physics concepts is a node in SEMNET.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Creation of the network</head><p>To form connections between different quantum physics concepts, we use 100.000 articles of quantum physics categories on arXiv, and the dataset of all 650,000 articles ever published by the APS. We chose these two data sources because the APS database contains peer-reviewed physics papers from the last 100 years (allowing for investigation of long-term trends), while the arXiv database contains specific quantum physics papers, allowing for more precise coverage of the quantum physics research trends.</p><p>Whenever two concepts occur together in a title or an abstract of an article, we interpret that as a semantic connection between these concepts, and add a unique link between the two corresponding nodes in the network. Relations between two concepts can take many forms. Concepts may be put together for example when mathematical tool (such as Schmidt rank ) is used to investigate a specific quantum system (such as vector beam or exciton polariton), or when insights from a specific technique (such as lasing without inversion or rabi oscillation) lead to conclusions about another property (such as transport property or atom transition frequency) or when fundamental ideas (such as quantum decoherence or quantum energy teleportation) are studied in the context of foundational experiments (such as delayed choice experiment or Mermin inequality). While this method clearly cannot represent all quantum physics knowledge, it represents elements of its semantic structure, which we demonstrate in what follows. The resulting network SEMNET has 6368 vertices with more than 1.7 million edges (drawn from more than 15 million concept pairs pulled from 750.000 physics articles), using physics articles from 1919 to december 2017.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Past quantum physics trends</head><p>First, we use the evolution of the semantic network to identify impactful emerging fields of research in the past. We define emerging fields as either concepts or concept pairs which have grown significantly after they have been introduced or connected for the first time, over periods of five years.</p><p>Figure <ref type="figure" target="#fig_1">3a</ref> shows the quantum physics topics that have grown the fastest (in terms of numbers of papers in which they have been mentioned) after their emergence, from the years 1987 to 2017. Figure <ref type="figure" target="#fig_1">3b</ref> shows, for each year, which two-concept combinations have grown the fastest in the first five years after they have been first connected. In Figure <ref type="figure" target="#fig_1">3</ref>, many of the emerging fields clearly correspond to important discoveries, advances in understanding and shifts of thought within quantum science research. One of the fastest growing concepts is Qubit, which emerged in 1995 (first in april in a Phys.Rev.A paper by Schumacher <ref type="bibr" target="#b14">[15]</ref>, then in arXiv preprints by Chuang&amp;Yamamoto <ref type="bibr" target="#b15">[16]</ref> and by Knill <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b17">18]</ref>). Qubits are the basic units of quantum information -generalizing classical bits to coherent quantum superpositions, and connect quantum mechanics and information science. The emergence of the qubit can be interpreted as the start of the discipline of quantum information science. Enormous growth is seen for topics connected to graphene, starting in 2005, the discoverers of which were awarded the 2010 Nobel Prize in Physics. Interesting, graphene itself was mentioned (in our data collection) already back in the early 1990s in Phys.Rev.B papers <ref type="bibr" target="#b18">[19]</ref><ref type="bibr" target="#b19">[20]</ref><ref type="bibr" target="#b20">[21]</ref>, when it was not a strongly emergent concept itself. Strong growth in research into topological materials can be observed from approximately 2008; the Nobel Prize in Physics was subsequently awarded in this area in 2016. Aaronson's and Arkhipov's approach to achieving quantum supremacy <ref type="bibr" target="#b21">[22]</ref> using linear photonic networks, termed BosonSampling <ref type="bibr" target="#b22">[23]</ref>, achieved considerable attention (with more than 600 citations since its introduction in 2011, and considerable experimental efforts into this directions). Since 2012, the application of machine learning to quantum physics has become a prominent and diverse topic of research, that falls under the umbrella of quantum machine learning (recently summarized in two prominent reviews <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b24">25]</ref>, and also observable by the foundation of a novel high-quality journal for this topic, Springer Quantum Machine Intelligence). These findings confirm that SEMNET contains useful semantic information.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Predictive ability of the SEMNET</head><p>Having used SEMNET to study past quantum trends, we investigate its ability to provide projections of knowledge developments in the future. This essential question in network science is called linkprediction problem, and asks which new link will be formed between unconnected vertices of the network in the future given the current state of the network (for a detailed investigation of the link-prediction problem in network theory, see <ref type="bibr" target="#b25">[26]</ref>). We apply this problem in the context of semantic networks which are generated from published scientific literature. In the present case looking at the field of quantum physics, we ask which two concepts that have not yet been studied together might be investigated together in a scientific article over the next five years. To answer this question, we use an artificial neural network, with four fully connected layers (two hidden layers). The structure of the neural network and its training is shown in Figure <ref type="figure" target="#fig_2">4</ref>. Its task is to rank all unconnected pairs of concepts (roughly 5% of all edges have been drawn by the end of 2017), starting with the pair that is most likely to be connected five years, up to the pair that most likely stays unconnected. Ultimately we want to apply the neural network to the current SEMNET and predict the future trends. To validate its quality, we first input to the neural network past states of SEMNET (for example, containing data only up to 2002), and train it to predict new links by 2007. After the training, we apply this network on 2007 data and validate its quality for data of the year 2012 (which it has never seen before).</p><p>The semantic network is very large (consisting of 6368×6368 entries for each year, which are the number of possible connections between the 6368 quantum physics concepts, compared to 28×28 pixels for the famous MNIST dataset of handwritten images, and 256×256 pixels for ImageNet <ref type="bibr" target="#b26">[27]</ref>), and involves combinatorial, graph-based information which are more structured than images (see for example <ref type="bibr" target="#b27">[28]</ref>). For that reason, it is an unsuitable direct input to the neural network. Instead, we compute semantic network properties for each pair of concepts. For each pair of concepts (c i , c j ) that are unconnected in SEMNET, we calculate 17 network properties p i,j = (p 1 i,j , p 2 i,j , . . . , p 17 i,j ) where p k i,j ∈ R. Here, p 1 i,j and p 2 i,j are the degrees of concept c i and c j , and p 3 i,j and p 4 i,j are the numbers of papers in which they are mentioned. While these four properties are purely local, p 5 i,j is the cosine-similarity between the two concepts, which corresponds to the number of common neighbors. A cosine similarity of one indicates that the terms might be synonyms. The next nine properties indicate the number of paths with lengths of two, three and four between the physics concepts in the current and previous two years. These properties allow us to draw conclusions from the evolution over time of various topics as tracked by SEMNET. The choice to use large path lengths as one of the properties is strengthened by a very recent observation that the paths of length 3 (L3) are crucial for link prediction tasks in a network for protein interactions <ref type="bibr" target="#b28">[29]</ref>. Finally, the last three properties correspond to three different measures of distance between the two concepts. More details can be seen in the SI.</p><p>We explain these properties on a concrete pair of concepts, interaction-free measurement and Leggett-Garg inequality. (We chose the example randomly, from unconnected concepts that had been mentioned individually more than 30 times.) The concept c 2526 represents "interaction-free measurement which is mentioned in 60 abstracts and has 135 connections to other concepts by 2012. The concept c 2819 represents the "Leggett-Garg inequality", which occurs in 33 abstracts and has 141 connections to other concepts by the end of 2012. These two concepts were not connected in SEMNET as of 2012, therefore, the 15th property, their network distance, is p 15 2526,2819 = 2 (neighbors have a distance of one, in other words, there is a direct path connecting them of length one). In 2012, the two concepts have a cosine-similarity p 5  2526,2819 = 0.228, meaning that 22.8% of their neighbors are shared. Two years later, in 2014 an article on arXiv mentioned both of these concepts in the abstract and the work was later published <ref type="bibr" target="#b30">[31]</ref> and featured <ref type="bibr" target="#b31">[32]</ref> in the high-impact journal Physical Review X, achieving approximately 100 citations within four years. This example indicates that drawing first connections between concepts can lead to significant scientific insights.</p><p>The 17 properties for each unconnected concept pair in SEMNET are used by the neural network to estimate which pairs of quantum physics concepts are likely to be connected within 5 years and which are not.</p><p>To quantify the quality of the predictions, we employ a commonly-used technique called the receiver operating characteristic (ROC) curve <ref type="bibr" target="#b29">[30]</ref>. For this, the neural network is used to classify unconnected nodes into two sets: one set that is connected after five years, and a set that is non-connected. Figure <ref type="figure" target="#fig_2">4</ref> shows a significant ability to predict connections between pairs of topics -even through we restrict ourselves to pairs that share less than 20% of their neighbors (to prevent predictions of concepts which have similar meaning). This indicates that even research that draws new connections between concepts, can be predicted with high quality.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>PROPOSING FUTURE RESEARCH TOPICS</head><p>Next, we attempt to use SEMNET and the artificial neural network to suggest new, potentially fruitful research directions in quantum physics. While it is interesting and useful to understand future trends, it potentially cannot by itself lead to surprising or out-of-the-box ideas (otherwise they would not be predictable). Therefore, we extend our previous approach with network theoretic tools, to identify concept pairs with exceptional network-theoretic properties. Furthermore. Since science is conducted by (groups of) individual scientists, suggestions for proposed new research directions need to be personalized (otherwise, we would obtain suggestions for topics in which nobody is an expert in -which may be potentially interesting but limited in applicability).</p><p>How do we obtain suggestions for an individual scientist? What we find interesting and surprising strongly depends on what we already know. To gauge that, we need to investigate a given scientist's previously-published body of research papers and extract a list of concepts (from the concept list generated before) that define that person's personal research agenda(s). We define key concepts as concepts investigated over-proportionally often by the scientist, compared to the relative frequency of that concept in all 750.000 papers. Each concept c i in the papers authored by the scientist has a probability p scientist (c i ) that we calculate by the the number of occurrences of the concept N (c i ) divided by the sum of occurrences of all concepts, which is</p><formula xml:id="formula_0">p scientist (c i ) = N (ci) j N (cj ) .</formula><p>Each concept also has a probability of occuring in all 750.000 papers that we use, written as p total (c i ) = Prediction-Degree-Similarity of 100.000 personalized Concept Pairs One axis is the neural network predictions of whether two unconnected points will be connected in 2022 (the predictions -0.5 stand for very unlikely, 0.5 is very likely). The y-axis represents the average (normalized) degree of the pair (the concept with the highest degree in the complete network has a degree of 1). The z-axis is the cos-similarity, which is the ratio of shared neighbors in the networks of the two concepts. The color of the dots represents the distance from the most common, average point in this space -darker dots are further away from the average. Outliers represent pairs of concepts with a unique network property, which make them ideal candidate suggestions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>M (ci)</head><p>j M (cj ) , where M (c i ) is the number of occurrences of the concept c i in all 750.000 articles. The ratio r scientist (c i ) = pscientist(ci)</p><formula xml:id="formula_1">p total (ci)</formula><p>indicates the research agenda of the scientist. A value of r scientist (c i ) &gt; 1 shows that the scientist investigates the concept c i overproportionally often.</p><p>Our approach is to identify personalized suggestions of pairs of concepts that have never been connected. The concepts with r scientist (c i ) &gt; 1 value are paired with all of the other 6.368 concepts. This translates to a list of potentially 100.000s of possible topic pairs. For further usability, we introduce a way to sort the candidate suggestions. Suggestions can be sorted by identifying concept pairs with unique and unusual properties. For each pair of concepts, we have already calculated 18 different network properties: 17 properties which have been used by the neural network for generating predictions, and the prediction value itself. Together, these properties define a multi-dimensional space in which the location of each concept pair depends on its network properties.</p><p>To identify unusual and unique concept pairs, we search for outliers in this high-dimensional space. An outlier indicates a pair of concepts that is uniquely located in the space, and thus has unique properties in the semantic SEMNET network. We can visualize, for an anonymous example scientist, a 3-dimensional projection of the high-dimensional space in Fig. <ref type="figure" target="#fig_4">6</ref>. There, every dot corresponds to a concept pair which is located according to its network properties. Outliers can be identified by the darkness of their color.</p><p>A few suggestion from SEMNET, for the example scientist: Some of the highest predicted pairs </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>OUTLOOK</head><p>Machine Learning -Graph-based machine learning models, which have been studied in recent years, could improve prediction qualities in the linkprediction task, for example see <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b32">33,</ref><ref type="bibr" target="#b33">34]</ref>. Furthermore, as SEMNET represents a time evolution of quantum physics' semantic network, applying efficient tools for handling time-dependent data, such as a long short-term memory <ref type="bibr" target="#b34">[35]</ref> might further significantly improve the prediction quality. Application of techniques from machine translation could be beneficial to introduce multiple classes of connections within semantic networks <ref type="bibr" target="#b35">[36]</ref>. Additionally, combining our approach with unsupervised embedding of scientific literature, as shown in <ref type="bibr" target="#b36">[37]</ref> could lead to interesting, dynamic networks.</p><p>Network Theory and Science of Science -Currently, SEMNET represents connections between concepts that appear in the scientific literature. This is of course a vast simplification of scientific knowledge, as concepts in natural languages can have a manifold of relations <ref type="bibr" target="#b37">[38]</ref>. An extension could employ more complex structures for knowledge representation, such as hyper-graphs <ref type="bibr" target="#b38">[39]</ref>. The concept list, which represents the nodes of SEMNET, can be improved by various different, sophisticated ways for generating of lists of concepts and categories <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b39">40]</ref>. The extension to combinations of more than pairs of concepts will lead to more complex knowledge representations. Furthermore, it would be insightful to fold into the semantic network numbers of article citations, which is, at least in the field of science, frequently used as a proxy for scientific impact (see <ref type="bibr" target="#b40">[41]</ref><ref type="bibr" target="#b41">[42]</ref><ref type="bibr" target="#b42">[43]</ref>, for example). This may enable the prediction of future research directions to be made taking into consideration the highest potential impact, potentially accelerating the evolution of individual scientific knowledge <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b44">45]</ref>.</p><p>Surprisingness -In this work, we place pairs of concepts in an abstract high-dimensional space and identify outliers that have unique and potentially valuable properties. It would be interesting to apply more, and different measures of surprisingness. An interesting example is the information-based Bayesian surprise function, which has been introduced in the context of human attention <ref type="bibr" target="#b45">[46]</ref> and successfully applied to the subfield of computational creativity <ref type="bibr" target="#b46">[47,</ref><ref type="bibr" target="#b47">48]</ref>. In order to achieve further progress, it would be important to further explore and genuinely understand what human scientists consider as surprising and creative.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>We show how to create a semantic network in the field of quantum physics, demonstrate its useage to predict future trends in the field and how it can be used to suggest pairs of concepts, which are not yet investigated jointly, but have distinct network properties. We show how to filter the suggestions for the research agends of an individual scientist. The approach presented here is independent of the discipline of science. As such it can be applied to other fields of research.</p><p>This can be interpreted as one potential road towards computer-inspired science, in the following sense: We imagine cases (which we believe is possible) where SEMNET produces seeds or inspirations of unusual ideas or directions of thoughts, that a researcher alone might not have thought of. The subsequent, successful interpretation and scientific execution of the suggestions fully remains the task of a creative, human scientist. teresting discussion on related topics. The authors also thank the APS (American Physical Socienty) for providing access to the database of all published articles in APS journals. The authors thank Xuemei Gu for the illustrations of Figure <ref type="figure">1</ref> and<ref type="figure" target="#fig_2">4</ref>. This work was supported by the Austrian Academy of Sciences ( ÖAW), University of Vienna via the project QUESS and the Austrian Science Fund (FWF) with SFB F40 (FOQUS) and the Erwin Schrödinger fellowship No. J4309.</p><p>The neural network receives 17 network theoretical properties from SEMNET, which we detail here. For a concept c i and c j , the vector p i,j = (p 1 i,j , p 2 i,j , . . . , p 17 i,j ) corresponds to 17 real valued numbers. SEMNET of a specific year Y corresponds to an adjacency matrix, which we denote as AdjM Y .</p><formula xml:id="formula_2">• p 1 i,j = deg(ci) max k (deg(c k )) ∈[0,1]</formula><p>: normalized degree centrality of first concept c i (normalized by largest degree centrality in the concept list), i.e. with how many other concept is c i connected divided by the connection numbers of the concept with most neighboring concepts.</p><formula xml:id="formula_3">• p 2 i,j = deg(cj ) max k (deg(c k )) ∈[0,1]</formula><p>, normalized degree centrality of second concept c j .</p><formula xml:id="formula_4">• p 3 i,j = #(ci) max k (#(c k )) ∈[0,1]</formula><p>, number of titles and abstract that concept c i occures (normalized by number of concept that occures in most articles.</p><formula xml:id="formula_5">• p 4 i,j = #(cj ) max k (#(c k )) ∈[0,1]</formula><p>, number of titles and abstract that concept c j occures (normalized by number of concept that occures in most articles.</p><formula xml:id="formula_6">• p 5 i,j = AdjM 2 Y √ deg(ci)•deg(cj )</formula><p>∈[0,1], ratio of common neighbors, also known as cosine similarity.</p><formula xml:id="formula_7">• p 6 i,j = AdjM 2 Y (ci,cj ) max k,l AdjM 2 Y (c k ,c l )</formula><p>∈[0,1], paths of length=2 between c i and c j normalized by pair with largest number of paths, at year Y . <ref type="bibr" target="#b0">1]</ref>, paths of length=2 between c i and c j normalized by pair with largest number of paths, at year Y -1. <ref type="bibr" target="#b0">1]</ref>, paths of length=2 between c i and c j normalized by pair with largest number of paths, at year Y -2.</p><formula xml:id="formula_8">• p 7 i,j = AdjM 2 Y -1 (ci,cj ) max k,l AdjM 2 Y -1 (c k ,c l ) ∈[0,</formula><formula xml:id="formula_9">• p 8 i,j = AdjM 2 Y -2 (ci,cj ) max k,l AdjM 2 Y -2 (c k ,c l ) ∈[0,</formula><formula xml:id="formula_10">• p 9 i,j = AdjM 3 Y (ci,cj ) max k,l AdjM 3 Y (c k ,c l )</formula><p>∈[0,1], paths of length=3 between c i and c j normalized by pair with largest number of paths, at year Y . <ref type="bibr" target="#b0">1]</ref>, paths of length=3 between c i and c j normalized by pair with largest number of paths, at year Y -1. <ref type="bibr" target="#b0">1]</ref>, paths of length=3 between c i and c j normalized by pair with largest number of paths, at year Y -2.</p><formula xml:id="formula_11">• p 10 i,j = AdjM 3 Y -1 (ci,cj ) max k,l AdjM 3 Y -1 (c k ,c l ) ∈[0,</formula><formula xml:id="formula_12">• p 11 i,j = AdjM 3 Y -2 (ci,cj ) max k,l AdjM 3 Y -2 (c k ,c l ) ∈[0,</formula><formula xml:id="formula_13">• p 12 i,j = AdjM 4 Y (ci,cj ) max k,l AdjM 4 Y (c k ,c l )</formula><p>∈[0,1], paths of length=4 between c i and c j normalized by pair with largest number of paths, at year Y . <ref type="bibr" target="#b0">1]</ref>, paths of length=4 between c i and c j normalized by pair with largest number of paths, at year Y -1. <ref type="bibr" target="#b0">1]</ref>, paths of length=4 between c i and c j normalized by pair with largest number of paths, at year Y -2.</p><formula xml:id="formula_14">• p 13 i,j = AdjM 4 Y -1 (ci,cj ) max k,l AdjM 4 Y -1 (c k ,c l ) ∈[0,</formula><formula xml:id="formula_15">• p 14 i,j = AdjM 4 Y -2 (ci,cj ) max k,l AdjM 4 Y -2 (c k ,c l ) ∈[0,</formula><p>• p 15 i,j = distance(c i , c j ) ∈ N, network distance between c i and c j .</p><formula xml:id="formula_16">• p 16 i,j = W eightedDistance( √ deg(c k )•deg(c l ) AdjM Y (c k ,c l ) ) ∈[0,1]</formula><p>, weighted network distance between c i and c j (normalized by largest value of all pairs). Intuition: The more connections between certain edges, the easier it to transition from the one to the other.</p><formula xml:id="formula_17">• p 17 i,j = W eightedDistance( deg(c k )•deg(c l ) AdjM Y (c k ,c l ) ) ∈[0,1]</formula><p>, different normalized weighted network distance between c i and c j . Intuition: The more connections between certain edges, the easier it to transition from the one to the other.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FUTURE SUGGESTIONS FROM SEMNET</head><p>Here we show a number of future suggestions with different parameter settings. These pairs of concepts are network-theoretically distinguished, and they couldd be inspirations for the creative, human scientist. The concept list used here is unrestricted, meaning not tailored for a specific scientist's research interest.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>General Concepts</head><p>Unrestricted; Highest predicted values: The neural network receives 17 network theoretical properties from SEMNET, which we detail here. For a concept c i and c j , the vector p i,j = (p 1 i,j , p 2 i,j , . . . , p 17 i,j ) corresponds to 17 real valued numbers. SEMNET of a specific year Y corresponds to an adjacency matrix, which we denote as AdjM Y .</p><formula xml:id="formula_18">• p 1 i,j = deg(ci) max k (deg(c k )) ∈[0,<label>1</label></formula><p>]: normalized degree centrality of first concept c i (normalized by largest degree centrality in the concept list), i.e. with how many other concept is c i connected divided by the connection numbers of the concept with most neighboring concepts.  Y -1 (c k ,c l ) ∈[0,1], paths of length=4 between c i and c j normalized by pair with largest number of paths, at year Y -1.</p><p>• p 14 i,j = AdjM 4 Y -2 (ci,cj ) max k,l AdjM 4 Y -2 (c k ,c l ) ∈[0,1], paths of length=4 between c i and c j normalized by pair with largest number of paths, at year Y -2.</p><p>• p 15 i,j = distance(c i , c j ) ∈ N, network distance between c i and c j . AdjM Y (c k ,c l ) ) ∈[0,1], weighted network distance between c i and c j (normalized by largest value of all pairs). Intuition: The more connections between certain edges, the easier it to transition from the one to the other.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• p 17</head><p>i,j = W eightedDistance( deg(c k )•deg(c l ) AdjM Y (c k ,c l ) ) ∈[0,1], different normalized weighted network distance between c i and c j . Intuition: The more connections between certain edges, the easier it to transition from the one to the other.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FUTURE SUGGESTIONS FROM SEMNET</head><p>Here we show a number of future suggestions with different parameter settings. These pairs of concepts are network-theoretically distinguished, and they couldd be inspirations for the creative, human scientist. The concept list used here is unrestricted, meaning not tailored for a specific scientist's research interest.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Diagrammatic inner working of SEMNET.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. The evolution of quantum physics research observed using SEMNET, reflected in the change in number of</figDesc><graphic coords="3,74.93,151.13,192.12,117.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 .</head><label>4</label><figDesc>Figure 4. Artificial Neural Network for predicting the future of quantum physics research, using the evolution of the semantic network SEMNET. For each unconnected pair of concepts at a specific year, we derive a vector of 17 network properties (such as distance or cosine similarity). In the training phase, we input these network properties into an artificial neural network, and ask the question whether they will be connected 5 years later. SEMNET of 2017 is used for supervision. After training, we can apply the neural network to SEMNET of 2017, and ask what will have happend until the year 2022.</figDesc><graphic coords="4,83.15,101.29,430.08,114.08" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 5 .</head><label>5</label><figDesc>Figure5. Quantifying the prediction quality of the neural network regarding whether unconnected pairs will be connected within 5 years, using a receiver operating characteristic (ROC) curve. The y-axis shows the true-positive (TP) rate (rate of pairs that have been correctly identified to be connected within 5 years). The x-axis shows the false positive (FP) rate of predictions -concept pairs that have falsely been predicted to be connected. We restrict ourselves to concept pairs which share less than 20% of their neighbors, to prevent predictions of terms with similar semantical meaning. A perfect neural network would have TP = 1 while FP = 0. A network that classifies 50% of true instances correctly, and misclassifies 10% false instance as true would have TP = 0.5 and FP = 0.1. A random classifier is incorrect half the time and thus lies along the diagonal. The area under the curve (AUC) for a perfect neural network is 1, while for random predictions, it is AUC = 0.5. The AUC can be interpreted as the probability that the neural network will rank a randomly chosen true instance higher than a randomly-chosen negative instance<ref type="bibr" target="#b29">[30]</ref>. The ROC validation curves for 1995, 2005 and 2017 (trained with SEMNET using data from only 1990, 2000 and 2012 and earlier, respectively) are consistently and significantly non-random, with AUC2017 = 0.85. These results show that the neural network can learn to predict future research interests in quantum physics, based on historical information to a high accuracy.</figDesc><graphic coords="5,343.08,103.63,124.86,124.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 6 .</head><label>6</label><figDesc>Figure 6. Personalized prediction of topic pairs that could form future research directions for a given scientist. Each dot represents one unconnected pair of physical concepts. The concepts in use are filtered by a scientist's previous research agenda (see main text). The dot is placed in a threedimensional space, which is proscribed by the properties of SEMNET and the predictions of the neural network.</figDesc><graphic coords="6,341.87,130.86,170.42,166.86" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>(from Top10) are orbital angular momentum &amp; magnetic skyrmion, spin orbit coupling &amp; quantum sensing or dicke model &amp; cloning, filtered for highly predicted, uncommon pairs (cosine similarity &lt; 0.03; from Top10): topos theory &amp; cyclic operation, critical exponent &amp; reed muller code, quantum key distribution &amp; adhm construction. Unrestricted concept lists (normalized concept degree &lt; 0.1; from Top10): atom cavity system &amp; mode volume, entanglement of formation &amp; multiqubit state, neutrino oscillation &amp; dark photon. For more examples, see SI.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>• p 2 i</head><label>2</label><figDesc>,j = deg(cj ) max k (deg(c k )) ∈[0,1], normalized degree centrality of second concept c j . • p 3 i,j = #(ci) max k (#(c k )) ∈[0,1], number of titles and abstract that concept c i occures (normalized by number of concept that occures in most articles.• p 4 i,j = #(cj ) max k (#(c k )) ∈[0,1], number of titles and abstract that concept c j occures (normalized by number of concept that occures in most articles.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>2 Y 3 Y 4 Y</head><label>234</label><figDesc>)•deg(cj ) ∈[0,1], ratio of common neighbors, also known as cosine similarity. (ci,cj ) max k,l AdjM 2 Y (c k ,c l )∈[0,1], paths of length=2 between c i and c j normalized by pair with largest number of paths, at year Y .• p 7 i,j = AdjM 2 Y -1 (ci,cj ) max k,l AdjM 2 Y -1 (c k ,c l ) ∈[0,<ref type="bibr" target="#b0">1]</ref>, paths of length=2 between c i and c j normalized by pair with largest number of paths, at year Y -1.• p 8 i,j = AdjM 2 Y -2 (ci,cj ) max k,l AdjM 2 Y -2 (c k ,c l ) ∈[0,<ref type="bibr" target="#b0">1]</ref>, paths of length=2 between c i and c j normalized by pair with largest number of paths, at yearY -2. (ci,cj ) max k,l AdjM 3 Y (c k ,c l ) ∈[0,1], paths of length=3 between c i and c j normalized by pair with largest number of paths, at year Y .• p 10 i,j = AdjM 3 Y -1 (ci,cj ) max k,l AdjM 3 Y -1 (c k ,c l ) ∈[0,<ref type="bibr" target="#b0">1]</ref>, paths of length=3 between c i and c j normalized by pair with largest number of paths, at year Y -1.• p 11 i,j = AdjM 3 Y -2 (ci,cj ) max k,l AdjM 3 Y -2 (c k ,c l ) ∈[0,1], paths of length=3 between c i and c j normalized by pair with largest number of paths, at year Y -2. (ci,cj ) max k,l AdjM 4 Y (c k ,c l ) ∈[0,1], paths of length=4 between c i and c j normalized by pair with largest number of paths, at year Y . • p 13 i,j = AdjM 4 Y -1 (ci,cj ) max k,l AdjM 4</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>• p 16 i</head><label>16</label><figDesc>,j = W eightedDistance( √ deg(c k )•deg(c l )</figDesc></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>Code and details: https://github.com/MarioKrenn6240/ SEMNET</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>MK thanks <rs type="person">James A. Evans</rs> and <rs type="person">Sasha Belikov</rs> for exciting discussions of metaknowledge research and automation of science, and <rs type="person">Jacob G. Foster</rs> for a short but influencial conversation at the <rs type="programName">International Symposium on Science of Science 2016</rs>. Furthermore, we would like to acknowledge <rs type="person">Nora Tischler</rs>, <rs type="person">Armin Hochrainer</rs>, <rs type="person">Robert Fickler</rs>, <rs type="person">Radek Lapkiewicz</rs>, <rs type="person">Manuel Erhard</rs> and <rs type="person">Philipp Haslinger</rs> for many in-</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_6rMAkCG">
+					<orgName type="program" subtype="full">International Symposium on Science of Science 2016</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary Information</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>NETWORK THEORETICAL PROPERTIES USED FOR PREDICTIONS</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Advancing science through mining libraries, ontologies, and communities</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rzhetsky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Biological Chemistry</title>
+		<imprint>
+			<biblScope unit="volume">286</biblScope>
+			<biblScope unit="page" from="23659" to="23666" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Darpa sets out to automate research</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>You</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">347</biblScope>
+			<biblScope unit="page">465</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Semantic networks in artificial intelligence</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lehmann</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1992">1992</date>
+			<publisher>Elsevier Science Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Metaknowledge</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">331</biblScope>
+			<biblScope unit="page" from="721" to="725" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The science of science: From the perspective of complex systems</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">E</forename><surname>Stanley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physics Reports</title>
+		<imprint>
+			<biblScope unit="volume">714</biblScope>
+			<biblScope unit="page" from="1" to="73" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Uzzi and others, Science of science</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fortunato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Bergstrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Börner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Helbing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Milojević</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Petersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Radicchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sinatra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">359</biblScope>
+			<biblScope unit="page">185</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Tradition and innovation in scientists&apos; research strategies</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rzhetsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American Sociological Review</title>
+		<imprint>
+			<biblScope unit="volume">80</biblScope>
+			<biblScope unit="page" from="875" to="908" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Choosing experiments to accelerate collective discovery</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rzhetsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">T</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">112</biblScope>
+			<biblScope unit="page" from="14569" to="14574" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Network dynamics of innovation processes</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Iacopini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Milojević</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Latora</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical review letters</title>
+		<imprint>
+			<biblScope unit="volume">120</biblScope>
+			<biblScope unit="page">48301</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Quantifying the cognitive extent of science</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Milojević</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Informetrics</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="962" to="973" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Mapping the semantic structure of cognitive neuroscience</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Beam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">G</forename><surname>Appelbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Moody</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Huettel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of cognitive neuroscience</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1949" to="1965" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The landscape of NeuroImage-ing research</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Dworkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Bassett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NeuroImage</title>
+		<imprint>
+			<biblScope unit="volume">183</biblScope>
+			<biblScope unit="page" from="872" to="883" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The emergent integrated network structure of scientific research</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Dworkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Bassett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PloS one</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">216146</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Automatic keyword extraction from individual documents</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rose</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Engel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Cramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Cowley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Text Mining: Applications and Theory</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">20</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Quantum coding</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Schumacher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review A</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page">2738</biblScope>
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Simple quantum computer</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">L</forename><surname>Chuang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yamamoto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review A</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page">3489</biblScope>
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<persName><forename type="first">E</forename><surname>Knill</surname></persName>
+		</author>
+		<idno>quant-ph/9508006</idno>
+		<title level="m">Approximation by quantum circuits</title>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Bounds for approximation in total variation distance by quantum circuits</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Knill</surname></persName>
+		</author>
+		<idno>quant- ph/9508007</idno>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Two-dimensional weak localization in partially graphitic carbons</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Bayot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Piraux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Michenaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Issi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lelaurain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moore</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review B</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page">11770</biblScope>
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Magnetic-field dependence of the hole-hole interaction in fluorine-intercalated graphite fibers</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">Di</forename><surname>Vittorio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dresselhaus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Endo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Nakajima</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review B</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page">1313</biblScope>
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Effective and Debye temperatures of alkali-metal atoms in graphite intercalation compounds</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Moreh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shnieg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zabel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review B</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page">1311</biblScope>
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Quantum computational supremacy</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">W</forename><surname>Harrow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Montanaro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">549</biblScope>
+			<biblScope unit="page">203</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">The computational complexity of linear optics</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Aaronson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Arkhipov</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="333" to="342" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Quantum machine learning</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Biamonte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wittek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Pancotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rebentrost</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Wiebe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lloyd</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">549</biblScope>
+			<biblScope unit="page">195</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Machine learning &amp; artificial intelligence in the quantum domain: a review of recent progress</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Dunjko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Briegel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Reports on Progress in Physics</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page">74001</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">The link-prediction problem for social networks</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Liben-Nowell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kleinberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American society for information science and technology</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="1019" to="1031" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Deep learning</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lecun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bengio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hinton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">nature</title>
+		<imprint>
+			<biblScope unit="volume">521</biblScope>
+			<biblScope unit="page">436</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Long</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">S</forename><surname>Yu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1901.00596</idno>
+		<title level="m">A comprehensive survey on graph neural networks</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Hao and others, Network-based prediction of protein interactions</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">A</forename><surname>Kovács</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Luck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Spirohn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pollis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schlabach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Bian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">K</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kishore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature communications</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">1240</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">ROC graphs: Notes and practical considerations for researchers</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fawcett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Machine learning</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="1" to="38" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Ideal negative measurements in quantum walks disprove theories based on classical trajectories</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Alt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Meschede</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Emary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Alberti</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review X</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">11003</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">C</forename><surname>Knee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Do Quantum Superpositions Have a Size Limit</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">6</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tarlow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brockschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Zemel</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1511.05493</idno>
+		<title level="m">Gated graph sequence neural networks</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Learning convolutional neural networks for graphs</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Niepert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kutzkov</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014-2023 (2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Long short-term memory</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hochreiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schmidhuber</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neural computation</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="1735" to="1780" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Attention is all you need. Advances in neural informa-tion processing systems</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vaswani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Polosukhin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5998" to="6008" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Unsupervised word embeddings capture latent knowledge from materials science literature</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Tshitoyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dagdelen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Weston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dunn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Rong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Kononova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Persson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Ceder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jain</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">571</biblScope>
+			<biblScope unit="page" from="95" to="98" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Knowledge representation and the semantics of natural language</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Helbig</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Weaving the fabric of science: Dynamic network models of science&apos;s unfolding structure</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Evans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Networks</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="73" to="85" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Quantitative analysis of the evolution of novelty in cinema through crowdsourced keywords</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sreenivasan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Scientific reports</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">2758</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Atypical combinations and scientific impact</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Uzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mukherjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stringer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jones</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">342</biblScope>
+			<biblScope unit="page" from="468" to="472" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Coauthorship and citation patterns in the Physical Review</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ball</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Karrer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Newman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review E</title>
+		<imprint>
+			<biblScope unit="volume">88</biblScope>
+			<biblScope unit="page">12814</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Inheritance patterns in citation networks reveal scientific memes</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kuhn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Perc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Helbing</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review X</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">41036</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Quantifying the evolution of individual scientific impact</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sinatra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Deville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Barabási</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">354</biblScope>
+			<biblScope unit="page">5239</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">The Formula: The Universal Laws of Success</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Barabási</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Hachette UK</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Bayesian surprise attracts human attention</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Itti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Baldi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page">547</biblScope>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">R</forename><surname>Varshney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pinel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Varshney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bhattacharjya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Schoergendorfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">M</forename><surname>Chee</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1311.1213</idno>
+		<title level="m">A big data approach to computational creativity</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pinel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">R</forename><surname>Varshney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bhattacharjya</surname></persName>
+		</author>
+		<title level="m">A culinary computational creativity system. Computational creativity research: towards creative machines</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="327" to="346" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">spin state, rarita schwinger equation</title>
+		<idno>pred: 0.73427</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">matrix product operator, multi scale entanglement renormalization ansatz</title>
+		<idno>pred: 0.45618</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<idno>pred: 0.45098</idno>
+		<title level="m">tribimaximal mixing cosS: 0.32507</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<idno>pred: 0.41915</idno>
+		<title level="m">valleytronic, spatial inversion cosS: 0.34483</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">neutron capture nucleosynthesis, european spallation source</title>
+		<idno>pred: 0.21189</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<idno>pred: 0.20579</idno>
+		<title level="m">copenhagen interpretation, spekkens toy model cosS: 0.14746</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">copenhagen interpretation, quasi set theory</title>
+		<idno>pred: 0.20417</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Highest predicted values: 1. hybrid system</title>
+		<author>
+			<persName><surname>Unrestricted</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+	<note>classical communication cosS: 0.30407, deg: 0.22924</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">spin orbit interaction, quantum sensing</title>
+		<idno>pred: 0.95525</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Lowest predicted values: 1. transverse mode</title>
+		<author>
+			<persName><surname>Unrestricted</surname></persName>
+		</author>
+		<idno>pred: -1</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">many particle system, inelastic neutron scattering</title>
+		<idno>pred: -0.97628</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">maximal outlier (cosS, deg, pred): 1. quantum information, scattering amplitude</title>
+		<idno>pred: -0.95502</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">NETWORK THEORETICAL PROPERTIES USED FOR PREDICTIONS General Concepts Unrestricted; Highest predicted values: 1. hybrid system, classical communication</title>
+		<idno>deg: 0.22924</idno>
+		<imprint>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">spin orbit interaction, quantum sensing</title>
+		<idno>pred: 0.95525</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title level="m" type="main">spin state, rarita schwinger equation</title>
+		<idno>pred: 0.73427</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">matrix product operator, multi scale entanglement renormalization ansatz</title>
+		<idno>pred: 0.45618</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<idno>pred: 0.45098</idno>
+		<title level="m">tribimaximal mixing cosS: 0.32507</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<idno>pred: 0.41915</idno>
+		<title level="m">valleytronic, spatial inversion cosS: 0.34483</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">neutron capture nucleosynthesis, european spallation source</title>
+		<idno>pred: 0.21189</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<idno>pred: 0.20579</idno>
+		<title level="m">copenhagen interpretation, spekkens toy model cosS: 0.14746</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title level="m" type="main">copenhagen interpretation, quasi set theory</title>
+		<idno>pred: 0.20417</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<monogr>
+		<title level="m" type="main">Highest predicted values: 1. hybrid system</title>
+		<author>
+			<persName><surname>Unrestricted</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+	<note>classical communication cosS: 0.30407, deg: 0.22924</note>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<title level="m" type="main">spin orbit interaction, quantum sensing</title>
+		<idno>pred: 0.95525</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">Lowest predicted values: 1. transverse mode</title>
+		<author>
+			<persName><surname>Unrestricted</surname></persName>
+		</author>
+		<idno>pred: -1</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">many particle system, inelastic neutron scattering</title>
+		<idno>pred: -0.97628</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">maximal outlier (cosS, deg, pred): 1. quantum information, scattering amplitude</title>
+		<idno>pred: -0.95502</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

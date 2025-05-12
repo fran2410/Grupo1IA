@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">THE BEES ALGORI THM and mechanical design optimisation</title>
+				<funder ref="#_CpPagMR">
+					<orgName type="full">EC FP6 Innovative Production Machines and Systems (I*PROMS) Network of Excellence</orgName>
+				</funder>
+				<funder ref="#_K8RxqWU">
+					<orgName type="full">EPSRC</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Pham</surname></persName>
+							<email>phamdt@cf.ac.uk</email>
+							<affiliation key="aff0">
+								<note type="raw_affiliation">Manufacturing Engineering Centre , Cardiff University , Cardiff , UK</note>
+								<orgName type="department">Manufacturing Engineering Centre</orgName>
+								<orgName type="institution">Cardiff University</orgName>
+								<address>
+									<settlement>Cardiff</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Castellani</surname></persName>
+							<email>castellanim@cf.ac.uk</email>
+							<affiliation key="aff0">
+								<note type="raw_affiliation">Manufacturing Engineering Centre , Cardiff University , Cardiff , UK</note>
+								<orgName type="department">Manufacturing Engineering Centre</orgName>
+								<orgName type="institution">Cardiff University</orgName>
+								<address>
+									<settlement>Cardiff</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Sholedolu</surname></persName>
+							<email>sholedolum3@cf.ac.uk</email>
+							<affiliation key="aff0">
+								<note type="raw_affiliation">Manufacturing Engineering Centre , Cardiff University , Cardiff , UK</note>
+								<orgName type="department">Manufacturing Engineering Centre</orgName>
+								<orgName type="institution">Cardiff University</orgName>
+								<address>
+									<settlement>Cardiff</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">A</forename><surname>Ghanbarzadeh</surname></persName>
+							<affiliation key="aff1">
+								<note type="raw_affiliation">Mechanical Engineering Department , Engineering Faculty , Shahid Chamran University , Ahvaz , Iran</note>
+								<orgName type="department" key="dep1">Mechanical Engineering Department</orgName>
+								<orgName type="department" key="dep2">Engineering Faculty</orgName>
+								<orgName type="institution">Shahid Chamran University</orgName>
+								<address>
+									<settlement>Ahvaz</settlement>
+									<country key="IR">Iran</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">THE BEES ALGORI THM and mechanical design optimisation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">A47D151A3E6FD7B5E0D0F70C782EFAFB</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2-SNAPSHOT" ident="GROBID" when="2025-02-06T18:53+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Bees Algorithm</term>
+					<term>Optimisation</term>
+					<term>Mechanical Design</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The Bees Algorithm is a search procedure inspired by the way honey-bee forage for food. Two standard mechanical design problems, the design of a welded beam structure and the design of coil springs, were used to benchmark the Bees Algorithm against other optimisation techniques. The paper presents the results obtained showing the robust performance of the Bees Algorithm.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Researchers have used the design of welded beam structures <ref type="bibr" target="#b9">(Rekliatis et al., 1983)</ref> and coil springs <ref type="bibr" target="#b0">(Arora, 2004)</ref> as benchmarks to test their optimisation algorithms. The welded beam design problem involves a nonlinear objective function and eight constraints, and the coil spring design problem, a nonlinear objective function and four constraints. A number of optimisation techniques have been applied to these two problems. Some of them, such as geometric programming <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref>, require extensive problem formulation; some (see, for example, <ref type="bibr" target="#b4">(Leite and Topping, 1998</ref>)) use specific domain knowledge which may not be available for other problems, and others (see, for example, <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref>) are computationally expensive or give poor results.</p><p>The Bees Algorithm has been applied to different optimisation problems <ref type="bibr" target="#b6">(Pham et al., 2005</ref><ref type="bibr">, Pham et al., 2006b</ref><ref type="bibr">, Pham et al., 2006a)</ref>. The design problems discussed in this paper are constrained optimisation problems to be solved using this new algorithm.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">THE BEES ALGORITHM</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">The foraging process in nature</head><p>During the harvesting season, a colony of bees keeps a percentage of its population as scouts <ref type="bibr" target="#b13">(Von Frisch, 1976)</ref> and uses them to explore the field surrounding the hive for promising flower patches. The foraging process begins with the scout bees being sent to the field where they move randomly from one patch to another.</p><p>When they return to the hive, those scout bees that found a patch of a sufficient quality (measured as the level of some constituents, such as sugar content) deposit their nectar or pollen and go to the "dance floor" to perform a dance known as the "waggle dance" <ref type="bibr" target="#b10">(Seeley, 1996)</ref>. This dance is the means to communicate to other bees three pieces of information regarding a flower patch: the direction in which it will be found, its distance from the hive, and its quality rating (or fitness) <ref type="bibr" target="#b13">(Von Frisch, 1976</ref><ref type="bibr" target="#b2">, Camazine et al., 2003)</ref>. This information helps the bees watching the dance to find the flower patches without using guides or maps. After the waggle dance, the dancer (i.e. the scout bee) goes back to the flower patch with follower bees recruited from the hive. The number of follower bees will depend on the overall quality of the patch. Flower patches with large amounts of nectar or pollen that can be collected with less effort are regarded as more promising and attract more bees <ref type="bibr" target="#b10">(Seeley, 1996</ref><ref type="bibr" target="#b1">, Bonabeau et al., 1999)</ref>. In this way, the colony can gather food quickly and efficiently.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">The Bees Algorithm</head><p>This section summarises the main steps of the Bees Algorithm. For more details, the reader is referred to <ref type="bibr">(Pham et al., 2006b</ref><ref type="bibr">, Pham et al., 2006a</ref><ref type="bibr" target="#b6">, Pham et al., 2005)</ref>. Figure <ref type="figure" target="#fig_0">1</ref> shows the pseudo code for the Bees Algorithm. The algorithm requires a number of parameters to be set, namely: number of scout bees (n), number of sites selected for neighbourhood searching (out of n visited sites) (m), number of toprated (elite) sites among m selected sites (e), number of bees recruited for the best e sites (nep), number of bees recruited for the other (m-e) selected sites (nsp), the initial size of each patch (ngh) (a patch is a region in the search space that includes the visited site and its neighbourhood), and the stopping criterion. The algorithm starts with the n scout bees being placed randomly in the search space. The fitnesses of the sites visited by the scout bees are evaluated in step 2.</p><p>1. Initialise population with random solutions. 2. Evaluate fitness of the population. 3. While (stopping criterion not met) //Forming new population. 4. Select sites for neighbourhood search. 5. Determine the patch size. 6. Recruit bees for selected sites (more bees for best e sites) and evaluate fitnesses. 7. Select the fittest bee from each patch. 8. Abandon sites without new information. 9. Assign remaining bees to search randomly and evaluate their fitnesses. 10. End While. In step 4, the m sites with the highest fitnesses are designated as "selected sites" and chosen for neighbourhood search. In step 5, patch size or the size of neighbourhood around the selected sites will be determined. In steps 6, the algorithm conducts searches around the selected sites, assigning more bees to search in the vicinity of the best e sites. Selection of the best sites can be made directly according to the fitnesses associated with them. Alternatively, the fitness values are used to determine the probability of the sites being selected. Searches in the neighbourhood of the best e sitesthose which represent the most promising solutionsare made more detailed. As already mentioned, this is done by recruiting more bees for the best e sites than for the other selected sites. Together with scouting, this differential recruitment is a key operation of the Bees Algorithm.</p><p>In step 7, for each patch, only the bee that has found the site with the highest fitness (the "fittest" bee in the patch) will be selected to form part of the next bee population. In nature, there is no such a restriction. This restriction is introduced here to reduce the number of points to be explored. In step 8, if searching around any selected sites can not produce a better solution, even by changing the neighbourhood size done in step 5, it is assumed that the patch is centred on a local peak of performance of the solution space. Once the neighbourhood search has found a local optimum, no further progress is possible. Consequently, the location of the peak is recorded and the exploration of the patch is terminated. This procedure is called henceforth "abandon sites without new information". In step 9, the remaining bees in the population are assigned randomly around the search space to scout for new potential solutions.</p><p>At the end of each iteration, the colony will have two parts to its new population: representatives from the selected patches, and scout bees assigned to conduct random searches. These steps are repeated until a stopping criterion is met.</p><p>As described above, the Bees Algorithm is suitable for unconstrained optimisation problems. If a problem involves constraints, a simple technique can be adopted to enable the optimisation to be applied. The technique involves subtracting a large number from the fitness of a particular solution that has violated a constraint in order drastically to reduce the chance of that solution being found acceptable. This was the technique adopted in this work. As both design problems were minimisation problems, a fixed penalty was added to the cost of any constraint-violating potential solution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">WELDED BEAM DESIGN PROBLEM</head><p>A uniform beam of rectangular cross section needs to be welded to a base to be able to carry a load of 6000 lbf . The configuration is shown in Figure <ref type="figure">2</ref>.</p><p>The beam is made of steel 1010.</p><p>The length L is specified as 14 . in . The objective of the design is to minimise the cost of fabrication while finding a feasible combination of weld thickness h, weld length l, beam thickness t and beam width b. The objective function can be formulated as <ref type="bibr" target="#b9">(Rekliatis et al., 1983)</ref> : Not all combinations of h, l, t and b which can support F are acceptable. There are limitations which should be considered regarding the mechanical properties of the weld and bar, for shear and normal stresses, physical constraints (no length less than zero) and maximum deflection. The constraints are as follows <ref type="bibr" target="#b9">(Rekliatis et al., 1983)</ref>: that the load on the beam is not greater than the allowable buckling load. The seventh constraint ( 7 g ) checks that the weld thickness is above a given minimum, and the last constraint ( <ref type="formula">8</ref>g ) is to ensure that the end deflection of the beam is less than a predefined amount. Normal and shear stresses and buckling force can be formulated as <ref type="bibr" target="#b11">(Shigley, 1973</ref><ref type="bibr" target="#b9">, Rekliatis et al., 1983)</ref>: </p><formula xml:id="formula_0">Min 2 12 (1 ) ( ) f chl c t bL l =+ + +<label>(</label></formula><formula xml:id="formula_1">1 0 d g τ τ =-≥ (2) 2 0 d g σ σ =-≥ (3) 3 0 gb h =-≥ (4)</formula><formula xml:id="formula_2">3 2.1952 tb σ = (10) 22 2 2 () ( ) ( ) 0 . 2 5 ( ( )) ll h t τττ τ τ ′′ ′ ′ ′ ′ =+ + + +<label>(</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">RESULTS AND DISCUSSION</head><p>The empirically chosen parameters for the Bees Algorithm are given in Table <ref type="table" target="#tab_0">1</ref> with the stopping criterion of 750 generations. The search space was defined by the following intervals <ref type="bibr" target="#b3">(Deb, 1991)</ref></p><formula xml:id="formula_3">: 0.125 5 h ≤≤ (13) 0.1 10 l ≤≤ (14) 0.1 10 t ≤≤ (15) 0.1 5 b ≤≤ (16)</formula><p>With the above search space definition, constraints 4 g , 5 g and 7 g are already satisfied and do not need to be checked in the code.  Figure <ref type="figure" target="#fig_4">3</ref> shows how the lowest value of the objective function changes with the number of iterations (generations) for three independent runs of the algorithm. It can be seen that the objective function decreases rapidly in the early iterations and then gradually converges to the optimum value.</p><p>A variety of optimisation methods have been applied to this problem by other researchers <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976</ref><ref type="bibr" target="#b3">, Deb, 1991</ref><ref type="bibr" target="#b4">, Leite and Topping, 1998)</ref>. The results they obtained along with those of the Bees Algorithm are given in Table <ref type="table" target="#tab_1">2</ref>. APPROX is a method of successive linear approximation <ref type="bibr" target="#b12">(Siddall, 1972)</ref>. DAVID is a gradient method with a penalty <ref type="bibr" target="#b12">(Siddall, 1972)</ref>. Geometric Programming (GP) is a method capable of solving linear and nonlinear optimisation problems that are formulated analytically <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref>. SIMPLEX is the Simplex algorithm for solving linear programming problems <ref type="bibr" target="#b12">(Siddall, 1972)</ref>.</p><p>As shown in Table <ref type="table" target="#tab_1">2</ref>, the Bees Algorithm produces better results than almost all the examined algorithms including the Genetic Algorithm (GA) <ref type="bibr" target="#b3">(Deb, 1991)</ref>, an improved version of the GA <ref type="bibr" target="#b4">(Leite and Topping, 1998)</ref>, SIMPLEX <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref> and the random search procedure RANDOM <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref>. Only APPROX and DAVID <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref> produce results that match those of the Bees Algorithm. However, as these two algorithms require information specifically derived from the problem <ref type="bibr" target="#b4">(Leite and Topping, 1998)</ref>, their application is limited. The result for GP is close to those of the Bees Algorithm but GP needs a very complex formulation <ref type="bibr" target="#b8">(Ragsdell and Phillips, 1976)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">CONCLUSION</head><p>A constrained optimisation problem was solved using the Bees Algorithm. The algorithm converged to the optimum without becoming trapped at local optima. The algorithm generally outperformed other optimisation techniques in terms of the accuracy of the results obtained. A drawback of the algorithm is the number of parameters that must be chosen. However, it is possible to set the values of those parameters after only a few trials.</p><p>Indeed, the Bees Algorithm can solve a problem without any special domain information, apart from that needed to evaluate fitnesses. In this respect, the Bees Algorithm shares the same advantage as global search algorithms such as the Genetic Algorithm (GA). Further work should be addressed at reducing the number of parameters and incorporating better learning mechanisms to make the algorithm even simpler and more efficient.  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Pseudo code of the Bees Algorithm.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><figDesc>Figure 2: A Welded Beam.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><figDesc>shear stress of weld = 13600 Psi ; τ = Maximum shear stress in weld; d σ = Allowable normal stress for beam material = 30000 Psi ; σ = Maximum normal stress in beam; c P = Bar buckling load; F = Load = 6000 lbf ; δ = Beam end deflection. The first constraint ( 1 g ) ensures that the maximum developed shear stress is less than the allowable shear stress of the weld material. The second constraint ( 2 g ) checks that the maximum developed normal stress is lower than the allowed normal stress in the beam. The third constraint ( 3 g ) ensures that the beam thickness exceeds that of the weld. The fourth and fifth constraints ( 4 g and 5 g ) are practical checks to prevent negative lengths or thicknesses. The sixth constraint ( 6 g ) makes sure</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Evolution of the lowest cost in each iteration.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Parameters of the Bees Algorithm for the welded beam design problem.</figDesc><table><row><cell>Bees Algorithm parameters</cell><cell>Symbol</cell><cell>Value</cell></row><row><cell>Population</cell><cell>n</cell><cell>80</cell></row><row><cell>Number of selected sites</cell><cell>m</cell><cell>5</cell></row><row><cell>Number of top-rated sites out of m selected sites</cell><cell>e</cell><cell>2</cell></row><row><cell>Initial patch size</cell><cell>ngh</cell><cell>0.1</cell></row><row><cell>Number of bees recruited for best e sites</cell><cell>nep</cell><cell>50</cell></row><row><cell>Number of bees recruited for the other (m-e) selected sites</cell><cell>nsp</cell><cell>10</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Results for the welded beam design problem obtained using the Bees Algorithm and other optimisation methods</figDesc><table><row><cell/><cell/><cell cols="2">Design variables</cell><cell/><cell/></row><row><cell>Methods</cell><cell/><cell/><cell/><cell/><cell>Cost</cell></row><row><cell/><cell>h</cell><cell>l</cell><cell>t</cell><cell>b</cell><cell/></row><row><cell>APPROX</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>(Ragsdell and</cell><cell>0.2444</cell><cell>6.2189</cell><cell>8.2915</cell><cell>0.2444</cell><cell>2.38</cell></row><row><cell>Phillips, 1976)</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>DAVID (Ragsdell</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>and Phillips,</cell><cell>0.2434</cell><cell>6.2552</cell><cell>8.2915</cell><cell>0.2444</cell><cell>2.38</cell></row><row><cell>1976)</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>GP (Ragsdell and Phillips, 1976)</cell><cell>0.2455</cell><cell>6.1960</cell><cell>8.2730</cell><cell>0.2455</cell><cell>2.39</cell></row><row><cell/><cell>0.2489</cell><cell>6.1730</cell><cell>8.1789</cell><cell>0.2533</cell><cell>2.43</cell></row><row><cell>GA (Deb, 1991)</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>Three independent</cell><cell>0.2679</cell><cell>5.8123</cell><cell>7.8358</cell><cell>0.2724</cell><cell>2.49</cell></row><row><cell>runs</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell/><cell>0.2918</cell><cell>5.2141</cell><cell>7.8446</cell><cell>0.2918</cell><cell>2.59</cell></row><row><cell>IMPROVED GA</cell><cell>0.2489</cell><cell>6.1097</cell><cell>8.2484</cell><cell>0.2485</cell><cell>2.40</cell></row><row><cell>(Leite and</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>Topping, 1998) Three</cell><cell>0.2441</cell><cell>6.2936</cell><cell>8.2290</cell><cell>0.2485</cell><cell>2.41</cell></row><row><cell>independent</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>runs</cell><cell>0.2537</cell><cell>6.0322</cell><cell>8.1517</cell><cell>0.2533</cell><cell>2.41</cell></row><row><cell>SIMPLEX</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>(Ragsdell and</cell><cell>0.2792</cell><cell>5.6256</cell><cell>7.7512</cell><cell>0.2796</cell><cell>2.53</cell></row><row><cell>Phillips, 1976)</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>RANDOM</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>(Ragsdell and</cell><cell>0.4575</cell><cell>4.7313</cell><cell>5.0853</cell><cell>0.6600</cell><cell>4.12</cell></row><row><cell>Phillips, 1976)</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>BEES</cell><cell>0.24429</cell><cell>6.2126</cell><cell>8.3009</cell><cell>0.24432</cell><cell>2.3817</cell></row><row><cell>ALGORITHM</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>Three</cell><cell>0.24428</cell><cell>6.2110</cell><cell>8.3026</cell><cell>0.24429</cell><cell>2.3816</cell></row><row><cell>independent</cell><cell/><cell/><cell/><cell/><cell/></row><row><cell>runs</cell><cell>0.24432</cell><cell>6.2152</cell><cell>8.2966</cell><cell>0.24435</cell><cell>2.3815</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>The research described in this paper was performed as part of the <rs type="projectName">Objective 1 SUPERMAN</rs> project, the <rs type="funder">EPSRC</rs> <rs type="projectName">Innovative Manufacturing Research Centre</rs> Project and the <rs type="funder">EC FP6 Innovative Production Machines and Systems (I*PROMS) Network of Excellence</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_K8RxqWU">
+					<orgName type="project" subtype="full">Objective 1 SUPERMAN</orgName>
+				</org>
+				<org type="funded-project" xml:id="_CpPagMR">
+					<orgName type="project" subtype="full">Innovative Manufacturing Research Centre</orgName>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Arora</surname></persName>
+		</author>
+		<title level="m">Introduction to Optimum Design</title>
+		<meeting><address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Elsevier</publisher>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">ARORA, J. S. (2004) Introduction to Optimum Design, New York, Elsevier.</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Swarm Intelligence: from Natural to Artificial Systems</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bonabeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dorigo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Theraulaz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<publisher>Oxford University Press</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">BONABEAU, E., DORIGO, M. &amp; THERAULAZ, G. (1999) Swarm Intelligence: from Natural to Artificial Systems, New York, Oxford University Press.</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Self-Organization in Biological Systems</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Camazine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-L</forename><surname>Deneubourg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">R</forename><surname>Franks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sneyd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Theraula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bonabeau</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+			<publisher>Princeton University Press</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">CAMAZINE, S., DENEUBOURG, J.-L., FRANKS, N. R., SNEYD, J., THERAULA, G. &amp; BONABEAU, E. (2003) Self-Organization in Biological Systems, Princeton, Princeton University Press.</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Optimal Design of a Welded Beam via Genetic Algorithm</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Deb</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AIAA Journal</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="2013" to="2015"/>
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">DEB, K. (1991) Optimal Design of a Welded Beam via Genetic Algorithm. AIAA Journal, 29, 2013- 2015.</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Improved Genetic Operators for Structural Engineering Optimization</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P B</forename><surname>Leite</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">H V</forename><surname>Topping</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Engineering Software</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="529" to="562"/>
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">LEITE, J. P. B. &amp; TOPPING, B. H. V. (1998) Improved Genetic Operators for Structural Engineering Optimization. Advances in Engineering Software, 29, 529-562.</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Application of the Bees Algorithm to the Training of Radial Basis Function Networks for Control Chart Pattern Recognition</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Pham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ghanbarzadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Koc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Otri</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">5th CIRP International Seminar on Intelligent Computation in Manufacturing Engineering (CIRP ICME '06)</title>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Teti</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Ischia, Italy</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">PHAM, D. T., GHANBARZADEH, A., KOC, E. &amp; OTRI, S. (2006a) Application of the Bees Algorithm to the Training of Radial Basis Function Networks for Control Chart Pattern Recognition. IN TETI, R. (Ed.) 5th CIRP International Seminar on Intelligent Computation in Manufacturing Engineering (CIRP ICME '06). Ischia, Italy.</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Pham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ghanbarzadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Koc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Otri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rahim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zaidi</surname></persName>
+		</author>
+		<title level="m">Technical Report MEC 0501-The Bees Algorithm</title>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+		<respStmt>
+			<orgName>Cardiff, Manufacturing Engineering Centre, Cardiff University</orgName>
+		</respStmt>
+	</monogr>
+	<note type="raw_reference">PHAM, D. T., GHANBARZADEH, A., KOC, E., OTRI, S., RAHIM, S. &amp; ZAIDI, M. (2005) Technical Report MEC 0501-The Bees Algorithm. Cardiff, Manufacturing Engineering Centre, Cardiff University.</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The Bees Algorithm, A Novel Tool for Complex Optimisation Problems</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Pham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ghanbarzadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Koc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Otri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rahim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zaidi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2nd Int Virtual Conf on Intelligent Production Machines and Systems (IPROMS 2006)</title>
+		<imprint>
+			<publisher>Oxford, Elsevier</publisher>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">PHAM, D. T., GHANBARZADEH, A., KOC, E., OTRI, S., RAHIM, S. &amp; ZAIDI, M. (2006b) The Bees Algorithm, A Novel Tool for Complex Optimisation Problems. 2nd Int Virtual Conf on Intelligent Production Machines and Systems (IPROMS 2006). Oxford, Elsevier.</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Optimal Design of a Class of Welded Structures Using Geometric Programming</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Ragsdell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Phillips</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ASME Journal of Engineering for Industry</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page" from="1021" to="1025"/>
+			<date type="published" when="1976">1976</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">RAGSDELL, K. M. &amp; PHILLIPS, D. T. (1976) Optimal Design of a Class of Welded Structures Using Geometric Programming. ASME Journal of Engineering for Industry, 98, 1021-1025.</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Engineering Optimisation Methods and Applications</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">V</forename><surname>Rekliatis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ravindrab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Ragsdell</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1983">1983</date>
+			<publisher>Wiley</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">REKLIATIS, G. V., RAVINDRAB, A. &amp; RAGSDELL, K. M. (1983) Engineering Optimisation Methods and Applications, New York, Wiley.</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">The Wisdom of the Hive: The Social Physiology of Honey Bee Colonies</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">D</forename><surname>Seeley</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1996">1996</date>
+			<publisher>Harvard University Press</publisher>
+			<pubPlace>Cambridge, Massachusetts</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">SEELEY, T. D. (1996) The Wisdom of the Hive: The Social Physiology of Honey Bee Colonies, Cambridge, Massachusetts, Harvard University Press.</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Shigley</surname></persName>
+		</author>
+		<title level="m">Mechanical Engineering Design</title>
+		<meeting><address><addrLine>Ney York</addrLine></address></meeting>
+		<imprint>
+			<publisher>McGraw-Hill</publisher>
+			<date type="published" when="1973">1973</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">SHIGLEY, J. E. (1973) Mechanical Engineering Design, Ney York, McGraw-Hill.</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Analytical Decision-making in Engineering Design</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">N</forename><surname>Siddall</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1972">1972</date>
+			<publisher>Prentice-Hall</publisher>
+			<pubPlace>New Jersey</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">SIDDALL, J. N. (1972) Analytical Decision-making in Engineering Design, New Jersey, Prentice-Hall.</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">K</forename><surname>Von Frisch</surname></persName>
+		</author>
+		<title level="m">Bees: Their Vision, Chemical Senses and Language</title>
+		<meeting><address><addrLine>Ithaca, N.Y.</addrLine></address></meeting>
+		<imprint>
+			<publisher>Cornell University Press</publisher>
+			<date type="published" when="1976">1976</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">VON FRISCH, K. (1976) Bees: Their Vision, Chemical Senses and Language, Ithaca, N.Y., Cornell University Press.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
