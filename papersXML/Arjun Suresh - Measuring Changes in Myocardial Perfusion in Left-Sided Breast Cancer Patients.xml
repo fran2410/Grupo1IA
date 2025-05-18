@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Measuring Changes in Myocardial Perfusion in Left-Sided Breast Cancer Patients</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Arjun</forename><surname>Suresh¹</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Newsome High School</orgName>
+								<address>
+									<settlement>Lithia, Florida</settlement>
+									<country>U.S</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">W</forename><surname>O'dell²</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">Department of Radiation Oncology</orgName>
+								<orgName type="department" key="dep2">College of Medicine</orgName>
+								<orgName type="institution">University of Florida</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Measuring Changes in Myocardial Perfusion in Left-Sided Breast Cancer Patients</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">6840C9CB34BB8C4B0EFE09DEB56108C0</idno>
+					<idno type="DOI">10.5281/zenodo.14643830</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-12T17:53+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>SSTP -MIACA Lab myocardial perfusion</term>
+					<term>radiation therapy</term>
+					<term>Left Ventricle Ejection Fraction (LVEF)</term>
+					<term>cardiac toxicity</term>
+					<term>breast cancer</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Left-sided Breast Cancer patients often undergo radiation therapy, including Proton or Photon Therapy, which can affect nearby cardiac structures, causing chronic vascular damage and fibrosing inflammation. This leads to microvascular changes in the heart, manifesting as reduced perfusion and cardiac motion. Advances in 3-dimensional imaging have detailed the actual radiation doses received by critical cardiac structures, revealing the significance of low-dose radiation injury in breast cancer patients. Our study aims to delve deeper into the relationship between changes in myocardial perfusion and heart function (EF), comparing post-treatment images of X-ray (photon therapy) and proton therapy patients. This research highlights the complexity of the relationship between myocardial perfusion and heart function. Understanding these compensatory mechanisms and their impact on perfusion and overall cardiac function is crucial. Our findings emphasize the need for further study to refine our models and improve clinical interventions, ultimately aiming to reduce radiation-induced cardiac injury and improve the survival and quality of life for breast cancer patients undergoing RT.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. Introduction</head><p>Perfusion, the process of delivering blood to the capillary beds in biological tissue, is crucial for maintaining heart function. Adequate perfusion ensures that cardiac tissues receive sufficient oxygen and nutrients necessary for optimal functioning. Left Ventricle Ejection Fraction (LVEF) is a measurement used to assess the functioning of the left ventricle of the heart, which is responsible for pumping oxygenated blood to the rest of the body. LVEF represents the percentage of blood that is ejected from the left ventricle with each heartbeat. It helps in determining the severity of heart failure and guiding treatment strategies. A reduced LVEF (typically less than 35%) indicates that the heart is not pumping efficiently, which is a key marker of systolic heart failure. There are more than 2.3 million women currently suffering from Breast Cancer (BC) in the world <ref type="bibr" target="#b0">[1]</ref>, and over 260,000 new breast cancer diagnoses annually in the United States. Approximately 0.5 million people succumb to this cancer and pass away each year <ref type="bibr" target="#b1">[2]</ref>. Most of the patients undergo radiation treatment to kill cancer cells and shrink tumors <ref type="bibr" target="#b2">[3]</ref>. When breast cancer patients undergo Proton or Photon Therapy (types of Radiation Therapy (RT)), to destroy the tumor cells, the region of treatment includes the affected breast and neighboring chest wall. The late presentation of radiation-induced cardiac symptoms makes it challenging to quantify the true incidence of RT-related toxicity. Over the past decade, advances in 3-dimensional imaging and mapping of radiation dose distributions have provided detailed knowledge of the actual radiation doses received by critical cardiac structures. The importance of low-dose radiation injury to the heart in breast cancer patients has only recently been recognized. These injuries can cause changes in LVEF.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 1: CT Scan of Chest acquired from our patient dataset</head><p>As shown in Fig. <ref type="figure">1</ref>, the radiation often hits portions of the heart wall lying near the chest wall (in this case, it hits the left side of the heart), causing chronic vascular damage and fibrosing inflammation that leads to microvascular changes in the heart, manifesting as reduced perfusion and, subsequently, reduced cardiac motion.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. Literature Review</head><p>Earlier studies in this area have primarily relied on the mean heart dose (MHD) as the primary metric for assessing the impact of radiation dose on the heart <ref type="bibr" target="#b3">[4]</ref>. S. C. Darby et al in <ref type="bibr" target="#b4">[5]</ref> conducted a study of major coronary events in women who underwent radiotherapy for breast cancer and estimated mean radiation doses to the whole heart and the left anterior descending coronary artery from a radiotherapy chart. <ref type="bibr" target="#b5">[6]</ref> found the incidence of major coronary events increases linearly as the mean radiation dose to the heart increases. Recent research indicates that it is important to consider the cumulative radiation dose as well as the spatial distribution of radiation dose to the sub volume of heart to accurately evaluate the risk of cardiac toxicity. A previous study <ref type="bibr" target="#b6">[7]</ref> that focused on this area of the research measured radiation-induced defects in perfusion, but it compared the mean radiation dose to the heart with the subsequent changes in LVEF as shown in Fig. <ref type="figure">2</ref>, and it did not account for changes in perfusion. Therefore, we plan to delve deeper than <ref type="bibr" target="#b6">[7]</ref> and study whether changes in perfusion affect heart function. Through this, we seek to find how this is demonstrated when the EF is graphed against perfusion changes. A pilot study by our lab compared left ventricular (LV) dysfunction following conventional photon-based radiation therapy versus proton therapy in women with left-sided breast cancer. We observed a significant decline in LVEF as a function of MHD. However, although similar experiments have been conducted, there has not been a comprehensive study studying how differences in radiation dose can cause abnormal perfusion, and how this can cause changes in heart function. This analysis aims to fill that gap, providing insights into how different radiation therapies impact cardiac perfusion and function. Our overall goal would be to compare the severity of perfusion changes with the severity of heart function measured with LVEF. This knowledge will help identify when a patient needs clinical intervention to avoid future heart failure.</p><p>Our study is crucial as it helps us to understand the relationship between abnormal changes in perfusion and the overall long-term function of the heart. Poor perfusion results in inadequate delivery of blood to meet the body's needs, which has the potential to lead to heart failure. The heart compensates by enlarging, and developing more muscle mass, which causes the other sectors of the heart to pump faster, but these compensatory mechanisms can fail over time. Thus, understanding how abnormal perfusion changes affect the heart is of utmost importance. It also further leads back to reducing or eliminating radiation-induced cardiac injury and mortality as it may improve survival and quality of life for patients treated for breast cancer.</p><p>We hypothesize that decreases in left ventricle ejection fraction is directly proportional to reductions in perfusion in left-side breast cancer patients, when comparing post-treatment images of X-ray (photon therapy) patients to proton therapy patients.</p><p>The relationship between cardiac perfusion and heart function is a critical area of study in cardiology, particularly in understanding and managing heart diseases. One key metric in this domain is the LVEF, which quantifies the percentage of blood ejected from the left ventricle with each heartbeat. This work aims to underscore the importance of monitoring LVEF to evaluate heart health, guide treatment decisions, and predict outcomes in patients with various cardiac conditions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. Methods</head><p>Currently, we have a 14-patient dataset for which we have obtained the perfusion images for pre-and-post-RT, so as to compare the changes in heart function before and after RT. The patients included in this study met the following criteria:</p><p>(1) a confirmed diagnosis of left-sided breast cancer; (2) undergoing pre/post RT. Our team was dedicated to ensuring that all research procedures were executed in a responsible and compliant manner, adhering to all relevant guidelines and regulations.</p><p>The perfusion series is typically 3 short-axis slices with 50 images in each. A contrast agent is injected into the patient's vein and the image acquisition is timed to match the start of the injection. Each image represents a heartbeat and is acquired at the same phase in the cardiac cycle. The patient is asked to hold their breath as long as they are able to and the first 25-30 images are fairly stationary. After the patient takes a breath, the heart moves. Each pixel within the heart wall (myocardium) represents the time it takes for the contrast agent to reach that location. Delays in either the time for contrast to appear or the time it takes to disappear can reflect a perfusion deficit. Our goal was to quantify the contrast update curve at different regions around the left ventricle. Since the heart is constantly beating and because of low signal, we averaged the pixel intensity profile over several adjacent pixels. Heart perfusion rates were calculated by measuring the uptake of the contrast agent injected into the bloodstream, and then analyzing the rate at which the tracer washes out from the heart muscle. The program's tasks were to load the images; for each slice select a reference time; segment the left ventricle myocardium; register all 50 slices for that slice to the reference time; divide the LV into 4-8 regions circumferentially; identify adjacent pixels within each region that are away from the border to avoid artifacts; average the pixels in each region and output to file. We then used Microsoft Excel to plot the uptake curves and compute the metrics of the slope of the curve, time from initial uptake to peak intensity (TTP).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 3: Selecting ROI and Reference Time</head><p>Going into more detail about the process, firstly we selected a reference time before the heart moves noticeably (when the patient breathes) and drew a region of interest (ROI) that is centered on the middle of the LV cavity and is large enough to encompass the LV myocardium at all time points (as shown in Fig. <ref type="figure">3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 4: Angle at the septum is being selected</head><p>Next, we identify the crescent-shaped blood/cavity of the right ventricle and the rough locations where the RV wall attaches to the LV wall. We select a point halfway between those locations (as seen in Fig. <ref type="figure">4</ref>). The angle at this point is used to help align the heart from one time point to another, and from one patient to another.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 5: Snake Contouring of Left Ventricle</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig. 6: Program takes the average of the pixels</head><p>After that, we segment the Endo and Epi contours by adjusting the contour snake such that it encompasses the Left Ventricle as precisely as possible (as shown in Fig. <ref type="figure">5</ref>). This then results in the program taking the average over all pixels in each sector (as shown in Fig. <ref type="figure">6</ref>). Finally, we used Desmos to find the difference between time taken for pre and post perfusion rates, and graphed the perfusion Rate against EF using the data obtained.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig.7: Output graph of LV Cavity against Time</head><p>There are currently 14 perfusion patient datasets available for analysis (collected by the Medical Imaging And Computational Analysis Lab, University of Florida) and the software being used to measure the LVEF is ImageJ. However, out of these 14 patients, 3 perfusion datasets (Patients 5, 6, 12) were omitted due to the data being too noisy. Fig. <ref type="figure">7</ref> shows the graph which is plotted at the end of the analysis program. It graphs the perfusion of the LV cavity against time. This served as a reference which we then compared to the perfusion rates of Region 3 of Slice 2, as according to <ref type="bibr" target="#b5">[6]</ref>, Region 17 and 18 of the heart (based on American Heart Association's 20 sector model <ref type="bibr" target="#b7">[8]</ref>) faces most radiation in the bottom slice so we focused on that. This corresponded to Region 3 of Slice 2 of our analysis. This region receives the most radiation during RT.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig.8: Analysis of Pre-Treatment Curve in Patient 3, Y-Axis: Perfusion of LV cavity, X-Axis: Time</head><p>As shown in Fig. <ref type="figure">8</ref>, we focused on the time interval from 12 to 30 seconds as the contrast agent was injected only after 12 seconds, and after 30 seconds, the patient starts to breathe which makes the data inconsistent outside the 12-30 second time interval. A line of Best Fit was used to find the time delay for each patient. We used the following formula to apply the Best Fit Sigmoid Curve to match the trends shown as close as possible: We then found the difference between the 'd' values of the LV Cavity and the Pre / Post curve to find the Perfusion Rate. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Table 1: Results of our Analysis of Perfusion Rates for each patient (Ranked in order of Increasing EF)</head><p>Table <ref type="table">1</ref> compares the difference between the Perfusion Rates for Pre and Post Treatment patients, with changes in EF. We did not use Patient 14, however; as the patient had heart failure and thus had her heart artificially boosted, which therefore led to an artificially high EF. Nevertheless, we believed it was crucial to include this in the table as although other factors could have caused 14's heart failure, we theorize that it could be due to long term effects of high radiation received by the heart from X-Rays during RT.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig.9: Graph of difference between perfusion rates of Pre and Post RT (seconds) against LVEF (%)</head><p>In the end, we graphed the data from Table <ref type="table">1</ref> and obtained the graph as shown in Fig. <ref type="figure">9</ref>. We omitted Patient 14 since the patient's heart was artificially boosted as stated earlier.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. Discussion</head><p>Our original hypothesis was that changes in heart function (EF) affect myocardial perfusion. We conducted this experiment with the notion that if the EF is high, the heart is performing well, resulting in less time taken for the blood to circulate through the body (lesser perfusion), as a high EF indicates that the heart is effectively pumping a significant amount of blood with each beat at a faster time. Moreover, we also hypothesized that therefore, we would obtain a greater post difference in perfusion between Pre and Post RT for X-ray patients than PT patients as X-ray patients typically receive more radiation dose than PT patients. However, the graph we obtained (Fig. <ref type="figure">9</ref>) showed that there was no definite relationship between EF and Perfusion Rate as though the EF was high for some patients, they still had lower Perfusion than patients with lower EF. Therefore, a conclusive trend between the difference in Perfusion between Pre and Post RT and EF could not be established, which does not support our hypothesis. Hence, this could mean that there is more to our project than what was expected of our simple model. The body could be compensating for the damage in one sector by expanding the other sectors and causing them to exert extra effort. This may have caused the unpredictable changes in the Perfusion rates. There could be an unlikely possibility that the damage to the heart was not significant enough (smaller LVEF) to show a strong reduction in perfusion. While proton therapy is generally considered to reduce radiation exposure to the heart compared to conventional photon therapy, some studies have examined its potential long-term effects on cardiac health. <ref type="bibr" target="#b8">[9]</ref> discusses how radiation therapy, including proton therapy, can lead to radiation-induced cardiovascular disease, which may manifest as cardiomyopathy, coronary artery disease, and valvular heart disease. Thus, long-term effects of proton therapy, although a better alternative to x-rays, still does damage the heart and thus we would expect a gradual reduction in heart function with proton therapy. Therefore, this is an area of the field that needs to be studied more to understand the situation that arises better.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fig.10: Graph of difference between perfusion rates of Pre and Post RT against EF for Patient 5 5.1 Limitations</head><p>There was some amount of noise when collecting the perfusion data from the patient. This caused the graph to be very inconsistent during the desired time interval from 12-30 seconds, as shown in Fig. <ref type="figure">10</ref>. Therefore, we had to discard this patient's data to avoid inaccurate trends. Hence, it prevented us from having more data by introducing measurement uncertainty to the study. If we had had this data, it would have helped us make a more conclusive statement about the trend. Moreover, the data from 0-12 seconds was also wasted as the contrast agent was only injected after 12 seconds. Thus, the patient could only hold their breath for about 20 more seconds after the contrast agent was injected. Hence, a shorter time interval had to be used for analysis. The subjective nature of analyzing the scans and applying the method to could be another limitation. This introduces variability and bias into the results. Since different clinicians may interpret images differently, there is a risk that inconsistent or non-standardized assessments could affect the reliability and accuracy of the findings. Variability in how practitioners apply the method could also lead to inconsistent conclusions, making it harder to draw generalizable or reproducible results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Future directions</head><p>During the data collection process, when injecting the contrast agent in the patient, we could inject it first and wait 10s. This gives the chemical ample time to travel to the heart. We could then tell the patient to hold their breath. This allows us to get the trend for a longer time interval. Therefore, changing the protocols could lead to more accurate results as it is tough for the patients to hold their breath for that long.</p><p>There is also much potential in this field for future research as our hypothesis, which is highly logical -a greater EF means that that the heart is supposed to be working well which should in theory lead to a lower time taken for the heart to pump blood to the body (greater rate of myocardial perfusion). However, our results have shown that this is not the case as we could not establish a concrete positive relationship which suggests that other factors might be at work. We posit that it is the heart's compensatory mechanisms at work. This suggests that our project encompasses more complexity than initially anticipated with our simple model. Therefore, further study in this area is essential to better understand this unpredictability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VI. Conclusion</head><p>Our initial hypothesis posited that changes in heart function directly affect myocardial perfusion, as measured by EF. We conducted this study with the presumption that a high EF would indicate that the heart is performing well, resulting in a faster circulation of blood through the body, which we interpreted as lower perfusion times. Additionally, we hypothesized that post-treatment perfusion differences would be greater in patients receiving X-ray RT compared to those receiving proton therapy (PT), due to the typically higher radiation dose in X-ray treatments.</p><p>However, our results did not support this hypothesis. The data showed no consistent relationship between EF and perfusion rates; some patients with high EF still exhibited lower perfusion rates than those with lower EF, and vice versa. This lack of a clear trend suggests that there is more to our original model than our analysis can provide. These findings highlight the complexity of the relationship between myocardial perfusion and heart function. Specifically, damage in one area of the heart may be offset by increased effort from other sectors, and the body's compensatory mechanisms might be at play, leading to unpredictable changes in perfusion rates. The absence of a definitive correlation between EF and perfusion rate changes indicates that further research is needed to fully understand these dynamics. Future studies should investigate the compensatory mechanisms of the heart and how they affect perfusion and overall cardiac function.</p><p>Additionally, examining the mechanisms of sectoral compensation could provide insights into developing more accurate models and potential therapeutic interventions. If the hypothesis were supported, it would suggest that proton therapy is more effective than photon therapy in preserving heart function in left-side breast cancer patients by increasing left ventricle ejection fraction and enhancing cardiac perfusion. This would be valuable for both patients and practitioners, as it could reduce the risk of radiation-induced cardiovascular complications like coronary artery disease and heart failure, especially in younger patients or those with preexisting conditions. It could guide treatment decisions to prioritize proton therapy, improving long-term health outcomes and reducing the likelihood of heart-related issues post-treatment, thereby ensuring a more holistic approach to breast cancer care. Understanding how different sectors interact and adapt to damage could lead to innovative strategies to manage and mitigate the effects of RT on perfusion rates and overall bodily function.</p><p>Understanding these mechanisms is crucial, not only for refining our models but also for improving clinical interventions. By gaining deeper insights into how different radiation therapies impact cardiac perfusion and function, we can better predict and manage the long-term cardiovascular health of breast cancer patients undergoing RT. By using proton therapy, which more precisely targets the tumor and spares surrounding healthy tissues, including the heart, the overall radiation dose to the heart is minimized. This reduction in exposure lowers the risk of these radiation-induced cardiac injuries, preserving heart function and improving long-term cardiovascular health for patients. In essence, minimizing cardiac radiation exposure helps ensure that patients survive cancer treatment without developing significant heart-related issues later on.This knowledge will be instrumental in reducing radiation-induced cardiac injury, thereby improving survival rates and quality of life for these patients.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>•</head><label></label><figDesc>y: Perfusion of LV cavity • x: Time • -a: The vertical shift of the sigmoid curve. It determines the baseline value of y when x is at its midpoint. • b: The scaling factor that affects the steepness of the curve. A larger b value results in a steeper curve, while a smaller b value makes the curve more gradual. • c: The rate of growth or decay. It influences how quickly the function transitions from its minimum to maximum values. • d: The horizontal shift of the sigmoid curve. It determines the value of x at which the function reaches its midpoint.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,131.46,96.93,343.89,231.71" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,178.50,419.15,274.48,225.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="5,73.50,376.57,468.00,233.25" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="6,86.63,103.92,438.75,210.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="6,132.38,492.09,347.25,174.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="8,73.50,73.50,468.00,222.75" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="9,100.88,105.24,410.25,237.00" type="bitmap" /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VII. Acknowledgements</head><p>I would like to acknowledge and give my warmest thanks to my Research Mentor Dr Walter O'Dell whose guidance for my project was valuable. I would also like to thank my lab mate Maia Gueron, High School Student, Student Science Training Program for her comments and suggestions.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Breast Cancer Statistics</title>
+		<ptr target="https://www.who.int/news-room/fact-sheets/detail/breast-cancer" />
+		<imprint>
+			<date type="published" when="2024-06-30">Jun. 30, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<author>
+			<persName><forename type="first">F</forename><surname>Cardoso</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.breast.2018.03.002</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Global analysis of advanced/metastatic breast cancer: Decade report</title>
+				<imprint>
+			<date type="published" when="2005">2005-2015. Jun. 2018</date>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="131" to="138" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Radiation Therapy for Cancer -NCI</title>
+		<ptr target="https://www.cancer.gov/about-cancer/treatment/types/radiation-therapy" />
+		<imprint>
+			<date type="published" when="2024-06-30">Jun. 30, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Exposure of the heart in breast cancer radiation therapy: A systematic review of heart doses published during 2003 to 2013</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Macaulay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jagsi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Duane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Darby</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijrobp.2015.07.2292</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Int J Radiat Oncol Biol Phys</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="845" to="853" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Risk of Ischemic Heart Disease in Women after Radiotherapy for Breast Cancer</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Darby</surname></persName>
+		</author>
+		<idno type="DOI">10.1056/nejmoa1209825</idno>
+	</analytic>
+	<monogr>
+		<title level="j">New England Journal of Medicine</title>
+		<imprint>
+			<biblScope unit="volume">368</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="987" to="998" />
+			<date type="published" when="2013-03">Mar. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Integrating subvolume dose and myocardial perfusion imaging parameters to assess the impact of radiation therapy on heart function in breast cancer patients: A comparative analysis between left-and right-sided breast cancer</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1759-7714.15056</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Thorac Cancer</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">26</biblScope>
+			<biblScope unit="page" from="2696" to="2706" />
+			<date type="published" when="2023-09">Sep. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Measuring early changes in heart function due to radiation treatment in breast cancer patients</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">G</forename><surname>O'dell</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ahjo.2023.100349</idno>
+	</analytic>
+	<monogr>
+		<title level="j">American Heart Journal Plus: Cardiology Research and Practice</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<date type="published" when="2024-02">Feb. 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Standardized Myocardial Segmentation and Nomenclature for Tomographic Imaging of the Heart</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Manuel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Cerqueira</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Radiation-Induced Cardiovascular Disease: Review of an Underrecognized Pathology</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

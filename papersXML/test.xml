@@ -1,0 +1,1484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Typeset using</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability  status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2024-12-30">30 Dec 2024</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Space Telescope Science Institute</orgName>
+								<address>
+									<addrLine>3700 San Martin Dr</addrLine>
+									<postCode>21218</postCode>
+									<settlement>Baltimore</settlement>
+									<region>MD</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Physics &amp; Astronomy</orgName>
+								<orgName type="institution">Johns Hopkins University</orgName>
+								<address>
+									<addrLine>3400 N Charles St</addrLine>
+									<postCode>21218</postCode>
+									<settlement>Baltimore</settlement>
+									<region>MD</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">Johns Hopkins University</orgName>
+								<address>
+									<addrLine>3400 N Charles St</addrLine>
+									<postCode>21218</postCode>
+									<settlement>Baltimore</settlement>
+									<region>MD</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Typeset using</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2024-12-30">30 Dec 2024</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E765605F880DD22BD2693EA7D272C03C</idno>
+					<idno type="arXiv">arXiv:2501.00089v1[astro-ph.GA]</idno>
+					<note type="submission">Draft version January 3, 2025</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.2-SNAPSHOT" ident="GROBID" when="2025-05-18T09:36+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Galaxies (573)</term>
+					<term>Astronomy image processing (2306)</term>
+					<term>Convolutional neural networks (1938)</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Galaxy appearances reveal the physics of how they formed and evolved. Machine learning models can now exploit galaxies' information-rich morphologies to predict physical properties directly from image cutouts. Learning the relationship between pixel-level features and galaxy properties is essential for building a physical understanding of galaxy evolution, but we are still unable to explicate the details of how deep neural networks represent image features. To address this lack of interpretability, we present a novel neural network architecture called a Sparse Feature Network (SFNet). SFNets produce interpretable features that can be linearly combined in order to estimate galaxy properties like optical emission line ratios or gas-phase metallicity. We find that SFNets do not sacrifice accuracy in order to gain interpretability, and that they perform comparably well to cutting-edge models on astronomical machine learning tasks. Our novel approach is valuable for finding physical patterns in large datasets and helping astronomers interpret machine learning results.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">INTRODUCTION</head><p>Galaxies have spectacularly information-rich appearances. For a hundred years, astronomers have categorized galaxies on the basis of morphology and colors seen in optical imaging, and they have noted correlations between galaxies' physical properties and these simple morphological classifications (e.g., <ref type="bibr" target="#b25">Hubble 1926;</ref><ref type="bibr" target="#b60">Zwicky 1959;</ref><ref type="bibr" target="#b45">Sandage 1961;</ref><ref type="bibr" target="#b32">Lintott et al. 2008;</ref><ref type="bibr" target="#b34">Masters &amp; Galaxy Zoo Team 2020)</ref>. However, until very recently, there has been no way to connect the physics of galaxy formation and evolution with their detailed appearances.</p><p>Deep neural networks that exploit pixel-scale information from images can now robustly predict galaxy properties; optical images of galaxies contain enough information to constrain their physical characteristics (e.g., <ref type="bibr">Wu et al. 2019;</ref><ref type="bibr" target="#b54">Wu 2020;</ref><ref type="bibr" target="#b8">Buck &amp; Wolf 2021)</ref>. In fact, entire galaxy spectra can be estimated directly from image cutouts of individual galaxies <ref type="bibr" target="#b57">(Wu &amp; Peek 2020;</ref><ref type="bibr" target="#b24">Holwerda et al. 2021;</ref><ref type="bibr" target="#b14">Doorenbos et al. 2022</ref><ref type="bibr" target="#b15">Doorenbos et al. , 2024;;</ref><ref type="bibr" target="#b40">Parker et al. 2024)</ref>. This last discovery highlights the jowu@stsci.edu promise of machine learning (ML) in the physical sciences. By leveraging deep learning models such as convolutional neural networks (CNNs), we can derive valuable physical constraints from plentiful galaxy images (Huertas-Company &amp; Lanusse 2023; <ref type="bibr" target="#b40">Parker et al. 2024)</ref>. So machines are capable of learning physics from galaxy imaging-but what about us astronomers?</p><p>Two major challenges arise when we try to interpret physics from deep neural networks. First, each neuron in the network represents a non-linear combination of features, resulting in uninterpretable mess of features (known as the "superposition" problem; <ref type="bibr" target="#b17">Elhage et al. 2022)</ref>. Second, each neuron can also be activated in multiple independent contexts, and can thus take on multiple meanings (known as "polysemanticity," see e.g., <ref type="bibr" target="#b19">Geva et al. 2021)</ref>. In other words, neuron values are not one-to-one with learned concepts. Superposition and polysemanticity allow neural networks to increase their capacity for storing features <ref type="bibr" target="#b36">(Olah et al. 2020;</ref><ref type="bibr" target="#b17">Elhage et al. 2022;</ref><ref type="bibr" target="#b44">Räuker et al. 2023</ref>); these phenomena are topics of cutting-edge ML research, and we present an extended discussion in Appendix A. Unfortunately, they also obscure the interpretation and contribution of any specific neuron, preventing us from understanding the physics behind the patterns that ML models learn.</p><p>Fortunately, there exists a strategy to combat these issues in ML. Sparse coding represents data using a small number of active elements from a larger set of basis functions <ref type="bibr" target="#b38">(Olshausen &amp; Field 1996;</ref><ref type="bibr" target="#b29">Lee et al. 2006)</ref>, making it easier to inspect the individual features that contribute to ML model predictions (e.g., <ref type="bibr" target="#b37">Olah et al. 2017)</ref>. Recently, sparse ML algorithms have been used in the artificial intelligence community to disentangle the internal activations of large language models <ref type="bibr" target="#b42">(Radford et al. 2019)</ref>, and mitigate the problems of superposition and polysemanticity <ref type="bibr" target="#b33">(Makhzani &amp; Frey 2014;</ref><ref type="bibr" target="#b10">Cunningham et al. 2023;</ref><ref type="bibr" target="#b39">O'Neill et al. 2024;</ref><ref type="bibr" target="#b49">Templeton et al. 2024)</ref>. Therefore, sparse coding can reveal the mechanics of how deep neural networks learn.</p><p>We introduce a novel, interpretable CNN for images: a Sparse Feature Network (SFNet). CNNs encode image data from a high-dimensional pixel space (n ∼ 10 5 pixels) into a lower-dimensional latent space (d ∼ 10 3 features). To disentangle the learned features, we enforce a k-sparse constraint while training our ML model: only k ≪ d features are allowed to have non-zero activations for each image example. By keeping just the top k activating features, sparse algorithms are forced to consolidate features into the fewest possible neurons. Our SFNet activates k features per image in its penultimate layer, and makes predictions by using a linear combination of the sparse activations. Since we only add a top-k constraint to a standard CNN architecture, this modification incurs zero extra computational cost or memory.</p><p>We train the SFNet to predict galaxy properties from image cutouts according to the methodology described in Section 2. In Section 3, we show that the SFNet achieves robust performance while learning interpretable features. We discuss these results further in Section 4, and state our conclusions in Section 5.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">METHODOLOGY</head><p>We select galaxies from the SDSS Main Galaxy Sample <ref type="bibr" target="#b48">(Strauss et al. 2002;</ref><ref type="bibr" target="#b0">Abazajian et al. 2009</ref>) that have emission line signal-to-noise ratios greater than 3 for [N II] λ6584, Hα λ6564, [O III] λ5007, and Hβ λ4861, where each line is designated by its rest wavelength in Angstroms. In addition to galaxy line fluxes, we compile physical properties derived from fitting spectral energy distribution models to SDSS photometry and spectra <ref type="bibr" target="#b27">(Kauffmann et al. 2003;</ref><ref type="bibr">Brinchmann et al. 2004;</ref><ref type="bibr" target="#b50">Tremonti et al. 2004</ref>). For all galaxies, we obtain griband 144 × 144 image cutouts resampled at 0.262 arcsec per pixel resolution from the Legacy Survey website <ref type="bibr" target="#b12">(Dey et al. 2019)</ref>. Our SDSS sample comprises 250,207 galaxies in total.</p><p>Our SFNet implementation is shown in Figure <ref type="figure">1</ref>. We use a CNN architecture identical to the resnet18 <ref type="bibr" target="#b23">(He et al. 2015)</ref>, except that we insert a top-k operation before the final linear layer. This additional top-k layer guarantees that each prediction is a linear combination of k sparse features. We use d = 512 latent features (after the average pooling layer) and set k = 4. Later, in Section 4.3, we vary k ∈ {2, 3, 4, 6, 8}. Thus, the SFNet learns a representation of each galaxy using just a few features out of a library of 512 possible features. Critically, the features activate directly after the convolution layers, so that morphological features are localized in pixel space.</p><p>The resnet18 backbone of the model is initialized to ImageNet-pretrained weights <ref type="bibr" target="#b11">(Deng et al. 2009)</ref>, and we update model parameters by minimizing the root mean squared error. We randomly designate 20% of objects for validation, and train on the remainder. Random flips are applied for data augmentation. We train for 20 epochs using the ranger optimizer <ref type="bibr" target="#b53">(Wright &amp; Demeure 2021</ref>) and an initial learning rate of 0.1 with a flat+cosine annealing schedule. All code and the trained models presented here can be found in our public Github repository: <ref type="url" target="https://github.com/jwuphysics/sparse-feature-networks">https://github.com/jwuphysics/ sparse-feature-networks</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">RESULTS</head><p>Motivated by previous works that connect galaxy imaging with their physical properties <ref type="bibr" target="#b56">(Wu &amp; Boada 2019;</ref><ref type="bibr" target="#b57">Wu &amp; Peek 2020;</ref><ref type="bibr" target="#b21">Grover et al. 2021;</ref><ref type="bibr" target="#b24">Holwerda et al. 2021)</ref>, we train the SFNet to predict spectroscopic line fluxes (Section 3.1) and gas-phase metallicity (3.2) directly from image cutouts. We identify the learned features using their sparse activation index, e.g., SL 17 for the 17th feature of a SFNet trained to predict spectral lines fluxes, or Z 256 for the 256th feature of a SFNet trained to predict gas-phase metallicity. Feature activations are scaled between 0 and 1, and we refer to these example activation strengths as A SL 17 and A Z 256 , respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Emission line fluxes</head><p>We train a SFNet to predict the spectral line fluxes for [N II], Hα, [O III], and Hβ. These lines can diagnose a galaxy's global ionization state; for example, the line ratios [N II]/Hα against [O III]/Hβ comprise the BPT diagram <ref type="bibr" target="#b3">(Baldwin et al. 1981)</ref>, which is commonly used to differentiate activate galactic nuclei (AGN) from starforming galaxies. Other physical processes can also affect these line strengths, including stellar evolution/age,</p><p>Input 3x3 conv, 64 3x3 conv, 64 3x3 conv, 64 3x3 conv, 64 3x3 conv, 128, /2 3x3 conv, 128 3x3 conv, 128 3x3 conv, 128 3x3 conv, 256, /2 3x3 conv, 256 3x3 conv, 256 3x3 conv, 256 3x3 conv, 512, /2 3x3 conv, 512 3x3 conv, 512 3x3 conv, 512 Avg pool, /2 Top-k Linear Max pool, /2 7x7 conv, 64</p><p>Figure 1. Our SFNet architecture, which resembles a resnet18 modified with a penultimate "Top-k" layer to ensure interpretable, sparse image features. A 3x3 conv, 128, /2 block denotes a 3 × 3 2D convolution layer with 128 channels that downsamples the image size by a factor of 2. Each convolution layer is followed by batch normalization and then a ReLU activation function. Arrows show how inputs flow through the network, and when two inputs are sent as inputs to the same layer, they are concatenated together (i.e. a residual connection).</p><p>AGN, gas metallicity, gas physical state, and dust attenuation.</p><p>The eight most frequently activated features explain 99.99% of the variance in the dataset, but there is significant correlation between them. The four most frequently activated features can still explain 91.6% of the variance; therefore, we restrict our investigation to these top four activations that correspond to features SL 17, SL 138, SL 157, and SL 322.</p><p>In Figure <ref type="figure" target="#fig_0">2</ref>, we show galaxy image examples for the strongest activations, and where they appear in a BPT diagram. The four features reside in overlapping regions of the [O III]/Hβ versus [N II]/Hα space, but they all peak in distinct locations. For example, the locus of points for SL 17 appear to be at higher [N II]/Hα and [O III]/Hβ, indicating harder ionizing radiation and higher gas density (based on nebular diagnostics, e.g., <ref type="bibr" target="#b28">Kewley et al. 2019)</ref>. Meanwhile, the opposite appears to be true for SL 138 (or at least, for non-AGN with high A SL 138 ). Additional features contain information about metallicity and stellar populations. In Table <ref type="table" target="#tab_1">1</ref>, we offer physical interpretations for these features.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Gas metallicity</head><p>We separately train a SFNet to predict the gas-phase metallicity, Z gas = 12+log(O/H), directly from images. We remove all objects with invalid estimates for metallicity, stellar mass, and star formation rate, leaving 117,223 galaxies from the SDSS Main Galaxy Sample. The scatter of metallicity is 0.207 dex, and our trained SFNet can predict it to within 0.087 dex using only two image features, Z 61 and Z 256, which are activated 99.6% and 87.9% of the time respectively. If we also incorporate the third and fourth most frequent activations (40.2% and 11.9%, respectively), then we can achieve 0.086 dex error. This level of performance suggests that our SFNet is extremely accurate (see Section 4.2 for further discussion).</p><p>In the bottom two rows of Table <ref type="table" target="#tab_1">1</ref>, we describe the two main features used to predict metallicity. Z 61 is associated with galaxies with prominent red bulges and is linked to higher metallicity. It activates strongly for red ellipticals or face-on disk galaxies (often with two loosely wound spiral arms; see, e.g., <ref type="bibr" target="#b35">Masters et al. 2019</ref> for more on the correlations between galaxy properties and spiral arm pitch angle). Feature Z 256 is associated with blue, edge-on disk galaxies and lower metallicity. <ref type="bibr" target="#b50">Tremonti et al. (2004)</ref> noted that metal-poor galaxies tended to have highly inclined disk morphologies, and attributed this effect to observational bias. SDSS spectroscopic fibers collect light from lower-Z gas outskirts of disk galaxies observed edge-on, but would miss those regions for the same galaxies observed face-on. Our SFNet now captures this same observational bias, affecting the library of morphological features that it learns.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">DISCUSSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Physical laws from galaxy images</head><p>Because the SFNet learns a linear projection from these activations to the final prediction, we can write down a simple "equation" between learned galaxy features and the physical quantity of interest. In Figure <ref type="figure" target="#fig_1">3</ref>, we present linear equations for predicting gas metallicity and spectral line ratios by using the aforementioned galaxy image features. The maximally activating galaxy examples are shown in the equations (each labeled by their activated feature index).</p><p>These linear relations are so simple that we can directly interpret them. The Z 61 and Z 256 features used to predict Z gas directly correspond to higher and lower metallicity. Interestingly, both can be activated at the same time-and in fact, both are non-zero for the ma-  The model is only able to learn physical laws by leveraging galaxy morphology present within the optical image cutouts. However, galaxy evolution is governed by the complex interplay between multiple physical processes (e.g., <ref type="bibr" target="#b47">Somerville &amp; Davé 2015;</ref><ref type="bibr" target="#b2">Bait et al. 2017</ref>), which are not always imprinted in galaxy morphology, or perhaps not at the scales or wavelengths probed by our imaging surveys. Nonetheless, CNNs are surprisingly powerful at predicting the spectroscopic tracers of galaxy evolution. <ref type="bibr" target="#b13">Dobbels et al. (2019)</ref> and <ref type="bibr" target="#b56">Wu &amp; Boada (2019)</ref> showed that galaxies' stellar masses can be estimated directly from image cutouts, and <ref type="bibr" target="#b58">Zanisi et al. (2021)</ref> suggest that CNNs are sensitive to smallscale morphological perturbations due to dust in galaxies. Even information outside of the image cutout can be indirectly probed; <ref type="bibr" target="#b54">Wu (2020)</ref> measure impact of = -0.35 + 0.16 • -0.29 • log(N II/H𝛂) + 0.57 • -1.09 • = -0.48 + 0.14 • + 0.05 • log(O III/H𝛃) + 0.94 • + 1.07 • Z gas + 0.50 • -0.59 • A SL 17 A SL 138 A SL 157 A SL 322 A SL 17 A SL 138 A SL 157 A SL 322 A Z 61 A Z 256 = 8.72 galaxy environment on CNN-predicted gas properties, suggesting that the well-known density-morphology relation <ref type="bibr" target="#b16">(Dressler 1980</ref>) can be implicitly learned via ML models. In summary, SFNets can learn a limited (but still powerful) set of physical relationships that govern galaxy evolution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Performance versus interpretability</head><p>Previous works have found that a CNN trained on optical image cutouts can successfully classify AGN from star-forming galaxies with an accuracy (e.g., <ref type="bibr" target="#b24">Holwerda et al. 2021;</ref><ref type="bibr" target="#b22">Guo et al. 2022;</ref><ref type="bibr" target="#b15">Doorenbos et al. 2024)</ref>. We test how well the interpretable SFNet from Section 3.1 can also identify AGN. By optimizing a linear support vector machine (SVM) classifier on SL 17, SL 138, SL 157, and SL 322 from the training dataset, we can classify AGN with a validation accuracy of 0.85 and F1 score of 0.72.<ref type="foot" target="#foot_0">foot_0</ref> In comparison, the highly tuned CNN from <ref type="bibr" target="#b22">Guo et al. (2022)</ref> achieves an accuracy of 0.89 and F1 score of 0.75, and the conditional diffusion model by <ref type="bibr" target="#b15">Doorenbos et al. (2024)</ref> results in an accuracy of 0.82 and F1 score of 0.73 (although we note that they use a slightly different AGN classification scheme). Our experiments demonstrate that a linear combination of our interpretable features can distinguish AGN from star-forming galaxies at a level comparable to state-ofthe-art ML algorithms.</p><p>In Section 3.2, we estimate gas metallicity to within 0.087 dex using a linear combination of two features (and 0.086 dex using four features). For comparison, a typical CNN only achieves 0.085 dex error <ref type="bibr" target="#b56">(Wu &amp; Boada 2019)</ref>; note that the systematic scatter is ∼ 0.03 dex. Again, this suggests that SFNets do not sacrifice performance in order to gain interpretability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Comparison to PCA</head><p>While the SFNet produces interpretable features by imposing a sparsity constraint during the training process, other techniques are frequently used to reduce the number of learned features. Here we compare SFNet features against another common approach: dimensionality reduction of learned model features via principal components analysis (PCA). Given feature activations in the penultimate layer of a regularly trained CNN, we can obtain the principal components by computing eigenvectors of the dense activation's covariance matrix. They are listed in descending order of how much variance is accounted for by each principal component (i.e., ordered by descending eigenvalues). By selecting the top k principal components, we can project dense feature activations into a smaller space of sparse activations.</p><p>We test whether this smaller set of principal components are as robust as the SFNet features. We train a multivariate linear regression model using the first k principal components from dense CNN activations as features, again using the same training and validation split, to predict both the metallicity and spectral line strengths. For comparison, we have also re-trained the SFNet using k ∈ {2, 3, 4, 6, 8}. We independently retrain the SFNet three times in order to estimate the mean and standard error on the prediction RMSE.  <ref type="table" target="#tab_3">2</ref>.</p><p>For both metallicity and spectral line fluxes, &gt; 95% of the variance is explained using the top k = 8 principal components. For metallicity (left panel of Figure <ref type="figure">4</ref>), we find that the CNN + PCA performs poorly on the validation set for all values of k. Meanwhile, the SFNet can reconstruct metallicity with only k = 2 explainable features, reinforcing our results found in Section 3.2. We interpret this as evidence that the metallicity cannot be linearly combined using a small number of principal components of features extracted via a typical CNN. <ref type="foot" target="#foot_3">3</ref>We turn our attention to spectral line fluxes (right panel of Figure <ref type="figure">4</ref>), and find that performance is poor for small values of k, but if we use 8 principal components, then the RMSE becomes comparable to that of the SFNet. The SFNet can accurately estimate spectral line fluxes using only k = 4 features (with significantly worse performance at k = 2).</p><p>Our experiment shows that we can reduce the dimensionality of CNN feature activations via PCA, but the ensuing principal components are not always robust features for recovering the training targets (e.g., for metallicity). These difficulties may arise from superposition and polysemanticity, which cause the most important features to be entangled and spread across multiple CNN activations in highly non-linear ways. Since typical CNNs are not optimized with any sparsity constraint in mind, there is no guarantee that a linear combination of the learned features should be interpretable (although there are non-linear methods for finding optimal summary statistics; e.g., <ref type="bibr" target="#b9">Charnock et al. 2018)</ref>. By forcing a CNN to be sparse during the training process, we find that SFNets can learn robust features and produce accurate predictions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.">Comparison to GalaxyZoo features</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Do regular CNNs also learn interpretable features?</head><p>We compare the SFNet against Zoobot, a CNN trained to classify GalaxyZoo morphologies <ref type="bibr" target="#b32">(Lintott et al. 2008;</ref><ref type="bibr" target="#b51">Walmsley et al. 2023</ref><ref type="bibr" target="#b52">Walmsley et al. , 2024))</ref>. We consider the resnet18 variant of Zoobot, which has the same architecture as our SFNet modulo the top-k sparsity constraint (Figure <ref type="figure">1</ref>). Zoobot predicts citizen scientist vote fractions for GalaxyZoo morphological labels. We hypothesize that Zoobot's 512-dimensional features directly after the pooling layer suffer from superposition and polysemanticity, and thereby produce an uninterpretable combination of morphology and color.</p><p>Using morphological features from Zoobot, we train a regression model to predict galaxy metallicity. This experiment allows us to assess whether traditional CNNs can also be used to learn astrophysical relationships between image features and galaxy properties. We use the same training/validation datasets from Section 3.2, and independently test two models that use Zoobotextracted features as inputs and Z gas as training targets.</p><p>First, we fit a linear model to the training dataset, and find poor performance on the validation dataset (error of 0.183 dex). When we fit on the validation dataseti.e., if we attempt to memorize the answers-the error remains very high (0.181 dex). This result demonstrates that no linear combination of Zoobot features can reconstruct galaxy metallicity.</p><p>Second, we fit an gradient-boosted decision tree (XG-Boost) model to the training dataset, and achieve only 0.180 dex error on the validation dataset. However, when we "cheat" by fitting on the validation dataset, we can lower the error down to 0.085 dex (comparable to the SFNet performance).</p><p>Our experiments confirm that the Zoobot features indeed contain enough information to memorize the validation set, but that these features (i ) cannot be linearly combined to reconstruct galaxy metallicity, and (ii ) cannot generalize across the random training/validation split. We surmise that regular CNN features are not interpretable. Meanwhile, our SFNet is both performant and interpretable.</p><p>Finally, we check whether the SFNet can capture information not found within the 512-dimensional Zoobot feature vector. We optimize a ridge regression model to predict SFNet feature values using the Zoobot features, finding R 2 values of 0.253 and 0.107 for the two primary SFNet features, Z 61 and Z 256, respectively. These low coefficients of determination suggest that our SFNet extracts different morphological features than Zoobot.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.">Limitations of previous interpretability methods</head><p>The ML discipline generally focuses on classification problems, which has led to rapid development of classification-based interpretability algorithms (e.g., <ref type="bibr" target="#b18">Erhan et al. 2009;</ref><ref type="bibr" target="#b59">Zeiler &amp; Fergus 2013;</ref><ref type="bibr" target="#b46">Simonyan et al. 2014;</ref><ref type="bibr" target="#b4">Bau et al. 2017)</ref>. For example, Gradient-weighted Class Activation Mapping <ref type="bibr">(GradCAM;</ref><ref type="bibr">Selvaraju et al. 2017)</ref> enables researchers to interrogate the model to reveal the pixels that are most important for each class prediction. However, GradCAM and its variations are reliant on classification labels. For example, galaxy morphologies and other properties exist along a continuum rather than in distinct categories. Even identifying AGN via the BPT diagram, which we explore in Section 3.1, is more accurately posed as a regression problem than a classification problem. 4  Moreover, interpretation for classification tasks (with fully separable classes) serves a different purpose than interpretation for regression tasks. Specifically, astronomers might ask questions like, "which morphological features in this galaxy scale with its gas-phase metallicity?" Astronomers are generally less interested in asking questions like, "which morphological features in this image scale with the probability that it is a galaxy rather than a star?" Regression tasks can be interpreted by understanding how output quantities scale with input features (see, e.g., our "equations" in Figure <ref type="figure" target="#fig_1">3</ref>), but classification problems-wherein predictions are selected via the softmax operation-only require the dominant class to be marginally higher than every other class. Therefore, interpretability for regression and classification problems is different.</p><p>Other interpretability methods like saliency mapping <ref type="bibr" target="#b46">(Simonyan et al. 2014</ref>) cannot learn the non-linear patterns of multiple pixels at once-which is exactly what makes deep learning models so powerful. Despite these limitations, saliency and GradCAM-like techniques are widely adopted in astronomy (e.g., <ref type="bibr" target="#b41">Peek &amp; Burkhart 2019;</ref><ref type="bibr" target="#b54">Wu 2020;</ref><ref type="bibr" target="#b5">Bowles et al. 2021;</ref><ref type="bibr" target="#b1">Alfonzo et al. 2024)</ref>. Our results demonstrate that sparse algorithms provide a powerful alternative for interpretable ML in the physical sciences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">CONCLUSIONS</head><p>We present a novel method for learning the relationship between the physical properties and interpretable morphologies of galaxies. Our sparse feature network (SFNet; Figure <ref type="figure">1</ref>) maps galaxy features onto galaxies' physical properties such as spectroscopic line fluxes and 4 While there is promise in improving the semantic content of some classification labels (e.g., <ref type="bibr" target="#b6">Bowles et al. 2022)</ref>, categorization is often an oversimplification of richer (astro)physics.</p><p>gas-phase metallicity. We identify features that correspond to hard ionizing radiation (starbursts), low gas density, old stellar populations/high metallicities, and star-forming regions/low metallicity (e.g., Table <ref type="table" target="#tab_1">1</ref> and Figure <ref type="figure" target="#fig_0">2</ref>). Critically, our method does not substantially sacrifice ML performance in order to gain interpretability. We can write down "equations" (Figure <ref type="figure" target="#fig_1">3</ref>) that reveal the robust linear connection between galaxy properties and their appearances. Optimizing a SFNet yields more robust and interpretable features than training a CNN and then using PCA to consolidate the dense features: we find that a linear combination of k interpretable morphological features produces more accurate predictions than by using the top k principal components of a regular CNN's features (see Figure <ref type="figure">4</ref>). We do not imply that astrophysics can or should be automated by machines. As we discuss in Section 4, astronomers are still necessary for interpreting image features. While the SFNet can highlight ML algorithms are capable of learning, they cannot replace domain experts, who are essential for scrutinizing the phys-ical interplay between learned features and predicted quantities.</p><p>This work represents important progress toward developing explainable deep learning algorithms for the physical sciences. While we find strong results by incorporating a simple top-k sparsity layer into a resnet18, we have not comprehensively varied the optimization procedure or model hyperparameters. However, we have tested a few values of k and found that the SFNet performance is robust. Additional sparsity constraints, such as decorrelation layers (e.g. zero-phase component analysis or Cholesky whitening) or regularization terms (e.g., L1 norm) in the loss function, may encourage the SFNet to learn improved features. Using a CNN architecture with a smaller receptive field (i.e., by eschewing pooling layers), which guarantees that learned features are localized to a small number of pixels, may also enhance interpretability of SFNets. To aid the physical interpretation of features, we could also deploy an activation maximization model to specifically hone in on activating features (e.g., <ref type="bibr" target="#b37">Olah et al. 2017)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.1. Superposition and polysemanticity</head><p>Modern deep neural networks are composed of many layers, each with many neurons. AI and ML researchers are actively seeking to understand the semantic meanings captured by these neurons. Mechanistic interpretability is a subfield within AI/ML that aims to clarify the mechanisms by which deep neural networks learn (e.g., <ref type="bibr" target="#b36">Olah et al. 2020;</ref><ref type="bibr" target="#b43">Rai et al. 2024)</ref>, usually in simplified settings (since studying all neurons in all layers at once is infeasible). Given the rise of AI/ML techniques in the physical sciences, it is also vital to understand how and what our trained neural networks have learned.</p><p>However, it is challenging to decipher what features are represented by specific neurons, primarily due to two phenomena: superposition and polysemanticity <ref type="bibr" target="#b17">(Elhage et al. 2022</ref>).</p><p>• Superposition is where semantic concepts (i.e., features) become distributed across many neurons. For example, a single feature like "three-armed spiral galaxy" can be spread out across multiple neurons (in one or even multiple layers).</p><p>• Polysemanticity means that any given neuron can also have multiple separate meanings. These semantic concepts may not even be correlated with each other! For example, a specific neuron in a regularly trained CNN might activate on features such as "three-armed spiral galaxy" and "r-band light bleed from nearby saturated star."</p><p>So rather than a one-to-one mapping of neurons to features, or vice versa, there is actually a many-to-many mapping. Multiple learned features can be distributed and superposed across many different neurons. Superposition and polysemanticity encapsulate why it is so challenging to understand neural networks, even in just a single layer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2. Sparse autoencoders and SFNets</head><p>Originally motivated by biological vision systems <ref type="bibr">(Olshausen &amp; Field 1997;</ref><ref type="bibr" target="#b31">Lee et al. 2007)</ref>, sparse dictionary learning has emerged as a viable method for understanding (and consolidating) learned features into a small number of neurons. Algorithms such as sparse autoencoders (SAEs; <ref type="bibr" target="#b33">Makhzani &amp; Frey 2014;</ref><ref type="bibr" target="#b10">Cunningham et al. 2023</ref>) are capable of explaining learned features in large language models <ref type="bibr" target="#b7">(Bricken et al. 2023;</ref><ref type="bibr" target="#b49">Templeton et al. 2024;</ref><ref type="bibr" target="#b39">O'Neill et al. 2024</ref>) and deep convolutional neural networks <ref type="bibr" target="#b20">(Gorton 2024)</ref>. These recent works have demonstrated that sparse algorithms can disentangle the features represented by deep neural networks.</p><p>Previous works with SAEs have typically operated on large, pretrained models and sought to extract the meanings of learned activations (e.g., <ref type="bibr" target="#b7">Bricken et al. 2023)</ref>. SAEs are tasked with reconstructing the uninterpretable mess of neuron activations from a specific network layer by learning a set of new sparse activations.</p><p>However, SAEs only have two layers, which limits their ability to accurately distill the dense network activations into a few sparse ones.</p><p>Our work builds on insights from the mechanistic interpretability community. Instead of tasking a SAE to interpret learned features from a trained deep CNN, we devise a neural network architecture that is not only expressive like a regular CNN, but also employs sparse dictionary learning to produce interpretable features.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. SFNet learned features when trained to predict optical emission lines. We show how each feature correlates with optical line ratios (BPT diagrams; left) and examples of the top nine image activations (right). For the BPT diagrams, colors denote scaled activation strength, ranging from black (zero) to dark magenta (low) to bright yellow (high).</figDesc><graphic coords="4,79.36,207.34,108.75,105.21" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. Linear relationships between galaxy properties and image features learned by the SFNet. We show how the gas metallicity, [N II]/Hα, and [O III]/Hβ depend on SFNet feature activations, where SFNet features are represented using the top-activating galaxy image cutout from the validation set.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>Image</figDesc><table><row><cell cols="2">Feature f activated</cell><cell>Morphology</cell><cell>Physical interpretation</cell></row><row><cell>SL 17</cell><cell>62.9%</cell><cell cols="2">very blue, compact or merging extreme star formation, hard ionizing radiation</cell></row><row><cell>SL 138</cell><cell>87.0%</cell><cell cols="2">low surface brightness, face-on low gas density, soft ionizing radiation</cell></row><row><cell>SL 157</cell><cell>95.8%</cell><cell>red, elliptical</cell><cell>old stellar populations, high mass, high metallicity</cell></row><row><cell>SL 322</cell><cell>62.9%</cell><cell>blue, irregular</cell><cell>low mass, low metallicity, star-forming</cell></row><row><cell>Z 61</cell><cell>99.6%</cell><cell>red, face-on, bright core</cell><cell>high metallicity</cell></row><row><cell>Z 256</cell><cell>87.9%</cell><cell>blue, edge-on disks</cell><cell>low metallicity</cell></row><row><cell cols="3">jority of galaxies in the validation set, demonstrating</cell><cell></cell></row><row><cell cols="3">the physical interplay between these morphological fea-</cell><cell></cell></row><row><cell cols="3">tures and metallicity. For predicting spectral lines, fea-</cell><cell></cell></row><row><cell cols="3">tures SL 17 and SL 157 positively correlate with both</cell><cell></cell></row><row><cell cols="3">[N II]/Hα and [O III]/Hβ; we might interpret these</cell><cell></cell></row><row><cell cols="3">morphological features as indicators of spectral hardness</cell><cell></cell></row><row><cell cols="3">and low ionization (nuclear) emission-line regions, re-</cell><cell></cell></row><row><cell cols="3">spectively. Meanwhile, S 322 correlates with [O III]/Hβ</cell><cell></cell></row><row><cell cols="3">but anticorrelates with [N II]/Hα, suggesting that it is</cell><cell></cell></row><row><cell cols="3">associated with harder ionizing spectra.</cell><cell></cell></row></table><note><p>features learned by a SFNet to independently predict optical spectral line fluxes and metallicity. We only show features that are most frequently activated.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 .</head><label>2</label><figDesc>Figure 4. SFNet comparison against a CNN with dimensionality-reduced features. Using the SFNet model (blue) and a dense CNN with top principal components as features (red), we report RMSE values (lower is better) for models trained to predict metallicity (left) and spectral line fluxes (right) for several values of k (i.e., sparsity or number of PCA components).Comparison of performance using a SFNet and a CNN with PCA-based dimensionality reduction.</figDesc><table><row><cell>2 The</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>If we use all non-zero SFNet features, then the best-fit linear SVM validates at 0.83 accuracy and 0.70 F1 score, i.e., it performs worse. This suggests that restricting to the four most frequent feature activations reduces noise-another benefit of sparsity.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>We use the same training/validation split and re-initialize the model each time for each value of k. Because we repeat the training process from scratch, the RMSE values presented in this section slightly differ from the ones reported in Section</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p></p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_3"><p>The non-monotonic decrease in RMSE with increasing k suggests that PCA-while able to reduce dimensionality-does not optimally distill morphological features into the ones most relevant for predicting galaxy properties.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgments. We thank <rs type="person">Christian Jespersen</rs>, <rs type="person">Charlie O'Neill</rs>, <rs type="person">Joshua Peek</rs>, and <rs type="person">Christine Ye</rs> for useful conversations.</p></div>
+			</div>			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>APPENDIX</head><p>A. WHY ARE DEEP NEURAL NETWORKS SO HARD TO DECIPHER?</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">N</forename><surname>Abazajian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Adelman-Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Agüeros</surname></persName>
+		</author>
+		<idno type="DOI">10.1088/0067-0049/182/2/543</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJS</title>
+		<imprint>
+			<biblScope unit="volume">182</biblScope>
+			<biblScope unit="page">543</biblScope>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Alfonzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">G</forename><surname>Iyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Akiyama</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/1538-4357/ad3b95</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">967</biblScope>
+			<biblScope unit="page">152</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">O</forename><surname>Bait</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Barway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wadadekar</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/stx1688</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">471</biblScope>
+			<biblScope unit="page">2687</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Baldwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Terlevich</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/130766</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PASP</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page">5</biblScope>
+			<date type="published" when="1981">1981</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khosla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Oliva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Torralba</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CVPR.2017.354</idno>
+		<title level="m">2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="3319" to="3327" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bowles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M M</forename><surname>Scaife</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Porter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Bastien</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/staa3946</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">501</biblScope>
+			<biblScope unit="page">4579</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bowles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Vardoulaki</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2210.14760</idno>
+		<idno type="arXiv">arXiv:2210.14760</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Transformer Circuits Thread Brinchmann</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bricken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Templeton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Batson</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1365-2966.2004.07881.x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<editor>
+			<persName><forename type="first">S</forename><forename type="middle">D M</forename></persName>
+		</editor>
+		<imprint>
+			<biblScope unit="volume">351</biblScope>
+			<biblScope unit="page">1151</biblScope>
+			<date type="published" when="2004">2023. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">T</forename><surname>Buck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wolf</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2111.01154</idno>
+		<idno type="arXiv">arXiv:2111.01154</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">T</forename><surname>Charnock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Lavaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">D</forename><surname>Wandelt</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/physrevd.97.083004</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review D</title>
+		<imprint>
+			<biblScope unit="volume">97</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Sparse Autoencoders Find Highly Interpretable Features in Language Models</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Cunningham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ewart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Riggs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Huben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sharkey</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2309.08600" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Deng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Socher</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CVPR.2009.5206848</idno>
+		<title level="m">2009 IEEE Conference on Computer Vision and Pattern Recognition</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="248" to="255" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Schlegel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lang</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/1538-3881/ab089d</idno>
+	</analytic>
+	<monogr>
+		<title level="j">AJ</title>
+		<imprint>
+			<biblScope unit="volume">157</biblScope>
+			<biblScope unit="page">168</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">W</forename><surname>Dobbels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Krier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pirson</surname></persName>
+		</author>
+		<idno type="DOI">10.1051/0004-6361/201834575</idno>
+	</analytic>
+	<monogr>
+		<title level="j">A&amp;A</title>
+		<imprint>
+			<biblScope unit="volume">624</biblScope>
+			<biblScope unit="page">102</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><surname>Doorenbos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cavuoti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Longo</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2211.05556</idno>
+		<idno type="arXiv">arXiv:2211.05556</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><surname>Doorenbos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Sextl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Heng</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2406.18175</idno>
+		<idno type="arXiv">arXiv:2406.18175</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dressler</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/157753</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">236</biblScope>
+			<biblScope unit="page">351</biblScope>
+			<date type="published" when="1980">1980</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Elhage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olsson</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2209.10652" />
+		<title level="m">Toy Models of Superposition</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Visualizing Higher-Layer Features of a Deep Network</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Erhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bengio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Courville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Vincent</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+		<respStmt>
+			<orgName>University of Montreal</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Tech. Rep. 1341</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Geva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Berant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Levy</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2012.14913" />
+		<title level="m">Transformer Feed-Forward Layers Are Key-Value Memories</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">The Missing Curve Detectors of InceptionV1: Applying Sparse Autoencoders to InceptionV1 Early Vision</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Gorton</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2406.03662" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">H</forename><surname>Grover</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Bait</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wadadekar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">K</forename><surname>Mishra</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/stab1935</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">506</biblScope>
+			<biblScope unit="page">3313</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Sharon</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2212.07881</idno>
+		<idno type="arXiv">arXiv:2212.07881</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Deep Residual Learning for Image Recognition</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sun</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/1512.03385" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">W</forename><surname>Holwerda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">C</forename><surname>Keel</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/1538-4357/abffcc</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">914</biblScope>
+			<biblScope unit="page">142</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Hubble</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/143018</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page">321</biblScope>
+			<date type="published" when="1926">1926</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">M</forename><surname>Huertas-Company</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lanusse</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/pasa.2022.55</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PASA</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kauffmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Heckman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tremonti</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1365-2966.2003.07154.x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">346</biblScope>
+			<biblScope unit="page">1055</biblScope>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">J</forename><surname>Kewley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">C</forename><surname>Nicholls</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Sutherland</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev-astro-081817-051832</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ARA&amp;A</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page">511</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Battle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Raina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ng</surname></persName>
+		</author>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">B</forename><surname>Schölkopf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Platt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hoffman</surname></persName>
+		</author>
+		<ptr target="https://proceedings.neurips.cc/paperfiles/paper/2006/file/2d71b2ae158c7c5912cc0bbde2bb9d95-Paper.pdf" />
+		<imprint>
+			<publisher>MIT Press</publisher>
+			<biblScope unit="volume">19</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ekanadham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ng</surname></persName>
+		</author>
+		<ptr target="https://proceedings.neurips.cc/paperfiles/paper/2007/file/4daa3db355ef2b0e64b472968cb70f0d-Paper.pdf" />
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Platt</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Koller</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Y</forename><surname>Singer</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">&amp;</forename><forename type="middle">S</forename><surname>Roweis</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Curran Associates, Inc</publisher>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="volume">20</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Lintott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Schawinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Slosar</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1365-2966.2008.13689.x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">389</biblScope>
+			<biblScope unit="page">1179</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Makhzani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Frey</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/1312.5663" />
+		<title level="m">k-Sparse Autoencoders</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Masters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zoo</forename><surname>Galaxy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Team</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1743921319008615</idno>
+		<title level="m">Galactic Dynamics in the Era of Large Surveys</title>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Valluri</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Sellwood</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">353</biblScope>
+			<biblScope unit="page" from="205" to="212" />
+		</imprint>
+	</monogr>
+	<note>IAU Symposium</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Masters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Lintott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">E</forename><surname>Hart</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/stz1153</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">487</biblScope>
+			<biblScope unit="page">1808</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Cammarata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schubert</surname></persName>
+		</author>
+		<idno type="DOI">10.23915/distill.00024.001</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Distill</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mordvintsev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schubert</surname></persName>
+		</author>
+		<idno type="DOI">10.23915/distill.00007</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Distill</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Olshausen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Field</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0042-6989(97)00169-7</idno>
+		<ptr target="https://doi.org/10.1016/S0042-6989(97)00169-7" />
+	</analytic>
+	<monogr>
+		<title level="j">Vision Research</title>
+		<imprint>
+			<biblScope unit="volume">381</biblScope>
+			<biblScope unit="page">3311</biblScope>
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+	<note>Nature</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">C</forename><surname>O'neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Iyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2408.00657</idno>
+		<idno type="arXiv">arXiv:2408.00657</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><surname>Parker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lanusse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Golkar</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/stae1450</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">531</biblScope>
+			<biblScope unit="page">4990</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E G</forename><surname>Peek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Burkhart</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/2041-8213/ab3a9e</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJL</title>
+		<imprint>
+			<biblScope unit="volume">882</biblScope>
+			<biblScope unit="page">12</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Child</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">A Practical Review of Mechanistic Interpretability for Transformer-Based Language Models</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Rai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Saparov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yao</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2407.02646" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><surname>Räuker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Casper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hadfield-Menell</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SaTML54575.2023.00039</idno>
+		<title level="m">2023 IEEE Conference on Secure and Trustworthy Machine Learning (SaTML)</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="464" to="483" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">The Hubble Atlas of Galaxies Selvaraju</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sandage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">R</forename><surname>Cogswell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+		<idno type="DOI">10.1109/ICCV.2017.74</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE International Conference on Computer Vision (ICCV)</title>
+		<imprint>
+			<date type="published" when="1961">1961. 2017</date>
+			<biblScope unit="page" from="618" to="626" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Simonyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vedaldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zisserman</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/1312.6034" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Somerville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Davé</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev-astro-082812-140951</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ARA&amp;A</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page">51</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Strauss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Weinberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">H</forename><surname>Lupton</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/342343</idno>
+	</analytic>
+	<monogr>
+		<title level="j">AJ</title>
+		<imprint>
+			<biblScope unit="volume">124</biblScope>
+			<biblScope unit="page">1810</biblScope>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Templeton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Conerly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Marcus</surname></persName>
+		</author>
+		<ptr target="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html" />
+		<title level="m">Transformer Circuits Thread</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Tremonti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Heckman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kauffmann</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/423264</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">613</biblScope>
+			<biblScope unit="page">898</biblScope>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">M</forename><surname>Walmsley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Aussel</surname></persName>
+		</author>
+		<idno type="DOI">10.21105/joss.05312</idno>
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Open Source Software</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">5312</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">M</forename><surname>Walmsley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bowles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M M</forename><surname>Scaife</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2404.02973</idno>
+		<idno type="arXiv">arXiv:2404.02973</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Demeure</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2106.13731" />
+		<title level="m">Ranger21: a synergistic deep learning optimizer</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/1538-4357/abacbb</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">900</biblScope>
+			<biblScope unit="page">142</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Heckman</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/1538-4357/ab5953</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ApJ</title>
+		<imprint>
+			<biblScope unit="volume">887</biblScope>
+			<biblScope unit="page">251</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Boada</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/stz333</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">484</biblScope>
+			<biblScope unit="page">4683</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E G</forename><surname>Peek</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2009.12318</idno>
+		<idno type="arXiv">arXiv:2009.12318</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zanisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Huertas-Company</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lanusse</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mnras/staa3864</idno>
+	</analytic>
+	<monogr>
+		<title level="j">MNRAS</title>
+		<imprint>
+			<biblScope unit="volume">501</biblScope>
+			<biblScope unit="page">4359</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">Visualizing and Understanding Convolutional Networks</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Zeiler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Fergus</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/1311.2901" />
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">F</forename><surname>Zwicky</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-45932-0_9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Handbuch der Physik</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page">373</biblScope>
+			<date type="published" when="1959">1959</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

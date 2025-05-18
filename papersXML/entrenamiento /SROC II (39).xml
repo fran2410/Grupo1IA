@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Central-Eastern European Consensus Statement on Breast Cancer Radiotherapy</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Ivanov</forename><surname>Olivera</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Oncology Institute of Vojvodina</orgName>
+								<address>
+									<addrLine>Sr. Kamenica</addrLine>
+									<country key="RS">Serbia</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">University of Novi Sad</orgName>
+								<address>
+									<settlement>Novi Sad</settlement>
+									<country key="RS">Serbia</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Polgár</forename><surname>Csaba</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">National Institute of Oncology</orgName>
+								<address>
+									<settlement>Budapest</settlement>
+									<country key="HU">Hungary</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution">Semmelweis University</orgName>
+								<address>
+									<settlement>Budapest</settlement>
+									<country key="HU">Hungary</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Central-Eastern European Consensus Statement on Breast Cancer Radiotherapy</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">F47E611F70E593548E873F95965B51F7</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-03-04T20:46+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>breast cancer</term>
+					<term>professional guideline</term>
+					<term>radiotherapy</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>A Central -Eastern European consensus conference on breast cancer was held in Visegrad (Hungary) in November 2021. with the participation of 21 countries and an international guideline for breast cancer diagnosis and treatment was created. Radiotherapy of Breast cancer-Professional Guideline 1 st Central-Eastern European Professional Consensus Statement on Breast Cancer was published in Pathology and Oncology Research Journal in June 2022. Radiotherapy (RT ) after breast conserving surgery (BCS) is indicated in ductal carcinoma in situ (stage 0)and in early stage (stage I-II) of invasive breast cancer. In elderly patients with stage I and hormone receptor positive tumor, RT can be omitted if hormonal therapy is prescribed. Hypofractionated whole breast irradiation is validate treatment alternative to conventional fractionation. Accelerated partial breast irradiation is indicated in low-risk patients using interstitial brachytherapy or external beam RT.</p><p>Post-mastectomy radiotherapy signifi cantly decreases the risk of recurrence and improves survival in node-positive patients. After neoadjuvant systemic treatment (NST ) followed by BCS, irradiation of the whole breast is mandatory and after mastectomy, locoregional RT is recommended if initial stage was III-IV and ypN1 axillary status.</p><p>International guidelines for breast cancer radiotherapy are desirable in the light of fast technology development and increasing use of systemic therapy.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0" /><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>SERBIAN Radiation Oncology Congress 2022</head><label></label><figDesc></figDesc><table><row><cell>Urednik</cell></row><row><cell>Olivera Ivanov</cell></row><row><cell>Izdavač</cell></row><row><cell>Institut za Onkologiju Vojvodine</cell></row><row><cell>Grafi čka priprema i štampa</cell></row><row><cell>NS digiprint, Novi Sad</cell></row><row><cell>Tiraž</cell></row><row><cell>200</cell></row><row><cell>ISBN 978-86-82113-15-7</cell></row><row><cell>CIP -Каталогизација у публикацији</cell></row><row><cell>Библиотеке Матице српске, Нови Сад</cell></row><row><cell>616-006(048.3)</cell></row><row><cell>SERBIAN Radiation Oncology Congress (2022 ; Vrdnik)</cell></row><row><cell>Abstract book / Serbian Radiation Oncology Congress,</cell></row><row><cell>November, 05-06 2022 Ethno Complex Vrdnicka kula,</cell></row><row><cell>Vrdnik ; [urednik Olivera Ivanov]. -Novi Sad : Institut za</cell></row><row><cell>Onkologiju Vojvodine, 2022 (Novi Sad : NS digiprint).</cell></row><row><cell>-56 str. : ilustr. ; 21 cm</cell></row><row><cell>Tiraž 200.</cell></row><row><cell>ISBN 978-86-82113-15-7</cell></row><row><cell>a) Онкологија -Апстракти</cell></row><row><cell>COBISS.SR-ID 78911241</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl/>
+			</div>
+		</back>
+	</text>
+</TEI>

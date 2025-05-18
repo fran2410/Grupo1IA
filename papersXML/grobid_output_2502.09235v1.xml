@@ -1,0 +1,1265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Hybrid Answer Set Programming: Foundations and Applications</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Nicolas</forename><surname>Rühling</surname></persName>
+							<email>nruehling@uni-potsdam.de</email>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Computer Science An</orgName>
+								<orgName type="institution">University of Potsdam</orgName>
+								<address>
+									<addrLine>Bahn 2</addrLine>
+									<postCode>14476</postCode>
+									<settlement>Potsdam</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Hybrid Answer Set Programming: Foundations and Applications</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">2AC05A66EB812A0D27B2ADE62AE13141</idno>
+					<idno type="DOI">10.4204/EPTCS.416.38</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.3-SNAPSHOT" ident="GROBID" when="2025-05-13T17:34+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.8.2-3-g65968aec5</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract/>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Answer Set Programming (ASP; <ref type="bibr" target="#b32">[32]</ref>) is being increasingly applied to solve problems from the realworld. However, in many cases these problems have a heterogenous nature which requires features beyond the current capacities of solvers like clingo <ref type="bibr" target="#b19">[19]</ref>. Consider for example the field of configuration <ref type="bibr" target="#b17">[17]</ref>; one of the early successful applications of ASP <ref type="bibr" target="#b20">[20,</ref><ref type="bibr" target="#b23">23]</ref>. A configuration problem usually consists of (at least) a partonomy where parts are parameterized by attributes whose values in turn are restricted by constraints. While in simple cases these attributes are discrete, many industrial applications require attributes that range over large numeric domains (eg. precisions in the milimeter range might be needed). Further, calculations over these attributes can be of linear nature (eg. calculating the total weight by summing up the weight of all parts) as well as non-linear (eg. area or volume of an object, inclination of a conveyor belt, etc). Standards ASP solvers like clingo quickly reach their limits when dealing with numeric ranges and calculations as they need to explicitly ground all possible values. Apart from this, representing constraints in ASP that go beyond simple arithmetic expressions or aggregations generally requires considerable effort.</p><p>Over the last years, hybrid solvers such as clingcon <ref type="bibr" target="#b2">[3]</ref> <ref type="foot" target="#foot_0">foot_0</ref> and clingo[DL] <ref type="bibr" target="#b27">[27]</ref> <ref type="foot" target="#foot_1">foot_1</ref> which make use of dedicated inference methods for certain kinds of constraints over finite integer domains have already been successfully applied to many problems such as train scheduling <ref type="bibr" target="#b1">[2]</ref> and warehouse delivery <ref type="bibr" target="#b38">[38]</ref>. However, what is still missing, is a solid, semantic underpinning of these systems.</p><p>This issue has first been addressed by introducing the Logic of Here-and-There with constraints (HT c ; <ref type="bibr" target="#b12">[12]</ref>) as an extension of the Logic of Here-and-There (HT; <ref type="bibr" target="#b25">[25]</ref>) and its non-monotone extension Equilibrium Logic <ref type="bibr" target="#b36">[36]</ref>. Nowadays, HT serves as a logical foundation for ASP and has facilitated a broader understanding of this paradigm. The idea is that HT c (and other extensions; see Section 2) play an analogous role for hybrid ASP.</p><p>There remain many open questions about these logics regarding their fundamental characteristics as well as their practical use in solvers, ie. how they can guide the implementation. Having a formal understanding of these hybrid logics is also needed to better understand the inherent structure of the (real-world) problems they are applied to, eg. configuration, and to improve their representations in ASP.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Background</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Hybrid Solvers</head><p>Nowadays, ASP solver clingo supports so-called theory atoms which allow for foreign inference methods <ref type="bibr" target="#b27">[27,</ref><ref type="bibr" target="#b30">30]</ref> following the approach of SAT modulo theories (SMT; <ref type="bibr" target="#b4">[5]</ref>). This has greatly facilitated the development of ASP-based special-purpose systems which make use of dedicated inference methods for certain subclasses of constraints such as difference logic and linear programming. The general idea is that some external theory serves as an oracle by certifying some of a program's stable models and has been characterized for clingo in <ref type="bibr" target="#b11">[11]</ref>. We proceed by giving a quick introduction of some of the hybrid solvers that are part of the POTASSCO suite <ref type="foot" target="#foot_2">3</ref> .</p><p>The system clingcon is a solver for Constraint Answer Set Programming (CASP) and extends the input language of clingo with linear equations, represented as theory atoms of the form</p><formula xml:id="formula_0">&amp;sum{k 1 * x 1 ; . . . ; k n * x n } ≺ k 0 (1)</formula><p>where x i is an integer variable and k i ∈ Z an integer constant for 0 ≤ i ≤ n; and ≺ is a comparison symbol such as &lt;=, =, ! =, &lt;, &gt;, &gt;=. In clingo, theory predicates are preceded by '&amp;'.</p><p>System clingo[DL] has a more restricted syntax which allows for difference constraints over integers. This is a subset of the syntax in <ref type="bibr" target="#b0">(1)</ref> where theory atoms have the fixed form &amp;sum{1 * x; (-1) * y} &lt;= k but are rewritten instead as:</p><formula xml:id="formula_1">&amp;diff{x -y} &lt;= k (2)</formula><p>with x and y integer variables and k ∈ Z.</p><p>A third system is clingo[LP] <ref type="foot" target="#foot_3">4</ref> which extends clingo to solve linear constraints as dealt with in Linear Programming (LP). The syntax is identical to (1) but the domain now ranges over the real numbers. Notably, <ref type="bibr" target="#b11">[11]</ref> contains a formal characterization of all three just mentioned systems.</p><p>Lastly, a recent addition is system fclingo<ref type="foot" target="#foot_4">foot_4</ref> which makes use of clingcon to solve ASP modulo conditional linear constraints with founded variables. While in clingcon all integer variables need to have a value assigned, fclingo adds a notion of undefinedness and foundedness as known from ASP, ie. there needs to be a justification in the logic program if a variable receives a value in an answer set. Further, the conditional aspect of the linear constraints can be seen as a generalization of the concept of aggregates commonly used in ASP. The syntax of fclingo accomodates so-called assignments which guarantee that a variable only gets assigned a value if all other variables in its definition are itself defined, ie. justified at some other part in the logic program. For instance, the expression &amp;in{y..y} =: x only assigns the value of y to x if y has been defined by some other rule. Omitting the assignment would permit y and x to take arbitrary values if not defined elsewhere, thereby circumventing the principle of foundedness.</p><p>Further systems not developed by POTASSCO include ASP solver dlvhex <ref type="bibr" target="#b39">[39]</ref> which supports a similar concept of theory atoms as clingo. Other CASP systems include dingo <ref type="bibr" target="#b28">[28]</ref>, mingo <ref type="bibr" target="#b34">[34]</ref> and ezsmt <ref type="bibr" target="#b31">[31]</ref>. Different from the aforementioned systems, all three rely on translations to non-ASP solvers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">The Logic of Here-and-There and Hybrid Extensions</head><p>The logics HT and Equilibrium Logic nowawadays serve as a logical foundation for (plain) ASP, having brought upon fundamental results such as the notion of strong equivalence <ref type="bibr" target="#b33">[33]</ref>. The idea of HT is that of two worlds h and t, generally called here and there. <ref type="foot" target="#foot_5">6</ref> More precisely, an HT-interpretation is a pair H, T of sets of atoms such that H ⊆ T . This gives rise to a three-valued logic where atoms can either be true, false or undefined. A formula ϕ is satisfied or holds in a model H, T in symbols H, T |= ϕ, if it is true in the model, ie. satisfied at the h-world. A model H, T of a theory Γ is called an equilibrium model if (i) it is total, ie. H = T , and (ii) for any H ′ such that H T , H, T |= Γ. The term equilibrium model was coined in <ref type="bibr" target="#b35">[35]</ref> and there is complete agreement between equilibrium models and the stable models of logic programs as defined in <ref type="bibr" target="#b21">[21]</ref>.</p><p>In an attempt to provide a solid, logical foundation for hybrid systems such as the ones introduced in Section 2.1, a number of extensions of HT for incorporating constraints have been introduced.</p><p>The Logic of Here-and-There with constraints (HT c ; <ref type="bibr" target="#b12">[12]</ref>) allows for capturing constraint theories in the non-monotonic setting and has subsequently been extended with aggregate functions over constraint values and variables <ref type="bibr" target="#b9">[9,</ref><ref type="bibr" target="#b10">10]</ref>. In <ref type="bibr" target="#b10">[10]</ref> specifications for aggregate functions in terms of HT c are given based on two different semantic principles. While the semantics given in <ref type="bibr" target="#b18">[18]</ref> ensures that aggregate terms are always defined, <ref type="bibr" target="#b22">[22]</ref> prohibits so-called vicious cycles. We also refer to the former as Ferraris and to the latter as Gelfond-Zhang (GZ) aggregate semantics.</p><p>The Logic of Here-and-there with lower bound founded variables (HT LB ; <ref type="bibr" target="#b7">[8]</ref>) generalizes the concept of foundedness to integer variables. The idea is that variables get assigned the smallest integer value that can be justified. This can be seen as a generalization of plain HT if one regards Boolean truth values as ordered by letting true be greater than false.</p><p>Both of these extensions can be seen as black-box approaches in the sense that the constraints are incorporated as special entities whose syntax and satisfaction relations are generally left open. Thus, the intricacies of the hybrid part are mostly unknown from the logic program perspective. Another HT extension with a white-box approach of constraints is ASP(A C ) <ref type="bibr" target="#b13">[13]</ref> which generalizes logical connectives as a particular case of more general operations on weighted formulas over semirings. In this setting, operators like logical conjunction ∧ become just one more possible operation that can be combined with others, such as addition or multiplication (depending on the underlying semiring). This results in a very expressive and powerful formalism but at the price of a more complex semantics and the requirement of a semiring structure.</p><p>Further white-box approaches are based on the incorporation of intensional or non-Herbrand functions in ASP. For instance, <ref type="bibr" target="#b5">[6]</ref> added partial intensional functions to a quantified First-Order version of HT <ref type="bibr" target="#b37">[37]</ref> and later extended this to sets and aggregates <ref type="bibr" target="#b6">[7]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Configuration</head><p>A wide range of approaches exist for representing and solving configuration problems across various paradigms <ref type="bibr" target="#b29">[29,</ref><ref type="bibr" target="#b26">26]</ref>. In recent years, ASP has emerged as a promising alternative, as evidenced by several applications <ref type="bibr" target="#b20">[20,</ref><ref type="bibr" target="#b16">16,</ref><ref type="bibr" target="#b23">23,</ref><ref type="bibr" target="#b24">24]</ref>. Moreover, <ref type="bibr" target="#b15">[15]</ref> developed an object-oriented approach to configuration by directly defining concepts in ASP. In the context of interactive configuration, <ref type="bibr" target="#b14">[14]</ref> conducted a comparative evaluation of various systems, including the ASP solver clingo as well as SAT and CP systems, for their suitability in this context, finding clingo to be as capable as any other system.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Research</head><p>My research focuses on the foundations of hybrid ASP with the goal of both understanding better its fundamental properties and exploiting this knowledge to guide and improve solver implementations. Further, as this research is motivated by problems in real-world applications, another goal is to better understand the essence of these problems and how they can be solved using hybrid ASP. More precisely, the objective is to find mathematical or logical formalizations of these problems which subsequently serve as basis for succint but general ASP representations. These two goals are reciprocally beneficial as a deeper insight into real-world problems will make clearer the necessary research directions on the foundational level. In the context of applications, my current focus lies on problems in the realm of (industrial product) configuration.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Contributions and Future Work</head><p>Regarding the theoretical aspects of my research I am currently working on the theoretical foundations of solver fclingo with the goal of improving the current implementation. Here, one of the open issues is that current results in HT c only allow for the use of GZ aggregate semantics (see Sec. 2.2) in fclingo. However, we would like to be able to use Ferraris aggregate semantics which guarantee definedness as known from clingo. Our current approach here consists of finding a suitable translation between the two semantics.</p><p>Another open issue is the formalization of solver clingo[DL] by means of logic HT LB . The concept of assigning a minimal, founded value to integer variables of HT LB seems like a natural match with the difference constraints in clingo <ref type="bibr">[DL]</ref> which are defined as inequalities, thus, generally have multiple valid solutions but only one or a few minimal ones.</p><p>On the practical side of my research, preliminary results have been found in application of (plain and hybrid) ASP to configuration problems. In <ref type="bibr" target="#b40">[40]</ref> we developed a principled approach to configuration that included a mathematical formalization of configuration problems with an ASP-based solution. We defined a configuration problem in terms of an abstract model and a concrete instantiation. While the model serves as a blueprint for all possible configurations, the instantation represents a solution. This work was accompanied by a corresponding fact format and two ASP encoding, one for clingo and one for fclingo, which were subsequently made public <ref type="foot" target="#foot_6">7</ref> .</p><p>A similar but slightly different work has been done in <ref type="bibr" target="#b3">[4]</ref> where we developed the COOMSUITE<ref type="foot" target="#foot_7">foot_7</ref> , a workbench for experimentation with industrial-scale product configuration problems. The COOMSUITE is built around product configuration language COOM <ref type="bibr" target="#b0">[1]</ref> <ref type="foot" target="#foot_8">foot_8</ref> and provides a COOM grammar for parsing, a specialized ASP translator for conversion into facts, two encodings (one for clingo and one for fclingo) as well as various benchmark sets. The intention is to ease the development of powerful methods able to perform in industrial settings.</p><p>Future work here includes the further study of suitable representations for hybrid solver fclingo. The current fclingo encodings do not necessarily use all features the solver has to offer, eg. undefinedness of numeric variables, but rather leaves this to non-hybrid ASP. The reason for this is that these encodings have been constructed with a plain ASP encoding as base, only modifying the necessary parts. An approach we want to pursue here is to find a logical formalization of configuration problems in terms of HT c and use this as basic for new encodings which make more natural use of fclingo's features. We expect that this will not only improve the knowledge representation but also the performance of the solver.</p></div>			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://potassco.org/clingcon</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://github.com/potassco/clingo-dl</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>https://potassco.org/</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>https://github.com/potassco/clingoLP</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_4"><p>https://github.com/potassco/fclingo</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_5"><p>This is based on Kripke semantics for intuitionistic logic, see<ref type="bibr" target="#b41">[41]</ref> </p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_6"><p>https://github.com/potassco/configuration-encoding</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_7"><p>https://github.com/potassco/coom-suite</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9" xml:id="foot_8"><p>COOM is a domain-specific language developed by denkbares GmbH and used in numerous industrial applications</p></note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Coom</forename><surname>Language</surname></persName>
+		</author>
+		<ptr target="https://www.coom-lang.org/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Train scheduling with hybrid ASP</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Abels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jordi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ostrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Toletti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068420000046</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="317" to="347" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Clingcon: The Next Generation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Banbara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kaufmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ostrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068417000138</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="408" to="461" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Towards Industrial-scale Product Configuration</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Baumeister</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Herud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ostrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Reutelshoefer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Rühling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Seventeenth International Conference on Logic Programming and Nonmonotonic Reasoning (LPNMR&apos;24)</title>
+		<title level="s">Lecture Notes in Artificial Intelligence</title>
+		<editor>
+			<persName><forename type="first">C</forename><surname>Dodaro</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">V</forename><surname>Martinez</surname></persName>
+		</editor>
+		<meeting>the Seventeenth International Conference on Logic Programming and Nonmonotonic Reasoning (LPNMR&apos;24)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note>To appear</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<author>
+			<persName><forename type="first">A</forename><surname>Biere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Heule</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Van Maaren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">&amp;</forename><forename type="middle">T</forename><surname>Walsh</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/FAIA336</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Satisfiability</title>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="volume">185</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Functional answer set programming</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068410000517</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">2-3</biblScope>
+			<biblScope unit="page" from="203" to="233" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fandinno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Del Cerro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">&amp;</forename><forename type="middle">D</forename><surname>Pearce</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068418000169</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Functional ASP with Intensional Sets: Application to Gelfond-Zhang Aggregates</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="390" to="405" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fandinno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schellhorn</surname></persName>
+		</author>
+		<title level="m">Lower Bound Founded Logic of Here-and-There</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<author>
+			<persName><forename type="first">In</forename><forename type="middle">F</forename><surname>Calimeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Leone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Manna</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-19570-0_34</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Sixteenth European Conference on Logics in Artificial Intelligence (JELIA&apos;19)</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<meeting>the Sixteenth European Conference on Logics in Artificial Intelligence (JELIA&apos;19)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<biblScope unit="volume">11468</biblScope>
+			<biblScope unit="page" from="509" to="525" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">An ASP Semantics for Constraints Involving Conditional Aggregates</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fandinno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/FAIA200152</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Twenty-fourth European Conference on Artificial Intelligence (ECAI&apos;20)</title>
+		<editor>
+			<persName><forename type="first">G</forename><surname>De Giacomo</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Catalá</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Dilkina</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Milano</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Barro</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Bugarín</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Lang</surname></persName>
+		</editor>
+		<meeting>the Twenty-fourth European Conference on Artificial Intelligence (ECAI&apos;20)</meeting>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="664" to="671" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">A Uniform Treatment of Aggregates and Constraints in Hybrid ASP</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fandinno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<idno type="DOI">10.24963/KR.2020/20</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Seventeenth International Conference on Principles of Knowledge Representation and Reasoning (KR&apos;21)</title>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Calvanese</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">E</forename><surname>Erdem</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Thielscher</surname></persName>
+		</editor>
+		<meeting>the Seventeenth International Conference on Principles of Knowledge Representation and Reasoning (KR&apos;21)</meeting>
+		<imprint>
+			<publisher>AAAI Press</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="193" to="202" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">On the Semantics of Hybrid ASP Systems Based on Clingo</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Fandinno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/a16040185</idno>
+		<ptr target="https://www.mdpi.com/1999-4893/16/4/185" />
+	</analytic>
+	<monogr>
+		<title level="j">Algorithms</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">An ASP Semantics for Default Reasoning with Constraints</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cabalar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaminski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ostrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<idno type="DOI">10.5555/3060621.3060762</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Twenty-fifth International Joint Conference on Artificial Intelligence (IJCAI&apos;16)</title>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Kambhampati</surname></persName>
+		</editor>
+		<meeting>the Twenty-fifth International Joint Conference on Artificial Intelligence (IJCAI&apos;16)</meeting>
+		<imprint>
+			<publisher>IJCAI/AAAI Press</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1015" to="1021" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">ASP(A C ): Answer Set Programming with Algebraic Constraints</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Eiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kiesel</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068420000393</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="895" to="910" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Solver Requirements for Interactive Configuration</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Falkner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Haselböck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Krames</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Schenner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Schreiner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Taupe</surname></persName>
+		</author>
+		<idno type="DOI">10.3897/jucs.2020.019</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Universal Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="343" to="373" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">OOASP: Connecting Object-Oriented and Logic Programming</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Falkner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ryabokon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Schenner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Shchekotykhin</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-23264-5_28</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Thirteenth International Conference on Logic Programming and Nonmonotonic Reasoning (LPNMR&apos;15)</title>
+		<title level="s">Lecture Notes in Artificial Intelligence</title>
+		<editor>
+			<persName><forename type="first">F</forename><surname>Calimeri</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">G</forename><surname>Ianni</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Truszczyński</surname></persName>
+		</editor>
+		<meeting>the Thirteenth International Conference on Logic Programming and Nonmonotonic Reasoning (LPNMR&apos;15)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">9345</biblScope>
+			<biblScope unit="page" from="332" to="345" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">ASP-based Knowledge Representations for IoT Configuration Scenarios</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Felfernig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Falkner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Atas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erdeniz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Uran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Azzoni</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Nineteenth International Configuration Workshop</title>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><surname>Haag</surname></persName>
+		</editor>
+		<meeting>the Nineteenth International Configuration Workshop</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="62" to="67" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Knowledge-Based Configuration: From Research to Business Cases</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Felfernig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Hotz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bagley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tiihonen</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/C2011-0-69705-4</idno>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Elsevier/Morgan Kaufmann</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Logic Programs with propositional connectives and aggregates</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ferraris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1970398.1970401</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Computational Logic</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">40</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Multi-shot ASP solving with clingo</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gebser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaminski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kaufmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068418000054</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="27" to="82" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">aspcud: A Linux Package Configuration Tool Based on Answer Set Programming</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gebser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaminski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<idno type="DOI">10.4204/eptcs.65.2</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second International Workshop on Logics for Component Configuration</title>
+		<editor>
+			<persName><forename type="first">C</forename><surname>Drescher</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">I</forename><surname>Lynce</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Treinen</surname></persName>
+		</editor>
+		<meeting>the Second International Workshop on Logics for Component Configuration</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="volume">65</biblScope>
+			<biblScope unit="page" from="12" to="25" />
+		</imprint>
+	</monogr>
+	<note>Electronic Proceedings in Theoretical Computer Science (EPTCS)</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">The Stable Model Semantics for Logic Programming</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gelfond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lifschitz</surname></persName>
+		</author>
+		<idno type="DOI">10.1201/b10397-6</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Fifth International Conference and Symposium of Logic Programming (ICLP&apos;88)</title>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Kowalski</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">K</forename><surname>Bowen</surname></persName>
+		</editor>
+		<meeting>the Fifth International Conference and Symposium of Logic Programming (ICLP&apos;88)</meeting>
+		<imprint>
+			<publisher>MIT Press</publisher>
+			<date type="published" when="1988">1988</date>
+			<biblScope unit="page" from="1070" to="1080" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Vicious Circle Principle and Logic Programs with Aggregates</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gelfond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068414000222</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">4-5</biblScope>
+			<biblScope unit="page" from="587" to="601" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Applications of non-monotonic reasoning to automotive product configuration using answer set programming</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Genc ¸ay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Schüller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Erdem</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10845-017-1333-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Intelligent Manufacturing</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="1407" to="1422" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Conflict Handling in Product Configuration using Answer Set Programming</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Herud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Baumeister</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Sabuncu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<ptr target="https://ceur-ws.org/Vol-3193/paper2ASPOCP.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Fifteenth Workshop on Answer Set Programming and Other Computing Paradigms (ASPOCP&apos;22)</title>
+		<meeting>the Fifteenth Workshop on Answer Set Programming and Other Computing Paradigms (ASPOCP&apos;22)</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">3193</biblScope>
+		</imprint>
+	</monogr>
+	<note>CEUR Workshop Proceedings</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Die formalen Regeln der intuitionistischen Logik</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Heyting</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Sitzungsberichte der Preussischen Akademie der Wissenschaften, Deutsche Akademie der Wissenschaften zu Berlin</title>
+		<imprint>
+			<date type="published" when="1930">1930</date>
+			<biblScope unit="page" from="42" to="56" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Configuration Knowledge Representation and Reasoning</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Hotz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Felfernig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stumptner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ryabokon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Bagley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wolter</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/b978-0-12-415817-7.00006-2</idno>
+		<editor>Felfernig et al.</editor>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="41" to="72" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<author>
+			<persName><forename type="first">T</forename><surname>Janhunen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaminski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ostrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schellhorn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068417000242</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Clingo goes Linear Constraints over Reals and Integers</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="872" to="888" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Computing Stable Models via Reductions to Difference Logic</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Janhunen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Niemelä</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sevalnev</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-04238-6_14</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Tenth International Conference on Logic Programming and Nonmonotonic Reasoning (LPNMR&apos;09)</title>
+		<title level="s">Lecture Notes in Artificial Intelligence</title>
+		<editor>
+			<persName><forename type="first">E</forename><surname>Erdem</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">F</forename><surname>Lin</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</editor>
+		<meeting>the Tenth International Conference on Logic Programming and Nonmonotonic Reasoning (LPNMR&apos;09)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="volume">5753</biblScope>
+			<biblScope unit="page" from="142" to="154" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Configuration</title>
+		<author>
+			<persName><forename type="first">U</forename><surname>Junker</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/s1574-6526(06)80028-3</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Constraint Programming</title>
+		<editor>
+			<persName><forename type="first">F</forename><surname>Rossi</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">P</forename><surname>Van Beek</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">&amp;</forename><forename type="middle">T</forename><surname>Walsh</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Elsevier Science</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="837" to="873" />
+		</imprint>
+	</monogr>
+	<note>chapter 24</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kaminski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Romero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068421000508</idno>
+		<title level="m">How to Build Your Own ASP-based System?! Theory and Practice of Logic Programming</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="299" to="361" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">SMT-Based Constraint Answer Set Solver EZSMT (System Description)</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lierler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Susman</surname></persName>
+		</author>
+		<idno type="DOI">10.4230/OASICS.ICLP.2016.1</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Technical Communications of the Thirty-second International Conference on Logic Programming (ICLP&apos;16)</title>
+		<title level="s">Open Access Series in Informatics (OASIcs) 52, Schloss Dagstuhl-Leibniz-Zentrum fuer Informatik</title>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Carro</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">A</forename><surname>King</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lifschitz</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-24658-7</idno>
+		<title level="m">Answer Set Programming</title>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Strongly equivalent logic programs</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Lifschitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pearce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Valverde</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/383779.383783</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Computational Logic</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="526" to="541" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Answer Set Programming via Mixed Integer Programming</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Janhunen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Niemelä</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Thirteenth International Conference on Principles of Knowledge Representation and Reasoning (KR&apos;12)</title>
+		<editor>
+			<persName><forename type="first">G</forename><surname>Brewka</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">T</forename><surname>Eiter</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Mcilraith</surname></persName>
+		</editor>
+		<meeting>the Thirteenth International Conference on Principles of Knowledge Representation and Reasoning (KR&apos;12)</meeting>
+		<imprint>
+			<publisher>AAAI Press</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="32" to="42" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">A New Logical Characterisation of Stable Models and Answer Sets</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pearce</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BFb0023801</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Sixth International Workshop on Non-Monotonic Extensions of Logic Programming (NMELP&apos;96)</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Dix</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Pereira</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">T</forename><surname>Przymusinski</surname></persName>
+		</editor>
+		<meeting>the Sixth International Workshop on Non-Monotonic Extensions of Logic Programming (NMELP&apos;96)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="volume">1216</biblScope>
+			<biblScope unit="page" from="57" to="70" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Equilibrium logic</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pearce</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10472-006-9028-z</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Mathematics and Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">1-2</biblScope>
+			<biblScope unit="page" from="3" to="41" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Towards a First Order Equilibrium Logic for Nonmonotonic Reasoning</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pearce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Valverde</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-540-30227-8_15</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Ninth European Conference on Logics in Artificial Intelligence (JELIA&apos;04)</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Alferes</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Leite</surname></persName>
+		</editor>
+		<meeting>the Ninth European Conference on Logics in Artificial Intelligence (JELIA&apos;04)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="volume">3229</biblScope>
+			<biblScope unit="page" from="147" to="160" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Solving an Industrial-Scale Warehouse Delivery Problem with Answer Set Programming Modulo Difference Constraints</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Rajaratnam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wanko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Son</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/a16040216</idno>
+		<ptr target="https://www.mdpi.com/1999-4893/16/4/216" />
+	</analytic>
+	<monogr>
+		<title level="j">Algorithms</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">The dlvhex system for knowledge representation: recent advances (system description)</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Redl</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S1471068416000211</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice of Logic Programming</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">5-6</biblScope>
+			<biblScope unit="page" from="866" to="883" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Towards a formalization of configuration problems for ASPbased reasoning: Preliminary report</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Rühling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Stolzmann</surname></persName>
+		</author>
+		<ptr target="https://ceur-ws.org/Vol-3509/paper12.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Twenty-fifth International Configuration Workshop (CONF&apos;23)</title>
+		<title level="s">CEUR Workshop Proceedings</title>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Horcas</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Galindo</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Comploi-Taupe</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">&amp;</forename><forename type="middle">L</forename><surname>Fuentes</surname></persName>
+		</editor>
+		<meeting>the Twenty-fifth International Configuration Workshop (CONF&apos;23)</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">3509</biblScope>
+			<biblScope unit="page" from="85" to="94" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Intuitionistic Logic</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Van Dalen</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-94-009-5203-4_4</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Philosophical Logic</title>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Gabbay</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">F</forename><surname>Guenthner</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="225" to="339" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

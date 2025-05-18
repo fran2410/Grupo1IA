@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Breast cancer detection through attention based feature integration model</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Sharada</forename><surname>Gupta</surname></persName>
+							<email>gupthasharada@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Electronics and Communication Engineering</orgName>
+								<orgName type="institution">Sri Siddhartha Academy of Higher Education</orgName>
+								<address>
+									<settlement>Tumakuru</settlement>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Electronics and Communication Engineering</orgName>
+								<orgName type="institution">Sri Siddhartha Academy of Higher Education Tumakuru</orgName>
+								<address>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Murundi</forename><forename type="middle">N</forename><surname>Eshwarappa</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Electronics and Communication Engineering</orgName>
+								<orgName type="institution">Sri Siddhartha Academy of Higher Education</orgName>
+								<address>
+									<settlement>Tumakuru</settlement>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Breast cancer detection through attention based feature integration model</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">33D1209014B7E57765E014830826F5BA</idno>
+					<idno type="DOI">10.11591/ijai.v13.i2.pp2254-2264</idno>
+					<note type="submission">Received Jun 3, 2023 Revised Oct 13, 2023 Accepted Oct 21, 2023</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-12T17:53+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>Attention-based featureintegration mechanism Bi-lateral attention module Breast cancer Classification models Mediolateral oblique</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Breast cancer is detected by screening mammography wherein X-rays are used to produce images of the breast. Mammograms for screening can detect breast cancer early. This research focuses on the challenges of using multi-view mammography to diagnose breast cancer. By examining numerous perspectives of an image, an attention-based feature-integration mechanism (AFIM) model that concentrates on local abnormal areas associated with cancer and displays the essential features considered for evaluation, analyzing cross-view data. This is segmented into two views the bi-lateral attention module (BAM) module integrates the left and right activation maps for a similar projection is used to create a spatial attention map that highlights the impact of asymmetries. Here the module's focus is on data gathering through medio-lateral oblique (MLO) and bilateral craniocaudal (CC) for each breast to develop an attention module. The proposed AFIM model generates using spatial attention maps obtained from the identical image through other breasts to identify bilaterally uneven areas and class activation map (CAM) generated from two similar breast images to emphasize the feature channels connected to a single lesion in a breast. AFIM model may easily be included in ResNet-style architectures to develop multi-view classification models.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">INTRODUCTION</head><p>Breast cancer normally affects women that are middle-aged within the age group of 15 to 54 <ref type="bibr" target="#b0">[1]</ref>. Globally and in Mexico, the rate of deaths and cases caused due to malignancy of neoplasms are rising. The World Health Organization (WHO) states that there are claims of 460,000 fatalities out of 1,350,000 reported cases globally. The WHO also claims that by the year 2025, the count of these cases will reach 19 million. Breast cancer is identified early by the study of mammography <ref type="bibr" target="#b1">[2]</ref>. Developed is a non-invasive imaging approach termed mammography shows a decrease in the rate of mortality by 30 to 70% because of the increased sensitivity in the recognition of breast cancer at its early stages <ref type="bibr" target="#b2">[3]</ref>.</p><p>The imaging of mammography can be done either digitally or conventionally. An X-ray image of decreased dose from the breast of the patient is a mammogram and this is normally captured by the use of two views, namely, medio-lateral oblique (MLO) and bilateral craniocaudal (CC). Over the last two decades, there has been an increase in this methodology that helps radiologists to detect anomalies <ref type="bibr" target="#b3">[4]</ref>. Hence, radiologists study the possibility of mass being present, which could be cystic, lumps, or little deposits of calcium that are normally seen in irregular forms and are termed micro-calcification. Presently, mammography is categorized into three main divisions, full field digitalized mammograms (FFDM), screen film mammogram (SFM), and Int J Artif Intell ISSN: 2252-8938 </p><p>Breast cancer detection through attention based feature integration model (Sharada Gupta) 2255 digitalized breast tomosynthesis (DBT). Mammograms of the FFDM class are also called digitalized mammograms. One of the disadvantages is the result depends on the age of the patient, the density of the breast, and the type of lesion. Specifically, considering the high density of breasts, are more difficult to see 'radiographically' and show a lesser contrast between the cancerous parts and their background <ref type="bibr" target="#b4">[5]</ref>. Although, there are upsides of digital mammography compared to film based. A few of the main upsides of digitalized mammogram are the mammograms can be stored for a longer time without any loss in quality, they can be easily replicated and there is less radiation exposure to the patient. Various methodologies of pre-processing are applied to digital mammograms for the improvisation of their quality and are advantageous in the following phases in the formation of computer-aided diagnosis (CAD) systems such as classification. Various pre-processing methods enhance the quality of mammography, which include enhancement of contrast and quality. The utilization of a particular method is dependent on the specific task of pre-processing for resolution. The traditional methods of CAD utilize features of images that are mostly made up of manually created characteristics. This method for identifying calcification combines machine learning, frequency decomposition, stochastic modeling, and picture enhancement. The detection of mass is followed by approaches based on pixel and region. Considering the progress of neural networks, its ability to automate features to learn from huge data sets for training is possible. An end-to-end system is provided for the extraction of features for building classifiers. In addition, this learning methodology is robust towards noise in the dataset that makes it adaptable for the detection of abnormalities and their diagnosis in the images of mammograms <ref type="bibr" target="#b5">[6]</ref>.</p><p>Classification, and detection, as well as a diagnosis based on deep learning studies towards computer vision, have attained popularity in recent times and have advanced rapidly. Convolutional neural networks (CNN) are standard in the applications of image recognition. Considering various tasks executed on autonomous, robust systems as well as mobile applications, higher-skilled software in comparison to humans is done by the use of machine learning techniques. CNN are specifically used for the distinction of minute details that are not observed by people. Since CNN are a topic of emerging interest, their utilization in the methods of medical imaging is adequate. Presently, considering the medical field, the level of decision, initial diagnosis, determining the level of disease. Taken by experts has not been met <ref type="bibr" target="#b6">[7]</ref>. The high rate of mortality as well as the recurring development of breast cancer in middle-aged women causes medicine with CAD to be a rapidly growing area of study. In Figure <ref type="figure" target="#fig_5">1</ref> a sample representation of a bi-lateral attention module (BAM) and a bi-projection attention model (BPM) is shown.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure 1. BAM and BPM attention maps</head><p>Various tasks of medical imaging utilize data from different modalities. However, it could be tedious to effectively combine. Since multi-modal images are normally registered as well as seen as various channels of input for a neural network, various views of images could be tough to properly register. Hence, most models with multi-views process the views individually and are combined only after pooling globally; this neglects any correlation locally among views. If these correlations locally are essential for image interpretation, the models can be improvised by connecting the views of the feature at a spatial and initial level. This particular research is organized as follows: the first section of the research work starts with the background of breast cancer, and techniques to handle digital mammograms for improvisation. The second section discusses the existing work for imaging mammography. In the third section, AFIM is designed and developed along with modeling and architecture; AFIM is evaluated considering the different datasets along with comparative analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">RELATED WORK</head><p>Considering CNN are used in research in the field of medical imaging to identify and categorize lesions <ref type="bibr" target="#b7">[8]</ref>. For the tasks of BAM classification of breast masses, the methods based on CNN automatically learn effective features as well as the performance of complete training. On completion of training, the model outputs the probabilities of masses in the breast based on a mammography input image. The main goal of CNN's mass categorization research is to improve CNN's input <ref type="bibr" target="#b8">[9]</ref>, the structure of the CNN as well as the methods of training. The improvisation of the CNN combines mask image as well as the mammography of mass in the breast into two-phase images of input for CNN. The combination of images enhanced, residue image, and the initial image into three phases of the image of CNN input.</p><p>Considering the improvisation of the structure of CNN, the <ref type="bibr" target="#b9">[10]</ref> removal of the completely linked layers are utilized for classifying CNN, as well as an intermediate level of features and features of high level for the support vector machine (SVMs) for classification of breast mass (BM). The Leaky rectified linear unit (ReLu) is used as the function of activation and utilized for dropout to the completely linked layers for building the CNN model along four layers of CNN and three completely linked layers for the classification of BM <ref type="bibr" target="#b10">[11]</ref>. The normalization layer for local response is removed based on AlexNet and a layer of BM is added after every convolutional layer by the use of the activation function of parametric rectified linear unit (PReLU) rather than the activation function of ReLU so that it results in improved performance of classification in comparison to the original effect of AlexNet. A vast stride has been made in the training of CNN <ref type="bibr" target="#b11">[12]</ref>. The study proposes a CNN scheme of training and has applications for various rates of learning for training distinct parts at various phases of the model. Finally, a BM localization model and classification are obtained of masses in the breast based on whole images.</p><p>After the training of the CNN model, all the layer of convolution is frozen as well as trained the layer that is completely linked that maximizes feature distance among classes <ref type="bibr" target="#b12">[13]</ref>. This reduced the distance feature inside the class. After which, the same count of the samples is chosen at random from the dataset for training and interchanged with the samples that are misclassified in the set for validation to furthermore enhance the robust nature of the classification model. In addition, there exist methodologies for the classification of masses in the breast that are a combination of features that are traditional as well as features with depth. For instance, a CNN is used along with a mechanism for feature selection for extraction of features from both the views of masses in the breast and the region surrounding it, as well as combined 17 features extracted. That are manually built from CNN and all the features are finally processed by the use of recurrent neural network (RNN) for building a classification BM model for masses in the breast that handles incomplete information <ref type="bibr" target="#b13">[14]</ref>- <ref type="bibr" target="#b16">[17]</ref>. Similarly, the fusion of CNN is explored, as deep features are extracted as well as hand-designed features. It has been proved experimentally that the traditional features are defective and impossible for future improvisation of the effect of classification of the CNN by fusion. Therefore, considering breast masses feature extraction, the features extracted in CNN have a higher abstract and complete representation rather than manually built features. Hence, this study uses methods based on CNN for BM classification of masses in the breast to furthermore improvising performance concerning classification.</p><p>This suggests a unique classification model for the diagnosis of breast cancer based on a hybridized CNN, an improved optimization approach, and transfer learning to help radiologists properly identify anomalies <ref type="bibr" target="#b17">[18]</ref>- <ref type="bibr" target="#b22">[22]</ref>. For optimization, the marine predator's algorithm (MPA), and opposition-based learning are incorporated to solve the fundamental problems with the original MPA. The ideal CNN hyper-parameter parameters are determined using the improved marine predators' algorithm (IMPA). The suggested technique employs a CNN model trained on residual network (ResNet50). The IMPA-ResNet50 architecture is built using this model and the IMPA algorithm. It is difficult to identify the presence of cancer using digital mammography pictures <ref type="bibr" target="#b23">[23]</ref>. This work creates an autonomous system for cancer diagnostics by combining CNN and picture To categorize data at the CNN level, a nine-layer proprietary CNN is deployed. To increase classification effectiveness, uniform manifold approximation (UMAP), and projection are used to identify textural traits and minimize their dimensions.</p><p>A state-of-the-art CAD method that aids radiologists in finding and organizing data on breast cancer detection <ref type="bibr" target="#b19">[20]</ref>. Four different assessments are carried out to find the best categorization approach. The trained deep CNNs AlexNet, GoogleNet, ResNet50, and Dense-Net121 are used in the first model in this example. The second approach incorporates trial-and-error features using a three-kernel SVM algorithm. The following example shows how fusing deep features and deep attributes may improve categorization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">PROPOSED METHODOLOGY</head><p>Using a CNN, multi-view mammography pictures are classified (CNN). Convolutional filters, pooling layers, and several layers that are all related in some way make up CNNs. These layers collect visual input, decrease their dimensionality, and make predictions based on previous input. In a classification of multi-view mammograms, a CNN is frequently trained on a large dataset of multi-channel images representing mammograms. Each channel represents a unique mammogram, which might include craniocaudal or MLO views. The CNN is trained during training to identify patterns and features in each mammogram image that are predictive of benign or malignant tumors. CNN may be configured to categorize new mammograms based on their characteristics. Figure <ref type="figure" target="#fig_2">2</ref> shows the proposed model. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Attention-based feature-integration mechanism</head><p>This method focuses on attention-based or salient feature-based mechanisms. This attentional bias enables the brain to ignore irrelevant information and concentrate on essential features, enabling effective and precise processing of visual information. The many characteristics or dimensions of visual stimuli, such as color, shape, and orientation, come together during the feature integration process to produce a cohesive perceptual entity. By focusing on the stimulus of the most crucial features, AFIM make sure that the pertinent components are integrated correctly and efficiently.</p><p>The 2258 similar project that is generally symmetric, the activation maps are specifically aligned, and the BAM module integrates left and right activation maps for a similar prediction that generates a spatial attention mechanism (SAM) to increase the essentiality of asymmetric regions. Figure <ref type="figure">3</ref> shows the development of the BAM AM ϑ for prediction ϑ ∈ {CC, MLO}. Average max − pooling for activation maps with the channel axis AM CC left , AM CC right individually and combine them to generate an activation descriptor, then application of pooling operation on the channel axis to showcase an informative region. Following a sigmoid layer with four output channels that compresses the output, the descriptor passes via a convolution layer with four output channels, a ReLU function, and an output channel, 1 * l * b class activation map (CAM) AM ϑ . The BAM for prediction ϑ is depicted as shown in <ref type="bibr" target="#b0">(1)</ref>. Here δ denotes the sigmoid function, τ denotes the convolutional block whereas Pool and MaxPool denote the average − pooling, and max − pooling.</p><formula xml:id="formula_0">AM ϑ = δ(τ([Pool(AM ϑ left )MaxPool(AM ϑ left ); Pool(AM ϑ right )MaxPool(AM ϑ right )]))<label>(1)</label></formula><p>− BPM: this module is a deep learning approach for image classification problems involving the detection of discrete object components. The BPM build this model; the Bi-projection module collects feature representations of multiple object components by projecting the input picture onto two distinct subspaces, giving the model fine-grained object information. The attention module then selectively focuses on characteristics in the feature representations, allowing the model to focus on the essential features and increase classification accuracy. This module focuses on aggregating the information through CC, MLO for each breast to develop an attention module. Figure <ref type="figure">4</ref>  the output is integrated into a 4p*1*1 vector. This is then forwarded through the multilayer perceptron (MLP) by a single hidden layer to form a c * 1 * 1 AM d this is computed by (2):</p><formula xml:id="formula_1">AM d = δ(MLP[Pool(AM cc d )MaxPool(AM cc d ); Pool(AM MLO d )MaxPool(AM MLO d )]))<label>(2)</label></formula><p>Here δ in (3) the weights are spread between the left and right breasts, which symbolize the sigmoid function. The activation map for each element is fine-tuned by multiplying the attention map plus 1. Here ⊗ shows the multiplier for each element, whereas ∈ {left, right} and ϑ = cc and MLO to point out a certain side or projection. The channel attention values are dispersed to execute multiplication, and the attention values are replicated with the spatial dimension. for two breasts of one patient having a different label. The input makes an independent forward pass via the convolutional blocks, further finetuned by the last AFIM through a layer of pooling for the spatial dimension 1*1, The prediction is produced by applying each vector to a common layer. Finally, yet importantly the loss between the predictions and the pertinent label is computed and sent to determine the gradient is shown in Algorithm 1. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.">Deep-net approach</head><p>The deep-net model is denoted by −&gt; β , here α denotes the image and β represents the classification mechanism. A neural network consists of H convolutions and P connected layers shown in <ref type="bibr" target="#b3">(4)</ref>. Here {g x (. )} x=1 H denotes a convolutional layer, δ h shows the layer's parameter h of the neural net consisting of the weight matrix A h ∈ β k h * k h * a h * k h−1 and bias vector j h ∈ β k h with k h * k h to denote a layer's filters' size h which shows k h−1 input and k h output networks, g gv,P in a fully connected layer associated with weights {A gv,P }} p=1 P . Where A gv,P ∈ β a gv,p−1 * a gv,p denotes the connection to and from the biases {j gv,P }} p=1 P whereas g out denotes the logical regression layer associated along the weights A out ∈ β a gv,p * V and bias j out ∈ β v . The convolutional layer h ∈ {1, , , , , , H} of the neural-net is shown as shown in <ref type="bibr" target="#b4">(5)</ref>. Here ^ depicts the convolution, G h = [g h,1,………., g h,k h ], where G 0 denotes the input segmentation map v or l. The H − th convolutional layer consists of fully connected layers that take input as the volume g H ∈ β |g H | . Here g H depicts the distance of the specific vector. k-linear transformation to be used as shown in <ref type="bibr" target="#b5">(6)</ref>. Here g gv ∈ β a gv,p , the softmax function over a classification layer is depicted as linear transformed input as shown in <ref type="bibr" target="#b6">(7)</ref>.</p><p>g(e, δ) = g out (g gv,P(… g gv,1 (g H (… . . g 1 (s, δ 1 )…., δ H ), δ gv,1 ) … . , δ gv,P ), δ out ),</p><formula xml:id="formula_2">G h = g h (e h−1 , δ h ) = A h ^Gh−1 + j h<label>(4)</label></formula><p>g gv =g gv (G H , δ gv ) = (A gv,P … . . (A gv,1 g H + j hv,1 ) … . . +j hv,P )</p><p>g out = g out (g gv , δ out ) = softmax(A out g gv + j out )</p><p>Whereas</p><formula xml:id="formula_6">softmax(m) = k m ∑ k m(u) u</formula><p>, and g out ∈ [0,1] V shows the output through the assumption. V depicts the total number of output classes. It consists of three channels in the first phase and the second phase consists of 4096 nodes, the logistic regression stage denotes the softmax layer consisting of three nodes. There consists of two types of model inputs: i) to fit the input into the input channel, the 2-D input model duplicates the input as an image or segmentation three times; and ii) the input mass and segmentation map are transmitted via the 3-D model to the three input channels for a single view. The training process to estimate δ = δ 1 , … . . , δ H , δ gv,1 , … . . , δ gv,P , δ out ] is focused on for the training set, thereby reducing cross-entropy loss.</p><p>Here K depicts the cases available for training.</p><formula xml:id="formula_7">h(δ) = 1 K ∑ g out,a o K a=1 logb a<label>(8)</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4.">Representation learning</head><p>The pre-training stage uses the ImageNet dataset 𝝉 to model x = g(a; δ) here δ = δ 1 , … . , δ H , δ gv,1 , … . , δ gv,P , δ out ]. Focused on minimizing the loss associated with training using V classes from 𝝉. The model here is [pre-trained that initializes the model parameter shown as δ 1 = δ 1 … . ., δ H = δ H , δ gv,1 = δ gv,1 and δ out is analyzed through random values. The model is further fine-tuned by minimizing the loss by utilizing V classes from 𝝉. The focus is on the parameters with the pre-trained model that shows the success of the similarity of the fine-tuning process focused on a wide variety of pre-trained layers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">RESULT</head><p>The result section involves a comparison with two datasets the mammographic image analysis society (MIAS) dataset where the proposed system is compared with the existing state-of-art techniques wherein the method CNN <ref type="bibr" target="#b14">[15]</ref>. Local activation weighted sum (LAWS) and artificial neural network (ANN) <ref type="bibr" target="#b15">[16]</ref>, visual geometry group 19 (VGG19) <ref type="bibr" target="#b16">[17]</ref>, extreme learning machine (ELM) <ref type="bibr" target="#b17">[18]</ref>, Deep-CNN <ref type="bibr" target="#b18">[19]</ref>, Inception V3 and U-shaped encoder-decoder network (U-Net) <ref type="bibr" target="#b19">[20]</ref>. Deep feature fusion and SVM <ref type="bibr" target="#b21">[21]</ref>, deep feature fusion and support vector machine-radial basis function (SVM-RBF) <ref type="bibr" target="#b22">[22]</ref>, ensemble CNN <ref type="bibr" target="#b23">[23]</ref>, convolutional neural network bidirectional long-sort term memory (CNN-BiLSTM) [ES] <ref type="bibr" target="#b24">[24]</ref>, IMPA-ResNet50 <ref type="bibr" target="#b25">[25]</ref> and the results are plotted in the form of a graph for accuracy. For curated breast imaging subset of digital database for screening mammography (CBIS-DDSM) dataset is compared for single-view classifier and 2-view classifier the proposed system is compared with the existing state-of-art techniques. Wherein the method CNN <ref type="bibr" target="#b26">[26]</ref> gives, deep-CNN <ref type="bibr" target="#b26">[26]</ref>, MorphHR <ref type="bibr" target="#b27">[27]</ref>, pooling structures-CNN <ref type="bibr" target="#b28">[28]</ref> and the results are plotted in the form of a graph for area under the ROC curve (AUC).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Dataset details</head><p>Here we use two datasets to evaluate our proposed model with the existing state of art techniques. The two most popular datasets used are the MIAS dataset and the CBIS-DDSM dataset. A subset of the digital database for screening mammography (DDSM) data is chosen and assembled for the CBIS-DDSM collection by a skilled mammographer whereas, for the MIAS dataset, the data is made up of mammography scan images and labels or comments. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2261</head><p>− MIAS dataset: here the MIAS dataset consists of only 330 images total across all mammography classes in the MIAS dataset. The normal scan size is 1024 pixels. Due to its enormity, the dataset is not appropriate for training but is used for exploratory data analysis and as an addition to test data. − CBIS-DDSM dataset: the DDSM has been improved and is now known as CBIS-DDSM. 2,620 scanned mammography film studies may be found in the DDSM. Normal, benign, and malignant cases are supplied with validated pathology data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">Metrics</head><p>Metrics such as accuracy and AUC are vital for evaluating classification models. Accuracy measures the proportion of correct predictions, while AUC quantifies the model's ability to discriminate between classes across various thresholds. Both metrics offer distinct insights into model performance, helping assess its overall effectiveness in classification tasks. − Accuracy: accuracy is the degree to which a particular set of measures (observations or readings) correspond to their actual value.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accuracy =</head><p>TP+TN TP+TN+FP+FN − AUC: the matrix values are changed to provide 1s to cells where the positive case ranks higher than the negative case and 0s to cells where the negative case ranks higher to calculate the AUC.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Experiment analysis</head><p>The experimental analysis is carried out on the MIAS dataset with the existing state-of-art techniques wherein the method CNN <ref type="bibr" target="#b14">[15]</ref> gives a value of 90.5, LAWS and ANN <ref type="bibr" target="#b15">[16]</ref> gives a value of 93.9. VGG19 <ref type="bibr" target="#b16">[17]</ref> gives a value of 94.39, ELM <ref type="bibr" target="#b17">[18]</ref> gives a value of 96.02, deep-CNN <ref type="bibr" target="#b18">[19]</ref> gives a value of 96.55, Inception V3 and U-Net <ref type="bibr" target="#b19">[20]</ref> gives a value of 96.87. Deep feature fusion and SVM <ref type="bibr" target="#b21">[21]</ref> gives a value of 97.4, deep feature fusion and SVM-RBF <ref type="bibr" target="#b22">[22]</ref> gives a value of 97.93, ensemble CNN <ref type="bibr" target="#b23">[23]</ref> gives a value of 98, CNN-BiLSTM [ES]existing aprroach <ref type="bibr" target="#b24">[24]</ref> gives a value of 98.56, IMPA and ResNet50 <ref type="bibr" target="#b25">[25]</ref> gives a value of 98.88 and the proposed system gives a value of 99.46. Figure <ref type="figure">5</ref> shows the accuracy comparison of the MIAS dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Figure 5. Accuracy comparison of the MIAS dataset</head><p>The experimental analysis is carried out on the CBIS-DDSM dataset for single-view classifier AUC is plotted with the existing state-of-art techniques. Wherein the method, VGG/ResNet <ref type="bibr" target="#b26">[26]</ref> gives an AUC value of 75, ResNet <ref type="bibr" target="#b27">[27]</ref> gives a value of 75.22, MorphHR <ref type="bibr" target="#b28">[28]</ref> gives an AUC value of 79.64. Whereas the existing system <ref type="bibr" target="#b29">[29]</ref> generates a value of 80.33 and the proposed system gives a value of 82.46, which performs better in comparison with the existing system. Figure <ref type="figure">6</ref> shows the AUC for single-view classifier comparison. The experimental analysis is carried out on the CBIS-DDSM dataset for 2-view classifier AUC is plotted with the existing state-of-art techniques wherein the method CNN <ref type="bibr" target="#b26">[26]</ref> gives an AUC value of 68.49, deep-CNN <ref type="bibr" target="#b26">[26]</ref> gives an AUC value of 75. MorphHR <ref type="bibr" target="#b27">[27]</ref> gives an AUC value of 83.13, pooling structures-CNN <ref type="bibr" target="#b28">[28]</ref> gives a value 83.8 whereas the existing system <ref type="bibr" target="#b29">[29]</ref> generates a value of 84.83 and the proposed system gives a value of 87.66, which performs better in comparison with the existing system. Figure <ref type="figure">7</ref> shows the AUC for 2-view classifier comparison. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Comparative analysis</head><p>The comparative analysis is carried out by comparing the proposed system with the existing system and the percentage of improvisation is evaluated as shown in Table <ref type="table" target="#tab_1">1</ref>. For the MIAS dataset, the improvisation in terms of accuracy sums up to 0.9089%, whereas for the CBIS-DDSM dataset for single view-based AUC, the improvisation sums up to 2.61687%. Whereas for the CBIS-DDSM dataset for two views-based AUC the improvisation sums up to 3.87232%, upon conclusion, we can state that the attention-based feature-integration mechanism-proposed system (AFIM-PS) model gives better results in comparison with the existing system for both datasets and various metrics considered. Table <ref type="table" target="#tab_1">1</ref> shows the comparative analysis.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">CONCLUSION</head><p>In this paper, a unique AFIM model is developed that precisely focuses on specific components or features of a visual stimulus while overlooking other components. It is necessary for visual perception and cognition, particularly in tasks that require the synthesis of information from several sources, it also analyses the cross-view information from four mammography images and learns implicitly that shows emphasis on cancer-related local abnormalities is proposed. The experimental results reveal that the AFIM. In terms of classification accuracy, the multi-view attention model performs better than the existing single-view attention models. For the MIAS dataset, the improvisation in terms of accuracy sums up to 0.9089%, whereas for the CBIS-DDSM dataset for single view-based AUC, the improvisation sums up to 2.61687%. Whereas for the CBIS-DDSM dataset for two views-based AUC the improvisation sums up to 3.87232%, upon conclusion, we can state that the AFIM-PS model gives better results in comparison with the existing system for both datasets and various metrics considered.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>The single-view attention mechanism precisely refers to relevant attributes in a single view of the input image by evaluating the significance of different spatial regions. It develops an attention map that emphasizes the focal points of the input image, focusing on the model's attention to specific details and enhancing object recognition precision. The two-view attention model highlights key aspects of an object from different perspectives to improve object recognition in computer vision applications. New imaging techniques, refinements to existing methods, and detection methods targeted at identifying different types of breast cancer are all examples of advancements in  ISSN: 2252-8938 Int J Artif Intell, Vol. 13, No. 2, June 2024: 2254-2264 2256 the field of breast cancer detection. Deep learning has emerged widely for the classification of images and specifications. − The proposed attention-based feature-integration mechanism (AFIM) model is developed that performs the classification process used in diagnostic mammography. − Second, upon experimental evaluation, the proposed AFIM may boost lesion localization abilities during the training phase and classification performance compared to the single-view and two-view attention models.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>Int J Artif Intell ISSN: 2252-8938  Breast cancer detection through attention based feature integration model (Sharada Gupta) 2257 texture attribute extraction into a single technique.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Proposed model</figDesc><graphic coords="4,257.93,321.18,93.65,180.30" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>input given to the attention model consists of activation maps as AM CC left , AM CC right , AM MLO left , and AM MLO right . A lateralized attention module estimates the 2-D salience maps {SM cc , SM MLO } ∈ƿ 1 * l * b for the craniocaudal (cc) and MLO view based on the same projection's left and right activation maps, as well as the simultaneous lateralized attention module evaluates the 1-D channel attention Map as {SM left , SM right }∈ ƿ c * 1 * 1 for the projection view of one breast via the left and right projection attention module. In the next section, the BAM and BPM attention models are dealt with, − BAM: Bilateral attention is a computational component used in deep learning methods for computer vision applications. Focusing on the essential, fundamental aspects of the image improves accuracy. By evaluating the relative importance of several features and merging that data with the initial input, the module creates a new feature representation. This attention is utilized in various computer vision applications, including segmentation, object detection, and picture categorization. The left and right images of the breast show a  ISSN: 2252-8938 Int J Artif Intell, Vol. 13, No. 2, June 2024: 2254-2264</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 4 . BPM 3 . 2 .</head><label>432</label><figDesc>Figure 3. BAM</figDesc><graphic coords="5,210.25,521.15,188.99,205.05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Algorithm 1 .</head><label>1</label><figDesc>Attention-based feature-integration mechanism Input Activation maps of different views to screen mammography, { AM CC left , AM CC right , AM MLO left , AM MLO right }∈ƿ c * l * b Step 1 For ϑ = CC, MLO do Compute lateralized attention AM ϑ ∈ ƿ 1 * l * b through projection ϑ based on AM ϑ left and AM ϑ right as depicted in equation (1) end for Step 2 For d = left, right do Compute lateralized attention SM d ∈ ƿ c * 1 * 1 through projection ϑ based on AM cc d cc, MLO do For d = left, right do Compute lateralized attention AM ϑ d * through side d projection ϑ based on equation end for Step 4 end for output Activation maps AM CC left * , AM CC right * , AM MLO left * , AM MLO right *</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head></head><label></label><figDesc>ISSN: 2252-8938 Int J Artif Intell, Vol. 13, No. 2, June 2024: 2254-2264 2260</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Int</head><label></label><figDesc>Breast cancer detection through attention based feature integration model (Sharada Gupta)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head></head><label></label><figDesc>Intell, Vol. 13, No. 2, June 2024: 2254-2264 2262</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 6 .Figure 7 .</head><label>67</label><figDesc>Figure 6. AUC for single-view classifier comparison</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head></head><label></label><figDesc>Breast cancer detection through attention based feature integration model (Sharada Gupta) 2263</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>here depicts the evaluation of the attention map as SM d from AM cc d and AM MLO It is difficult to find the correspondence among the images acquired through the projection angle, and the spatial characteristics of input AM, the pooling, and Max − pooling are applied on AM cc d and AM MLO d</figDesc><table /><note>d hered ∈ {left, right}.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1</head><label>1</label><figDesc>Comparison analysis</figDesc><table><row><cell>Dataset</cell><cell>ES</cell><cell>AFIM-PS</cell><cell>Improvisation (%)</cell></row><row><cell>MIAS dataset for accuracy</cell><cell>98.56</cell><cell>99.46</cell><cell>0.9089</cell></row><row><cell cols="2">CBIS-DDSM dataset single-view-AUC 80.33</cell><cell>82.46</cell><cell>2.61687</cell></row><row><cell>CBIS-DDSM dataset two-view-AUC</cell><cell>84.83</cell><cell>87.66</cell><cell>3.87232</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BIOGRAPHIES OF AUTHORS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sharada Guptha</head><p>working as an assistant professor in Department of Electronics and Communication, Sri Siddhartha Institute of Technology, Tumakuru. Presently, she is pursuing her Ph.D. from Sri Siddhartha Academy of higher Education. She has 14 years of teaching experience and published three papers in international conference and two papers in international journals. Her research interests are signal processing, digital circuit design, and embedded systems. She can be contacted at email: gupthasharada@gmail.com.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Murundi N. Eshwarappa</head><p>is presently working as a professor and HOD in the Department of ECE in Sri Siddhartha Institute of Technology, Tumakuru. He completed his B.E. from Mysore University in the year 1991, M.Tech. from KREC-Surathkal, Mangalore University in the year 1999 and Ph.D. from Visvesvaraya Technological University-Belgaum, in the year 2013. He has more than 30 years of teaching experience and 8 years of research experience. His research interests are communication, biometrics, medical imaging, and signal processing. He can contact at this email: jenuece2016@gmail.com.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The automated learning of deep features for breast mass classification from mammograms</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dhungel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Carneiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Bradley</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-46723-8_13</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Medical Image Computing and Computer-Assisted Intervention</title>
+				<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="106" to="114" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Classification of breast MRI lesions using small-size training sets: comparison of deep learning approaches</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Amit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ben-Ari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Hadad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Monovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Granot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hashoul</surname></persName>
+		</author>
+		<idno type="DOI">10.1117/12.2249981</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computer-Aided Diagnosis</title>
+		<imprint>
+			<biblScope unit="volume">2017</biblScope>
+			<date type="published" when="2017-03">Mar. 2017</date>
+		</imprint>
+	</monogr>
+	<note>Medical Imaging</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A deep feature-based framework for breast masses classification</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Jiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.neucom.2016.02.060</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">197</biblScope>
+			<biblScope unit="page" from="221" to="231" />
+			<date type="published" when="2016-07">Jul. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Classification of breast masses using convolutional neural network as feature extractor and classifier</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">R</forename><surname>Sarkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">R K</forename><surname>Sai</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Subrahmanyam</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-981-10-7898-9_3</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 2nd International Conference on Computer Vision &amp; Image Processing</title>
+				<meeting>2nd International Conference on Computer Vision &amp; Image Processing</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="25" to="36" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Breast mass classification in mammograms using ensemble convolutional neural networks</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rampun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">W</forename><surname>Scotney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Morrow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/HealthCom.2018.8531154</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE 20th International Conference on e-Health Networking, Applications and Services (Healthcom)</title>
+				<imprint>
+			<date type="published" when="2018-09">Sep. 2018</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Efficient big data clustering using Adhoc Fuzzy C means and auto-encoder CNN</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Sreedhara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Salma</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-981-19-7402-1_25</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Inventive Computation and Information Technologies</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="353" to="368" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">A parasitic metric learning net for breast mass classification based on mammography</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Jiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patcog.2017.07.008</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern Recognition</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="292" to="301" />
+			<date type="published" when="2018-03">Mar. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Breast mass classification via deeply integrating the contextual information from multi-view data</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patcog.2018.02.026</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern Recognition</title>
+		<imprint>
+			<biblScope unit="volume">80</biblScope>
+			<biblScope unit="page" from="42" to="52" />
+			<date type="published" when="2018-08">Aug. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Representation learning for mammography mass lesion classification with convolutional neural networks</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Arevalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>González</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ramos-Pollán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Guevara Lopez</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.cmpb.2015.12.014</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Methods and Programs in Biomedicine</title>
+		<imprint>
+			<biblScope unit="volume">127</biblScope>
+			<biblScope unit="page" from="248" to="257" />
+			<date type="published" when="2016-04">Apr. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Automatic breast mass segmentation and classification using subtraction of temporally sequential digital mammograms</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Loizidou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Skouroumouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Nikolaou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Pitris</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/JTEHM.2022.3219891</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Journal of Translational Engineering in Health and Medicine</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Automated breast mass classification system using deep learning and ensemble learning in digital mammogram</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Malebary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hashmi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ACCESS.2021.3071297</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="55312" to="55328" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Simultaneous segmentation and classification of mass region from mammograms using a mixed-supervision guided deep model</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F.-Y</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/LSP.2019.2963151</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Signal Processing Letters</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="196" to="200" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Dual convolutional neural networks for breast mass segmentation and diagnosis in mammography</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">H</forename><surname>Nailon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">E</forename><surname>Davies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">I</forename><surname>Laurenson</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TMI.2021.3102622</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Medical Imaging</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="3" to="13" />
+			<date type="published" when="2022-01">Jan. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Spatial enhanced rotation aware network for breast mass segmentation in digital mammogram</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Lin</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ACCESS.2020.2978009</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="92559" to="92570" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Mammogram classification using law&apos;s texture energy measure and neural networks</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Setiawan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elysia</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wesley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Purnama</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.procs.2015.07.341</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Procedia Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="page" from="92" to="97" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Breast mass classification in digital mammography based on extreme learning machine</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ma</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.neucom.2015.08.048</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">173</biblScope>
+			<biblScope unit="page" from="930" to="941" />
+			<date type="published" when="2016-01">Jan. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Convolutional neural network improvement for breast cancer classification</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">F</forename><surname>Ting</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">J</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Sim</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.eswa.2018.11.008</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">120</biblScope>
+			<biblScope unit="page" from="103" to="115" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">An optimized deep learning architecture for breast cancer diagnosis based on improved marine predators algorithm</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">H</forename><surname>Houssein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Emam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Ali</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00521-022-07445-5</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Neural Computing and Applications</title>
+				<imprint>
+			<date type="published" when="2022-10">Oct. 2022</date>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="18015" to="18033" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A framework for breast cancer classification using Multi-DCNNs</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Ragab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Attallah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sharkas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Marshall</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compbiomed.2021.104245</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Biology and Medicine</title>
+		<imprint>
+			<biblScope unit="volume">131</biblScope>
+			<date type="published" when="2021-04">Apr. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Multi-Deep CNN based experimentations for early diagnosis of</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Sannasi Chakravarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bharanidharan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rajaguru</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">2264 breast cancer</title>
+		<idno type="DOI">10.1080/03772063.2022.2028584</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IETE Journal of Research</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="16" />
+			<date type="published" when="2022-02">June 2024. Feb. 2022</date>
+		</imprint>
+	</monogr>
+	<note>Int J Artif Intell</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Deep learning in mammography images segmentation and classification: Automated CNN approach</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">M</forename><surname>Salama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">H</forename><surname>Aly</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.aej.2021.03.048</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Alexandria Engineering Journal</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="4701" to="4709" />
+			<date type="published" when="2021-10">Oct. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Breast cancer detection in mammogram: combining modified CNN and texture feature-based approach</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Melekoodappattu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Dhas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">K</forename><surname>Kandathil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Adarsh</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s12652-022-03713-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Ambient Intelligence and Humanized Computing</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="11397" to="11406" />
+			<date type="published" when="2023-09">Sep. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Automated diagnosis of breast cancer using multi-modal datasets: A deep convolution neural network-based approach</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Muduli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Dash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Majhi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.bspc.2021.102825</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Biomedical Signal Processing and Control</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<date type="published" when="2022-01">Jan. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Malignant and nonmalignant classification of breast lesions in mammograms using convolutional neural networks</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M F El</forename><surname>Houby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">I R</forename><surname>Yassin</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.bspc.2021.102954</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Biomedical Signal Processing and Control</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<date type="published" when="2021-09">Sep. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Diagnosis of breast cancer for modern mammography using artificial intelligence</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Karthiga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Narasimhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Amirtharajan</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.matcom.2022.05.038</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mathematics and Computers in Simulation</title>
+		<imprint>
+			<biblScope unit="volume">202</biblScope>
+			<biblScope unit="page" from="316" to="330" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Inconsistent Results on DDSM Testset</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Shen</surname></persName>
+		</author>
+		<ptr target="https://github.com/lishen/end2end-all-conv/issues/5" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Beyond fine-tuning: Classifying high resolution mammograms using function-preserving transformations</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Wei</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.media.2022.102618</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Medical Image Analysis</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<date type="published" when="2022-11">Nov. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Deep neural networks with region-based pooling structures for mammographic image classification</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Shu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Lv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TMI.2020.2968397</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Medical Imaging</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="2246" to="2255" />
+			<date type="published" when="2020-06">Jun. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Breast cancer diagnosis in twoview mammography using end-to-end trained efficientnet-based convolutional network</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">G P</forename><surname>Petrini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Shimizu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Roela</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">V</forename><surname>Valente</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A A K</forename><surname>Folgueira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">Y</forename><surname>Kim</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ACCESS.2022.3193250</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="77723" to="77731" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

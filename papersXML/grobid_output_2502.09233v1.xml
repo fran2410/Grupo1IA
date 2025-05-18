@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Commonsense Reasoning-Aided Autonomous Vehicle Systems</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Keegan</forename><surname>Kimbrell</surname></persName>
+							<email>keegan.kimbrell@utdallas.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">The University of Texas at Dallas Richardson</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Commonsense Reasoning-Aided Autonomous Vehicle Systems</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E770B6B9F85DF303207B5873F9B1D598</idno>
+					<idno type="DOI">10.4204/EPTCS.416.36</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.3-SNAPSHOT" ident="GROBID" when="2025-05-13T17:34+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.8.2-3-g65968aec5</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Autonomous Vehicle (AV) systems have been developed with a strong reliance on machine learning techniques. While machine learning approaches, such as deep learning, are extremely effective at tasks that involve observation and classification, they struggle when it comes to performing higher level reasoning about situations on the road. This research involves incorporating commonsense reasoning models that use image data to improve AV systems. This will allow AV systems to perform more accurate reasoning while also making them more adjustable, explainable, and ethical. This paper will discuss the findings so far and motivate its direction going forward.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>For both academic and industry research, AV technology has seen incredible advances since the introduction of computer vision-focused systems in the 1980's <ref type="bibr">[3]</ref>. Here, this paper will provide some formal definitions for autonomous vehicles that it will use throughout this writing. SAE International defines autonomous vehicles into six different levels based on the level of automation, with level 0 being no automation and level 5 being full driving automation <ref type="bibr" target="#b5">[6]</ref>. Despite AV research being a well-explored field, there are still no level 5, or fully autonomous, vehicles. This is largely due to imperfections in computer vision systems and the complexity of more complicated driving tasks that require a human driver to be present. For a safety-critical system, such as AV systems, minor mistakes cannot be afforded. To this end, it is important that the AV system can make safe and rational decisions based on accurate interpretations about its surroundings.</p><p>There are several technologies that are used in the perception side of AV systems, such as Light Detection and Ranging (LiDAR) systems and camera-based systems. These systems are coupled with deep learning techniques such as Convolutional Neural Networks (CNNs), which are used to classify sensor data <ref type="bibr" target="#b14">[14]</ref>. However, like all machine learning systems, it is always possible for misclassifications to occur due to noise, scenarios outside of the training data, degradation of sensing equipment, and other external factors. Because of this, AV systems should move towards using a hybrid AI system, or AI that combines deep learning with logical reasoning, to help mitigate the failures and shortcomings of solely deep learning-based approaches.</p><p>There are two types of systematic thinking proposed by Kahneman in 2011 <ref type="bibr" target="#b10">[11]</ref>. The first is "System 1", which is fast, instinctive, and emotional thinking. The second is "System 2", which is slow, deliberative, and logical. For a human driver, we use both systems when we are in a driving scenario. Identifying objects around us and minor driving actions are done quickly using System 1 thinking. However, when we encounter an unfamiliar or dangerous scenario, we use System 2 thinking to determine a safe way to navigate the situation. In an optimal hybrid AV system, fast System 1 tasks such as perception and classification should be handled by deep learning, and slow System 2 tasks should be handled by commonsense reasoning. The reasoning system can also be used to perform a more deliberative analysis of the sensor data. This is similar to a human driver who realizes that they misinterpreted an object on the road and looks closer to figure out what it is.</p><p>Commonsense reasoning is a method for modeling the human way of thinking about the world around us using default rules and exceptions <ref type="bibr" target="#b8">[9]</ref>. In the context of driving scenarios, we can understand this as our default understanding of traffic laws and scenarios. For example, if we drive up to a crosswalk, by default, we know that we have to stop when there are pedestrians waiting to cross. However, there may be an exceptional scenario that breaks this rule, such as if we discover that the pedestrians do not actually intend to cross. In this case, a human driver will still stop and slowly think about the situation and confirm that the pedestrians do not want to cross before making the potentially unsafe decision of driving forward. This research is focused on modeling commonsense reasoning and combining it with current AV techniques to create safer and more reasonable autonomous vehicles.</p><p>This experiment proposes a framework for improving AV systems by attaching commonsense layers that use image data to provide feedback to the deep learning layers for various tasks. With this approach, we can write commonsense reasoning models that can perform optimizations, safety checks, and explanations for autonomous vehicles. By keeping the commonsense reasoning model in a separate layer, we can even use this approach to improve existing AV systems. Furthermore, this approach is not encumbered by a mandatory and expensive training process. The commonsense reasoning model can be modeled and updated with rules generated from domain experts, allowing us to easily stay up-to-date on new laws, ethical standards, and regulations. Currently, the commonsense model employs collective behaviors, or the actions of nearby vehicles, to determine the state of the road around us.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related Work</head><p>There have been many other works that incorporate symbolic reasoning into deep learning, computer vision, and autonomous vehicle models. Suchan et al. explore commonsense reasoning-based approaches such as an integrated neurosymbolic online abduction vision and semantics-based approach for autonomous driving <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b16">16]</ref>. These techniques are primarily focused on integrating with the perception model using answer set programming (ASP), a nonmonotonic reasoning system using stable models <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b12">13]</ref>. While their framework is similar, this approach is more decoupled from the vision models, allowing us to show improvements on existing AV models.</p><p>Neurosymbolic AI, AIs that integrate symbolic and neural network-based approaches <ref type="bibr" target="#b9">[10]</ref>s, have been applied towards autonomous driving as well. For safety-critical systems, such as autonomous driving, neurosymbolic techniques can improve compliance with guidelines and safety constraints <ref type="bibr" target="#b15">[15]</ref>. Anderson et al. propose a neurosymbolic framework that incorporates symbolic policies with a deep reinforcement learning model <ref type="bibr" target="#b0">[1]</ref>. They assert that this approach can improve the safety of reinforcement learning approaches in safety-critical domains, including autonomous vehicles. These systems are related to this research in the sense that both are using symbolic methods to improve existing deep learning-based systems. However, this research is different in that it is using commonsense reasoning as the proposed symbolic model and that, while it is being used to improve on a deep learning model, it is a different layer that is generated separately. While autonomous vehicles and computer vision technologies are primarily deep learning-based, this approach could be used to improve upon reinforcement learning-based, other non-neural machine learning-based, or even search-based vehicles.</p><p>A framework created earlier, AUTO-DISCERN <ref type="bibr" target="#b11">[12]</ref>, proposes a goal-directed commonsense reasoning ASP system that makes driving decisions based on the observations of the environment. This research is an extension of this approach by creating a commonsense reasoning model that makes safe decisions and reasons over a road scenario. This experiment pushes it farther by incorporating the model with an AV system and using the commonsense model to improve aspects of autonomous driving.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Research Goals</head><p>The major goal of creating an AV system of higher level autonomy using commonsense reasoning can be broken down into various tasks relating to where in the AV system we inject the reasoning:</p><p>• Perception and Classification: Use commonsense reasoning and knowledge to model the sensor data and optimize the classifications. We can also inject commonsense reasoning into the training process itself to create a more connected and explainable model.</p><p>• Safe Decision Making: We can model rules for the AV system so that it will always make intelligent and safe decisions that still move it towards its desired goal. This is important for making an ethical system that complies with traffic laws.</p><p>• Complicated Tasks: Complicated tasks may be outside of the training data for an AV system, such as navigating a road after the results of a hurricane. We can create reasoning models that can handle multiple unknown scenarios safely. Furthermore, it is easier to model these niche scenarios using reasoning since there is often a strong bias against such scenarios in the existing training data for AV systems, and they are difficult to capture using just deep learning.</p><p>Each of these tasks separately will improve the effectiveness of future AV systems, and if success is found in each task, then they can be combined to create an autonomous vehicle with a higher level of autonomy than existing systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Preliminary Results</head><p>The current focus of these recent experiments has been using commonsense reasoning and knowledge to optimize the classifications of the computer vision model through consistency checking (first and second tasks). The system uses a Prolog <ref type="bibr" target="#b4">[5]</ref> commonsense reasoning model to check if the classifications being made by the computer vision model are consistent with each other, particularly if the behavior of nearby vehicles is consistent with the current road scenario. For example, if a traffic light at an intersection is red, then vehicles in that lane should be stopped. We define the group actions of nearby vehicles as collective behaviors. If the rules about the collective behaviors are not consistent with the observed objects, then the system adjusts the classifications of objects around the AV system to fix the scenario. This system emulates the human process of reasoning about a road situation by observing surrounding vehicles. In this approach, we test over misclassified traffic light colors and unobserved road obstacles.</p><p>To accomplish this, the system takes objects from the computer vision model's output and converts them into facts. For example, the following facts represent the information about nearby vehicles and intersections: Coordinate2X, Coordinate2Y). vehicles(Frame, Vehicles).</p><formula xml:id="formula_0">property(vehicle,</formula><p>These facts are treated as knowledge about our current scenario. The system also contains another Prolog program that performs commonsense reasoning over road scenarios. These rules define how nearby vehicles, or collective behaviors, should act around traffic lights and obstacles. false_negative_light(Frame):property(intersection, Frame, _, _, _, _, _), collective_{up/down/left/right}(Frame).</p><p>This rule is a basic example of how the system would detect misclassifications about the presence of red traffic lights. The rule will evaluate to true, meaning that the AV system fails to detect a red traffic light (negative) when there actually is one (positive), when the AV system detects a collective behavior moving across an intersection in front of it. This is similar to how a human driver can figure out a traffic light is red even if it appears to be green based on the behavior of nearby vehicles. In addition to rules concerning traffic lights, the commonsense reasoning program also contains rules about how vehicles behave when near obstacles.</p><p>The following are some of the results from the experiments performed so far, which show the results of this system when identifying the color of an incoming traffic light and road obstacles using the collective behaviors of nearby vehicles. Both experiments were performed over recorded datasets from the Car Learning to Act simulator (CARLA) <ref type="bibr" target="#b6">[7]</ref>.</p><p>Table <ref type="table" target="#tab_0">1</ref> shows the accuracy of the logic model and baseline computer vision model when it comes to identifying the color of traffic lights at intersections. The dataset is generated from two different recordings, about a couple minutes long each. Each recording was done using the same CARLA map (Town 1) with two different vehicle population densities (100 and 200). The image data contained inclement weather conditions that were outside of the training data. Due to this, the baseline model struggles to maintain high accuracy when identifying the color of the traffic light.</p><p>The accuracy of the commonsense reasoning model is evaluated over eligible frames in the data, meaning images within the data that fulfill the default rules in our model. For these eligible frames,</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CARLA Obstacles Metrics</head><p>Accuracy Precision Recall F-Score Town 3.0 Logic the commonsense reasoning model maintains high accuracy. When the reasoning model is combined with the baseline model and evaluated over the whole dataset, we can see a significant increase in all metrics over the baseline model. The increase in performance varies, as it depends strongly on how many frames are eligible for the commonsense reasoning to perform a correction. This is why there is a greater increase in accuracy for the first dataset as opposed to the second. Despite this, the experiment so far has demonstrated that this approach is an effective optimizer for this scenario.</p><p>The results from Table <ref type="table" target="#tab_1">2</ref> show a similar result for a different scenario. In this dataset, scenarios are much shorter (around 30 seconds) and are used to evaluate predictions about incoming obstacles that are blocking a lane of traffic. This is a task that deep learning models can struggle with since they rely entirely on image or sensor data. If a large vehicle is completely obstructing the view of the obstacle, the deep learning system will struggle heavily to identify it. This, however, is not an issue for the commonsense reasoning system. The results show that as long as there are vehicles nearby for us to observe, we can always determine an obstacle blocking a lane. The accuracy of the deep learning model depends heavily on how well it can see the obstruction, which is what leads to the results seen in the table.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Conclusion and Future Work</head><p>While a lot of progress has been made in research for AV technology, we are still far away from achieving a fully autonomous vehicle. This is because of an overreliance on deep learning techniques. Proposed here is a pipeline towards a fully autonomous vehicle by incorporating commonsense reasoning into various aspects of the AV system. The results so far demonstrate the effectiveness of this approach. This work will be extended by exploring new techniques to improve the applicability and efficiency of this approach. This approach can be improved with evaluations from real-world datasets, such as KITTI or NuScenes <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b3">4]</ref>, the use of more powerful logic technologies, such as answer set programming, and the exploration of efficient ways to construct and invoke commonsense reasoning models. It will also benefit from the consideration of new ways to combine commonsense reasoning into AV systems, such as employing more neurosymbolic-based methods like injecting commonsense into the training of the deep learning model.</p><p>Going forward, the techniques shown for autonomous vehicles can be applied to other domains.</p><p>These approaches focus on using commonsense reasoning models that use the images from the autonomous vehicle to improve the system. This can be viewed as a form of visual question answering (VQA <ref type="bibr" target="#b1">[2]</ref>) and can be applied to other domains. Future work will be about the knowledge extraction and reasoning from images used in this experiment and demonstrate its effectiveness in various applications, including autonomous vehicles.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Results of commonsense reasoning, baseline deep learning, and combined hybrid models for traffic lights. The logic model is only evaluated over frames in which there are collective behaviors, and the baseline and combined models are evaluated over all frames.</figDesc><table><row><cell>Frame, Object_id,</cell></row><row><cell>Action, VelocityX, VelocityY, Rotation,</cell></row><row><cell>Coordinate1X, Coordinate1Y,</cell></row><row><cell>Coordinate2X, Coordinate2Y).</cell></row><row><cell>property(intersection, Frame, Object_id,</cell></row><row><cell>Coordinate1X, Coordinate1Y,</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Results of the commonsense reasoning model for obstructions for the logic, baseline, and hybrid combined models.</figDesc><table><row><cell></cell><cell>1</cell><cell>1</cell><cell>1</cell><cell>1</cell></row><row><cell>Town 3.0 Baseline</cell><cell>.4943</cell><cell>1</cell><cell>.4943</cell><cell>.6615</cell></row><row><cell>Town 3.0 Combined</cell><cell>1</cell><cell>1</cell><cell>1</cell><cell>1</cell></row><row><cell>Town 3.1 Logic</cell><cell>1</cell><cell>1</cell><cell>1</cell><cell>1</cell></row><row><cell>Town 3.1 Baseline</cell><cell>.93</cell><cell>1</cell><cell>.93</cell><cell>.9636</cell></row><row><cell>Town 3.1 Combined</cell><cell>1</cell><cell>1</cell><cell>1</cell><cell>1</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Neurosymbolic reinforcement learning with formally verified exploration</title>
+		<idno type="DOI">10.48550/arXiv.2009.12612</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in neural information processing systems</title>
+		<editor>
+			<persName><forename type="first">Greg</forename><surname>Anderson</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Abhinav</forename><surname>Verma</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Isil</forename><surname>Dillig</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Swarat</forename><surname>Chaudhuri</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="6172" to="6183" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Vqa: Visual question answering</title>
+		<author>
+			<persName><forename type="first">Stanislaw</forename><surname>Antol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aishwarya</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiasen</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dhruv</forename><surname>Batra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lawrence</forename><surname>Zitnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devi</forename><surname>Parikh</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICCV.2015.279</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE international conference on computer vision</title>
+		<meeting>the IEEE international conference on computer vision</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2425" to="2433" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Autonomous cars: Past, present and future a review of the developments in the last century, the present scenario and the expected future of autonomous vehicle technology</title>
+		<author>
+			<persName><forename type="first">Keshav</forename><surname>Bimbraw</surname></persName>
+		</author>
+		<idno type="DOI">10.5220/0005540501910198</idno>
+	</analytic>
+	<monogr>
+		<title level="m">12th international conference on informatics in control, automation and robotics</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="191" to="198" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">nuscenes: A multimodal dataset for autonomous driving</title>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Caesar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Varun</forename><surname>Bankiti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><forename type="middle">H</forename><surname>Lang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sourabh</forename><surname>Vora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Venice</forename><forename type="middle">Erin</forename><surname>Liong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiang</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anush</forename><surname>Krishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giancarlo</forename><surname>Baldan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oscar</forename><surname>Beijbom</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CVPR42600.2020.01164</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</title>
+		<meeting>the IEEE/CVF conference on computer vision and pattern recognition</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="11621" to="11631" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Programming in PROLOG</title>
+		<author>
+			<persName><forename type="first">&amp;</forename><surname>William F Clocksin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Christopher</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mellish</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-55481-0</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Springer Science &amp; Business Media</title>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">On-Road Automated Driving (ORAD) Committee (2021): Taxonomy and definitions for terms related to driving automation systems for on-road motor vehicles</title>
+		<imprint>
+			<publisher>SAE international</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">CARLA: An open urban driving simulator</title>
+		<author>
+			<persName><forename type="first">Alexey</forename><surname>Dosovitskiy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">German</forename><surname>Ros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felipe</forename><surname>Codevilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vladlen</forename><surname>Koltun</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.1711.03938</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Conference on robot learning</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Vision meets robotics: The kitti dataset</title>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Geiger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Lenz</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0278364913491297</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Christoph Stiller &amp; Raquel Urtasun</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="1231" to="1237" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Knowledge representation, reasoning, and the design of intelligent agents: The answer-set programming approach</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Gelfond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">&amp;</forename><surname>Yulia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kahl</forename></persName>
+		</author>
+		<idno type="DOI">10.1017/CBO9781139342124</idno>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Cambridge University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Neurosymbolic approaches in artificial intelligence</title>
+		<author>
+			<persName><forename type="first">Pascal</forename><surname>Hitzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Eberhart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Monireh</forename><surname>Ebrahimi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kamruzzaman</forename><surname>Md</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lu</forename><surname>Sarker</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhou</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/nsr/nwac035</idno>
+	</analytic>
+	<monogr>
+		<title level="j">National Science Review</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">35</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kahneman</surname></persName>
+		</author>
+		<title level="m">Thinking, fast and slow</title>
+		<imprint>
+			<publisher>macmillan</publisher>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">AUTO-DISCERN: autonomous driving using common sense reasoning</title>
+		<author>
+			<persName><forename type="first">Suraj</forename><surname>Kothawade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vinaya</forename><surname>Khandelwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kinjal</forename><surname>Basu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huaduo</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gopal</forename><surname>Gupta</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2110.13606</idno>
+		<idno type="arXiv">arXiv:2110.13606</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Answer set programming</title>
+		<author>
+			<persName><forename type="first">Vladimir</forename><surname>Lifschitz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Springer</forename><surname>Heidelberg</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-24658-7</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Quito</surname></persName>
+		</author>
+		<idno type="DOI">10.36227/techrxiv.23528403.v1</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Compare and Contrast LiDAR and Non-LiDAR Technology in an Autonomous Vehicle: Developing a Safety Framework</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Neurosymbolic artificial intelligence (why, what, and how)</title>
+		<author>
+			<persName><forename type="first">Amit</forename><surname>Sheth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaushik</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manas</forename><surname>Gaur</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MIS.2023.3268724</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Intelligent Systems</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="56" to="62" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Driven by commonsense</title>
+		<author>
+			<persName><forename type="first">Jakob</forename><surname>Suchan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mehul</forename><surname>Bhatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Srikrishna</forename><surname>Varadarajan</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/FAIA200463</idno>
+	</analytic>
+	<monogr>
+		<title level="m">ECAI 2020</title>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="2939" to="2940" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Commonsense visual sensemaking for autonomous driving-On generalised neurosymbolic online abduction integrating vision and semantics</title>
+		<author>
+			<persName><forename type="first">Jakob</forename><surname>Suchan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mehul</forename><surname>Bhatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Srikrishna</forename><surname>Varadarajan</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.artint.2021.103522</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">299</biblScope>
+			<biblScope unit="page">103522</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

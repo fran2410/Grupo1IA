@@ -1,0 +1,1306 @@
+Modelo UnBIAS cargado correctamente
+Modelo ConfliBERT cargado correctamente
+Modelo AventIQ cargado correctamente
+Modelo SciBERT-JNLPBA cargado correctamente
+Modelo SciBERT-JNLPBA-cased cargado correctamente
+Modelo PCSciBERT cargado correctamente
+Modelo BERT-CoNLL-Base cargado correctamente
+Modelo BERT-CoNLL-Cased cargado correctamente
+Modelo BERT-CoNLL-Large cargado correctamente
+Modelo Jean-Baptiste cargado correctamente
+
+Procesando: grobid_output_2502.09294v1.xml
+Acknowledgments section : 
+' ETHICAL IMPACT STATEMENT This is a purely theoretical paper that provides an argument for adopting particular practices in specific Affective Computing Research. There are no ethical issues to discuss at the moment. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : grobid_output_2502.09294v1.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Procesando: grobid_output_2502.09565v1.xml
+Acknowledgments section : 
+' 6 Acknowledgments Research reported in this work was supported by the National Institute of General Medic al Sciences of the National Institutes of Health under award number R35GM137966, National Science Foundation under grant number of 1751471, Robert L. and Mary L. Sproull Fellowship gift and U.S. Department of Energy, Grant No. DE-SC0023354. Work at FutureHouse is supported by the generosity of Eric and Wendy Schmidt. We thank the Center for Integrated Research Computing (CIRC) at University of Rochester for providing computational resources and technical support. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : grobid_output_2502.09565v1.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (6): {'Robert L', 'Wendy Schmidt', 'Sproull', 'Mary L', 'Eric', '.'}
+Organizaciones (10): {'National Institute of General Medic al Sciences', 'National Science Foundation', 'CIRC', 'S. Department of Energy', 'Center for Integrated Research Computing', 'University of Rochester', 'FutureHouse', 'National Institutes of Health', 'U', '.'}
+
+Procesando: grobid_output_2502.09596v1.xml
+ - No se pudo extraer texto
+
+Procesando: Machine Learning Algorithms.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: 2401.00775v2.xml
+Acknowledgments section : 
+' Alternatively, for each paper, we can count the citation by web searching (e.g., Google Scholar, which is known to be not very accurate), or by reference matching (e.g., Web of Science and Scopus). Our approach allows us to perform advanced analysis (e.g., ranking authors/papers by citation counts, reporting the most cited authors and papers, excluding self-citations, and calculating cross-journal citation). For such analysis, it is crucial that we know the title, author, author affiliation, references, and time and place where it is published for each paper under consideration. For each of the two alternative approaches, we can gather such information for a small number of papers, but it is hard to obtain such '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2401.00775v2.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (3): {'Web of Science', 'Google Scholar', 'Scopus'}
+
+Procesando: IJBB-V18-No3-p11-20.xml
+Acknowledgments section : 
+' The authors thank the TETFUND IBR Grant for 2021/2022 financial support utilized for the present research. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : IJBB-V18-No3-p11-20.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (0): set()
+
+Procesando: Artificial Intelligence in Education.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: Classification of Breast Cancer Tumors from Histopathological Images.xml
+ - No se pudo extraer texto
+
+Procesando: 2502.12102v1.xml
+Acknowledgments section : 
+' Acknowledgments. We are grateful to Killian McLoughlin and M. J. Crockett for their contributions to both the original (Earp et al., 2021) and updated (Earp et al., 2025) versions of the Relational Norms model along with some of the present authors. Many helpful comments on this article were offered by participants in the Workshop on Partiality, Relationships, and AI held at LMU Munich (24 & 25 October, 2024) organized by Ben Lange, Tom Douglas, and Sven Nyholm. Thank you also to Rodrigo Diaz for helpful comments on an earlier draft. Please note that any use of generative AI in this manuscript adheres to ethical guidelines for use and acknowledgement of generative AI in academic research (Porsdam Mann, Vazirani et al., 2024). Each author has made a substantial contribution to the work, which has been thoroughly vetted for accuracy, and assumes responsibility for the integrity of their contributions. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2502.12102v1.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (10): {'Earp', 'Sven Nyholm.', 'Ben Lange', 'Porsdam Mann', 'Vazirani', 'Tom Douglas', 'M. J. Crockett', 'Rodrigo Diaz', 'Killian McLoughlin', '.'}
+Organizaciones (1): {'LMU'}
+
+Procesando: Machine learning algorithms for breast cancer analysis.xml
+ - No se pudo extraer texto
+
+Procesando: grobid_output_2502.09242v1.xml
+Acknowledgments section : 
+' Acknowledgements This work was partially funded via the EVUK programme ("Next-generation AI for Integrated Diagnostics") of the Free State of Bavaria, the Deutsche Forschungsgemeinschaft (DFG), and Friedrich-Alexander-Universität Erlangen-Nürnberg within the funding program Open Access Publication Funding. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : grobid_output_2502.09242v1.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (5): {'EVUK', 'Deutsche Forschungsgemeinschaft', 'DFG', 'Friedrich-Alexander-Universität Erlangen-Nürnberg', '.'}
+
+Procesando: grobid_output_2502.09560v1.xml
+ - No se pudo extraer texto
+
+Procesando: 2010.02462v1.xml
+Acknowledgments section : 
+' Acknowledgements Our research was supported by the Chinese foundations (NSFC 11533005, 11961131002, 11733003, and U1731241). X.A.A. was supported by the Science and Technology Development Fund of Macau (275/2017/A). PFC thanks ISSI-Beijing and ISSI for supporting team meetings on solar filaments. This paper is dedicated to Prof. Yunchun Jiang, who trained many students in the filament research. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2010.02462v1.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (1): {'Yunchun Jiang'}
+Organizaciones (7): {'ISSI', 'PFC', 'Science and Technology Development Fund of Macau', 'X.A.A.', '.', 'NSFC', 'ISSI-Beijing'}
+
+Procesando: 2405.17044v3.xml
+Acknowledgments section : 
+' The authors wholeheartedly thank all the researchers who spent the time participating in our study. The authors also thank the organizers of OpenAlex, arXiv, bioRxiv, medRxiv, and chemRxiv for making scientific resources freely accessible. X.G. acknowledges support from the Alexander von Humboldt Foundation. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2405.17044v3.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (3): {'. X.G.', ',', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Procesando: 2206.02983v2.xml
+Acknowledgments section : 
+' We would like to express our gratitude to our Computational Intelligence LAB for providing all research resources. Our supervisor and course instructor deserve special thanks for his patience and support in helping us overcome the lot of obstacles we encountered during our research. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2206.02983v2.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (1): {'Computational Intelligence LAB'}
+
+Procesando: grobid_output_2502.09601v1.xml
+ - No se pudo extraer texto
+
+Procesando: 2212.07286v2.xml
+Acknowledgments section : 
+' This material is based upon work supported by the National Science Foundation under Award No. OAC-2311521 and by NASA under award No. 20-OSTFL20-0053. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation or of NASA. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2212.07286v2.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'National Science Foundation', 'NASA'}
+
+Procesando: Transparent precision explainable artificial intelligence empowered breast cancer recommendations for personalized treatment.xml
+ - No se pudo extraer texto
+
+Procesando: A-Review-on-Python-Libraries-and-IDEs-for-Data-Science.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: 2402.08640v3.xml
+Acknowledgments section : 
+' The authors thank Burak Gurlek for interesting discussions at the start of this project, and the organizers of OpenAlex, arXiv, bioRxiv, chemRxiv, and medRxiv for making scientific resources freely and readily accessible. X.G acknowledges the support from the Alexander von Humboldt Foundation. Author Contributions X.G. and M.K. designed research; X.G. performed research and analyzed data; and X.G. and M.K. wrote the manuscript. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2402.08640v3.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (9): {'M.K.', '. X.G', 'K.', ',', 'X.G.', 'the', 'Burak Gurlek', 'M', '.'}
+Organizaciones (1): {'Alexander von Humboldt Foundation'}
+
+Procesando: THE BEES ALGORITHM.pdf.tei.xml
+Acknowledgments section : 
+' The research described in this paper was performed as part of the Objective 1 SUPERMAN project, the EPSRC Innovative Manufacturing Research Centre Project and the EC FP6 Innovative Production Machines and Systems (I*PROMS) Network of Excellence. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : THE BEES ALGORITHM.pdf.tei.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (0): set()
+Organizaciones (2): {'EC', 'EPSRC'}
+
+Procesando: Breast cancer detection through attention based feature integration model.xml
+ - No se pudo extraer texto
+
+Procesando: A Review of Machine Learning and Deep Learning Applications.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: 1906.06843v2.xml
+Acknowledgments section : 
+' MK thanks James A. Evans and Sasha Belikov for exciting discussions of metaknowledge research and automation of science, and Jacob G. Foster for a short but influencial conversation at the International Symposium on Science of Science 2016. Furthermore, we would like to acknowledge Nora Tischler, Armin Hochrainer, Robert Fickler, Radek Lapkiewicz, Manuel Erhard and Philipp Haslinger for many in- '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 1906.06843v2.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (12): {'James A. Evans', 'Sasha Belikov', 'Nora Tischler', 'Robert Fickler', 'Armin Hochrainer', 'Radek Lapkiewicz', 'Philipp Haslinger', ',', 'MK', 'Jacob G. Foster', 'Manuel Erhard', '.'}
+Organizaciones (0): set()
+
+Procesando: 107 35515 IJECE 25_ Faizah.xml
+ - No se pudo extraer texto
+
+Procesando: 2502.13138v1.xml
+ - No se pudo extraer texto
+
+Procesando: The rsync algorithm.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: Leveraging Artificial Intelligence in Business.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: Blockchain_technology_innovations.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: Arjun Suresh - Measuring Changes in Myocardial Perfusion in Left-Sided Breast Cancer Patients.xml
+Acknowledgments section : 
+' I would like to acknowledge and give my warmest thanks to my Research Mentor Dr Walter O'Dell whose guidance for my project was valuable. I would also like to thank my lab mate Maia Gueron, High School Student, Student Science Training Program for her comments and suggestions. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : Arjun Suresh - Measuring Changes in Myocardial Perfusion in Left-Sided Breast Cancer Patients.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (2): {"Walter O'Dell", 'Maia Gueron'}
+Organizaciones (1): {'Training Program'}
+
+Procesando: SROC II (39).xml
+ - No se pudo extraer texto
+
+Procesando: What an Algorithm Is.pdf.tei.xml
+Acknowledgments section : 
+' Acknowledgments I wish to thank William J. Rapaport of the University at Buffalo for his cogent suggestions and steady encouragement, and to note that any failing in the ideas or treatment is mine alone. Anonymous reviewers improved this work via many good suggestions, and have my sincere gratitude. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : What an Algorithm Is.pdf.tei.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (2): {'William J. Rapaport', '.'}
+Organizaciones (1): {'University at Buffalo'}
+
+Procesando: grobid_output_2502.09378v1.xml
+ - No se pudo extraer texto
+
+Procesando: Blockchain for the Metaverse.pdf.tei.xml
+ - No se pudo extraer texto
+
+Procesando: test.xml
+Acknowledgments section : 
+' Acknowledgments. We thank Christian Jespersen, Charlie O'Neill, Joshua Peek, and Christine Ye for useful conversations. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : test.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (4): {"Charlie O'Neill", 'Christine Ye', 'Christian Jespersen', 'Joshua Peek'}
+Organizaciones (0): set()
+
+Procesando: WJBPHS-2024-0113.xml
+Acknowledgments section : 
+' We would like to thank and acknowledge, Karen Viviana Castaño Coronado MBA, Chief Communication Officer (CCO) and CO-Founder of LAIHA (Latin American Industrial Hemp Association), and CEO-CANNACONS, Bogota, D.C., Capital District, Colombia for thoughtful discussions, critical comments, supporting, promoting, encouraging and appreciating this research work. We also thank all the members of LAIHA for supporting and encouraging this research work. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : WJBPHS-2024-0113.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (1): {'Karen Viviana Castaño Coronado'}
+Organizaciones (3): {'Latin American Industrial Hemp Association', 'LAIHA', 'CANNACONS'}
+
+Procesando: grobid_output_2502.09432v1.xml
+ - No se pudo extraer texto
+
+Procesando: LoremIpsum.xml
+ - No se pudo extraer texto
+
+Procesando: 2502.12150v1.xml
+Acknowledgments section : 
+' We thank Zekai Wang for valuable discussions. Mingjie Sun was supported by funding from the Bosch Center for Artificial Intelligence. '
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Paper : 2502.12150v1.xml
+
+Modelo: UnBIAS
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: ConfliBERT
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: AventIQ
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: SciBERT-JNLPBA
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: SciBERT-JNLPBA-cased
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: PCSciBERT
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: BERT-CoNLL-Base
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: BERT-CoNLL-Cased
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: BERT-CoNLL-Large
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Modelo: Jean-Baptiste
+
+Resultados:
+Nombres (2): {'Mingjie Sun', 'Zekai Wang'}
+Organizaciones (1): {'Bosch Center for Artificial Intelligence'}
+
+Procesando: WJARR-2024-0625.xml
+ - No se pudo extraer texto
+
+Procesando: grobid_output_2502.09233v1.xml
+ - No se pudo extraer texto
+
+Procesando: grobid_output_2502.09235v1.xml
+ - No se pudo extraer texto

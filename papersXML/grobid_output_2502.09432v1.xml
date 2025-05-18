@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Dual Formulation for Non-Rectangular L p Robust Markov Decision Processes</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability  status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2025-02-13">13 Feb 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Adarsh</forename><surname>Gupta</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Maxence</forename><forename type="middle">Mohamed</forename><surname>Elfatihi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Giorgia</forename><surname>Ramponi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kfir</forename><forename type="middle">Yehuda</forename><surname>Levy</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">École</forename><surname>Polytechnique</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Zurich</orgName>
+								<address>
+									<addrLine>4 Finsyth AI 5 NVIDIA</addrLine>
+									<settlement>Research</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Dual Formulation for Non-Rectangular L p Robust Markov Decision Processes</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-02-13">13 Feb 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">D9C4AD95E20314C529A79556B1519684</idno>
+					<idno type="arXiv">arXiv:2502.09432v1[cs.AI]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.3-SNAPSHOT" ident="GROBID" when="2025-05-13T17:34+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.8.2-3-g65968aec5</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We study robust Markov decision processes (RMDPs) with non-rectangular uncertainty sets, which capture interdependencies across states unlike traditional rectangular models. While non-rectangular robust policy evaluation is generally NP-hard, even in approximation, we identify a powerful class of L p -bounded uncertainty sets that avoid these complexity barriers due to their structural simplicity. We further show that this class can be decomposed into infinitely many sa-rectangular L p -bounded sets and leverage its structural properties to derive a novel dual formulation for L p RMDPs. This formulation provides key insights into the adversary's strategy and enables the development of the first robust policy evaluation algorithms for non-rectangular RMDPs. Empirical results demonstrate that our approach significantly outperforms brute-force methods, establishing a promising foundation for future investigation into non-rectangular robust MDPs.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Robust Markov Decision Processes (MDPs) provide a framework for developing solutions that are more resilient to uncertain environmental parameters compared to standard MDPs <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b4">5]</ref>. This approach is particularly critical in high-stakes domains, such as robotics, finance, healthcare, and autonomous driving, where catastrophic failures can have severe consequences. The study of robust MDPs is further motivated by their potential to offer superior generalization capabilities over non-robust methods <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b7">8]</ref>.</p><p>Robust solutions are highly desirable, but obtaining them is a challenging task. In particular, robust policy evaluation has been shown to be strongly NP-hard <ref type="bibr" target="#b8">[9]</ref> for general convex uncertainty sets. Consequently, much of the existing work makes rectangularity assumptions, with the most common being s-rectangular uncertainty sets and its special case sa-rectangular uncertainty sets <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b10">11,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b4">5,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b16">17,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b21">22]</ref>.</p><p>The s-rectangularity assumption simplifies the modeling of uncertainty by treating it as independent across states <ref type="bibr" target="#b8">[9]</ref>. This assumption is analytically appealing due to the existence of contractive robust Bellman operators, which facilitate computational tractability <ref type="bibr" target="#b8">[9]</ref>. However, real world uncertainties are often coupled across the states, and modelling it with s-rectangular uncertainty sets, can overly introduce conservatism in solutions (as illustrated in Figure <ref type="figure" target="#fig_1">1</ref> of <ref type="bibr" target="#b22">[23]</ref>). In other words, the ratio between the volume of a real world coupled uncertainty set and the smallest s-rectangular uncertainty containing it, can be exponential in the state space (as the ratio of volumes of a n-dimension sphere and a n-dimension cube containing it is O(2 n ) <ref type="bibr" target="#b23">[24]</ref>).</p><p>In contrast, non-rectangular RMDPs capture much better these interdependencies but lack the existence of any contractive robust Bellman operators, which makes the problem unwieldy <ref type="bibr" target="#b22">[23]</ref>.</p><p>To the best of our knowledge, research on non-rectangular robust MDPs remains limited <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b16">17]</ref>. While <ref type="bibr" target="#b22">[23]</ref> explored robust policy evaluation for non-rectangular uncertainty sets, their work was confined to reward uncertainties. In contrast, this paper addresses kernel uncertainty, which presents a significantly greater level of complexity compared to reward uncertainty.</p><p>Additionally, <ref type="bibr" target="#b16">[17]</ref> demonstrated the convergence of robust policy gradient methods with an iteration complexity of O(ϵ -4 ) for all types of uncertainty sets, including non-rectangular ones.</p><p>However, their method depends on oracle access to the robust gradient (worst-case kernel). As a result, robust policy evaluation under non-rectangular kernel uncertainties remains an unresolved challenge.</p><p>Further, dual formulation for non-robust MDPs <ref type="bibr" target="#b24">[25]</ref> has played a significant role in advancing the field. Unfortunately, no such formulation exists for the robust MDPs.</p><p>The key insight of this work is decomposing minimization over a nonrectangular L p normbounded uncertainty sets into minimization over a union of sa-rectangular L p -norm bounded uncertainty sets. For each minimization over rectangular uncertainty set, we have the robust return in close form. Now, we minimize this expression over the set of possible all sa-rectangular L p -norm bounded uncertainty sets that makes up the original nonrectangular set. Using the fact that worst kernel is rank-one perturbation of the nominal kernel in sa-rectangular robust MDPs, we derive dual formulation for the L p robust MDPs. This reveals a very interesting insishts over how the adversary chooses the worst kernel. Further, this dual formulation inspires a method for evaluation of robust policy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Contributions.</head><p>• We show that the general NP-hardness result for policy evaluation in non-rectangular RMDPs does not apply to L p -bounded robust MDPs.</p><p>• We derive a novel dual formulation for L p -RMDPs, providing key insights into the adversary's strategy and enabling the development of first robust policy evaluation algorithms.</p><p>• We experimentally validate our proposed algorithms, demonstrating significant improvements over existing brute-force methods. This work opens up the avenue for the further investigation of non-rectangular RMDPs otherwise believed too hard.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.1">Related Work</head><p>To the best of our knowledge, there exists no work on non-rectangular robust MDPs with kernel uncertainty. This work is the first to propose an efficient method for robust policy evaluation for a very useful class of uncertainty sets, otherwise thought to be NP-Hard <ref type="bibr" target="#b8">[9]</ref>. Rectangular Robust MDPs. In literature, sa-rectangular uncertainty is a very old assumption <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b3">4]</ref>. <ref type="bibr" target="#b8">[9]</ref> introduced s-rectangular uncertainty sets and proved its tractability, in addition to the intractability of the general non-rectangular uncertainty sets.</p><p>The most advantageous aspect of the s-rectangularity, is the existence of contractive robust Bellman operators. This gave rise to many robust value based methods <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b16">17]</ref>. Further, for many specific uncertainty sets, robust Bellman operators are equivalent to regularized non-robust operators, making the robust value iteration as efficient as non-robust MDPs <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b18">19]</ref>.</p><p>There exists many policy gradient based methods for robust MDPs, relying upon contractive robust Bellman operators for the robust policy evaluation <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b19">20]</ref>.</p><p>Further, <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b21">22]</ref> trie to tweak the process, and directly get samples from the adversarial model via pessimistic sampling.</p><p>There exist other notions of rectangularity such as k-rectangularity <ref type="bibr" target="#b9">[10]</ref> and r-rectangularity <ref type="bibr" target="#b10">[11]</ref> which are sparsely studied. However, <ref type="bibr" target="#b25">[26]</ref> shows, the theses uncertainty sets are either equivalent to s-rectangularity or non-tractable.</p><p>Non-Rectangular Reward Robust MDPs. Policy evaluation for robust MDPs with non-rectangular uncertainty set is proven to be a Strongly-NP-Hard problem <ref type="bibr" target="#b8">[9]</ref>, in general. For a very specific case, where uncertainty is limited only to reward uncertainty bounded with L p norm, <ref type="bibr" target="#b22">[23]</ref> proposed robust policy evaluation via frequency (occupation measure) regularization, and derived the policy gradient for policy improvement.</p><p>Convergence Rate of Robust Policy Gradient . The robust policy gradient method has been shown to converge with iteration complexity of O(ϵ -4 ) for general robust MDPs <ref type="bibr" target="#b16">[17]</ref>.</p><p>However, it requires oracle access to robust policy evaluation (i.e., the computation of the worst kernel), which can be computationally expensive <ref type="bibr" target="#b16">[17]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Preliminary</head><p>A Markov Decision Process (MDP) can be described as a tuple (S, A, P, R, γ, µ), where S is the state space, A is the action space, P is a transition kernel mapping S × A to ∆ S , R is a reward function mapping S × A to R, µ is an initial distribution over states in S, and γ is a discount factor in [0, 1) <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b26">27]</ref>. A policy π : S → ∆ A is a decision rule that maps state space to a probability distribution over action space. Let Π = (∆ A ) S denote set of all possible policies. Further, π(a|s), P (s ′ |s, a) denotes the probability of taking action a in state s by policy π, and the probability of transition to state s ′ from state s under action a respectively. In addition, we denote P π (s ′ |s) = a π(a|s)P (s ′ |s, a) and R π (s) = a π(a|s)R(s, a) as short-hands.</p><p>The return of a policy π, is defined as</p><formula xml:id="formula_0">J π P = ⟨µ, v π P ⟩ = ⟨R π , d π P ⟩ where v π P := D π R π is value function, d π P = µ ⊤ D π</formula><p>is occupation measure and D π = (I -γP π ) -1 is occupancy matrix <ref type="bibr" target="#b24">[25]</ref>. As a shorthand, we denote d π P (s, a) = d π P (s)π(a|s) and the usage shall be clear from the context. A robust Markov Decision Process (MDP) is a tuple (S, A, R, U, γ, µ) which generalizes the standard MDP, by containing a set of environments U <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b3">4]</ref>. The reward robust MDPs is well-studied in the precious work of rectangular <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b18">19]</ref> and non-rectangular <ref type="bibr" target="#b22">[23]</ref> uncertainty sets.</p><p>Hence, in this work , we consider only uncertainty in the kernel which is much more challenging.</p><p>For an uncertainty set U, the robust return J π U for a policy π, and the optimal robust return J * U , are defined as:</p><formula xml:id="formula_1">J π U = min P ∈U J π P , and J * U = max π J π U ,</formula><p>respectively. The objective is to determine an optimal robust policy π * U that achieves the optimal robust performance J * U . Unfortunately, even robust policy evaluation (i.e., finding the worst-case transition kernel P π U ∈ arg min P ∈U J π P ) is strongly NP-hard for general (non-rectangular) convex uncertainty sets <ref type="bibr" target="#b8">[9]</ref>. This makes solving non-rectangular robust MDPs a highly challenging problem.</p><p>To make the problem tractable, a common approach is to use s-rectangular uncertainty sets, U s = × s∈S P s , where the uncertainty is modeled independently across states <ref type="bibr" target="#b8">[9]</ref>. These sets decompose state-wise, capturing correlated uncertainties within each state while ignoring inter-dependencies across states. This allows the robust value function to be defined as (vector minimum) v π U s = min P ∈U s v π P <ref type="bibr" target="#b8">[9]</ref>. A further simplification is the sa-rectangular uncertainty set, U sa , where uncertainties are assumed to be independent across both states and actions. Formally, U sa = × (s,a)∈S×A P s,a , where P s,a are independent component sets for each state-action pair <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b15">16]</ref>. Notably, sa-rectangular sets are a special case of s-rectangular sets.</p><p>Various types of rectangular uncertainty sets have been explored in the literature <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b28">29]</ref>.</p><p>In this work, we focus specifically on L p -bounded uncertainty sets U sa p /U s p , which are centered around a nominal transition kernel P <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b19">20]</ref>, defined as</p><formula xml:id="formula_2">U sa p = {P s ′ P sa (s ′ ) = 1, ∥P sa -Psa ∥ p ≤ β sa }, U s p = {P s ′ P sa (s ′ ) = 1, ∥P s -Ps ∥ p ≤ β s },</formula><p>with small enough radius vector β is small enough, to ensure all the kernels in the uncertainty sets are valid. Further, symbol q is the Hölder conjugate of p and σ p is the generalized standard deviation (GSTD) <ref type="bibr" target="#b18">[19]</ref> defined as:</p><formula xml:id="formula_3">1 p + 1 q = 1, and σ p (v) := min ω∈R ∥v -ω1∥ p .</formula><p>One of the most surprising, and useful facts about L p bounded uncertainty sets, is that the adversarial kernel is a rank one perturbation of the nominal kernel, as stated below.</p><p>Proposition 2.1. (Nature of the Adversary, <ref type="bibr" target="#b19">[20]</ref>) For uncertainty set U = U sa p /U s p , the worst kernel is given as</p><formula xml:id="formula_4">P π U = P -bk ⊤ ,</formula><p>where k depends on the robust value function v π U and b is (policy weighted of U s p ) radius vector.</p><p>This result is insightful however it doesn't characterize the direction of perturbation k in nominal terms.</p><p>Robust Policy Gradient Methods. The absence of contractive robust Bellman operators renders the development of value-based methods for robust MDPs particularly challenging.</p><p>Consequently, policy gradient methods naturally emerge as a viable alternative. The update rule is given by:</p><formula xml:id="formula_5">π k+1 = Proj π∈Π π k -η k ∇ π J π k P k ,<label>(1)</label></formula><p>where</p><formula xml:id="formula_6">J π k P k -J π k U ≤ ϵγ k and learning rate η k = O( 1 √ k )</formula><p>. This approach guarantees convergence to a global solution within O(ϵ -4 ) iterations <ref type="bibr" target="#b16">[17]</ref>.</p><p>However, this update rule depends on oracle access to the robust gradient, which is highly challenging to obtain because robust policy evaluation is an NP-hard problem. Moreover, no prior work has addressed robust gradient evaluation in the context of non-rectangular robust MDPs. This work constitutes the first attempt to compute the robust gradient for such MDPs by leveraging the dual structure of robust MDPs, paving the way for practical robust policy gradient methods. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Dual</head><formula xml:id="formula_7">a d(s, a) -γ s ′ ,a ′ d(s ′ , a ′ )P (s | s ′ , a ′ ) = µ(s), ∀s ∈ S.</formula><p>The feasible set D forms a convex polytope <ref type="bibr" target="#b29">[30]</ref>, whereas the set of value functions, V, is a polytope that is generally non-convex <ref type="bibr" target="#b30">[31]</ref>. This dual formulation offers several advantages, including efficient handling of constraints and the ability to solve the problem using linear programming techniques.</p><p>For robust MDPs, the geometry of robust value functions is significantly more intricate compared to standard MDPs <ref type="bibr" target="#b31">[32]</ref>. While the dual formulation for standard MDPs is wellestablished, this work is the first to derive a dual formulation for robust MDPs. This novel formulation provides critical insights and lays the foundation for the development of robust policy evaluation methods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Method</head><p>In this section, we derive the dual formulation for non-rectangular robust Markov decision processes (RMDPs) with uncertainty sets bounded by L p balls. This dual perspective not only introduces several new research questions but also provides critical insights into the underlying problem. Further, we develop a method to compute the worst kernel, thereby enabling robust policy evaluation.</p><p>We begin with defining the non-rectangular L p -constrained uncertainty set around the nominal kernel P as:</p><formula xml:id="formula_8">U p = P ∥P -P ∥ p ≤ β, s ′ P (s ′ | s, a) = 1 .</formula><p>Throughout the paper, we use d π , v π , J π , D π as shorthand for d π P , v π P , J π P , and D π P , respectively w.r.t. nominal kernel P . The simplex constraint ensures that the transition kernel P satisfies the unity-sum-rows property, as discussed in <ref type="bibr" target="#b18">[19]</ref>. The kernel radius β is assumed to be small enough to guarantee that all kernels within U p are well-defined, consistent with assumptions made in prior works <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b18">19]</ref>.</p><p>Note that this setting allows noise in one state to be coupled with noise in other states.</p><p>Before delving into solving it, we first discuss why its important? Why are uncertainty sets modeled with non-rectangular sets U p (e.g., L 2 -balls) better than rectangular ones?</p><p>In Figure <ref type="figure" target="#fig_1">1</ref>, we illustrate this by capturing the uncertainty set using non-rectangular U 2 (circle/sphere) balls and rectangular (square/cube) balls. The blue dots represent possible environments, with the origin being the nominal environment. Points farther away from the origin indicate larger perturbations. Specifically, points near the corners of the square/cube represent environments with large perturbations in all dimensions or coordinates simultaneously.</p><p>The likelihood of such simultaneous perturbations is very low, and this issue becomes even more pronounced in higher dimensions. This phenomenon is well discussed in the paper Lightning Doesn't Strike Twice: Coupled RMDPs <ref type="bibr" target="#b32">[33]</ref>. To make matters worse, as shown in the result below, most of the volume of a highdimensional cube lies near its corners outside the embedded sphere. This implies that rectangular robust MDPs are overly conservative, as their uncertainty sets focus on environments near the corners-corresponding to highly unlikely extreme perturbations.</p><p>Proposition 3.1. Let U sa 2 and U s 2 denote the smallest sa-rectangular and s-rectangular sets, respectively, that contain U 2 . Then:</p><formula xml:id="formula_9">vol(U 2 ) vol(U sa 2 ) = O(c -SA sa ),<label>and</label></formula><formula xml:id="formula_10">vol(U 2 ) vol(U s 2 ) = O(c -S s ),</formula><p>where vol(X) denotes the volume of the set X, and c s , c sa &gt; 1 are constants.</p><p>The result follows from the n-dimensional sphere's volume c n r n (c n → 0) <ref type="bibr" target="#b23">[24]</ref>, compared to the enclosing cube's volume 2 n r n (side 2r), resulting in a ratio of O(2 n ).</p><p>From the above discussion, we conclude that non-rectangular robust MDPs are less conservative. However, robust policy evaluation (even approximation) has been proven NP-hard for general uncertainty sets defined as intersections of finite hyperplanes <ref type="bibr" target="#b8">[9]</ref>. Specifically, <ref type="bibr" target="#b8">[9]</ref> reduces an Integer Program (IP) with m constraints to robust MDPs where the uncertainty set consists of intersections of m half-spaces (m-linear constraints). This polyhedral structure is fundamental to the hardness proof, hence, it does not extend to our uncertainty sets U p for p &gt; 1. For the case of U 1 , the IP reduction does apply, but since U 1 is defined by a single global constraint (∥P -P1 ∥ 1 ≤ β), it forces the IP to have only one simple constraint which is efficiently solvable.</p><p>A detailed discussion can be found in Appendix D.2.</p><p>We conclude that L p -robust MDPs are potentially tractable. A key insight is that a nonrectangular uncertainty set U p can be expressed as a union of sa-rectangular sets U sa p (b) with varying radius vectors b, each of which can be solved more easily on its own. Proposition 3.2. Non-rectangular uncertainty U p can be written as infinite union of sarectangular sets U sa p , as</p><formula xml:id="formula_11">U p = b∈B U sa p (b), where B = {b ∈ R S × A + | ∥b∥ p ≤ β}.</formula><p>Note that all of them share the same nominal kernel P .</p><p>The proof of the above result intuitively generalizes the idea that a circle (or n-dimensional sphere) can be covered by an inscribed square (or n-dimensional rectangles) touching its boundaries and a continuum of its rotated versions, as shown in Figure <ref type="figure" target="#fig_2">2</ref>. This offers a significant simplification to the problem at hand, as it implies that non-rectangular policy evaluation (difficult) can be decomposed into sa-rectangular uncertainty sets (easier) as:</p><formula xml:id="formula_12">J π Up = min b∈B min P ∈U sa p (b) J π P . (<label>2</label></formula><formula xml:id="formula_13">)</formula><p>In essence, we have reduced a challenging problem into an infinite number of simpler ones.</p><p>However, our task is not complete yet. While there exists a closed-form expression for J π</p><formula xml:id="formula_14">U sa p = J π -s,a d π (s, a)b sa σ q (v π U sa p )</formula><p>, where σ q (v π U sa p ) represents the q-generalized standard deviation (GSTD) of the robust value function as defined in <ref type="bibr" target="#b18">[19]</ref>, this formulation is still impractical, as max b∈B s,a d π (s, a)b sa σ q (v π U sa p (b) ) remains computationally challenging. To address this issue, we turn to the dual formalism developed in the next section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Dual Formulation of Robust MDPs</head><p>In this section, we derive, for the first time, a dual formulation for robust MDPs. While it is more complex than the dual formulation for non-robust MDPs and applies specifically to L p -bounded uncertainty sets, it lays the groundwork for all the subsequent results in the paper.</p><p>From <ref type="bibr" target="#b19">[20]</ref>, we know sa-rectangular worst-case kernel P π</p><formula xml:id="formula_15">U sa p (b) = P -bk T is a rank-one perturbation of the nominal kernel, where k ∈ K := {k| | ∥k∥ p ≤ 1, 1 ⊤ k = 0}</formula><p>. Hence, it is enough for the adversary to focus on the rank-one perturbations, allowing us to rewrite (2) as</p><formula xml:id="formula_16">J π Up = min b∈B min k∈K J π P -bk ⊤ = min b∈B min k∈K µ ⊤ D π P -bk ⊤ R π ,</formula><p>where the last equality comes from J π P = µ T D π P R π . Further, as shown in Lemma 4.4 of <ref type="bibr" target="#b19">[20]</ref>, applying the Sherman-Morrison formula <ref type="bibr" target="#b33">[34]</ref> (see Proposition D.1), the robust return can be expressed as:</p><formula xml:id="formula_17">J π Up = min b∈B,k∈K µ ⊤ D π R π -γµ ⊤ D π b π k ⊤ D π R π 1 + γk ⊤ D π b π ,</formula><p>where b π s := a π(a|s)b sa . The following result presents a more compact and interpretable form of this expression.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lemma 3.3. The robust return can be expressed as:</head><formula xml:id="formula_18">J π Up = J π -γ max b∈B,k∈K ⟨k, v π R ⟩⟨d π , b π ⟩ 1 + γ⟨k, v π b ⟩</formula><p>, where v π b = D π b π represents the value function with uncertainty radius b as the reward vector.</p><p>For the first time, the above result expresses the robust return in terms of the nominal return J π and a penalty term involving only nominal values (d π , v π R = v π , and v π b ). Notably, the denominator term 1 + γ⟨k, v π b ⟩ is strictly positive (see appendix for details). In the subsequent subsections, we delve deeper into evaluating this penalty term and analyzing the nature of the optimal (k, b) for a given policy π, revealing the adversary. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Additionally, by maximizing the robust return J π</head><p>Up over policies, we derive a novel dual formulation, as stated below.</p><p>Theorem 3.4. The optimal robust return is the solution to</p><formula xml:id="formula_19">J * Up = max D∈D min k∈K,b∈B µ T DR -γµ T Db k T DR 1 + γk T Db where D = D π H π | π ∈ Π and H π R := R π , D π = (I -P π ) -1 .</formula><p>Notably, the dual formulations for the sa-rectangular and s-rectangular cases differ in their definitions of B: for the sa-rectangular case, B = {β}, whereas for the s-rectangular case,</p><formula xml:id="formula_20">B = {b ∈ R S×A | ∥b s ∥ p ≤ β s }, as detailed in the appendix.</formula><p>The result above formulates the dual of robust MDPs as a min-max problem, which is insightful and significant in itself. However, the set D may be non-convex, as suggested by How can we effectively exploit the above dual form for more insights and better algorithmic design?</p><p>In this paper, we first develop a method to approximate the worst-case kernel for robust policy evaluation, as discussed in the next section. We then derive policy gradient methods to facilitate policy improvement.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Robust Policy Evaluation</head><p>In this section, we propose an algorithm for robust policy evaluation and establish its performance guarantees. The following result states that the robust return can be computed using the function:</p><formula xml:id="formula_21">F (λ) = max b∈B ∥E π λ b∥ q , where E π λ := γ I -11 ⊤ S D π R π µ ⊤ D π -λD π H π</formula><p>, and H π R := R π consists of easily computable quantities.</p><p>Lemma 3.5. The robust return can be expressed as:</p><formula xml:id="formula_22">J π Up = J π -λ * ,</formula><p>where the penalty λ * is a fixed point of F (λ). Furthermore, λ * can be found via binary search since:</p><formula xml:id="formula_23">F (λ) &gt; λ if and only if λ &gt; λ * .</formula><p>The proof of this result is provided in Appendix (Lemma F.1). Further, the bisection property of F established in the result, directly implies the linear convergence rate of Algorithm 1, as stated below.</p><p>Algorithm 1 Binary Search for Robust Policy Evaluation</p><formula xml:id="formula_24">1: Initialize: Upper limit λ u = 1 1-γ , lower limit λ l = 0 2: while not converged: n = n + 1 do 3: Bisection value: λ n = (λ l + λ u )/2 4: Bisection: λ l = λ n if F (λ n ) &gt; λ n , else λ u = λ n .</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5:</head><p>Update robust return: J n = J π -λ n . 6: end while Theorem 3.6. Algorithm 1 converges linearly, i.e.,</p><formula xml:id="formula_25">J n -J π Up ≤ O(2 -n ).</formula><p>We conclude that robust evaluation can be performed efficiently with linear iteration complexity. However, each iteration requires solving max x∈B ∥Ax∥ q as a subroutine in Algorithm 1.</p><p>We focus specifically on the simplified case of p = 2, i.e., max ∥x∥ 2 ≤1, x⪰0 ∥Ax∥ 2 , for which we proposed a modified eigenvalue Algorithm 2. This method has a time complexity of O(S 3 A 3 ), performs very effectively (i.e., very similar performance to numerical method scipy.minimize and order of magnitude of faster), with more details in Appendix H.</p><p>Algorithm 2 Spectral method for max x∈B ∥Ax∥ 2 1: Compute eigenvector v i and eigenvalues</p><formula xml:id="formula_26">λ i of A ⊤ A 2: WLOG let ∥v + i ∥ 2 ≥ ∥v - i ∥ 2 where v + i = max(v i , 0), v - i = -min(v i , 0) 3: Compute best score : j = arg max i λ i ⟨v i , v + i ∥v + i ∥ 2 ⟩. 4: Output: Approximate maximum value β∥A v + j ∥v + j ∥ 2 ∥ 2 .</formula><p>Performance of robust policy evaluation Algorithm 1, is further validated experimentally in the later section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Revealing the Adversary</head><p>Non-rectangular robust MDPs have been sparsely studied in the literature, and the nature of the adversary remains unexplored. The following result provides the first insights into the adversary's behavior for non-rectangular uncertainty sets. It establishes that the worst-case transition kernel is a rank-one perturbation of the nominal kernel, similar to the case of rectangular uncertainty sets (see Proposition 2.1). However, its exact structure is significantly more intricate.</p><p>Theorem 4.1 (Non-rectangular Worst Kernel). The worst kernel for the policy π and the uncertainty set U p is</p><formula xml:id="formula_27">P π Up = P -bk ⊤ , where (k, b) is a solution to max k∈K,b∈B J π b ⟨k,v π R ⟩ 1+γ⟨k,v π b ⟩ .</formula><p>The result shows that the adversary controls two variables, β and k, with the objective of:</p><p>• Maximizing the average uncertainty in the trajectories J π β , since the more frequently the agent visits high-uncertainty states, the greater the adversary's ability to steer it toward unfavorable states.</p><p>• Choosing the perturbation direction k to maximize k ⊤ v π R , forcing the agent into low-reward trajectories, while simultaneously minimizing k ⊤ v π b , ensuring high exposure to high-uncertainty states.</p><p>These insights provide a deeper understanding of the adversary and can aid in designing more resilient robust algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Message to Practitioners</head><p>The adversary focuses solely on rank-one perturbations of the nominal kernel, iteratively boosting its influence by pushing the agent into high-uncertainty states, then leveraging that influence to steer the agent toward low-reward trajectories, ultimately driving the agent to the lowest possible return.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Policy Improvement</head><p>Once a worst kernel for policy is obtained using Algorithm 1, we can compute the policy gradient to update the policy. Alternatively, we can use the policy gradient theorem derived in the result below.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lemma 5.1. [Policy Gradient] Given the worst transition kernel P π</head><p>Up = P -bk ⊤ , the gradient is given as</p><formula xml:id="formula_28">∇ π J π Up = d π • Q π R -γ k ⊤ v π R 1 + γk ⊤ v π b d π • Q π b -γ J π b (k ⊤ D π ) 1 + γk ⊤ v π b • Q π R + γ 2 J π b (k ⊤ v π )(k ⊤ D π ) (1 + γk ⊤ v π b ) 2 • Q π b ,</formula><p>where</p><formula xml:id="formula_29">(u • v)(s) := u(s)v(s).</formula><p>Note that the above result expresses robust gradient only in nominal terms, displaying the complex interplay of different parameters.</p><p>The first term d π • Q π R is a nominal policy gradient, trying to improve the policy's emphasis (weight) for high reward actions. The first part of the second term γ</p><formula xml:id="formula_30">k ⊤ v π R 1+γk ⊤ v π b = σ q (v π</formula><p>Up ) is GSTD, hence, always positive, measuring the vulnerability towards the adversary actions. This scales the other term d π • Q π b , that is policy gradient w.r.t. the reward being the uncertainty radius. To summarize, the second term discourages the policy's emphasis (weight) in high uncertainty Q-value by the amount proportional to the vulnerability.</p><p>The last two terms are much more complex to interpret, showcasing the complexity of robust MDPs .</p><p>Theorem 5.2. Robust policy gradient algorithm 3, convergence to an ϵ-optimal policy in a total of O(ϵ -8 ) iterations.</p><p>The policy gradient method in <ref type="bibr" target="#b16">[17]</ref> requires O(ϵ -4 ) iterations to converge to the globally optimal robust policy. At the n-th policy gradient step, the guarantee in <ref type="bibr" target="#b16">[17]</ref> necessitates an O(γ -n )-close approximation of the worst-case kernel for the policy π n , which our Algorithm 1 computes in O(n) iterations. Consequently, the overall iteration complexity to achieve the global optimal robust policy becomes O ϵ -4   n=1 n = O(ϵ -8 ). Algorithm 3, is a double loop algorithm: That is, the inner loop (Algorithm 1) computes an approximate worst kernel for the fixed policy. On the other hand, the outer loop updates the policy using the gradient obtained using the worst kernel. Alternatively, an actor-critic style algorithm can also be obtained, where the worst kernel and the policy are updated simultaneously.</p><p>We leave this direction for a future work. Get worst kernel P = P -bk ⊤ for policy π from Algorithm 1 with tolerance ϵ = γ n ..</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithm 3 Robust Policy Gradient Algorithm</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3:</head><p>Compute gradient G from Lemma 5.1 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4:</head><p>Policy update: π → P roj π + α n G .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5: end while 6 Experiments</head><p>In this section, we evaluate the performance of Algorithm 1 for robust policy evaluation, focusing on the case p = 2. The algorithm requires computing F (λ) at each iteration, which involves solving the constrained matrix norm problem max x∈B ∥Ax∥ 2 . This can be efficiently handled using our spectral Algorithm 2. Figures <ref type="figure">4</ref> and <ref type="figure">5</ref> compare four methods for computing the robust return, specifically the penalty term J π -J π U 2 :</p><p>• SLSQP from scipy <ref type="bibr" target="#b34">[35]</ref> : This is A semi-brute force approach that uses Lemma 3.3.</p><p>It computes the penalty term via scipy.minimize to directly optimize over (b, k). This is equivalent to optimize over only rank-one perturbation of nominal kernel as a(b, k) corresponds to selecting a rank-one perturbation of the nominal kernel P = P -bk ⊤ . Note that this method is local, hence can sometime be stuck in very bad local solution. Figure 5: Convergence of Robust Policy Evaluation Methods, with fixed S = 128, A = 8. • Binary search Algorithm 1 : Uses the binary search Algorithm 1, and spectral Algorithm 2 for computing F (λ) in each iteration.</p><p>• Random Rank-One Kernel Sampling : A semi-brute force approach that uses Lemma 3.3 to sample random pairs (b, k) ∈ B, K, empirically maximizing the penalty term. Since choosing (b, k) corresponds to selecting a rank-one perturbation of the nominal kernel P = P -bk ⊤ , the method is named accordingly.</p><p>• Random Kernel Sampling : A brute-force approach that samples random kernels directly from the uncertainty set U 2 , computing the empirical minimum as an estimate of the robust return.</p><p>Figure <ref type="figure">4</ref> presents the penalty value (J π -J π U 2 ) computed by different methods across various state space sizes while keeping the action space (A = 8) fixed, with each method given the same computational time. Our binary search Algorithm 1 combined with spectral Algorithm 2 performs significantly better to brute-force (random kernel sampling) and semi-brute (random sampling of rank-one perturbations of the nominal kernel) approaches. Notably, the scipy SLSQP variant performs slightly better on average, but our Algorithm 1 is more reliable. This is expected, as the spectral method used to compute F (λ) in Algorithm 1, is global, while scipy SLSQP is a local optimizer and thus more prone to getting stuck in suboptimal solutions (as evident in the figure).</p><p>Figure <ref type="figure">5</ref> illustrates the convergence of different approaches over time (in seconds) for a fixed state space size (S = 8). Algorithm 1 converges rapidly, while the SLSQP variation gradually approaches the same performance. In contrast, the brute-force method shows slow, logarithmic improvement. This behavior arises because brute-force methods require an exponential number of samples (in the dimensionality of the problem) to adequately explore all directions. In comparison, our binary search Algorithm combined with the spectral Algorithm 2 achieves significantly better efficiency, with a complexity of O(S 3 A 3 log ϵ -1 ). More details of these experiments along with others can be found in the appendix, and codes are available at <ref type="url" target="https://anonymous.4open.science/r/non-rectangular-rmdp-77B8">https://anonymous.4open.science/r/non-rectangular-rmdp-77B8</ref>.</p><p>Our experiments confirm the efficiency of our binary search Algorithm 1 for robust policy evaluation, significantly outperforming brute-force approaches in both accuracy and convergence speed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Discussion</head><p>We studied robust Markov decision processes (RMDPs) with non-rectangular L p -bounded uncertainty sets, balancing expressiveness and tractability. We showed that these uncertainty sets can be decomposed into infinitely many sa-rectangular sets, reducing robust policy evaluation to a min-max fractional optimization problem (dual form). This novel dual formulation provides key insights into the adversary and leads to the development of the first robust policy evaluation algorithms. Experiments demonstrate the effectiveness of our approach, significantly outperforming brute-force methods. These findings further pave the way for scalable and efficient robust reinforcement learning algorithms.</p><p>Future Work. Our results naturally extend to uncertainty sets that can be expressed as a finite union of L p balls. Furthermore, any uncertainty set can be approximated using a finite number of L p balls, with smaller balls providing a better approximation. However, the number of balls required for an accurate approximation may grow prohibitively large. While this work is limited to L p norms, it may be possible to generalize the approach to other types of uncertainty sets. A key challenge in such an extension would be identifying the structure of the worst-case kernel and developing the corresponding matrix inversion techniques.</p><p>Another promising direction is to design policy improvement methodologies compatible with deep neural networks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Summary of Notations and Definitions</head><p>For a set S, |S| denotes its cardinality. ⟨u, v⟩ := s∈S u(s)v(s) denotes the dot product between functions u, v : S → R. ∥v∥ q p := ( s |v(s)| p ) q p denotes the q-th power of L p norm of function v, and we use ∥v∥ p := ∥v∥  </p><formula xml:id="formula_31">1 p + 1 q = 1 Holder's conjugates σ p Standard deviation w.r.t. L p norm v π , v π P,R (I -γP π ) -1 R π Value function D π , D π P,R (I -γP π ) -1 Occupancy matrix d π , d π P,µ µ T (I -γP π ) -1 Occupancy measure U, U sa p , U s p , U p Uncertainty sets</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B More on Setting, Assumptions, Results, Discussion</head><p>Extension to KL Entropy Uncertainty Sets. For the KL uncertainty case, the worst kernel is given by P π</p><formula xml:id="formula_32">U sa KL = (I -γ P π A π ) -1</formula><p>where A π is a diagonal matrix <ref type="bibr" target="#b21">[22]</ref>. If we can invert this matrix, then its possible to build upon it. We leave this for future work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.1 Revealing the Adversary</head><p>The worst kernel for the policy π and the uncertainty set U sa p /U s p , is given as</p><formula xml:id="formula_33">P π U sa p (•|s, a) = P (•|s, a) -β sa k, and<label>(3)</label></formula><formula xml:id="formula_34">P π U s p (•|s, a) = P (•|s, a) -β s π(a|s) ∥π s ∥ q q-1 k, (<label>4</label></formula><formula xml:id="formula_35">)</formula><p>where k is a solution of max k∈K</p><formula xml:id="formula_36">k T v π R 1+γk T v π β .</formula><p>The relation sheds the light on the working of the adversary in <ref type="bibr" target="#b12">(13)</ref>. Basically, k is the direction in which the adversary discourages the perturbation of the kernel. And the optimal direction k that the adversary chooses is the one that maximizes the potential gain in the reward (⟨k, v π R ⟩) and minimizes the average uncertainty on the trajectories (⟨k, v π β ⟩). Compared to the existing characterization of the adversary in <ref type="bibr" target="#b19">[20]</ref>, see Proposition C.2 , where the direction k = u π U is in robust terms, this is the first time, we have a complete overview of the working of the adversary in nominal terms.</p><p>Theorem B.1 (Non-rectangular Worst Kernel). The worst kernel for the policy π and the uncertainty set U p is</p><formula xml:id="formula_37">P π Up = P -bk ⊤ , where (k, b) is a solution to max k∈K,b∈B J π b ⟨k,v π R ⟩ 1+γ⟨k,v π b ⟩ .</formula><p>Moreover, we can see that the adversary wants to optimize three things: A)</p><formula xml:id="formula_38">J π β , k ⊤ v π R and k ⊤ v π</formula><p>β with two variables β and k.</p><p>1. Maximizing the average uncertainty in the trajectories J π β . This makes sense, as the more the agent visits states with high uncertainty, the higher is the ability of the adversary to undermine it.</p><p>2. Choosing the perturbation direction k that discourages the agent to transition into good value states (w.r.t. nominal value function v π R ). This observation was also seen in a previous study <ref type="bibr" target="#b19">[20]</ref>, for sa and s rectangular uncertainty sets but it was w.r.t. robust value function v π U . Whereas, the result has the exact finding except it is w.r.t. nominal value function, which is known contrast to the robust value function.</p><p>3. Choosing the uncertainty radius vector β and the perturbation direction k, such that the k T v π β is minimized. This can be done, by putting negative entries of k at maximal entries of v π β , and positive entries of k T at states which has minimum uncertainty value function. In other words, we want to perturb the kernel such that visitation of high uncertainty states in the long term is maximized.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Background</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.1 Robust MDPs</head><p>A robust Markov Decision Process (MDP) is a tuple (S, A, R, U, γ, µ) which generalizes the standard MDP, by containing a set of environments U <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b3">4]</ref>. The reward robust MDPs is well-studied in the precious work of rectangular <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b18">19]</ref> and non-rectangular <ref type="bibr" target="#b22">[23]</ref> uncertainty sets.</p><p>Hence, in this work , we consider only uncertainty in kernel which is much more challenging.</p><p>The robust return of a policy π, is its performance over the uncertainty set U, defined as</p><formula xml:id="formula_39">J π U = min P ∈U J π P .</formula><p>The objective is to find an optimal robust policy π * U that achieves the optimal robust performance J * U , defined as</p><formula xml:id="formula_40">J * U = max π J π U . (<label>5</label></formula><formula xml:id="formula_41">)</formula><p>Unfortunately, a general solution to the robust objective <ref type="bibr" target="#b4">(5)</ref>, is proven to be strongly NP-hard for both non-convex sets and convex ones <ref type="bibr" target="#b8">[9]</ref>. The robust value function v π U and optimal robust value function v * U <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b3">4]</ref>, for any uncertainty set U can be defined state wise, for all π, as v π U (s) = min</p><formula xml:id="formula_42">P ∈U v π P (s), v * U (s) = max π∈⋄ v π P (s).</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.2 Rectangular Robust MDPs</head><p>Unfortunately, a general solution to the robust objective <ref type="bibr" target="#b4">(5)</ref>, is proven to be strongly NP-hard for both non-convex sets and convex ones <ref type="bibr" target="#b8">[9]</ref>. Hence, it is common practice to take the sa-rectangular uncertainty sets U sa , where ambiguity in each state and action are independent <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b15">16]</ref>.</p><p>Formally defined as U sa = × (s,a)∈S×A P s,a is decomposed over state-action-wise where P s,a are components sets.</p><p>However, many classes of uncertainty sets arise in practice, where ambiguities in a given state are correlated. This type of uncertainty sets are captured by s-rectangular uncertainty sets U s = P = × s∈S P s , which can be decomposed state-wise as <ref type="bibr" target="#b8">[9]</ref>. Note that sa-rectangular uncertainty sets are a special case of it.</p><p>Fortunately, the decoupling structure in s-rectangular uncertainty sets allows the existence of a kernel and a reward function that minimizes the value function over the uncertainty set for each state for any given policy. Similarly, it allows the existence of an optimal robust policy that maximizes the robust value in each state <ref type="bibr" target="#b8">[9]</ref>. Mathematically, the robust value function is to be rewritten as</p><formula xml:id="formula_43">v * U s = max π v π U s , v π U s = min P ∈U s v π P .</formula><p>Hence, the robust return can be rewritten as J π U = ⟨µ, v π U ⟩, and J * U = ⟨µ, v * U ⟩. Most importantly, this rectangularity implies the existence of contractive robust Bellman operators, which are pivotal same as non-robust MDPs <ref type="bibr" target="#b8">[9]</ref>. Specifically, the robust value function v π U , and the optimal robust value function v * U is the fixed point of the robust Bellman operator T π U and the optimal robust Bellman operator T * U respectively <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b4">5]</ref>, defined as</p><formula xml:id="formula_44">T π U v := min P ∈U T π P v, and T * U v := max π T π U v,</formula><p>where T π P v := R π + γP π v is non-robust Bellman operator <ref type="bibr" target="#b24">[25]</ref>. This contractive property of Bellman operators plays a central role in the s-rectangular robust MDPs. Unfortunately, these contractive Bellman operators do not exist for non-rectangular uncertainty sets. This makes the non-rectangular robust MDPs very unwieldy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.3 Rectangular L p robust MDPs</head><p>Some useful definitions: q is reserved for Holder's conjugate of p that satisfies 1 p + 1 q = 1. The generalized p-variance function σ p and p-mean function ω p are defined as</p><formula xml:id="formula_45">σ p (v) = min w∈R ∥v -w1∥ p , ω p (v) ∈ arg min w∈R ∥v -w1∥ p . Table 2: p-variance p σ p (v) Remark ∞ maxs v(s)-mins v(s) 2 Semi-norm 2 s v(s) -s v(s) S 2 Variance 1 ⌊(S+1)/2⌋ i=1 v(s i ) - S i=⌈(S+1)/2⌉ v(s i ) Top half -lower half where v is sorted, i.e. v(s i ) ≥ v(s i+1 ) ∀i.</formula><p>Their close form for p = 1, 2, ∞, is summarized in table <ref type="table">2</ref> . The results below summarizes policy evaluation for L p -robust MDPs <ref type="bibr" target="#b18">[19]</ref>.</p><p>Let P be any nominal transition kernel. In accordance with <ref type="bibr" target="#b18">[19]</ref>, we define sa-rectangular L p constrained uncertainty set U sa p and s-rectangular L p constrained uncertainty set U s p as</p><formula xml:id="formula_46">U sa p = {P s ′ P sa (s ′ ) = 1 simplex condition , ∥P sa -( P ) sa ∥ p ≤ β sa } U s p = {P s ′ P sa (s ′ ) = 1, ∥P s -( P ) s ∥ p ≤ β s }.</formula><p>Note that U sa p , U s p are sets around nominal kernel P component wise bounded by radius vectors β. To ensure, all the kernels in U are valid, we assume the radius vector β is small enough.</p><p>Proposition C.1. <ref type="bibr" target="#b18">[19]</ref> The robust return is</p><formula xml:id="formula_47">J π U sa p =J π -γσ q (v π U sa p ) s,a d π (s)π(a|s)β sa , J π U s p =J π -γσ q (v π U s p ) s d π (s)∥π s ∥ q β s where ∥π s ∥ q is q-norm of the vector π(•|s) ∈ ∆ A .</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.4 Nature of Adversary</head><p>First, we define the normalized and balanced robust value function for uncertainty set U = U sa p , U s p as</p><formula xml:id="formula_48">u π U (s) := sign(v π U (s) -ω q (v π U ))|v π U (s) -ω q (v π U )| q-1 σ q (v π U ) q-1</formula><p>which has zero mean and unit norm, that is, ⟨u π U , 1⟩ = 0, and ∥u π U ∥ p = 1.</p><p>Further, it can be re-written as a gradient of q-variance and its correlation with robust value function is q-variance.</p><p>Property 1. <ref type="bibr" target="#b18">[19]</ref> For uncertainty set U = U sa p , U s p , we have</p><formula xml:id="formula_49">u π U = ∇ v σ q (v) v=v π U , and ⟨u π U , v π U ⟩ = σ q (v π U ).</formula><p>Proposition C.2. <ref type="bibr" target="#b19">[20]</ref> For any policy π, taking k = u π U , the worst model is related to the nominal one through:</p><formula xml:id="formula_50">P π U = P -bk ⊤ , where b(s, a) = β sa , β s π(a|s) ∥πs∥q q-1</formula><p>for U sa p and U s p respectively.</p><p>The above result states that for sa-rectangular case, the worst-case reward is independent of the employed policy. However, the worst kernel is policy dependent, and a rank one perturbation of nominal kernel which is a very surprising finding. The adversarial kernel discourages the system to move to high rewarding states, and directs towards low rewarding states.</p><p>Compared to the sa-rectangular case, in the s-rectangular case the worst reward and worst kernel have an extra dependence on the policy term π(a|s) q-1 ∥πs∥ q-1 q . This is because the worst values cannot be chosen independently for each action in the s-rectangular case, but are instead dependent on the policy. Similarly to the sa-case, the adversarial kernel is also a rank-one perturbation of the nominal kernel.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.5 Robust Policy Gradient</head><p>The update rule</p><formula xml:id="formula_51">π k+1 = P roj π∈Π π k -η k ∇ π J π k P k ,<label>(6)</label></formula><p>where</p><formula xml:id="formula_52">J π k P k -J π k U ≤ ϵγ k , finds global solution in O(ϵ -4</formula><p>) iterations <ref type="bibr" target="#b16">[17]</ref>.</p><p>Proposition C.3. <ref type="bibr" target="#b16">[17]</ref> For initial tolerance ϵ ≤ √ T , and learning rate η k = δ √ T for any δ &gt; 0,</p><formula xml:id="formula_53">J * U -J π k U ≤ ϵ, for k ≥ CS 2 A 3 (S + A) 2 ϵ -4</formula><p>where some constant C.</p><p>The gradient ∇ π J π k U of the robust return may not exist due to non-differentiability. However, sub-differential can be defined using the standard policy gradient theorem <ref type="bibr" target="#b35">[36]</ref>, as</p><formula xml:id="formula_54">∂ π J π U = ∇ π J π P P =P π U = s,a d π U (s)Q π U (s, a)∇π(a|s).</formula><p>where</p><formula xml:id="formula_55">Q π U := Q π P π U is robust Q-value, d π U := d π P π</formula><p>U is robust occupation measure, and P π U are worst values associated with policy π, defined as</p><formula xml:id="formula_56">P π U :∈ arg inf P ∈U J π P .</formula><p>To compute the above sub-gradient, we require the access to the worst (adversarial) parameters P π U that we show can be computed efficiently using nominal parameters P in close form, for s-rectangular robust uncertainty sets. Then these worst parameters, can be used to compute robust occupation measure d π U and robust Q-value Q π U , which in turn can be used to compute the above robust gradient. However, it may be possible to compute the gradient directly without computing the worst kernel, as : Proposition C.4. <ref type="bibr" target="#b19">[20]</ref> The policy gradient is given by:</p><formula xml:id="formula_57">∂J π U ∂π(a|s) = d π (s) -c π (s) Q π U (s, a)</formula><p>,</p><formula xml:id="formula_58">where c π is a correction term. Taking k = v π U , it is c π (s) = γ ⟨d π , b⟩ 1 + γ⟨d π k , b⟩ d π k (s),</formula><p>radius b(s) = a π(a|s)β sa , β s ∥π s ∥ q for U sa p and U s p respectively.</p><p>Intuition. Here, we have the robust Q-value instead of the non-robust one. Note that the correction term c π , resulting from switching the occupation measure of the worst kernel against the nominal, is distribution of zero, that is</p><formula xml:id="formula_59">⟨c π , 1⟩ = 0, as ⟨d π k , 1⟩ = k ⊤ (I -P π 0 ) -1 1 = k ⊤ 1 1-γ = 0.</formula><p>Observe that the c π is positive for those states which are on average visited more from good value states compared to bad value states, w.r.t. nominal values. Given the result, we understand that the adversary spends more time on states which are more visited from bad value states, compared to the nominal agent.</p><p>The results holds for rectangular robust MDPs. Unfortunately, nothing is known about the nature of the adversary for non-rectangular uncertainty sets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D Helper Results</head><p>Proposition D.1 (Sherman-Morrison Formula <ref type="bibr" target="#b33">[34]</ref>.). If A ∈ R n×n invertible matrix, and</p><formula xml:id="formula_60">u, v ∈ R n , then the matrix A + uv T is invertible if and only if 1 + v T A -1 u ̸ = 0: (A + uv T ) -1 = A -1 - A -1 uv T A -1 1 + v T A -1 u . Proposition D.2. σ q (v) := min w∈R ∥v -w1∥ q , = min ∥k∥p≤1,1 T k=0 k T v</formula><p>Proof. Follows directly from Lemma J.</p><p>1 of [19]. Proposition D.3. Let U sa 2 , U s 2 be smallest sa-rectangular set and s-rectangular set containing U 2 then vol(U 2 ) vol(U sa 2 )</p><p>= O(c -SA sa ), and</p><formula xml:id="formula_61">vol(U 2 ) vol(U s 2 ) = O(c -S s ),</formula><p>where vol(X) is volume of the set X and c s , c sa &gt; 1 are some constants.</p><p>Proof. Volume of n-dimension sphere of radius r is c n r n where c n ≤ 8π 2 15 <ref type="bibr" target="#b23">[24]</ref>. And to cover n-dimension sphere of radius r, we need cube of radius 2r whose volume is (2r) n . Hence the first result vol(U 2 ) vol(U sa 2 ) = O(2 -SA ) immediately follows. Now, volume of set of X = × s∈S X s where X s is an A-dimension sphere of radius r then the volume of X is (c A r) S . And the volume of an SA dimensional sphere is c SA r SA , where lim n→∞ c n → 0 <ref type="bibr" target="#b23">[24]</ref>. Hence the ratio of their volume is O((c A ) S ), implying the other result.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Proposition D.4. Non-rectangular uncertainty U p can be written as an infinite union of</head><p>sa-rectangular sets U sa p , as</p><formula xml:id="formula_62">U p = b∈B U sa p (b)</formula><p>,</p><formula xml:id="formula_63">where B = {b ∈ R S × A + | ∥b∥ p ≤ β}.</formula><p>Note that all of them share the nominal kernel P .</p><p>Proof. By definition, we have</p><formula xml:id="formula_64">U p = {P | ∥P -P ∥ p ≤ β, s ′ P (s ′ |s, a) = 1} (7) = {P | s,a ∥P sa -Psa ∥ p p ≤ β p , s ′ P (s ′ |s, a) = 1} (8) = {P | s,a b p sa ≤ β p , ∥P sa -Psa ∥ p p = b p sa , s ′ P (s ′ |s, a) = 1} (9) = {P | s,a b p sa ≤ β p , ∥P sa -Psa ∥ p p ≤ b p sa , s ′ P (s ′ |s, a) = 1} (10) = s,a b p sa ≤β p , {P | ∥P sa -Psa ∥ p p ≤ b p sa , s ′ P (s ′ |s, a) = 1} (11) = b∈B U sa p (b). (<label>12</label></formula><formula xml:id="formula_65">)</formula><p>Proposition D.5. For any vector ∥x∥ = 1, we have</p><formula xml:id="formula_66">max{∥P roj R n + (x)∥, ∥P roj R n + (-x)∥} ≥ 1 √ 2 ,</formula><p>where R n + is positive quadrant.</p><p>Proof. For any vector ∥x∥ = 1, we have</p><formula xml:id="formula_67">∥x + ∥ 2 + ∥x -∥ 2 = ∥x∥ 2 = 1.</formula><p>And P roj R n + (x) = x + and P roj R n + (-x) = x -, the rest follows.</p><p>Proposition D.6. For ∥k∥ p and k T 1 = 0, we have</p><formula xml:id="formula_68">1 + γk T (I -γP π ) -1 b π ≥ 0, for all π, ∥b∥ p ≤ β, b ⪰ 0.</formula><p>Proof. This is true from the Sherman-Morrison formula as J π P -bk T is finite, hence the denominator must be strictly greater than zero.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.1 Binary Search Approach</head><p>Proposition D.7. For λ * = max x∈C g(x) h(x) , F (λ) := max x∈C g(x) -λh(x) , we have</p><formula xml:id="formula_69">F (λ * ) = 0 and f (λ) ≥ 0 ⇐⇒ λ * ≥ λ.</formula><p>Proof.</p><formula xml:id="formula_70">• If F (λ) ≥ 0 then ∃x s.t. g(x) -λh(x) ≥ 0 =⇒ ∃x s.t. g(x) h(x) ≥ λ, (as h(x) &gt; 0 for all x) =⇒ max x∈C g(x) h(x) ≥ λ. • If F (λ) ≤ 0 then g(x) -λh(x) ≤ 0, ∀x ∈ C =⇒ g(x) h(x) ≤ λ, ∀x ∈ C, (as h(x) &gt; 0 ) =⇒ max x∈C g(x) h(x) ≤ λ • If F (λ) = 0 then λ = max x∈C g(x)</formula><p>h(x) implied from the above two items.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.2 NP-Hardness of non-rectangualr RMDP</head><p>Reduction of Integer Program to Robust MDP 0/1 Integer Program (IP): For g, c ∈ Z n , ζ ∈ Z, F ∈ Z m×n , ∃x ∈ {0, 1} n s.t. F x ≤ g and c ⊤ x ≤ ζ?</p><p>is a NP-Hard problem <ref type="bibr" target="#b36">[37]</ref>, <ref type="bibr" target="#b8">[9]</ref> which reduces into following robust MDP.</p><p>Robust MDP:</p><formula xml:id="formula_71">1. State Space S = {b j , b 0 j , b 1 j | j = 1, • • • , n} ∪ {c 0 , τ },</formula><p>where τ is a terminal state.</p><p>2. Singleton Action Space: A= {a}.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Uncertainty set:</head><formula xml:id="formula_72">U = {P ξ | ξ ∈ [0, 1] n , F ξ ≤ g} 4.</formula><p>Discount factor γ ∈ [0, 1); Uniform initial state distribution µ.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Big reward M ≥</head><formula xml:id="formula_73">γAn i c i 2ϵ 2</formula><p>where ϵ &lt;&lt; 1 helps in rounding.</p><p>6. Transitions and rewards are illustrated in Figure <ref type="figure">6</ref> Figure <ref type="figure">6</ref>: MDP P ξ , and R(Figure <ref type="figure">5</ref> of <ref type="bibr" target="#b8">[9]</ref>).</p><p>Robust policy evaluation is proven to be NP-hard for general uncertainty sets defined as intersections of finite hyperplanes <ref type="bibr" target="#b8">[9]</ref>. Specifically, robust MDPs with uncertainty set U hard :=</p><formula xml:id="formula_74">{P ξ |F ξ ≤ g, ξ ∈ [0, 1] n }</formula><p>where P ξ is a specially designed kernel with ladder structure with only action (effectively no decision) and a terminal state <ref type="bibr" target="#b8">[9]</ref>.</p><p>Note that F ξ ≤ g imposes m-linear constraints on U hard while we allow only one global constraint on U p . Observe that • Case 1) If g &lt; 0 then no.</p><formula xml:id="formula_75">U 1 = {P ξ | 1 ⊤ ξ ≤ g, ξ ∈ [0, 1] n } is nearest</formula><p>• Case 2) If g = 0, ζ ≥ 0 then yes and g = 0, ζ &lt; 0 then yes.</p><p>• If g &gt; 0 then compute the sum of g smallest coordinate of c, and this sum is less/equal</p><p>than ζ then answer is yes, otherwise no.</p><p>Further, for IP to be reducable to robust MDPs, the diameter of the uncertainty (max P,P ′ ∈U hard ∥P -</p><formula xml:id="formula_76">P ′ ∥ 1 = 2S</formula><p>) has to be large for the practical settings. Loosly speaking, robust MDPs with a U p uncertainty have one global constraint and a small radius β, which corresponds to a Knapsack Problem with a small budget (IP with one constraint and a small g) which are much easier to solve <ref type="bibr" target="#b37">[38,</ref><ref type="bibr" target="#b36">37]</ref>.</p><p>We can thus conclude that the hardness result of <ref type="bibr" target="#b8">[9]</ref> doesn't apply to our uncertainty case.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E Dual Formulation</head><p>s-rectangular uncertainty sets. Now, we turn our attention to the uncertainties coupled across different actions in each state.</p><p>Lemma E.1. For the s-rectangular uncertainty set U s p , the robust return can be written as</p><formula xml:id="formula_77">J π U s p = J π -γ min ∥bs∥p≤βs,∥k∥p≤1,⟨1,k⟩=0 ⟨d π , b π ⟩⟨k, v π ⟩ 1 + γk ⊤ D π b π , where b ∈ R S × A , b s = b s• , and b π (s) = a π(a|s)b sa .</formula><p>Proof. The proof follows similarly to the sa-rectangular case, and can be found in the appendix.</p><p>The key additional step is to decompose the s-rectangular uncertainty set U s p into a union of sa-rectangular uncertainty sets U sa p .</p><p>The above result formulates the robust return in terms of nominal values only for the first time. This implies the robust objective can be rewritten in the dual form as :</p><formula xml:id="formula_78">J * U s p = max D∈D min k∈K,b∈B µ T DR π -γµ T Db π k T DR π 1 + γk T Db π where D = {(I -γP π 0 ) -1 | π ∈ Π}, K = {k ∈ R S | ∥k∥ p = 1, 1 T k = 0}, and B = {b ∈ R S × A | ∥b s ∥ p ≤ β s }.</formula><p>Comparing the penalty term from the previous results in <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>, the dual formulation can be written as</p><formula xml:id="formula_79">J * U s p = max D∈D min k∈K µ T DR π -γµ T Dβ π k T DR π 1 + γk T Dβ π</formula><p>where β π s = ∥π s ∥ q β s . Surprisingly, the optimization here looks as if it is optimized for the same value of β π s = max a β p sa ≤β p s a π(a|s)β sa = β s ∥π s ∥ q for all values of feasible k. This suggest that the adversary payoff is maximized by maximizing the expected uncertainty in the trajectories. Lemma E.2. For the sa-rectangular uncertainty set U = U sa p (β) with radius vector β ∈ R S × A , the robust return can be written as the following optimization problem,</p><formula xml:id="formula_80">J π U = J π -γ max ∥k∥p=1,1 T k=0 µ T D π β π k T D π R π 1 + γk T D π β π , where β π s = a π(a|s)β sa .</formula><p>Proof. From <ref type="bibr" target="#b19">[20]</ref>, we know that the worst kernel P π U sa p (β) for the uncertainty set U sa p (β) is a rank one-perturbation of P . In other words,</p><formula xml:id="formula_81">P π U sa p (β) = P + βk T</formula><p>for some k ∈ R S satisfying ∥k∥ p = 1 and 1 T k = 0. This implies that it is enough to look for rank-one perturbations of the nominal kernel P in order to find the robust return. That is,</p><formula xml:id="formula_82">J π U sa p (β) = min P ∈U sa p (β)</formula><p>J π P = min</p><formula xml:id="formula_83">P = P +βk T ,∥k∥p=1,1 T k=0 J π P ,</formula><p>(looking only at rank one perturbations)</p><p>= min</p><formula xml:id="formula_84">P = P +βk T ,∥k∥p=1,1 T k=0 µ T D π P R π = min P = P +βk T ,∥k∥p=1,1 T k=0 µ T (I -γP π ) -1 R π = min ∥k∥p=1,1 T k=0 µ T I -γ(P π + β π k T ) -1 R π = J π -γ max ∥k∥p=1,1 T k=0 µ T D π β π k T D π R π 1 + γk T D π β π .</formula><p>Lemma E.3. For U = U s p , the robust return can be written as the following optimization problem,</p><formula xml:id="formula_85">J π U = J π -γ min ∥β∥p≤ϵ,∥k∥p≤1,⟨1,k⟩=0 ⟨d π , β π ⟩⟨k, v π ⟩ 1 + γk ⊤ D π β π ,</formula><p>where</p><formula xml:id="formula_86">D π = (I -γP π ) -1 , d π = µ T D π and v π = D π R π .</formula><p>Proof.</p><formula xml:id="formula_87">J π U s p (β) = min ∥Ps-(P )s∥ p p =β p s ,1 T Psa=1 J π P = min a β p sa ≤β p s min ∥Psa-(P )sa∥p=βsa,1 T Psa=1 J π P = min a β p sa ≤β p s J π U sa p (β) = min a β p sa ≤β p s J π -γ max ∥k∥p=1,1 T k=0 µ T D π β π k T D π R π 1 + γk T D π β π = J π -γ max a β p sa ≤β p s ,∥k∥p=1,1 T k=0 µ T D π β π k T D π R π 1 + γk T D π β π .</formula><p>Lemma E.4. For U = U p , the robust return can be written as the following optimization problem</p><formula xml:id="formula_88">J π U = J π -γ min ∥β∥p≤ϵ,∥k∥p≤1,⟨1,k⟩=0 ⟨d π , β π ⟩⟨k, v π R ⟩ 1 + γ⟨k, v π β ⟩</formula><p>,</p><formula xml:id="formula_89">where D π = (I -γP π ) -1 , d π = µ T D π and v π = D π R π .</formula><p>Proof. Now,</p><formula xml:id="formula_90">J π Up(ϵ) = min ∥P -P ∥ p p =ϵ p ,1 T Psa=1 J π P = min ∥β∥ p p ≤ϵ p min ∥Psa-(P )sa∥p=βsa,1 T Psa=1 J π P = min ∥β∥ p p ≤ϵ p J π U sa p (β) = min ∥β∥p≤ϵ J π -γ max ∥k∥p=1,1 T k=0 µ T D π β π k T D π R π 1 + γk T D π β π = J π -γ max ∥β∥p≤ϵ,∥k∥p=1,1 T k=0 µ T D π β π k T D π R π 1 + γk T D π β π .</formula><p>The above result formulates the robust return in terms of nominal values only, for the first time. Comparing with the existing result, we get a very interesting relation:</p><formula xml:id="formula_91">σ q (v π U ) = max ∥k∥p=1,1 T k=0 k T v π R 1 + γk T v π β ,<label>(13)</label></formula><p>where v π x = (I -γP π ) -1 x π . The LHS is a robust quantity (variance of the robust return) which is express in the terms of purely nominal quantities. This is the simplest of all such relations. We believe that the above relation can help in theoretical derivations and experiment design but not exactly sure how yet.</p><p>Intuition on the adversary. We know that the σ(v π U ) is the penalty for robustness, that is</p><formula xml:id="formula_92">J π U = J π -γ⟨d π , β π ⟩σ q (v π U ).</formula><p>Knowing σ(v π U ) how it arises, sheds the light on the working of the adversary in <ref type="bibr" target="#b12">(13)</ref>. Further more, recall that if P = P -βk T then</p><formula xml:id="formula_93">J π P = J π -⟨d π , β π ⟩ k T v π R 1 + γk T v π β .</formula><p>Basically, k is the direction the adversary discourages the perturbation of the kernel. And the optimal direction k that the adversary chooses is the one that optimizes <ref type="bibr" target="#b12">(13)</ref>.</p><p>s-rectangular uncertainty sets. Now, we move our attention to the coupled uncertainty case.</p><p>Lemma E.5. For U = U s p , the robust return can be written as the following optimization problem</p><formula xml:id="formula_94">J π U = J π -γ min ∥β∥p≤ϵ,∥k∥p≤1,⟨1,k⟩=0 ⟨d π , β π ⟩⟨k, v π ⟩ 1 + γk ⊤ D π β π ,</formula><p>where</p><formula xml:id="formula_95">D π = (I -γP π ) -1 , d π = µ T D π and v π = D π R π .</formula><p>Proof. The proof follows similarly to the sa-rectangular case, and can be found in the appendix.</p><p>The key additional step is to decompose the s-rectangular uncertainty set U s p into as a union of sa-rectangular uncertainty sets U sa p .</p><p>Comparing the penalty term from the previous results in <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>, we get</p><formula xml:id="formula_96">s d π (s)∥π s ∥ q σ q (v π U ) = max a β p sa ≤β p s ,∥k∥p=1,1 T k=0 (d π β π )(k T v π ) 1 + γk T D π β π .</formula><p>Again, the above relation looks very interesting as it relates the robust term on LHS with non-robust terms on RHS.</p><p>Surprisingly, the optimization here looks as if it is optimized for the same value of β π s = max a β p sa ≤β p s a π(a|s)β sa = β s ∥π s ∥ q for all values of feasible k. This suggests that the adversary's payoff is maximized by maximizing the expected uncertainty in the trajectories.</p><p>Looking at GSTD from two angles From the binary search method at section D.1, we know that σ q (v π U ) is the solution to the following:</p><formula xml:id="formula_97">max ∥k∥p≤1,1 T k=0 k T v π R -x(1 + γk T v π β ) = 0 (14) max ∥k∥p≤1,1 T k=0 k T v π R -γxv π β = x (15) max ∥k∥p≤1,1 T k=0 k T D π R π -γxβ π = x (16) v π R = γ k T v π R 1 + γk T v π β v π β = γσ(v π U )v π β .</formula><p>Its maybe possible to make this process online, simultaneously updating x → v π U , v and k.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>F Robust Policy Evaluation</head><p>Lemma F.1. The robust return can be expressed as</p><formula xml:id="formula_98">J π Up = J π -λ * ,</formula><p>where the penalty λ * is a fixed point of F (λ). Furthermore, λ * can be found via binary search as</p><formula xml:id="formula_99">F (λ) &gt; λ if and only if λ &gt; λ * , where F (λ) = max b∈B ∥E π b∥ q , E π = γ I -11 ⊤ S D π R π µ ⊤ D π - λD π H π , and H π R := R π .</formula><p>Proof. We want to evaluate the following</p><formula xml:id="formula_100">λ * := max b∈B,k∈K γ k T D π R π µ T D π b π 1 + γk T D π b π .</formula><p>This is of the form max x f (x) g(x) . Then according to Proposition D.7, we have f (λ * ) = 0 and f (λ) &gt; 0 if and only if λ * &gt; λ, where</p><formula xml:id="formula_101">f (λ) := max b∈B,k∈K γk T A π b π -λ(1 + γk T D π b π ) = max b∈B,k∈K k ⊤ C π b -λ, = max b∈B,∥k∥p≤1 k ⊤ I - 11 T S C π b -λ, (from Proposition H.2) = max b∈B ∥ I - 11 T S C π b∥ q -λ, (Holder's inequality)</formula><p>where</p><formula xml:id="formula_102">A π = D π R π µ T D π , C π := γ A π -λD π H π .</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>G Robust Policy Improvement</head><p>In the previous section, , we found that the worst kernel is a rank-one perturbation of the nominal kernel. Exploiting this, we developed a method to evaluate the robust policy efficiently.</p><p>This methods also computes the perturbation (βk T ), and consequently the worst kernel.</p><p>We can use it directly to compute the gradient w.r.t. the policy for this computed worst kernel. Then, we can apply policy improvement by gradient ascent as in <ref type="bibr" target="#b16">[17]</ref>:</p><formula xml:id="formula_103">π n+1 = proj π n + η k ∇ π J π Pn | π=πn , (<label>17</label></formula><formula xml:id="formula_104">)</formula><p>where P n is the estimate of the worst kernel for π k . This has global convergence guarantees with iteration complexity of O(ϵ -4 ) <ref type="bibr" target="#b16">[17]</ref>.</p><p>Alternatively, we can derive the policy gradient for the approximated perturbation, as done in the result below.</p><p>Lemma G.1 (Approximate Policy Gradient Theorem). Given the transition kernel P = P -βk ⊤ , the return is given as</p><formula xml:id="formula_105">J π P := J π 0 -γ J π β ⟨k, v π R ⟩ 1 + γ⟨k, v π β ⟩</formula><p>, and the gradient is given as</p><formula xml:id="formula_106">∇ π J π P = d π • Q π R -γ k ⊤ v π R 1 + γk ⊤ v π β d π • Q π β -γ J π β (k ⊤ D π ) 1 + γk ⊤ v π β • Q π R + γ 2 J π β (k ⊤ v π )(k ⊤ D π ) (1 + γk ⊤ v π β ) 2 • Q π β .</formula><p>Proof. The expression for the return directly follows from the inverse matrix theorem as proved in <ref type="bibr" target="#b19">[20]</ref>. Now, we move our attention towards evaluating the gradient, using the policy gradient theorem <ref type="bibr" target="#b26">[27]</ref> in the format used in <ref type="bibr" target="#b38">[39]</ref> (see appendix).</p><formula xml:id="formula_107">∇ π J π P = d π • Q π R -γ k ⊤ D π R π 1 + γk ⊤ D π β π d π µ • Q π β -γ µ T Dβ π 1 + γk ⊤ D π β π d π k • Q π R + γ 2 µ T Dβ π k ⊤ D π R π (1 + γk ⊤ D π β π ) 2 d π k • Q π β , = d π • Q π R -γ k ⊤ v π R 1 + γk ⊤ D π β π d π • Q π β -γ J π β (k ⊤ D π ) 1 + γk ⊤ D π β π • Q π R + γ 2 J π β (k ⊤ v π )(k ⊤ D π ) (1 + γk ⊤ D π β π ) 2 • Q π β .</formula><p>The main advantage of the above policy gradient is that constituents terms like</p><formula xml:id="formula_108">J π β , v π β , Q π β , in addition to nominal terms J π R , v π R , Q π R can</formula><p>be computed easily with bootstrapping exploiting Bellman operators. Proof. Directly follow from the proposition above.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H Evaluation of max x,y xAy</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.1 Eigenvalue Approach (Spectral Methods)</head><p>This section focus on deriving a spectral method for solving the optimization problem:</p><formula xml:id="formula_109">max ∥x∥ 2 ≤1, x≥0 ∥Ax∥ 2 ,</formula><p>where A ∈ R n×n . Compute A ⊤ A. We perform eigenvalue decomposition of A ⊤ A:</p><formula xml:id="formula_110">A ⊤ A = V ΛV ⊤ , where Λ = diag(λ 1 , λ 2 , . . . , λ n ) (eigenvalues) and V = [v 1 , v 2 , . . . , v n ] (eigenvectors). Further, WLOG λ 1 ≥ λ, • • • , ,<label>and</label></formula><formula xml:id="formula_111">∥v+ i ∥ ≥ ∥v-i ∥ ∀i, u i := v + i ∥v + i ∥ where v + i = max(v i , 0), v - i = -min(v i , 0</formula><p>) denotes positive and negative parts respectively.</p><p>• Zero Order Solution:</p><formula xml:id="formula_112">f 0 = ∥Au 1 ∥.</formula><p>• First order solution:</p><formula xml:id="formula_113">f 1 = max i ∥Au i ∥.</formula><p>• Second order solution:</p><formula xml:id="formula_114">f 2 = max i,j max t∈[0,1] ∥A (tv i + (1 -t)v j ) + ∥(tv i + (1 -t)v j ) + ∥ ∥.</formula><p>• Third order solution:</p><formula xml:id="formula_115">f 3 = max i,j,k max r,s,t,∈[0,1],r+s+t=1 ∥A (rv i + sv j + tv k ) + ∥(rv i + sv j + tv k ) + ∥ ∥.</formula><p>Upper bounds on max ∥x∥ 2 ≤1,x⪰0 ∥Ax∥ 2 :</p><p>• Zero order upper bound: λ 1</p><p>• First order upper bound:</p><formula xml:id="formula_116">i λ i c i ,</formula><p>where</p><formula xml:id="formula_117">c i =                              ⟨v i , u i ⟩ 2 , if i j=1 ⟨v j , u j ⟩ 2 ≤ 1, 1 -i-1 j=1 ⟨v j u j ⟩ 2 , if i j=1 ⟨v j , u j ⟩ 2 ≥ 1, i-1 j=1 ⟨v j , u j ⟩ 2 ≤ 1 0, otherwise.</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lemma H.3 (Zero Order Approximation). The highest projected eigenvector</head><formula xml:id="formula_118">u = v + 1 ∥v + 1 ∥ is atleast a half-good solution, i.e., ∥Au∥ 2 2 ≥ λ 1 2 ≥ 1 2 max ∥x∥ 2 ≤1, x≥0 ∥Ax∥ 2 2 .</formula><p>Further, if A is rank-one then it is exact, i.e.,</p><formula xml:id="formula_119">∥Au∥ 2 = max ∥x∥ 2 ≤1, x≥0 ∥Ax∥ 2 .</formula><p>Proof. We have ∥v</p><formula xml:id="formula_120">+ 1 ∥ ≥ 1 √ 2 from Proposition D.5. Let u = (v 1 ) + ∥(v 1 ) + ∥ = i σ i v i , where σ i = ⟨u, v i ⟩,</formula><p>we have</p><formula xml:id="formula_121">u T A T Au = ( i σ i v i )( i λ i v i v T i )( i σ i v i ) = i λ i σ 2 i , (as v i are orthogonal) = λ 1 σ 2 1 + i̸ =1 λ i σ 2 i , ≥ λ 1 σ 2 1 + i̸ =1 λ n σ 2 i , (as λ 2 ≥ λ 3 , • • • ) = λ 1 σ 2 1 + λ n (1 -σ 2 1 ), (as i σ 2 i = 1) ≥ 1 2 (λ 1 + λ n ), (as σ 1 ≥ 1 √<label>2</label></formula><p>).</p><p>Rest follows.</p><p>Proposition H.4 (First Order is Better than the First).</p><formula xml:id="formula_122">∥Au j ∥ 2 2 ≥ max i λ i σ 2 i ≥ λ 1 2 where j ∈ arg max i λ i ⟨v i , u i ⟩ and σ i = ⟨v i , u i ⟩ ≥ 1 √ 2 . Proof. Let u j = (v j ) + ∥(v j ) + ∥ = i σ j i v i , where σ j i = ⟨u j , v i ⟩, we have u T j A T Au j = ( i σ j i v i )( i λ i v i v T i )( i σ j i v i ) = i λ i (σ j i ) 2 , (as v i are orthogonal), ≥ λ j (σ j j ) 2 , = max i λ i (σ i ) 2 ,</formula><p>(by definition of j).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rest follows.</head><p>Proposition H.5. Second order solution f 2 = max i,j max t∈[0,1] ∥A</p><formula xml:id="formula_123">(tv i +(1-t)v j ) + ∥(tv i +(1-t)v j ) + ∥ ∥ is exactly equal to max ∥x∥ 2 ≤1,x⪰0 ∥Ax∥ 2 when A is rank two.</formula><p>This approach is computationally efficient but may not always yield the exact solution, especially when multiple eigenvectors significantly contribute to the optimal x. The intuition behind this approach is that the matrix A ⊤ A can be decomposed into its eigenvalues and eigenvectors, representing the principal directions of the transformation applied by A. The eigenvector corresponding to the largest eigenvalue provides the direction of maximum scaling for A. However, since the solution is constrained to the nonnegative orthant (x ≥ 0), we adjust the eigenvectors by only considering their positive parts. The method identifies an approximate solution u j by selecting and normalizing the positive part of the eigenvector that contributes the most to the objective function.</p><p>Algorithm 4 Second Order Spectral Approximation for max ∥x∥ 2 ≤1,x≥0 ∥Ax∥ 2 1: Normalize the positive part:</p><formula xml:id="formula_124">u i = v + i ∥v + i ∥ 2 . 2:</formula><p>Compute scores for all eigenvectors:</p><p>Score i = λ i ⟨v i , u i ⟩.</p><p>3: Select j = arg max i Score i .</p><p>4: Output: Approximate solution u j = v + j /∥v + j ∥ 2 and approximate maximum value ∥Au j ∥ 2 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Notes</head><p>• This approach is effective when the largest eigenvalue s 1 dominates the others. It approximates the solution by leveraging the spectral properties of A ⊤ A.</p><p>• The result might not be exact if multiple eigenvalues contribute significantly, as the approach considers only the contribution of individual eigenvectors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.1.1 Reformulation</head><p>Proposition H.6.</p><formula xml:id="formula_125">max ∥x∥ 2 ≤1,x⪰0 xA T Ax = max V σ⪰0,∥σ∥ 2 ≤1 i λ i σ 2 i , (where V V ⊤ = I, λ i ≥ 0) Proof. x = i σ i v i , where σ i = ⟨x, v i ⟩, we have x T A T Ax = ( i σ i v i )( i λ i v i v T i )( i σ i v i ) = i λ i (σ i ) 2 , (<label>as</label></formula><formula xml:id="formula_126">v i are orthogonal).</formula><p>Further, x = V σ. This map is bijection. Rest follows.</p><p>Since, λ i ≥ 0, the objective ⟨λ, σ⟩ is convex in σ, further the domain {σ | V σ ⪰ 0, ∥σ∥ 2 ≤ 1} is intersection of a polytope and a sphere, hence convex. This makes the following max</p><formula xml:id="formula_127">V σ⪰0,∥σ∥ 2 ≤1 i λ i σ 2 i</formula><p>as convex objective with convex domain.</p><p>Proposition H.7.</p><formula xml:id="formula_128">max ∥x∥ 2 ≤1,x⪰0 xA T Ax = max b∈B i λ i b i , where B = {b | b i = ⟨v i , x⟩ 2 , x ⪰ 0}. Proof. x = i σ i v i , where σ i = ⟨x, v i ⟩, we have x T A T Ax = ( i σ i v i )( i λ i v i v T i )( i σ i v i ) = i λ i (σ i ) 2 ,</formula><p>(as v i are orthogonal).</p><p>Rest follows.</p><p>Proposition H.8. The set</p><formula xml:id="formula_129">B = {b | b i = ⟨v i , x⟩ 2 , x ⪰ 0, ∥x∥ 2 = 1}, is convex.</formula><p>Proof. Le b, b ′ ∈ B be corresponding point for x, x ′ ⪰ 0, and ∥x∥, ∥x ′ ∥ = 1 respectively. Now make circle with origin, x and x ′ . The minor arc containing x and x ′ lies entirely in the R n + . The x lying on the arc will generate a line connecting b and b ′ . Hence B is convex.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.2 Experimental Verification</head><p>This section describes three different methods for solving the optimization problem:</p><formula xml:id="formula_130">max ∥x∥ 2 ≤1, x≥0 ∥Ax∥ 2 ,</formula><p>where A ∈ R n×n . The methods are compared in terms of their computational efficiency and the quality of their solutions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.2.1 Brute Force Random Search</head><p>The brute force method randomly samples vectors x ∈ R n from the nonnegative orthant, normalizes them to satisfy ∥x∥ 2 = 1, and evaluates ∥Ax∥ 2 for each sampled vector. The steps are as follows:</p><p>1. Generate N random vectors x i ≥ 0, i = 1, . . . , N .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Normalize each vector to unit norm: x</head><formula xml:id="formula_131">i ← x i /∥x i ∥ 2 .</formula><p>3. Compute ∥Ax i ∥ 2 for each vector and select the maximum value. This method is simple to implement but computationally expensive, as it evaluates A for a large number of randomly generated vectors. See figure <ref type="figure">7</ref> Figure <ref type="figure">7</ref>: Random Kernel Guess takes exponentially long time to converge. While Algorithm 1 only took 0.14 sec to find the optimal value.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.2.2 Numerical Optimization (Scipy Minimize)</head><p>This approach uses numerical optimization to directly solve the problem:</p><formula xml:id="formula_132">max ∥x∥ 2 ≤1, x≥0 ∥Ax∥ 2 .</formula><p>The optimization problem is formulated as: min x -∥Ax∥ 2 , subject to ∥x∥ 2 ≤ 1 and x ≥ 0.</p><p>Steps include:</p><p>1. Define the objective function as -∥Ax∥ 2 .</p><p>2. Impose constraints: ∥x∥ 2 ≤ 1 and x ≥ 0.</p><p>3. Solve the problem using scipy.optimize.minimize, with an initial guess x 0 .</p><p>This method provides the exact solution but is computationally more expensive than the spectral method.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.3 Comparison Metrics</head><p>The three methods are compared based on:</p><p>• Optimality: The maximum value ∥Ax∥ 2 achieved by each method.</p><p>• Time Efficiency: The computational time required by each method.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.4 Results and Observations</head><p>The following plots compare the performance of the three methods: State Space Cardinality and Random matrix Generation • State Space Cardinality (n): The dimension of the problem, denoted by n, represents the state space cardinality. In the experiments, n varied from 1 to 300 to analyze the scalability of the methods.</p><p>• Matrix Generation: The matrix A ∈ R n×n was generated as a random matrix with entries sampled from a standard normal distribution:</p><p>A ij ∼ N (0, 1), i, j = 1, . . . , n.</p><p>The same random seed (seed = 42) was used across all runs to ensure reproducibility.</p><p>• 10000 random vectors x were generated for Brute Search Method.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Process of matrix Evaluation</head><p>The goal of the experiments is to maximize ∥Ax∥ 2 under the constraints ∥x∥ 2 ≤ 1 and x ≥ 0. The matrix A is evaluated by: 1. Generating random vectors x ∈ R n for the brute force method.</p><p>2. Computing the spectral decomposition of A ⊤ A for the eigenvalue heuristic.</p><p>3. Defining and solving a constrained optimization problem for the numerical optimization method.</p><p>The results, including the optimal values and computational times, are recorded for each method. Notations: Value function v π = (I -γ P π ) -1 R π , Occupancy matrix D π = (I -γ P π ) -1 R π , occupation measure d π = µ T (I -γ P π ) -1 R π , return J π P = (I -γP π ) -1 R π ,.</p><p>In this section, we evaluate the performance of Algorithm 1 for robust policy evaluation, focusing on the case p = 2. The algorithm requires computing F (λ) at each iteration, which involves solving the constrained matrix norm problem max x∈B ∥Ax∥ 2 . This can be efficiently handled using our spectral Algorithm 2. Figures <ref type="figure">4</ref> and <ref type="figure">5</ref> compare four methods for computing the robust return, specifically the penalty term J π -J π U 2 :</p><p>• SLSQP from scipy <ref type="bibr" target="#b34">[35]</ref> : This is A semi-brute force approach that uses Lemma 3.3.</p><p>It computes the penalty term via scipy.minimize to directly optimize over (b, k). This is equivalent to optimize over only rank-one perturbation of nominal kernel as a(b, k) corresponds to selecting a rank-one perturbation of the nominal kernel P = P -bk ⊤ . Note that this method is local, hence can sometime be stuck in very bad local solution.</p><p>• Binary search Algorithm 1 : Uses the binary search Algorithm 1, and spectral Algorithm 2 for computing F (λ) in each iteration.</p><p>• Random Rank-One Kernel Sampling : A semi-brute force approach that uses Lemma 3.3 to sample random pairs (b, k) ∈ B, K, empirically maximizing the penalty term. Since choosing (b, k) corresponds to selecting a rank-one perturbation of the nominal kernel P = P -bk ⊤ , the method is named accordingly.</p><p>• Random Kernel Sampling : A brute-force approach that samples random kernels directly from the uncertainty set U 2 , computing the empirical minimum as an estimate of the robust return.</p><p>Figure <ref type="figure" target="#fig_15">14</ref> presents the penalty value (J π -J π U 2 ) computed by different methods across various state space sizes while keeping the action space fixed, with each method given the same computational time. Our binary search Algorithm 1 performs significantly better in both variations compared to brute-force (random kernel sampling) and semi-brute (random sampling of rank-one perturbations of the nominal kernel) approaches. Notably, the scipy SLSQP variant performs slightly better on average, but the spectral Algorithm 2 is more reliable. This is expected, as the spectral method is global, while scipy SLSQP is a local optimizer and thus more prone to getting stuck in suboptimal solutions.</p><p>J.1 Penalty Values (J π -J π U 2 ) vs Sample Size for Different Algorithms <ref type="bibr">Figure 16</ref>, figure <ref type="figure" target="#fig_9">17</ref> and figure <ref type="figure" target="#fig_9">18</ref> show Penalty Values (J p i -J π U 2 ) for different values of β calculated using different algorithms.</p><p>The experiment as shown in figure <ref type="figure" target="#fig_9">18</ref> shows that the SLSQP algorithm is not robust for this problem and can end up in local minima multiple times.</p><p>Figure <ref type="figure" target="#fig_9">15</ref> illustrates the convergence of different approaches over time (in seconds) for a fixed state space size (S = 8). The spectral variation of Algorithm 1 converges rapidly, while the SLSQP variation gradually approaches the same performance. In contrast, the brute-force method shows slow, logarithmic improvement. This behavior arises because brute-force methods require an exponential number of samples (in the dimensionality of the problem) to adequately explore all directions. In comparison, our binary search Algorithm combined with the spectral Algorithm 2 achieves significantly better efficiency, with a complexity of O(S 3 A 3 log ϵ -1 ).</p><p>More details of these experiments along with others can be found in the appendix, and codes are available at <ref type="url" target="https://anonymous.4open.science/r/non-rectangular-rmdp-77B8">https://anonymous.4open.science/r/non-rectangular-rmdp-77B8</ref>.</p><p>Our experiments confirm the efficiency of our binary search Algorithm 1 for robust policy evaluation, significantly outperforming brute-force approaches in both accuracy and convergence speed. Algorithm 5 Binary Search for Robust Policy Evaluation for Uncertainty set U p J.2 Our Method 1: Input: Tolerance ϵ = 0.001, β = 0.01 2: Initialize: λ = 0.5 1-γ , λ max = 1 1-γ , λ min = 0 3: while Tolerance is not met: f (λ) &gt; ϵ do 4: Compute: f (λ) = max ∥b∥p≤1,b⪰0 βγ∥Φ(v π d π⊤ -λD π H π b∥ q , where Φ = I -11 ⊤ S is projection matrix and (H π b)(s) = a π(a|s)b(s, a) is policy averaging operator.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5:</head><p>Bisection: If f (λ) &gt; ϵ, set λ min = λ, if f (λ) &lt; ϵ, set λ max = λ 6: end while 7: Output: Robust return: J π Up = J π -λ.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>J.3 Robust Penalty Function</head><p>We have defined robust penalty function in 3.2 as   Figure 16: β=0.1, A=8 </p><formula xml:id="formula_133">F (λ) = max b∈B ∥E π λ b∥ q ,</formula></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><figDesc>Formulation of MDPs. The primal formulation of an MDP is defined as: max v∈V ⟨µ, v⟩, with its dual: max d∈D ⟨d, R⟩, where V = {v | v = R π +γP π v, π ∈ Π} represents the set of value functions. The dual formulation relies on the state-action occupancy measure d, where d ∈ D ⊂ R |S|×|A| satisfies the non-negativity constraint (d ⪰ 0) and the flow conservation constraint:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Modeling Uncertainty with Non-Rectangular and Rectangular L 2 -Balls.</figDesc><graphic coords="6,72,00,424,50,451,28,225,64" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Illustration of Proposition 3.2: N-dimensional sphere can be written as infinite union of n-dimenssional inscribing cubes.</figDesc><graphic coords="7,184,82,72,00,225,63,225,63" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Projections of set D along principal components, for S = 3, A = 2 with 10 millions samples. This figure strongly suggests the non-convexity of the set.</figDesc><graphic coords="9,184,26,72,00,226,76,113,37" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 3 (</head><label>3</label><figDesc>Figure 3 (details in the appendix), making the problem non-convex. We leave this as an open question for future work:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>1 :</head><label>1</label><figDesc>while not converged: n = n + 1 do 2:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 4 : 8 Figure 5 :</head><label>485</label><figDesc>Figure 4: Performance of Robust Policy Evaluation methods with equal amount of time, with fixed action space A = 8</figDesc><graphic coords="13,198,43,72,00,198,41,119,05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>1 p</head><label>1</label><figDesc>and ∥v∥ := ∥v∥ 2 as shorthand. For a set C, ∆ C := {a : C → R|a c ≥ 0, ∀c, c∈C a c = 1} is the probability simplex over C. var(•) is variance function, defined as var(v) = s∈S (v(s) -v) 2 where v = s∈S v(s) |S| is the mean of function v : S → R d . 0, 1 denotes all zero vector and all ones vector/function respectively of appropriate dimension/domain. 1(a = b) := 1 if a = b, 0 otherwise, is the indicator function. For vectors u, v, 1(u ≥ v) is component wise indicator vector, i.e. 1(u ≥ v)(x) = 1(u(x) ≥ v(x)). A × B = {(a, b) | a ∈ A, b ∈ B} is the Cartesian product between set A and B.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><figDesc>uncertainty to U hard as both have polyhedral structure. This restrict the class of the IP programms to have a number of constraint m = 1 and the row of F to be all ones. In other words, only IP programmes that can be reduced to U 1 are of the following form: For , c ∈ Z n , ζ ∈ Z, ∃x ∈ {0, 1} n s.t. 1 T x ≤ g, and c T x ≤ ζ? Solution:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Algorithm 1</head><label>1</label><figDesc>requires an oracle access to max ∥b∥p≤β,∥k∥p≤1,1 T k=0 k T Ab, where k ∈ R S , b ∈ R S A and p ≥ 1. The above is a bilinear problem, which is NP-Hard, but we have a very useful structure on domain set (L p bounded set). Proposition H.1. [Orthogonality Equivalence]Let K = {k | ∥k∥ p ≤ 1, 1 ⊤ k = 0}, and W = {k T (I -11 T S ) | ∥k∥ p ≤ 1} . Then we have, K = W. Proof. Now let k ∈ K, then k T (I -11 T S ) = k ⊤ ∈ W. Now the other direction, let k ∈ W, then ⟨k T (I -11 T S ), 1⟩ = 0 by construction and ∥k T (I -11 T S )∥ p ≤ ∥k∥ p ≤ 1, this implies k T (I -11 T S ) ∈ K. The above result implies that max ∥b∥p≤β,∥k∥p≤1,1 T k=0 k T Ab = max ∥b∥p≤β,k∈K k T Ab = max ∥b∥p≤β,k∈W k T Ab, (as K = W from above Proposition H.1) = max ∥b∥p≤β,∥k∥p=1 k ⊤ (I -11 T S )Ab, (def. of W). Further, we have equivalence of optimizers arg max ∥k∥p≤1,1 T k=0,∥b∥p≤β k T Ab = (b * , (I -11 T S )k * ) | (b * , k * ) ∈ arg max</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Comparison of computational time across methods</figDesc><graphic coords="40,117,13,72,00,361,04,270,78" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 11 :</head><label>11</label><figDesc>Figure 11: 3D PCA projection of the first three principal components.</figDesc><graphic coords="43,162,25,72,00,270,77,216,62" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>Figure 12 :</head><label>12</label><figDesc>Figure 12: 2D Random Projections of the Data.</figDesc><graphic coords="44,139,69,72,00,315,88,284,29" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Figure 13 :Algorithm 5</head><label>135</label><figDesc>Figure 13: 3D Random Projection Example.</figDesc><graphic coords="45,162,25,72,00,270,77,216,62" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Figure 19 and</head><label>19</label><figDesc>Figure 19 and Figure 20 show graph of F(λ) vs λ for different value of β for fixed value of S=100 and A=10.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Figure 14 :</head><label>14</label><figDesc>Figure 14: Performance of Robust Policy Evaluation methods with equal amount of time.</figDesc><graphic coords="46,139,69,128,26,315,89,209,04" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_16"><head>Figure 15 :Figure 17 :Figure 18 :Figure 19 :</head><label>15171819</label><figDesc>Figure 15: Convergence of Robust Policy Evaluation Methods</figDesc><graphic coords="46,139,69,481,31,315,89,208,81" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="38,139,69,72,00,315,89,208,81" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="39,117,13,161,14,361,04,270,78" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="42,139,69,244,61,315,88,284,29" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="47,139,69,128,19,315,89,209,10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="47,139,69,481,15,315,89,209,04" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="48,139,69,126,74,315,89,209,10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="48,72,00,476,81,361,03,214,82" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="49,72,00,301,78,361,03,214,82" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>Useful Notations</figDesc><table><row><cell>Notation</cell><cell>Definition</cell><cell>Remark</cell></row><row><cell>p, q</cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>• Optimality Plot: Shows that the maximum value obtained with scipy.minimize is slightly better than our spectral method, while random search performs poorly.</p><p>• Time Efficiency Plot: Illustrates the that scipy.minimize scales much poorly with the dimension, while our spectral method is way faster than both methods.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H.4.1 Parameters of Experiments</head><p>The experiments were conducted to evaluate the performance of three methods-brute force random search, eigenvalue heuristic, and numerical optimization-on solving the problem:</p><p>Evaluation Metrics The performance of the methods was assessed using the following metrics:</p><p>• Optimality: The maximum value ∥Ax∥ 2 obtained by each method.</p><p>• Computational Efficiency: The time taken by each method to compute the result.</p><p>• Scalability: The behavior of the methods as n increases.</p><p>This systematic evaluation ensures a fair comparison of the three approaches across varying problem sizes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Hardware and Software Specifications</head><p>The experiments were conducted on the following hardware and software setup:</p><p>• Model Name: MacBook Pro (2023 model).</p><p>• Model Identifier: Mac14,7.</p><p>• Chip: Apple M2 with 8 cores (4 performance and 4 efficiency cores).</p><p>• Memory: 16 GB Unified Memory.</p><p>• Operating System: macOS Ventura.</p><p>• Programming Language: Python 3.9.</p><p>• Libraries Used:</p><p>numpy for numerical computations.</p><p>scipy for numerical optimization.</p><p>matplotlib for generating plots.</p><p>time for recording computational times.</p><p>The experiments were designed to ensure reproducibility by fixing the random seed (seed = 42). Computational times and results are specific to the above hardware configuration and may vary on different systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I Convexity of D</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I.1 MDP Configuration</head><p>We define an MDP with the following parameters:</p><p>• State space size: S = 3</p><p>• Action space size: A = 2</p><p>• Discount factor: γ = 0.9</p><p>• Random kernel P , random reward R, seed 42.</p><p>• Compute the set D = {D π H π |π} with 10 millions random policies π</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I.2 Dimensionality Reduction via PCA</head><p>Given the high-dimensional nature of the D π H π representations, we apply Principal Component Analysis (PCA) to extract meaningful structure.</p><p>• We retain the top 10 components to capture the dominant variations in the dataset.</p><p>• The explained variance ratio is visualized to assess how much information each component retains.</p><p>• 2D and 3D projections of the first few principal components are generated for visualization. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I.3 Random Linear Projections</head><p>To further explore the geometry of the occupancy measure set, we apply random linear projections of the high-dimensional data:</p><p>• 2D Random Projections: The data is projected onto randomly chosen 2D subspaces.</p><p>• 3D Random Projections: The data is projected onto randomly chosen 3D spaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>J Experiments: Robust Policy Evaluation</head><p>Setting: Randomly generate P is nominal kernel, reward function R, and π is a policy. Discount factor γ = 0.9, uncertainty radius β = 0.01, initial distribution µ = unif ormdistribution. </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Bias and variance in value function estimation</title>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duncan</forename><surname>Simester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">N</forename><surname>Tsitsiklis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Twenty-First International Conference on Machine Learning, ICML &apos;04</title>
+		<meeting>the Twenty-First International Conference on Machine Learning, ICML &apos;04<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="volume">72</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Robust data-driven dynamic programming</title>
+		<author>
+			<persName><forename type="first">Adiwena</forename><surname>Grani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Hanasusanto</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kuhn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Burges</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Bottou</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Welling</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Z</forename><surname>Ghahramani</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">K</forename><forename type="middle">Q</forename><surname>Weinberger</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Curran Associates, Inc</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">26</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Scaling up robust mdps using function approximation</title>
+		<author>
+			<persName><forename type="first">Aviv</forename><surname>Tamar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huan</forename><surname>Xu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 31th International Conference on Machine Learning, ICML 2014</title>
+		<meeting>the 31th International Conference on Machine Learning, ICML 2014<address><addrLine>Beijing, China</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014-06">June 2014. 2014</date>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="181" to="189" />
+		</imprint>
+	</monogr>
+	<note>JMLR Workshop and Conference Proceedings</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Robust control of markov decision processes with uncertain transition matrices</title>
+		<author>
+			<persName><forename type="first">Arnab</forename><surname>Nilim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurent</forename><forename type="middle">El</forename><surname>Ghaoui</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Oper. Res</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="780" to="798" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Robust dynamic programming</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Garud</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Iyengar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mathematics of Operations Research</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="257" to="280" />
+			<date type="published" when="2005-05">May 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">Huan</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<title level="m">Robustness and generalization</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Investigating generalisation in continuous deep reinforcement learning</title>
+		<author>
+			<persName><forename type="first">Chenyang</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename><surname>Sigaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Freek</forename><surname>Stulp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><forename type="middle">M</forename><surname>Hospedales</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Assessing generalization in deep reinforcement learning</title>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Packer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katelyn</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jernej</forename><surname>Kos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Krähenbühl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vladlen</forename><surname>Koltun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Song</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Robust markov decision processes</title>
+		<author>
+			<persName><forename type="first">Wolfram</forename><surname>Wiesemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kuhn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Breç</forename><surname>Rustem</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mathematics of Operations Research</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="153" to="183" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Robust mdps with k-rectangular uncertainty</title>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ofir</forename><surname>Mebel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huan</forename><surname>Xu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Math. Oper. Res</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1484" to="1509" />
+			<date type="published" when="2016-11">nov 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Robust markov decision process: Beyond rectangularity</title>
+		<author>
+			<persName><forename type="first">Vineet</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Grand-Clément</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Robust modified policy iteration</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">L</forename><surname>Kaufman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">J</forename><surname>Schaefer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">INFORMS J. Comput</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="396" to="410" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Solving uncertain markov decision processes</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Andrew</forename><surname>Bagnell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">Y</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><forename type="middle">G</forename><surname>Schneider</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+		<respStmt>
+			<orgName>Carnegie Mellon University</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Technical report</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Partial policy iteration for l1-robust markov decision processes</title>
+		<author>
+			<persName><forename type="first">Chin Pang</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marek</forename><surname>Petrik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfram</forename><surname>Wiesemann</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Online robust reinforcement learning with model uncertainty</title>
+		<author>
+			<persName><forename type="first">Yue</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaofeng</forename><surname>Zou</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Policy gradient method for robust reinforcement learning</title>
+		<author>
+			<persName><forename type="first">Yue</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaofeng</forename><surname>Zou</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Policy gradient in robust mdps with global convergence guarantee</title>
+		<author>
+			<persName><forename type="first">Qiuhao</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chin</forename><forename type="middle">Pang</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marek</forename><surname>Petrik</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Twice regularized mdps and the equivalence between robustness and regularization</title>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Derman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthieu</forename><surname>Geist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Efficient value iteration for s-rectangular robust markov decision processes</title>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaixin</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kfir Yehuda</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Forty-first International Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Policy gradient for rectangular robust markov decision processes</title>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Derman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthieu</forename><surname>Geist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kfir Yehuda</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Thirty-seventh Conference on Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Natural actor-critic for robust reinforcement learning with function approximation</title>
+		<author>
+			<persName><forename type="first">Ruida</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dileep</forename><surname>Kalathil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Panganamala</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chao</forename><surname>Tian</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Thirty-seventh Conference on Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Robust reinforcement learning via adversarial kernel approximation</title>
+		<author>
+			<persName><forename type="first">Kaixin</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Uri</forename><surname>Gadot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kfir</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Solving non-rectangular reward-robust mdps via frequency regularization</title>
+		<author>
+			<persName><forename type="first">Uri</forename><surname>Gadot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Derman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohamed</forename><surname>Maxence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kfir</forename><surname>Elfatihi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mannor</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">How small is a unit ball?</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">J</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mavina</forename><forename type="middle">K</forename><surname>Vamanamurthy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mathematics Magazine</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="101" to="107" />
+			<date type="published" when="1989">1989</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Markov decision processes: Discrete stochastic dynamic programming</title>
+		<author>
+			<persName><forename type="first">Martin</forename><forename type="middle">L</forename><surname>Puterman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Wiley Series in Probability and Statistics</title>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Grand-Clément</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nian</forename><surname>Si</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shengbo</forename><surname>Wang</surname></persName>
+		</author>
+		<title level="m">Tractable robust markov decision processes</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Reinforcement Learning: An Introduction</title>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">S</forename><surname>Sutton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">G</forename><surname>Barto</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>The MIT Press</publisher>
+		</imprint>
+	</monogr>
+	<note>second edition</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Mohammed</forename><surname>Amin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdullah</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hang</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haitham</forename><surname>Bou Ammar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vladimir</forename><surname>Milenkovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rui</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingtian</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Wang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Wasserstein robust reinforcement learning</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Robust $\phi$-divergence MDPs</title>
+		<author>
+			<persName><forename type="first">Chin Pang</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marek</forename><surname>Petrik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfram</forename><surname>Wiesemann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">Alice</forename><forename type="middle">H</forename><surname>Oh</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Alekh</forename><surname>Agarwal</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Danielle</forename><surname>Belgrave</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Kyunghyun</forename><surname>Cho</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Constrained Markov Decision Processes</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Altman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<publisher>Chapman and Hall</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Dadashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrien</forename><forename type="middle">Ali</forename><surname>Taïga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><forename type="middle">Le</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dale</forename><surname>Schuurmans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><forename type="middle">G</forename><surname>Bellemare</surname></persName>
+		</author>
+		<title level="m">The value function polytope in reinforcement learning</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">The geometry of robust value functions</title>
+		<author>
+			<persName><forename type="first">Kaixin</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kuangqi</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryan</forename><surname>Hooi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiashi</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 39th International Conference on Machine Learning</title>
+		<editor>
+			<persName><forename type="first">Kamalika</forename><surname>Chaudhuri</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Stefanie</forename><surname>Jegelka</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Le</forename><surname>Song</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Csaba</forename><surname>Szepesvari</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Gang</forename><surname>Niu</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Sivan</forename><surname>Sabato</surname></persName>
+		</editor>
+		<meeting>the 39th International Conference on Machine Learning</meeting>
+		<imprint>
+			<date type="published" when="2022-07">Jul 2022</date>
+			<biblScope unit="volume">162</biblScope>
+			<biblScope unit="page" from="17" to="23" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Lightning does not strike twice: Robust mdps with coupled uncertainty</title>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ofir</forename><surname>Mebel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huan</forename><surname>Xu</surname></persName>
+		</author>
+		<idno>CoRR, abs/1206.4643</idno>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">An Inverse Matrix Adjustment Arising in Discriminant Analysis</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Bartlett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Annals of Mathematical Statistics</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="107" to="111" />
+			<date type="published" when="1951">1951</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<author>
+			<persName><forename type="first">Pauli</forename><surname>Virtanen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralf</forename><surname>Gommers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Travis</forename><forename type="middle">E</forename><surname>Oliphant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Haberland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tyler</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Cournapeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evgeni</forename><surname>Burovski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pearu</forename><surname>Peterson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Warren</forename><surname>Weckesser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Bright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Stéfan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Van Der Walt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Brett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikolay</forename><surname>Jarrod Millman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mayorov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Andrew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Nelson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Kern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C J</forename><surname>Larson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">İlhan</forename><surname>Carey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Polat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><forename type="middle">W</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jake</forename><surname>Moore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Vanderplas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josef</forename><surname>Laxalde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Perktold</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Cimrman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Henriksen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><forename type="middle">R</forename><surname>Quintero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">M</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antônio</forename><forename type="middle">H</forename><surname>Archibald</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ribeiro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="261" to="272" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Policy gradient methods for reinforcement learning with function approximation</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Richard S Sutton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satinder</forename><surname>Mcallester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yishay</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mansour</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Solla</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">T</forename><surname>Leen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">K</forename><surname>Müller</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>MIT Press</publisher>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="volume">12</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Computers and Intractability: A Guide to the Theory of NP-Completeness (Series of Books in the Mathematical Sciences)</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Garey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Johnson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1979">1979</date>
+			<publisher>W. H. Freeman</publisher>
+		</imprint>
+	</monogr>
+	<note>first edition edition</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Convex Optimization</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Boyd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lieven</forename><surname>Vandenberghe</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2004-03">March 2004</date>
+			<publisher>Cambridge University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Policy gradient for reinforcement learning with general utilities</title>
+		<author>
+			<persName><forename type="first">Navdeep</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaixin</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kfir</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shie</forename><surname>Mannor</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

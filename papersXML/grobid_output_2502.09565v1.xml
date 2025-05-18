@@ -1,0 +1,2621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">MDCROW: AUTOMATING MOLECULAR DYNAMICS WORKFLOWS WITH LARGE LANGUAGE MODELS</title>
+				<funder ref="#_gTfnnz6">
+					<orgName type="full">National Institute of General Medic al Sciences of the National Institutes of Health</orgName>
+				</funder>
+				<funder ref="#_cEw3nFK">
+					<orgName type="full">National Science Foundation</orgName>
+				</funder>
+				<funder ref="#_gDP2EF8">
+					<orgName type="full">U.S. Department of Energy</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability  status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2025-02-13">13 Feb 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Quintina</forename><surname>Campbell</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Chemical Engineering</orgName>
+								<orgName type="institution">University of Rochester</orgName>
+								<address>
+									<settlement>Rochester</settlement>
+									<region>New York</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Sam</forename><surname>Cox</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Chemical Engineering</orgName>
+								<orgName type="institution">University of Rochester</orgName>
+								<address>
+									<settlement>Rochester</settlement>
+									<region>New York</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">FutureHouse Inc</orgName>
+								<address>
+									<settlement>San Francisco</settlement>
+									<region>CA</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jorge</forename><surname>Medina</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Chemical Engineering</orgName>
+								<orgName type="institution">University of Rochester</orgName>
+								<address>
+									<settlement>Rochester</settlement>
+									<region>New York</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Brittany</forename><surname>Watterson</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Biomedical Engineering</orgName>
+								<orgName type="institution">University of Rochester</orgName>
+								<address>
+									<settlement>Rochester</settlement>
+									<region>New York</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>White</surname></persName>
+							<email>andrew.white@rochester.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Chemical Engineering</orgName>
+								<orgName type="institution">University of Rochester</orgName>
+								<address>
+									<settlement>Rochester</settlement>
+									<region>New York</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">FutureHouse Inc</orgName>
+								<address>
+									<settlement>San Francisco</settlement>
+									<region>CA</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">MDCROW: AUTOMATING MOLECULAR DYNAMICS WORKFLOWS WITH LARGE LANGUAGE MODELS</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-02-13">13 Feb 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E4B92DEBA4B8B0DBC17E836A66D65BCE</idno>
+					<idno type="arXiv">arXiv:2502.09565v1[cs.AI]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.3-SNAPSHOT" ident="GROBID" when="2025-05-13T17:34+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.8.2-3-g65968aec5</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Molecular dynamics (MD) simulations are essential for understanding biomolecular systems but remain challenging to automate. Recent advances in large language models (LLM) have demonstrated success in automating complex scientific tasks using LLM-based agents. In this paper, we introduce MDCrow, an agentic LLM assistant capable of automating MD workflows. MDCrow uses chainof-thought over 40 expert-designed tools for handling and processing files, setting up simulations, analyzing the simulation outputs, and retrieving relevant information from literature and databases. We assess MDCrow's performance across 25 tasks of varying required subtasks and difficulty, and we evaluate the agent's robustness to both difficulty and prompt style. gpt-4o is able to complete complex tasks with low variance, followed closely by llama3-405b, a compelling open-source model. While prompt style does not influence the best models' performance, it has significant effects on smaller models.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Molecular dynamics (MD) simulations is a common method to understand dynamic and complex systems in chemistry and biology. While MD is now routine, its integration into and impact on scientific workflows has increased dramatically over the past few decades <ref type="bibr">[1]</ref><ref type="bibr">[2]</ref><ref type="bibr">[3]</ref>. There are two main reasons for this: First, MD provides valuable insights. Through simulations, scientists can study structural and dynamic phenomena, perturbations, and dynamic processes in their chemical systems. Second, innovations in hardware and expert-designed software packages have made MD much more accessible to both experienced and novice users <ref type="bibr">[3]</ref>.</p><p>For a given protein simulation, parameter selection is nontrivial: the user must provide the input structure (such as a PDB <ref type="bibr">[4]</ref> file), select a force field (e.g., CHARMM <ref type="bibr">[5]</ref>, AMBER <ref type="bibr">[6]</ref>), and specify parameters such as temperature, integrator, simulation length, and equilibration protocols. Simulations also generally require pre-and post-processing steps, along with various analyses. For instance, a user may need to clean or trim a PDB file, add a solvent, or analyze the protein's structure. After simulation, they might examine the protein's shape throughout the simulation or assess its stability under different conditions. The choices for pre-processing, analysis, and simulation parameters are highly specific to any given use case and often require expert intuition. Thus, automating this process is difficult but beneficial.</p><p>Several efforts have been made to automate MD workflows <ref type="bibr">[7]</ref><ref type="bibr">[8]</ref><ref type="bibr">[9]</ref><ref type="bibr">[10]</ref><ref type="bibr">[11]</ref><ref type="bibr">[12]</ref><ref type="bibr">[13]</ref><ref type="bibr">[14]</ref><ref type="bibr">[15]</ref><ref type="bibr">[16]</ref><ref type="bibr">[17]</ref>, focusing largely on specific domains, such as RadonPy for polymer's simulations <ref type="bibr">[8]</ref>, or PyAutoFEP for proteins and small molecules for drug-screening <ref type="bibr">[16]</ref>. Other approaches are constrained to a particular combination of simulation software and simulation (e.g. GROMACS and Free Energy Perturbation). Certainly, there has been significant community-driven improvement in automating and creating MD toolkits <ref type="bibr">[14,</ref><ref type="bibr">[18]</ref><ref type="bibr">[19]</ref><ref type="bibr">[20]</ref><ref type="bibr">[21]</ref><ref type="bibr">[22]</ref><ref type="bibr">[23]</ref><ref type="bibr">[24]</ref> and user-friendly interfaces and visualizations <ref type="bibr">[25]</ref><ref type="bibr">[26]</ref><ref type="bibr" target="#b26">[27]</ref><ref type="bibr" target="#b27">[28]</ref><ref type="bibr" target="#b28">[29]</ref><ref type="bibr" target="#b29">[30]</ref><ref type="bibr" target="#b30">[31]</ref><ref type="bibr" target="#b31">[32]</ref>. While these advances improve the capabilities and ease of use in many cases, the inherent variability of MD workflows still poses a great challenge for full automation.</p><p>Large-Language Model (LLM) agents <ref type="bibr" target="#b32">[33]</ref><ref type="bibr" target="#b33">[34]</ref><ref type="bibr" target="#b34">[35]</ref><ref type="bibr" target="#b35">[36]</ref> have gained popularity for their ability to automate technical tasks through reasoning and tool usage, even surpassing domain-specialized LLMs (e.g., BioGPT <ref type="bibr" target="#b36">[37]</ref>, Med-PaLM <ref type="bibr" target="#b37">[38]</ref>) when programmed for specialized roles <ref type="bibr" target="#b38">[39]</ref>. These agents have demonstrated promising results in scientific tasks within a predefined toolspace, with tools like ChemCrow and Coscientist successfully automating complex workflows and novel design in chemical synthesis <ref type="bibr" target="#b39">[40]</ref><ref type="bibr" target="#b40">[41]</ref><ref type="bibr" target="#b41">[42]</ref>. Likewise, LLM-driven automation has been explored in materials research <ref type="bibr" target="#b42">[43]</ref><ref type="bibr" target="#b43">[44]</ref><ref type="bibr" target="#b44">[45]</ref><ref type="bibr" target="#b45">[46]</ref>, literature and data aggregation <ref type="bibr" target="#b46">[47,</ref><ref type="bibr" target="#b47">48]</ref>, and more sophisticated tasks <ref type="bibr" target="#b44">[45,</ref><ref type="bibr" target="#b48">[49]</ref><ref type="bibr" target="#b49">[50]</ref><ref type="bibr" target="#b50">[51]</ref><ref type="bibr" target="#b51">[52]</ref><ref type="bibr" target="#b52">[53]</ref><ref type="bibr" target="#b53">[54]</ref><ref type="bibr" target="#b54">[55]</ref>. Most similar to this work, ProtAgents <ref type="bibr" target="#b54">[55]</ref> is a multi-agent modeling framework tackling protein-related design and analysis, and LLaMP <ref type="bibr" target="#b44">[45]</ref> applies a retrieval-augmented generation (RAG)-based ReAct agent to simulate inorganic materials by interfacing with literature databases, Wikipedia, and atomistic simulation tools. Although preliminary work has applied agentic LLMs to MD via a RAG-based agent <ref type="bibr" target="#b44">[45]</ref>, no fully adaptive and autonomous system exists for biochemical MD or protein simulations. See Ramos et al. <ref type="bibr" target="#b55">[56]</ref> for a recent review on the design, assessment, and applications of scientific agents.</p><p>Here we present MDCrow, an LLM-agent capable of autonomously completing MD workflows. Our main contributions to the field are (1) we assess MDCrow's performance across 25 tasks with varying difficulty and compare performance of different LLM models; (2) we measure robustness how agents are prompted and task complexity based on required number of subtasks we compare with simply equipping an LLM with a python interpreter with the required packages installed, rather than using a custom built environment. Our main conclusions is that MDCrow with gpt-4o or llama3-405b is able to perform nearly all of our assessed tasks and is relatively insensitive to how precise the instructions are given to it. See Figure <ref type="figure">1D</ref> for an overview of the main results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">MDCrow Toolset</head><p>MDCrow is an LLM agent, which consists of an environment of tools that emit observations and an LLM that selects actions (tools + inpnut arguments). MDCrow is built with Langchain <ref type="bibr" target="#b56">[57]</ref> and a ReAct style prompt. <ref type="bibr" target="#b34">[35]</ref>. The tools mostly consist of analysis and simulation methods; we use OpenMM <ref type="bibr">[22]</ref> and MDTraj <ref type="bibr">[21]</ref> packages, but in principle our findings generalize to any such packages.</p><p>MDCrow's tools can be categorized in four groups: Information Retrieval, PDB &amp; Protein, Simulation, and Analysis (see Figure <ref type="figure">1B</ref>).</p><p>Information Retrieval Tools These tools enable MDCrow to build context and answer simple questions posed by the user. Most of the tools serve as wrappers for UniProt API functionalities <ref type="bibr" target="#b57">[58]</ref>, allowing access to data such as 3D structures, binding sites, and kinetic properties of proteins. Additionally, we include a LiteratureSearch tool, which uses PaperQA <ref type="bibr" target="#b47">[48]</ref> to answer questions and retrieve information from literature. PaperQA accesses a local database of relevant PDFs, selected specifically for the test prompts, which can be found in SI section C. This realtime information helps the system provide direct answers to user questions and can also assist the agent in selecting parameters or guiding simulation processes. Figure <ref type="figure">1:</ref> A. MDCrow workflow. Starting with a user prompt and initialized with a set of MD tools, MDCrow follows a chain-of-thought process until it completes all tasks in the prompt. The final output includes a response, along with all resulting analyses and files. B. The tool distribution categorized into 4 types: information retrieval, PDB and protein handling, simulation, and analysis. A few examples from each category are shown. C. Two example prompts that MDCrow is tested on. The first is the simplest prompt, containing only 1 subtask. The most complex task requires 10 subtasks. D. Average subtask completion across all 25 prompts as task complexity (the number of subtasks per prompt) increases. The top three performing base-LLMs are shown. Among them, gpt-4o and llama3-405b consistently maintain high stability, staying close to 100% completion even as task complexity increases.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Chatting with Simulations</head><p>A key challenge in developing an automated MD assistant is ensuring it can manage a large number of files, analyses, and long simulations and runtimes. Although MDCrow has been primarily tested with shorter simulations, it is designed to handle larger workflows as well. Its ability to retrieve and resume previous runs allows users to start a simulation, step away during the long process, and later continue interactions and analyses without needing to stay engaged the entire time. An example of this chatting feature is shown in Figure <ref type="figure" target="#fig_0">2</ref>.</p><p>MDCrow creates an LLM-generated summary of the user prompt and agent trace, which is assigned to a unique run identifier provided at the end of the run (but accessible at any time during the session). Each run's files, figures, and path registry are saved in a unique checkpoint folder linked to the run identifier.</p><p>When resuming a chat, the LLM loads the summarized context of previous steps and maintains access to the same file corpus, as long as the created files remain intact. To resume a run, the user simply provides the checkpoint directory and run identifier. MDCrow then loads the corresponding memory summaries and retrieves all associated files, enabling seamless continuation of analyses. Then, once MDCrow has completed this task, the user asks for analysis of the files. Next, the user asks for a quick 10 ps simulation of both files, and MDCrow saves all files for later handling. Lastly, the user asks for plots of RMSD for each simulation over time, and MDCrow responds with each plot.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">MDCrow Performance on Various Tasks</head><p>To assess MDCrow's ability to complete tasks of varying difficulty, we designed 25 prompts with different levels of complexity and documented the number of subtasks (minimum required steps) needed to complete each task. MDCrow was not penalized for taking additional steps, but was penalized for omitting necessary ones. For example, the first prompt in Figure <ref type="figure">1C</ref> contains a single subtask, whereas the complex task requires 10 subtasks: downloading the PDB file, performing three simulations, and performing two analyses per simulation. If the agent failed to complete an earlier step, it was penalized for every subsequent step it could not perform due to that failure.</p><p>The 25 prompts require between 1 and 10 subtasks, with their distribution shown in Figure <ref type="figure" target="#fig_1">3B</ref>. Each prompt was tested across three GPT models (gpt-3.5-turbo-0125, gpt-4-turbo-2024-04-09, gpt-4o-2024-08-06) <ref type="bibr" target="#b60">[61,</ref><ref type="bibr" target="#b61">62]</ref>, two Llama models (llama-v3p1-405b-instruct, llama-v3p1-70b-instruct) <ref type="bibr" target="#b62">[63]</ref> (accessed via the Fireworks AI API with 8-bit floating point (8FP) quantization [64]), and two Claude models (claude-3-opus-20240229, claude-3-5-sonnet-20240620) <ref type="bibr">[65,</ref><ref type="bibr" target="#b63">66]</ref>. A newer Claude Sonnet model, claude-3-5-sonnet-20241022 was tested in later experiments but was not found to give superior results, so it was not tested on these 25 prompts. All other parameters were held constant across tests, and each version of MDCrow executed a single run per prompt.</p><p>Each run was evaluated by experts recording the number of required subtasks the agent completed and using Boolean indicators to indicate accuracy, whether the agent triggered a runtime error, and whether the trajectory contained any hallucinations. Since the agent trajectories for each run are inherently variable, accuracy is defined as the result's consistency with the expected trajectory rather than comparing against a fixed reference.</p><p>The percentage of tasks that were deemed to have valid solutions for MDCrow with each base-LLM is shown in Fig- <ref type="figure" target="#fig_1">ure 3A</ref>. The lowest performing model was gpt-3.5. This is not surprising, as this model had some of the highest hallucination rates (32% of prompt completions contained hallucinations), compared to the absence of documented hallucinations in the higher performing models, gpt-4o and llama3-405b. However, the discrepancy in accuracy rates between models cannot solely be attributed to hallucinations, as gpt-3.5 attempted fewer than half of the required subtasks, whereas the higher-performing models, gpt-4o and llama3-405b, attempted 80-90% of the required subtask, earning accuracy in answering for 72% and 68% of tasks, respectively (Figures <ref type="figure" target="#fig_1">3C</ref>, <ref type="figure">D</ref>).</p><p>These results indicate that MDCrow can handle complex MD tasks but is limited by the capabilities of the base model. For gpt-4-turbo, gpt-3.5, and llama3-70b, the number of trajectories with verified results decreases significantly as task complexity increases (Figure <ref type="figure" target="#fig_1">3C</ref>). In contrast, gpt-4o and llama3-405b show only a slight decline, demonstrating that MDCrow performs well even for complex tasks when paired with more robust base models. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">MDCrow Robustness</head><p>We evaluated the robustness of MDCrow on complex prompts and different prompt styles. We hypothesized that some models would excel at completing complex tasks, while others would struggle-either forgetting steps or hallucinating-as the number of required subtasks increased. To test this, we created a sequence of 10 prompts that increased in complexity. The first prompt required a single subtask, and each subsequent prompt added an additional subtask (see Figure <ref type="figure">4A</ref>). Each prompt was tested twice: once in a natural, conversational style and once with explicitly ordered steps. Example prompts can be seen in Figure <ref type="figure">4B</ref>.</p><p>To quantify robustness, we calculated the coefficient of variation (CV) for the percentage of completed subtasks across tasks. A lower CV indicates greater consistency in task completion and, therefore, higher robustness. The analysis revealed clear differences in robustness across models and prompt types. Overall, gpt-4o and llama3-405b demonstrated moderate to high robustness, while the Claude models showed significantly lower robustness. The performance comparison is shown in Figure <ref type="figure">4C</ref>.</p><p>We expected that the percentage of subtasks completed by each model would decrease as task complexity increased. However, with gpt-4o and llama3-405b as base models, MDCrow demonstrated a strong relationship between the number of required and completed subtasks (Figure <ref type="figure">4D</ref>) for both prompt types, indicating consistent performance regardless of task complexity or prompt style. The three included Claude models demonstrated less impressive performance. claude-3-opus followed the linear trend very loosely, becoming more erratic as task complexity increased. As the tasks required more subtasks, the model consistently misses nuances in the instructions and make logical errors. Both claude-3.5-sonnet models gave poor performance on these tasks, often producing the same error (see SI section A).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">MDCrow Comparison</head><p>We also compared MDCrow to two baselines: a ReAct <ref type="bibr" target="#b34">[35]</ref> agent with only a Python REPL tool and a single-query LLM. MDCrow and the baselines were tested on the same 25 prompts as previously mentioned, all using gpt-4o. We use different system prompts to accommodate each framework, guiding the LLM to utilize common packages with MDCrow, and these prompts can be found in SI section B.</p><p>The single-query LLM is asked to complete the prompt by writing the code for all subtasks, not unlike what standalone ChatGPT would be asked to do. We then execute the code ourselves and evaluate the outcomes accordingly. ReAct with Python REPL can write and execute codes using a chain-of-thought framework. We find that MDCrow outperforms the two baselines significantly, as shown in Figure <ref type="figure" target="#fig_2">5A</ref>, on attempting all subtasks and achieving an accurate solution. Not surprisingly, the two baseline methods struggled with code syntax errors and incorrect handling of PDB files. There is not a significant difference between the two baselines, indicating that the ReAct framework did not significantly boost the model's robustness.</p><p>In Figure <ref type="figure" target="#fig_2">5B</ref>, we observe that the performance of all three methods generally declines as task complexity increases. However, both baseline methods drop to zero after just three steps, with performance then fluctuating erratically at higher complexities. This is not surprising, as proper file processing and simulation setup are crucial for optimal LLM performance in MD tasks. In contrast, MDCrow demonstrates greater robustness and reliability in handling complex tasks, thanks to its well-designed system for accurate file processing and simulation setup, as well as its ability to dynamically adjust to errors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">MDCrow Extrapolation through Chatting</head><p>We further show MDCrow's ability to harness its chatting feature and extrapolate outside of its toolset to complete new tasks. This task requires MDCrow to perform an annealing simulation, which is not part of the current toolset. The agent achieves this by first setting up a simulation to find appropriate system parameters and handle possible early errors. Then, the agent modifies the script according to the user's request. Once the simulation is complete, the user later asks for simulation analyses, shown in Figures <ref type="figure" target="#fig_3">6A</ref>, <ref type="figure">B</ref>.</p><p>This shows that MDCrow has the ability to generalize outside of its toolset and is capable of completing more complicated and/or user-specific simulations. By utilizing the chatting feature, users can walk MDCrow through new analyses, reducing the risk of catastrophic mistakes.</p><p>Figure <ref type="figure">4</ref>: A. The number of subtasks in each task, categorized by type. Task 1 begins with a single pre-simulation subtask (Download a PDB file) and each subsequent task adds a single subtask, adding to a total of 10 tasks with a maximum of 10 subtasks. B. Example of "Natural" and "Ordered" prompt style on a three-step prompt. C. The robustness of MDCrow built on each model with both prompt types, measured by coefficient of variation (CV). Lower CV is interpreted as greater consistency. gpt-4o and llama3-405b are the more robust models, as the Claude models have higher CVs. D. Comparison of subtask completion across models and prompt types. In the 9-subtask prompt, gpt-4o encountered an error after only one step and gave up without trying to fix it. In general, gpt-4o and llama3-405b have relatively robust performance with increasing complexity for both prompt types. claude-3-opus struggles with more complex tasks, making more logical errors for complex tasks. The two claude-3.5-sonnet models showed fairly poor performance across this experiment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Discussion</head><p>Although LLMs' scientific abilities are growing <ref type="bibr" target="#b64">[67]</ref><ref type="bibr" target="#b65">[68]</ref><ref type="bibr" target="#b66">[69]</ref>, they cannot yet independently complete MD workflows, even with a ReAct framework and Python interpreter. However, with frontier LLMs, chain-of-thought, and an expertcurated toolset, MDCrow successfully handles a broad range of tasks. It performs 80% better than gpt-4o in ReAct workflows at completing subtasks, which is expected due to MD workflows' need for file handling, error management, and real-time data retrieval.</p><p>In some cases, particularly for complex tasks beyond its explicit toolset, MDCrow's performance may improve with human guidance. The system's chatting feature allows users to continue previous conversations, clarify misunderstandings, and guide MDCrow step-by-step through difficult tasks. This adaptability helps MDCrow recover from failures, refine its approach based on user intent, and handle more complex workflows. This suggests that, with more advanced LLM models, targeted feedback, and the addition of specialized tools, MDCrow could tackle an even broader range of tasks. We did not do a full evaluation of MDCrow's capabilities through this chatting feature in this work.</p><p>For all LLMs, task accuracy and subtask completion are affected by task complexity. Interestingly, while gpt-4o can handle multiple steps with low variance, llama3-405b is a compelling second best, as an open-source model. Other models, such as gpt-3.5 and claude-3.5-sonnet, struggle with hallucinations or inability to follow multistep instructions. Performance on these models, however, is improved with explicit prompting or model-specific optimization (especially for claude-3.5-sonnet).  These tasks were focused on routine applications of MD with short simulation runtimes, limited to proteins, common solvents, and force fields included in the OpenMM package. We did not explore small-molecule force fields, especially related to ligand binding. Future work could explore multi-modal approaches <ref type="bibr" target="#b67">[70,</ref><ref type="bibr" target="#b68">71]</ref> for tasks like convergence analysis or plot interpretations. The current framework relies on human-created tools, but as LLM-agent systems become more autonomous <ref type="bibr" target="#b69">[72]</ref>, careful evaluation and benchmarking will be essential.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Conclusion</head><p>Running and analyzing MD simulations is non-trivial and typically hard to automate. Here, we explored using LLM agents to accomplish this. We built MDCrow, an LLM and environment consisting of over 40 tools purpose built for MD simulation and analysis. We found MDCrow could complete 72% of the tasks with the optimal settings (gpt-4o). llama-405B was able to complete 68%, providing a compelling open-source model. The best models were relatively robust to how the instructions are given, although weaker models struggle with unstructured instructions. Simply using an LLM with a python interpreter and required packages installed had a 28% accuracy. The performance of MDCrow was relatively stable as well, though dependent on the model. Correct assessment of these complex scientific workflows is challenging, and had to be done by hand. Chatting with the simulations, via extended conversations, is even more compelling, but is harder to assess. This work demonstrates the steps to automate and assess computational scientific workflows. As LLMs continue improving in performance, and better training methods arise for complex tasks like this, we expect LLM agents to be increasingly important for accelerating science. MDCrow, for example, can now automatically assess hypotheses with 72% accuracy with simulation and can scale-out to thousands of simultaneous tasks. The code and tasks are open source and available at <ref type="url" target="https://github.com/ur-whitelab/MDCrow">https://github.com/ur-whitelab/MDCrow</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplemental Information A Claude-Specific Engineering</head><p>While both of Claude's Sonnet models achieved poor performance during the robustness experiment, it can be noted that a single common error arose consistently. When running an NPT simulation, MDCrow requires that all parameters be passed to the simulation tool. However, both Sonnet models consistently neglected to provide a value for pressure, even when directly prompted to do so. The claude-3-opus made this mistake a single time. This is a relatively simple fix, providing MDCrow with a default pressure of 1 atm when no pressure is passed.</p><p>Figure <ref type="figure">7</ref>: Performance of MDCrow with three Claude models on 10 tasks. As the number of subtasks increase, we all subtasks completed for both prompt types. The top row shows MDCrow's performance as-is, and the bottom row shows MDCrow's performance when given a direct fix for missing parameters. There is a clear change in performance after the fix for both claude-3.5-sonnet-20241022 and claude-3.5-sonnet-20240620.</p><p>As can be seen in Figure <ref type="figure">7</ref>, including this fix drastically improves the performance of these models, with performance comparable to the top models. However, no other models made this mistake, and no other model-specific optimization was conducted. Thus, for all experiments shown in this paper, MDCrow does not accommodate this Claude-specific missing parameter fix.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Prompts MDCrow Prompt</head><p>You are an expert molecular dynamics scientist, and your task is to respond to the question or solve the problem to the best of your ability using the provided tools.</p><p>You can only respond with a single complete 'Thought, Action, Action Input' format OR a single 'Final Answer' format.</p><p>Complete format: Thought: (reflect on your progress and decide what to do next) Action: ''' {{ "action": (the action name, it should be the name of a tool), "action_input": (the input string for the action) }} ''' OR Final Answer: (the final response to the original input question, once all steps are complete) You are required to use the tools provided, using the most specific tool available for each action. Your final answer should contain all information necessary to answer the question and its subquestions. Before you finish, reflect on your progress and make sure you have addressed the question in its entirety.</p><p>If you are asked to continue or reference previous runs, the context will be provided to you. If context is provided, you should assume you are continuing a chat.</p><p>Here is the input: Previous Context: {context} Question: {input}</p><p>During the comparison study between MDCrow, GPT-only, and ReAct with Python REPL tool, we used different system prompts for each of these LLM frameworks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Direct-LLM Prompt</head><p>You are an expert molecular dynamics scientist, and your task is to respond to the question or solve the problem in its entirety to the best of your ability. If any part of the task requires you to perform an action that you are not capable of completing, please write a runnable Python script for that step and move on. For literature papers, use and process papers from the 'paper_collection' folder. For .pdb files, download them from the RSCB website using 'requests'. To preprocess PDB files, you will use PDBFixer. To get information about proteins, retrieve data from the UniProt database. For anything related to simulations, you will use OpenMM, and for anything related to analyses, you will use MDTraj. At the end, combine any scripts into one script.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ReAct Agent Prompt</head><p>You are an expert molecular dynamics scientist, and your task is to respond to the question or solve the problem to the best of your ability. If any part of the task requires you to perform an action that you are not capable of completing, please write a runnable Python script for that step and run it. For literature papers, use and process papers from the 'paper_collection' folder. For .pdb files, download them from the RSCB website using 'requests'. TO preprocess PDB files, you will use PDBFixer. To get information about proteins, retrieve data from the UniProt database. For anything related to simulations, you will use OpenMM, and for anything related to analyzes, you will use MDTraj.</p><p>You can only respond with a single complete 'Thought, Action, Action Input' format OR a single 'Final Answer' format.</p><p>Complete format: Thought: (reflect on your progress and decide what to do next) Action: ''' {{ "action": (the action name, it should be the name of a tool), "action_input": (the input string for the action) }} ''' OR Final Answer: (the final response to the original input question, once all steps are complete) You are required to use the tools provided, using the most specific tool available for each action. Your final answer should contain all information necessary to answer the question and its subquestions. Before you finish, reflect on your progress and make sure you have addressed the question in its entirety.</p><p>Here is the input: Question: {input} </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Task Prompts &amp; References Used in Experiments</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Example Chat Example of chat with MDCrow. The user first asks to download PDB files for two systems.Then, once MDCrow has completed this task, the user asks for analysis of the files. Next, the user asks for a quick 10 ps simulation of both files, and MDCrow saves all files for later handling. Lastly, the user asks for plots of RMSD for each simulation over time, and MDCrow responds with each plot.</figDesc><graphic coords="4,118,80,128,01,374,40,385,22" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: MDCrow Performance across Large Language Models. A. Summary of MDCrow performance dependent on LLM. Percentage of accuracy is determined by whether it gave acceptable final answer or not. While statistically indistinguishable from Claude and Llama models, gpt-4o significantly outperforms the rest of GPT models on giving accurate solutions (t-test, 0.004 ≤ p-value ≤ 0.046). B. The distribution of number of subtasks in each task across 25 prompts. The prompts range from 1-10 steps, with each step count belonging to at least 2 prompts. C. Percentages of prompts with accurate solutions with respect to LLM used and number of subtasks per task. The correlation between accuracy and complexity is statistically significant for all LLMs (Spearman correlation, 3.9 × 10 -7 ≤ pvalue ≤ 1.1 × 10 -2 ) D. Percentage of the subtasks that the agent completed for each base LLM per task.</figDesc><graphic coords="5,72,00,332,48,468,00,274,10" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Performance across LLM Frameworks using the same 25-prompt set: MDCrow, direct LLM with no tools (single-query), and ReAct agent with only Python REPL tool. All use gpt-4o. A. Performance among LLM frameworks measured by whether accuracy and average percentage of subtasks they complete for each of 25 task prompts.MDCrow is significantly better at giving accurate solutions than direct LLM (t-test, p = 1 × 10 -3 ) and ReAct (ttest, p = 4 × 10 -4 ). MDCrow completes significantly more subtasks on average compared to direct LLM (t-test, p = 1 × 10 -6 ) and ReAct (t-test, p = 6 × 10 -6 ). B. Percentage of tasks completed with the respect to LLM framework used and the number of subtasks required for each task. The correlation between accuracy and number of subtasks required is statistically significant, p = 1 × 10 -3 for direct LLM and p = 1 × 10 -4 MDCrow. The p value for ReAct is p = 7 × 10 -2 .</figDesc><graphic coords="8,72,00,72,00,468,02,138,85" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: A. MDCrow simulating annealing. The user directly instructs MDCrow to simulate an annealing simulation of protein 1L2Y. Once the simulation is complete, the user utilizes the chatting feature to ask for further analyses. B. RMSD, RGy, and temperature throughout the simulation, as requested by the user in A.</figDesc><graphic coords="8,72,00,349,90,467,99,234,93" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="3,95,40,72,00,421,20,420,61" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="7,72,00,72,00,467,99,303,45" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><graphic coords="14,95,40,214,64,421,19,390,39" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Details of 25 task prompts used in experimentsPDB ID 1FNF) for 1 ns, using an appropriate temperature found in the literature. Compute the RMSD and the final secondary structure. By using the PDB ID to get the Uniprot ID, obtain the subunit structure and the number of beta sheets, helices, etc. Compare this information to the structure we computed.Compare the RMSF of 1UBQ under high pressure and low pressure. Perform the simulation for 1 ns, varying only the pressure. Plot the moments of inertia over time for both simulations. 1TRN) for 1 ns at 300 K and plot eneRGy over time. Compute SASA, RMSF, and radius of gyration. Get the subunit structure, sequence, active and binding sites. Download the PDB for 2YXF. Tell me about its stability as found in the literature. Then, simulate it for 1 ns and plot its RMSD over time.</figDesc><table><row><cell>Prompt ID Prompt</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>6 Acknowledgments Research reported in this work was supported by the <rs type="funder">National Institute of General Medic al Sciences of the National Institutes of Health</rs> under award number <rs type="grantNumber">R35GM137966</rs>, <rs type="funder">National Science Foundation</rs> under grant number of <rs type="grantNumber">1751471</rs>, <rs type="person">Robert L.</rs> and <rs type="person">Mary L. Sproull Fellowship</rs> gift and <rs type="funder">U.S. Department of Energy</rs>, Grant No. <rs type="grantNumber">DE-SC0023354</rs>. Work at FutureHouse is supported by the generosity of Eric and <rs type="person">Wendy Schmidt</rs>. We thank the <rs type="institution">Center for Integrated Research Computing (CIRC) at University of Rochester</rs> for providing computational resources and technical support.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_gTfnnz6">
+					<idno type="grant-number">R35GM137966</idno>
+				</org>
+				<org type="funding" xml:id="_cEw3nFK">
+					<idno type="grant-number">1751471</idno>
+				</org>
+				<org type="funding" xml:id="_gDP2EF8">
+					<idno type="grant-number">DE-SC0023354</idno>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Applications of molecular dynamics simulation in protein study</title>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Sinha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Tam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">San</forename><surname>Ming</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wang</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Membranes</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page">844</biblScope>
+			<date type="published" when="2022-08">August 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Molecular dynamics simulations of biomolecules</title>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Karplus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Andrew Mccammon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">nature structural biology</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Molecular dynamics simulation for all</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Scott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ron</forename><forename type="middle">O</forename><surname>Hollingsworth</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dror</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neuron</title>
+		<imprint>
+			<biblScope unit="volume">99</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="1129" to="1143" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The protein data bank archive</title>
+		<author>
+			<persName><forename type="first">Sameer</forename><surname>Velankar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><forename type="middle">K</forename><surname>Burley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Genji</forename><surname>Kurisu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">C</forename><surname>Hoch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">L</forename><surname>Markley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Structural Proteomics: High-Throughput Methods</title>
+		<imprint>
+			<biblScope unit="page" from="3" to="21" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">CHARMM: the biomolecular simulation program</title>
+		<author>
+			<persName><forename type="first">Charles</forename><forename type="middle">L</forename><surname>Bernard R Brooks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iii</forename><surname>Brooks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">D</forename><surname>Mackerell</surname><genName>Jr</genName></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lennart</forename><surname>Nilsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">J</forename><surname>Petrella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Roux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Youngdo</forename><surname>Won</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georgios</forename><surname>Archontis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Bartels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Boresch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of computational chemistry</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1545" to="1614" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Force fields for protein simulations</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Jay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Ponder</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Case</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in protein chemistry</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="page" from="27" to="85" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Building admiral, an automated molecular dynamics and analysis platform</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">P</forename><surname>Baumgartner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongzhou</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACS Medicinal Chemistry Letters</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="2331" to="2335" />
+			<date type="published" when="2020-11">November 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">RadonPy: automated physical property calculation using all-atom classical molecular dynamics simulations for polymer informatics</title>
+		<author>
+			<persName><forename type="first">Yoshihiro</forename><surname>Hayashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Junichiro</forename><surname>Shiomi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Junko</forename><surname>Morikawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryo</forename><surname>Yoshida</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computational Materials</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">222</biblScope>
+			<date type="published" when="2022-11">November 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Gmx qk: An automated protein proteinligand complex simulation workflow bridged to MM PBSA, based on gromacs and zenity-dependent GUI for beginners in MD simulation study</title>
+		<author>
+			<persName><forename type="first">Harvinder</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anupam</forename><surname>Raja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Prakash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bikash</forename><surname>Medhi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Chemical Information and Modeling</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="2603" to="2608" />
+			<date type="published" when="2023-05">May 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Simulation foundry: Automated and F.A.I.R. molecular modeling</title>
+		<author>
+			<persName><forename type="first">Gudrun</forename><surname>Gygli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juergen</forename><surname>Pleiss</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Chemical Information and Modeling</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1922" to="1927" />
+			<date type="published" when="2020-04">April 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Mukhtar Oluwaseun Idris, Hamdalat Folake Muritala, and Rotimi Olusanya Arise. CHAPERONg: A tool for automated GROMACS-based molecular dynamics simulations and trajectory analyses</title>
+		<author>
+			<persName><forename type="first">Olanrewaju</forename><surname>Abeeb Abiodun Yekeen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ayodeji Durojaye</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computational and Structural Biotechnology Journal</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="4849" to="4858" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Molecular architect: A user-friendly workflow for virtual screening</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">B</forename><surname>Eduardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Maia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alisson</forename><surname>Rolim Medaglia</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Marques Da</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><forename type="middle">G</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Taranto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACS Omega</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="6628" to="6640" />
+			<date type="published" when="2020-03">March 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">AMBER drug discovery boost tools: Automated workflow for production free-energy simulation setup and analysis (professa)</title>
+		<author>
+			<persName><forename type="first">Abir</forename><surname>Ganguly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hsu-Chun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mario</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tai-Sung</forename><surname>Fernández-Pendás</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><forename type="middle">J</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Darrin</forename><forename type="middle">M</forename><surname>Giese</surname></persName>
+		</author>
+		<author>
+			<persName><surname>York</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Chemical Information and Modeling</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="issue">23</biblScope>
+			<biblScope unit="page" from="6069" to="6083" />
+			<date type="published" when="2022-12">December 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">SimStack: An intuitive workflow framework</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename><surname>Celso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jörg</forename><surname>Rêgo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Schaarschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Montserrat</forename><surname>Schlöder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saientan</forename><surname>Penaloza-Amion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Bag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timo</forename><surname>Neumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Strunk</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wenzel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Materials</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">877597</biblScope>
+			<date type="published" when="2022-05">May 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<author>
+			<persName><forename type="first">Derek</forename><surname>Groen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Agastya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Bhati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Suter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><forename type="middle">J</forename><surname>Hetherington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">V</forename><surname>Zasada</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Coveney</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fabsim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Facilitating computational research through automation on large-scale and distributed e-infrastructures</title>
+		<imprint>
+			<date type="published" when="2016-10">October 2016</date>
+			<biblScope unit="volume">207</biblScope>
+			<biblScope unit="page" from="375" to="385" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">PyAutoFEP: An automated free energy perturbation workflow for GROMACS integrating enhanced sampling methods</title>
+		<author>
+			<persName><forename type="first">Luan</forename><surname>Carvalho Martins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elio</forename><forename type="middle">A</forename><surname>Cino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafaela</forename><forename type="middle">Salgado</forename><surname>Ferreira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Chemical Theory and Computation</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="4262" to="4273" />
+			<date type="published" when="2021-07">July 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">ProtoCaller: Robust automation of binding free energy calculations</title>
+		<author>
+			<persName><forename type="first">Miroslav</forename><surname>Suruzhon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tharindu</forename><surname>Senapathi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">S</forename><surname>Bodnarchuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russell</forename><surname>Viner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><forename type="middle">D</forename><surname>Wall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">B</forename><surname>Barnett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">J</forename><surname>Naidoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">W</forename><surname>Essex</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Chemical Information and Modeling</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1917" to="1921" />
+			<date type="published" when="2020-04">April 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">EasyAmber: A comprehensive toolbox to automate the molecular dynamics simulation of proteins</title>
+		<author>
+			<persName><forename type="first">Dmitry</forename><surname>Suplatov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yana</forename><surname>Sharapova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vytas</forename><surname>Švedas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Bioinformatics and Computational Biology</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">06</biblScope>
+			<biblScope unit="page">2040011</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">PACKMOL: A package for building initial configurations for molecular dynamics simulations</title>
+		<author>
+			<persName><forename type="first">Leandro</forename><surname>Martínez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ricardo</forename><surname>Andrade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ernesto</forename><forename type="middle">G</forename><surname>Birgin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">José</forename><surname>Mario</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martínez</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of computational chemistry</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page" from="2157" to="2164" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">MDAnalysis: a toolkit for the analysis of molecular dynamics simulations</title>
+		<author>
+			<persName><forename type="first">Naveen</forename><surname>Michaud-Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">J</forename><surname>Denning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">B</forename><surname>Woolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Beckstein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of computational chemistry</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="2319" to="2327" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">MDTraj: A modern open library for the analysis of molecular dynamics trajectories</title>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">T</forename><surname>Mcgibbon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><forename type="middle">A</forename><surname>Beauchamp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">P</forename><surname>Harrigan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">M</forename><surname>Swails</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><forename type="middle">X</forename><surname>Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><forename type="middle">R</forename><surname>Schwantes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lee-Ping</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">J</forename><surname>Lane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vijay</forename><forename type="middle">S</forename><surname>Pande</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biophysical Journal</title>
+		<imprint>
+			<biblScope unit="volume">109</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1528" to="1532" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">OpenMM 7: Rapid development of high performance algorithms for molecular dynamics</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Eastman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Swails</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">D</forename><surname>Chodera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yutong</forename><surname>Robert T Mcgibbon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><forename type="middle">A</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lee-Ping</forename><surname>Beauchamp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">C</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Simmonett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chaya</forename><forename type="middle">D</forename><surname>Matthew P Harrigan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Stern</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS computational biology</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">1005659</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">GROMACS: High performance molecular simulations through multi-level parallelism from laptops to supercomputers</title>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abraham</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Teemu</forename><surname>Murtola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roland</forename><surname>Schulz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Szilárd</forename><surname>Páll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><forename type="middle">C</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Berk</forename><surname>Hess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Lindahl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SoftwareX</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="19" to="25" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">LAMMPS -a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Aktulga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Berger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Bolintineanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">M</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">S</forename><surname>Crozier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Veld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kohlmeyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Moore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">D</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Shan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Stevens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tranchida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Trott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Plimpton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Comp. Phys. Comm</title>
+		<imprint>
+			<biblScope unit="volume">271</biblScope>
+			<biblScope unit="page">108171</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">MDANSE: An interactive analysis environment for molecular dynamics simulations</title>
+		<author>
+			<persName><surname>Goret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Aoun</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pellegrini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of chemical information and modeling</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="5" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">QwikMD -gateway for easy simulation with VMD and NAMD</title>
+		<author>
+			<persName><forename type="first">João</forename><surname>Vieira Ribeiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafael</forename><forename type="middle">C</forename><surname>Bernardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Till</forename><surname>Rudack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Schulten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emad</forename><surname>Tajkhorshid</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biophysical Journal</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="673" to="674" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">MDWiZ: a platform for the automated translation of molecular dynamics simulations</title>
+		<author>
+			<persName><surname>Victor H Rusu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Vitor</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Horta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Bruno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberto</forename><forename type="middle">D</forename><surname>Horta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riccardo</forename><surname>Lins</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Baron</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Molecular Graphics and Modelling</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="80" to="86" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Bringing molecular dynamics simulation data into view</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">S</forename><surname>Peter W Hildebrand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johanna</forename><forename type="middle">Ks</forename><surname>Rose</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tiemann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trends in Biochemical Sciences</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="902" to="913" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">METAGUI. a VMD interface for analyzing metadynamics and molecular dynamics simulations</title>
+		<author>
+			<persName><forename type="first">Xevi</forename><surname>Biarnés</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabio</forename><surname>Pietrucci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabrizio</forename><surname>Marinelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Laio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Physics Communications</title>
+		<imprint>
+			<biblScope unit="volume">183</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="203" to="211" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">VMD: visual molecular dynamics</title>
+		<author>
+			<persName><forename type="first">William</forename><surname>Humphrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Dalke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Schulten</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of molecular graphics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="33" to="38" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Gromita: a fully integrated graphical user interface to gromacs 4</title>
+		<author>
+			<persName><forename type="first">Diamantis</forename><surname>Sellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dimitrios</forename><surname>Vlachakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Metaxia</forename><surname>Vlassi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics and biology insights</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<date type="published" when="2009">2009</date>
+			<publisher>BBI-S3207</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">PlayMolecule ProteinPrepare: a web application for protein preparation for molecular dynamics simulations</title>
+		<author>
+			<persName><forename type="first">Gerard</forename><surname>Martínez-Rosell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Toni</forename><surname>Giorgino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gianni</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabritiis</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of chemical information and modeling</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1511" to="1516" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">Timo</forename><surname>Schick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jane</forename><surname>Dwivedi-Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberto</forename><surname>Dessì</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberta</forename><surname>Raileanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Lomeli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Cancedda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Scialom</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Toolformer</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2302.04761</idno>
+		<title level="m">Language models can teach themselves to use tools</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">MRKL systems: A modular, neuro-symbolic architecture that combines large language models, external knowledge sources and discrete reasoning</title>
+		<author>
+			<persName><forename type="first">Ehud</forename><surname>Karpas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omri</forename><surname>Abend</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonatan</forename><surname>Belinkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barak</forename><surname>Lenz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Opher</forename><surname>Lieber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nir</forename><surname>Ratner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoav</forename><surname>Shoham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hofit</forename><surname>Bata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoav</forename><surname>Levine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Leyton-Brown</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2205.00445</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<author>
+			<persName><forename type="first">Shunyu</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dian</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nan</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Izhak</forename><surname>Shafran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Narasimhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuan</forename><surname>Cao</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2210.03629</idno>
+		<title level="m">ReAct: Synergizing reasoning and acting in language models</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Aviary: training language agents on challenging scientific tasks</title>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">D</forename><surname>Braza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan-Rhys</forename><surname>Griffiths</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manu</forename><surname>Ponnapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Bou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Laurent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ori</forename><surname>Kabeli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geemi</forename><surname>Wellawatte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Cox</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Samuel G Rodriques</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2412.21154</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">BioGPT: generative pre-trained transformer for biomedical text generation and mining</title>
+		<author>
+			<persName><forename type="first">Renqian</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liai</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yingce</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Qin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheng</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hoifung</forename><surname>Poon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tie-Yan</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Briefings in bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">409</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Large language models encode clinical knowledge</title>
+		<author>
+			<persName><forename type="first">Karan</forename><surname>Singhal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shekoofeh</forename><surname>Azizi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Mahdavi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyung</forename><forename type="middle">Won</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Scales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Tanwani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heather</forename><surname>Cole-Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Pfohl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">620</biblScope>
+			<biblScope unit="issue">7972</biblScope>
+			<biblScope unit="page" from="172" to="180" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Empowering biomedical discovery with AI agents</title>
+		<author>
+			<persName><forename type="first">Shanghua</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ada</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yepeng</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentina</forename><surname>Giunchiglia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayush</forename><surname>Noori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">Richard</forename><surname>Schwarz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasha</forename><surname>Ektefaie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jovana</forename><surname>Kondic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marinka</forename><surname>Zitnik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell</title>
+		<imprint>
+			<biblScope unit="volume">187</biblScope>
+			<biblScope unit="page" from="6125" to="6151" />
+			<date type="published" when="2024-10">Oct 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Augmenting large language models with chemistry tools</title>
+		<author>
+			<persName><forename type="first">Andres</forename><forename type="middle">M</forename><surname>Bran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Cox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Schilter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlo</forename><surname>Baldassari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philippe</forename><surname>Schwaller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Machine Intelligence</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Autonomous chemical research with large language models</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Daniil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Boiko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Macknight</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabe</forename><surname>Kline</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gomes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">624</biblScope>
+			<biblScope unit="issue">7992</biblScope>
+			<biblScope unit="page" from="570" to="578" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">CACTUS: A computational framework for generating realistic white matter microstructure substrates</title>
+		<author>
+			<persName><forename type="first">Juan</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luis</forename><surname>Villarreal-Haro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Remy</forename><surname>Gardier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erick</forename><forename type="middle">J</forename><surname>Canales-Rodriguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elda</forename><forename type="middle">Fischi</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Girard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Philippe</forename><surname>Thiran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Rafael-Patino</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">14 examples of how LLMs can transform materials science and chemistry: a reflection on a large language model hackathon</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Maik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jablonka</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qianxiang</forename><surname>Ai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Al-Feghali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Badhwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><forename type="middle">D</forename><surname>Bocarsly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andres</forename><forename type="middle">M</forename><surname>Bran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Bringuier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Brinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kamal</forename><surname>Choudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Defne</forename><surname>Circi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Digital Discovery</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1233" to="1250" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Automation and machine learning augmented by large language models in catalysis study</title>
+		<author>
+			<persName><forename type="first">Yuming</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xue</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanxiang</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yibo</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yujing</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yibing</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheng</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Chemical Science</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<author>
+			<persName><forename type="first">Yuan</forename><surname>Chiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chia-Hong</forename><surname>Chou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janosh</forename><surname>Riebesell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Llamp</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2401.17244</idno>
+		<title level="m">Large language model made powerful for highfidelity materials knowledge retrieval and distillation</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Large language models for inorganic synthesis predictions</title>
+		<author>
+			<persName><forename type="first">Seongmin</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yousung</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Schrier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Chemical Society</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Harnessing large language model to collect and analyze metal-organic framework property dataset</title>
+		<author>
+			<persName><forename type="first">Wonseok</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yeonghun</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Taeun</forename><surname>Bae</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jihan</forename><surname>Kim</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2404.13053</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">Language agents achieve superhuman synthesis of scientific knowledge</title>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Michael D Skarlinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><forename type="middle">M</forename><surname>Cox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">D</forename><surname>Laurent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michaela</forename><surname>Braza</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hinks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manvitha</forename><surname>Hammerling</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ponnapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>Samuel G Rodriques</surname></persName>
+		</author>
+		<author>
+			<persName><surname>White</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2409.13740</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Opportunities for retrieval and tool augmented large language models in scientific facilities</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Prince</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aikaterini</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Vriza</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Varuni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">T</forename><surname>Sastry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ross</forename><forename type="middle">J</forename><surname>Dearing</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Harder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Rama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mathew</forename><forename type="middle">J</forename><surname>Vasudevan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cherukara</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Automatic evaluation of llms on protocol planning in biology</title>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Odhran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aleksandar</forename><surname>Donoghue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Shtedritski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralph</forename><surname>Ginger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><forename type="middle">Essa</forename><surname>Abboud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Ghareeb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><forename type="middle">G</forename><surname>Booth</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rodriques</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bioplanner</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">CRISPR-GPT: An LLM agent for automated design of gene-editing experiments</title>
+		<author>
+			<persName><forename type="first">Kaixuan</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanhao</forename><surname>Qu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Cousins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">A</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Di</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihir</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denny</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russ</forename><surname>Altman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mengdi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Cong</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Accelerated end-to-end chemical synthesis development with large language models</title>
+		<author>
+			<persName><forename type="first">Yixiang</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chenyin</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ning</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Xuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jianzhang</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qun</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanyu</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaodong</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ning</forename><surname>Ye</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ChemRxiv</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">ChatMOF: an artificial intelligence system for predicting and generating metalorganic frameworks using large language models</title>
+		<author>
+			<persName><forename type="first">Yeonghun</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jihan</forename><surname>Kim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">4705</biblScope>
+			<date type="published" when="2024-06">June 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Anywhere: A multi-agent framework for reliable and diverse foreground-conditioned image inpainting</title>
+		<author>
+			<persName><forename type="first">Tianyidan</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rui</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoqian</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Feixuan</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ying</forename><surname>Tai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhenyu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zili</forename><surname>Yi</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">ProtAgents: Protein discovery via large language model multi-agent collaborations combining physics and machine learning</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ghafarollahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Buehler</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">A review of large language models and autonomous agents in chemistry</title>
+		<author>
+			<persName><forename type="first">Caldas</forename><surname>Mayk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">J</forename><surname>Ramos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>Collison</surname></persName>
+		</author>
+		<author>
+			<persName><surname>White</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Chemical Science</title>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Harrison</forename><surname>Chase</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Langchain</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">2022</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">UniProt: the Universal Protein Knowledgebase in 2023</title>
+	</analytic>
+	<monogr>
+		<title level="m">The UniProt Consortium</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page">2022</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Molstar</forename><surname>Developers</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Molrender</surname></persName>
+		</author>
+		<ptr target="https://github.com/molstar/molrender" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="2025" to="2027" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">NGLview-interactive molecular graphics for Jupyter notebooks</title>
+		<author>
+			<persName><forename type="first">Hai</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Case</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">S</forename><surname>Rose</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1241" to="1242" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Training language models to follow instructions with human feedback</title>
+		<author>
+			<persName><forename type="first">Long</forename><surname>Ouyang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xu</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diogo</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carroll</forename><surname>Wainwright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pamela</forename><surname>Mishkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chong</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandhini</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katarina</forename><surname>Slama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Ray</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="27730" to="27744" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Achiam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Adler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandhini</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lama</forename><surname>Ahmad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilge</forename><surname>Akkaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florencia</forename><surname>Leoni Aleman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diogo</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janko</forename><surname>Altenschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Altman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2303.08774</idno>
+		<title level="m">Shyamal Anadkat, et al. GPT-4 technical report</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<author>
+			<persName><forename type="first">Abhimanyu</forename><surname>Dubey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhinav</forename><surname>Jauhri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhinav</forename><surname>Pandey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Kadian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmad</forename><surname>Al-Dahle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aiesha</forename><surname>Letman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Akhil</forename><surname>Mathur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Schelten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Fan</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.21783</idno>
+		<title level="m">The Llama 3 herd of models</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">The Claude 3 model family: Opus, Sonnet, Haiku</title>
+		<author>
+			<persName><surname>Anthropic</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024-03">Mar 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Jaech</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Kalai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Lerer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Richardson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>El-Kishky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aiden</forename><surname>Low</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alec</forename><surname>Helyar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aleksander</forename><surname>Madry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Beutel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Carney</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2412.16720</idno>
+		<title level="m">OpenAI o1 system card</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Hurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Lerer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">P</forename><surname>Goucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Perelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Ramesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aidan</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Akila</forename><surname>Ostrow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Welihinda</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hayes</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2410.21276</idno>
+		<title level="m">Alec Radford, et al. GPT-4o system card</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jon M</forename><surname>Laurent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">D</forename><surname>Janizek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Ruzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michaela</forename><forename type="middle">M</forename><surname>Hinks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">J</forename><surname>Hammerling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manvitha</forename><surname>Ponnapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><forename type="middle">G</forename><surname>Rodriques</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.10362</idno>
+		<title level="m">LAB-Bench: Measuring capabilities of language models for biology research</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<author>
+			<persName><forename type="first">Chenyu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weixin</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qianyu</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haonan</forename><surname>Mai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jindi</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sixun</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuan</forename><surname>Xiaohua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhengxin</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lin</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shenghua</forename><surname>Gao</surname></persName>
+		</author>
+		<title level="m">MLLM-Tool: A multimodal large language model for tool agent learning</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title level="m" type="main">AssistGPT: A general multi-modal assistant that can plan, execute, inspect, and learn</title>
+		<author>
+			<persName><forename type="first">Difei</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lei</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luowei</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">Qinghong</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joya</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zihan</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><forename type="middle">Zheng</forename><surname>Shou</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<monogr>
+		<author>
+			<persName><forename type="first">Guanzhi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuqi</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yunfan</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Mandlekar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chaowei</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuke</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linxi</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anima</forename><surname>Anandkumar</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.16291</idno>
+		<title level="m">Voyager: An open-ended embodied agent with large language models</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note>List of References Used for Literature Search During the Experiments</note>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<title level="m" type="main">The folding space of protein β2-microglobulin is modulated by a single disulfide bridge</title>
+		<idno type="DOI">10.1088/1478-3975/ac08ec</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">Molecular Dynamics Simulation of the Adsorption of a Fibronectin Module on a Graphite Surface</title>
+		<idno type="DOI">10.1021/la0357716</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">Predicting stable binding modes from simulated dimers of the D76N mutant of β2-microglobulin</title>
+		<idno type="DOI">10.1016/j.csbj.2021.09.003</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Deciphering the Inhibition Mechanism of under Trial Hsp90 Inhibitors and Their Analogues: A Comparative Molecular Dynamics Simulation</title>
+		<idno type="DOI">10.1021/acs.jcim.9b01134</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<title level="m" type="main">Molecular modeling, simulation and docking of Rv1250 protein from Mycobacterium tuberculosis</title>
+		<idno type="DOI">10.3389/fbinf.2023.1125479</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<monogr>
+		<title level="m" type="main">Molecular Dynamics Simulation of Rap1 Myb-type domain in Saccharomyces cerevisiae</title>
+		<idno type="DOI">10.6026/97320630008881</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<monogr>
+		<title level="m" type="main">A Giant Extracellular Matrix Binding Protein of Staphylococcus epidermidis Binds Surface-Immobilized Fibronectin via a Novel Mechanism</title>
+		<idno type="DOI">10.1128/mbio.01612-20</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Native Fibronectin in the Modulation of αvβ3 Integrin Conformational Dynamics: Insights from Computational Analyses and Implications for Molecular Design</title>
+		<idno type="DOI">10.1371/journal.pcbi.1005334</idno>
+	</analytic>
+	<monogr>
+		<title level="m">High Affinity vs</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<monogr>
+		<title level="m" type="main">Forced unfolding of fibronectin type 3 modules: an analysis by biased molecular dynamics simulations</title>
+		<idno type="DOI">10.1006/jmbi.1999.2670</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<monogr>
+		<idno type="DOI">10.3390/ijms19113321</idno>
+		<title level="m">Adsorption of Fibronectin Fragment on Surfaces Using Fully Atomistic Molecular Dynamics Simulations</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<monogr>
+		<idno type="DOI">10.1371/journal.pone.0002373</idno>
+		<title level="m">Fibronectin Unfolding Revisited: Modeling Cell Traction-Mediated Unfolding of the Tenth Type-III Repeat</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<monogr>
+		<title level="m" type="main">Tertiary and quaternary structural basis of oxygen affinity in human hemoglobin as revealed by multiscale simulations</title>
+		<idno type="DOI">10.1038/s41598-017-11259-0</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1016/s0006-3495(85)83890-x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Oxygen Delivery from Red Cells</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<monogr>
+		<title level="m" type="main">Molecular Dynamics Simulations of Hemoglobin A in Different States and Bound to DPG: Effector-Linked Perturbation of Tertiary Conformations and HbA Concerted Dynamics</title>
+		<idno type="DOI">10.1529/biophysj.107.114942</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<monogr>
+		<title level="m" type="main">Theoretical Simulation of Red Cell Sickling Upon Deoxygenation Based on the Physical Chemistry of Sickle Hemoglobin Fiber Formation</title>
+		<idno type="DOI">10.1021/acs.jpcb.8b07638</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<monogr>
+		<title level="m" type="main">Adsorption of Heparin-Binding Fragments of Fibronectin onto Hydrophobic Surfaces</title>
+		<idno type="DOI">10.3390/biophysica3030027</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<monogr>
+		<title level="m" type="main">Mechanistic insights into the adsorption and bioactivity of fibronectin on surfaces with varying chemistries by a combination of experimental strategies and molecular simulations</title>
+		<idno type="DOI">10.1016/j.bioactmat.2021.02.021</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<monogr>
+		<title level="m" type="main">Radical Scavenging Mechanism of New 4-Aryl-[1,3]-thiazol-2-yl-2-quinoline Carbohydrazides and Quinolinyl</title>
+		<author>
+			<persName><surname>Anti-Inflammatory</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/slct.201801398</idno>
+		<imprint/>
+	</monogr>
+	<note>1,3]-thiazolo[3,2-b 1,2,4]triazoles</note>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<title level="m" type="main">binding affinities calculated using an effective interaction entropy method under polarized force field</title>
+		<author>
+			<persName><forename type="first">Trypsin-Ligand</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/s41598-017-17868-z</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<monogr>
+		<title level="m" type="main">Molecular modeling and simulations</title>
+		<author>
+			<persName><surname>Ubiquitin</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jmgm.2013.09.006</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<title level="m" type="main">Valid molecular dynamics simulations of human hemoglobin require a surprisingly large box size</title>
+		<idno type="DOI">10.7554/eLife.35560</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<monogr>
+		<title level="m" type="main">Multiple Cryptic Binding Sites are Necessary for Robust Fibronectin Assembly: An In Silico Study</title>
+		<idno type="DOI">10.1038/s41598-017-18328-4</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<monogr>
+		<title level="m" type="main">Computer simulations of fibronectin adsorption on hydroxyapatite surfaces</title>
+		<idno type="DOI">10.1039/c3ra47381c</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<monogr>
+		<idno type="DOI">10.1016/j.bpj.2012.01.011</idno>
+		<title level="m">An Atomistic View on Human Hemoglobin Carbon Monoxide Migration Processes</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<monogr>
+		<idno type="DOI">10.33011/livecoms.1.1.5957</idno>
+		<title level="m">Best Practices for Foundations in Molecular Simulations</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<idno type="DOI">10.1021/acs.jpcb.8b09318</idno>
+		<title level="m">Unfolding Dynamics of Ubiquitin from Constant Force MD Simulation: Entropy-Enthalpy Interplay Shapes the Free-Energy Landscape</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
