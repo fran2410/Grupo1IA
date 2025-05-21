@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Neural Thermodynamic Laws for Large Language Model Training</title>
+				<funder ref="#_EWHfNrC">
+					<orgName type="full">National Science Foundation</orgName>
+					<orgName type="abbreviated">NSF</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Google PhD</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">IAIFI</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Ziming</forename><surname>Liu</surname></persName>
+							<email>zmliu@mit.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Massachusetts Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yizhou</forename><surname>Liu</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Massachusetts Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jeff</forename><surname>Gore</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Massachusetts Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Max</forename><surname>Tegmark</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Massachusetts Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Neural Thermodynamic Laws for Large Language Model Training</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">C3131F478341ADA5E0E706E959992B19</idno>
+					<idno type="arXiv">arXiv:2505.10559v1[cs.LG]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:42+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Beyond neural scaling laws, little is known about the laws underlying large language models (LLMs). We introduce neural thermodynamic laws (NTL) -a new framework that offers fresh insights into LLM training dynamics. On the theoretical side, we demonstrate that key thermodynamic quantities (e.g., temperature, entropy, heat capacity, thermal conduction) and classical thermodynamic principles (e.g., the three laws of thermodynamics and the equipartition theorem) naturally emerge under river-valley loss landscape assumptions. On the practical side, this scientific perspective yields intuitive guidelines for designing learning rate schedules. (valley, fast) y x (river, slow)</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><formula xml:id="formula_0">ℓ = ℓ s + ℓ f ΔU = W + Q ℓ s W ℓ f Q ℓ x</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Large neural networks bear striking similarities to thermodynamic systems -both involve a vast number of degrees of freedom and exhibit stochastic dynamics. It is therefore not surprising that connections between neural networks and thermodynamics have been explored in prior work <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b3">4]</ref>. However, these studies primarily focus on classical machine learning models with relatively well-understood loss landscapes. In contrast, recent research has only begun to shed light on the complex loss landscapes of large language models (LLMs), characterized by the so-called "rivervalley" structure -comprising sharp, fast directions (valley) and flat, slow directions (rivers) <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b6">7]</ref>.</p><p>Intuitively, the fast dynamics rapidly "equilibrate" within valleys, while the slow dynamics evolve gradually along rivers, subtly modulated by the fast components. The goal of this paper is to formalize this intuition through the lens of Neural Thermodynamic Laws (NTL). We show that key thermodynamic quantities and principles -including temperature, entropy, heat capacity, thermal conduction, the three laws of thermodynamics, and the equipartition theorem -emerge naturally from the training dynamics of LLM (see the connections between training dynamics and thermodynamics in Figure <ref type="figure" target="#fig_1">1</ref>).</p><p>The duality between LLM training dynamics and thermodynamics is not only conceptually and theoretically compelling, but also provides practical insights -for example, into the design of learning rate schedules. A common learning rate schedule used in LLM pretraining is the warmup-stable-decay (WSD). According to <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b7">8]</ref>, the stable phase corresponds to motion along the river, with fluctuations in the valley directions, while the decay phase suppresses these valley variations. Motivated by this, we introduce a toy model of the river-valley landscape. This model is analytically solvable, admits a natural thermodynamic interpretation, and shows strong empirical agreement with actual LLM training dynamics.</p><p>The paper is organized as follows. The timescale separation between fast and slow dynamics allows us to decompose the total loss function ℓ into two components -the fast part ℓ f and the slow part ℓ s , which motivates our toy model of the river-valley landscape (Section 2). With a fixed learning rate, the fast dynamics converge to a steady-state distribution, analogous to thermal equilibrium (Section 3). When the learning rate decays, the distribution evolves accordingly -resembling annealing (Section 4). Moreover, the fast dynamics exert an effective entropic force on the slow dynamics, similar to entropic forces in physics (Section 5). Notably, the learning rate η plays a central role in all of these phenomena. By clarifying its complex and sometimes contradictory effects, we derive an intuitive guideline for designing efficient learning rate schedules (Section 6), followed by related works (Section 7) and conclusions (Section 8).</p><p>Unlike prior work that approaches LLM optimization, especially the design of learning rate schedules, from largely empirical or phenomenological perspectives, our characterizations are more mechanistic. Our technical contributions are as follows:</p><p>• Formulation of Fast-slow decomposition. In river-valley landscapes, we decompose training into two processes: (1) fast dynamics: either equilibrium (under fixed η) or annealing (under decaying η) along the valley and (2) slow dynamics: drift along the river.</p><p>• An exactly solvable toy model. We introduce a tractable toy model of the river-valley landscape that captures both fast and flow dynamics. This model admits analytical solutions for training behavior and optimal learning rate schedules.</p><p>• Empirical relevance to LLMs. We demonstrate that insights from the toy model generalize well to real LLM training, providing intuitive and effective heuristics for the learning rate schedule.</p><p>• A bridge to physics The duality between neural network training and thermodynamics provides a foundation for developing a deeper scientific understanding of deep learning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">River Valley Loss Landscape</head><p>Recent work <ref type="bibr" target="#b4">[5]</ref> showed that LLM loss landscape resembles a river-valley landscape: a flat river lies at the bottom of sharp valleys. Training slowly progresses along the river while bouncing quickly between the sharp hillsides. Throughout the paper, we interchangeably use valley dynamics = fast dynamics, river dynamics = slow dynamics.</p><p>A dilemma for learning rate η A good learning rate should strike a good balance between the two objectives: (A) enabling progress along the river directions -where the loss typically decreases monotonically -which favors a large η; and (B) minimizing variance along the valley directionswhich favors small η. In WSD schedules, the stable phase takes care of (A), while the decay phase takes care of (B) <ref type="bibr" target="#b4">[5]</ref>. To better understand this trade-off, we introduce a toy model that admits analytical characterization of the training dynamics along both river and valley directions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Toy model</head><p>The toy model ℓ(x, y) = c(y) + 1 2 a(y)x<ref type="foot" target="#foot_0">2</ref> is a loss function in 2D, resembling the river-valley landscape in the top left of Figure <ref type="figure" target="#fig_1">1</ref>. It consists of a fast variable x and a slow variable y. For any fixed y, the loss is minimized at x = 0, which traces out the riverbed at the bottom of the valley, with corresponding loss c(y). The loss function decomposes additively into two components: the valley component ℓ f (x, y) ≡ 1  2 a(y)x 2 (called fast loss or thermal loss) and the river component ℓ s (x, y) ≡ c(y) (called slow loss). In the remainder of the paper, we analyze the training dynamics of SGD and SignGD on this landscape -under learning rate η and gradient noise σ g -and demonstrate its relevance to the training behavior of large language models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Thermodynamics: First law of thermodynamics</head><p>The decomposition of fast and slow dynamics is reminiscent of quasi-static equilibrium in thermodynamics. Consider a piston slowly changing the volume of a gas-filled chamber: while the piston (a slow variable) moves slowly, the gas molecules (fast variables) undergo rapid thermal motion and quickly reach a new thermal equilibrium. According to the first law of thermodynamics ∆U = W + Q, the change in internal energy ∆U is composed of work W (associated with slow dynamics) and heat Q (associated with fast dynamics). This mirrors the decomposition of the loss function in the river-valley landscape ℓ = ℓ s + ℓ f , where ℓ s captures slow dynamics and ℓ f captures fast dynamics. In this analogy, the slow variable y corresponds to macroscopic quantities such as volume, while the fast variable x corresponds to microscopic degrees of freedom, such as atomic vibrations. In the next section, we examine how the fast fluctuations in x contribute to the fast loss component ℓ f . Although this decomposition is conceptually interesting, it does not yet provide a quantitative characterization of ℓ f and ℓ s , which we aim to address in the remainder of the paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Valley Dynamics in Equilibrium (Stable phase)</head><p>The fast-slow separation allows us to treat the slow variable y as fixed while analyzing the fast dynamics. Relevant to the fast dynamics is the fast loss ℓ f (x, y) ≡ 1 2 a(y)x 2 . For simplicity, we drop the dependence on y and write ℓ f (x) = 1 2 ax 2 . We consider stochastic gradient descent (SGD) or signed gradient descent (SignGD) 2 on this quadratic function, with learning rate η and gradient noise σ g . Under this quadratic approximation, the training dynamics converge to a Gaussian steady-state distribution, p(x) = 1 √ 2πσ exp(-x 2 2σ 2 ), characterized by width σ. Our goal is to understand how σ depends on sharpness a, learning rate η, and gradient noise σ g . In Section 3.1, we derive the functional form σ = σ(η, a, σ g ) for SGD and SignSGD. Section 3.2 provides a thermodynamic interpretation of the results, followed by empirical validation on LLM training in Section 3.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Toy model: steady distribution</head><p>SGD An SGD optimizer with learning rate η and gradient noise σ g obeys the following dynamics:</p><formula xml:id="formula_1">x t+1 = x t -η(ax t + σ g Ẇ ),<label>(1)</label></formula><p>where Ẇ ∼ N (0, 1) is the standard Brownian motion. The equilibrium distribution is the Gaussian</p><formula xml:id="formula_2">distribution p σ (x) = 1 √ 2πσ e -x 2</formula><p>2σ 2 (see derivtions in Appendix A). In equilibrium, the variance is preserved, i.e., Var(x t+1 ) = Var(x t ), giving rise to the equation </p><formula xml:id="formula_3">σ 2 = (1 -ηa) 2 σ 2 + σ 2 g , resulting</formula><formula xml:id="formula_4">η 2a σ g ∝ η 1/2 a -1/2 σ g ( π 8 ) 1/4 σgη a ∝ η 1/2 a -1/2 σ 1/2 g Thermal loss ℓ f σ 2 g 4 η π 32 σ g η Optimal decay schedule η t = η 2 1+ t t h (t h = 2 aη ) η t = η 2 1+ t t h (t h = √ 2π σg aη ) in σ = σ g / a(2/η -a)</formula><p>. This formula is only well-defined when 0 &lt; a &lt; 2 η . When a → 2/η, the learning rate reaches the so-called "edge of stability" <ref type="bibr" target="#b8">[9]</ref>. Since most directions in an overparametrized model are relatively flat, we are interested in the flat limit when a ≪ 2/η, which simplifies σ to σ ≈ η/(2a)σ g ∝ η 1/2 a -1/2 σ 1 g . SignGD An SignGD optimizer with learning rate η and gradient noise σ g obeys the dynamics:</p><formula xml:id="formula_5">x t+1 = x t -η sign(ax t + σ g Ẇ ).</formula><p>(</p><formula xml:id="formula_6">)<label>2</label></formula><p>Using the variance preservation condition as in SGD, we derive the steady-state Gaussian width</p><formula xml:id="formula_7">σ = √ π 4 η 1 + 1 + 32 π ( σg aη ) 2 . The flat limit a ≪ σ g /η gives σ ≈ ( π 8 ) 1/4 σgη a ∝ η 1/2 a -1/2 σ 1/2</formula><p>g . Detailed derivations are postponed to Appendix C. Results are summarized in Table <ref type="table" target="#tab_0">1</ref> for reference.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Thermal loss</head><p>The averaged thermal loss is</p><formula xml:id="formula_8">ℓ f = E x∼pσ(x) ( 1 2 ax 2 ) = 1 2 aσ 2 .</formula><p>Notice that for both SGD and SignGD, σ ∝ a -1/2 , it follows that a is cancelled out in ℓ f , i.e., ℓ f ∝ ησ 2 g for SGD and ℓ f ∝ ησ g for SignGD. The independence of a leads to an interesting fact: given two directions with different sharpness a 1 ̸ = a 2 , they induce the same ℓ f (as long as η and σ g are the same). This also means: no matter how long the stable phase goes on (resulting in different points along the river with different sharpnesses), the reducible thermal loss is roughly the same in the decay phase, which explains the observations in <ref type="bibr" target="#b9">[10]</ref>. The averaged thermal loss ℓ f can also be interpreted as being averaged over many valley directions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Thermodynamics: Equi-partition theorem, Temperature, Heat capacity</head><p>The independence of sharpness corresponds to the equipartition theorem in thermodynamics, which states that: in a system in thermal equilibrium, energy is distributed equally among all degrees of freedom that appear quadratically in the system's energy. Quantititavely, E = 1 2 k b T , Where k b is the Boltzmann constant and T is the temperature. In particular, the energy of a vibrational degree of freedom is independent of the spring constant, which corresponds to sharpness a in our case. Now we can make a mapping between optimization ℓ f ∝ σ n g η (n = 1 for SignGD, n = 2 for SGD) and thermodynamics E = 1 2 k b T . Ignoring constants, we have effective temperature T ∼ η, i.e., the learning rate η can be interpreted as temperature. Given this, the slope C ≡ ∂ℓ f ∂η can be interpreted as heat capacity. Now we can simply relate ℓ f and η by ℓ f = Cη. When there are N valley directions, the total thermal loss is summed over all valley directions L f = N ℓ f = N Cη.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Experiments</head><p>GPT-2 Experiment setup: We pre-train a GPT-2-small model (based on NanoGPT <ref type="bibr" target="#b10">[11]</ref>) on Open-WebText. We use 8 V100 GPUs, choose block size 1024, batch size 480 blocks. We use the Adam Optimizer, with warmup-stable-decay learning rate schedules as shown in Figure <ref type="figure" target="#fig_3">2 (a)</ref>. We always use 2000-step linear warmup from 0 to 6 × 10 -4 . The stable phase has a learning rate η. The decay phase starts from η and cosine decays to η min . The total number of training steps is 10k.</p><p>We have shown in the toy model that the averaged thermal loss ℓ f is linear to the learning rate η (assuming thermal equilibrium). We now show that this relation holds for large language models.  We have 2k-step warmup, 7k-step stable (η = 6 × 10 -4 ) and 1k-step cosine decay to η min , which is swept. In Figure <ref type="figure" target="#fig_3">2</ref> (b), we show that the final validation loss is linear to η min for large η min . Since the decay phase is short, we can assume that ℓ s does not vary much across decay schedules. As a result, ℓ is representative of ℓ f , and we measure that ℓ = 3.145 + 110η min . Comparing to the theoretical thermal loss L f = ( π 32 N σ g )η (for SignGD<ref type="foot" target="#foot_1">3</ref> ), we have N = 110 σg 32 π ≈ 5×10 6 = 5M where σ g ≈ 7 × 10 -5 is estimated using batches. Note that GPT-2 small has 124M parameters, and 5M valley directions are only 4% of its total parameters. This is expected: most directions of an over-parameterized model are flat ("river"), and only a small portion of directions are sharp ("valley"). However, too small η min leads to higher loss, and the lowest loss occurs around η min ≈ 5 × 10 -5 &gt; 0. The non-monotonic behavior at small η min is due to the breakdown of thermal equilibrium when η decays too fast, as we will elaborate on in the next section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Valley Dynamics in Annealing (Decay phase)</head><p>In the last section, we have shown that the width of the steady distribution σ depends on the learning rate η as σ ∝ √ η. In the decay phase when η decays, σ will decay as a result. If η decays slowly enough, we could expect that σ ∝ √ η always holds because of quasi-static thermal equilibrium. But is this optimal? Probably no. But the other extreme -too fast η decay -is also not optimal. This dilemma is because η plays two roles: (1) η is temperature that controls the Gaussian noise (we want η to be small); (2) η is step size that controls the time scale (we want η to be large). There exists an "optimal" η decay schedule in the sense that ℓ f is reduced as quickly as possible.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Toy model: optimal learning rate decay</head><p>Now we consider a learning rate decay schedule, i.e., a sequence</p><formula xml:id="formula_9">η 0 ≥ η 1 ≥ η 2 ≥ • • • ≥ η T .</formula><p>the dynamics of SGD (Eq. ( <ref type="formula" target="#formula_1">1</ref>)) now becomes</p><formula xml:id="formula_10">x t+1 = x t -η t (ax t + σ g Ẇ ).</formula><p>Since the equation is linear, if p(x 0 ) starts off as a Gaussian distribution, p(x t ) remains a Gaussian distribution (with time-varying Gaussian width, denoted as σ t ) for all t ≥ 0. Assuming that at t = 0, p(x 0 ) is in thermal equilibrium with learning rate η whose Gaussian width is σ 0 . Gaussian widths σ t obeys the following recursive relation</p><formula xml:id="formula_11">σ 2 t+1 = (1 -η t a) 2 σ 2 t + (η t σ g ) 2 = (a 2 σ 2 t + σ 2 g )η 2 t -2aσ 2 t η t + σ 2 t , which is a quadratic function of η t . We want to choose η t such that σ t+1 is minimized η t = aσ 2 t a 2 σ 2 t +σ 2 g , σ 2 t+1 = σ 2 g σ 2 t σ 2 g +a 2 σ 2 t .</formula><p>By inverting the second equation, we get 1</p><formula xml:id="formula_12">σ 2 t+1 = 1 σ 2 t + a 2 σ 2 g , which means that { 1 σ 2 t } forms an arithmetic sequence. It is clear that 1 σ 2 t = 1 σ 2 0 + a 2 t σ 2 g</formula><p>. Correspondingly,</p><formula xml:id="formula_13">η t = 1 a 1 + σ 2 g a 2 ( 1 σ 2 0 + a 2 t σ 2 g ) ≈ η 2 1 + t t h (t h ≡ 2 aη ),<label>(3)</label></formula><p>where t h is the time needed to decrease η t by half, hence representing the characteristic time scale of learning rate decay. Recall that ℓ f = Cη, so ℓ f,t = Cη t has the same decay form as η t . We make a few remarks about the optimal schedule.</p><p>Remark 1: Asymptotic behavior As t → ∞, learning rate η t ∝ t -1 , standard deviation σ t ∝ t -1/2 , loss ℓ f,t ∝ t -1 , I t = 1/σ 2 t ∝ t (I t is the fisher-information of the Gaussian mean). Remark 2: non-continuity at t = 0. An interesting observation is that η 0 ̸ = η but rather η 0 ≈ η 2 . This makes sense because neither η 0 = η nor η 0 = 0 leads to a loss decrease. The non-continuity goes against the common wisdom of continuous learning rate schedules.</p><p>Remark 3: decay time is bounded when η → ∞. Suppose we want to decrease the learning rate from the stable value η to the final value η min . The optimal decay takes time</p><formula xml:id="formula_14">T d = 2 aηmin (1 -ηmin η ) &lt; 2 aηmin .</formula><p>Notice that the decay time T d has an upper bound T * ≡ 2 aηmin independent of η, meaning that as long as one uses enough time (more than T * ) for decay, one can in principle arbitrarily increase the stable learning rate η without worrying about extra losses induced by insufficient decay.</p><p>Remark 4: The optimal schedule for SignGD is the same except for t h . The optimal η decay schedule for SignGD has the same functional form</p><formula xml:id="formula_15">η t = η 2 1+ t t h</formula><p>although with a slightly different</p><formula xml:id="formula_16">t h ≡ √ 2π σg aη .</formula><p>Detailed derivations are deferred to Appendix C.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Thermodynamics: Fourier's conduction law, Second law of thermodynamics</head><p>In the analysis above, the learning rate η has two roles: temperature and time scale, making it complicated to make a correspondence with thermodynamics. We now study a simplified twotemperature setting where the analogy becomes clearer. Suppose the fast parameter x reaches its thermal equilibrium with learning rate η A . At t = 0, we suddenly switch the learning rate to η B &lt; η A . How does thermal width σ t and thermal loss ℓ f,t ≡ 1 2 aσ 2 t evolve in time? Recalling basic facts for SGD at steady distribution: in the flat limit a ≪ 2 η , we have σ ≈ η 2a σ g , and</p><formula xml:id="formula_17">ℓ f = 1 2 aσ 2 = 1 4 ησ 2 g . At t = 0, we have σ 0 = η A 2a σ g . {σ t } evolves as follows σ 2 t+1 = ( ¨ä2 σ 2 t + σ 2 g )η 2 B -2aσ 2 t η B + σ 2 t</formula><p>, where the crossed-out term can be ignored due to the flat limit. We are interested in how ℓ f,t evolves:</p><formula xml:id="formula_18">ℓ f,t+1 -ℓ f,t = 1 2 a(σ 2 t+1 -σ 2 t ) = 1 2 aη B (σ 2 g η B -2aσ 2 t ) = -2aη B (ℓ f,t -ℓ eq (η B ))<label>(4)</label></formula><p>where ℓ eq (η B ) ≡</p><formula xml:id="formula_19">η B σ 2 g 4</formula><p>is the averaged thermal loss given η = η B in equilibrium. This equation is similar to Fourier's law in thermal conduction Q = k(T A -T B ): when a hot object (temperature T A ) touches a cooler surface (temperature T B ), the power of thermal conduction Q is proportional to their temperature difference, leading to an exponential convergence. Similarly, Eq. ( <ref type="formula" target="#formula_18">4</ref>) bears an exponential decay solution</p><formula xml:id="formula_20">ℓ f,t = ℓ f (η B ) + (ℓ f (η A ) -ℓ f (η B ))exp(-2aη B t) ≥ ℓ f (η B ). The inequality ℓ f,t ≥ ℓ f (η B</formula><p>) is related to the second law of thermodynamics. Simply put, when a hot object is in contact with a cool thermostat, the hot object cannot be cooled down to a temperature lower than the temperature of the cool thermostat (without extra work). As a sanity check, we show in Appendix D that: by making Eq. ( <ref type="formula" target="#formula_18">4</ref>) continuous, we can also obtain the 1/t schedule as in Eq. (3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Experiments</head><p>Toy experiments We test the optimality of the schedule we derived in Eq. (3). We choose the loss landscape ℓ = n i=1 1 2 aθ 2 i (a = 2, n = 10000) and initialize θ i ∼ N (0, 1). We run SGD with η = 0.1 (manually injecting Gaussian gradient noise σ g = 0.1) for 10000 steps to reach its steady distribution. We then perform a learning rate decay schedule η t = bη</p><formula xml:id="formula_21">1+ t t h</formula><p>with various combinations of (b, t h ). We plot the final losses in Figure <ref type="figure">3</ref> (a). Our theoretical result implies that b = 1/2 and t h = 2 aη = 10 give the best result (the lowest loss), which is verified by the phase diagram. We also plot the two slices along t h and b in (b) and (c), showing that the final loss is more sensitive to t h than b. To simulate anisotropy, we also experiment with an anisotropic loss ℓ = n i=1 1 2 a i θ 2 i (a i = 10 -2+4i/n , n = 10000), θ i ∼ N (0, 1). We apply the learning rate decay i (a i = 10 -2+4i/n , n = 10000). We set b = 0.5 and try t h = 10, 100, 1000. Small sharpness is slower to converge than large sharpness.</p><formula xml:id="formula_22">schedule η t = bη 1+ t t h</formula><p>with b = 0.5 and t h = 10, 100, 1000, as shown in Figure <ref type="figure">3 (d)</ref>. The loss is roughly constant for large a, because of the equipartition theorem in Section 3. However, small sharpness directions have higher losses because their optimal decay time t h ∝ 1/a is larger, hence requiring longer time to converge.</p><p>Implications for LLM The above results can provide insights on recent observations: (1) it is observed that the 1-sqrt decay <ref type="bibr" target="#b9">[10]</ref> or an optimized decay <ref type="bibr" target="#b11">[12]</ref> are better than the linear or cosine decay. These better decay schedules are aligned with our derived 1/t schedule. (2) Decaying to zero is sub-optimal, as observed in <ref type="bibr" target="#b12">[13]</ref>. In fact, the optimal schedule implies that it should take infinite time to reach η min = 0.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">River Dynamics</head><p>So far, we have been studying the fast dynamics of x, assuming the slow variable y is fixed. This section will study how the slow dynamics can be influenced by the fast dynamics via entropic forces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Toy model: entropic forces</head><p>Recall that our 2D toy river-valley landscape is l(x, y) = 1 2 a(y)x 2 + c(y) ≡ ℓ f + ℓ s where ℓ f and ℓ s are fast loss and slow loss, respectively. The sharpness of the valley is controlled by a(y), while c(y) controls the bottom of the valley. Optimizer dynamics can be viewed as fast dynamics along x and slow dynamics along y. Given a fixed y, the steady distribution for x is p y</p><formula xml:id="formula_23">(x) = 1 √ 2πσ(y) e -x 2 2σ(y) 2 .</formula><p>We have shown that σ(y) = d(η, σ g )/ a(y), where d = η/2σ g for SGD and c = (π/8) 1/4 √ σ g η for SignGD. The entropic force is defined as the average gradient of ℓ f along y:</p><formula xml:id="formula_24">F ent = -g y = - 1 2 a ′ (y)x 2 = - 1 2 a ′ (y)σ(y) 2 = - d 2 (η , σ g ) 2 a ′ (y) a(y)<label>(5)</label></formula><p>The minus sign means that the entropic force points towards the direction of decreasing sharpness. The negative gradient of the valley bottom ℓ s is F btm = -c ′ (y). The total "force" is F = F ent +F btm .</p><p>Defining entropy Notice that a ′ (y)/a(y) in F ent can be written into a more compact form (log a(y)) ′ .</p><p>We can define S ≡ -</p><formula xml:id="formula_25">d 2 (η,σg) 2</formula><p>log a(x), and then F ent = ∇S.</p><p>Entropic trapping is defined as F btm • F ≤ 0. Entropic trapping happens when the entropic forces prevent the optimizer from descending the river despite the fact that the optimizer is able to "see" the correct direction. Concrete examples are discussed in Appendix E.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Thermodynamics: entropy, the third law of thermodynamics</head><p>We want to justify a bit more from the thermodynamics perspective why S(x) ∝ -1 2 log a(x) can be interpreted as entropy. In physics, entropy is defined as S phy =i p i log p i for discrete systems or hence has entropy</p><formula xml:id="formula_26">S phy = 1 2 log(2πσ 2 ) + 1 2 . Inserting σ = d/ √ a gives S phy = -1 2 log a + 1 2 log(2πd) + 1 2</formula><p>, which scales with a as S ∝ -1 2 log a. This is also analogous to the Boltzmann entropy equation S = k b logW , where k b is the Boltzmann constant, and W is the number of microstates (analogous to σ). The Boltzmann entropy equation is a foundation to the third law of thermodynamics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Experiments</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LLM experiments</head><p>We want to determine to what extent the concerning entropic trapping phenomenon occurs in LLM training. Technically, the entropic force is hard to compute for large models: by definition, entropic forces are third-order derivatives, since they are gradients of sharpness (second-order derivatives). However, we may probe the existence of entropic forces via loss curves alignment against learning rate sums. In the gradient flow limit (η → 0), the slow dynamics is only governed by the learning rate sum <ref type="bibr" target="#b11">[12]</ref>, i.e., we should expect the following two schedules to give the same final state and loss: (i) learning rate η with A steps and (ii) learning rate 2η with A/2 steps. However, for a finite η, the two schedules may not align due to the existence of entropic forces, so their misalignment is an indicator of the magnitude and direction of entropic forces. Since ℓ s is not directly measurable, we can try to control ℓ f the same (requiring η min to be the same, according to Section 4) and measure ℓ as a surrogate of ℓ s .</p><p>We test a bunch of schedules with different stable learning rates η = 0.0003, 0.0006, 0.0012 (Figure <ref type="figure">4</ref> left). The stable phase may last for 1000i steps (i = 0, 1, 2, 3, 4, 5), and the decay phase lasts for 3k steps with cosine transition to the final learning rate η min = 0.0006<ref type="foot" target="#foot_2">4</ref> . For each η, we plot its validation loss against the η sum, swept by varying the duration of the stable phase. Figure <ref type="figure">4 (b)</ref> shows that curves of different η align reasonably well with each other, although smaller η seem to produce slightly lower losses given the same η sum, similar to the observations in <ref type="bibr" target="#b11">[12]</ref>. This result implies that LLM has a slightly narrowing valley structure on average (correspondingly, the entropic force is slightly negative). However, our training is in the early stage due to computational constraints. It would be interesting to study whether entropic forces represent a more significant limit to the training of LLMs when more training steps are taken (where valleys may become sharper and entropic forces are larger).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Summary of Findings</head><p>The role of learning rates We have learned that the learning rate η has three roles in controlling training dynamics. (1) Gaussian width: η acts as temperature, controlling the Gaussian width along the fast direction. (2) Entropic force magnitude: the Gaussian width, combined with valley sharpness, jointly controls the entropic force. (3) Time scale: controls the step size.</p><p>What determines the final loss? In summary, our results show that the final loss largely depends on learning rate sum D (controlling ℓ s , Section 5) and η min (controlling ℓ f , Section 3), but there are also small correction terms due to the entropic force ∆ entropic (Section 5) and due to insufficient annealing ∆ anneal (Section 4).</p><p>ℓ final = ℓ(D, η min ) + ∆ entropic + ∆ anneal . (6) Empirically, for the early training stages of GPT2, we found ∆ entropic ∼ 0 holds roughly true, and ∆ anneal ∼ 0 when the decay phase is no smaller than 3k steps. If we assume ∆ entropic and ∆ anneal can be ignored, the only way to reduce loss is by reducing ℓ(D, η min ), which involves reducing η min and/or increasing D. Increasing D can be achieved by using a larger step size in the stable phase, verified by experiments in Appendix G.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Related Works</head><p>Physics of optimization Stochastic gradient descent with finite step sizes has different dynamics from gradient flow. Finite learning rate η can induce implicit regularization η 4 ||∇ℓ|| 2 <ref type="bibr" target="#b13">[14]</ref>, and stochastic gradients also have various implicit biases <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b16">17]</ref>, guiding the optimization towards flatter minima <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b8">9]</ref>, large eigendirections <ref type="bibr" target="#b18">[19]</ref>, maximizes margin <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b20">21]</ref>, and redundant neurons/directions <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b21">22]</ref>. Besides these quite general phenomena, research has also been carried out to understand the loss landscapes of neural networks, especially in the over-parametrized regime. Large models are shown to have mode connectivity <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b23">24]</ref>, which is also related to the recently discovered river-valley landscape of LLMs <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b6">7]</ref>.</p><p>Learning rate schedules for LLMs are diverse: cosine decay <ref type="bibr" target="#b24">[25]</ref>, cyclic <ref type="bibr" target="#b25">[26]</ref>, Noam <ref type="bibr" target="#b26">[27]</ref> and weight-stable-decay (WSD) <ref type="bibr" target="#b7">[8]</ref>. Recent research has started to show the advantages of the WSD schedule <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b9">10]</ref> and concerns about designing better decay schedules, e.g., the 1-sqrt schedule proposed in <ref type="bibr" target="#b9">[10]</ref> and an optimized schedule in <ref type="bibr" target="#b11">[12]</ref>. Our analysis provides yet another theoretical evidence for the use of the WSD schedule and analytically derives an optimal decay schedule which decays as 1/t (under the isotropic assumption).</p><p>Thermodynamics and learning Although we are the first to establish a mapping between thermodynamics and LLM training dynamics, thermodynamics has long inspired and has connections to machine learning: optimization as a thermodynamic process <ref type="bibr" target="#b0">[1]</ref>, statistical mechanics of learning <ref type="bibr" target="#b3">[4]</ref>, information bottleneck <ref type="bibr" target="#b27">[28]</ref>, entropy gradient descent <ref type="bibr" target="#b28">[29]</ref>, Boltzman machine <ref type="bibr" target="#b29">[30]</ref>, Hopfield networks <ref type="bibr" target="#b30">[31]</ref>, diffusion models <ref type="bibr" target="#b31">[32,</ref><ref type="bibr" target="#b32">33,</ref><ref type="bibr" target="#b33">34]</ref>, thermodynamic interpretations of networks <ref type="bibr" target="#b1">[2]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Conclusions</head><p>We propose a toy model of a river-valley loss landscape and analyze the training dynamics under SGD and SignGD. The fast-slow separation enables us to treat valley and river directions independently, yielding analytically tractable results: thermal equilibrium and annealing for the fast dynamics, and drift for the slow dynamics. These analytical solutions bear qualitative-and in some cases quantitative-analogies to classical thermodynamic concepts and laws. Crucially, they are relevant to large language model (LLM) training, as recent work has shown that LLM loss landscapes exhibit river-valley structure. This duality between optimization and thermodynamics offers a novel perspective for understanding and evaluating modern optimizers. While we leave it for future work, we include a proof-of-concept analysis in Appendix F, where we analyze the recently proposed FOCUS optimizer-characterized by self-attracting forces <ref type="bibr" target="#b6">[7]</ref>-through the lens of our theory.</p><p>Limitations. Many of the derivations in this paper adopt the physicist's style of reasoning-emphasizing intuition, simplification, and tractable approximations-which may not satisfy the standards of mathematical rigor expected by theorists. For instance, the Gaussian approximation of steady states is not necessary for many results (only variances matter). In deriving the optimal learning rate decay schedule, we assume either uniform sharpness or a one-dimensional landscape; we treat the river as straight, though it is likely curved in practice; and we ignore momentum and weight decay for simplicity. Despite these simplifications, our analysis yields non-trivial, testable insights into LLM training dynamics. Natural extensions of this work include relaxing these assumptions, validating predictions at larger scales, and generalizing the framework. Although our focus is on transformer-based LLMs, the underlying physics-inspired principles may extend to other model architectures.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.2 Learning rate decay</head><p>Now we consider a learning rate schedule, i.e., a sequence of {η t } T t=0 . Eq. ( <ref type="formula" target="#formula_1">1</ref>) now becomes:</p><formula xml:id="formula_27">x t+1 = x t -η t (ax t + σ g Ẇt )<label>(12)</label></formula><p>Since the equation is linear, if p(x 0 ) starts off as a Gaussian distribution, p(x t ) remain a Gaussian distribution (with time-varying Gaussian width, denoted as σ t ) forever. Assuming that at t = 0, p(x 0 ) is already in thermal equilibrium whose Gaussian width is given by Eq. ( <ref type="formula">11</ref>), i.e., the initial condition is σ 0 = σ. Gaussian widths σ t obeys the following recursive relation:</p><formula xml:id="formula_28">σ 2 t+1 = (1 -η t a) 2 σ 2 t + (η t σ g ) 2 = (a 2 σ 2 t + σ 2 g )η 2 t -2aσ 2 t η t + σ 2 t ,<label>(13)</label></formula><p>which is a quadratic function of η t . We want to choose η t such that σ t+1 is minimized:</p><formula xml:id="formula_29">η t = aσ 2 t a 2 σ 2 t + σ 2 g , σ 2 t+1 = σ 2 g σ 2 t σ 2 g + a 2 σ 2 t .<label>(14)</label></formula><p>By inverting the second equation, we get</p><formula xml:id="formula_30">1 σ 2 t+1 = 1 σ 2 t + a 2 σ 2 g ,<label>(15)</label></formula><p>which means that { 1</p><formula xml:id="formula_31">σ 2 t</formula><p>} forms an arithmetic sequence. It is clear that 1</p><formula xml:id="formula_32">σ 2 t = 1 σ 2 0 + a 2 t σ 2 g</formula><p>. Correspondingly,</p><formula xml:id="formula_33">η t = 1 a 1 + σ 2 g a 2 σ 2 t = 1 a 1 + σ 2 g a 2 ( 1 σ 2 0 + a 2 t σ 2 g ) ≈ 1 a 2 aη + t ∝ 1 t + t h , (t h ≡ 2 aη )<label>(16)</label></formula><p>whose asymptotic behavior is η t ∝ 1 t . t h is the time needed to decrease η t by half, hence representing the characteristic time scale of learning rate decay. Another interesting observation is that η 0 ̸ = η. In fact, when we assume aη ≪ 2, η 0 ≈ η 2 . This makes sense: since σ 1 is an quadratic function of η 0 , and σ 1 = σ 0 for both η t = η (continue thermal equilibrium) and η 0 = 0 (freeze), the best η 1 must be at the middle point of η and 0, which is η 2 . This suggests that the standard learning rate decay schedule (which is continuous at t = 0) may be suboptimal.</p><formula xml:id="formula_34">η t = ηt h t+t h (t h = 2 aη</formula><p>), to take it from η to η m , it takes time T d = 2 aηm (1 -ηm η ) &lt; 2 aηm . So a larger η in the stable phase does not increase T d significantly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Derivations for SignGD C.1 Fixed learning rate</head><p>The optimization dynamics of SignGD is</p><formula xml:id="formula_35">x t+1 = x t -η sign(ax t + σ g Ẇ ). (<label>17</label></formula><formula xml:id="formula_36">) Define ζ(x) ≡ -ax/σg 1 √ 2π exp(-y<label>2</label></formula><p>2 )dy. Then given a fixed x, ax + σ g Ẇ is positive with probability ζ(x), or negative with probability 1 -ζ(x), i.e.,</p><formula xml:id="formula_37">x t+1 = x t -η probaility ζ(x) x t + η probaility 1 -ζ(x)<label>(18)</label></formula><p>We assume that x t has a Gaussian steady distribution x t ∼ 1 √ 2πσ exp(-x 2 2σ 2 )<ref type="foot" target="#foot_3">5</ref> . We can set up an equation by leveraging Var(x t+1 ) = Var(x t ), i.e.,</p><formula xml:id="formula_38">∞ -∞ dx p(x)x 2 = ∞ -∞ dx p(x)(ζ(x)(x -η) 2 + (1 -ζ(x))(x + η) 2 ),<label>(19)</label></formula><p>which can simplify to (with some derivations)</p><formula xml:id="formula_39">∞ -∞ dx p(x)ζ(x)x - η 4 = 0.<label>(20)</label></formula><p>The first integral</p><formula xml:id="formula_40">∞ -∞ dx p(x)ζ(x)x = ∞ -∞ dx ∞ -ax/σg dy x √ 2πσ exp(- x 2 2σ 2 ) 1 √ 2π exp(- y 2 2 ) = ∞ -∞ dy ∞ -σgy/a dx x √ 2πσ exp(- x 2 2σ 2 ) 1 √ 2π exp(- y 2 2 ) = ∞ -∞ dy exp(- y 2 2 ) ∞ -σgy/a dx x 2πσ exp(- x 2 2σ 2 ) = ∞ -∞ dy exp(- y 2 2 ) σ 2π exp(- 1 2 ( σ g y aσ ) 2 ) = σ √ 2π 1 1 + ( σg aσ ) 2<label>(21)</label></formula><p>Combining the previous two equations gives</p><formula xml:id="formula_41">σ 1 + ( σg aσ ) 2 = π 8 η,<label>(22)</label></formula><p>or</p><formula xml:id="formula_42">σ = √ π 4 η 1 + 1 + 32 π ( σ g aη ) 2 ,<label>(23)</label></formula><p>which is verified in Figure <ref type="figure" target="#fig_8">6</ref>. The deviation at large a or small σ g is due to discretization (x t distribution cannot be viewed as a Gaussian). Comparing to SGD (Figure <ref type="figure" target="#fig_7">5</ref>), the main difference is the σ(a) is non-monotonic for SGD but is monotonic for SignGD. Another observation is that σ is lower bounded by √ 2π 4 η (when σ g → 0 or a → ∞). In the limit of</p><formula xml:id="formula_43">σg aη ≫ 1, we have σ ∝ √ σg √ η √ a .</formula><p>Comparing this with SGD:</p><formula xml:id="formula_44">σ SGD ∝ σ g √ η √ a , σ SignGD ∝ √ σ g √ η √ a ,<label>(24)</label></formula><p>which suggests that SignGD is more robust to bigger noise since σ SGD ∝ σ g while σ SignGD ∝ √ σ g .</p><p>Also since σ SignGD ∝ 1 √ a just like σ SGD ∝ 1 √ a , the equipartition property applies to SignGD as well. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.2 Learning rate decay</head><p>Considering time-varying learning rate {η t } T t=0 , Eq. ( <ref type="formula" target="#formula_6">2</ref>) becomes:</p><formula xml:id="formula_45">x t+1 = x t -η t sign(ax t + σ g Ẇ ).<label>(25)</label></formula><p>Similarly, we obtain the recursive relation for σ t :</p><formula xml:id="formula_46">σ 2 t+1 = η 2 t -4η t ∞ -∞ dx p(x)ζ(x)x + σ 2 t = η 2 t - 4σ t √ 2π 1 + ( σg aσt ) 2 η t + σ 2 t ,<label>(26)</label></formula><p>which is a quadratic function against η t . The optimal choice of η t that minimizes σ t is:</p><formula xml:id="formula_47">η t = 2σ t √ 2π 1 + ( σg aσt ) 2 , σ 2 t+1 = σ 2 t - 2 π σ 2 t 1 + ( σg aσt ) 2 ≈ σ 2 t - 2 π ( aσ 2 t σ g ) 2 ,<label>(27)</label></formula><p>where the approximation holds when σ g ≫ aσ 0 ≥ aσ t which is equivalent to σ g ≫ aη. Inverting both sides of the second equation gives</p><formula xml:id="formula_48">1 σ 2 t+1 = 1 σ 2 t 1 1 -2 π ( aσt σg ) 2 ≈ 1 σ 2 t (1 + 2 π ( aσ t σ g ) 2 ) = 1 σ 2 t + 2 π ( a σ g ) 2 ,<label>(28)</label></formula><p>which is an arithmetic sequence. Hence 1</p><formula xml:id="formula_49">σ 2 t = 1 σ 2 0 + 2 π ( a σg ) 2 t. Correspondingly η t ≈ 2 π aσ 2 t σ g = π 2 σg a t + √ 2π σg aη ∝ 1 t + t h , (t h ≡ √ 2π σ g aη )<label>(29)</label></formula><p>whose asymptotic behavior is η t ∼ 1 t , just like SGD. We again observe that η 0 ≈ η/2, which suggests that a continuous learning rate schedule might be suboptimal. Comparing the half time of SGD and SignGD:</p><formula xml:id="formula_50">t SGD h = 2 aη , t SignGD h = √ 2π σ g aη .<label>(30)</label></formula><p>For a large model, the gradient (and gradient noise) of each individual parameter is usually small, i.e., σ g &lt; 1, suggesting the benefit of SignGD over SGD.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D Generalizing the two-temperature setup</head><p>In Section 4.2, we have shown that in the two-learning rate (temperature) setup η A &gt; η B , the convergence from one equilibrium (η A ) to the other equilibrium (η B ) is exponential, similar to the situation when a hot object is in contact with a cooling thermostat, the temperature of the hot object converges exponentially to the temperature of the thermostat. However, this does not mean we can have ℓ f decay exponentially in time. What explains the difference? Note that the convergence rate 2aη B is also proportional to η B , meaning that η B play both roles: temperature and time scale. This is different from the situation in thermodynamics when temperature and time are independent (not controlled by a single parameter).</p><p>Making Eq. ( <ref type="formula" target="#formula_18">4</ref>) continuous, we have dℓ dt = -2aη(ℓ -ℓ eq (η)), ℓ eq (η) ≡ Cη.</p><p>Our goal is to design η(t) such that ℓ(t) is minimized. Given ℓ, the RHS is an inverted quadratic function of η, so the optimal η is η * (ℓ) ≡ ℓ/(2C). Inserting the relation to the RHS, we have</p><formula xml:id="formula_52">dℓ dt = - a 2C ℓ 2 ,<label>(32)</label></formula><p>which solves to be ℓ(t) = (ℓ(0) -1 + at 2C ) -1 , and correspondingly η(t) = ( 2C ℓ0 + at) -1 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E Entropic Trapping E.1 Example 1: Go down and stop</head><p>We set c(x) = -cx (c = 0.1), a(x) = a 0 + b|x| (a 0 = b = 1). Solving F = 0 gives</p><formula xml:id="formula_53">x -,+ = 1 η ± ( 1 η ) 2 - bσ 2 g 2c .<label>(33)</label></formula><p>When x &gt; x + or x &lt; x -, F (x) &lt; 0, i.e., x moves to the left. When x -&lt; x &lt; x + , F (x) &gt; 0, x moves to the right. As a result, when the initial point</p><formula xml:id="formula_54">x 0 &lt; x -or ( 1 η ) 2 &lt; bσ 2 g 2c ,</formula><p>x would decrease and end at 0. When x -&lt; x &lt; x + , x would decrease and end at x + . This is verified in Figure <ref type="figure">7</ref>.   </p><p>We verify that when γ → 0, σ goes back to σ = σ g , which means that the role of γ is to shift sharpness from a to a + γ. So in the flat limit a ≪ 1/η, a reasonable γ &lt; 1/η -a can make σ smaller, i.e., reducing valley variations.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>G Designing learning rate schedules</head><p>What insights can we gain to make training more effective? If we assume ∆ entropic and ∆ anneal can be ignored, the only way to reduce loss is by reducing ℓ(D, η min ), which involves reducing η min and/or increasing D.</p><p>However, reducing η min may have a non-trivial effect on ∆ anneal , because in Section 4 we have shown that the decay time T d ∼ 1/η min , meaning that if one wants to reduce η min by a factor of 2, the duration of the decay phase should be 2 times longer, which is not very efficient.</p><p>We now consider fixing η min but increasing D by choosing a larger η in the stable phase. There are two potential concerns with this strategy: (1) Perhaps a longer decay schedule is needed to decay a larger η to η min . Luckily, this is not a problem because Section 4 showed that T d has an upper bound O(1/η min ) which is independent of η. (2) Perhaps a larger η includes larger entropic forces. Our η sum alignment experiments in Section 5 show that the effect of entropic forces is negligible. With both concerns cleared, our experiments in Figure <ref type="figure" target="#fig_14">9</ref> indeed show the efficiency of choosing a larger stable learning rate. However, the learning rate cannot be too large to cause numerical problems. Note that our experiments are done on two V-100s with float16 precision. More advanced machines are supposed to allow even higher learning rates without a blowup. We also note that our strategy is not just running the stable phase longer, which inevitably faces a trade-off: longer stable phase reduces ℓ(D, η min ) by increasing D, but potentially increases ∆ anneal since the decay phase is eaten by the stable phase. The trade-off is shown in Figure <ref type="figure" target="#fig_15">10</ref>.  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>Anneal learning rate too fast can lead to non-equilibriumη ℓ f ≥ C(σ g )η T obj ≥ T coola hot object cannot have lower temperature than its cooling thermostat ideal annealing (equilibrium) suboptimal annealing (out-of-equilibrium)η ↓ f dirft = -ℓ′ s (y) f entropy ∝ -∇ y (log a(y)) f ent = η ∇S f ent = T ∇S S = k b logΩ S ∝ logσ ∝ Nℓ f = NC(σ g )η Q = C v THeat capacity Total fast loss aggregating directions N Cv : heat capacity John James Waterson James Clerk Maxwell Sec 2: River-valley loss landscape Sec 3: Fast dynamics (stable) Sec 4: Fast dynamics (decay)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Connections between LLM training dynamics and thermodynamics.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: (a) LLM pretraining usually uses the WSD (warmup-stable-decay) learning rate schedule. η min is the final learning rate. (b) validation loss is a linear function of η min for large η min . (c) ∆ℓ is a linear function of ∆η for small ∆η.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 3 : 1 2 1 2 a i θ 2</head><label>3112</label><figDesc>Figure 3: Annealing toy examples. (a)(b)(c) Isotropic loss ℓ = n i=1 1 2 aθ 2 i (a = 2, n = 10000). The final loss obtained by applying the decay schedule η t = bη 0 /(1 + t/t h ). The theoretical minimum (b, t h ) = (0.5, 10) (marked as a star) agrees with numerical results. (d) Anisotropic loss ℓ = n i=1 1 2 a i θ 2i (a i = 10 -2+4i/n , n = 10000). We set b = 0.5 and try t h = 10, 100, 1000. Small sharpness is slower to converge than large sharpness.</figDesc><graphic coords="7,122.21,84.65,60.92,67.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 4 : 1 √ 2πσ e -x 2 2σ 2</head><label>412</label><figDesc>Figure 4: Test the existence of entropic forces in LLMs. Left: Various learning rate schedules with different stable η max = 0.0003, 0.0006, 0.0012 and the same η min = 0.0006. Right: Plot validation losses against learning rate sums. Curves for different η roughly align, suggesting slightly negative entropic forces, corresponding to a slightly narrowing valley along the river.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Dependence of σ on gradient noise σ g and sharpness a.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: SignGD: Dependence of σ on gradient noise σ g and sharpness a.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 7 : 2 g(</head><label>72</label><figDesc>Figure 7: Increasing gradient noise σ g makes the stop point shift to left (flatter region).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>F</head><label></label><figDesc>Attraction forcesSGD with linear attraction force:xt = β xt-1 + (1 -β)x t , x t = x t-1 -η(ax t + γ(x t-1 -xt ) + σ g Ẇt-1 ),(34)with the standard deviation of x beingσ = η(1 -β 2 + aβ(1 + β)η -2β 3 γη) (a + γ(1 -2β))(2(1 + β) -η((a + γ)(1 + β) -2β 2 γ))(1 + β(-1 + aη + 2(1 -β)γη)) σ g .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Gaussian width σ for different self-attracting force γ, η = 0.1, a = 1, σ g = 1.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Learning rate schedules with different stable learning rate η. A larger η leads to a lower validation loss, unless NaN issues occur (at η = 1.5 × 10 -3 ).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Figure 10 :</head><label>10</label><figDesc>Figure10: Learning rate schedules with different starting points of the decay phase. A longer stable phase does not necessarily lead to lower validation loss, since the decay phase cannot be too short due to annealing.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Optimization on the 1D quadratic function ℓ(x) = 1 2 ax 2 Optimizer SGD SignGD Equation x t+1 = x t -η(ax t + σ g Ẇ ) x t+1 = x t -η sign(ax t + σ g Ẇ )</figDesc><table><row><cell>Steady distribution width σ</cell><cell>σg a( 2 η -a)</cell><cell>√ 4 η 1 + 1 + 32 π π (</cell><cell>σg aη ) 2</cell></row><row><cell>σ (flat limit aη ≪ 1)</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_0"><p>For simplicity, we set momentums to zero. Note that SignGD is a special case of Adam when (β1, β2) = (0, 0).</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1"><p>SignGD is a special cases of Adam when (β1, β2) = (0, 0).</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>Although ηmin has the subscript "min", it does not necessarily mean it is the minimum learning rate in the last phase. The last phase can either be decay (η = 0.0012), stable (η = 0.0006) or growth (η = 0.0003). The point is that all the schedules have the same final learning rate, denoted as ηmin.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_3"><p>The Gaussian approximation becomes increasingly more accurate as η → 0.</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgment Z.L. and M.T. are supported by <rs type="funder">IAIFI</rs> through <rs type="funder">NSF</rs> grant <rs type="grantNumber">PHY-2019786</rs>. Z. L. is also supported by the <rs type="funder">Google PhD</rs> fellowship.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_EWHfNrC">
+					<idno type="grant-number">PHY-2019786</idno>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Appendix</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A SGD converges to Gaussian steady distribution</head><p>Suppose the initial point is x 0 at t = 0. The distribution is a delta function, effectively a Gaussian with mean µ 0 = x 0 and σ 0 = 0. Due to the linearity of Eq. ( <ref type="formula">1</ref>), a Gaussian distribution at step t evolved to become a Gaussian distribution at step t + 1, although with different means µ t and standard deviations σ t . Their recursive relations are (t = 1, 2, 3, • • • )</p><p>which have solutions</p><p>where σ is the steady-state standard deviation. Regardless of x 0 , µ t → 0 and σ t → σ as t → ∞. The time scale of convergence is t c = -1/log(1 -ηa). In the flat limit aη ≪ 1, t c ≈ 1/(aη).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Derivations for SGD B.1 Fixed learning rate</head><p>Suppose a 1D loss function l(x) = 1 2 ax 2 where a is the second order derivative of the quadratic function. An SGD optimizer with learning rate η and gradient noise σ g obeys the following dynamics:</p><p>The equilibrium distribution is the Gaussian distribution p(x) = 1 √ 2πσ e -x 2 2σ 2 . In equilibrium, we should have Var(x t+1 ) = Var(x t ), i.e.,</p><p>This formula is only valid when 0 &lt; a &lt; 2 η . When a → 0 (i.e., flat), finite σ g can induce infinite σ (i.e., steady distribution does not exist). When a → 2 η , learning rate reaches the so-called "edge of stability". In particular, when η &gt; 2 a , the {x t } sequence diverges when σ g → 0. Eq. 11 is tested empirically in Figure <ref type="figure">5</ref>. A somewhat unexpected feature of Eq. ( <ref type="formula">11</ref>) is that σ → ∞ when a → 0 although we were previously viewing flat directions as good and viewing sharp directions as evil. Eq. <ref type="bibr" target="#b10">(11)</ref> suggests that flat directions are as evil as sharp directions.</p><p>Equipartition theorem The original idea of equipartition (in classical statistical mechanics) is that, in thermal equilibrium, energy is shared equally among all of its degrees of freedom. Specifically, each degree of freedom would contribute to energy 1  2 k B T (k B : Boltzmann constant, T : temperature) regardless of underlying details. We show that the loss incurred due to gradient noise is also (approximately) independent of sharpness a: ⟨l⟩</p><p>Ignoring constants, the effective temperature is T eff ∝ σ 2 g η. The gradient noise scales with batch size B as σ g ∝ 1 √ B . To reduce temperature, we can increase the batch size or decrease the learning rate. This has an interesting implication: during the training of a neural network, there might exist many such equilibrium directions. No matter how sharpness these directions are, they contribute equally to the total loss. Suppose there are N such directions, the total loss incurred by gradient noise is l g = N ⟨l⟩ = 1 4 N σ 2 g η.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Bayesian learning via stochastic gradient langevin dynamics</title>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Welling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yee</forename><forename type="middle">W</forename><surname>Teh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 28th international conference on machine learning (ICML-11)</title>
+		<meeting>the 28th international conference on machine learning (ICML-11)</meeting>
+		<imprint>
+			<publisher>Citeseer</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="681" to="688" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Thermodynamics-inspired explanations of artificial intelligence</title>
+		<author>
+			<persName><forename type="first">Shams</forename><surname>Mehdi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pratyush</forename><surname>Tiwary</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">7859</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Statistical mechanics of learning</title>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Engel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+			<publisher>Cambridge University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Statistical mechanics of deep learning</title>
+		<author>
+			<persName><forename type="first">Yasaman</forename><surname>Bahri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Kadmon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Pennington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><forename type="middle">S</forename><surname>Schoenholz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jascha</forename><surname>Sohl-Dickstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Surya</forename><surname>Ganguli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annual review of condensed matter physics</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="501" to="528" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">Kaiyue</forename><surname>Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiyuan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Hall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Percy</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tengyu</forename><surname>Ma</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2410.05192</idno>
+		<title level="m">Understanding warmup-stable-decay learning rates: A river valley loss landscape perspective</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">How noise affects the hessian spectrum in overparameterized neural networks</title>
+		<author>
+			<persName><forename type="first">Mingwei</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">J</forename><surname>Schwab</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1910.00195</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Focus: First order concentrated updating scheme</title>
+		<author>
+			<persName><forename type="first">Yizhou</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ziming</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Gore</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.12243</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">Shengding</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuge</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xu</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chaoqun</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ganqu</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiang</forename><surname>Long</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhi</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yewei</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuxiang</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weilin</forename><surname>Zhao</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2404.06395</idno>
+		<title level="m">Unveiling the potential of small language models with scalable training strategies</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Gradient descent on neural networks typically occurs at the edge of stability</title>
+		<author>
+			<persName><forename type="first">Simran</forename><surname>Jeremy M Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanzhi</forename><surname>Kaur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ameet</forename><surname>Zico Kolter</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Talwalkar</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2103.00065</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Scaling laws and compute-optimal training beyond fixed training durations</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Hägele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elie</forename><surname>Bakouch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Atli</forename><surname>Kosson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leandro</forename><surname>Von Werra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Jaggi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="76232" to="76264" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Andrej</forename><surname>Karpathy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nanogpt</surname></persName>
+		</author>
+		<ptr target="https://github.com/karpathy/nanoGPT" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">A multi-power law for loss curve prediction across learning rate schedules</title>
+		<author>
+			<persName><forename type="first">Kairong</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haodong</forename><surname>Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shengding</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhenbo</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maosong</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiyuan</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaifeng</forename><surname>Lyu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenguang</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Thirteenth International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Jordan</forename><surname>Keller</surname></persName>
+		</author>
+		<ptr target="https://github.com/KellerJordan/modded-nanogpt" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note>modded-nanogpt. GitHub repository</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">T</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoit</forename><surname>Barrett</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dherin</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2009.11162</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Implicit gradient regularization. arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">The limiting dynamics of sgd: Modified loss, phase-space oscillations, and anomalous diffusion</title>
+		<author>
+			<persName><forename type="first">Javier</forename><surname>Daniel Kunin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><surname>Sagastuy-Brena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eshed</forename><surname>Gillespie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hidenori</forename><surname>Margalit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Surya</forename><surname>Tanaka</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ganguli</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Daniel</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Yamins</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neural Computation</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="151" to="174" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Stochastic collapse: How gradient noise attracts sgd dynamics towards simpler subnetworks</title>
+		<author>
+			<persName><forename type="first">Feng</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kunin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Atsushi</forename><surname>Yamamura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Surya</forename><surname>Ganguli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="35027" to="35063" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Stochastic gradient descent as approximate bayesian inference</title>
+		<author>
+			<persName><forename type="first">Mandt</forename><surname>Stephan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">M</forename><surname>Matthew D Hoffman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Blei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">134</biblScope>
+			<biblScope unit="page" from="1" to="35" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">A diffusion theory for deep learning dynamics: Stochastic gradient descent exponentially favors flat minima</title>
+		<author>
+			<persName><forename type="first">Zeke</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Issei</forename><surname>Sato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masashi</forename><surname>Sugiyama</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2002.03495</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Direction matters: On the implicit bias of stochastic gradient descent with moderate learning rate</title>
+		<author>
+			<persName><forename type="first">Jingfeng</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Difan</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vladimir</forename><surname>Braverman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quanquan</forename><surname>Gu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2011.02538</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Gradient descent maximizes the margin of homogeneous neural networks</title>
+		<author>
+			<persName><forename type="first">Kaifeng</forename><surname>Lyu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1906.05890</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">The implicit bias for adaptive optimization algorithms on homogeneous neural networks</title>
+		<author>
+			<persName><forename type="first">Bohan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qi</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tie-Yan</forename><surname>Liu</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="10849" to="10858" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">An overview of condensation phenomenon in deep learning</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zhi-Qin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yaoyu</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhangchen</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhou</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2504.09484</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Loss surfaces, mode connectivity, and fast ensembling of dnns</title>
+		<author>
+			<persName><forename type="first">Timur</forename><surname>Garipov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pavel</forename><surname>Izmailov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dmitrii</forename><surname>Podoprikhin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dmitry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">G</forename><surname>Vetrov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wilson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="page">31</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Linear mode connectivity and the lottery ticket hypothesis</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Frankle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karolina</forename><surname>Gintare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Dziugaite</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Carbin</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="3259" to="3269" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Loshchilov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Hutter</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sgdr</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1608.03983</idno>
+		<title level="m">Stochastic gradient descent with warm restarts</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Cyclical learning rates for training neural networks</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Leslie</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE winter conference on applications of computer vision (WACV)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="464" to="472" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Attention is all you need</title>
+		<author>
+			<persName><forename type="first">Ashish</forename><surname>Vaswani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niki</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jakob</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Llion</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aidan</forename><forename type="middle">N</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Łukasz</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Illia</forename><surname>Polosukhin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">Naftali</forename><surname>Tishby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fernando</forename><forename type="middle">C</forename><surname>Pereira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Bialek</surname></persName>
+		</author>
+		<idno>arXiv preprint physics/0004057</idno>
+		<title level="m">The information bottleneck method</title>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Entropy-sgd: Biasing gradient descent into wide valleys</title>
+		<author>
+			<persName><forename type="first">Pratik</forename><surname>Chaudhari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Choromanska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Soatto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yann</forename><surname>Lecun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlo</forename><surname>Baldassi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Borgs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Chayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Levent</forename><surname>Sagun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riccardo</forename><surname>Zecchina</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Statistical Mechanics: Theory and Experiment</title>
+		<imprint>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page">124018</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">A learning algorithm for boltzmann machines</title>
+		<author>
+			<persName><forename type="first">Geoffrey</forename><forename type="middle">E</forename><surname>David H Ackley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Terrence</forename><forename type="middle">J</forename><surname>Hinton</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sejnowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cognitive science</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="147" to="169" />
+			<date type="published" when="1985">1985</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">Hubert</forename><surname>Ramsauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bernhard</forename><surname>Schäfl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Lehner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Seidl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Widrich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Adler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukas</forename><surname>Gruber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Holzleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milena</forename><surname>Pavlović</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geir</forename><surname>Kjetil Sandve</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2008.02217</idno>
+		<title level="m">Hopfield networks is all you need</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Deep unsupervised learning using nonequilibrium thermodynamics</title>
+		<author>
+			<persName><forename type="first">Jascha</forename><surname>Sohl-Dickstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Weiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niru</forename><surname>Maheswaranathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Surya</forename><surname>Ganguli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International conference on machine learning</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2256" to="2265" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jascha</forename><surname>Sohl-Dickstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Diederik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Kingma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Ermon</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Poole</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2011.13456</idno>
+		<title level="m">Score-based generative modeling through stochastic differential equations</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Denoising diffusion probabilistic models</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pieter</forename><surname>Abbeel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in neural information processing systems</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="6840" to="6851" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Document Quality Scoring for Web Crawling</title>
+				<funder>
+					<orgName type="full">Spoke &quot;FutureHPC &amp; BigData</orgName>
+				</funder>
+				<funder ref="#_ZU7W6Pt">
+					<orgName type="full">Italian Ministry of Education and Research and European Union -Next Generation EU</orgName>
+				</funder>
+				<funder ref="#_AxE7rMF">
+					<orgName type="full">OpenWebSearch.eu project</orgName>
+				</funder>
+				<funder ref="#_DNEFmfh">
+					<orgName type="full">NEREO</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Italian Government</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">FoReLab and CrossLab projects (Departments of Excellence)</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Francesca</forename><surname>Pezzuti</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Pisa</orgName>
+								<address>
+									<settlement>Pisa</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ariane</forename><surname>Mueller</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Glasgow</orgName>
+								<address>
+									<settlement>Glasgow</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Sean</forename><surname>Macavaney</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Glasgow</orgName>
+								<address>
+									<settlement>Glasgow</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nicola</forename><surname>Tonellotto</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Pisa</orgName>
+								<address>
+									<settlement>Pisa</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Document Quality Scoring for Web Crawling</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">9B8003E36AEEAEFB5DB72DCC098C3B51</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:55+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Quality scoring</term>
+					<term>Web crawling</term>
+					<term>Information Retrieval</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The internet contains large amounts of low-quality content, yet users expect web search engines to deliver high-quality, relevant results. The abundant presence of low-quality pages can negatively impact retrieval and crawling processes by wasting resources on these documents. Therefore, search engines can greatly benefit from techniques that leverage efficient quality estimation methods to mitigate these negative impacts. Quality scoring methods for web pages are useful for many processes typical for web search systems, including static index pruning, index tiering, and crawling. Building on work by Chang et al. <ref type="bibr" target="#b0">[1]</ref>, who proposed using neural estimators of semantic quality for static index pruning, we extend their approach and apply their neural quality scorers to assess the semantic quality of web pages in crawling prioritisation tasks. In our experimental analysis, we found that prioritising semantically high-quality pages over low-quality ones can improve downstream search effectiveness. Our software contribution consists of a Docker container that computes an effective quality score for a given web page, allowing the quality scorer to be easily included and used in other components of web search systems.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>The Internet contains vast amounts of information, yet not all of it is of high quality. In fact, the web is filled with low-quality web pages, including meaningless pages, keyword-stuffed pages, and spam <ref type="bibr" target="#b1">[2]</ref>. If not properly managed, this abundance of low-quality pages, can pose significant challenges for web search engines, whose primary goal is to deliver high-quality, relevant results to users. Firstly, lowquality pages may introduce unnecessary overheads: they need to be crawled, indexed, and processed at query time, consuming resources that could be better spent on high-quality web pages and ultimately slowing down search systems. Secondly, despite being semantically poor, low-quality pages may still rank highly in search results (especially from systems that do not consider semantic quality, such as lexical retrievers), negatively affecting retrieval effectiveness. To improve efficiency and effectiveness of web search systems, a heuristic for estimating page quality is thus highly valuable. With such a heuristic, search engines can mitigate the negative impacts of low-quality pages. For instance, one technique that can be employed to speed up indexing and ranking times while decreasing memory requirements, is static index pruning. This approach discards low-quality pages from the search index. As an example of this, Chang et al. recently proposed a neural quality estimator that approximates semantic quality and has proven strongly effective for static indexing pruning <ref type="bibr" target="#b0">[1]</ref>. Meanwhile, to speed up the retrieval of high-quality results at query processing time, search engines can implement tiered indexing <ref type="bibr" target="#b2">[3]</ref>. This approach consists in organising the index in multiple tiers based on page quality: high-quality pages are placed in the top tier to be retrieved quickly, low quality-ones are placed in lower tiers and are processed only when necessary. Finally, quality estimation is crucial in the crawling stage of a web search engine, where the goal is to traverse the web link graph and download pages to build a corpus of documents. Specifically, the crawler component of a search systems often uses quality estimation heuristics to prioritise the download of high-quality web pages over low-quality ones, aiming to improve the early downstream ranking effectiveness of the retriever component. Common quality estimation methods for crawling prioritisation include those based on connectivity metrics like PageRank <ref type="bibr" target="#b3">[4]</ref> and indegree <ref type="bibr" target="#b4">[5]</ref>, or Click-Through-Rate <ref type="bibr" target="#b5">[6]</ref>. However, these quality estimation techniques often have high computational demands <ref type="bibr" target="#b6">[7]</ref>, require storing information about the web graph, or the previous popularity of web pages <ref type="bibr" target="#b5">[6]</ref>. More importantly, to the best of our knowledge, existing prioritisation techniques for crawlers do not account for the semantic quality of web pages.</p><p>Considering the semantic quality of pages during crawling has substantial potential. Chang et al. <ref type="bibr" target="#b0">[1]</ref> showed that these signals can be useful for static pruning, and Yu et al. <ref type="bibr" target="#b7">[8]</ref> showed that they can be useful for identifying language model pre-training data. Therefore, in this work, we test whether semantic quality signals are helpful for prioritising web pages to crawl for a search engine. The central hypothesis is that documents of similar semantic quality will likely link to one another: high-quality to high-quality and low-quality to low-quality. <ref type="foot" target="#foot_0">1</ref> By leveraging this signal, we anticipate that we can both identify high-quality pages faster during crawling and avoid wasting resources on low-quality pages. To assess this goal, we implement a dockerised quality scoring module. As this approach is containerised, it can be easily included and used in Open Web Search (OWS) components <ref type="bibr" target="#b8">[9]</ref> to compute document quality scores. Additionally, we integrate this quality scoring approach within the Resilipipe pre-processing pipeline <ref type="bibr" target="#b9">[10]</ref>. Using our implementation, we score subsets of the main and legal collections of OWS datasets <ref type="bibr" target="#b10">[11]</ref>. However, since these two collections are not associated with a web graph, we conduct a proof of concept on crawling prioritisation strategies based on neural quality estimators using the English subset of the ClueWeb22-B <ref type="bibr" target="#b11">[12]</ref> web corpus. Our analysis reveals that the distribution of quality scores of the two OWS datasets closely matches that of the English subset of ClueWeb22-B, suggesting that our findings for this dataset are likely to generalise to OWS.</p><p>Specifically, our preliminary findings on ClueWeb22-B <ref type="bibr" target="#b11">[12]</ref> show that by prioritising web pages with high semantic quality over those with lower quality, relevant content is implicitly prioritised over irrelevant content. Our experiments show that an oracle crawler leveraging a semantic quality scorer improves early downstream recall effectiveness compared to two well-known graph-traversal crawling strategies, namely Breadth-First-Search <ref type="bibr" target="#b12">[13]</ref> and Depth-First-Search crawlers <ref type="bibr" target="#b13">[14]</ref>. Furthermore, because the quality of a page is positively correlated with that of its (outlinking) neighbours, its quality score can serve as an estimate for the quality of pages it links to. Consequently, in real-world crawling scenarios where the text of a web page is unavailable before its download, these estimates can effectively be used to prioritise semantically valuable web pages, to skip pages mostly linked to by low-quality pages, or to avoid crawling domains that mostly host low-quality pages.</p><p>The remainder of this paper is organised as follows. First, in Section 2 we describe the quality scorer and web crawler used for the mentioned proof of concept experiments. In Section 3 we provide details on our implementation of quality scoring for OWS datasets. Then, in Section 4 we describe our experimental setup. In Section 5 we show and discuss results of our experiments. Lastly, in Section 6 we summarise our contribution and give an outlook on potential future work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Methodology</head><p>A quality scorer component for a web search system consists of a large language model (LLM) (denoted as 𝒬 𝜃 ), trained to distinguish pages of high semantic quality from low-quality ones <ref type="bibr" target="#b0">[1]</ref>. Formally, a quality scorer parametrised by 𝜃 is characterised by a quality scoring function 𝒬 𝜃 : 𝑡 ↦ → R that estimates the semantic quality of a text 𝑡 with a real valued score 𝑞 = 𝒬 𝜃 (𝑡). This value is referred to as a quality score. Because quality scorers are based on LLM models, they can efficiently generate quality scores in batches, making them suitable for simultaneously scoring multiple text documents.</p><p>These quality scorers can be applied in a variety of contexts, both to improve efficiency and effectiveness. For example, they have already proven effective for static pruning tasks <ref type="bibr" target="#b0">[1]</ref>. Another promising application is the prioritisation of web pages characterised by high semantic quality during the crawling process, to build semantically high-quality corpora and improving downstream effectiveness.</p><p>The crawler component of a web search system systematically traverses the web graph following hyperlinks and downloading web pages valuable for downstream tasks like retrieval. To achieve this, it maintains a priority queue of links yet to be crawled, ordered by quality. We propose using the quality scorer described in the previous section to assign a quality score to each page, which is then used to determine its crawling priority in the queue. However, in real-world crawling scenarios the text of a page is unavailable before its crawl. Therefore, such an approach is only applicable if it is combined with an oracle function 𝒪 : 𝑥 ↦ → 𝑡 that provides the text 𝑡 of a web page 𝑥 before the page is actually downloaded. We call this approach QOracle. Given a quality scorer 𝒬 𝜃 and an oracle function 𝒪(•), the QOracle crawler computes the crawling priority 𝑝 𝑥 of a web page 𝑥 as:</p><formula xml:id="formula_0">𝑝 𝑥 = 𝒬 𝜃 (𝒪(𝑥)) = 𝒬 𝜃 (𝑡) = 𝑞 𝑥 ,</formula><p>where the priority 𝑝 𝑥 is a real-valued score reflecting the level of semantic quality 𝑞 𝑥 of the textual content 𝑡 of page 𝑥 to be crawled.</p><p>However, in most real-world scenarios we do not have access to an oracle function. Consequently, crawlers need to rely on alternative methods based on quality approximations. Indeed, if the quality of a page reflects the quality of its neighbours in the web graph, one could approximate the quality of an un-crawled linked page using the quality of the in-linking page during crawling prioritisation. To test this hypothesis, we measure the linear correlation between the quality of a page 𝑥 and the mean quality of the pages it links to. Formally, we denote with 𝒩 : 𝑥 ↦ → {𝑙 1 , . . . , 𝑙 𝑁 } the function that given a page 𝑥, returns the set of pages 𝒩 (𝑥) = {𝑙 1 . . . , 𝑙 𝑁 } with an incoming link from 𝑥. We also denote with 𝑞 ^𝑥 ∈ R the mean quality of pages in 𝒩 (𝑥), and we compute it as:</p><formula xml:id="formula_1">𝑞 ^𝑥 = 1 |𝒩 (𝑥)| ∑︁ 𝑙∈𝒩 (𝑥) 𝑞 𝑙 ,</formula><p>where 𝑞 𝑙 is the quality score of a neighbour page of 𝑥, computed with 𝒬 𝜃 . To investigate how the quality of a page relates to the quality of the pages it links to, we propose to measure how strongly the quality of a page 𝑞 𝑥 correlates to the quality 𝑞 ^𝑥 of its out-linking pages on a collection of web pages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Software Implementation</head><p>In this section we provide details on the architecture and implementation of our containerised quality scoring module as well as the integration of quality scoring within the Resilipipe preprocessing pipeline.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Quality Scoring Module</head><p>In order to make our approach easily deployable in a crawling or pre-processing scenario, we sandbox our application within a custom Docker container as shown in Figure <ref type="figure" target="#fig_0">1</ref>. While the standard input and output file format of the container is parquet (in accordance with the file format used for the pre-processed OWS datasets, i.e. datasets in owi-format <ref type="bibr" target="#b8">[9]</ref>, which are described in further detail in Section 4), it also offers support for several other formats, including csv and json. This allows the quality scorer to be easily integrated and used in other components of the web index of OWS.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Integration with Resilipipe</head><p>In addition to the dockerised quality scoring module, we integrate quality scoring as an additional module of the Resilipipe preprocessing pipeline <ref type="bibr" target="#b9">[10]</ref>. This pipeline receives the crawled warc files, containing the full HTTP request/response stream from the crawling process, as input and extracts information such as outlinks, plain text, geoinformation and the language of the respective website(s). As a last step, the websites/ documents are indexed and the extracted metadata is provided in parquet files. Adding quality scoring of documents to the pipeline allows to use the obtained scores during indexing (or other post-processing steps) e.g. for filtering out low-quality documents that should not be indexed, therefore reducing index size and retrieval latency <ref type="bibr" target="#b0">[1]</ref>. For our module, we employ the same QT5-small based scorer as used for the containerised version. The model receives the plaintext of a document, which was extracted in a previous step, and produces the corresponding quality score. The score is added as an additional column in the extracted metadata and is accessible to post-processing modules in the pipeline. The full architecture of the pipeline is visualised in Figure <ref type="figure" target="#fig_1">2</ref>. The pre-processing step parses the HTML, extracting the HTML tree and the plaintext of a document, as well as metadata such as language. The standard modules are additional pre-implemented modules that extract further metadata such as link or geo-information <ref type="bibr" target="#b14">[15]</ref>. After the standard and quality scoring modules, the resulting data is stored in parquet files and the documents are indexed. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quality Scoring Module Standard Modules</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Pre-Processing</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Experimental Setup</head><p>In this section we describe the setup used in our experimental analysis, and provide details on the used datasets and training procedures for the neural quality scorer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quality scoring for Open Web Search datasets</head><p>We deploy the containerised quality scoring module described in Section 3.1 to estimate the document quality of several OWS datasets. As our quality estimator, we use the QT5-small based model trained by Chang et al. <ref type="bibr" target="#b0">[1]</ref> without further fine-tuning. It is important to note that this and all other quality scoring models used in our experiments assign the log-probability for a document of being relevant to at least one user query as its quality score. In particular, we score English documents from (arbitrarily) selected subsets of the legal and main collections of OWS <ref type="bibr" target="#b10">[11]</ref>. All used datasets are in owi-format, i.e. they consist of several parquet files containing document (meta-)data as well as a ciff index file. Table <ref type="table" target="#tab_0">1</ref> shows an overview of all scored datasets. It is to be noted that the OWS main and legal collections as well as our subsets of them are not mutually exclusive, i.e. their documents may overlap. However, as mentioned in the introduction, the OWS datasets do not provide a corresponding web graph nor a set of queries associated with relevance judgements. Hence, we use the ClueWeb22-B dataset for further experimentation as follows.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Quality scoring for ClueWeb22-B</head><p>To estimate the quality for pages in the subset of 87 million English head web pages of ClueWeb22-B <ref type="bibr" target="#b11">[12]</ref> (ClueWeb22-B (en)), and being coherent with the scoring performed on OWS datasets, we again use the QT5 quality estimator without further fine-tuning it.</p><p>Crawling ClueWeb22-B To perform the experiments on ClueWeb22-B (en), we fine-tune our QT5small model using a version of the training procedure provided in the original paper <ref type="bibr" target="#b0">[1]</ref>, modified to work with the ClueWeb22 dataset. In particular, we sample 9.1 million documents with positive relevance label from the MS MARCO Web Search dataset <ref type="bibr" target="#b15">[16]</ref>, and we use them as positive quality labels, considering the remaining set of documents as negatives. The model converged after 1.6 million training instances. Our QT5-small quality scorer model fine-tuned on MS MARCO Web Search, is available on HuggingFace<ref type="foot" target="#foot_1">2</ref> . In our simulations of crawling processes, we always start from a fixed set of 100 thousand randomly selected seed pages, and we reach a total of 29 million pages. To evaluate the early downstream effectiveness of our oracle crawler, we index the crawled corpora after every 5 million pages have been crawled. We compare our proposed oracle crawler using Breadth-First-Search (BFS) <ref type="bibr" target="#b12">[13]</ref> and Depth-First-Search (DFS) <ref type="bibr" target="#b13">[14]</ref> crawlers as baselines.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Query sets &amp; Downstream Retrieval effectiveness</head><p>To evaluate crawlers in terms of downstream retrieval effectiveness, we measure the recall at cutoff 100, of a BM25 retriever <ref type="bibr" target="#b16">[17]</ref>. We use a mix of queries from the Researchy Questions query set (RQ) <ref type="bibr" target="#b17">[18]</ref> and MS MARCO Web Search query set (MSM-WS) <ref type="bibr" target="#b15">[16]</ref>. Both these two datasets are generated from the logs of commercial search engines. While MSM-WS contains explicit relevance assessments extracted from a real click-log, RQ only provides a click distribution; thus, for queries from RQ, we consider as relevant the most clicked page. In particular, we measure the retrieval recall at cutoff 100 (R@100), for a query set composed of 850 queries randomly selected from RQ, and 850 queries randomly selected from MSM-WS. For significance testing we conduct Bonferroni-corrected pairwise t-tests with 𝑝 ≤ 0.01.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Code, Container, and Data Availability</head><p>We publish on Github the code for our dockerised quality scoring component<ref type="foot" target="#foot_2">3</ref> as well as our custom Resilipipe module <ref type="foot" target="#foot_3">4</ref> . We also provide the code for reproducing experiments and crawling simulations on ClueWeb22-B (en) <ref type="foot" target="#foot_4">5</ref> . The quality scores computed on OWS datasets are available on Zenodo<ref type="foot" target="#foot_5">6</ref>  <ref type="bibr" target="#b18">[19]</ref>, whereas those computed on ClueWeb22-B (en) are available on HuggingFace<ref type="foot" target="#foot_6">7</ref> .  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Table 2</head><p>Jensen-Shannon distance between pairs of histogram distributions of quality scores computed for subsets of OWS (main, legal) and for ClueWeb22-B (en) using 15 bins.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Experimental Analysis</head><p>In this section we describe and discuss our experiments and their results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.">Comparison between quality score distributions</head><p>To gain an insight into the similarity between the OWS collections and ClueWeb22-B w.r.t. document quality, we measure and compare quality scores computed on the three datasets described in Section 4, i.e., OWS (main), OWS (legal), and ClueWeb22-B (en). Figure <ref type="figure" target="#fig_3">3</ref> shows the distributions of quality scores for the respective datasets. Based on the shown histograms, we note that the three considered datasets exhibit very similar quality distributions, especially the two OWS collections. This result is also quantitatively confirmed by the values of the Jensen-Shannon distance values computed for pairs of histogram distributions, as shown in Table <ref type="table">2</ref>. The OWS legal collection is a subset of the (full) OWS main collection <ref type="bibr" target="#b8">[9]</ref>, thus our samples of these two collections may overlap in parts, which could partially account for their extremely similar quality distributions. Surprisingly, the Jensen-Shannon distance between the distributions of quality scores computed on OWS legal collection and ClueWeb22-B (en) is lower than the one between the two distributions computed on OWS collections. Notably, all three datasets also have very high quality overall. This is not surprising since ClueWeb22-B consists of the most frequently visited pages, which are thus highly relevant to users and of good quality <ref type="bibr" target="#b11">[12]</ref>. Similarly, the OWS datasets are pre-filtered for malicious URLs and spam documents using an exclusion list <ref type="bibr" target="#b19">[20]</ref> and thus should not include any extremely low-quality pages. As already mentioned, since the two OWS datasets we consider neither provide a web graph, nor a query set for retrieval tasks associated with relevance labels, we conduct all subsequent experiments on ClueWeb22-B (en). However, since the quality distributions of OWS datasets and ClueWeb22-B (en) are very similar, our findings on ClueWeb22-B likely also hold true for OWS data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.">Relationship between quality &amp; relevance</head><p>On ClueWeb22-B (en), we first investigate whether quality scores provide good relevance signals, aiming to understand if by prioritising web pages with high semantic quality during the crawl, relevant pages are automatically prioritised. To this end, we consider as relevant, all the web pages of ClueWeb22-B   Comparison between the downstream retrieval effectiveness of our QOracle crawler, and baseline BFS and DFS crawlers in terms of 𝑅@100 computed on a mixed query set composed of 850 judged queries from RQ, and 850 judged queries from MSM-WS. Hollow markers denote statistically significant differences w.r.t. the two baselines, whereas filled markers denote differences that are not statistically significant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Relevants</head><p>(en) that have been judged relevant for at least one query belonging to the union of the entire RQ and MSM-WS query sets. The remaining documents are considered irrelevant. In Figure <ref type="figure" target="#fig_5">4</ref> we show how the quality distributions of relevant and irrelevant documents differ. In particular, from Figure <ref type="figure" target="#fig_5">4</ref>, we note that relevant web pages generally exhibit higher quality than irrelevant ones, suggesting that quality scoring using neural estimators is a useful heuristic for distinguishing relevant pages from irrelevant ones. Hence, the quality score is a promising relevance signal. However, the large overlap between the two distributions indicates that the quality score alone does not allow for a perfect distinction. Thus, future work could focus on combining the relevance signal coming from neural quality scorers with other types of relevance signals to enhance effectiveness. Since quality scores are good relevance signals, we expect that employing quality scorers to prioritise high-quality pages during the crawling process could increase the likelihood of discovering relevant web pages early on.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.">Downstream retrieval effectiveness of a QOracle</head><p>As a proof of concept, we next explore if prioritising semantically high-quality pages during the crawling process -leveraging neural quality scorers -can improve the downstream retrieval effectiveness of a search system. To investigate this, in Figure <ref type="figure" target="#fig_6">5</ref> we show at different points in time, the retrieval effectiveness of a BM25 retriever measured with R@100 on search corpora built by our proposed oracle crawler (QOracle). A Breadth-First-Search (BFS) crawler and a Depth-First-Search (DFS) crawler are shown as baselines. Our results demonstrate that the proposed QOracle crawler outperforms both baselines in terms of early retrieval effectiveness. Therefore, guiding the crawl with a prioritisation strategy based on semantic quality scoring has a positive impact on downstream search effectiveness. Freq. (M) </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mean outlink quality</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.">Quality of outlinks</head><p>Finally, to gain an insight into the applicability of quality scoring in web crawling without an oracle function, we investigate if web pages mostly link to pages with similar semantic quality. To address this, we filter ClueWeb22-B (en) for pages containing at least one outgoing link to another page in the same dataset. For pages in this subset, we compute the the semantic quality of the page as well as the quality of the pages it links to. Next, we plot them in the hexagonal binning plot enriched by two marginal histograms, shown in Figure <ref type="figure" target="#fig_8">6</ref>. This plot shows how the quality of a web page correlates with the average quality of the pages it links to. We note that there is a weak positive linear correlation between these two variables, also confirmed by the Pearson correlation coefficient between the two, which is 0.286. Additionally, we observe that most web pages have medium semantic quality and link to pages of similar quality. Meanwhile, web pages of very high semantic quality rarely link to web pages of extremely low quality. Therefore, when a crawler follows the outgoing links of high-quality pages, it is unlikely for it to discover very low-quality web pages. At the same time, very low-quality web pages generally do not link to high-quality pages. As a result, low-quality pages can be de-prioritised without the risk of missing a significant number of high-quality pages. These findings suggest that there may be a clear separation between very high-quality and very low-quality pages. Consequently, crawlers can use this quality estimation to prioritise the crawling of high-quality pages, aiming to discover other valuable content while reducing the risk of wasting time and resources on low-quality pages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Conclusion &amp; Future Work</head><p>In this paper, as part of our software contribution, we developed a Docker container that applies a neural quality scorer. This quality scoring module can be easily used and integrated in various components of web search systems to estimate the semantic quality of documents. Additionally, we introduced an effective crawling approach that, by leveraging neural quality scorers, prioritises pages of high semantic quality. Our early experimental analysis performed on ClueWeb22-B (en), suggests that the prioritisation of semantically high-quality web pages during the crawl could effectively mitigate the negative impact of low-quality content on downstream retrieval effectiveness. Furthermore, we show that these findings are likely to generalise to Open Web Search datasets. However, our findings also suggest that relevance signals coming from quality scoring should be combined with other signals for improved performance. This is a promising topic for future work, along with the exploration of crawling prioritisation strategies based on approximated quality scores.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Architecture of our containerised quality scorer module. The quality score is added to the input as an additional column. The input and output format do not have to be identical.</figDesc><graphic coords="4,119.33,60.63,119.86,92.38" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Overview of the integration of our quality scoring module (highlighted in green) in the Resilipipe pre-processing pipeline, adapted from [9].</figDesc><graphic coords="4,72.00,350.50,451.28,83.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Comparison between the distributions of the quality score computed for subsets of OWS (main, legal), and for ClueWeb22-B. All the histograms are generated using 15 bins.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Boxplot and histogram plot of the distribution of the quality scores of relevant and irrelevant web pages for 2867 judged queries from the union of MSM-WS with RQ. However, in the histogram plot, to make the distributions comparable, we performed undersampling.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 5 :</head><label>5</label><figDesc>Figure5: Comparison between the downstream retrieval effectiveness of our QOracle crawler, and baseline BFS and DFS crawlers in terms of 𝑅@100 computed on a mixed query set composed of 850 judged queries from RQ, and 850 judged queries from MSM-WS. Hollow markers denote statistically significant differences w.r.t. the two baselines, whereas filled markers denote differences that are not statistically significant.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: Visualisation of the weak positive linear correlation between the quality of a page (𝑥-axis, histogram on top) and the average quality of the pages it links to (𝑦-axis, histogram on right). Both the histograms are generated using 15 bins. The hexagonal binning plot is created using a grid-size of 25, and displays only hexagonal cells containing at at least 10 3 pages. The solid line represents the linear regression line of the data, while the dashed line represents the theoretical linear regression line that the data under perfect positive correlation.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1</head><label>1</label><figDesc>Overview of the OWS datasets we selected for applying quality scoring.</figDesc><table><row><cell cols="2">Collection Datacenter</cell><cell>Crawl Date</cell><cell>ID</cell><cell>Original size</cell></row><row><cell>main</cell><cell>it4i</cell><cell>22/01/2024</cell><cell>03858e76-3308-11ef-a49c-0242ac1d000a</cell><cell>1.2 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>27/11/2023</cell><cell>25e96c3a-7477-4ebe-886a-57aa157c3425</cell><cell>18 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>23/11/2023</cell><cell>cd0c41ff-a5d2-493c-9e4f-249939106323</cell><cell>7.5 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>20/11/2023</cell><cell>93150510-14b4-49e9-96a6-4c765477dfbd</cell><cell>41 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>25/10/2023</cell><cell>e36b4256-4c98-4d27-b675-3b70f7d04daf</cell><cell>42 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>24/10/2023</cell><cell>a7c072ba-f64c-44e2-befb-0ac99edde800</cell><cell>1.4 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>16/11/2023</cell><cell>989a458e-16ff-43dd-bee5-97295587f7c6</cell><cell>38 GB</cell></row><row><cell>main</cell><cell>lrz</cell><cell>21/11/2023</cell><cell>9c540793-726b-484b-b496-92f3df4e65aa</cell><cell>22 GB</cell></row><row><cell>legal</cell><cell>it4i</cell><cell cols="2">12/03/2024-21/03/2024 0dac12be-52f5-11ef-a60f-0242c0a81003</cell><cell>6.7 GB</cell></row><row><cell>legal</cell><cell>it4i</cell><cell cols="2">01/01/2024-31/01/2024 1459dc0c-4e42-11ef-b6de-0242c0a81003</cell><cell>6.9 GB</cell></row><row><cell>legal</cell><cell>it4i</cell><cell cols="2">03/12/2023-25/12/2023 33d3b674-4e5c-11ef-8f9d-0242c0a81003</cell><cell>3.4 GB</cell></row><row><cell>legal</cell><cell>it4i</cell><cell>04/02/2024-16/02/2024</cell><cell>af54360a-4f08-11ef-af7b-0242c0a81003</cell><cell>0.9 GB</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>This intuition matches the intuition of PageRank<ref type="bibr" target="#b3">[4]</ref>, but considers the semantic quality of the document contents, rather than the link structure.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://huggingface.co/macavaney/qt5-small-msw</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>https://github.com/ArianeS21/quality_scoring</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>https://github.com/ArianeS21/resilipipe_quality_scoring</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_4"><p>https://github.com/fpezzuti/quality_crawling</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_5"><p>https://zenodo.org/records/15110099</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_6"><p>macavaney/cw22b-en.qt5-small-msw.cache</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>This work was partially supported by the <rs type="funder">Spoke "FutureHPC &amp; BigData</rs>" of the <rs type="institution">ICSC -Centro Nazionale di Ricerca in High-Performance Computing</rs>, <rs type="person">Big Data</rs> and <rs type="person">Quantum Computing</rs> funded by the <rs type="funder">Italian Government</rs>, the <rs type="funder">FoReLab and CrossLab projects (Departments of Excellence)</rs>, the <rs type="funder">NEREO</rs> <rs type="projectName">PRIN</rs> project funded by the <rs type="funder">Italian Ministry of Education and Research and European Union -Next Generation EU</rs> (<rs type="grantNumber">M4C1 CUP 2022AEF-HAZ</rs>), and the <rs type="projectName">FUN</rs> project (<rs type="projectName">SGA 2024FSTPC2PN30</rs>) funded by the <rs type="funder">OpenWebSearch.eu project</rs> (<rs type="grantNumber">GA 101070014</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_DNEFmfh">
+					<orgName type="project" subtype="full">PRIN</orgName>
+				</org>
+				<org type="funded-project" xml:id="_ZU7W6Pt">
+					<idno type="grant-number">M4C1 CUP 2022AEF-HAZ</idno>
+					<orgName type="project" subtype="full">FUN</orgName>
+				</org>
+				<org type="funded-project" xml:id="_AxE7rMF">
+					<idno type="grant-number">GA 101070014</idno>
+					<orgName type="project" subtype="full">SGA 2024FSTPC2PN30</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Declaration on Generative AI</head><p>The authors have not employed any Generative AI tools.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Neural Passage Quality Estimation for Static Pruning</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Macdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Macavaney</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. SIGIR</title>
+		<meeting>SIGIR</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="174" to="185" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Efficient and effective spam filtering and re-ranking for large web datasets</title>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gordon</forename><forename type="middle">V</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Smucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Charles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Inf. Retr</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="441" to="465" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Efficiency trade-offs in two-tier web search systems</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Baeza-Yates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Murdock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hauff</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. SIGIR</title>
+		<meeting>SIGIR</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="163" to="170" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">The PageRank citation ranking: Bringing order to the web</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Page</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Brin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Motwani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Winograd</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Efficient Discovery of Authoritative Resources</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marlow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tomkins</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. ICDE</title>
+		<meeting>ICDE</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1495" to="1497" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Crawling Policies Based on Web Page Popularity Prediction</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ostroumova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Bogatyy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chelnokov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tikhonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Gusev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. ECIR</title>
+		<meeting>ECIR</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="100" to="111" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Topical web crawlers: Evaluating adaptive algorithms</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Menczer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Srinivasan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Internet Techn</title>
+		<imprint>
+			<biblScope unit="page" from="378" to="419" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Craw4LLM: Efficient Web Crawling for LLM Pretraining</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Xiong</surname></persName>
+		</author>
+		<idno>ArXiv:2502.13347</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The Open Web Search Book</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Granitzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Froebe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Fathima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>De Vries</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hendriksen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Heineking</surname></persName>
+		</author>
+		<ptr target="https://openwebsearcheu-public.pages.it4i.eu/ows-the-book/content/intro.html" />
+	</analytic>
+	<monogr>
+		<title level="j">Open Web Search Community</title>
+		<imprint>
+			<date type="published" when="2023">2023. 24/02/2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><surname>Heineking</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Zelch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hendriksen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Resilipipe</forename></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.13784624</idno>
+		<imprint>
+			<biblScope unit="page">2024</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Owler Dashboard -Datasets</surname></persName>
+		</author>
+		<ptr target="https://dashboard.ows.eu/owler/our_datasets" />
+		<imprint>
+			<date type="published" when="2023">2023. 2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Clueweb22: 10 billion web documents with visual and semantic information</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Overwijk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Vandenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Callan</surname></persName>
+		</author>
+		<idno>ArXiv:2211.15848</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Breadth-first crawling yields high-quality pages</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Najork</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Wiener</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. WWW</title>
+		<meeting>WWW</meeting>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="page" from="114" to="118" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Information retrieval in the World-Wide Web: Making client-based searching feasible, Computer Networks and ISDN Systems</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">De</forename><surname>Bra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Post</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+			<biblScope unit="page" from="183" to="192" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Heineking</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Zelch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bevendorff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Farzana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Caspari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Potthast</surname></persName>
+		</author>
+		<title level="m">Piloting a Cooperative Open Web Search Infrastructure to Support Europe&apos;s Digital Sovereignty&quot; -Deliverable D2.3 Semantic Enrichment Algorithms and Models</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+	<note>Open Web Search</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A Large-scale Information-rich Web Dataset with Millions of Real Click Labels</title>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Geng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rosset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Buractaon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Craswell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Tower</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Majumder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Neville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Oakley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Risvik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">V</forename><surname>Simhadri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Varma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Marco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Web</forename><surname>Search</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. WWW</title>
+		<meeting>WWW</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="292" to="301" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Robertson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hancock-Beaulieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gatford</surname></persName>
+		</author>
+		<title level="m">Okapi at TREC-3, in: Proc. TREC</title>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+			<biblScope unit="page" from="109" to="126" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Researchy Questions: A Dataset of Multi-Perspective, Decompositional Questions for LLM Web Agents</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rosset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H.-L</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Qin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">C</forename><surname>Chau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Awadallah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Neville</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Nikhil</surname></persName>
+		</author>
+		<idno>ArXiv:2402.17896</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Document quality scoring for web crawlingscored ows data</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mueller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Macavaney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Tonellotto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pezzuti</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.15110099</idno>
+		<imprint>
+			<biblScope unit="page">2025</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">The Open Web Index: Crawling and Indexing the Web for Public Use</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hendriksen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dinzinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Farzana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Fathima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fröbe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Zerhoudi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Granitzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hagen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hiemstra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. ECIR</title>
+		<meeting>ECIR</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="130" to="143" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

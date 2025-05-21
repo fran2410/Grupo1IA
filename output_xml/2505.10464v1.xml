@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">HWA-UNETR: Hierarchical Window Aggregate UNETR for 3D Multimodal Gastric Lesion Segmentation</title>
+				<funder ref="#_UkuWjDE #_SQ4XaV3">
+					<orgName type="full">Hainan University High-level Talent Research Launch Fund</orgName>
+				</funder>
+				<funder ref="#_DNmhTcz #_E3X5XGM">
+					<orgName type="full">Key-Area Research and Development Program of Guangzhou City</orgName>
+				</funder>
+				<funder ref="#_VKYfGpk">
+					<orgName type="full">National Natural Science Foundation of China</orgName>
+				</funder>
+				<funder ref="#_MKv7nvb">
+					<orgName type="full">National Key Research and Development Program of China</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Jiaming</forename><surname>Liang</surname></persName>
+							<idno type="ORCID">0009-0000-6007-9759</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Lihuan</forename><surname>Dai</surname></persName>
+							<idno type="ORCID">0000-0002-0713-105X</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Xiaoqi</forename><surname>Sheng</surname></persName>
+							<idno type="ORCID">0000-0002-2929-5805</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Xianggua</forename><surname>Chen</surname></persName>
+							<idno type="ORCID">0000-0002-2747-7234</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Chun</forename><surname>Yao</surname></persName>
+							<idno type="ORCID">0009-0007-0170-5482</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Guihua</forename><surname>Tao</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Qibin</forename><surname>Leng</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Honming</forename><surname>Cai</surname></persName>
+							<idno type="ORCID">0000-0002-2747-7234</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Xi</forename><surname>Zhong</surname></persName>
+							<email>zhongxi@gzhmu.edu.cn</email>
+							<idno type="ORCID">0009-0007-0170-5482</idno>
+							<affiliation key="aff0">
+								<orgName type="laboratory">of Computer</orgName>
+								<address>
+									<region>Medical , , Medical</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">HWA-UNETR: Hierarchical Window Aggregate UNETR for 3D Multimodal Gastric Lesion Segmentation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">A07F27E9AE05A2773425379C3E3A9148</idno>
+					<idno type="arXiv">arXiv:2505.10464v1[eess.IV]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:54+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Gastric Cancerous</term>
+					<term>GCM 2025</term>
+					<term>Multimodal Segmentation</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Multimodal medical image segmentation faces significant challenges in the context of gastric cancer lesion analysis. This clinical context is defined by the scarcity of independent multimodal datasets and the imperative to amalgamate inherently misaligned modalities. As a result, algorithms are constrained to train on approximate data and depend on application migration, leading to substantial resource expenditure and a potential decline in analysis accuracy. To address those challenges, we have made two major contributions: First, we publicly disseminate the GCM 2025 dataset, which serves as the first large-scale, open-source collection of gastric cancer multimodal MRI scans, featuring professionally annotated FS-T2W, CE-T1W, and ADC images from 500 patients. Second, we introduce HWA-UNETR, a novel 3D segmentation framework that employs an original HWA block with learnable window aggregation layers to establish dynamic feature correspondences between different modalities' anatomical structures, and leverages the innovative tri-orientated fusion mamba mechanism for context modeling and capturing long-range spatial dependencies. Extensive experiments on our GCM 2025 dataset and the publicly BraTS 2021 dataset validate the performance of our framework, demonstrating that the new approach surpasses existing methods by up to 1.68% in the Dice score while maintaining solid robustness. The dataset and code are public via this URL.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Gastric Cancer (GC) ranks as the fifth most common malignant neoplasm globally and the fourth leading cause of cancer-related mortality <ref type="bibr" target="#b18">[19]</ref>, whose detec-tion of lesions is a critical step in clinical treatment. Through sustained technical refinements, Magnetic Resonance Imaging (MRI) has evolved into a superior modality for gastrointestinal malignancy evaluation <ref type="bibr" target="#b3">[4]</ref>, with its diagnostic ascendancy over Computed Tomography (CT) stemming from three cardinal virtues: multi-parametric soft tissue discrimination, absence of ionizing radiation, and synergistic incorporation of functional molecular imaging paradigms <ref type="bibr" target="#b17">[18]</ref>. Recently, with the advancement of Deep Learning (DL) technologies, quantitative multimodal MRI scans have leveraged their inherent advantages to serve as an essential tool for detecting cancerous lesions <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b6">7]</ref>. More importantly, these technologies have significantly enhanced medical image segmentation methods <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b9">10]</ref>, allowing for the systematic delineation of malignant tumor spatial distributions and precise quantification of lesion heterogeneity through the integration of multimodal data.</p><p>Existing DL methods are sensitive to imaging modalities and lesion characteristics, leading to segmentation performance that relies heavily on training data quality <ref type="bibr" target="#b2">[3]</ref>. However, the scarcity of large-scale, high-quality multimodal MRI datasets for GC necessitate reliance on generic medical imaging datasets and transfer learning <ref type="bibr" target="#b12">[13]</ref>, both of which are resource-intensive and reduce specificity. Furthermore, gastric cancer lesion detection involves multiple spatially misaligned MRI modalities, which pose two critical challenges for DL methods:</p><p>(1) aligning inherently misaligned imaging modalities and integrating complementary features, and (2) fully leveraging the complementary characteristics of each modality for multi-scale context modeling. Previous studies enhance segmentation via feature fusion <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b21">22]</ref>, yet clinical applicability remains limited due to reliance on overly optimistic data assumptions. Additionally, improving model representational capacity has proven effective for segmentation tasks. CNN-based <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b15">16]</ref> and Transformer-based methods <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b14">15]</ref> improve contextual feature modeling, while Mamba-based methods <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b5">6]</ref> optimize the modeling process by incorporating state space models (SSMs). Nonetheless, these predominantly focus on pixel-level predictions within single modalities, neglecting multimodal misalignment and complementarity. Recently, H-DenseFormer <ref type="bibr" target="#b16">[17]</ref> proposes a multi-path parallel embedding framework to enhance segmentation efficiency and accuracy in multimodal tasks. Meanwhile, MMEF <ref type="bibr" target="#b4">[5]</ref> integrates Dempster-Shafer theory <ref type="bibr" target="#b4">[5]</ref> with a DL network to achieve reliable feature extraction. Nevertheless, existing approaches still struggle to fully leverage the complementary features of gastric MRI modalities, limiting their effectiveness in achieving reliable lesion segmentation.</p><p>This study addresses challenges in multimodal MRI segmentation of gastric lesions with two principal contributions: (1) GCM (Gastric Cancer MRI) 2025 dataset, the first publicly available multimodal MRI resource for gastric cancer research, featuring fat-suppressed T2-weighted (FS-T2W), venous phase contrast-enhanced T1-weighted (CE-T1W), and apparent diffusion coefficient (ADC) images from 500 gastric cancer patients (as shown in Fig. <ref type="figure" target="#fig_0">1</ref>), is released to provide essential baseline data for lesion segmentation; and (2) HWA-UNETR (Hierarchical Window Aggregate UNEt TRansformer), a 3D multimodal seg-  Dataset Modalities: The standardization protocol of GCM 2025 includes FS-T2W, CE-T1W, and ADC images, as illustrated in Fig. <ref type="figure" target="#fig_0">1</ref>, where FS-T2W/CE-T1W demonstrate high soft-tissue contrast for lesion detection and tumor staging <ref type="bibr" target="#b1">[2]</ref>, while ADC-based diffusion imaging noninvasively quantifies water molecular mobility to characterize tumor pathophysiology <ref type="bibr" target="#b11">[12]</ref>. Dataset Construction: MRI scans of GCM 2025 were acquired from November 2017 to December 2024. All examinations were performed using 1.5T or 3.0T scanners equipped with dedicated body coils. Sensitive patient information in this dataset has been removed. Each volume was annotated by a professional doctor and cross-checked by a second doctor. Detailed data acquisition information are provided at this public https URL. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Methodology</head><p>To address the challenges of multimodal gastric lesion segmentation, the HWA-UNETR framework is proposed, which achieves high-performance multimodal segmentation tasks through novel blocks and architecture design. The detailed implementation is illustrated in Fig. <ref type="figure" target="#fig_2">2</ref> and described in the following sections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">U-shaped Framework Overview</head><p>HWA-UNETR adopts a 4-stage U-shaped architecture comprising an encoderdecoder structure with skip connections, which is shown in Fig. <ref type="figure" target="#fig_2">2</ref> (a) and (b), aiming to achieve high-performance 3D multimodal image segmentation. The input volumetric data X in with dimensions</p><formula xml:id="formula_0">H in × W in × D in × C in (height, width, depth, modals) undergoes hierarchical feature extraction in the encoder. At each stage i, spatial resolution is progressively reduced to H 2 i+1 × W 2 i+1 × D 2 i+1</formula><p>via depthwise separable convolutional layers followed by instance normalization and ReLU activation. In the decoder, transposed convolutional layers upsample feature maps to recover the original spatial resolution. Simultaneously, skip connections integrate multi-scale encoder features to minimize information loss. Finally, a segmentation head equipped with a sigmoid activation layer produces pixel-wise probability maps, facilitating precise and scalable image segmentation.</p><p>To enhance its core functionality, HWA-UNETR integrates three key components within its framework: Hierarchical Window Aggregate (HWA) block, Stratified Group Convolution (SGC) block, and Tri-orientated Fusion Mamba (TFM) block. These components are introduced in the following sections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Hierarchical Window Aggregate Block</head><p>The HWA block, whose structure is shown in Fig. <ref type="figure" target="#fig_2">2 (c</ref>), operates at the multimodal volumetric input X in stage, dynamic window partitioning, and multikernel convolutions are employed to align cross-modal local semantics. This structure allows for the extraction of features from multimodal images with cross-resolution characteristics, generating semantically consistent fused image features. Specifically, the HWA Block adaptively employs depthwise convolutional layers with varying strides r and kernel sizes k based on the input image shapes to extract features from multimodal images, as detailed in Eq. ( <ref type="formula" target="#formula_1">1</ref>).</p><p>[X 1 , X 2 , ..., X Cin ] = Sp(X in );</p><formula xml:id="formula_1">X ′ i = R(Dw(X i ) 1 ) ∥ R(Dw(X i ) 2 ) ∥ R(Dw(X i ) 4 ) ∥ R(Dw(X i ) 8 ); X ho = w 1 X ′ 1 + w 2 X ′ 2 + ... + w Cin X ′ Cin ;<label>(1)</label></formula><p>where X ho represents the output of the HWA Block; + and ∥ denote addition operation and concatenation operation performed along dimension C in ; w i represents the learnable parameters; Dw(.) i represents the depthwise convolutional layer with r = k = i; R denotes the reshape operation that upsamples the convolution results back to their original size; and Sp(.) represents a splitting operation that divides the input data into separate vectors via the C in dimension.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Stratified Group Convolution Block</head><p>The SGC block, deployed post-downsampling in each encoder stage, enhances local feature retention and spatial information preservation for cross-level fusion <ref type="bibr" target="#b20">[21]</ref>. As shown in Fig. <ref type="figure" target="#fig_2">2</ref> (d), the tri-branch architecture processes shared input X si via: (1) dual depthwise convolutions (k=3,1) with instance normalization obtain X 1 ; (2) pointwise convolution refinement obtain X 2 ; and (3) residualenhanced fusion with MLP transformation obtain X so as result of SGC block.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Tri-orientated Fusion Mamba Block</head><p>The TFM Block is deployed in the skip connections stage, specifically designed for modeling global and multi-scale features, as shown in Fig. <ref type="figure" target="#fig_2">2 (e)</ref>.</p><p>In particular, to perform complementary feature modeling on cross-modal feature maps, the TFM block introduces a novel Tri-orientated Fusion Mamba computational mechanism, which integrates the long-sequence modeling capability of Tri-SSMs <ref type="bibr" target="#b20">[21]</ref> with the cross-modal attention mechanisms inherent in the attention <ref type="bibr" target="#b6">[7]</ref> mechanism. This mechanism, as mathematically formulated in Eq. ( <ref type="formula" target="#formula_2">2</ref>), provides enriched feature representations specifically optimized for the decoder's upsampling operations.</p><p>M q , M k , M v = M a(X so.f ), M a(X so.r ), M a(X so.s );</p><formula xml:id="formula_2">X mba = M q + M k + M v ; X att = S( M q M T k d M k )M v ; X mo = Dw(X mba ||X att ) 1 ;<label>(2)</label></formula><p>where X mo denotes the output of TFM Block; S denotes the softmax function, M a refers to the Mamba module that models global information within the sequence, X so.f , X so.r , and X so.s denote the forward, reverse, and inter-slice direction feature maps, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Experiments</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Assistance Dataset</head><p>BraTS 2021 dataset <ref type="bibr" target="#b0">[1]</ref> serves as an accessorial benchmark for evaluating HWA-UNETR's performance in multimodal MRI segmentation, particularly assessing its generalizability across tumor subregions. It contains 1,251 3D brain MRI cases, each comprising four imaging modalities (T1, T1Gd, T2, and T2-FLAIR) with annotations for three distinct tumor compartments: Whole Tumor (WT), Enhancing Tumor (ET), and Tumor Core (TC).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Implementation Details</head><p>Our model is implemented in PyTorch 2.4.1, CUDA 12.4, and MONAI 1.3.2, trained with random crops of 128×128×64 (GCM 2025) and 128×128×128 (BraTS 2021), batch size 2 per GPU. Both experiments utilized the AdamW optimizer for 300 epochs with an initial learning rate of 0.001, incorporating linear warm-up, cosine annealing, a weight decay of 0.4, and 1:1 positive-to-negative sample balancing, while employing a composite loss function that integrates soft dice loss <ref type="bibr" target="#b13">[14]</ref> and focal loss <ref type="bibr" target="#b10">[11]</ref>. All data underwent random axis flipping (50% prob.) and intensity scaling/shifting (20% prob.). Experiments run on a cloud platform with four NVIDIA A100 GPUs, randomly allocating 3D volumes into 70% training, 10% validation, and 20% testing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Performance</head><p>We compare HWA-UNETR with five SOTA segmentation methods: CNN-based nnUNet <ref type="bibr" target="#b8">[9]</ref>, Transformer-based Swin UNETR <ref type="bibr" target="#b6">[7]</ref>, SSM-based SegMamba <ref type="bibr" target="#b20">[21]</ref>/nnMamba <ref type="bibr" target="#b5">[6]</ref>,</p><p>and MMEF <ref type="bibr" target="#b7">[8]</ref>, a method specifically designed for multimodal segmentation. All methods were retrained using their official implementations under consistent settings for fair comparison. Performance was quantitatively evaluated on GCM 2025 and BraTS 2021 datasets using Dice coefficient (Dice) and 95% Hausdorff Distance (HD95). GCM 2025 : Table <ref type="table" target="#tab_0">1</ref> summarizes the multimodal segmentation results of HWA-UNETR and other SOTA methods on the newly released GCM 2025 dataset.</p><p>The outstanding segmentation performance demonstrated in the results validates the effectiveness of our approach. Although HWA-UNETR ranks second only to the method MMEF <ref type="bibr" target="#b7">[8]</ref> in terms of the optimal segmentation edge metric HD95 (5.03 mm), it achieves the highest average Dice score of 74.21%, surpassing other SOTA methods by 1.68%. This performance highlights HWA-UNETR's superior capability in handling multimodal segmentation tasks with misaligned information.</p><p>BraTS 2021 : The results on the BraTS 2021 dataset are listed in Table <ref type="table" target="#tab_1">2</ref>.</p><p>The proposed HWA-UNETR achieves optimal performance compared to other methods, achieving an average Dice score of 92.34% along with an average HD95 of 3.51 mm. These compelling results further substantiate two key advantages of HWA-UNETR: (1) its advanced feature integration capabilities across diverse imaging modalities, and (2) its remarkable robustness in cross-organ segmentation tasks. Visual Comparisons : Fig. <ref type="figure" target="#fig_3">3</ref> provides a more intuitive comparison of the segmentation results obtained by different methods. On the GCM 2025 dataset, our HWA-UNETR accurately detects the boundaries of tumor regions in each modality image, demonstrating better consistency compared to other SOTA methods. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Ablation Study</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Conclusion</head><p>In this paper, HWA-UNETR is proposed as a novel multimodal 3D medical image segmentation framework specifically tailored for gastric cancer lesions. The framework designs a hierarchical window aggregation HWA Block with a learnable cross-modal alignment layer to address the structural differences between unaligned MRI modalities. In addition, a new tri-orientated fusion mamba is introduced to model global and multi-scale features for multimodal data specifically. To advance gastric cancer research, GCM 2025, the first large-scale opensource multimodal MRI dataset, is publicly released, comprising 500 expertannotated, aligned multimodal MRI scans (FS-T2W/CE-T1W/ADC) for gastric cancer segmentation. Extensive experiments on both the newly released GCM 2025 and the public BraTS 2021 datasets demonstrate that HWA-UNETR achieves SOTA segmentation accuracy on gastric multimodal MRI scans while exhibiting exceptional generalizability in cross-organ segmentation tasks, outperforming conventional approaches by a significant margin.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. The data visualization for GCM 2025 dataset. From top to bottom, the images demonstrate the FS-T2W, CE-T1W, and ADC modalities.</figDesc><graphic coords="3,169.35,115.84,276.66,130.38" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>mentation framework is proposed, combining the novel HWA blocks for dynamic cross-modal feature correspondence and TFM blocks for global, multi-scale feature modeling through its innovative tri-orientated fusion mamba mechanism. Extensive experiments on multimodal benchmarks, including GCM 2025 and BraTS 2021 datasets, demonstrate the technical superiority of HWA-UNETR. The proposed framework achieves a Dice score improvement of up to 1.68% compared to State-Of-The-Art (SOTA) methods, while maintaining exceptional robustness across various organ structures and multimodal imaging scenarios. 2 GCM 2025: Gastric Cancer MRI Dataset GCM (Gastric Cancer MRI Dataset) 2025 is currently recognized as the first large-scale open-source dataset featuring professionally annotated gastric cancer MRI examinations, integrating multimodal MRI results from 500 gastric cancer patients. It establishes standardized baselines for multimodal DL segmentation techniques, thereby advancing epidemiological research on gastric cancer.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Overview of HWA-UNETR.</figDesc><graphic coords="4,134.77,115.84,345.82,224.15" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Visual comparisons of proposed HWA-UNETR and other SOTA methods. The arrangement of the images in this figure corresponds to that in Fig. 1.</figDesc><graphic coords="7,134.77,115.84,345.82,113.27" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Comparative Performance Analysis of Various Network Architectures for Lesion Segmentation on the GCM 2025 Dataset. The performance metrics of HWA-UNETR are highlighted in gray , whereas the best segmentation performance is marked in red.</figDesc><table><row><cell>Method</cell><cell cols="3">Dice Similarity Coefficient (%) FS-T2W↑ CE-T1W↑ ADC↑ Avg.↑</cell><cell>Average Hausdorff Distance 95% (mm) ↓</cell></row><row><cell>nnUNet [9]</cell><cell>70.47</cell><cell>71.68</cell><cell>67.31 69.82</cell><cell>6.54</cell></row><row><cell>Swin-UNETR [7]</cell><cell>72.06</cell><cell>72.46</cell><cell>69.83 71.45</cell><cell>5.67</cell></row><row><cell>SegMamba [21]</cell><cell>71.6</cell><cell>73.83</cell><cell>71.05 72.16</cell><cell>5.37</cell></row><row><cell>nnMamba [6]</cell><cell>70.12</cell><cell>73.02</cell><cell>69.94 71.03</cell><cell>5.86</cell></row><row><cell>MMEF-nnUNet [8]</cell><cell>72.66</cell><cell>73.69</cell><cell>71.24 72.53</cell><cell>5.03</cell></row><row><cell cols="2">HWA-UNETR(ours) 74.76</cell><cell cols="2">75.56 72.31 74.21</cell><cell>5.35</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 .</head><label>2</label><figDesc>Comparative Performance Analysis of Various Network Architectures for Lesion Segmentation on the BraTS 2021 Dataset. The colors of the record in this table are labeled the same as in Table 1.</figDesc><table><row><cell>Method</cell><cell cols="2">Dice Similarity Coefficient (%) WT↑ ET↑ TC↑ Avg.↑</cell><cell>Average Hausdorff Distance 95% (mm) ↓</cell></row><row><cell>nnUNet [9]</cell><cell>92.72 88.34 91.39</cell><cell>90.84</cell><cell>5.33</cell></row><row><cell cols="2">Swin-UNETR [7] 93.32 89.08 91.69</cell><cell>91.36</cell><cell>5.03</cell></row><row><cell>SegMamba [21]</cell><cell>93.13 88.21 93.82</cell><cell>91.72</cell><cell>4.73</cell></row><row><cell>nnMamba [6]</cell><cell>92.52 86.68 93.89</cell><cell>91.03</cell><cell>5.33</cell></row><row><cell cols="2">MMEF-nnUNet [8] 93.58 89.04 93.77</cell><cell>92.13</cell><cell>3.97</cell></row><row><cell cols="3">HWA-UNETR(ours) 93.41 89.54 94.07 92.34</cell><cell>3.51</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 .</head><label>3</label><figDesc>Ablation study of various block settings of HWA-UNETR on the GCM 2025 benchmark. The colors of the record in this table are labeled the same as in Table1.</figDesc><table><row><cell cols="5">HWA SGC TFM Avg. Dice↑ Avg. HD 95 ↓</cell></row><row><cell>×</cell><cell>×</cell><cell>×</cell><cell>67.56</cell><cell>10.57</cell></row><row><cell>×</cell><cell>×</cell><cell>✓</cell><cell>71.84</cell><cell>6.03</cell></row><row><cell>×</cell><cell>✓</cell><cell>✓</cell><cell>72.36</cell><cell>5.31</cell></row><row><cell>✓</cell><cell>✓</cell><cell>✓</cell><cell>74.21</cell><cell>5.35</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3</head><label>3</label><figDesc>validates the effectiveness of core modules in the HWA-UNETR framework. On the GCM 2025 dataset:<ref type="bibr" target="#b0">(1)</ref> The TFM Block establishes excellent performance (i.e, 71.84% Dice score) through global context modeling and hierarchical feature integration; (2) the SGC Block enhances Dice score to 72.47% by capturing local information; and (3) the HWA Block achieves a 1.85% Dice score improvement (74.21%) via dynamic window partitioning strategy, demonstrating superior capability in handling misaligned multimodal data.</figDesc><table /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>Acknowledgments. This study was funded by the <rs type="funder">Key-Area Research and Development Program of Guangzhou City</rs> (<rs type="grantNumber">2023B01J1001</rs>), the <rs type="funder">National Key Research and Development Program of China</rs> (<rs type="grantNumber">2022ZD0117700</rs>), the <rs type="funder">National Natural Science Foundation of China</rs> (<rs type="grantNumber">U21A20520</rs>, <rs type="grantNumber">62325204</rs>), the <rs type="funder">Key-Area Research and Development Program of Guangzhou City</rs> (<rs type="grantNumber">2023B01J1001</rs>), and the <rs type="funder">Hainan University High-level Talent Research Launch Fund</rs> (<rs type="grantNumber">XJ2400012551</rs>).</p><p>Disclosure of Interests. This study and its authors have no competing interests.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_DNmhTcz">
+					<idno type="grant-number">2023B01J1001</idno>
+				</org>
+				<org type="funding" xml:id="_MKv7nvb">
+					<idno type="grant-number">2022ZD0117700</idno>
+				</org>
+				<org type="funding" xml:id="_VKYfGpk">
+					<idno type="grant-number">U21A20520</idno>
+				</org>
+				<org type="funding" xml:id="_E3X5XGM">
+					<idno type="grant-number">62325204</idno>
+				</org>
+				<org type="funding" xml:id="_UkuWjDE">
+					<idno type="grant-number">2023B01J1001</idno>
+				</org>
+				<org type="funding" xml:id="_SQ4XaV3">
+					<idno type="grant-number">XJ2400012551</idno>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">U</forename><surname>Baid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ghodasara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bilello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Calabrese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Colak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Farahani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kalpathy-Cramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">C</forename><surname>Kitamura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pati</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2107.02314</idno>
+		<title level="m">The rsna-asnr-miccai brats 2021 benchmark on brain tumor segmentation and radiogenomic classification</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Basic principles of diffusion-weighted imaging</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bammer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European journal of radiology</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="169" to="184" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Cross-modality deep transfer learning: Application to liver segmentation in ct and mri</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bibars</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">E</forename><surname>Salah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Eldeib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Elattar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">A</forename><surname>Yassine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Annual Conference on Medical Image Understanding and Analysis</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="96" to="110" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Imaging strategies in the management of gastric cancer: current role and future potential of mri</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Borggreve</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Goense</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Brenkman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">J</forename><surname>Meijer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Wessels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Verheij</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Jansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Van Hillegersberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">S</forename><surname>Van Rossum</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The British journal of radiology</title>
+		<imprint>
+			<biblScope unit="volume">92</biblScope>
+			<biblScope unit="page">20181044</biblScope>
+			<date type="published" when="1097">1097. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><surname>Denoeux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dubois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Prade</surname></persName>
+		</author>
+		<title level="m">Representations of uncertainty in artificial intelligence: Probability and possibility. A Guided Tour of Artificial Intelligence Research: Volume I: Knowledge Representation, Reasoning and Learning</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="69" to="117" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">nnmamba: 3d biomedical image segmentation, classification and landmark detection with state space model</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Wan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2402.03526</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Swin unetr: Swin transformers for semantic segmentation of brain tumors in mri images</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hatamizadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Nath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">R</forename><surname>Roth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Xu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International MICCAI Brainlesion Workshop</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="272" to="284" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Deep evidential fusion with uncertainty quantification and reliability learning for multimodal medical image segmentation</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Decazes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Denoeux</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Fusion</title>
+		<imprint>
+			<biblScope unit="volume">113</biblScope>
+			<biblScope unit="page">102648</biblScope>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">nnu-net for brain tumor segmentation</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Isensee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">F</forename><surname>Jäger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">M</forename><surname>Full</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Vollmuth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H</forename><surname>Maier-Hein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International MICCAI Brainlesion Workshop</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="118" to="132" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Comprehensive transformer integration network (ctin): Advancing endoscopic disease segmentation with hybrid transformer architecture</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Sheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Pang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Chinese Conference on Pattern Recognition and Computer Vision (PRCV)</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="210" to="224" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Focal loss for dense object detection</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">Y</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Girshick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dollár</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE international conference on computer vision</title>
+		<meeting>the IEEE international conference on computer vision</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2980" to="2988" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Apparent diffusion coefficient value of gastric cancer by diffusion-weighted imaging: correlations with the histological differentiation and lauren classification</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Guan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European journal of radiology</title>
+		<imprint>
+			<biblScope unit="volume">83</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2122" to="2128" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Segment anything in medical images</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>You</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">654</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">V-net: Fully convolutional neural networks for volumetric medical image segmentation</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Milletari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Navab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Ahmadi</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<publisher>IEEE</publisher>
+			<biblScope unit="page" from="565" to="571" />
+		</imprint>
+	</monogr>
+	<note>fourth international conference on 3D vision (3DV</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Slim unetr: Scale hybrid transformers to efficient 3d medical image segmentation under limited computational resources</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Pang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Medical Imaging</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">U-net: Convolutional networks for biomedical image segmentation</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Ronneberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Fischer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Brox</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Medical image computing and computer-assisted intervention</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="234" to="241" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">H-denseformer: An efficient hybrid densely connected transformer for multimodal tumor segmentation</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Qiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>An</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xue</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Medical Image Computing and Computer-Assisted Intervention</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="692" to="702" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Treatment efficacy prediction of focused ultrasound therapies using multi-parametric magnetic resonance imaging</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Adams-Tew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Odeen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Day</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pessin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Payne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Joshi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">MICCAI Workshop on Cancer Prevention through Early Detection</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="190" to="199" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Global cancer statistics 2020: Globocan estimates of incidence and mortality worldwide for 36 cancers in 185 countries</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ferlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Siegel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Laversanne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Soerjomataram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jemal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bray</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">CA: a cancer journal for clinicians</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="209" to="249" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Transbts: Multimodal brain tumor segmentation using transformer</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Wenxuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Sen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jiangyun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Medical Image Computing and Computer-Assisted Intervention</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="109" to="119" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Segmamba: Long-range sequential modeling mamba for 3d medical image segmentation</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Medical Image Computing and Computer-Assisted Intervention</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="578" to="588" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A review: Deep learning for medical image segmentation using multi-modality fusion</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Canu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Array</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">100004</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

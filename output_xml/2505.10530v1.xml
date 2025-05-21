@@ -1,0 +1,2000 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Exploring Variational Entanglement Hamiltonians</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Yanick</forename><forename type="middle">S</forename><surname>Kind</surname></persName>
+							<email>benedikt.fauseweh@tu-dortmund.de</email>
+							<affiliation key="aff0">
+								<orgName type="department">Condensed Matter Theory</orgName>
+								<address>
+									<addrLine>University , - - 4</addrLine>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Exploring Variational Entanglement Hamiltonians</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E9927D861956D254793D0D6900FC2493</idno>
+					<idno type="arXiv">arXiv:2505.10530v1[quant-ph]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:55+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Recent advances in analog and digital quantum-simulation platforms have enabled exploration of the spectrum of entanglement Hamiltonians via variational algorithms. In this work we analyze the convergence properties of the variationally obtained solutions and compare them to numerically exact calculations in quantum critical systems. We demonstrate that interpreting the cost functional as an integral permits the deployment of iterative quadrature schemes, thereby reducing the required number of measurements by several orders of magnitude. We further show that a modified ansatz captures deviations from the Bisognano-Wichmann form in lattice models, improves convergence, and provides a cost-function-level diagnostic for quantum phase transitions. Finally, we establish that a low cost value does not by itself guarantee convergence in trace distance. Nevertheless, it faithfully reproduces degeneracies and spectral gaps, which are essential for applications to topological phases.</p><p>Generating and controlling novel quantum states is a central objective in condensed-matter physics and in the development of emerging quantum devices. Complex many-body states are often highly entangled, rendering their analysis by classical numerical methods infeasible. Consequently, experiments that prepare such states frequently provide the only viable means of investigation-an idea at the heart of quantum simulation <ref type="bibr" target="#b0">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr" target="#b2">[3]</ref><ref type="bibr" target="#b3">[4]</ref>. By tuning control parameters and performing measurements we can explore systems beyond classical computational limits, with notable examples in trapped-ion and ultracold-atom platforms <ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref><ref type="bibr" target="#b8">[9]</ref><ref type="bibr" target="#b9">[10]</ref><ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref><ref type="bibr" target="#b12">[13]</ref><ref type="bibr" target="#b13">[14]</ref><ref type="bibr" target="#b14">[15]</ref>.</p><p>In recent years variational quantum algorithms</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>(VQAs) <ref type="bibr" target="#b15">[16]</ref> have emerged as a valuable tool in quantum simulation. These hybrid quantum-classical schemes leverage the complementary strengths of a classical computer to efficiently optimize scalar objective functions and of a quantum processor to represent, manipulate, and measure states in high-dimensional Hilbert spaces. Potential applications include the preparation of ground <ref type="bibr" target="#b16">[17]</ref><ref type="bibr" target="#b17">[18]</ref><ref type="bibr" target="#b18">[19]</ref><ref type="bibr" target="#b19">[20]</ref>, excited <ref type="bibr" target="#b20">[21]</ref><ref type="bibr" target="#b21">[22]</ref><ref type="bibr" target="#b22">[23]</ref>, timeevolved <ref type="bibr" target="#b23">[24]</ref><ref type="bibr" target="#b24">[25]</ref><ref type="bibr" target="#b25">[26]</ref>, and Floquet states <ref type="bibr" target="#b26">[27,</ref><ref type="bibr" target="#b27">28]</ref>.</p><p>Recently, Kokail et al. proposed a variational algorithm to learn the entanglement Hamiltonian of a given ground state <ref type="bibr" target="#b28">[29,</ref><ref type="bibr" target="#b29">30]</ref> and demonstrated it experimentally in trapped-ion systems <ref type="bibr" target="#b30">[31,</ref><ref type="bibr" target="#b31">32]</ref>. Combined with entanglement spectroscopy, the learned Hamiltonian enables determination of the low-lying entanglement spectrum without exponential resource costs. Since the seminal work by Li and Haldane <ref type="bibr" target="#b32">[33]</ref>, the entanglement spectrum has become an important diagnostic not only for topologically ordered phases but also for symmetry-protected topological phases <ref type="bibr" target="#b33">[34,</ref><ref type="bibr" target="#b34">35]</ref>, tensor-network approaches <ref type="bibr" target="#b35">[36]</ref>, many-body-localized systems <ref type="bibr" target="#b36">[37]</ref> and to detect quantum phase transitions <ref type="bibr" target="#b37">[38]</ref><ref type="bibr" target="#b38">[39]</ref><ref type="bibr" target="#b39">[40]</ref>. Notably the measurement of the entanglement spectrum of a symmetry protected topological state was also realized on IBM quantum computers <ref type="bibr" target="#b40">[41]</ref>.</p><p>The variational algorithm employs an ansatz based on the Bisognano-Wichmann (BW) form of the entanglement Hamiltonian <ref type="bibr" target="#b41">[42]</ref><ref type="bibr" target="#b42">[43]</ref><ref type="bibr" target="#b43">[44]</ref>. While this form is exact for ground states of relativistic quantum field theories, it is generally only an approximation on a lattice. As a result, resolving spectral gaps and degeneracies with high fidelity can be demanding. Moreover, optimization of the cost function entails time evolution under the ansatz Hamiltonian and measurement of observables at multiple time points, leading to substantial measurement overhead.</p><p>In this paper we address these challenges by analyzing the convergence properties of the vari-ational algorithm. We perform classical simulations for several one-dimensional spin models, contrast the simple midpoint integration rule with iterative quadrature schemes, and demonstrate the superiority of the latter. We further show that convergence depends sensitively on the maximum observation time. This dependence can be mitigated by enhancing the expressiveness of the ansatz, thereby lowering the optimal cost and rendering the solution insensitive to both observation time and discretization. Finally, we establish that a small cost value does not necessarily imply high fidelity as measured by the trace distance; nevertheless, it reliably indicates spectral gaps and degeneracies in the entanglement spectrum, as we demonstrate for the symmetryprotected Haldane phase in a S = 1 chain.</p><p>1 Theoretical foundation</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.1">Schmidt decomposition and Entanglement Hamiltonian</head><p>Given a composite Hilbert space H = H A ⊗H B , composed of two subsystems A and B with their respective Hilbert spaces H A and H B of dimensions d A = dim(H A ) and d B = dim(H B ), spanned by the orthonormal bases {|µ i A ⟩} and {|µ i B ⟩}, a general pure state |Ψ⟩ ∈ H can be written as</p><formula xml:id="formula_0">|Ψ⟩ = d A i=1 d B j=1 M ij |µ i A ⟩ ⊗ |µ j B ⟩,<label>(1)</label></formula><p>where the rank χ ≤ min(d A , d B ) of the complex matrix M is called the Schmidt rank <ref type="bibr" target="#b44">[45]</ref>. The entanglement matrix M can be brought into a diagonal form D via a singular value decomposition (SVD) <ref type="bibr" target="#b45">[46]</ref> M = U DV † .</p><p>(</p><formula xml:id="formula_1">)<label>2</label></formula><p>The matrices U and V are of size d A ×min(d A , d B ) and d B × min(d A , d B ), respectively, and obey U † U = 1 and V V † = 1. The non-negative entries (the singular values of M ) of the diagonal matrix D with dimension min(d A , d B ) are called Schmidt-coefficients <ref type="bibr" target="#b46">[47]</ref> and can be expressed as e -ξα /2 . Using the SVD, Eq. (1) reads</p><formula xml:id="formula_2">|Ψ⟩ = d A i=1 d B j=1 min(d A ,d B ) α=1 e -ξα /2 U iα V * jα |µ i A ⟩ ⊗ |µ j B ⟩.<label>(3)</label></formula><p>Defining a new orthonormal basis set</p><formula xml:id="formula_3">{|Φ α A ⟩ = d A i=1 U iα |µ i A ⟩} and {|Φ α B ⟩ = d B j=1 V * jα |µ j B ⟩} yields |Ψ⟩ = χ α=1 e -ξα/2 |Φ α A ⟩ ⊗ |Φ α B ⟩,<label>(4)</label></formula><p>where {ξ α } will be referred to as the Entanglement Spectrum (ES). Since the rank is preserved under a SVD, the number of non-zero singular values coincides with the Schmidt rank χ <ref type="bibr" target="#b47">[48]</ref>, and thus, the sum in Eq. ( <ref type="formula" target="#formula_3">4</ref>) is restricted to χ.</p><p>The lower and upper bound of summation will be dropped from now on as long as it is unambiguous. The reduced density matrix (RDM) of the state ρ = |Ψ⟩⟨Ψ| on subsystem A after tracing out the degrees of freedom related to subsystem B is given by <ref type="bibr" target="#b4">(5)</ref> which defines the Entanglement Hamiltonian (EH) ĤA <ref type="bibr" target="#b28">[29,</ref><ref type="bibr" target="#b48">49]</ref>. The EH and its non-negative eigenvalues {ξ α }, the ES, completely characterize all correlations in partition A <ref type="bibr" target="#b28">[29]</ref> and reveal much more than the entanglement entropy <ref type="bibr" target="#b32">[33]</ref> or the entanglement witness <ref type="bibr" target="#b39">[40]</ref>. In general, it is hard to derive an analytical form of the EH especially for lattice theories. The BW theorem (Section 1.2) allows one to obtain the EH analytically for specific cases for QFTs.</p><formula xml:id="formula_4">ρA = Tr B [ρ] = α e -ξα |Φ α A ⟩⟨Φ α A | =: e -ĤA ,</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.2">Bisognano-Wichmann theorem</head><p>In a d + 1-dimensional Poincaré invariant QFT with a local Hamiltonian density Ĥ(x), the exact EH of the ground state for the special case of a bipartition of an infinite system A (</p><formula xml:id="formula_5">A = {x ∈ R d |x 1 &gt; 0}) is ĤA = A d d x β(x 1 ) Ĥ(x) + c ′<label>(6)</label></formula><p>with β(x 1 ) = 2π c x 1 <ref type="bibr" target="#b28">[29,</ref><ref type="bibr" target="#b49">50,</ref><ref type="bibr" target="#b50">51]</ref>, whereby the speed of sound c of the underlying QFT is set to unity from now on. The constant c ′ ensures the normalization Tr[ρ A ] = 1. This is the seminal BW-theorem. In Eq. (6) it becomes apparent that the EH is a deformation of the system Hamiltonian <ref type="bibr" target="#b28">[29]</ref>. Additionally, the RDM ρA can be interpreted as a thermal state with a locally varying entanglement temperature, which is very</p><formula xml:id="formula_6">A x 1 β ∝ x 1 ρA = e -ĤA B</formula><p>Figure <ref type="figure" target="#fig_2">1</ref>: Interpretation of the reduced density matrix ρA as a thermal state with a locally varying temperature, the entanglement temperature. The inverse entanglement temperature takes the form of a linear ramp, and thus, the entanglement temperature decreases as ∝ 1 /x1, indicated by the color gradient from orange to blue.</p><p>high near the entanglement cut (boundary between both partitions) and decreases with 1 /x1 away from it <ref type="bibr" target="#b28">[29]</ref>, see also Fig. <ref type="figure" target="#fig_2">1</ref> For lattice systems, it is straightforward to propose a discretized version of Eq. (6) s.t.</p><p>ĤA ≈</p><formula xml:id="formula_7">i∈A g i ĥi + c ′ , (<label>7</label></formula><formula xml:id="formula_8">)</formula><p>where the substitution β(x 1 ) → g i and Ĥ(x) → ĥi with ĥi as a quasi-local few-body operator for the i-th lattice site is utilized. A natural question is whether the BW theorem works for lattice systems since it is defined for relativistic QFTs at first. Although the presence of a lattice breaks the Lorentz invariance <ref type="bibr" target="#b49">[50]</ref> (even when it is recovered as a low-energy symmetry <ref type="bibr" target="#b50">[51]</ref>), analytical and numerical calculations <ref type="bibr" target="#b48">[49]</ref><ref type="bibr" target="#b49">[50]</ref><ref type="bibr" target="#b50">[51]</ref><ref type="bibr" target="#b51">[52]</ref> suggest that the discretized version of the BW theorem (7) is often a good first approximation for lattice systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.3">Conformal extensions</head><p>For systems, which have conformal symmetry in addition to Lorentz invariance, the BW theorem (Eq. ( <ref type="formula" target="#formula_5">6</ref>)) can be extended to different geometries <ref type="bibr" target="#b50">[51]</ref>. In this work we focus one-dimensional systems. In case of a finite subsystem of length l in a ring of circumference L, the EH is given by</p><formula xml:id="formula_9">ĤCFT1 A = 2L l 0 dx sin π(l-x) L sin πx L sin πl L Ĥ(x)+c ′ . (<label>8</label></formula><formula xml:id="formula_10">)</formula><p>Since the system obeys periodic boundary conditions (PBC), there are two entanglement cuts, where the inverse temperature increases approximately linearly for small distances from the entanglement cut in agreement with the BW theorem (Eq. ( <ref type="formula" target="#formula_5">6</ref>)). For a finite partition of length L /2 at the edge of a finite open system of length L, the EH reads</p><formula xml:id="formula_11">A B l L β ∝ sin π(l-x) L sin( πx L ) (a) A β ∝ sin( πx L ) B L /2 L /2 (b)</formula><formula xml:id="formula_12">ĤCFT2 A = 2L L /2 0 dx sin πx L Ĥ(x) + c ′ , (<label>9</label></formula><formula xml:id="formula_13">)</formula><p>again with a linear rise of the inverse entanglement temperature near the entanglement cut.</p><p>For a finite subsystem of length l in an infinite composite system, the EH is given by</p><formula xml:id="formula_14">ĤCFT3 A = 2π l 0 dx x l -x l Ĥ(x) + c ′ . (<label>10</label></formula><formula xml:id="formula_15">)</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.4">Quantum classical algorithm</head><p>The main goal of the algorithm, first presented in Ref. <ref type="bibr" target="#b28">[29]</ref>, is to learn the EH via a hybrid quantumclassical feedback loop (QCFL) utilizing the variational Ansatz ĤVar A (g) = i g i ĥi , which acts as a generator for the time evolution operator</p><formula xml:id="formula_16">ÛA (g, t) = e -i ĤVar A (g)t ,<label>(11)</label></formula><p>acting on subsystem A for some time t s.t.</p><formula xml:id="formula_17">ρA → ÛA (g, t)ρ A Û † A (g, t). (<label>12</label></formula><formula xml:id="formula_18">)</formula><p>The parameters g i are the variational parameters of the algorithm. The QCFL works as follows:</p><p>1. Prepare an initial state ρA = Tr B <ref type="bibr">[|GS⟩⟨GS|]</ref> with |GS⟩ as the ground state of the composite system.</p><p>2. Evolve the subsystem A under the variational Ansatz for some time t n &gt; 0, leaving the complementary subsystem untouched. |GS⟩, of the system Hamiltonian. The subsystem A is then evolved under the variational Ansatz ĤVar A (g) and some observables ⟨ ÔA j ⟩ tn are measured at time instances {t n }. The cost function is then evaluated with the measurements and the new parameters suggested by the optimizer are used to repeat the procedure.</p><p>4. Calculate a suitable cost function C(g).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Repeat step 2 to 4 for different variational parameters and minimize C(g).</head><p>The expectation value after the subsystem A has been evolved under the variational Ansatz reads</p><formula xml:id="formula_19">⟨ ÔA j ⟩ tn = Tr A ÔA j ÛA (g, t n )ρ A Û † A (g, t n ) , (<label>13</label></formula><formula xml:id="formula_20">)</formula><p>where the operators ÔA j are only defined on subsystem A and are restricted to be (quasi-)local. The optimal parameters g opt are learned by minimizing the time variation of the observables s.t. ⟨ ÔA j ⟩ tn = const. A suitable cost function to be minimized is given as</p><formula xml:id="formula_21">C(g) = N O j=1 N T n=1 ⟨ ÔA j ⟩ tn -⟨ ÔA j ⟩ 0 2<label>(14)</label></formula><p>with N O as the number of observables and N T as the number of times the subsystem A is evolved and each observable is measured. For sufficiently many observation times t n and observables ÔA j , a cost function value of zero implies</p><formula xml:id="formula_22">[ ĤVar A (g opt ), ĤA ] = 0, (<label>15</label></formula><formula xml:id="formula_23">)</formula><p>where ĤA is the exact EH and g opt are the optimal variational parameters. Equivalently, a cost function value of zero implies [ ĤVar A (g opt ), ρA ] = 0, too, since the exact RDM ρA = exp(-ĤA ) is given by a power series in ĤA . This results in a thermalized subsystem A and the observables are constant in time. The precise choice of observables is not crucial, since an operator is expected to evolve into a complex operator under the dynamics as long as [ ĤVar A (g), ÔA j ] ̸ = 0.</p><p>Since the aforementioned commutator is still fulfilled if a solution g opt is scaled by a factor γ, the scale factor remains undetermined by the algorithm as well as the normalization constant c ′ (see Eq. ( <ref type="formula" target="#formula_7">7</ref>)). To compare the ES of the variational solution and the exact ES, the universal ratios</p><formula xml:id="formula_24">κ α = ξ α -ξ α 0 ξ α 1 -ξ α 0<label>(16)</label></formula><p>are defined s.t. the undetermined scaling factor γ and the normalization constant c ′ are eliminated by division and subtraction, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.5">Improvement of the cost function</head><p>Throughout the investigation of the algorithm, some difficulties, and thus, possibilities to improve the algorithm have been noticed. A major challenge is to determine the observation times t n , such that the optimized parameters are stable to small changes in the t n . This can be easily solved by reinterpreting the cost function. Recalling the cost function in Eq. 14, it is hard to compare numerical values of the cost function, since it is not normalized to the number of observables N O and to the number of observation times N T , which is easily fixed by dividing by these aforementioned quantities. Since the algorithm is based on monitoring observables, it is, in general, not enough to choose a few arbitrary discrete time points. Otherwise, the variational parameters g opt will not be converged. Assuming equidistant time points i.e. a step size ∆t for the observation times, the cost function can therefore, together with the aforementioned normalization, be rewritten as</p><formula xml:id="formula_25">C(g) = ∆t T max N O N O j=1 N T n=1 ⟨ ÔA j ⟩ n∆t -⟨ ÔA j ⟩ 0 2 , (<label>17</label></formula><formula xml:id="formula_26">)</formula><p>defining the maximum observation time T max = N T ∆t. To obtain a cost function, observing not at discrete time points but at all times, the discrete sum is replaced by an integral,</p><formula xml:id="formula_27">C(g) lim ∆t→0 = 1 T max Tmax 0 1 N O N O j=1 ⟨ ÔA j ⟩ t -⟨ ÔA j ⟩ 0 2 :=c(g,t) dt = 1 T max Tmax 0 c(g, t) dt ,<label>(18)</label></formula><p>... ...</p><formula xml:id="formula_28">B A ( ĥ1 , g 1 )( ĥ2 , g 2 ) ( ĥN A , g N A )</formula><p>Figure <ref type="figure">4</ref>: Schematic illustration of the variational Ansatz ĤBW A = i g i ĥi . Each lattice site in the subsystem A is assigned a few-body quasi-local operator ĥi together with a variational parameter g i . Only interactions within the subsystem A are taken into account, as suggested by the green highlighting.</p><p>which allows numerical integration techniques to be applied. Note that there remains one degree of freedom to choose properly, namely the maximum observation time T max . The influence of T max will be thoroughly discussed in Sections 2.2 and 2.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.6">Variational Ansätze</head><p>We mainly distinguish two types of variational Ansätze in this work. The first Ansatz is the BW-like Ansatz, denoted as ĤBW A , which is used in Reference <ref type="bibr" target="#b28">[29]</ref>. As the name suggests, it follows the BW theorem. The second Ansatz, ĤBWV A , is used to show a violation of the BW theorem in lattice models. In general, both Ansätze are given by a linear combination</p><formula xml:id="formula_29">ĤVar A (g) = i g i ĥi , (<label>19</label></formula><formula xml:id="formula_30">)</formula><p>where g i is a variational parameter and ĥi is a quasi-local few-body operator, which will be referred to as a block.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.6.1">BW-like Ansatz</head><p>The BW theorem predicts that the EH is a spatially deformed version of the system Hamiltonian on a subsystem. That is, each lattice site i is assigned a block ĥi together with one variational parameter g i , as illustrated in Fig. <ref type="figure">4</ref>. That means that the index i in Eq. ( <ref type="formula" target="#formula_29">19</ref>) coincides with the i-th lattice site in the subsystem A. The blocks ĥi are not local and act on more than one qubit.</p><p>It is important to note that all interactions are restricted to be within subsystem A as well.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.6.2">BW-violating Ansatz</head><p>The BW-violating Ansatz is not given by a spatially deformed Hamiltonian. Thus, each lattice site is assigned multiple blocks ĥi and multiple variational parameters g i and the index i in Eq.</p><p>(19) does not coincide with the lattice site i.</p><p>From now on, the dependence of the variational Ansätze on the variational parameters g will be omitted.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.7">Transverse field Ising model</head><p>The </p><formula xml:id="formula_31">Ĥ = -J N -1 i=1 Z i Z i+1 -Γ N i=1 X i , (<label>20</label></formula><formula xml:id="formula_32">)</formula><p>where X i , Y i , Z i denotes the Pauli matrices on site i. The first term favors a ferromagnetic state for J &gt; 0 and an antiferromagnetic state for J &lt; 0 while the transverse field introduces fluctuations s.t. an orientation along the x-axis is favored by the transverse term. It possesses a Z 2 symmetry, where the Hamiltonian is invariant under flipping all spins, i.e.</p><formula xml:id="formula_33">Z i → -Z i . (<label>21</label></formula><formula xml:id="formula_34">)</formula><p>In the limit J ≫ Γ, the ground state is two-fold degenerate and the system is fully polarized with all spins pointing either up or down</p><formula xml:id="formula_35">|GS⟩ = N ⊗ i=1 |↑⟩ or |GS⟩ = N ⊗ i=1 |↓⟩,<label>(22)</label></formula><p>breaking the Z 2 symmetry spontaneously, whereas all spins are completely aligned in the x-direction in the limit Γ ≫ J</p><formula xml:id="formula_36">|GS⟩ = N ⊗ i=1 1 √ 2 (|↑⟩ + |↓⟩) =|→⟩ , (<label>23</label></formula><formula xml:id="formula_37">)</formula><p>exhibiting a paramagnetic behaviour. The TFIM has a quantum critical point at J /Γ = 1, separating the ordered ferromagnetic and the disordered paramagnetic phase <ref type="bibr" target="#b52">[53]</ref>. From now on, J = 1 holds. In the case of the Ansatz ĤBW A , one block of site i is given by</p><formula xml:id="formula_38">ĥi = - 1 2 j∈⟨j,i⟩∩A Z j Z i -ΓX i , (<label>24</label></formula><formula xml:id="formula_39">)</formula><p>where ⟨j, i⟩ ∩ A denotes nearest neighbour coupling only if i and j are in the subsystem A. The BW-violating Ansatz for the TFIM is given by</p><formula xml:id="formula_40">ĤBWV A = - N A -1 i=1 J i,i+1 Z i Z i+1 -Γ N A i=1 Γ i X i . (<label>25</label></formula><formula xml:id="formula_41">)</formula><p>with J i,i+1 and Γ i as variational parameters. An analytical expression for the EH in the thermodynamic limit in case of a bipartition is given in Reference <ref type="bibr" target="#b49">[50]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.8">XXZ model</head><p>The Hamiltonian of the XXZ model with N lattice sites and OBC is defined as</p><formula xml:id="formula_42">Ĥ = N -1 i=1 (X i X i+1 + Y i Y i+1 + ∆Z i Z i+1 ) , (<label>26</label></formula><formula xml:id="formula_43">)</formula><p>where ∆ is the anisotropy. For ∆ = 1, the isotropic case, the Heisenberg model is recovered. The XXZ model is ferromagnetic for ∆ &lt; -1, quantum critical for -1 &lt; ∆ ≤ 1 , exhibiting a Luttinger liquid phase, and antiferromagnetic for ∆ &gt; 1 <ref type="bibr" target="#b50">[51]</ref>. The phase transition at ∆ = -1 is of first order, s.t. the ferromagnetic state is exact for ∆ &lt; -1, while the phase transition at ∆ = 1 is of second order <ref type="bibr" target="#b53">[54]</ref>. Again in the ferromagnetic phase, the Z 2 symmetry is spontaneously broken <ref type="bibr" target="#b50">[51]</ref>. One block for the Ansatz ĤBW</p><formula xml:id="formula_44">A reads ĥi = 1 2 j∈⟨j,i⟩∩A (X i X j + Y i Y j + ∆Z i Z j ),<label>(27)</label></formula><p>while the variational Ansatz ĤBWV A for the XXZ model reads</p><formula xml:id="formula_45">ĤBWV A = N A -1 i=1 (J XX i,i+1 (X i X i+1 + Y i Y i+1 ) +J Z i,i+1 ∆Z i Z i+1 ). (<label>28</label></formula><formula xml:id="formula_46">)</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Convergence analysis</head><p>In this section we analyze the dependence of the cost function of the BW-like Ansatz on the number of observed time points, the maximum observation time and we discuss the convergence properties of the BW-violating Ansatz. Throughout this section, the TFIM with N = 8, N A = 4, Γ = 1 and OBC is used. We implement our numerical simulation using Julia. For details we refer to Appendix A.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Cost function and convergence of the midpoint rule for the BW-like Ansatz</head><p>Table <ref type="table" target="#tab_2">1</ref> contains the normalized optimal parameters g opt /g opt 1 rounded to 15 decimal places obtained via the midpoint rule with different ∆t and T max for the Ansatz ĤBWV A . For each T max the same initial parameters have been used.</p><p>the Tanh-sinh quadrature and the corresponding cost function value C(g opt ). Here, the BW-like Ansatz ĤBW A is used. The maximum observation time is T max = 1. All runs are initialized with the same initial parameters. Here, the fact that the cost function value at the minimum C(g opt ) is not numerically zero is crucial. It can be seen that the optimal parameters obtained with the midpoint rule approach the optimal parameters calculated with the Tanh-sinh quadrature asymptotically from below as the time step size ∆t decreases, except for ∆t = 10 -6 , where the ratios exceed those obtained with the Tanh-sinh quadrature. Note that for ∆t = 10 -2 the integrand is evaluated 100 times but only two decimal places match the results of the Tanh-sinh quadrature, while for ∆t = 10 -6 eleven decimal places are in agreement with the Tanh-sinh quadrature but the integrand is evaluated at 100000 time points. The Tanhsinh quadrature is more efficient, since it evaluates the integrand only 101 times at the minimum of the cost function and gives highly accurate results. These results demonstrate that, to get accurate results with the BW-like Ansatz, it is not sufficient to observe the observables at a few arbitrary time points, underlining that the cost function should not be treated as a discrete sum over a few time points but rather as an integral over the time domain. The fact that the ratios obtained with ∆t = 10 -6 are larger than the ratios obtained with the Tanh-sinh quadrature implies that the midpoint rule overshoots the correct results with ∆t = 10 -6 or the Tanh-sinh quadrature only delivers an accuracy up to eleven decimal places in this case.   To verify this, the evaluation points for the Tanhsinh quadrature were increased multiple times, but the first thirteen decimal places did not change. A benchmark for the accuracy of the Tanh-sinh quadrature is given in Section C. Thus, the midpoint rule probably overestimates the optimal ratios g opt /g opt 1 with ∆t = 10 -6 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Influence of the maximum observation time for the BW-like Ansatz</head><p>Figure <ref type="figure">5</ref> shows the ratios of the optimal parameters vs. T max , for the BW-like Ansatz ĤBW A . Here, each run was initialized with the parameters g init = (6 12 15 17) T . The cost function is evaluated with the Tanh-sinh quadrature. It can be seen that the optimal parameters exhibit oscillations and are not converged for the displayed T max . This observation is a fundamental consequence of the finite value for the cost function C(g opt ), as the system still shows dynamics on the order of the cost function value. The parameters will not converge, if the variational Ansatz captures the EH only poorly. Thus T max will always have an influence on the optimal parameters so that no convergence will be reached if the BWlike Ansatz is used. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Convergence properties of the BWviolating Ansatz</head><p>The previous discussions on convergence were based on the BW-like Ansatz ĤBW A , where the minimum of the cost function value was finite. In this subsection we investigate the convergence properties of the ĤBWV A Ansatz. We choose T max = 1 and the initial parameters g init = (3 5 8 10 12 14 15) T were used for all runs. Note that the index i of a parameter g i is not directly related to the i-th lattice site for the Ansatz ĤBWV A .</p><p>Table <ref type="table" target="#tab_3">2</ref> shows the optimal parameters normalized to Γ opt 1 for all different time steps ∆t. It can be seen that all normalized parameters agree up to twelve decimal places. The second study concerns the influence of the maximum observation time T max . Here, the Tanh-sinh quadrature is used and each run uses a different T max . Each run is initialized with the same initial parameters as in the first study. Table <ref type="table" target="#tab_4">3</ref> shows the optimal parameters normalized to Γ opt 1 for all different T max . All normalized parameters agree up to 13 decimal places, except for T max = 0.1, where only nine decimal places of the optimal ratios agree with the optimal ratios of the runs with higher T max . Both results demonstrate a robust behaviour with respect to the number of observation times and the maximum observation time. The results are converged for all ∆t and almost all T max if a good Ansatz is chosen, i.e. an Ansatz that leads to a cost function that is numerically zero at its minimum, which is the case for the BW-violating Ansatz for the TFIM with Γ = 1. The mismatch between the convergence properties of the ĤBW A and the ĤBWV A Ansatz can be explained by the values of the cost function. If the cost function reaches numerically zero for an Ansatz, the subsystem becomes constant in time and no dynamics is present at the optimal solution g opt . In this case ∆t and T max become irrelevant. On the other hand, if an Ansatz does not capture the EH accurately, the cost function will be finite at the minimum. Thus, even at the minimum, dynamics will be present s.t. it is not irrelevant how often or how long the system is sampled. Since it is not known a priori how accurate an Ansatz is, we conclude that it is best practice to evaluate the cost function with the Tanh-sinh quadrature to reduce the number of required measurements. Note, one parameter can be fixed throughout the optimization if the Ansatz is good and the cost function drops to numerically zero. Fixing one parameter effectively fixes the "entanglement energy scale", which has an influence on the time scale.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Violation of the BW theorem</head><p>In the previous section we have already seen that the ĤBWV A Ansatz performed well for the TFIM.</p><p>In the following we want to investigate the per- For each model we perform a total of 50 minimizations, drawing every initial parameter uniformly from the interval <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b5">6]</ref>. Outliers are filtered out based on the value of the cost function and the ratios of the optimal parameters. The optimal parameters from the QCFL are compared to the optimal parameters from the cost function</p><formula xml:id="formula_47">C Comm (g) = ||[ρ A , ĤVar A (g)]|| F 2||ρ A || F || ĤVar A (g)|| F , (<label>29</label></formula><formula xml:id="formula_48">)</formula><p>which measures the commutativity of the exact RDM and the variational Ansatz. The notation ||X|| F with some n × m matrix X denotes the Frobenius norm of X defined as <ref type="bibr" target="#b54">[55]</ref> ||X||</p><formula xml:id="formula_49">F =   n i=1 m j=1 |x ij | 2   1 2 . (<label>30</label></formula><formula xml:id="formula_50">)</formula><p>Here, n = m = 2 N A holds. No filtering of outliers is done with the results of the aforementioned commutator as a cost function C Comm (g).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.1">TFIM</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>If the Ansatz ĤBW</head><p>A is used in the case of OBC, the ratio g opt 2 /g opt 1 obtained with the QCFL shows good agreement with the ratio obtained via the commutator (Fig. <ref type="figure">6(a)</ref>), exhibiting an absolute difference of 0.02 ± 0.10. However, the third, fourth and fifth ratios deviate more with an absolute difference of up to 1.10 ± 0.29. A linear rise near the entanglement cut can be observed and bending in accordance with the second CFT extension (Eq. ( <ref type="formula" target="#formula_12">9</ref>)) becomes apparent. In the case of PBC, the optimal parameters exhibit large deviations from the parameters obtained via the commutator and do not follow the first CFT extension (Eq. 8) but rather a triangular form, while the parameters yielded with the commutator do show the behaviour predicted by the first CFT extension (Fig. <ref type="figure">6(b)</ref>). The maximum difference of the ratios obtained via the QCFL and the commutator is given by the third ratio, g opt 3 /g opt 1 , and takes the value 2.894852 ± 0.000028. In both cases, especially in the case of PBC, the standard deviation is very small, indicating the minimizer almost always finds the same solution. This observation is supported by the cost function value at its minimum agreeing in almost all runs, which takes the value of C(g opt ) ≈ 1.08(2) × 10 -5 and C(g opt ) ≈ 3.95 × 10 -4 for OBC and PBC, respectively. On the other hand, if the Ansatz ĤBWV A is used, the optimal parameters obtained via the QCFL match perfectly with the parameters obtained via the commutator for both, OBC and PBC (see Fig. <ref type="figure">6</ref>(c),(d)). The ratios obtained via the QCFL and the commutator as a cost function exhibit a maximum deviation of 1.26 × 10 -9 for OBC and PBC. In addition to the perfect match, after filtering out the outliers, the standard deviation of each parameter obtained via the QCFL is in the vicinity of 10 -14 , indicating that there is one good solution, while the standard deviation of the ratios obtained via the commutator are not larger than 6 × 10 -9 , which is why no error bars are depicted. The minimum of the cost function is C(g opt ) ≈ 2.90(257) × 10 -31 and C(g opt ) ≈ 6.91(721) × 10 -31 for OBC and PBC, respectively, underlining the fact that the Ansatz ĤBWV A works much better. This means that the BW theorem does not deliver an accurate description for the EH for the TFIM on a finite size chain. Additionally, the only corrections to the BW theorem are that there is not just one parameter per lattice, but two. Further corrections such as long-range interactions or higher-body interactions are not needed, since the cost function is already numerically zero at its minimum.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2">XXZ model</head><p>The optimal parameters exhibit huge standard deviations in the case of the XXZ model with OBC and the BW-like Ansatz ĤBW A (Fig. <ref type="figure" target="#fig_5">7(a)</ref>), with a standard deviation of up to 11.6. The differences of the optimal ratios obtained via the QCFL and the commutator range from 1.3 ± 6.6 ( g opt 3 /g opt 1 ) up to 2.5 ± 12.7 ( g opt 4 /g opt 1 ). In the case of PBC, these differences range from 0.0857(20805) × 10 -6 ( g opt 5 /g opt 1 ) up to 0.16 ± 0.79 ( g opt 2 /g opt 1 ) (Fig. <ref type="figure" target="#fig_5">7(b)</ref>). Again, the linear rise near the entanglement cut and bending at the right border become apparent in the case of OBC, while the symmetric behaviour can be observed if the composite system obeys PBC. However, the large error bars indicate that there many suboptimal or local minima, which are found by the optimizer. The minimum of the cost function is not numerically zero, namely C(g opt ) ≈ 3.54(10) × 10 -7 (OBC) and C(g opt ) ≈ 4.35(4)×10 -6 (PBC).  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.6806</head><p>tained with the QCFL match the parameters obtained with the commutator very well, exhibiting a maximum deviation of 0.0078 ± 0.0011. For OBC and PBC, the standard deviations of the ratios obtained via the QCFL over the 50 runs, after filtering out, and the ratios obtained via the commutator are not larger than 2×10 -3 , see Fig. <ref type="figure" target="#fig_5">7</ref>(c),(d). Remarkably, in the case of OBC, the pa-rameters only deviate slightly from the BW theorem. That is, the ratios of the coupling in the xand y-direction, and the coupling in z-direction, J XX,opt i,i+1 /J Z,opt i,i+1 , is 1.0219 ± 0.0005 at most, which almost agrees with the BW theorem which predicts a value of 1. The deviation of the parameters from the BW theorem in the case of PBC is similar. The cost function value at the optimum takes the value of C(g opt ) ≈ 1.12(27) × 10 -9 (OBC) and C(g opt ) ≈ 2.51(55) × 10 -8 (PBC). The deviation from the BW theorem is not negligible, underlined by the drop in the cost function value by approximately three (OBC) and two (PBC) orders of magnitude if the BW-violating Ansatz is used. Although the cost function is noticeably lower with the Ansatz ĤBWV A and parameters obtained via the QCFL and the commutator match very well, the minimum of the cost function is still finite.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Long range corrections in the XXZ model</head><p>We investigate if the cost function for the XXZ can be further reduced by including longrange corrections to the variational entanglement Hamiltonian. The variational Ansatz, together with the corrections Ĥc A , reads</p><formula xml:id="formula_51">ĤVar A = ĤBWV A + Ĥc A = rmax r=1 N A -r i=1 J XX i,i+r (X i X i+r + Y i Y i+r ) + J Z i,i+r ∆Z i Z i+r , (<label>31</label></formula><formula xml:id="formula_52">)</formula><p>where {J XX i,i+r , J Z i,i+r } act as variational parameters. The quantity r max determines the maximum range of interaction. Every term beyond r = 1 is a part of the long-range interactions, and thus, part of the corrections. The optimal parameters from Section 3.1 of the BW-violating Ansatz ĤBWV A are used for initialization of the parameters for r = 1. All long-range couplings (beyond r = 1) are initialized to zero, as these are expected to be small. Table <ref type="table" target="#tab_5">4</ref> lists the optimal parameters for a run with r max = 4, i.e., all long-range terms included. It can be seen that the corrections are at least one magnitude smaller in comparison to the parameters for r = 1. The parameters show a decay with the range of interaction r. We observe in Fig. <ref type="figure">8</ref>, that the variational Ansatz containing long-range corrections indeed reduces the value of the cost function, demonstrating that such corrections to the BW ansatz are crucial to represent the EH. Note that the norm of the gradient was very low in case of r max = 3 and r max = 4, and we terminated the optimization after 100000 iterations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">TFIM and XXZ model across the phase diagram</head><p>This section investigates the TFIM and XXZ model across the respective phase diagrams to analyze how the algorithm performs when the systems are not critical and whether the algorithm can indicate the critical points or specific phases. Both physical models obey OBC and the chain lengths are varied, while N = 2N A always holds. The Ansatz ĤBWV A is used without any other corrections for both models and the maximum integration time is set to T max = 1. Figure <ref type="figure">9</ref> shows the minimum of the cost function for varying the transverse field strength Γ in the TFIM. At Γ = 0 the minimum of the cost function is below 10 -29 for all N A , consistent with the fact that the ground state is unentangled. A second notable point appears at Γ = 1, the quantum critical point of the model, where the cost function approaches numerical zero. For intermediate values of Γ the cost function remains low but takes finite values. The minimum of the cost function has three interesting points in the case of the XXZ model, namely ∆ = -1, ∆ = 0 and ∆ = 1 (see Fig. <ref type="figure" target="#fig_2">10</ref>). The abrupt decrease of the minimum at ∆ = -1 can be explained by the first order phase transition occurring. For ∆ &lt; -1 the ground state of the XXZ model is a simple product state with all spins pointing in the same direction, and thus, no entanglement is present in the composite system. The second order phase transition can be recognized by the cusp-like behaviour of the cost function at ∆ = 1. For ∆ = 0 the system is at its self-dual point. In terms of Jordan-Wigner fermions it is non-interacting, and the EH is captured perfectly by the BWV Ansatz. To conclude, the algorithm delivers indications for the quantum phase transitions and classical states. Additionally, the accuracy of the BWviolating Ansatz varies across the phase diagram.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Violation of the BW theorem in the XXZ model in the thermodynamic limit</head><p>In this section we discuss the reliability of extrapolating the obtained results into the thermodynamic limit (TDL). We focus on the XXZ model at ∆ = -0.5, where violations of the BW theorem have been observed in Ref. <ref type="bibr" target="#b55">[56]</ref>. For simplicity we neglect long-range corrections. The subsystem chain length ranges from N A = 4 to N A = 7, and T max = 5 is used. To measure the deviation from the BW theorem, the quantity</p><formula xml:id="formula_53">θ i = J XX,opt i,i+1 J Z,opt i,i+1 -1 (<label>32</label></formula><formula xml:id="formula_54">)</formula><p>is defined, which will be referred to as the discrepancy. The procedure to obtain the parameters in the TDL and an example plot to show how the fit is done is given in Appendix D. The extrapolated parameters normalized to J XX,opt</p><formula xml:id="formula_55">1,2</formula><p>are given in Fig. <ref type="figure" target="#fig_2">11</ref>, where the solid lines are there to guide the eye and take the quadratic form ∝ i N A -i N A , as suggested by the conformal extension ĤCFT3</p><p>A (see Eq. 10), although the CFT extensions apply only to the BW theorem. No error bars are given, since extrapolated into the TDL vs. the lattice site i in units of the subsystem chain length l for each number of sites N A in the subsystem A.  -3 . The gap between the xand y-couplings, and the z-couplings can be seen. Table 5 lists the mean value of the discrepancies, as defined in Eq. (32), over the lattice sites i for all subsystem lattice sizes N A in the TDL. The errors given in Table <ref type="table" target="#tab_7">5</ref> are the propagated errors, stemming from the estimated uncertainties of the fit.</p><formula xml:id="formula_56">NA = 4 NA = 5 NA = 6 NA = 7 J XX,opt i,i+1</formula><p>We conclude that a clear discrepancy can be observed in the TDL. However, instead of the discrepancies of ≈ 0.1 from Reference <ref type="bibr" target="#b55">[56]</ref>, the discrepancies found with the algorithm of this work are approximately two times lower.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5">Comparison of the Entanglement spectra</head><p>This section compares the universal ratios (see Eq. ( <ref type="formula" target="#formula_24">16</ref>)) of the variational solutions of the previous sections to the exact ratios. We choose α 0 = 1 and α 1 = 5. The exact ES is computed through exact diagonalization of the exact EH, given by ĤA = -ln (ρ A ).</p><p>In the case of the TFIM, the low-lying univer- sal ratios match the exact universal ratios better if the BW-violating Ansatz is used, as expected (see Fig. <ref type="figure" target="#fig_2">12(a),</ref><ref type="figure">(b)</ref>). In contrast, in the higher part of the spectrum, the universal ratios obtained via variation show significant deviations from the exact universal ratios (Fig. <ref type="figure" target="#fig_2">12(b)</ref>). One source for this discrepancy is numerical precision: the RDM contains (eigen-)values, which are so small s.t. they cannot be accurately captured with double precision. Since the ES (and thus the universal ratios) are obtained by taking the logarithm of the RDM, the lowest eigenvalues of the RDM are mapped to the highest universal ratios. Thus, to compare the universal ratios, we focus on the first few universal ratios. The first ten universal ratios exhibit a mean absolute deviation from the exact universal ratios of ∆κ BW α = 0.0253 and ∆κ BWV α = 0.0071 for the Ansatz ĤBW A and ĤBWV A , respectively. That is, the low-lying spectrum (here, the first ten universal ratios) is reconstructed more than three times more accurately on average if the BW-violating Ansatz is used. The universal ratios for the XXZ model are shown in Fig. <ref type="figure" target="#fig_2">13(a)</ref>. As can be seen in Fig. <ref type="figure" target="#fig_2">13(b)</ref>, the low-lying spectrum is not significantly better reconstructed if the Ansatz ĤBWV A or the Ansatz ĤBWV A with all long-range corrections is used. To understand this behaviour, we investigate two additional measures, which involve the variational RDM on subsystem A  The measure is the trace distance</p><formula xml:id="formula_57">ρVar A = 1 Tr e -ĤVar A (g opt ) e -ĤVar A (g opt ) . (<label>33</label></formula><formula xml:id="formula_58">)</formula><formula xml:id="formula_59">T (ρ A , ρVar A ) = 1 2 Tr ρA -ρVar A 2 , (<label>34</label></formula><formula xml:id="formula_60">)</formula><p>which measures how close two quantum states are and ranges from 0 (identical states) to 1 (maximally distant states) <ref type="bibr" target="#b46">[47]</ref>. The second measure utilizes the commutator of ρA and ρVar</p><formula xml:id="formula_61">A F(ρ A , ρVar A ) = ||[ρ A , ρVar A ]|| F 2||ρ A || F ||ρ Var A || F ,<label>(35)</label></formula><p>which, ranges from 0 (completely commuting) to 1 (maximally non-commutative) <ref type="bibr" target="#b56">[57]</ref>. This measure is included, since the cost function is based on the commutativity of the variational Ansatz and the exact RDM. Table <ref type="table" target="#tab_8">6</ref> lists the mean of the absolute deviations of the first ten universal ratios from the exact universal ratios ∆κ α , the trace distance T (ρ A , ρVar A ), the norm of the commutator F(ρ A , ρVar A ) and the cost function value at its minimum C(g opt ). It can be seen that F(ρ A , ρVar A ) is lower if the Ansatz ĤBWV A is used and the lowest if the long-range corrections are included. This is in agreement with the cost function value, which shows the same trend. This observation makes sense, since the cost function is based on the commutativity of the exact RDM and the variational Ansatz. However, the trace distance is the highest for the Ansatz ĤBWV A with long-range interactions included and the lowest for the BW-like Ansatz ĤBW A . Thus, the universal ratios are not reconstructed more accurately with the Ansatz ĤBWV A with long-range interactions, since the trace distance is a measure for how close two quantum states are. We conclude that a cost function based on the commutator between exact and variational RDM is not necessarily sufficient to minimize the trace distance between the variational EH and the exact EH. A zero commutator only implies a shared eigenbasis of the operators and not the same eigenvalues. Any function of the exact EH also leads to stationarity in the dynamics of the subsystem. While this clearly restricts the applicability of the algorithm, we expect that certain properties remain invariant, even if the variational algorithm captures only the eigenbasis correctly, such as degeneracies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.6">Topological Entanglement Spectrum</head><p>To investigate degeneracies in the ES, we consider the spin-1 chain model</p><formula xml:id="formula_62">Ĥ = J i ⃗ S i • ⃗ S i+1 + B x i Ŝx i + U zz i ( Ŝz i ) 2 , (<label>36</label></formula><formula xml:id="formula_63">)</formula><p>where Ŝα i with α ∈ {x, y, z} are the components of the the spin-1 operator ⃗ S i on the i-the lattice site. Pollmann et al. <ref type="bibr" target="#b34">[35]</ref> showed that this model has a topological Haldane phase, where the ES has symmetry protected degeneracies in case of a semi-infinite half-chain. We consider a composite system of N = 8 sites with PBC, J = 1, B x = 0 and U zz = 0. The subsystem consists of N A = 4 sites and we use use the variational Ansatz where {J x i,i+1 , J y i,i+1 , J z i,i+1 , B x i , U zz i } are the variational parameters. Figure <ref type="figure" target="#fig_2">14</ref> shows the first forty values of the exact and variational ES. The cost function converged to C(g opt ) ≈ 5.29 × 10 -5 . Although the cost function is still finite, the variational algorithm can reproduce the degeneracies in the ES. We do not find the perfect double degeneracy in the ES, as predicted for the system in the TDL <ref type="bibr" target="#b34">[35]</ref>, due to finite size effects. We conclude that degeneracies can be obtained with the variational algorithm, even if the minimum of the cost function is finite.</p><formula xml:id="formula_64">ĤVar A = J N A -1 i=1 (J x i,i+1 S x i S x i+1 + J y i,i+1 S y i S y i+1 + J z i,i+1 S z i S z i+1 ) + B x N A i=1 B x i S x i + U zz N A i=1 U zz i (S z i ) 2 , (<label>37)</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Conclusion and Outlook</head><p>In summary, the discretized Bisognano-Wichmann Ansatz provides a useful starting point for learning lattice entanglement Hamiltonians, but allowing independent couplings per site already improves the varia-tional description markedly, while in anisotropic Heisenberg chains a set of long-range corrections is still necessary. Crucially, recasting the cost function as a time integral and evaluating it with iterative quadrature lowers the sampling effort by orders of magnitude, a saving that will be indispensable when the protocol is run on noisy quantum hardware. The cost itself carries physical information, as it shows pronounced minima at phase transitions and remains finite otherwise, so that the cost-function itself emerges as a simple experimental probe. Because the optimization enforces commutativity with the reduced density matrix, the learned operator reproduces the eigenbasis of the exact entanglement Hamiltonian and therefore captures degeneracies and gaps in the spectrum, even though individual eigenvalues are obtained only qualitatively.</p><p>An immediate outlook is to implement the iterative integration procedure and the BW violating Ansatz on analogue or digital simulators, benchmarking its resilience to sampling noise and decoherence and testing how reliably cost-function spectroscopy signals quantum criticality in practice. Finally, the hybrid loop is not tied to ground-state physics. Applying it to excited, driven and Floquet states, where more expressive Ansatz schemes are necessary, should open the way to entanglement spectroscopy of excited states and non-equilibrium phases on current devices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Methods</head><p>We use the Julia programming language <ref type="bibr" target="#b57">[58]</ref>. The cost function is evaluated with the Tanh-sinh quadrature as described in Section B. For the optimization of the cost function, we chose the implementation of the LBFGS algorithm from the package Optim.jl <ref type="bibr" target="#b58">[59]</ref>. The gradient is computed with an exact expression, utilizing the Fréchet derivative of the time evolution operator, i.e. an matrix exponential, which is implemented in the package ChainRules.jl <ref type="bibr" target="#b59">[60]</ref>. We chose the infinity norm of the gradient as an convergence criterum, which is referred to as ∇ tol . In order to stop a minimization, ∇ tol ≤ 10 -16 must hold if not mentioned otherwise. The monitored observables are {Z i Z i+1 |1 ≤ i &lt; N A }. The Hamiltonians, the variational Ansätze and the density matrices are constructed with the package Yao.jl <ref type="bibr" target="#b60">[61]</ref>.</p><p>To obtain the ground state, we use exact diagonalization for composite system sizes N ≤ 10, while for N &gt; 10 we use the Lanczos algorithm from the package KrylovKit.jl <ref type="bibr" target="#b61">[62]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Numerical integration method</head><p>The integrand changes with each new parameters g, and thus, the integral can be seen as a blackbox, which is why an adaptive or iterative integration method with a good error estimation scheme is required. Additionally, the integrand c(g, t) is oscillatory (see Fig. <ref type="figure" target="#fig_1">15</ref> for two examples). In general, oscillatory integrands are difficult to integrate efficiently. The best method for the integrand, as it turns out, is the Tanh-sinh quadrature, which is one quadrature formula of a whole family, the Double Exponential Formulas <ref type="bibr" target="#b62">[63]</ref> (DE Formulas). Starting from an integral over the interval [-1, 1]</p><formula xml:id="formula_65">I = 1 -1 f (x) dx, (<label>38</label></formula><formula xml:id="formula_66">)</formula><p>the DE Formulas utilize a variable transformation x = Φ(u) mapping the boundaries to infinity, i.e., ϕ(-∞) = -1 and ϕ(∞) = 1. That is, the integral reads</p><formula xml:id="formula_67">I = ∞ -∞ f (Φ(u))Φ ′ (u) du. (<label>39</label></formula><formula xml:id="formula_68">)</formula><p>Applying the trapezoidal rule with a step size h to Eq. (39) yields</p><formula xml:id="formula_69">I h = h ∞ j=-∞ f (Φ(jh))Φ ′ (jh) (<label>40</label></formula><formula xml:id="formula_70">)</formula><p>with the abscissae x j = Φ(jh) and weights w j = Φ ′ (jh). To be able to compute the integrand with a computer, the sum needs to be truncated, which gives</p><formula xml:id="formula_71">I M h = h M j=-M f (Φ(jh))Φ ′ (jh). (<label>41</label></formula><formula xml:id="formula_72">)</formula><p>The error ∆I M h stems from the error E D = I -I h due to the discretization and the error E T = I h -I M h caused by truncation of the infinite sum <ref type="bibr" target="#b63">[64]</ref>. The best balance between the discretization error E D and the truncation error E T is achieved by a variable transformation x = Φ(u), for which the integrand has a double exponential decay <ref type="bibr" target="#b62">[63,</ref><ref type="bibr" target="#b63">64]</ref> </p><formula xml:id="formula_73">f (Φ(u))Φ ′ (u) ≈ e -π 2 e |u| , u → ±∞,<label>(42)</label></formula><p>giving the DE Formulas their name. The double exponential decay is achieved by the variable transformation</p><formula xml:id="formula_74">Φ(u) = tanh π 2 sinh(u) ,<label>(43)</label></formula><p>caused by the derivative decaying as</p><formula xml:id="formula_75">Φ ′ (u) ≈ e -π 2 e |u| , u → ±∞. (<label>44</label></formula><formula xml:id="formula_76">)</formula><p>The specific variable transformation in Eq. <ref type="bibr" target="#b42">(43)</ref> gives the Tanh-sinh quadrature its name. The total error is roughly estimated as</p><formula xml:id="formula_77">I -I M h ≈ e -C M log(M )<label>(45)</label></formula><p>with some C &gt; 0 <ref type="bibr" target="#b63">[64]</ref>. For the implementation of the Tanh-sinh quadrature, parts of the package DoubleExponentialFormulas.jl <ref type="bibr" target="#b64">[65]</ref> are used and then fit to the purpose of this work. It estimates the integral iteratively at a level n (maximum of 12 levels used) with a step size h n = h0 /2 n beginning with h 0 = 1. After each iteration the error is estimated and checks whether the desired accuracy is achieved. If the desired accuracy has been reached, the integration is stopped and continued with the next level otherwise. This requires a good error estimation, which is not given in the package and was added manually, to get trustworthy results. For that, the heuristic error estimation scheme from Reference <ref type="bibr" target="#b65">[66]</ref> is used and the following information is taken from it. The approximated integral at level k up to level n is denoted as S k and the estimated error projection based on the differences between the result at the current level n and the past two levels.</p><formula xml:id="formula_78">E n at level n then is one if n ≤ 2, zero if S n = S n</formula><p>The fact that the optimal convergence rate achievable is quadratic, motivates 2d 1 . That means that the number of correct digits can never be more than double the previous level. The quantity d 3 is motivated by the fact that the error cannot be less than the current precision ϵ times the largest product of abscissae and weights. The fourth term, d 4 , accounts for the truncation. For this work, this error estimation scheme is slightly modified. The logarithm in the definitions of the quantities d i is dismissed, e.g.</p><formula xml:id="formula_79">d 1 = |S n -S n-1 | is used instead d 1 = log 10 |S n -S n-1 |.</formula><p>The estimated error then reads E n = d. No problems have been observed with the modified error estimation scheme so far, which will be backed up in the benchmarks section (Section C). In order to stop the integration, the relative error needs to be less than or equal to √ ϵ, where ϵ = 2.220 446 049 250 313 × 10 -16 as the machine epsilon for double precision. That is, E n ≤ S n √ ϵ must hold.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Benchmarks</head><p>This section shows that the used methods for integration and optimization are the best methods for this kind of problem among all the methods, which are used for the comparison. The model used is the TFIM with N = 8, N A = 4, OBC and Γ = 1 with the variational Ansatz ĤBW A . The first benchmark concerns the integration, for which only the Gauß-Kronrod quadrature is used for comparison. The reason behind that is, as already pointed out in Section B, an iterative or adaptive integration method with a good error estimation is needed. In addition to the Tanh-sinh quadrature, the only good candidate found for such type of integration problems is the aforementioned Gauß-Kronrod quadrature. To this end, the implementation from the package QuadGK.jl <ref type="bibr" target="#b66">[67]</ref> is used. In this test, the cost function is computed 25 times at different random parameters g between zero and ten and the number of integrand evaluations is averaged over these 25 different cost function computations for each T max . For both, the Tanh-sinh quadrature and the Gauß-Kronrod quadrature, the maximum relative error is set to the square root of the machine epsilon for double precision. The results are depicted in Fig. <ref type="figure" target="#fig_3">16</ref>, where the error bands are given by the standard deviation over the 25 cost function evaluations with the different random parameters g. It can be clearly seen that the Tanh-sinh quadrature outperforms the Gauß-Kronrod quadrature, especially for large T max . At T max = 20, the Tanh-sinh quadrature requires ≈ 1950 fewer evaluations on average. Only at T max = 0.5, the Gauß-Kronrod needs fewer integrand evaluations. This probably amounts to the fact that the Gauß-Kronrod quadrature is implemented as an adaptive integration method, where the number of integrand evaluation can vary in arbitrary steps. Meanwhile, the Tanh-sinh quadrature halves the step size, s.t. the number of integrand evaluations cannot vary arbitrarily, and thus, uses too many evaluation points for such a small integration interval. Of course, both quadrature rules should yield the same cost function value for each new parameter set g. Both rules showed no deviation greater than ≈ 4.441 × 10 -15 from one another over all 1000 samples, which is a remarkable result, since the Tanh-sinh quadrature clearly shows more efficiency while the accuracy does not suffer. An additional argument for the Tanh-sinh quadrature is that the abscissae and the weights are always the same for all integrands, and thus, the weights and abscissae can be calculated once at the beginning of a minimization run and can be reused in each iteration. On the other hand, the adaptivity of the Gauß-Kronrod quadrature requires the abscissae and weights to be calculated for each new parameters g. The second test concerns the optimization algorithm, where the algorithms used for comparison are Conjugate Gradient (ConjGrad), BFGS and Nelder-Mead (NM), which are all implemented in the package Optim.jl as well. The maximum integration time is set to T max = 1. The first three algorithms are gradient-based, whereas the Nealder-Mead algorithm is a direct search method and therefore does not require information about the gradient or Hessian. Initial parameters are chosen at random and the cost function is minimized with all different algorithms. The convergence criterium for the gradient-based methods is set to ∇ tol = 10 -16 . NM uses a so called simplex, which consists of multiple points in the parameter space. The convergence criterium here is the standard deviation of the cost function value at these points in the current simplex, since the cost function value at the points of the simplex should be equal in the vicinity of the minimum. In this test, the standard deviation is required to be less than or equal to 10 -16 , too. The cost function value vs. the number of cost function evaluations in one minimization run is shown in Fig. <ref type="figure" target="#fig_4">17</ref>. For all four different initial parameters, the LBFGS algorithm needed the fewest cost function evaluations, as indicated by the vertical dotted lines. However, in the fourth run (Fig. <ref type="figure" target="#fig_5">17(d</ref>)), the BFGS and Nelder-Mead algorithms found a slightly lower minimum (≈ 3 × 10 -5 smaller) than the BFGS and Conjugate Gradient algorithms. Table <ref type="table" target="#tab_9">7</ref> lists the time it took to minimize the cost function among all runs for all different algorithms. The minimization was repeated ten times for one set of initial parameters and the smallest time over these ten repetitions is listed. In all runs, the LBFGS algorithm won again in terms of runtime. To conclude, even tho the LBFGS algorithm did not find the lowest minimum in the fourth run, the efficiency is very With a good initial guess this should not happen. The Gradient descent, ADAM and Simulated annealing algorithm have also been tested but not listed, because their performance were much worse than the algorithms included in the benchmark. It needs to be mentioned that a model with only 4 parameters has been used. To get deeper insights into the performance of the optimization algorithms, a model with significantly more parameters could prove helpful.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D Extrapolation into the thermodynamic limit</head><p>To obtain the couplings J XX,opt i,i+1</p><p>and J Z,opt i,i+1 in the TDL, the procedure is the following:</p><p>1. Extract the ground state of the system Hamiltonian or different lattice sizes N (up to N = 29 could have been achieved with the Lancos algorithm).</p><p>2. Construct the RDM with the ground state obtained in step one for a subsystem chain length N A .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Run the algorithm with the BW-violating Ansatz ĤBWV</head><p>A with J XX i,i+1 and J Z i,i+1 as variational parameters for the different RDMs for each composite system size N from step 2 for a subsystem chain length N A .</p><p>4. Plot the ratios of the obtained parameters J XX,opt i,i+1 /J XX,opt 1,2 and J Z,opt i,i+1 /J XX,opt 1,2 vs. 1 /N 2 and extrapolate for 1 /N → 0, i.e., into the TDL.</p><p>5. Repeat step two to four for different subsystem chain lengths N A .</p><p>Figure <ref type="figure" target="#fig_2">18</ref> shows the obtained optimal parameters normalized to J XX,opt 1,2 vs. 1 /N 2 for N A = 7. The index i indicates the lattice site and the solid lines are the corresponding fits. For brevity, the plots for other N A are omitted. A linear fit was used</p><formula xml:id="formula_80">J Ω,opt i,i+1 J XX,opt 1,2 (N ) = p 1 1 N 2 + p 2 , Ω = XX, Z<label>(46)</label></formula><p>where p 1 and p 2 act as parameters for the fit. The optimal parameters normalized to J XX,opt vs. 1 /N 2 for each lattice site i in the subsystem A for N A = 7. The solid lines are linear fits.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: The BW theorem extended to one dimensional systems with conformal symmetry. Schematic representation of the entanglement temperature for (a) a subsystem of length l embedded in a system of length L with periodic boundary conditions and (b) a subsystem of length L /2 embedded at a boundary of an open system of length L. The colors indicate a high (orange) and low (blue) entanglement temperature.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>1 Figure 5 :</head><label>15</label><figDesc>Figure 5: Optimal parameters normalized to g opt 1 vs.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>opt 1 C</head><label>1</label><figDesc>(g opt ) ∆t = 10 -1 3.824 039 596 426 903 5.608 777 483 165 399 5.921 893 959 511 652 2.5110 × 10 -5 ∆t = 10 -2 3.835 351 726 582 212 5.632 970 094 804 400 5.941 793 208 331 469 2.0946 × 10 -5 ∆t = 10 -3 3.835 421 398 526 617 5.633 117 585 461 839 5.941 909 050 130 465 2.0948 × 10 -5 ∆t = 10 -4 3.835 422 093 758 030 5.633 119 057 108 413 5.941 910 205 524 904 2.0948 × 10 -5 ∆t = 10 -5 3.835 422 100 710 176 5.633 119 071 824 524 5.941 910 217 078 521 2.0948 × 10 -5 ∆t = 10 -6 3.835 422 100 781 501 5.633 119 071 974 829 5.941 910 217 197 190 2.0948 × 10 -5 Tanh-sinh 3.835 422 100 780 426 5.633 119 071 973 222 5.941 910 217 195 286 2.0948 × 10 -5</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>1 Figure 6 :</head><label>16</label><figDesc>Figure 6: 50 runs with different random initial parameters for the TFIM with the QCFL and the commutator as a cost function (Comm). Outliers from the QCFL were filtered out. The mean value from the 50 runs are depicted. (a),(b) Optimal parameters for the BW-like Ansatz with OBC and PBC, respectively. The errorbars for the QCFL are given by the standard deviation over the 50 runs after filtering out. (c),(d) Optimal parameters for the BW-violating Ansatz with OBC and PBC, respectively.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>1 Figure 7 :</head><label>17</label><figDesc>Figure 7: 50 runs with different random initial parameters for the XXZ model with the QCFL and the commutator as a cost function (Comm). Outliers from the QCFL were filtered out. The mean value from the 50 runs are depicted. (a),(b) Optimal parameters for the BW-like Ansatz with OBC and PBC, respectively. The errorbars are given by the standard deviation over the 50 runs (outliers from the QCFL were filtered out). (c),(d) Optimal parameters for the BW-violating Ansatz with OBC and PBC, respectively.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 7 (</head><label>7</label><figDesc>Figure 7(c),(d) show the optimal parameters after filtering obtained with the Ansatz ĤBWV A for OBC and PBC, respectively. The parameters ob-</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>1 Figure 8 : 3 N A = 4 N A = 5 N A = 6 N A = 7 1Figure 9 :</head><label>18345679</label><figDesc>Figure 8: Cost function C(g opt ) at the found solution vs. the maximum range of interaction r max included in the correction term.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>3 N A = 4 N A = 5 N A = 6 N A = 7 1Figure 10 :</head><label>3456710</label><figDesc>Figure 10: Minimum of the cost function in dependence on the anisotropy ∆ for the XXZ when the Ansatz ĤBWV A is used. The composite system twice as large as the subsystem A, i.e. N = 2N A .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>1 Figure 12 :</head><label>112</label><figDesc>Figure 12: (a) Universal ratios and (b) deviations from the exact universal ratios for the BW-like Ansatz ĤBW A</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>1 Figure 13 :</head><label>113</label><figDesc>Figure 13: (a) Universal ratios and (b) deviations from the exact universal ratios for the BW-like Ansatz ĤBW A (BW), BW-violating Ansatz ĤBWV A (BWV) and the BW-violating Ansatz with all long-range corrections (BWV+c) in the XXZ model.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>1 Figure 14 :</head><label>114</label><figDesc>Figure 14: First forty values of the variational (var) and exact universal ratios with N = 8, PBC, J = 1, B x = 0, U zz = 0 and N A = 4. The cost function value at the minimum is C(g opt ) ≈ 5.29 × 10 -5 . The black lines indicate which eigenvalues are degenerate.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>1 Figure 15 :</head><label>115</label><figDesc>Figure 15: Integrand c(g, t) for the TFIM with Γ = 1, the Ansatz ĤBW A , N = 10, N A = 5 and OBC for (a) g = (1 2 3 4 5) T and (b) g = (4 3 2 3 4) T .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>1 Figure 16 :</head><label>116</label><figDesc>Figure 16: Comparison of the Tanh-sinh and Gauß-Kronrod quadrature. For each T max , 25 different random parameters g are sampled and the cost function is evaluated with both quadrature rules. The average number of integrand evaluations of the 25 samples is plotted together and its corresponding standard deviation (error bands).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>1 Figure 17 :</head><label>117</label><figDesc>Figure 17: Cost function value vs. number cost function evaluations in one minimization run. Random initial parameters are sampled and the cost function is minimized with the different algorithms. This procedure is done four times (run one, two, three and four in (a),(b),(c) and (d), respectively). The vertical dotted lines indicate the points, where the optimizers are converged.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>2 ( 1 Figure 18 :</head><label>2118</label><figDesc>Figure 18: Optimal parameters J XX,opt i,i+1 and J Z,opt i,i+1 normalized to J XX,opt 1,2</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 1 :</head><label>1</label><figDesc>Normalized optimal parameters g opt /g opt 1 for the Ansatz ĤBWV A obtained with the midpoint rule with different ∆t and the Tanh-sinh quadrature (101 evaluations). All runs were initialized with the same initial parameters.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 :</head><label>2</label><figDesc>Optimal parameters normalized to Γ opt 1 for the Ansatz ĤBWV A and its corresponding minimum of the cost function for different time steps ∆t for the midpoint rule. All runs were initialized with the same initial parameters.</figDesc><table><row><cell>method</cell><cell>J opt 1,2 /Γ opt 1</cell><cell>Γ opt 2 /Γ opt 1</cell><cell>J opt 2,3 /Γ opt 1</cell></row><row><cell cols="4">∆t = 10 -1 1.965 946 199 367 813 2.864 944 458 808 732 3.666 380 470 827 035</cell></row><row><cell cols="4">∆t = 10 -2 1.965 946 199 367 794 2.864 944 458 808 709 3.666 380 470 827 011</cell></row><row><cell cols="4">∆t = 10 -3 1.965 946 199 367 796 2.864 944 458 808 713 3.666 380 470 827 013</cell></row><row><cell cols="4">∆t = 10 -4 1.965 946 199 367 799 2.864 944 458 808 718 3.666 380 470 827 019</cell></row><row><cell cols="4">∆t = 10 -5 1.965 946 199 367 800 2.864 944 458 808 720 3.666 380 470 827 025</cell></row><row><cell cols="4">Tanh-sinh 1.965 946 199 367 803 2.864 944 458 808 727 3.666 380 470 827 037</cell></row><row><cell cols="4">Γ opt 3 /Γ opt 1 4.342 962 293 250 064 4.871 649 743 585 611 5.234 439 004 803 229 1.135 × 10 -30 J opt 3,4 /Γ opt 1 Γ opt 4 /Γ opt 1 C(g opt ) 4.342 962 293 250 016 4.871 649 743 585 476 5.234 439 004 803 051 5.790 × 10 -31 4.342 962 293 250 017 4.871 649 743 585 489 5.234 439 004 803 071 4.818 × 10 -31 4.342 962 293 250 025 4.871 649 743 585 498 5.234 439 004 803 082 4.564 × 10 -31 4.342 962 293 250 033 4.871 649 743 585 508 5.234 439 004 803 094 4.516 × 10 -31 4.342 962 293 250 049 4.871 649 743 585 528 5.234 439 004 803 114 4.460 × 10 -31</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 3 :</head><label>3</label><figDesc>Optimal parameters normalized to Γ opt 1 for the Ansatz ĤBWV A and its corresponding minimum of the cost function for different T max . The Tanh-sinh quadrature was used to evaluate the cost function. All runs were initialized with the same initial parameters.</figDesc><table><row><cell>T max</cell><cell>J opt 1,2 /Γ opt 1</cell><cell>Γ opt 2 /Γ opt 1</cell><cell>J opt 2,3 /Γ opt 1</cell></row><row><cell cols="4">0.1 1.965 946 199 360 310 2.864 944 458 793 144 3.666 380 470 804 380</cell></row><row><cell>1</cell><cell cols="3">1.965 946 199 367 804 2.864 944 458 808 729 3.666 380 470 827 036</cell></row><row><cell>10</cell><cell cols="3">1.965 946 199 367 801 2.864 944 458 808 722 3.666 380 470 827 032</cell></row><row><cell cols="4">100 1.965 946 199 367 835 2.864 944 458 808 774 3.666 380 470 827 074</cell></row><row><cell cols="4">Γ opt 3 /Γ opt 1 4.342 962 293 221 468 4.871 649 743 552 242 5.234 439 004 766 612 1.978 × 10 -30 J opt 3,4 /Γ opt 1 Γ opt 4 /Γ opt 1 C(g opt ) 4.342 962 293 250 046 4.871 649 743 585 524 5.234 439 004 803 110 4.876 × 10 -31 4.342 962 293 250 044 4.871 649 743 585 517 5.234 439 004 803 101 4.013 × 10 -29 4.342 962 293 250 076 4.871 649 743 585 551 5.234 439 004 803 123 4.877 × 10 -27</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 4 :</head><label>4</label><figDesc>Optimal parameters {J XX i,i+r , J Z i,i+r } including all long-range interactions for r max = 4 rounded to four decimal places.</figDesc><table><row><cell></cell><cell>r = 1</cell><cell>r = 2</cell><cell>r = 3</cell><cell>r = 4</cell></row><row><cell>J XX 1,1+r J Z 1,1+r J XX 2,2+r J Z 2,2+r J XX 3,3+r J Z 3,3+r J XX 4,4+r J Z 4,4+r</cell><cell cols="2">0.8435 0.8821 1.6238 -0.0081 0.0056 0.0482 1.6379 0.0111 2.3228 0.0673 2.3268 0.0975 2.8433</cell><cell>0.0013 0.0447 0.0027 0.0265</cell><cell>0.0032 0.0474</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 5 :</head><label>5</label><figDesc>The mean value of the discrepancies as defined in Eq. (32) in the TDL for each subsystem size N A .</figDesc><table><row><cell>N A</cell><cell>θi</cell></row><row><cell>4 5 6 7</cell><cell>0.0443 0.0002 ± 0.0326 0.0006 ± 0.0224 0.0004 ± 0.0154 0.0006 ±</cell></row><row><cell cols="2">the propagated estimated uncertainties of the pa-rameters of the fit (see Eq. (46)) are not larger than than 2 × 10</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head>Table 6 :</head><label>6</label><figDesc>Measures to compare the accuracy of the variational Ansätze, BW-like Ansatz (BW), BW-violating Ansatz (BWV) and the BW-violating Ansatz with all long-range corrections (BWV+c) for the XXZ model.</figDesc><table><row><cell>Ansatz BW BWV BWV+c 0.028 87 ∆κ α 0.013 09 0.012 56</cell><cell>T (ρ A , ρVar A ) 0.007 51 0.019 83 0.030 30</cell><cell>F(ρ A , ρVar A ) 4.173 79 × 10 -4 3.550 22 × 10 -7 C(g opt ) 9.321 76 × 10 -5 5.768 21 × 10 -10 1.373 17 × 10 -6 1.945 40 × 10 -15</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>Table 7 :</head><label>7</label><figDesc>Runtime of the algorithms for the four sets of random initial parameters (i.e. four different runs). Additionally, this happened only one out of four times with random initial parameters.</figDesc><table><row><cell></cell><cell>runtime / s</cell></row><row><cell cols="2">algorithm run 1 run 2 run 3 run 4</cell></row><row><cell cols="2">ConjGrad 2.400 3.088 1.898 2.271</cell></row><row><cell>BFGS</cell><cell>1.727 1.914 1.625 2.494</cell></row><row><cell>LBFGS</cell><cell>0.940 1.372 0.909 1.377</cell></row><row><cell>NM</cell><cell>1.873 2.161 1.779 2.505</cell></row><row><cell>convincing.</cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>We thank <rs type="person">Peter Zoller</rs>, <rs type="person">Christian Kokail</rs> and <rs type="person">Bhuvanesh Sundar</rs> for helpful comments.</p></div>
+			</div>			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Simulating physics with computers</title>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">P</forename><surname>Feynman</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BF02650179</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Theor. Phys</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="467" to="488" />
+			<date type="published" when="1982">1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Universal Quantum Simulators</title>
+		<author>
+			<persName><forename type="first">Seth</forename><surname>Lloyd</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.273.5278.1073</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">273</biblScope>
+			<biblScope unit="page" from="1073" to="1078" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Practical quantum advantage in quantum simulation</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">J</forename><surname>Daley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Immanuel</forename><surname>Bloch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Kokail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Flannigan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalie</forename><surname>Pearson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Troyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41586-022-04940-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">607</biblScope>
+			<biblScope unit="page" from="667" to="676" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Quantum many-body simulations on digital quantum computers: State-ofthe-art and future challenges</title>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Fauseweh</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-024-46402-9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">2123</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Programmable quantum simulations of spin systems with trapped ions</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Monroe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">C</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L.-M</forename><surname>Duan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z.-X</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">V</forename><surname>Gorshkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">W</forename><surname>Hess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">M</forename><surname>Linke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pagano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Richerme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Senko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">Y</forename><surname>Yao</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/RevModPhys.93.025001</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Rev. Mod. Phys</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page">25001</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Quantum many-body systems out of equilibrium</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Eisert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Friesdorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gogolin</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nphys3215</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="124" to="130" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Observation of a many-body dynamical phase transition with a 53-qubit quantum simulator</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Pagano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">W</forename><surname>Hess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kyprianidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Becker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">V</forename><surname>Gorshkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z.-X</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Monroe</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nature24654</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">551</biblScope>
+			<biblScope unit="page" from="601" to="604" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Probing many-body quantum chaos with quantum simulators</title>
+		<author>
+			<persName><forename type="first">Kh</forename><surname>Lata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amit</forename><surname>Elben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Vikram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Vermersch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Galitski</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevX.12.011018</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. X</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">11018</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Probing many-body dynamics on a 51-atom quantum simulator</title>
+		<author>
+			<persName><forename type="first">Hannes</forename><surname>Bernien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sylvain</forename><surname>Schwartz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Keesling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harry</forename><surname>Levine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Omran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannes</forename><surname>Pichler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Soonwon</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">S</forename><surname>Zibrov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuel</forename><surname>Endres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Greiner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vladan</forename><surname>Vuletić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikhail</forename><forename type="middle">D</forename><surname>Lukin</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nature24622</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">551</biblScope>
+			<biblScope unit="page" from="579" to="584" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Quantum simulations with ultracold atoms in optical lattices</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Immanuel</forename><surname>Bloch</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.aal3837</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">357</biblScope>
+			<biblScope unit="page" from="995" to="1001" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Quantum simulations with ultracold quantum gases</title>
+		<author>
+			<persName><forename type="first">Immanuel</forename><surname>Bloch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Dalibard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sylvain</forename><surname>Nascimbène</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nphys2259</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="267" to="276" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Quantum simulations with trapped ions</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Blatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">F</forename><surname>Roos</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nphys2252</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="277" to="284" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">On-chip quantum simulation with superconducting circuits</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">A</forename><surname>Houck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hakan</forename><forename type="middle">E</forename><surname>Türeci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jens</forename><surname>Koch</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nphys2251</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="292" to="299" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Photonic quantum simulators</title>
+		<author>
+			<persName><forename type="first">Alán</forename><surname>Aspuru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-Guzik</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Walther</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nphys2253</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="285" to="291" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Probing topological spin liquids on a programmable quantum simulator</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Semeghini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Levine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Keesling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ebadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">T</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bluvstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Verresen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Pichler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kalinowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Samajdar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Omran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sachdev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vishwanath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Greiner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Vuletić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Lukin</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.abi8794</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">374</biblScope>
+			<biblScope unit="page" from="1242" to="1247" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Variational quantum algorithms</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cerezo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Arrasmith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Babbush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><forename type="middle">C</forename><surname>Benjamin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suguru</forename><surname>Endo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keisuke</forename><surname>Fujii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jarrod</forename><forename type="middle">R</forename><surname>Mcclean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kosuke</forename><surname>Mitarai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukasz</forename><surname>Cincio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><forename type="middle">J</forename><surname>Coles</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s42254-021-00348-9</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Physics</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="625" to="644" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A variational eigenvalue solver on a photonic quantum processor</title>
+		<author>
+			<persName><forename type="first">Alberto</forename><surname>Peruzzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jarrod</forename><surname>Mcclean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Shadbolt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Man-Hong</forename><surname>Yung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiao-Qi</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">J</forename><surname>Love</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alán</forename><surname>Aspuru-Guzik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><forename type="middle">L</forename><surname>O'brien</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/ncomms5213</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">4213</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Scalable quantum simulation of molecular energies</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J J</forename><surname>O'malley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Babbush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">D</forename><surname>Kivlichan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Romero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Mcclean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Barends</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Roushan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tranter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chiaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dunsworth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Fowler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jeffrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Lucero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Megrant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Y</forename><surname>Mutus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Neeley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Quintana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sank</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vainsencher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wenner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">V</forename><surname>Coveney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Love</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Neven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aspuru-Guzik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Martinis</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevX.6.031007</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. X</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">31007</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Hardware-efficient variational quantum eigensolver for small molecules and quantum magnets</title>
+		<author>
+			<persName><forename type="first">Abhinav</forename><surname>Kandala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Mezzacapo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristan</forename><surname>Temme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maika</forename><surname>Takita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Brink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jerry</forename><forename type="middle">M</forename><surname>Chow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jay</forename><forename type="middle">M</forename><surname>Gambetta</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nature23879</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">549</biblScope>
+			<biblScope unit="page" from="242" to="246" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Noise robust detection of quantum phase transitions</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Lively</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Bode</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jochen</forename><surname>Szangolies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian-Xin</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Fauseweh</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevResearch.6.043254</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Res</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">43254</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Variational Quantum Computation of Excited States</title>
+		<author>
+			<persName><forename type="first">Oscar</forename><surname>Higgott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daochen</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Brierley</surname></persName>
+		</author>
+		<idno type="DOI">10.22331/q-2019-07-01-156</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Quantum</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">156</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Subspace-search variational quantum eigensolver for excited states</title>
+		<author>
+			<persName><forename type="first">Ken</forename><forename type="middle">M</forename><surname>Nakanishi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kosuke</forename><surname>Mitarai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keisuke</forename><surname>Fujii</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevResearch.1.033062</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Res</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">33062</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Su(2) hadrons on a quantum computer via a variational approach</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yasar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinglei</forename><surname>Atas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Randy</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amin</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">F</forename><surname>Jahanpour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><forename type="middle">A</forename><surname>Haase</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Muschik</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-021-26825-4</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">6499</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Long-time simulations for fixed input states on quantum hardware</title>
+		<author>
+			<persName><forename type="first">Joe</forename><surname>Gibbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaitlin</forename><surname>Gili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zoë</forename><surname>Holmes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Commeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Arrasmith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukasz</forename><surname>Cincio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><forename type="middle">J</forename><surname>Coles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Sornborger</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41534-022-00625-0</idno>
+	</analytic>
+	<monogr>
+		<title level="s">npj Quantum Information</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">135</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Quantum dynamics simulations beyond the coherence time on noisy intermediate-scale quantum hardware by variational trotter compression</title>
+		<author>
+			<persName><forename type="first">Noah</forename><forename type="middle">F</forename><surname>Berthusen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Thaís</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Trevisan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">P</forename><surname>Iadecola</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Orth</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevResearch.4.023097</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Res</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">23097</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">An efficient quantum algorithm for the time evolution of parameterized circuits</title>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Barison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Filippo</forename><surname>Vicentini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giuseppe</forename><surname>Carleo</surname></persName>
+		</author>
+		<idno type="DOI">10.22331/q-2021-07-28-512</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Quantum</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">512</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Quantum computing Floquet energy spectra</title>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Fauseweh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian-Xin</forename><surname>Zhu</surname></persName>
+		</author>
+		<idno type="DOI">10.22331/q-2023-07-20-1063</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Quantum</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">1063</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Floquet-adapt-vqe: A quantum algorithm to simulate non-equilibrium physics in periodically driven systems</title>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karunya</forename><surname>Shirali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><forename type="middle">J</forename><surname>Mayhall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sophia</forename><forename type="middle">E</forename><surname>Economou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edwin</forename><surname>Barnes</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2503.11613</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Quantum variational learning of the entanglement hamiltonian</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Kokail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bhuvanesh</forename><surname>Sundar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Torsten</forename><forename type="middle">V</forename><surname>Zache</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Elben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Vermersch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcello</forename><surname>Dalmonte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rick</forename><surname>Van Bijnen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.127.170501</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">127</biblScope>
+			<biblScope unit="page">170501</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Entanglement Spectroscopy and probing the Li-Haldane Conjecture in Topological Quantum Matter</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Torsten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Zache</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bhuvanesh</forename><surname>Kokail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Sundar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.22331/q-2022-04-27-702</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Quantum</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">702</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Entanglement hamiltonian tomography in quantum simulation</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Kokail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rick</forename><surname>Van Bijnen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Elben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Vermersch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41567-021-01260-w</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="936" to="942" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Exploring large-scale entanglement in quantum simulation</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Manoj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rick</forename><surname>Kokail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Van Bijnen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Torsten</forename><forename type="middle">V</forename><surname>Kranzl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rainer</forename><surname>Zache</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><forename type="middle">F</forename><surname>Blatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Roos</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41586-023-06768-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">624</biblScope>
+			<biblScope unit="page" from="539" to="544" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Entanglement spectrum as a generalization of entanglement entropy: Identification of topological order in non-abelian fractional quantum hall effect states</title>
+		<author>
+			<persName><forename type="first">Hui</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">D M</forename><surname>Haldane</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.101.010504</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">101</biblScope>
+			<biblScope unit="page">10504</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Entanglement spectrum of topological insulators and superconductors</title>
+		<author>
+			<persName><forename type="first">Lukasz</forename><surname>Fidkowski</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.104.130502</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">104</biblScope>
+			<biblScope unit="page">130502</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Entanglement spectrum of a topological phase in one dimension</title>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Pollmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ari</forename><forename type="middle">M</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erez</forename><surname>Berg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masaki</forename><surname>Oshikawa</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevB.81.064439</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. B</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page">64439</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Emergent conformal boundaries from finite-entanglement scaling in matrix product states</title>
+		<author>
+			<persName><forename type="first">Rui-Zhen</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Long</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><forename type="middle">M</forename><surname>Läuchli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jutho</forename><surname>Haegeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Verstraete</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurens</forename><surname>Vanderstraeten</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.132.086503</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">132</biblScope>
+			<biblScope unit="page">86503</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Power-law entanglement spectrum in many-body localized phases</title>
+		<author>
+			<persName><forename type="first">Maksym</forename><surname>Serbyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexios</forename><forename type="middle">A</forename><surname>Michailidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dmitry</forename><forename type="middle">A</forename><surname>Abanin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Papić</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.117.160601</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">117</biblScope>
+			<biblScope unit="page">160601</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Entanglement spectrum, critical exponents, and order parameters in quantum spin chains</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>De Chiara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lepori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lewenstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sanpera</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.109.237208</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">109</biblScope>
+			<biblScope unit="page">237208</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Scaling of the entanglement spectrum near quantum phase transitions</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lepori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">De</forename><surname>Chiara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sanpera</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevB.87.235107</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. B</title>
+		<imprint>
+			<biblScope unit="volume">87</biblScope>
+			<biblScope unit="page">235107</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Entanglement spectrum and quantum phase diagram of the long-range xxz chain</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Thomson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sanchez-Palencia</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevB.106.014306</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. B</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page">14306</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Measurement of the entanglement spectrum of a symmetry-protected topological state using the ibm quantum computer</title>
+		<author>
+			<persName><forename type="first">Kenny</forename><surname>Choo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Curt</forename><forename type="middle">W</forename><surname>Von Keyserlingk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Regnault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Titus</forename><surname>Neupert</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevLett.121.086808</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. Lett</title>
+		<imprint>
+			<biblScope unit="volume">121</biblScope>
+			<biblScope unit="page">86808</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">On the duality condition for a hermitian scalar field</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">J</forename><surname>Bisognano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eyvind</forename><forename type="middle">H</forename><surname>Wichmann</surname></persName>
+		</author>
+		<idno type="DOI">10.1063/1.522605</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mathematical Physics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="985" to="1007" />
+			<date type="published" when="1975">1975</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">On the duality condition for quantum fields</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">J</forename><surname>Bisognano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eyvind</forename><forename type="middle">H</forename><surname>Wichmann</surname></persName>
+		</author>
+		<idno type="DOI">10.1063/1.522898</idno>
+		<ptr target="https://pubs.aip.org/aip/jmp/article-pdf/17/3/303/19151242/303_1_online.pdf" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mathematical Physics</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="303" to="321" />
+			<date type="published" when="1976">1976</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Quantum simulation and spectroscopy of entanglement hamiltonians</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dalmonte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Vermersch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Zoller</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41567-018-0151-7</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Physics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="827" to="831" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Quantum entanglement</title>
+		<author>
+			<persName><forename type="first">Ryszard</forename><surname>Horodecki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paweł</forename><surname>Horodecki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michał</forename><surname>Horodecki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karol</forename><surname>Horodecki</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/RevModPhys.81.865</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Rev. Mod. Phys</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page" from="865" to="942" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Entanglement spectroscopy and its application to the quantum Hall effects</title>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Regnault</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/acprof:oso/9780198785781.003.0004</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Topological Aspects of Condensed Matter Physics</title>
+		<title level="s">Lecture Notes of the Les Houches Summer School</title>
+		<imprint>
+			<publisher>Oxford University Press</publisher>
+			<date type="published" when="2014-08">August 2014. 2017</date>
+			<biblScope unit="volume">103</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Quantum computation and quantum information: 10th anniversary edition</title>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">A</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isaac</forename><forename type="middle">L</forename><surname>Chuang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>Cambridge University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">Linear Algebra and Its Applications Global Edition</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Lay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Lay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judi</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<ptr target="https://elibrary.pearson.de/book/99.150005/9781292092249" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>Pearson Deutschland</publisher>
+			<biblScope unit="page">576</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Entanglement hamiltonian in the non-hermitian ssh model</title>
+		<author>
+			<persName><forename type="first">Federico</forename><surname>Rottoli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Fossati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pasquale</forename><surname>Calabrese</surname></persName>
+		</author>
+		<idno type="DOI">10.1088/1742-5468/ad4860</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Statistical Mechanics: Theory and Experiment</title>
+		<imprint>
+			<biblScope unit="volume">2024</biblScope>
+			<biblScope unit="page">63102</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Entanglement hamiltonians: From field theory to lattice models and experiments</title>
+		<author>
+			<persName><forename type="first">Marcello</forename><surname>Dalmonte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Viktor</forename><surname>Eisler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Falconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Vermersch</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/andp.202200064</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annalen der Physik</title>
+		<imprint>
+			<biblScope unit="volume">534</biblScope>
+			<biblScope unit="page">2200064</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Entanglement hamiltonians of lattice models via the bisognano-wichmann theorem</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Giudici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mendes-Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Calabrese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dalmonte</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevB.98.134403</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. B</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page">134403</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Entanglement hamiltonian of quantum critical chains and conformal field theories</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mendes-Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Giudici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dalmonte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Rajabpour</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevB.100.155122</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. B</title>
+		<imprint>
+			<biblScope unit="volume">100</biblScope>
+			<biblScope unit="page">155122</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">The one-dimensional ising model with a transverse field</title>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Pfeuty</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0003-4916(70)90270-8</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Physics</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="79" to="90" />
+			<date type="published" when="1970">1970</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Visualizing quantum phase transitions in the xxz model via the quantum steering ellipsoid</title>
+		<author>
+			<persName><forename type="first">Ming-Ming</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Da-Jian</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhao-Yi</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Tong</surname></persName>
+		</author>
+		<idno type="DOI">10.1103/PhysRevA.104.012418</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. A</title>
+		<imprint>
+			<biblScope unit="volume">104</biblScope>
+			<biblScope unit="page">12418</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">Matrix computations -4th edition</title>
+		<author>
+			<persName><forename type="first">Gene</forename><forename type="middle">H</forename><surname>Golub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><forename type="middle">F</forename><surname>Van Loan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>Johns Hopkins University Press</publisher>
+			<pubPlace>Philadelphia, PA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Entanglement, combinatorics and finite-size effects in spin chains</title>
+		<author>
+			<persName><forename type="first">Bernard</forename><surname>Nienhuis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Massimo</forename><surname>Campostrini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pasquale</forename><surname>Calabrese</surname></persName>
+		</author>
+		<idno type="DOI">10.1088/1742-5468/2009/02/P02063</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Statistical Mechanics: Theory and Experiment</title>
+		<imprint>
+			<biblScope unit="page">2063</biblScope>
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Almost commuting matrices need not be nearly commuting</title>
+		<author>
+			<persName><forename type="first">Man-Duen</forename><surname>Choi</surname></persName>
+		</author>
+		<idno type="DOI">10.1090/S0002-9939-1988-0928973-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the American Mathematical Society</title>
+		<imprint>
+			<biblScope unit="volume">102</biblScope>
+			<biblScope unit="page" from="529" to="533" />
+			<date type="published" when="1988">1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Julia: A fresh approach to numerical computing</title>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Bezanson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Edelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Karpinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Viral</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shah</surname></persName>
+		</author>
+		<idno type="DOI">10.1137/141000671</idno>
+	</analytic>
+	<monogr>
+		<title level="j">SIAM review</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="page" from="65" to="98" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Optim: A mathematical optimization package for Julia</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Kofod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mogensen</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Asbjørn</forename><surname>Nilsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riseth</forename></persName>
+		</author>
+		<idno type="DOI">10.21105/joss.00615</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Open Source Software</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">615</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">Chainrules.jl</title>
+		<ptr target="https://github.com/JuliaDiff/ChainRules.jl" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Yao.jl: Extensible, efficient framework for quantum algorithm design</title>
+		<author>
+			<persName><forename type="first">Xiu-Zhe</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jin-Guo</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lei</forename><surname>Wang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">Krylovkit</title>
+		<author>
+			<persName><forename type="first">Jutho</forename><surname>Haegeman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Double exponential formulas for numerical integration</title>
+		<author>
+			<persName><forename type="first">Hidetosi</forename><surname>Takahasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masatake</forename><surname>Mori</surname></persName>
+		</author>
+		<idno type="DOI">10.2977/PRIMS/1195192451</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Publications of the Research Institute for Mathematical Sciences</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="721" to="741" />
+			<date type="published" when="1973">1973</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">Double-exponential transformation: A quick review of a japanese tradition</title>
+		<author>
+			<persName><forename type="first">Kazuo</forename><surname>Murota</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takayasu</forename><surname>Matsuo</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2301.01920</idno>
+		<ptr target="https://doi.org/10.48550/arXiv.2301.01920" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title level="m" type="main">Doubleexponentialformulas</title>
+		<author>
+			<persName><forename type="first">Masaaki</forename><surname>Nakamura</surname></persName>
+		</author>
+		<ptr target="https://machakann.github.io/DoubleExponentialFormulas.jl/stable/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">A comparison of three high-precision quadrature schemes</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">H</forename><surname>Bailey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Jeyabalan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoye</forename><forename type="middle">S</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10586458.2005.10128931</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Experimental Mathematics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="317" to="329" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<author>
+			<persName><forename type="first">Steven</forename><forename type="middle">G</forename><surname>Johnson</surname></persName>
+		</author>
+		<ptr target="https://github.com/JuliaMath/QuadGK.jl" />
+		<title level="m">QuadGK.jl: Gauss-Kronrod integration in Julia</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

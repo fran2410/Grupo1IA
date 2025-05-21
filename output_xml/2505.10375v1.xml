@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Are Sparse Autoencoders Useful for Java Function Bug Detection?</title>
+				<funder>
+					<orgName type="full">Internationalisation Operational Programme (POCI)</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Competitiveness</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Recovery and Resilience Plan (PRR)</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">European Regional Development Fund</orgName>
+					<orgName type="abbreviated">ERDF</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Google Cloud Research Credits Program</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Horizon</orgName>
+				</funder>
+				<funder ref="#_Z36Jcyk">
+					<orgName type="full">Agenda &quot;Center for Responsible AI</orgName>
+				</funder>
+				<funder ref="#_sSYhaFX">
+					<orgName type="full">European Union -NextGeneration EU</orgName>
+				</funder>
+				<funder ref="#_F7GMkdC">
+					<orgName type="full">AISym4Med</orgName>
+				</funder>
+				<funder ref="#_NKEwJFf">
+					<orgName type="full">Lisbon Regional Operational Programme</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Rui</forename><surname>Melo</surname></persName>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Claudia</forename><surname>Mamede</surname></persName>
+							<email>cmamede@andrew.cmu.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Andre</forename><surname>Catarino</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Rui</forename><surname>Abreu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Henrique</forename><surname>Lopes Cardoso</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">FEUP &amp; INESC-ID*</orgName>
+								<address>
+									<settlement>Porto</settlement>
+									<country key="PT">Portugal</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="department">FEUP &amp; CMU</orgName>
+								<orgName type="institution">Carnegie Mellon University</orgName>
+								<address>
+									<settlement>Pittsburgh</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">FEUP Porto</orgName>
+								<address>
+									<country key="PT">Portugal</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="department">FEUP &amp; INESC-ID</orgName>
+								<address>
+									<settlement>Porto</settlement>
+									<country key="PT">Portugal</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="department">FEUP &amp; LIACC</orgName>
+								<address>
+									<settlement>Porto</settlement>
+									<country key="PT">Portugal</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Are Sparse Autoencoders Useful for Java Function Bug Detection?</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">18F184D32015AD110D33D37C4FA7A5AA</idno>
+					<idno type="arXiv">arXiv:2505.10375v1[cs.SE]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:43+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Sparse Autoencoders</term>
+					<term>Large Language Models</term>
+					<term>Bugs</term>
+					<term>Patches</term>
+					<term>Interpretability</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Software vulnerabilities such as buffer overflows and SQL injections are a major source of security breaches. Traditional methods for vulnerability detection remain essential but are limited by high false positive rates, scalability issues, and reliance on manual effort. These constraints have driven interest in AI-based approaches to automated vulnerability detection and secure code generation. While Large Language Models (LLMs) have opened new avenues for classification tasks, their complexity and opacity pose challenges for interpretability and deployment. Sparse Autoencoder offer a promising solution to this problem. We explore whether SAEs can serve as a lightweight, interpretable alternative for bug detection in Java functions. We evaluate the effectiveness of SAEs when applied to representations from GPT-2 Small and Gemma 2B, examining their capacity to highlight buggy behaviour without fine-tuning the underlying LLMs. We found that SAE-derived features enable bug detection with an F1 score of up to 89%, consistently outperforming fine-tuned transformer encoder baselines. Our work provides the first empirical evidence that SAEs can be used to detect software bugs directly from the internal representations of pretrained LLMs, without any fine-tuning or task-specific supervision.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>Software vulnerabilities such as buffer overflows and SQL injections are a major source of security breaches <ref type="bibr" target="#b0">[1]</ref>, <ref type="bibr" target="#b1">[2]</ref>. Such vulnerabilities frequently stem from developers lacking security expertise <ref type="bibr" target="#b2">[3]</ref>. Therefore, ensuring the security of software systems is both a practical necessity and an ongoing challenge in computer science.</p><p>Traditional methods for vulnerability detection, e.g., static analysis, code reviews, and formal verification, remain essential but are limited by high false positive rates <ref type="bibr" target="#b3">[4]</ref>, scalability issues, and reliance on manual effort. These constraints have driven interest in AI-based approaches to automated vulnerability detection and secure code generation.</p><p>While Large Language Models (LLMs) have opened new avenues for classification tasks, their complexity and opacity pose challenges for interpretability and deployment <ref type="bibr" target="#b4">[5]</ref>, raising serious concerns about the safe deployment of LLMs in realworld programming environments <ref type="bibr" target="#b5">[6]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>*Work done as an External Collaborator †Equal Contribution</head><p>Sparse Autoencoders (SAEs) offer a promising solution to this problem. In particular, recent advances using SAEs have shown that neuron activations in transformers can be represented as sparse, linear combinations of meaningful features <ref type="bibr" target="#b6">[7]</ref>- <ref type="bibr" target="#b10">[11]</ref>. By representing activations in this sparse form, we move beyond aggregate or surface-level metrics and gain direct insight into which features contribute to buggy code identification. Thus, mechanistic interpretability provides a promising path forward by seeking to decompose neural networks into human-interpretable components.</p><p>In this paper, we bridge the gap between interpretability research and software security by investigating how LLMs internally represent buggy code patterns. We explore whether SAEs can serve as a lightweight, interpretable alternative for bug detection in Java functions, and ask: Are Sparse Autoencoders useful for Java function bug detection?</p><p>We evaluate the effectiveness of SAEs when applied to representations from GPT-2 Small and Gemma 2B, examining their capacity to highlight buggy behaviour without finetuning the underlying LLMs. Our goal is to assess whether mechanistic interpretability tools, specifically SAEs, can surface actionable features for software vulnerability detection in LLM-generated code. To this end, we conduct the first in-depth empirical study that leverages SAEs in the context of bug detection. We perform a comprehensive layer-wise analysis across both models. Sparse features extracted from neuron activations are then used to train lightweight classifiers, such as random forests.</p><p>This paper makes the following contributions:</p><p>1) Bridging interpretability and software security: We conduct the first in-depth empirical study applying SAEs to internal activations of LLMs for the task of software bug detection, focusing on Java functions. 2) Layer-wise analysis of model representations: We systematically analyse sparse features extracted from two pretrained LLMs, GPT-2 Small and Gemma 2B, across all transformer layers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3) Lightweight classification using interpretable features:</head><p>We demonstrate that simple classifiers (e.g., random forests) trained on SAE-extracted features can detect buggy code with up to 89% F1 score, outperforming fine-tuned transformer encoder baselines. 4) A scalable, interpretable framework for bug detection:</p><p>Our approach highlights a practical path for integrating interpretability tools into security-critical workflows and shows how feature-based representations from SAEs can surface actionable signals for vulnerability detection, without any additional fine-tuning. Our work provides the first empirical evidence that SAEs can be used to detect software bugs directly from the internal representations of pretrained LLMs, without any fine-tuning or task-specific supervision. We show that simple classifiers trained on these interpretable features can outperform finetuned baselines on Java vulnerability detection. These results highlight a practical and scalable approach for using interpretability tools in real-world security tasks and offer a new direction for research at the intersection of AI safety and software engineering. To analyse internal structure, we extract activation vectors x ∈ R d from a frozen LLM at a specific hidden layer. Each activation x is then encoded using a SAE, yielding a sparse representation c ∈ R k , where k ≫ d.</p><p>Our central hypothesis is that a subset of sparse SAE features captures semantically meaningful distinctions between buggy and patched code. Specifically, we posit that across many examples in P, some SAE features consistently differ in their activation between buggy and corrected code.</p><p>Given a dataset D of individual code snippets to be classified, our objective is to learn a binary function f : R k → {0, 1}, where f (c) = 1 denotes buggy code and f (c) = 0 denotes non-buggy code. Here, c = SAE(x), with x ∈ R d being the activation vector derived from a code snippet.</p><p>We restrict f to operate on a small subset of the most informative SAE features, selected using a function TopK. Formally, we aim to learn:</p><formula xml:id="formula_0">Bug(d) ≈ f (TopK(SAE(x d ))) ,</formula><p>where x d denotes the LLM activation vector extracted from code snippet d, and f is a lightweight classifier such as logistic regression or a random forest. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Feature Activation Case Studies</head><p>We further illustrate our methodology via token-level activation patterns.</p><p>Listing 1 presents a buggy and patched implementation of PostgreSQL URL construction. The buggy code improperly appends a trailing slash even when the database name is absent, risking malformed URLs.</p><p>The token-wise activation of Feature 6111 (Figure <ref type="figure" target="#fig_2">3</ref>) shows elevated activations around bug-prone operations, such as URL concatenations. This indicates GPT-2 Small's capacity to localise critical code regions associated with security risks.</p><p>A second example, shown in Listing 2, involves string literal construction. The buggy code conditionally selects quotation marks, potentially introducing inconsistencies.</p><p>Similarly, for Gemma 2B we can see the activation patterns of Feature 1987 (Figure <ref type="figure" target="#fig_3">4</ref>) highlight critical tokens involved in conditional logic, again showcasing the model's capacity to surface bug-relevant semantics.</p><p>Listing 1: Buggy and patched implementations of URL construction. Together, these examples demonstrate that sparse autoencoder features capture meaningful semantic distinctions between buggy and secure code, offering a promising pathway toward interpretable bug detection.</p><p>Ultimately, our research question is whether this approach, relying only on latent representations from a static LLM and sparse dictionary features, can effectively distinguish between buggy and non-buggy Java functions without model finetuning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. METHODOLOGY</head><p>Our approach centers on retrieving the activated features from various SAEs, each corresponding to individual layers of the LLM. We then select the most meaningful of these features and use them as input for simple classifiers.</p><p>Notably, our method does not require fine-tuning the LLM. Instead, we aim to leverage the representations produced by a generic encoder and repurpose them for our specific task.</p><p>To evaluate our approach, we compare it against State of the Art (SOTA) classifiers and more naive baseline methods. An overview of the full methodology is illustrated in Figure <ref type="figure" target="#fig_4">5</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Data</head><p>Following recent related work <ref type="bibr" target="#b11">[12]</ref>- <ref type="bibr" target="#b14">[15]</ref>, we select three Java Datasets for our evaluation, scoping it to singlefunction bugs: Defects4J <ref type="bibr" target="#b15">[16]</ref>, HumanEval <ref type="bibr" target="#b16">[17]</ref>, and Github-Bug Java <ref type="bibr" target="#b17">[18]</ref>. Defects4J comprises 835 realworld bugs sourced from 17 open-source Java projects, from HumanEval contains 162 single-function bugs artificially inserted in HumanEval <ref type="bibr" target="#b5">[6]</ref>.</p><p>All datasets contain buggy snippets and patched versions, allowing us to have a balanced dataset immediately. We focus on binary classification, with the target being either 0 or 1. To train and evaluate our models, we randomly split each dataset into 80% training and 20% testing sets. The selected datasets will be used to systematically investigate model behaviour in detecting software bugs. These datasets provide a diverse set of real-world coding errors, enabling a robust model performance evaluation. The simple data structure can be visualised in Figure <ref type="figure" target="#fig_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Pairwise Approach</head><p>We analyse how a model processes different types of inputs, focusing on the differences in its handling of buggy code versus patched code. We employ Random Forest to evaluate the classification performance on the SAEs' learned feature representations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Classical Data Mining</head><p>We then apply TF-IDF vectorisation to the token sequences for our classical baselines, producing feature representations. To ensure uniform input sizes across models, we pad each vector to a fixed dimensionality of 5000 features. We perform an extensive grid search to identify optimal hyperparameters for each classical algorithm.</p><p>a) K-Nearest Neighbours (KNN): For KNN, we explore a range of neighbourhood sizes to balance bias and variance. Since KNN performance is sensitive to the choice of distance metric and weighting scheme, we fixed the metric to Euclidean distance and used distance-based weighting. The hyperparameters tuned were:</p><p>• n_neighbors: {1, 3, 5, 7, 10, 20, 50} • weights: {uniform, distance} • metric: {euclidean} b) Random Forest: Random Forest was evaluated using varying numbers of decision trees and different configurations for tree depth and branching criteria. We aimed to capture a balance between underfitting and overfitting by tuning the following hyperparameters:</p><p>• n_estimators: {100, 300, 1000} • max_features: {sqrt, log2} • max_depth: {None, 10, 50, 100}</p><formula xml:id="formula_1">• min_samples_split: {2, 5, 10} • min_samples_leaf: {1, 2, 4}</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Sparse Autoencoders for Activation Analysis</head><p>Rather than merely identifying where the model processes code information, our approach aims to uncover how its processing differs between our two categories. We sample the internal activations on the residual stream.</p><p>By directly analysing model activations and decision patterns for different inputs, this method helps identify key features that influence code classification as buggy or its patched counterpart. These insights enhance the interpretability of the model's internal representations and decision-making processes.</p><p>To identify the most informative latent features for classification, we compute the average absolute activation difference between the buggy and patched versions across the dataset P with regard to our training set.</p><p>Given an SAE encoder function SAE(•) that maps an input activation vector to a sparse latent vector c ∈ R k , we define the feature-wise difference as:</p><formula xml:id="formula_2">∆ j = 1 p p i=1 |SAE(p buggy ) j -SAE(p patched ) j | ,<label>(1)</label></formula><p>where ∆ j denotes the average activation difference of feature j across all N training code pairs. The operator SAE(x) j denotes the activation of feature j for input x.</p><p>We define the set of the most discriminative features as:</p><formula xml:id="formula_3">TopK(∆, k) = {j 1 , j 2 , . . . , j k } (2) such that ∆ j1 , . . . , ∆ j k are the top-k values of ∆.</formula><p>This selection ensures that we use only the most activationsensitive features, those that consistently vary between buggy and patched versions, for our downstream classification. These features are then used as input to lightweight Random Forest classifiers. We summarise the full feature selection and classifier training pipeline in Algorithm 1.</p><p>In our experiments, we integrate pre-trained SAEs sourced from prior work for each model under study. For GPT-2 Small, we use the SAEs developed by Joseph Bloom <ref type="bibr" target="#b18">[19]</ref>, where each SAE replaces one of the 12 attention layers in the architecture. To facilitate feature-level analysis, we run inference over the entire training set and record the activations of each latent in the corresponding SAE. For Gemma 2B, we utilise the comprehensive suite of JumpReLU SAEs released Activation Difference Computation:</p><formula xml:id="formula_4">3:</formula><p>Initialize ∆ ∈ R k to zeros; 4: for each (x</p><formula xml:id="formula_5">(i) buggy , x (i) patched ) ∈ D do 5: c (i) buggy ← SAE(x (i) buggy ); 6: c (i) patched ← SAE(x (i)</formula><p>patched ); return f ; 21: end by DeepMind as part of the Gemma Scope project <ref type="bibr" target="#b19">[20]</ref>, covering all layers of the Gemma 2B model.</p><p>We observe that a substantial fraction of SAE latents remain largely inactive across inputs. Specifically, each GPT-2 Small SAE contains 24,576 features, while SAEs in Gemma 2B contain 16,384 features. Due to the intrinsic sparsity encouraged by the SAE training objective, most latents are rarely activated: a phenomenon illustrated in Figure <ref type="figure" target="#fig_6">6</ref>. Predictive Utility Evaluation. After characterizing feature behaviour at the token level, we evaluate their predictive strength across the dataset.</p><p>We train Random Forest classifiers using the selected topk features, assessing how well sparse latent activations can support downstream bug classification tasks. Performance is measured across varying values of of top-k, highlighting the trade-offs between feature sparsity and classification accuracy. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E. Fine-Tuning Neural Baselines</head><p>To benchmark the performance of our sparse feature-based approach against strong neural baselines, we fine-tune three transformer-based models for binary classification: Graph-CodeBERT <ref type="bibr" target="#b20">[21]</ref>, ModernBERT-base <ref type="bibr" target="#b21">[22]</ref>, and ModernBERTlarge. Each model is trained to distinguish between buggy and patched code snippets using our curated dataset of Java functions.</p><p>a) GraphCodeBERT: GraphCodeBERT is pre-trained on code and code-related natural language using a multi-modal objective. We fine-tune it for 20 epochs with a batch size of 16, a learning rate of 2e -5 , and weight decay of 0.01. We use the AdamW optimizer and apply evaluation at each epoch, retaining the best-performing checkpoint based on validation accuracy.</p><p>b) ModernBERT-base and ModernBERT-large: Modern-BERT <ref type="bibr" target="#b21">[22]</ref> is a recently proposed transformer architecture, with improvements in pre-training dynamics and token handling. We include both the base and large variants. ModernBERT-base contains approximately 110M parameters, while ModernBERT-large has around 345M parameters. We adopt the same training configuration as with GraphCode-BERT.</p><p>These models represent high-capacity, end-to-end fine-tuned baselines that directly contrast with our interpretable pipeline based on SAE activations. By including both a code-specialised transformer (GraphCodeBERT) and modern general-purpose models (ModernBERT), we provide a comprehensive view of model performance across paradigms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. RESULTS</head><p>Figure <ref type="figure" target="#fig_8">7</ref> provides a comprehensive visualisation of the F1 score (a) and accuracy (b) for each model. Across all datasets, models leveraging representations from Gemma 2B achieved higher F1 Scores and accuracy metrics than the baselines. Notably, in the Github-Bug Java dataset, RF Gemma 2B attained an F1 Score of 0.89, outperforming all other configurations by a significant margin.</p><p>Interestingly, GPT-2 Small exhibited strong results with simple Random Forest models, suggesting that fine-grained information can be captured by simpler LLM, providing highly predictive information.</p><p>For the Defects4J dataset, although all methods showed lower performance relative to Github-Bug Java, GPT-2 Small models still provided a noticeable advantage over baselines. GPT-2 Small RF achieved an F1 Score of 0.76, significantly surpassing GraphCodeBERT and ModernBERT variants.</p><p>On the HumanEval dataset, results were more nuanced. Here, Gemma 2B RF led with a score of 0.67, suggesting that Gemma 2B's learned representations generalise better to unseen examples. It is essential to highlight that GPT-2 Small and Gemma 2B maintained strong performance despite the increased complexity and variability of code snippets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Feature Importance Analysis</head><p>To provide further insight into the learned representations, we examine the feature importance derived from Random Forest classifiers applied at layer 0 for each model. Figure <ref type="figure">9</ref> presents the cumulative feature importance plots for GPT-2 Small and Gemma 2B.</p><p>As shown in Figures <ref type="figure">9a</ref> and<ref type="figure">9b</ref>, Gemma 2B achieves high cumulative importance using fewer features, indicating that its early-layer representations are more compact and discriminative. In contrast, the feature importance for GPT-2 Smallis distributed more gradually, suggesting broader but less concentrated utilisation of the feature space.</p><p>These findings, while not part of the primary evaluation, support the broader hypothesis that Gemma 2B encodes more salient and expressive code semantics, particularly in its early layers. Classical machine learning methods such as Random Forests can leverage this structured information effectively, even with minimal preprocessing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Transferability</head><p>To further assess the robustness of our learned representations, we conduct a transferability study in a formal setting.</p><p>Let D source and D target denote two code datasets, each consisting of code snippet pairs as defined in Section II. We consider a model f source trained and tuned on D source . The F1 Score achieved by f source when evaluated on dataset D is denoted by F1(f source , D).</p><p>(3)</p><p>We define the relative performance shift ∆ when transferring f source to D target as:</p><formula xml:id="formula_6">∆(D source → D target ) = F1(f source , D target ) -F1(f source , D source ) F1(f source , D source ) .<label>(4)</label></formula><p>Here, ∆ captures the proportional change in F1 Score:</p><p>• A small absolute value |∆| indicates strong transferability and robust feature extraction. • A large negative ∆ suggests overfitting to domain-specific patterns or limited cross-domain applicability. Specifically, we evaluate cases such as ∆(Github-Bug Java → Defects4J) and ∆(Defects4J → Github-Bug Java), measuring how models generalise between different code corpora.</p><p>The results, illustrated in Figure <ref type="figure" target="#fig_0">10</ref>, provide insight into the degree to which GPT-2 Small and Gemma 2B encode transferable, domain-independent representations. Our GPT-2 Small approach seems to have more degradation when transferring onto HumanEval. Throughout the other permutations of transferability settings between datasets, our approaches seem to be competitive, compared to transformer-based approaches, even surpassing (e.g. ∆(HumanEval → Github-Bug Java).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. DISCUSSION</head><p>Our study highlights several insights regarding the use of SAEs for bug detection in code without fine-tuning LLMs.</p><p>First, we observe that feature representations extracted from pre-trained LLMs, particularly through sparse encoding, can yield competitive or even superior bug detection performance compared to fully fine-tuned baselines. In particular, features extracted from Gemma 2B consistently outperform those from GPT-2 Small, suggesting that newer, larger models encode more discriminative and robust representations even without task-specific adaptation. This supports the emerging perspective that modern LLMs serve as strong feature extractors across diverse downstream tasks.</p><p>Second, our findings show that relatively simple models, such as random forests, are capable of effectively leveraging sparse LLM-derived features for classification. This result contrasts with the conventional reliance on deep fine-tuning and hints at an alternative paradigm for adapting foundation models: extracting and manipulating sparse internal representations instead of modifying model weights.</p><p>Third, the transferability analysis reveals that models built upon SAE features generalise reasonably well across different code datasets, though some degradation is expected. Notably, Gemma 2B's representations showed more consistent crossdataset performance, suggesting that its latent space captures higher-level semantic properties rather than dataset-specific   artefacts. However, a non-trivial drop in transfer performance between certain dataset pairs highlights the challenge of domain shifts even within the realm of Java code.</p><p>While promising, these results warrant caution. As discussed in Section VII, recent findings indicate that SAE latents can appear interpretable even in untrained models. This raises the possibility that some of the extracted features, while predictive, may not correspond to meaningful computational circuits but instead reflect superficial patterns such as token statistics or architectural biases. Further work is needed to systematically disentangle these factors.</p><p>Additionally, our reliance on simple classification tasks (binary buggy vs. safe) might overestimate the true semantic alignment between SAE features and buggy concepts. Extending this approach to finer-grained buggy categorisation (e.g., distinguishing buffer overflows from injection flaws) would provide stronger evidence of semantic coherence. Finally, while our approach eliminates the need for fine-tuning, it still assumes access to SAE models trained on the residual stream activations. Although recent public efforts have made such models increasingly available, the cost and complexity of training high-quality SAEs remain non-trivial, especially for very large LLMs.</p><p>Overall, our results suggest a promising but nuanced role for sparse feature extraction in AI-driven software security. Rather than relying solely on black-box fine-tuned models, future systems may blend mechanistic interpretability with lightweight classical learning to build more trustworthy, auditable, and efficient AI tools for code analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VI. CONCLUSION</head><p>We applied SAE to bug detection in Java, using models trained on LLM residual stream activations <ref type="bibr" target="#b18">[19]</ref>, <ref type="bibr" target="#b19">[20]</ref>. This enabled us to extract meaningful latents that distinguish buggy from safe code without fine-tuning the underlying models.</p><p>Our results demonstrate that sparse representations derived from pre-trained LLMs, when paired with simple classical classifiers like Random Forest, can outperform fine-tuned transformer-based baselines such as GraphCodeBERT and ModernBERT on multiple datasets. Furthermore, our qualitative case studies show that specific SAE features align with semantically meaningful buggy patterns, suggesting a promising direction for interpretable security analysis.</p><p>We also highlight the encouraging transferability of sparse features across datasets, supporting the notion that large pretrained models encode robust code representations that can be repurposed efficiently. However, challenges remain, particularly in verifying the true semantic depth of extracted features and generalising beyond binary classification tasks.</p><p>Overall, this study advances the case for lightweight and interpretable alternatives to full model fine-tuning in AI-driven software security. Future work should extend these findings across multiple programming languages, enhance feature-level interpretability, and explore hybrid approaches that integrate sparse neural features. Together, these directions aim to enable more trustworthy, scalable, and accountable bug and vulnerability detection systems. Our results lay a foundation for developing AI-driven security tools that prioritise interpretability and reliability alongside predictive performance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VII. THREATS TO VALIDITY</head><p>a) Interpretability of Sparse Autoencoders: While SAEs have recently gained popularity as a method for extracting interpretable representations from transformer models, recent evidence suggests caution when interpreting their outputs. Heap et. al <ref type="bibr" target="#b22">[23]</ref> demonstrate that SAEs trained on the activations of randomly initialised transformers, models that have never been trained on meaningful data, can yield latent representations with auto-interpretability scores comparable to those from fully trained models. This finding challenges the assumption that interpretable SAE latents necessarily reflect meaningful or learned computational structure.</p><p>In our work, we use SAEs for downstream code classification. Yet, since similar SAE features can arise in untrained models, our results may reflect superficial input patterns or architectural biases, rather than model-computed semantics.</p><p>b) Cost of SAE Pretraining: While our method eliminates the need for fine-tuning the base LLM, it relies on access to SAEs trained on the model's residual stream activations. Training high-quality SAEs is itself a non-trivial task, often requiring substantial computational resources, especially for large models like Gemma 2B or newer architectures. Pub-licly available pre-trained SAEs <ref type="bibr" target="#b23">[24]</ref> mitigate this cost for commonly studied models. However, for novel, proprietary, or rapidly evolving models, the requirement to train new SAEs remains a significant overhead. Future research could investigate lightweight or on-the-fly sparse feature extraction methods to reduce the computational burden further.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VIII. RELATED WORK</head><p>At its core, mechanistic interpretability seeks to model neural networks as structured circuits: composable programs that manipulate interpretable features representing meaningful input properties <ref type="bibr" target="#b24">[25]</ref>, <ref type="bibr" target="#b25">[26]</ref>. These features might correspond to linguistic constructs in Language Models (LMs) or securityrelevant patterns in code-generation systems. Complementary to this perspective, propositional interpretability frames Artificial Intelligence (AI) cognition through the lens of propositional attitudes, belief-like states that govern knowledge representation and decision-making <ref type="bibr" target="#b26">[27]</ref>. Together, these approaches enable a systematic analysis of how models internally represent and manipulate domain-specific concepts.</p><p>The integration of Explainable AI (XAI) presents a promising avenue for identifying specific model behaviours that lead to bugs or vulnerabilities, thereby enabling targeted interventions. For instance, by analysing the internal representations of LLMs during code generation, researchers can discern patterns associated with insecure coding practices and develop mechanisms to mitigate such risks. This enhanced interpretability not only fosters trust in the model but also facilitates the development of more secure AI systems.</p><p>One of the most important approaches in LLMinterpretability is the use of SAEs <ref type="bibr" target="#b23">[24]</ref>. This Autoencoder variant is designed to learn efficient representations by enforcing sparsity constraints on the hidden layer activations. Unlike conventional Autoencoders, which mainly aim at reconstructing input data, SAEs incorporate an additional restriction that promotes the activation of only a small subset of neurons at any given moment <ref type="bibr" target="#b27">[28]</ref>- <ref type="bibr" target="#b31">[32]</ref>.</p><p>Let M ∈ R dhid×din denote the feature dictionary matrix. Given an input vector x ∈ R din , the SAE computes the hiddenlayer activations c ∈ R dhid with c = ReLU(M x + b), where b ∈ R dhid is a bias vector. The reconstruction x ∈ R din is then obtained via x = M ⊤ c. Here, c serves as a sparse latent representation of the input, with the non-zero coefficients indicating which dictionary atoms 1 are active in reconstructing x. The autoencoder is trained to minimise the objective: L(x) = ∥x -x∥ 2 2 + α∥c∥ 1 , where α controls the sparsity of the reconstruction. The L 1 loss term on c encourages our reconstruction to be a sparse linear combination of the dictionary features.</p><p>Contemporary research has expanded along several axes: improving SAE reconstruction fidelity <ref type="bibr" target="#b27">[28]</ref>- <ref type="bibr" target="#b31">[32]</ref>, enhancing training efficiency <ref type="bibr" target="#b34">[35]</ref>, and developing evaluation benchmarks <ref type="bibr" target="#b35">[36]</ref>. Interestingly, and as noted by Kantamneni et al. <ref type="bibr" target="#b36">[37]</ref>, 1 In the context of SAEs and dictionary learning, a dictionary atom refers to a learned basis vector used to reconstruct the input <ref type="bibr" target="#b32">[33]</ref>, <ref type="bibr" target="#b33">[34]</ref>.</p><p>there is a notable scarcity of studies presenting negative evidence regarding the effectiveness of SAEs on downstream tasks. To our knowledge, only a limited number of investigations have reported such findings. For instance, Chaudhary and Geiger <ref type="bibr" target="#b37">[38]</ref> observed that SAE-derived latent representations perform worse than individual neurons when it comes to disentangling geographic features. Similarly, Farrell et al. <ref type="bibr" target="#b38">[39]</ref> demonstrated that constraining related SAE latents is less effective than conventional methods for the task of unlearning sensitive bioweapon-related knowledge. Given the paucity of such counterexamples, it remains uncertain whether SAEs are on the verge of proving distinctly advantageous, or if their utility has been overstated.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IX. FUTURE WORK</head><p>Several directions remain open for future research. First, a deeper analysis of attention patterns could enhance our understanding of how different layers contribute to bug detection. We may uncover more precise circuits responsible for identifying insecure code structures by isolating attention heads and studying their activation behaviours.</p><p>Second, expanding our study to larger and more contemporary LLMs, such as Deepseek, would provide insights into whether our findings generalise across architectures. Investigating whether the same feature representations emerge in different models would strengthen the case for mechanistic interpretability in security applications.</p><p>Finally, our work suggests the potential for a hybrid approach combining mechanistic interpretability with traditional code analysis tools. By fusing neural representations with symbolic reasoning methods, we may develop more comprehensive frameworks for AI-driven bug detection.</p><p>We believe that advancing these directions will contribute to building safer and more transparent AI-assisted programming environments, ultimately reducing security risks in automated software development.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 :</head><label>1</label><figDesc>Fig. 1: Overview of data used.</figDesc><graphic coords="2,58.83,268.32,231.33,236.38" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 :</head><label>2</label><figDesc>Fig. 2: An illustration of the SAE feature selection based on the average difference between feature activation for buggy and safe code.</figDesc><graphic coords="2,321.84,244.21,231.33,196.63" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 :</head><label>3</label><figDesc>Fig. 3: Token-wise activation of Feature 6111 for the code in Figure 1. Elevated activations correlate with bug-relevant tokens.</figDesc><graphic coords="3,324.53,50.54,225.95,263.61" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 :</head><label>4</label><figDesc>Fig. 4: Token-wise activation of Gemma 2B's Layer 0 Feature 1987 for the code in Code 2.</figDesc><graphic coords="4,61.52,50.54,225.95,263.61" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 5 :</head><label>5</label><figDesc>Fig. 5: Overview of the proposed methodology.</figDesc><graphic coords="5,48.96,50.54,514.09,74.70" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>11 :v 1 = 19 :</head><label>11119</label><figDesc>top-k most discriminative features: F top = TopK(∆, k); Training Data Construction (using only F top ): 12: D train = ∅; 13: for each (x SAE(x (i) buggy )[F top ] ▷ retain only TopK features 15: v 2 = SAE(x (i) patched )[F top ]; 16: D train = D train ∪ {(v 1 , 1), (v 2 , 0)}; 17: end for 18: Train classifier f on D train ; 20:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 6 :</head><label>6</label><figDesc>Fig. 6: Gemma 2B Layer 17 SAE activations throughout the buggy and safe versions of HumanEval</figDesc><graphic coords="5,321.84,165.29,231.34,192.83" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig. 7 :</head><label>7</label><figDesc>Fig. 7: Model Evaluation Results: F1 scores, accuracy for different models.</figDesc><graphic coords="7,48.96,210.45,514.06,208.18" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Fig. 8 :</head><label>8</label><figDesc>Fig. 8: Layer-wise classification performance heatmap using SAE-derived features. This heatmap visualises the F1 scores achieved by Random Forest classifiers trained on Top-K SAE features extracted from each layer of GPT-2 Small and Gemma 2B. Each cell corresponds to a specific model-layer combination, with colour intensity indicating predictive strength (darker is better).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Fig. 9 :Fig. 10 :</head><label>910</label><figDesc>Fig. 9: Cumulative feature importance from Random Forest models applied to layer 0 representations.</figDesc><graphic coords="8,48.96,211.17,514.06,200.29" type="bitmap" /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGEMENTS</head><p>This research used computing resources partially provided by the <rs type="funder">Google Cloud Research Credits Program</rs>. This work was partially funded by projects <rs type="funder">AISym4Med</rs> (<rs type="grantNumber">101095387</rs>) supported by <rs type="funder">Horizon</rs> Europe Cluster 1: Health, Connect-edHealth (n.º 46858), supported by <rs type="funder">Competitiveness</rs> and <rs type="funder">Internationalisation Operational Programme (POCI)</rs> and <rs type="funder">Lisbon Regional Operational Programme</rs> (<rs type="grantNumber">LISBOA 2020</rs>), under the <rs type="programName">PORTUGAL 2020 Partnership Agreement</rs>, through the <rs type="funder">European Regional Development Fund (ERDF)</rs> and <rs type="funder">Agenda "Center for Responsible AI</rs>", nr. <rs type="grantNumber">C645008882-00000055</rs>, investment project nr. 62, financed by the <rs type="funder">Recovery and Resilience Plan (PRR)</rs> and by <rs type="funder">European Union -NextGeneration EU</rs>, and also by FCT plurianual funding for 2020-2023 of LIACC (<rs type="grantNumber">UIDB/00027/2020 UIDP/00027/2020</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_F7GMkdC">
+					<idno type="grant-number">101095387</idno>
+				</org>
+				<org type="funding" xml:id="_NKEwJFf">
+					<idno type="grant-number">LISBOA 2020</idno>
+					<orgName type="program" subtype="full">PORTUGAL 2020 Partnership Agreement</orgName>
+				</org>
+				<org type="funding" xml:id="_Z36Jcyk">
+					<idno type="grant-number">C645008882-00000055</idno>
+				</org>
+				<org type="funding" xml:id="_sSYhaFX">
+					<idno type="grant-number">UIDB/00027/2020 UIDP/00027/2020</idno>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">A first step towards automated detection of buffer overrun vulnerabilities</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Wagner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Brewer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aiken</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NDSS</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">0</biblScope>
+			<biblScope unit="page">0</biblScope>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Basic concepts and taxonomy of dependable and secure computing</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Avizienis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-C</forename><surname>Laprie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Randell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Landwehr</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on dependable and secure computing</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="11" to="33" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">An analysis of openstack vulnerabilities</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">A</forename><surname>Elia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Antunes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Laranjeiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vieira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2017 13th European Dependable Computing Conference (EDCC)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="129" to="134" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A few billion lines of code later: using static analysis to find bugs in the real world</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bessey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Block</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chelf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hallem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Henri-Gros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mcpeak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Engler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="66" to="75" />
+			<date type="published" when="2010">2010</date>
+			<publisher>ACM</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">On the opportunities and risks of foundation models</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bommasani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Hudson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Adeli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Altman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Arora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Arx</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bohg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bosselut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Brunskill</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2108.07258</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tworek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">P D O</forename><surname>Pinto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Edwards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Burda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Brockman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2107.03374</idno>
+		<title level="m">Evaluating large language models trained on code</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Feature visualization</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mordvintsev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Schubert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Distill</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page">e7</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Linear algebraic structure of word senses, with applications to polysemy</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Arora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Risteski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Association for Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="483" to="495" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Transformer visualization via dictionary learning: contextualized embedding as a linear superposition of transformer factors</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Olshausen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lecun</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2103.15949</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">A is for absorption: Studying feature splitting and absorption in sparse autoencoders</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Chanin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wilken-Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Dulka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Bhatnagar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bloom</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Towards monosemanticity: Decomposing language models with dictionary learning</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bricken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Templeton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Batson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jermyn</surname></persName>
+		</author>
+		<ptr target="https://transformer-circuits.pub/2023/monosemantic-features/index.html" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note>Transformer Circuits Thread</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Repairllama: Efficient representations and fine-tuned adapters for program repair</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Monperrus</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2312.15698</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Keep the conversation going: Fixing 162 out of 337 bugs for $0.42 each using chatgpt</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2304.00385</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Practical program repair in the era of large pre-trained language models</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2210.14179</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Cure: Code-aware neural machine translation for automatic program repair</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lutellier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Tan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2021 IEEE/ACM 43rd International Conference on Software Engineering (ICSE)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1161" to="1173" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Defects4j: a database of existing faults to enable controlled testing studies for java programs</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Just</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Jalali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Ernst</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2610384.2628055</idno>
+		<ptr target="https://doi.org/10.1145/2610384.2628055" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 International Symposium on Software Testing and Analysis, ser. ISSTA 2014</title>
+		<meeting>the 2014 International Symposium on Software Testing and Analysis, ser. ISSTA 2014<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="437" to="440" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Impact of code language models on automated program repair</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lutellier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Tan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="1430" to="1442" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Gitbug-java: A reproducible benchmark of recent java bugs</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Saavedra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Monperrus</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3643991.3644884</idno>
+		<ptr target="https://doi.org/10.1145/3643991.3644884" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 21st International Conference on Mining Software Repositories, ser. MSR &apos;24</title>
+		<meeting>the 21st International Conference on Mining Software Repositories, ser. MSR &apos;24<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="118" to="122" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Open source sparse autoencoders for all residual stream layers of gpt2-small</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">I</forename><surname>Bloom</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">aI Alignment Forum</orgName>
+			</affiliation>
+		</author>
+		<ptr target="https://www.alignmentforum.org/posts/f9EgfLSurAiqRJySD/open-source-sparse-autoencoders-for-all-residual-stream" />
+		<imprint>
+			<date type="published" when="2023-12">December 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lieberum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rajamanoharan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Conmy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Sonnerat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Varma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kramár</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dragan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nanda</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2408.05147</idno>
+		<title level="m">Gemma scope: Open sparse autoencoders everywhere all at once on gemma 2</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Graphcodebert: Pre-training code representations with data flow</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Duan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Svyatkovskiy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tufano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Deng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Clement</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Drain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Sundaresan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhou</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2009.08366" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Smarter, better, faster, longer: A modern bidirectional encoder for fast, memory efficient, and long context finetuning and inference</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Warner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chaffin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Clavié</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Weller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Hallström</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Taghadouini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gallagher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Biswas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ladhak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Aarsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Cooper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Adams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Howard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Poli</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2412.13663" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Sparse autoencoders can interpret randomly initialized transformers</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Heap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lawson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Farnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Aitchison</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.17727</idno>
+		<ptr target="https://arxiv.org/abs/2501.17727" />
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<author>
+			<persName><forename type="first">H</forename><surname>Cunningham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ewart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Riggs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Huben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sharkey</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2309.08600</idno>
+		<title level="m">Sparse autoencoders find highly interpretable features in language models</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">A philosophical introduction to language models-part ii: The way forward</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Millière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Buckner</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2405.03207</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sharkey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chughtai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Batson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lindsey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bushnaq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Goldowsky-Dill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Heimersheim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ortega</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bloom</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.16496</idno>
+		<title level="m">Open problems in mechanistic interpretability</title>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Chalmers</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.15740</idno>
+		<title level="m">Propositional interpretability in artificial intelligence</title>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Jumping ahead: Improving reconstruction fidelity with jumprelu sparse autoencoders</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rajamanoharan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lieberum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Sonnerat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Conmy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Varma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kramár</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nanda</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.14435</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Batchtopk sparse autoencoders</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bussmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Leask</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nanda</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2412.06410</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Scaling and evaluating sparse autoencoders</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">D</forename><surname>Tour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Tillman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Goh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Troll</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Circuits updates -april 2024 -transformer circuits</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Conerly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Templeton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bricken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Marcus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Henighan</surname></persName>
+		</author>
+		<idno>15-02-2025</idno>
+		<ptr target="https://transformer-circuits.pub/2024/april-update/index.html#training-saes" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Towards monosemanticity: Decomposing language models with dictionary learning</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bricken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Templeton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Batson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jermyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Conerly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Anil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Denison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lasenby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kravec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Schiefer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Maxwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Hatfield-Dodds</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Tamkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mclean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E</forename><surname>Burke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Carter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Henighan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olah</surname></persName>
+		</author>
+		<ptr target="https://transformercircuits.pub/2023/monosemantic-features/index.html" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Online learning for matrix factorization and sparse coding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mairal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ponce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sapiro</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/0908.0050" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Towards monosemanticity: Decomposing language models with dictionary learning</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Bricken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Templeton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Batson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jermyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Conerly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Anil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Denison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transformer Circuits Thread</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Efficient dictionary learning with switch sparse autoencoders</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mudide</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Engels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Michaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tegmark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>De Witt</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Potts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Geva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Geiger</surname></persName>
+		</author>
+		<title level="m">Ravel: Evaluating interpretability methods on disentangling language model representations</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Are sparse autoencoders useful? a case study in sparse probing</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kantamneni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Engels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rajamanoharan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tegmark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nanda</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2502.16681</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Evaluating open-source sparse autoencoders on disentangling factual knowledge in gpt-2 small</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chaudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Geiger</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2409.04478" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Applying sparse autoencoders to unlearn knowledge in language models</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Farrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-T</forename><surname>Lau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Conmy</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2410.19278</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

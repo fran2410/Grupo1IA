@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Emotion-sensitive Explanation Model</title>
+				<funder ref="#_6gVdfnW">
+					<orgName type="full">Deutsche Forschungsgemeinschaft (DFG, German Research Foundation</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Christian</forename><surname>Schütze</surname></persName>
+							<email>christian.schuetze@uni-bielefeld.de</email>
+							<affiliation key="aff0">
+								<orgName type="department" key="dep1">Medical Assistance Systems</orgName>
+								<orgName type="department" key="dep2">Medical School OWL</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Center for Cognitive Interaction Technology (CITEC)</orgName>
+								<orgName type="institution">Bielefeld University</orgName>
+								<address>
+									<region>ORCID</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Birte</forename><surname>Richter</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department" key="dep1">Medical Assistance Systems</orgName>
+								<orgName type="department" key="dep2">Medical School OWL</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Center for Cognitive Interaction Technology (CITEC)</orgName>
+								<orgName type="institution">Bielefeld University</orgName>
+								<address>
+									<region>ORCID</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Britta</forename><surname>Wrede</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department" key="dep1">Medical Assistance Systems</orgName>
+								<orgName type="department" key="dep2">Medical School OWL</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Center for Cognitive Interaction Technology (CITEC)</orgName>
+								<orgName type="institution">Bielefeld University</orgName>
+								<address>
+									<region>ORCID</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Emotion-sensitive Explanation Model</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">2FCB3D8F94B3D78FB3F95D9A0A55B30F</idno>
+					<idno type="arXiv">arXiv:2505.10454v1[cs.HC]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:42+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Explainable AI (XAI) research has traditionally focused on rational users, aiming to improve understanding and reduce cognitive biases. However, emotional factors play a critical role in how explanations are perceived and processed. Prior work shows that prior and task-generated emotions can negatively impact the understanding of explanation. Building on these insights, we propose a three-stage model for emotion-sensitive explanation grounding: (1) emotional or epistemic arousal, (2) understanding, and (3) agreement. This model provides a conceptual basis for developing XAI systems that dynamically adapt explanation strategies to users' emotional states, ultimately supporting more effective and user-centered decision-making.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Supporting human decision-making has been in the focus of research for decades <ref type="bibr">[21]</ref>. However, the underlying assumption in such endeavors has mostly been that interaction takes place with a rational decision maker who follows purly logical considerations. Thus, support has been intended to <ref type="bibr" target="#b0">(1)</ref> provide the human decision maker with relevance information about certain features, and (2) to avoid cognitive biases such as confirmation bias <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b0">1]</ref>.</p><p>Yet, it is well known that human decision-making is heavily influenced by emotions <ref type="bibr" target="#b17">[18]</ref>. More recently, emotions have been investigated in the context of XAI and decision-making. However, most research focuses on the analysis of the effects that emotions have on the explanation process or their acceptance.</p><p>In <ref type="bibr" target="#b21">[23]</ref>, it was shown that humans respond differently to explanations depending on their emotional state. Individuals with low arousal levels followed advice more when no explanation was given, whereas individuals with high arousal levels followed advice more when a guided explanation was given, i.e. an explanation that contained a context-sensitive selection of the features that were explained. It was concluded that arousal is more critical in how explanations are received than valence or the emotion category.</p><p>Also, <ref type="bibr" target="#b11">[12]</ref> have observed that negative affect can be observed when explanations are given for an easy task and positive affect in case of explanation of an AI in a difficult task, indicating that affect valence may be a useful variable in order to determine the explanation strategies in a specific context, i.e., whether or not explanations should be given. Similarly, <ref type="bibr" target="#b2">[3]</ref> found in a vignette study that negative feelings would result from wrong advice and positive feelings from correct advice. In a further study, they found that emotions evoked by explanations increased or decreased trust <ref type="bibr" target="#b1">[2]</ref>. Emotions together with workload can correlate with "explanatory efficacy" <ref type="bibr" target="#b14">[15]</ref>.</p><p>[20] investigated the influence of both prior and task-generated emotions on explanation retention and understanding in the context of XAI. Neither emotion induction nor task-generated emotional reactions were significant predictors of retention. However, certain individual characteristics-such as gender, current health status, and political orientation-emerged as significant predictors for the recall of explained features. These features were more likely to verbally reproduced. While no significant main effect of the emotion induction condition on retention was found, the effect on understanding was marginally significant. This result suggests a potential trend indicating that task-unrelated emotions may influence participants' comprehension of explanations. Notably, emotional reactions were significantly negatively associated with explanation understanding, suggesting a possible disruptive effect of emotional intensity on cognitive processing in XAI contexts.</p><p>Taking this one step further, <ref type="bibr" target="#b15">[16]</ref> investigated whether XAI systems can intervene to regulate the explainees' emotions. Here, a nudging strategy was investigated. It was found that nudging strategies to emotional debiasing are effective, yet not sufficient for rational decision-making.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Literature</head><p>While all these results show that emotions occur during explanations and can affect decision-making, no approach so far has been developed to adapt the explanation strategy to the emotional state of the explainee.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Strategies for decision-making</head><p>Recent research suggests that too little arousal makes decisions volatile (or random) while too much arousal may lead to decreased updating of information and overgeneralization <ref type="bibr" target="#b6">[7]</ref>. Thus, human arousal most likely exhibits an inverted U-shaped relation to decision-making quality (cf. Fig. <ref type="figure" target="#fig_0">1</ref>). Thus, when addressing the influence of emotions in decision support systems, it needs to be considered that neither too low nor too high arousal are beneficial.</p><p>In the context of decision-making and specifically of decisionmaking with XAI, a range of strategies for good decision-making have been suggested. Asking the user for an initial hypothesis before the AI advice is presented helps to reduce over-reliance <ref type="bibr" target="#b8">[9]</ref>. To ameliorate under-reliance, <ref type="bibr" target="#b5">[6]</ref> suggested providing more time for the final decision to allow the user to integrate their own with the AI's hypothesis. <ref type="bibr" target="#b13">[14]</ref> suggested a so-called disfluency strategy to reduce confirmation bias. This strategy increases the difficulty in processing the explanation through less readable writing or visualization, requiring the reader to increase cognitive effort and thus overcome the tendency for confirmation bias. This is in line with the more recent, rather general approach of cognitive forcing functions suggested by <ref type="bibr" target="#b4">[5]</ref>. According to this approach, the user is "forced" through a specifically adapted procedure to increase their cognitive effort. <ref type="bibr" target="#b4">[5]</ref> basically suggest three approaches in the context of XAI which have been validated in experimental studies: (1) Requiring users to make an initial decision before having access to the AI's decision. Indeed, it was shown that users provided more correct answers under such conditions <ref type="bibr" target="#b10">[11]</ref>. (2) Slowing down the process. It has been shown that delaying access to the AI decision -without asking for a prior own hypothesis -yields better outcomes <ref type="bibr" target="#b18">[19]</ref>. ( <ref type="formula">3</ref>) Showing AI hypothesis only on request. It has been shown that presenting an unsolicited AI recommendation can trigger resistance to the advice <ref type="bibr" target="#b7">[8]</ref>. However, this approach does not explain which strategy is optimal for which decision task and context.</p><p>[22] provides a whole framework that suggests very differentiated explanation strategies collected from the literature, depending on the expertise level of the user, the risk involved in the decision, and the level of time pressure. For example, in a high-level of expertise and high-risk situation under time pressure, one suggestion pertains to supporting serial information processing: "provide an option to view a single information point at a time, allow an easy transition to the next option" <ref type="bibr" target="#b20">[22]</ref> together with visualization suggestions.</p><p>In addition to these strategies relating to the advice-giving process, some authors suggest different explanation types for the XAI approach. For example, <ref type="bibr" target="#b12">[13]</ref> investigated the effect of different XAI methods (e.g., local SHAP, LIME, ProtoDash etc.) on the cognitive load, task performance, and task time of over 270 prospective physicians. It was found that these explanation types strongly influenced cognitive load, task performance, and task time. Overall, the methods that addressed WHY and WHY-NOT questions yielded the least cognitive load, highest task performance, and least task time. However, these results were achieved on one specific task; different tasks might yield very different results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Grounding approaches for establishing shared understanding</head><p>Grounding has been proposed as a general principle for establishing joint understanding between two interaction partners (Clark, grounding). It is achieved by a speaker presenting a statement or request to be considered by the interaction partner. This partner will then issue a so called "acceptance", indicating whether or not s/he has perceived, processed and understood the statement. At this level, s/he can either signal understanding and proceed to a follow-up statement or give the turn back to the speaker, or s/he can initiate a clarification dialog to yield understanding. The statement will then belong to the common ground that has been established in the interaction. This principle is the basis for many human-computer interaction frameworks. For example, <ref type="bibr" target="#b3">[4]</ref> present a telephone system that can process spoken commands such as "Call X". Based on insights from user studies, they determined that a simple signal for non-understanding was not sufficient as it would leave the user clue-less as to what has gone wrong and how anoccurredd problem can be fixed. Therefore, they determined a hierarchy of grounding levels (cf. left side of Fig. <ref type="figure" target="#fig_1">2</ref> where different, mostly non-verbal signals were assigned to indicate whether this level was reached successfully or not. For example, it would provide a brief tone to indicate it was ready to listen to an utterance, or provide different tones or melodies for parsing and interpreting. When a problem occurred the system would specify, for example, that it could not interpret the sentence indicating for the user that s/he may have used a command that is not in the (current) repertoire of the system. Also, at the higher level, extra grounding loops could be initiated. For example, before starting to call a certain person, the system would ask the user for confirmation to avoid the execution of wrongly interpreted commands. Thus, in order to achieve shared understanding interaction partners have to go through different levels of processing, signalling one's own and monitoring the other's state of understanding.</p><p>Our results from previous studies on the influence of emotions on understanding of explanations indicate that (1) task unrelated emotions can influence the understanding of explanations, (2) explanations can induce emotional arousal, and (3) such task induced arousal may affect understanding in unexpected ways, often depending on the interaction partners idiosyncratic experiences and representations.</p><p>Based on these results, we propose a grounding hierarchy that is sensitive to emotional reactions which may require a specific grounding approach (cf. Fig. <ref type="figure" target="#fig_0">1</ref> right side). Thus, at the first level, the explanation system while providing the explanation for a feature, will look out for emotional or epistemic reactions such as irritation or surprise indicating that the explainee may have an issue with the currently explained feature. After detecting a (possibly minimal) reaction, a clarification loop is initiated by asking the user if s/he sees a problem with this explanation, thus starting a clarification sub-dialog. This clarification dialog will contain a range of different explanation strategies, ranging from simple repetition of an argument over rephrasing and contrasting to a change of focus. Note, that by reacting to rather subtle features of the interaction partner, the dialog will be able for mixed initiative. This is an important feature, as the explaining component needs to be able to initiate a dialog when detecting potential misunderstanding. After the explanation of the feature has been clarified the final step will be to assess whether or not the explainee agrees with this explanation. Note, that the goal is not necessarily that the user agrees to the explanation. Rather, the goal is to provide sufficient information for a well-informed decision. This may include the co-construction of a joint decision, for example, based on a decision taken from a hypothesis of the AI system without a feature that has been critically discussed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Grounding levels for telephone system (Brennen &amp; Hulteen, 1996)</head><p>Emotion-sensitive grounding hierarchy for explainee 0 -not attending 1 -attending 1 -emotional / epistemic reaction 2 -hearing 3 -parsing 4 -interpreting 2 -understanding / clarification 3 -interpreting / agreeing 5 -intending The emotion-sensitive grounding hierarchy is the underlying mechanism of the model for an emotion-sensitive dialog model for decision support in emotional situations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">-acting</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Model</head><p>Based on results of the influence on decision-making with a Decision Support System (DSS) so far, we have developed an emotionsensitive computational explanation model that realizes a multimodal interaction with the virtual robot Floka and monitors and scaffolds the explainee according to an emotional grounding hierarchy. The model provides explanations for the features that have led to the system's proposal for selecting a specific risk level one after the other. While providing the initial explanation of a feature (or variable), it monitors the explainee's facial expression and heart rate to detect changes in arousal or emotional expression. This emotional grounding process is based on the grounding hierarchy <ref type="bibr" target="#b3">[4]</ref> with eight grounding steps of their telephone system, ranging from 0 not attending to 7 reporting (cf. left side of Fig. <ref type="figure" target="#fig_1">2</ref>).</p><p>We transfer this hierarchy to the human explainee and extend its notion towards a concept for monitoring and scaffolding the explainee's emotional and epistemic state during the explanation. More specifically, we foresee three emotion-sensitive grounding steps that can encompass different multimodal dialog steps:</p><p>1. Emotional or epistemic arousal 2. Understanding, and 3. Agreement.</p><p>Figure <ref type="figure">3</ref> visualizes the different phases of the emotion-sensitive explanation model. After the risk assessment and the first assessment (Phase 0), the user's arousal state is observed (Phase 1) using realtime emotion recognition (via facial expressions detected by EmoNet <ref type="bibr" target="#b9">[10]</ref>) and physiological indicators such as heart rate variability measured by a smartwatch. If a deviation is detected, the system will start to scrutinize the user's understanding (Phase 2) by initiating a dialog regarding the meaning of the feature for the system's risk type classification of the user. Once a certain level of understanding has been established, the system moves to assess agreement (Phase 3), i.e., whether the user has strong reservations about specific features.</p><p>The underlying assumption of this step is that the training data of an AI system may be biased, outdated, or inappropriate for any reason. For example, gender may be an important feature to classify the user as less risk-oriented. However, this may be based on outdated data. In such cases, the system should provide information about a decision without this information or a counterfactual result. If no arousal is detected, the system will continue with the explanation of the next feature, see fig 3. At the end (Phase 4), the user makes a final decision.</p><p>Note that this approach addresses both the effect of prior, possibly task-unrelated emotions on the user's understanding and the effect that explanations may have on the user's arousal.</p><p>Figure <ref type="figure">4</ref> shows the simplified version of the emotion-sensitive explanation model, which is based on three categories:</p><p>1. Emotional Mode -Emotion recognition and emotional reaction detection occur in this module. Currently, emotion recognition is done via EmoNet as observer pattern. Therefore, additional arousal sources, e.g., by heart rate and calculation of arousal changes can be added to increase the sensitivity. Emotional reaction detection is implemented via anomaly detection using a rolling z-score (threshold = 2.5) within a 500ms window to capture microexpressions. 2. Cognitive Model -Within the cognitive model, risk assessment is performed with different questions and their risk tendencies. Additionally, the presentation of the feature is a fusion of our guided and full transparency strategies <ref type="bibr" target="#b16">[17]</ref>. This is achieved by presenting all features while adapting the distribution to strike a balance between risk-averse and risk-tendency features. Additionally, this module hosts the LLM-based understanding dialog, where the user interacts with Floka to reflect on emotionally salient features. 3. Phase Control -This component manages the observer's data flow and orchestrates the transitions between phases. It allows the integration of additional phases if needed and ensures coherent interaction across emotional and cognitive components.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Discussion</head><p>Recent research shows that prior and task-generated emotions can negatively impact the understanding of explanation. The proposed three-stage model addresses this by monitoring emotional and epistemic states and adapting explanation strategies accordingly. The model aligns with prior findings that excessive or insufficient arousal impairs decision-making performance, supporting the inverted Ushaped relationship between arousal and cognitive performance. By monitoring arousal (e.g., via EmoNet and physiological signals) and adapting explanation delivery accordingly, the system targets the optimal arousal window for effective understanding. Importantly, the model builds upon grounding theories from human communication (e.g., <ref type="bibr" target="#b3">[4]</ref>), adapting them to a multimodal Human-Agent-Interaction context. Future work will evaluate the model's effectiveness in a controlled user study.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure1. Inverse U-shaped relationship between arousal and performance: an optimal performance tends to be achieved with a medium level of arousal.</figDesc><graphic coords="2,102.26,71.12,122.53,67.92" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Emotion-sensitive grounding hierarchy for monitoring and scaffolding during feature explanations derived from [4].</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic coords="4,42.11,71.12,508.05,100.20" type="bitmap" /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>This research was funded by the <rs type="funder">Deutsche Forschungsgemeinschaft (DFG, German Research Foundation</rs>): <rs type="grantNumber">TRR 318/1 2021-438445824</rs> "<rs type="projectName">Constructing Explainability</rs>".</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_6gVdfnW">
+					<idno type="grant-number">TRR 318/1 2021-438445824</idno>
+					<orgName type="project" subtype="full">Constructing Explainability</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0" />			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Revealing the dynamics of medical diagnostic reasoning as step-by-step cognitive process trajectories</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Battefeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mues</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Wehner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>House</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kellinghaus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wellmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kopp</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Annual Meeting of the Cognitive Science Society</title>
+		<meeting>the Annual Meeting of the Cognitive Science Society</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="volume">46</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Affective analysis of explainable artificial intelligence in the development of trust in ai systems</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bernardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Seva</surname></persName>
+		</author>
+		<idno type="DOI">10.54941/ahfe1002861</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Intelligent Human Systems Integration (IHSI 2023): Integrating People and Intelligent Systems</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Exploration of emotions developed in the lnteraction with explainable ai</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bernardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Seva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2022 15th International Symposium on Computational Intelligence and Design (ISCID)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="143" to="146" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Interaction and feedback in a spoken language system: A theoretical framework</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Brennan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Hulteen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Knowledge-based systems</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">2-3</biblScope>
+			<biblScope unit="page" from="143" to="151" />
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">To trust or to think: cognitive forcing functions can reduce overreliance on ai in ai-assisted decision-making</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Buçinca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B</forename><surname>Malaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">Z</forename><surname>Gajos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">How time pressure in different phases of decision-making influences human-ai collaboration</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C.-M</forename><surname>Huang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="26" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Different underlying mechanisms for high and low arousal in probabilistic learning in humans</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">F</forename><surname>Ciria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Suárez-Pinilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jagannathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sanabria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Bekinschtein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cortex</title>
+		<imprint>
+			<biblScope unit="volume">143</biblScope>
+			<biblScope unit="page" from="180" to="194" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Reactance to recommendations: When unsolicited advice yields contrary responses</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">J</forename><surname>Fitzsimons</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Lehmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Marketing Science</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="82" to="94" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Who goes first? influences of human-ai workflow on decision making in clinical imaging</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Fogliato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chappidi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lungren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fitzke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Parkinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Horvitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Inkpen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Nushi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency</title>
+		<meeting>the 2022 ACM Conference on Fairness, Accountability, and Transparency</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="1362" to="1374" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Emonet: A transfer learning framework for multi-corpus speech emotion recognition</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gerczuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Amiriparian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ottl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">W</forename><surname>Schuller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Affective Computing</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1472" to="1487" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">The principles and limits of algorithm-in-theloop decision making</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="24" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Toward affective xai: facial affect analysis for understanding explainable human-ai interactions</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Guerdan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Raymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Gunes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF International Conference on Computer Vision</title>
+		<meeting>the IEEE/CVF International Conference on Computer Vision</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="3796" to="3805" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Impact of explainable ai on cognitive load: Insights from an empirical study</title>
+		<author>
+			<persName><forename type="first">L.-V</forename><surname>Herm</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2304.08861</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Disfluency disrupts the confirmation bias</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Hernandez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Preston</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Experimental Social Psychology</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="178" to="182" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Improved explanatory efficacy on human affect and workload through interactive process in artificial intelligence</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">H</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Koh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Huh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Choi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="189013" to="189024" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Can ai regulate your emotions? an empirical investigation of the influence of ai explanations and emotion regulation on human decision-making factors</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Lammert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">World Conference on Explainable Artificial Intelligence</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<biblScope unit="page">2025</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Humans in xai: increased reliance in decision-making under uncertainty by using explanation strategies</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Lammert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Richter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Schütze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Thommes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wrede</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/frbhe.2024.1377075</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Behavioral Economics</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">2024</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Emotion and decision making</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Lerner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Valdesolo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Kassam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annual review of psychology</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="799" to="823" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A slow algorithm improves users&apos; assessments of the algorithm&apos;s accuracy</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Barber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kirlik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Karahalios</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM on Human-Computer Interaction</title>
+		<meeting>the ACM on Human-Computer Interaction<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Influence of prior and task generated emotions on xai explanation retention and understanding</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Richter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Schütze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aksonovaa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wrede</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note>Manuscript submitted for publication</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Explainability for experts: A design framework for making algorithms supporting expert decisions more explainable</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Simkute</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Luger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jones</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Responsible Technology</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">2021</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Human emotions in ai explanations</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Thommes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Lammert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Schütze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Richter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wrede</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Explainable Artificial Intelligence</title>
+		<editor>
+			<persName><forename type="first">L</forename><surname>Longo</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Lapuschkin</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">C</forename><surname>Seifert</surname></persName>
+		</editor>
+		<imprint>
+			<biblScope unit="page" from="270" to="293" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Springer</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-031-63803-9_15</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Designing theory-driven user-centric explainable ai</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Abdul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">Y</forename><surname>Lim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 CHI conference on human factors in computing systems</title>
+		<meeting>the 2019 CHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">A Representation Learning Approach to Feature Drift Detection in Wireless Networks</title>
+				<funder ref="#_s6NhPRx">
+					<orgName type="full">European Union</orgName>
+				</funder>
+				<funder ref="#_G3KEDwa">
+					<orgName type="full">Slovenian Research and Innovation Agency</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Athanasios</forename><surname>Tziouvaras</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Blaž</forename><surname>Bertalanič</surname></persName>
+							<email>blaz.bertalanic@ijs.si</email>
+							<affiliation key="aff1">
+								<orgName type="institution">Jožef Stefan Institute</orgName>
+								<address>
+									<country key="SI">Slovenia</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">George</forename><surname>Floros</surname></persName>
+							<email>gefloros@uth.gr</email>
+							<affiliation key="aff2">
+								<orgName type="institution">University of Thessaly</orgName>
+								<address>
+									<settlement>Volos</settlement>
+									<country key="GR">Greece</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kostas</forename><surname>Kolomvatsos</surname></persName>
+							<email>kostasks@uth.gr</email>
+							<affiliation key="aff3">
+								<orgName type="institution">University of Thessaly</orgName>
+								<address>
+									<settlement>Lamia</settlement>
+									<country key="GR">Greece</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Panagiotis</forename><surname>Sarigiannidis</surname></persName>
+							<email>psarigiannidis@uowm.gr</email>
+							<affiliation key="aff4">
+								<orgName type="institution">University of Western Macedonia</orgName>
+								<address>
+									<settlement>Kozani</settlement>
+									<country key="GR">Greece</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Carolina</forename><surname>Fortuna</surname></persName>
+							<email>carolina.fortuna@ijs.si</email>
+							<affiliation key="aff1">
+								<orgName type="institution">Jožef Stefan Institute</orgName>
+								<address>
+									<country key="SI">Slovenia</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">IoT Integrated Solutions LTD</orgName>
+								<address>
+									<settlement>Nicosia</settlement>
+									<country key="CY">Cyprus</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">A Representation Learning Approach to Feature Drift Detection in Wireless Networks</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">0AC33A4666A7FA02D9C2150447126554</idno>
+					<idno type="arXiv">arXiv:2505.10325v1[cs.LG]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:55+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>feature drift detection</term>
+					<term>machine learning</term>
+					<term>artificial intelligence</term>
+					<term>wireless networks</term>
+					<term>fingerprinting</term>
+					<term>link anomaly detection</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Artificial Intelligence (AI) is foreseen to be a centerpiece in next generation wireless networks enabling enabling ubiquitous communication as well as new services. However, in real deployment, feature distribution changes may degrade the performance of AI models and lead to undesired behaviors. To counter for undetected model degradation, we propose ALERT; a method that can detect feature distribution changes and trigger model re-training that works well on two wireless network use cases: wireless fingerprinting and link anomaly detection. ALERT includes three components: representation learning, statistical testing and utility assessment. We rely on Multi-layer Perceptron (MLP) for designing the representation learning component, on Kolmogorov-Smirnov (KS) and Population Stability Index (PSI) tests for designing the statistical testing and a new function for utility assessment. We show the superiority of the proposed method against ten standard drift detection methods available in the literature on two wireless network use cases.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>AI is foreseen to be a centerpiece in next generation wireless networks, including 6th Generation Wireless Cellular Networks (6G) and beyond cellular networks <ref type="bibr" target="#b0">[1]</ref> by enabling enabling ubiquitous communication, new services including high-accuracy localization <ref type="bibr" target="#b1">[2]</ref>, anomaly fault and detection <ref type="bibr" target="#b2">[3]</ref> as well as replacing traditionally networking functionality by AI based realization towards so-called AI native functionality <ref type="bibr" target="#b3">[4]</ref>, <ref type="bibr" target="#b4">[5]</ref>. AI models are typically developed offline by using a pre-defined amount of data and a set of Machine Learning (ML) techniques that are tuned (semi-)manually to find the best performing combination for the respective training data <ref type="bibr" target="#b5">[6]</ref>. However, when deployed in a real, production environment, the model development workflow is managed by the so-called AI/ML workflow <ref type="bibr" target="#b6">[7]</ref> realized through Machine Learning Operations (MLOps) tools <ref type="bibr" target="#b7">[8]</ref>. The combination of those tools and their deployment enable MLOps pipelines that automatically manage the data preparation, model training, evaluation, selection and serving in production systems.</p><p>Once deployed in a production setting, the data collection, MLOps pipeline and integrated AI models are typically managed by different teams, sometimes without significant coordination between each other <ref type="bibr" target="#b8">[9]</ref>. In such setting, it may happen that input data distribution changes occur naturally due to changes in the observed systems, but it may also happen that unstable data dependencies such as re-calibrations done by the team responsible for data collection is not propagated to the teams managing the MLOps or AI systems. Therefore, the performance in production degrades and adjustments are reactive rather than proactive <ref type="bibr" target="#b8">[9]</ref>. A recent study across several hundreds of eNodeBs and three categories of wireless KPIs such as resource utilization has also confirmed the existence of drifts in cellular networks <ref type="bibr" target="#b9">[10]</ref> while <ref type="bibr" target="#b10">[11]</ref> identified the challenges surrounding the implementation of drift detection and mitigation schemes in resource-constrained networks.</p><p>To detect and signal distribution changes that may degrade the performance of AI in production, libraries able to detect data drifts while integrating with existing MLOps tools have been developed <ref type="bibr" target="#b11">[12]</ref>. These libraries incorporate several drift detectors, defined as methods that observe a stream of data over time and determine for every new data point if the current distribution of the data has changed compared to a reference data set <ref type="bibr" target="#b12">[13]</ref>. Several drift detection techniques as part of three such libraries have been recently benchmarked on two use-cases: occupancy detection and prediction of energy consumption <ref type="bibr" target="#b13">[14]</ref>. To date, the only investigations of the drift phenomenon on wireless data are available in <ref type="bibr" target="#b9">[10]</ref> including a Kolmogorov-Smirnov based detection technique and <ref type="bibr" target="#b10">[11]</ref> that considered Isolation Forests and threshold to detect drifts in an illustrative example.</p><p>Aiming to provide a better insight into the suitability of existing drift detection techniques on wireless data as well as improve the existing state of the art for detection in wireless networks, we propose a new feature drift detection method (named ALERT), and benchmark it against ten standard methods on two use cases: wireless fingerprinting and link fault or anomaly detection. The contributions of this paper are:</p><p>• ALERT, a new feature drift detection method consisting of three components: representation learning, statistical testing and utility assessment. • Validation on two wireless Use Cases that utilise realworld data. We show that the ALERT method outperforms all the baseline models, achieving an overall F1-score of 0.9 in the fingerprinting use case and 0.88 in the links use case. • Analysis (i) identifying feature drift; (ii) assessing their impact on the model; (iii) attempting to answer "when" to retrain the model with the new data. This paper is organized as follows. Section II summarizes related work, Section III provides background related to drift detection, Section IV provides the problem statement while Section V introduces the proposed ALERT method. Section VI details the evaluation methodology Section VII while Section VIII concludes the paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. RELATED WORK</head><p>Data and concept drift are sometimes interchangeably used in the literature while in some cases one is considered as a superset of the other. In this paper we follow the definition from <ref type="bibr" target="#b14">[15]</ref> where data drifts are categorized into four primary types: covariate drift also referred to a feature drift in this paper, prior probability drift, concept drift, and dataset shift. We group related works in three categories: works that develop new or analyze existing drift techniques, works that develop drift detection tools and systems and works that focus on studying specific use-cases.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Drift Detection Techniques</head><p>Most of the drift, or change, detection techniques can classified as follows based on the type of performed analysis: 1) sequential analysis, 2) control charts, 3) difference between distributions and 4) contextual as discussed in <ref type="bibr" target="#b15">[16]</ref> with <ref type="bibr" target="#b16">[17]</ref> providing a different grouping. One of the foundational sequential analysis test is the Sequential Probability Ratio Test (SPRT) that detects at a point p a change from a distribution to another. Other tests such as Cumulative Sum (CUMSUM) use principles from SPRT. The Page-Hinkley (PH) test is a sequential adaptation of the detection of an abrupt change in the average of a Gaussian signal <ref type="bibr" target="#b15">[16]</ref>. The methods from the second category are based on based on statistical process control represented by standard statistical techniques to monitor and control the quality of a product during a continuous manufacturing. One such example is the exponentially weighted moving average (EWMA) <ref type="bibr" target="#b15">[16]</ref>.</p><p>The methods from the third group, that monitor distributions on two different time-windows, compare the two distributions computed over the two windows using statistical tests and signal a drift when the distributions are not equal. The Kullback-Leibler (KL) divergence test, the PSI, a variation of the KL <ref type="bibr" target="#b17">[18]</ref>, as well as ADaptive WINdowing (ADWIN) all fall under this category <ref type="bibr" target="#b15">[16]</ref>. Some other statistical tests as follow probably also fall in this group. The Energy Distance (ED) <ref type="bibr" target="#b18">[19]</ref> that computes a statistical distance between two probability distributions, the Earth Mover's Distance (EMD) <ref type="bibr" target="#b19">[20]</ref> that computes the minimal cost that must be paid to transform one distribution into the other, the KS the quantifies the distance between the empirical distribution function of the sample and the cumulative distribution function of the reference distribution, or between the empirical distribution functions of two samples, the Kuiper test that is closely related to KS, etc <ref type="bibr" target="#b20">[21]</ref>.</p><p>Finally, the contextual detectors rely on learning, with examples such as the Splice that is a meta-learning technique that implements a context sensitive batch learning approach and the Incremental Fuzzy Classification System algorithm.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Drift Detection Tools and Systems</head><p>The authors in <ref type="bibr" target="#b13">[14]</ref> proposed D3Bench, a benchmarking too that enables the functional and non-functional evaluation of drift detection tools. In their analysis they benchmark three tools three open source tools for drift detection and found that Evidently AI stands out for its general data drift detection, whereas NannyML excels at pinpointing the precise timing of shifts and evaluating their consequent effects on predictive accuracy. The authors of <ref type="bibr" target="#b21">[22]</ref> start from the observation that observe that not all data drifts lead to degradation in prediction accuracy and propose a new strategy which, using decision trees, is able to precisely pinpoint low-accuracy zones within ML models. The work triggers model improvement through active learning only in cases of harmful drifts that detrimentally affect model performance. Rather than triggering model retraining when drift is noticed, <ref type="bibr" target="#b22">[23]</ref> proposed Matchmaker, a tool that dynamically identifies the batch of training data that is most similar to each test sample, and uses the ML model trained on that data for inference.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Drift Detection Use Cases</head><p>The authors in <ref type="bibr" target="#b13">[14]</ref> benchmarked three drift detection tools on univariate data falling under two use-cases: occupancy detection where CO2 and room temperature were used as features while occupancy was the target variable and energy consumption prediction where energy consumption was the feature. The authors of <ref type="bibr" target="#b23">[24]</ref> study the impact of industrial delays when mitigating distribution drifts on a financial usecase. Focusing on cellular wireless data, <ref type="bibr" target="#b9">[10]</ref> introduce a methodology for concept drift mitigation that explains the features and time intervals that contribute the most to drift; and mitigates it using forgetting and over-sampling. An illustrative demand prediction use case for multimedia service in a 5G network was briefly considered in <ref type="bibr" target="#b10">[11]</ref>. Isolation Forests and threshold were used to conceptually illustrate drifts detection.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. DRIFT DEFINITION</head><p>As briefly mentioned in Section II, the terminology related to data, concept and model drift varies across works. The formal mathematical definitions are generally similar in <ref type="bibr" target="#b16">[17]</ref>, <ref type="bibr" target="#b24">[25]</ref> and <ref type="bibr" target="#b23">[24]</ref>, however, in the remainder of the paper we will align with the terminology from <ref type="bibr" target="#b14">[15]</ref>. Assume a model M i is trained to fit a dataset D i = {d 0 , d 2 , d 3 , ..., d j }, where d j = {X k , y k }. In this sense, {d 0 , d 2 , d 3 , ..., d j } represent the data points of the dataset D i , X k represents the feature vector and y k represents the label for the corresponding data point d j . Evidently, since D i can be described under a distribution F 0,j (X, y), M i learns to identify this distribution through the model training process. Drift can occur when new data points are inserted in D i , namely d j+1 , d j+2 , d j+3 , ...., d j+n , if F 0,j (X, y) ̸ = F j+1,∞ (X, y). For this inequality to hold true, there should be a j that satisfies the following inequality: P j (X, y) ̸ = P j+1 (X, y). Since P j (X, y) = P j (X)×P j (y|X), we can rewrite the drift equation as follows: ∃j : P j (X) × P j (y|X) ̸ = P j+1 (X) × P j+1 (y|X) (1) Following Eq. 1, and in line with <ref type="bibr" target="#b14">[15]</ref>, the four types of drifts are as following:</p><p>1) The covariate shift <ref type="bibr" target="#b14">[15]</ref> or drift <ref type="bibr" target="#b23">[24]</ref>, also referred to as source 1 concept drift in <ref type="bibr" target="#b16">[17]</ref>, data drift in <ref type="bibr" target="#b25">[26]</ref>, is observed when P j (X) ̸ = P j+1 (X), while P j (y|X) = P j+1 (y|X). In such cases, the feature distribution changes, when new data {d j+1 } are entered into the D i dataset, thus the reason we refer to covariate drift also as feature drift in this paper.</p><p>2) The prior probability shift <ref type="bibr" target="#b14">[15]</ref> or drift <ref type="bibr" target="#b23">[24]</ref> phenomenon can be identified when P j (x|Y ) = P j+1 (X|y), while P j (X) ̸ = P j+1 (X). In this case, the label distribution changes, while in the case of the covariate drift, the distribution of the features changed.</p><p>3) The concept shift <ref type="bibr" target="#b14">[15]</ref>, drift <ref type="bibr" target="#b23">[24]</ref> or source 2 concept drift <ref type="bibr" target="#b16">[17]</ref> phenomenon can be identified when P j (y|X) ̸ = P j+1 (y|X), while P j (X) = P j+1 (X). In this case, the relationship between the labels and features changes. In <ref type="bibr" target="#b14">[15]</ref>, it is additionally also defined as when P j (X|y) ̸ = P j+1 (X|y), while P j (y) = P j+1 (y). 4) Dataset shift <ref type="bibr" target="#b14">[15]</ref> or source 3 concept drift <ref type="bibr" target="#b16">[17]</ref> is combination of covariate drift and concept drift and occurs when P j (y|X) ̸ = P j+1 (y|X) and P j (X) ̸ = P j+1 (X). This phenomenon requires both the data distribution and the feature-data mapping to change.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. PROBLEM STATEMENT</head><p>In this paper we focus on feature drift as defined in Section III and assume a model M 0 is trained on a dataset D 0 , which we call the original training dataset. Given a new dataset D 1 , our goal is to: (i) asses the existence of the feature drift phenomenon; (ii) estimate its effects on the M 0 model performance and (iii) decide whether the M 0 model should be re-trained with the D 1 dataset in order to increase its quality.</p><p>For M 0 , we consider two different datasets that correspond to the two distinct validation scenarios we employ in this work. Both validation scenarios leverage supervised classification tasks, one performed on a multivariate dataset (named fingerprinting) collected from the LOG-a-TEC testbed <ref type="bibr" target="#b26">[27]</ref> and one implemented over a univariate wireless dataset (named links) collected from the Rutgers WinLab testbed with synthetically injected anomalies/faults <ref type="bibr" target="#b2">[3]</ref>.</p><p>The labels of the fingerprinting dataset consist of discrete measurement positions in a grid and represent the location of the BLE transmitter. The dataset was collected using the LOGa-TEC testbed in two different seasons: winter and spring. It comprises of Received Signal Strenght (RSS) data from 25 BLE nodes deployed outdoors in a campus park, with nodes mounted on light poles and building walls at varied heights. In the experiment, a BLE transmitter broadcasted signals every 100 ms across a localization grid with each grid point sampled for about one minute. The data was gathered in a realistic environment with natural ambient interference. Figure <ref type="figure">1</ref> represents the distribution of collected RSS measurements at node #53 in localization position #12 for both winter (blue bars) and spring (green bars) data. Although the two histograms partially overlap, it can be seen that the winter data range is between -102 and -78 dBm, while the range for the spring data is between -108 and -82 dBm. This shift, or feature drift, illustrates how environmental factors can alter signal propagation between seasons even when measurements are taken at the same location and from the same transceiver pair.</p><p>In this example, the testbed area is abundant with trees, bushes, and other vegetation that is fully leafed in the spring and mostly bare in the winter. The difference in foliage between seasons leads to variations in signal propagation, as the dense vegetation in spring can cause additional attenuation of the signals compared to the winter, while the absence of leaves results in less signal interference. The links dataset is a univariate wireless dataset with synthetically injected anomalies. As presented by authors in <ref type="bibr" target="#b2">[3]</ref>, there are 4 common types of anomalies that can be observed in wireless link layer monitoring. As mentioned by the authors, these anomalies are rare events that can indicate different causes, such as a broken wireless nodes, software issues, or a slowly dying nodes. Figure <ref type="figure">2</ref> depicts the distribution of RSS values for Anomalous (blue bars) and Normal (green bars) wireless links. As it can be seen from the figure, there is a significant overlap between both type of links, with really subtle difference between the two. The Anomalous values range between -95 to -60 dBm, while Normal values range between -92 and -58 dBm.</p><p>We consider that the M 0 model is trained on the D 0 dataset (which can be either fingerprinting or links), and then it is deployed in a production environment where new data points (D 1 ) correspond to the location or type of anomaly respectively. As feature drift appears, through D 1 , the M 0 responses decrease in quality. As we run a controlled experiment in which we also have labels for D 1 , we can measure the actual decrease in performance. However, in a real production set-up, D 1 is a dataset which is yet to be labeled, therefore we have to develop a way to detect the feature drift in a reliable way without relying on labels.</p><p>As no labels for D 1 are available in production setting, detecting changes between D 0 and D 1 using techniques such as discussed in Section II-A to measure distribution changes (i.e., perform statistical tests) seems the most suitable approach. Then, we can verify which technique is the most suitable for the considered use cases.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. FEATURE DRIFT DETECTION USING THE ALERT METHOD</head><p>In this work we propose ALERT, a new feature drift detection method that rather than monitoring the distribution shift of the raw data or traditionally engineered features, it monitors the shift of a learnt representation (or embedding). The intuition behind ALERT is that the learnt representations tend to be lower dimensional and contain less noise making the subsequent distribution change computation faster and more accurate. ALERT includes three components: representation learning, statistical testing and utility assessment. Figure <ref type="figure" target="#fig_1">3</ref> depicts the proposed method detailing the representation learning component.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Design of the Representation Learning Component</head><p>We employ a supervised approach to learn the representation of D 0 through a lightweight MLP rather then relying on more complex and computationally expensive and data-hungry Convolutional Neural Network (CNN) or transformer-based architectures.</p><p>Supervised representation learning: The representation is learnt by training an MLP on D 0 , the original dataset including the labels as depicted on the top left of Figure <ref type="figure" target="#fig_1">3</ref>. Essentially the MLP is a network of feed-forward layers where each layer consists of a number of neurons. The output y i of the i-th neuron can described by the following equation:</p><formula xml:id="formula_0">y i = ϕ i W i X i + B i<label>(2)</label></formula><p>which is a linear combination of its inputs X i , weights W i and biases B i where ϕ i is the activation function of the neuron. Then each layer concatenates the outputs of all its neurons y i into a vector Y = y 1 , y 2 , ..., y n , which is forwarded to the next layer.</p><p>Extracting the feature representation: For this process, we utilize the trained MLP and we clip its lower layers as depicted in the mid area of Figure <ref type="figure" target="#fig_1">3</ref>. We opt to discard the lower layers of the MLP, since the upper layers tend to capture higher-level features <ref type="bibr" target="#b27">[28]</ref> and thus, they can provide useful information related with the input data distribution. In the sequel, we perform two forward passes using the clipped MLP model: one using the D 0 and one using the D 1 dataset. These forward passes do not update the weights of the model and they extract two sets of features: the R 0 feature set which is extracted from the D 0 , and the R 1 feature set which is extracted from the D 1 dataset. The extracted feature representations contain useful information that can be leveraged by the utility function designed in the next module.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Design of the Statistical Testing Component</head><p>For the statistical testing depicted in a blue box on the lower side of Figure <ref type="figure" target="#fig_1">3</ref>, we opt to use 2 well-established methods (KS <ref type="bibr" target="#b29">[29]</ref>, <ref type="bibr" target="#b30">[30]</ref> and PSI) <ref type="bibr" target="#b17">[18]</ref> instead of relying on a single one. This decision aims to cancel out the weakness of KS and PSI by aggregating their outcomes. It also provides a more stable output of the system which can be easily interpreted by decision-making mechanisms. More specifically, KS requires a large number of samples to produce accurate results and sometimes struggles with non-normal distributions <ref type="bibr" target="#b31">[31]</ref>. On the other hand, it performs well when investigating larger datasets and does not require any information related with the probability density functions (Probability Density Function (PDF)s) of the involved datasets <ref type="bibr" target="#b32">[32]</ref>. As for PSI, it can perform well, even if a lower amount of data is investigated <ref type="bibr" target="#b33">[33]</ref> and is considered a stable and robust measure to assess the difference between two data distributions. Under this premise, ALERT computes the following statistical tests:</p><p>• The KS (D0,D1) that represents the KS between the dataset D 0 and the dataset D1. • The KS (R0,R1) that represents the KS between the extracted features R 0 and the extracted features R 1 .</p><p>• The P SI (D0,D1) that calculates the PSI between the dataset D 0 and the dataset D 1 .</p><p>• The P SI (R0,R1) that calculates the PSI between the extracted features R 0 and the extracted features Y R 1 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>KS Statistical Test:</head><p>The KS is invoked to check if two sets of samples belong to the same distribution. To assess this, the test utilizes a p-value which designates that the samples belong to different distributions if p &lt; 0.05. We calculate this p-value similarly with <ref type="bibr" target="#b29">[29]</ref>, as follows:</p><formula xml:id="formula_1">p x,y = 2 z i=1 (-1) i-1 • e -2c 2 (a)•i 2<label>(3)</label></formula><p>where z is the total number of samples, x and y are the corresponding sets that are being checked, and the c(a) can be calculated through the following formula:</p><formula xml:id="formula_2">c(a) = D x,y n x • m y n x + m y<label>(4)</label></formula><p>where n x and m y is the number of samples of the x and y datasets correspondingly. D x,y is calculated via the following equation:</p><formula xml:id="formula_3">D x,y = sup t |F x (t) -F y (t)|<label>(5)</label></formula><p>Where F x (t) and F y (t) are the empirical distributions of the data belonging in the x and y sets.</p><p>PSI Statistical Test: The PSI is used to measure the relative entropy between two distributions. This can be interpreted as the measurement of divergence between two different sets of samples. PSI values that are lower than 0.1 indicate that there is no significant difference between two data distributions. We calculate PSI as suggested by previous work in <ref type="bibr" target="#b17">[18]</ref>:</p><formula xml:id="formula_4">P SI x,y = z i=1 P (x i ) -P (y i ) • ln P (x i ) P (y i ) (<label>6</label></formula><formula xml:id="formula_5">)</formula><p>where z is the number of samples of the x and y data sets, while P (x i ) and P (y i ) represent the frequencies of samples i in the x and y datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Design of the Utility Assessment Component</head><p>Since our ultimate goal is to provide a decision-making mechanism for when to retrain the M 0 model, we formulate a utility function, depicted in the orange box at the bottom of Figure <ref type="figure" target="#fig_1">3</ref>, that combines a KS utility with a PSI utility as follows:</p><formula xml:id="formula_6">U = U KS + U P SI 2<label>(7)</label></formula><p>U ∈ (0, 1) encapsulates the finality utility we obtain if the model retraining action is selected, given the datasets D 0 and D 1 . The expected utility U considers the outputs of KS and KL tests to evaluate the statistical difference of the data D 0 and D 1 and the extracted features R 0 and R 1 . As a result it contains valuable information on the model retraining operation which can be leveraged for decision-making.</p><p>Eq. 7 combines Eqs. 8 and 9 defined as follows into a unified utility function. The KS-based utility for retraining the M 0 model is:</p><formula xml:id="formula_7">U KS = 1 -KS (D0,D1) + 1 -KS (R0,R1) 2<label>(8)</label></formula><p>Since KS ∈ (0, 1), U KS is also a bounded function (U KS ∈ (0, 1)). This function uses the information derived from the datasets D 0 and D 1 and averages it with the information extracted from the features R 0 and R 1 to assess the KS drift. Evidently, when U KS → 1 the drift phenomenon is more prominent, while when U KS → 0 no drift is detected.</p><p>We also devise a function to calculate the PSI-based utility for retraining the M 0 model:</p><formula xml:id="formula_8">U P SI = σ P SI (D0,D1) + P SI (R0,R1) 2<label>(9)</label></formula><p>The U P SI averages the P SI (D0,D1) and the P SI (R0,R1) and uses the sigmoid function σ to bound the result so that U P SI ∈ (0, 1). Similarly to Eq. 8, the expected utility of the model retrain operation is higher when U P SI → 1 and lower when U P SI → 0.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VI. EVALUATION METHODOLOGY</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Dataset Description</head><p>For our experiments we focus on two use cases with two datasets: fingerprinting dataset summarized in Figure <ref type="figure">1</ref>, and the links dataset summarized in Figure <ref type="figure">2</ref>.</p><p>The fingerprinting dataset <ref type="bibr" target="#b26">[27]</ref> contains received signal strength (RSS) measurements made with Bluetooth Low Energy (BLE) technology, measured in dBm. The dataset consists of 505.000 data points, organised over 23 classes that represent 2D coordinates, which are collected during the spring and during the winter. It can be used for outdoor fingerprint-based localization applications, as presented in <ref type="bibr" target="#b26">[27]</ref>. We organise the data into 31 smaller datasets each containing 16.290 samples, as follows: The first dataset D 0 is used to train a random forest classifier, as our M 0 model. For this reason, we refer to the D 0 as the original dataset, as depicted in Figure <ref type="figure" target="#fig_1">3</ref> etc.) while the rest of them (i.e,D 3 , D 4 , D 6 , D 7 , D 9 etc.) contain data from the same distribution as D 0 . This is done to simulate various scenarios of data drifts which are encountered in different time frames i.e., in different versions of datasets collected in the field. We proceed to testing the M 0 model's Macro Precision, Macro Recall and Macro F1-score with each dataset. As illustrated in Figure <ref type="figure">4</ref>, the performance of the M 0 drops significantly when it is tested with a dataset that contains drifted samples compared to the D 0 . This experimental setup shows the existence of the drift and enables it's detection through ALERT and selected baselines.</p><p>The links dataset contains data from 8492 timeseries, each one of which having 302 data samples. The dataset is labeled and data is organized into 5 anomaly classes. We split the data into 9 smaller datasets each one containing 943 timeseries, as follows: the first dataset D 0 is used to train a random forest classifier, as our M 0 model. Similarly to our approach when using the fingerprinting case, the D 0 is again the original dataset, which is illustrated in Figure <ref type="figure" target="#fig_1">3</ref>. Then we split the rest of the datasets D 1 -D 8 so that the D 1 , D 2 and D 3 to contain samples from the same distribution as D 0 and the D 4 , D 5 , D 6 , D 7 and D 8 to contain drifted samples. Again, we test the M 0 model's Macro Precision, Macro Recall and Macro F1score with each dataset and we present our finding in Figure <ref type="figure" target="#fig_3">5</ref>. We observe that the performance of the M 0 drops when tested with drifted samples, similarly to the fingerprinting model.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Parameter Search for the Representation Learning Components</head><p>In order to design an efficient model for representation learning, we should consider tuning the MLP's layers, number of neurons contained in each layer and the number of training epochs. It is our objective to avoid complicated models for the representation learning process, due to the computational and training requirements they would impose during the MLP training operation. For this reason, we try to minimize as much as possible the number of layers, the amount of neurons and the training epochs of the model. On the contrary, we are aware that we risk underfitting if we design the model to be very simple since, in that case it would be unable to capture the representations of the input data. To solve this issue, we perform a 3-dimensional parameter search regarding the number of layers, neurons and training epochs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Baseline Selection</head><p>We compare the ALERT technique with state-of-the art methods that exist in the literature. We choose two broader types of methods for comparison, namely statistical methods and distance-based methods. Statistical methods leverage statistical indexes (such as mean values, sampling variations and variance) to predict data drifts. In this work, we formulate a baseline using the following statistical methods: (i) Kuiper test <ref type="bibr" target="#b34">[34]</ref>; (ii) Cramer-Von Mises (CVM) <ref type="bibr" target="#b35">[35]</ref>; (iii) Welch Test (WelchT) <ref type="bibr" target="#b36">[36]</ref>; (iv) Chi Square test <ref type="bibr" target="#b37">[37]</ref>; (v) Mann-Whitney U test (Mann Whitney) <ref type="bibr" target="#b38">[38]</ref>; (vi) Andreson Darling Test <ref type="bibr" target="#b39">[39]</ref>; and (vii) Kolmogorov-Smirnov (KS) test <ref type="bibr" target="#b40">[40]</ref>. On the contrary, distance-based methods focus on estimating the distance between two data distributions by measuring the dissimilarity between them through distance functions. In this work we use as a baseline the following distance-based methods: (i) Population Stability Index (PSI) <ref type="bibr" target="#b41">[41]</ref>; (ii) Energy Distance <ref type="bibr" target="#b42">[42]</ref>; and (iii) Earth Mover's Distance (EMD) <ref type="bibr" target="#b43">[43]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Training and Evaluation</head><p>We use the D 1 -D 30 stemming from the fingerprinting and the D 1 -D 8 stemming from the links datasets to evaluate ALERT and to assess whether it is able to identify the data drift phenomenon accurately. For the implementation of ALERT, we use the python programming language; whereas the code base for the Baseline methods is provided by <ref type="bibr" target="#b44">[44]</ref>. For each validation Use Case, we train the ALERT method's MLP for 3 epochs using the D 0 dataset and then, we utilize the trained model to assess the existence of the data drift phenomenon.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E. Performance Metrics</head><p>Since ALERT uses a utility function that designates whether the M 0 model should be retrained or not, it is difficult to compare it with existing solutions. This happens because each state-of-the-art method uses a different prediction confidence threshold that is uniquely tailored according to its requirements. To resolve this, we define the following scoring function that can be commonly used among several methods to compare their efficiency:</p><formula xml:id="formula_9">Score =          F 1 gain , if decision is true positive. T s , if decision is true negative. F 1 gain -T s , if decision is false positive. -F 1 gain , if decision is false negative. (<label>10</label></formula><formula xml:id="formula_10">)</formula><p>The function is designed to increase the score for correct data drift predictions and to decrease for incorrect ones. The larger the data drift, the bigger score is allocated for correct assessments, and the bigger the penalty is given for incorrect predictions. We assume that each method under examination outputs a prediction on whether the M 0 should be retrained. We distinguish 4 different possible scenarios for this assessment:</p><p>• A method's assessment is true positive and correctly identifies the existence of feature drift. There, the score equals to the macro F 1-score that the model will gain if retrained (F 1 gain ). The larger the feature drift, the higher the (F 1 gain ), and thus, larger scores are allocated for correct assessments. • A method's assessment is true negative and correctly identifies the absence of feature drift. In such scenarios the score equals to the T s constant, that is set by the user.</p><p>In our experiments, we set the T s to 0.1. • A method's assessment is false positive and incorrectly identifies the existence of feature drift. In this case the model M 0 is retrained, and the method is penalized by an amount of F 1 gain -T s where F 1 gain is F 1-score the model gains after retraining. We expect a small F 1 gain , due to the absence of feature drift and as a result, the score will be negative. • A method's assessment is false negative and incorrectly identifies the absence of feature drift. The penalty of this error is -F 1 gain , which is the F 1-score that the model would gain if it was retrained with the new data.</p><p>In our experiments, we apply this formula for each method under examination and for each tested dataset. At the end of each experiment, we sum each method's scores which are collected after assessing the aforementioned datasets and we calculate the final value.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>F. Utility Component Contribution</head><p>We perform an analysis of the contribution of each of the following components to the total utility score of the ALERT method: (i) KS (D0,D1) ; (ii) KS (R0,R1) ; (iii) P SI (D0,D1) ; and (iv) P SI (R0,R1) . The aim of this analysis is to validate our initial hypothesis that both the KS and the PSI tests are essential for the calculation of the utility score. Through this, we also aim to analyze the impact of the representation learning technique to the overall utility score of the ALERT. To achieve this, we perform an ablation study by measuring the contributions of each component separately, in terms of percentages (%) for each Use Case, and we present the results we obtain in section .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VII. RESULTS</head><p>In this section we analyze the performance of the ALERT method proposed in Section V and evaluated according to the methodology elaborated in Section VI to solve the problem identified in Section IV. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Parameter Search for the Representation Learning Components</head><p>Figure <ref type="figure" target="#fig_4">6</ref> illustrates the results of the 3-dimensional parameter exploration, which is conducted for the MLP. We experiment with two datasets in which the data drift phenomenon is prominent, in order to calibrate the MLP parameters. We should note that the utility function should be represented by a high value, to clearly predict the existence of data drifts. Results indicate that the increase of model complexity is directly correlated with higher utility scores. This is expected, since more complex models manage to properly capture input data representations and thus, to produce better assessments. Nonetheless, there is an optimal parameter space, over which larger and more complex MLPs do not provide significant contributions to the utility score. Empirically, an MLP with 3 layers, 20 neurons per layer, and a training period of 3 epochs achieves a utility score of 0.85, which we deem adequate to assess the presence of data drifts. On the contrary, an MLP with 5 layers, 40 neurons per layer, and a training period of 10 epochs achieves a utility score of 0.92 which, despite being higher than 0.85, does not provide us with better information than the previous configuration. This is true especially if we consider that the training requirements of more complex MLP are significantly larger compared to models that leverage simpler designs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Performance with the "Fingerprinting" Dataset</head><p>Figure <ref type="figure" target="#fig_5">7</ref> depicts the performance, in terms of the score function established by the Eq. 10, for the proposed ALERT method and the baseline techniques described in Section VI-C. The maximum achievable score for this Use Case is 4.5, which is achieved if all the predictions are correct, and the lowest is -4.5 which is obtained if all the predictions are incorrect. We observe that the proposed ALERT method achieves the best score (4.28), followed by the CVM (2.0) and Anderson Darling (1.3) tests. The rest of the methods underperform by a large margin and they obtain negative scores.</p><p>Table <ref type="table" target="#tab_0">I</ref> depicts the detailed prediction statistics for the four best performing methods on the "fingerprinting" dataset. The first column of the table represents the methods under examination, while the rest of the columns depict each method's performance in terms of true positive, true negative, false positive and false negative predictions, as described in Section 10. We have also included 3 additional columns that present the precision, recall and F1-score of each method. The ALERT method outperforms the baseline techniques since it achieves the best F1-score, namely 0.9. The CVM follows with 0.56, the Anderson Darling with 0.41 and the PSI with 0.13. Evidently, ALERT manages not only to accurately detect the existence of drift phenomena (9/10 true positive score), but also to correctly assess the absence of feature drift (19/20 true negative score), thus saving the M 0 model of unnecessary re-training operations. CVM, which is the best performing baseline method, achieves a bit lower true positive prediction score (8/10), but its performance degrades when considering its true negative assessments <ref type="bibr">(10/20)</ref>. As a result, the M 0 model would be unnecessarily re-trained several times, when using the CVM method to detect feature drifts. The same observation also holds true for both the Anderson Darling and PSI methods.</p><p>C. Performance with the "Links" Dataset Figure <ref type="figure" target="#fig_6">8</ref> illustrates the comparison of the ALERT technique with existing works over the links dataset. The maximum score for each method is 0.48. The ALERT achieves a score of 0.47 and clearly outperforms the rest of the techniques, which acquire an equal score of 0.26, with the exception of Chi-Square that severely under-performs (0.16 score). ALERT manages to successfully capture the data distribution properties of the links dataset and to assess with high accuracy the existence of feature drift.   Table <ref type="table" target="#tab_1">II</ref> showcases the performance of top-scoring methods, considering their predictions. Similarly to Table <ref type="table" target="#tab_0">I</ref>, the first column depicts the methods under examination which are the ALERT, CVM, Anderson Darling and PSI. The rest of the table columns contain information regarding the true positive, true negative, false positive, false negative, precision, recall and F1 scores of each method. The ALERT technique achieves the best true positive score (4/5), followed by CVM and PSI (3/5) and Anderson Darling (2/5). In terms of true negatives, ALERT comes first with 3/3 correct assessments, Anderson Darling second with 2/3 and CVM and PSI follow with 1/3. This has a direct impact to each method's F1, with ALERT scoring 0.88, CVM and PSI 0.6 and Anderson Darling 0.49. The results we obtain from this evaluation scenario using the Links dataset, are in line with the results we observed under the fingerprinting dataset. The ALERT method not only identifies the existence of drift phenomena, but also it properly assesses their absence as well. This does not necessarily hold true for the baseline methods, which perform worse in their true positive and true negative predictions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Ablation Study for the Utility Assessment Component</head><p>Figure <ref type="figure">9</ref> depicts the outcomes of the ablation study, which we conducted in order to evaluate the contributions of the proposed representation learning technique along with the KS and PSI tests described in Section V-B to the utility score of ALERT. As discussed in Section VI-F, we perform the study using the fingerprinting and the links datasets to confirm our hypothesis that all of the aforementioned methods play a major role to the overall utility score. Results indicate that the contributions of each statistical test (KS (D0,D1) , KS (R0,R1) , P SI (D0,D1) and P SI (R0,R1) ) are indeed significant. Evidently, all four methods have quantifiable impact to the expected utility, ranging from 7% to 45% depending on the dataset. Therefore, the exclusion of any of these tests would reduce the effectiveness of the utility function for the ALERT method.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E. Execution time requirements</head><p>In Table <ref type="table" target="#tab_2">III</ref> we present the execution time requirements of each method under examination, in seconds. The first column of the table refers to the method name, while the next two columns present the time requirements of each technique to perform a feature drift assessment, using the fingerprinting and the links datasets correspondingly. Generally, the methods that exist in the literature are very fast, since they complete their assessments within 0.02 to 0.4 seconds. On the other hand, ALERT has larger execution times, ranging from 17.2 -3.5 seconds, depending on the use case. This is expected, since ALERT partially trains an MLP model, which severely affects its execution time. Nonetheless, in terms of absolute numbers, we consider the execution time requirements of ALERT affordable for real-world applications, even when large data volumes are involved. Although our method is significantly slower compared to other methods, it is not necessarily a significant disadvantage. Gradual drifts usually occur in longer periods of time, from several hours, as noted by <ref type="bibr" target="#b45">[45]</ref>, or several months, as seen in our fingerprinting dataset. Considering this, our method's higher execution time can still be regarded as relatively fast, especially in the context of adapting to such evolving conditions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>VIII. CONCLUSION</head><p>In this paper we have introduced ALERT-a novel feature drift detection method that comprises representation learning, statistical testing, and utility assessment components. We demonstrated ALERT's superior performance on two real-world wireless use cases, fingerprinting and link anomaly detection, where it outperformed ten established methods by ensuring that the AI models keep high F1-scores, namely of 0.90 and 0.88 even in the presence of feature drift when it is suitably detected and re-training triggered. Beyond raw detection accuracy, our work provides a comprehensive analysis workflow that not only pinpoints when and where feature drift occurs but also quantifies its impact on model performance and informs optimal retraining decisions. By rigorously benchmarking ALERT against standard approaches, we advance the state of the art in feature drift detection for wireless networks and offer practitioners a robust, end-to-end solution for maintaining reliable AI models in dynamic radio environments. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .Fig. 2 .</head><label>12</label><figDesc>Fig. 1. An example of data drift between winter and spring data in the fingerprinting dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. The proposed ALERT methodology for assessing the data drift given 2 datasets D 0 and D 1 .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>14 OriginalFig. 4 .</head><label>144</label><figDesc>Fig. 4. The performance of the M 0 model with different fingerprinting datasets. The performance drops when the data drift phenomenon is present, since the M 0 is trained with the D 0 dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 5 .</head><label>5</label><figDesc>Fig. 5. The performance of the M 0 model with different links datasets. The model performance deteriorates when the M 0 is tested with datasets that contain data drifts.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 6 .</head><label>6</label><figDesc>Fig. 6. The contributions of different MLP parameters and training epochs to the obtained utility score.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 7 .</head><label>7</label><figDesc>Fig. 7. Performance comparison between the ALERT and the baseline tests, using the fingerprinting dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 8 .</head><label>8</label><figDesc>Fig. 8.Performance comparison of the ALERT method, with baseline techniques, using the links dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>1 )Fig. 9 .</head><label>19</label><figDesc>Fig.9. The contribution of KS (D 0 ,D 1 ) , KS (R 0 ,R 1 ) , P SI (D 0 ,D 1 ) and P SI (R 0 ,R 1 ) to the expected utility score.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Carolina</head><label></label><figDesc>Fortuna is a research associate professor with the Jožef Stefan Institute where she leads Sensorlab. She was a Post-Doctoral Researcher with Ghent University, Ghent, Belgium. She was a Visiting researcher in Infolab with Stanford University, Stanford, CA, USA. She has led and contributed EU funded projects such as H2020 NRG5, eWINE, WISHFUL, FP7 CREW, Planetdata, ACTIVE, under various positions. She has advised/coadvised more than six M.Sc. and Ph.D. students. She has consulted public and private institutions. She has coauthored over 100 papers including in IEEE COMST, IEEE WICOM Magazine, IEEE OJCOMS and Access. Her research interest includes developing the next generation smart infrastructures that surround us and improve the quality of our life. Dr. Fortuna contributed to community work as a TPC member, the track chair, and a reviewer at several IEEE conferences including Globecom and ICC.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>TABLE I PERFORMANCE</head><label>I</label><figDesc>IN TERMS OF PRECISION, RECALL AND F1 OF DIFFERENT DRIFT DETECTION METHODS OVER THE fingerprinting DATASET. THE PROPOSED ALERT METHOD OUTPERFORMS ALL THE BASELINE MODELS, ACHIEVING AN OVERALL F1-SCORE OF 0.9. IN TERMS OF F1-SCORES, CVM FOLLOWS WITH 0.56, ANDERSON DARLING WITH 0.41 AND PSI WITH 0.13.</figDesc><table><row><cell>Methods</cell><cell cols="6">True positives True negatives False positives False negatives Precision Recall</cell><cell>F1</cell></row><row><cell>ALERT</cell><cell>9/10</cell><cell>19/20</cell><cell>1/20</cell><cell>1/10</cell><cell>0.9</cell><cell>0.9</cell><cell>0.9</cell></row><row><cell>CVM</cell><cell>8/10</cell><cell>10/20</cell><cell>10/20</cell><cell>2/10</cell><cell>0.44</cell><cell cols="2">0.8 0.56</cell></row><row><cell>Anderson Darling</cell><cell>5/10</cell><cell>11/20</cell><cell>9/20</cell><cell>5/10</cell><cell>0.35</cell><cell cols="2">0.5 0.41</cell></row><row><cell>PSI</cell><cell>2/10</cell><cell>2/20</cell><cell>18/20</cell><cell>8/10</cell><cell>0.1</cell><cell cols="2">0.2 0.13</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>TABLE II PERFORMANCE</head><label>II</label><figDesc>IN TERMS OF PRECISION, RECALL AND F1, OF DIFFERENT DRIFT DETECTION METHODS OVER THE Links DATASET. ALERT ACHIEVES THE BEST F1-SCORE, COMPARED WITH BASELINE METHODS, NAMELY 0.88. CVM AND PSI ACQUIRE AN F1-SCORE OF 0.6, WHILE ANDERSON DARLING ACHIEVES 0.49.</figDesc><table><row><cell>Methods</cell><cell cols="6">True positives True negatives False positives False negatives Precision Recall</cell><cell>F1</cell></row><row><cell>ALERT</cell><cell>4/5</cell><cell>3/3</cell><cell>0/3</cell><cell>1/5</cell><cell>1.0</cell><cell cols="2">0.8 0.88</cell></row><row><cell>CVM</cell><cell>3/5</cell><cell>1/3</cell><cell>2/3</cell><cell>2/5</cell><cell>0.6</cell><cell>0.6</cell><cell>0.6</cell></row><row><cell>Anderson Darling</cell><cell>2/5</cell><cell>2/3</cell><cell>1/3</cell><cell>3/5</cell><cell>0.66</cell><cell cols="2">0.4 0.49</cell></row><row><cell>PSI</cell><cell>3/5</cell><cell>1/3</cell><cell>2/3</cell><cell>2/5</cell><cell>0.6</cell><cell>0.6</cell><cell>0.6</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>TABLE III THE</head><label>III</label><figDesc>EXECUTION TIME REQUIREMENTS OF THE METHODS UNDER EXAMINATION FOR BOTH THE fingerprinting AND links DATASETS. THE EXECUTION TIME IS MEASURED IN SECONDS AND IS CALCULATED FOR EACH METHOD INDEPENDENTLY. THE BASELINE TECHNIQUES PERFORM FASTER THAN ALERT, WHICH REQUIRES 17.2 SECONDS TO COMPLETE ON THE fingerprinting DATASET AND 3.5 SECONDS ON THE links DATASET.</figDesc><table><row><cell>Methods</cell><cell cols="2">fingerprinting dataset links dataset</cell></row><row><cell>ALERT</cell><cell>17.2s</cell><cell>3.5s</cell></row><row><cell>PSI</cell><cell>0.04s</cell><cell>0.4s</cell></row><row><cell>Energy Distance</cell><cell>0.04s</cell><cell>0.3s</cell></row><row><cell>EMD</cell><cell>0.04s</cell><cell>0.3s</cell></row><row><cell>Kuiper</cell><cell>0.07s</cell><cell>0.3s</cell></row><row><cell>CVM</cell><cell>0.03s</cell><cell>0.19s</cell></row><row><cell>WelchT</cell><cell>0.02s</cell><cell>0.02s</cell></row><row><cell>Chi Square</cell><cell>0.06s</cell><cell>0.4s</cell></row><row><cell>Mann Whitney</cell><cell>0.03s</cell><cell>0.1s</cell></row><row><cell>Anderson Darling</cell><cell>0.03s</cell><cell>0.3s</cell></row><row><cell>KS</cell><cell>0.06s</cell><cell>0.2s</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>This work was funded in part from the <rs type="funder">Slovenian Research and Innovation Agency</rs> under the grant <rs type="grantNumber">P2-0016</rs> and in part from the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon Europe Framework Program SNS-JU</rs> under grant agreement No <rs type="grantNumber">101096456</rs> (NANCY). We also acknowledge that instead of using more traditional spell checking and language correction engines, we passed some of the manually written paragraphs in the introduction and related work, to AI asking for improvement of the flow and quality of the language.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_G3KEDwa">
+					<idno type="grant-number">P2-0016</idno>
+				</org>
+				<org type="funding" xml:id="_s6NhPRx">
+					<idno type="grant-number">101096456</idno>
+					<orgName type="program" subtype="full">Horizon Europe Framework Program SNS-JU</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BIOGRAPHIES</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The roadmap to 6g: Ai empowered wireless networks</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">B</forename><surname>Letaief</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-J</forename><forename type="middle">A</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Communications Magazine</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="84" to="90" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Localization as a key enabler of 6g wireless systems: A comprehensive survey and an outlook</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Trevlakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A.-A</forename><forename type="middle">A</forename><surname>Boulogeorgos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pliatsios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Querol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ntontin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Sarigiannidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chatzinotas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Di Renzo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Open Journal of the Communications Society</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="2733" to="2801" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Resource-aware time series imaging classification for wireless link layer anomalies</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bertalanič</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Meža</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fortuna</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Neural Networks and Learning Systems</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="8031" to="8043" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Toward a 6g ai-native air interface</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hoydis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Aoudia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Valcarce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Viswanathan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Communications Magazine</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="76" to="81" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Ai-native network slicing for 6g networks</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">S</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhuang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Wireless Communications</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="96" to="103" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">What did my ai learn? how data scientists make sense of model behavior</title>
+		<author>
+			<persName><forename type="first">Á</forename><forename type="middle">A</forename><surname>Cabrera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tulio Ribeiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Deline</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Perer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Drucker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Computer-Human Interaction</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">O-ran working group 2 ai/ml workflow description and requirements</title>
+		<author>
+			<persName><forename type="first">O.-R</forename><surname>Alliance</surname></persName>
+		</author>
+		<idno>ORAN-WG2. AIML. v01.03</idno>
+		<imprint>
+			<date type="published" when="2021-07">July 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">An overview and solution for democratizing ai workflows at the network edge</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Čop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bertalanič</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fortuna</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Network and Computer Applications</title>
+		<imprint>
+			<biblScope unit="page">104180</biblScope>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Hidden technical debt in machine learning systems</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sculley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Holt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Golovin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Davydov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ebner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chaudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Young</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J.-F</forename><surname>Crespo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dennison</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in neural information processing systems</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">28</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Leaf: Navigating concept drift in cellular networks</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bronzino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Schmitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Bhagoji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Feamster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">G</forename><surname>Crespo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Coyle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ward</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Networking</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">CoNEXT2</biblScope>
+			<biblScope unit="page" from="1" to="24" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Model drift in dynamic networks</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Manias</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chouman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shami</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Communications Magazine</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="78" to="84" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">From deployment to drift: A comprehensive approach to ml model monitoring with evidently ai</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Swathi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Challa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on VLSI, Signal Processing, Power Electronics, IoT, Communication and Embedded Systems</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="307" to="320" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">On the impact of industrial delays when mitigating distribution drifts: An empirical study on real-world financial systems</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Simonetto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cordy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ghamizi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">L</forename><surname>Traon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lefebvre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Boystov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Goujon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Workshop on Discovering Drift Phenomena in Evolving Landscapes</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="57" to="73" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Open-source drift detection tools in action: Insights from two use cases</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Abdelaal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Stjelja</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Big Data Analytics and Knowledge Discovery</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="346" to="352" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A unifying view on dataset shift in classification</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Moreno-Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Raeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Alaiz-Rodríguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">V</forename><surname>Chawla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Herrera</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern recognition</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="521" to="530" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A survey on concept drift adaptation</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Žliobaitė</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bifet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pechenizkiy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bouchachia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM computing surveys (CSUR)</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1" to="37" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Learning under concept drift: A review</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Gama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Knowledge and Data Engineering</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2346" to="2363" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Detecting drifts in data streams using kullback-leibler (kl) divergence measure for data engineering applications</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Kurian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Allali</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s42488-024-00119-y</idno>
+		<ptr target="https://doi.org/10.1007/s42488-024-00119-y" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Data, Information and Management</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="207" to="216" />
+			<date type="published" when="2024-09">September 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">On the composition of elementary errors</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Harald</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Scandinavian Actuarial Journal</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="141" to="180" />
+			<date type="published" when="1928">1928</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">The earth mover&apos;s distance as a metric for image retrieval</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Rubner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tomasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">J</forename><surname>Guibas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International journal of computer vision</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="99" to="121" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Autoregressive based drift detection method</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Z A</forename><surname>Mayaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Riveill</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2022 International Joint Conference on Neural Networks (IJCNN)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Efficiently mitigating the impact of data drift on machine learning pipelines</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sahri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Palpanas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Srivastava</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the VLDB Endowment</title>
+		<meeting>the VLDB Endowment</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="3072" to="3081" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Matchmaker: Data drift mitigation in machine learning for large-scale systems</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mallick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Hsieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Arzani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Joshi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of Machine Learning and Systems</title>
+		<meeting>Machine Learning and Systems</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="77" to="94" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">On the impact of industrial delays when mitigating distribution drifts: an empirical study on real-world financial systems</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Simonetto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cordy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ghamizi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Le Traon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lefebvre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Boystov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Goujon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">KDD Workshop</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">23when training and test sets are different: Characterizing learning transfer</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Amos</surname></persName>
+		</author>
+		<idno type="DOI">10.7551/mitpress/9780262170055.003.0001</idno>
+		<ptr target="https://doi.org/10.7551/mitpress/9780262170055.003.0001" />
+	</analytic>
+	<monogr>
+		<title level="m">Dataset Shift in Machine Learning</title>
+		<imprint>
+			<publisher>The MIT Press</publisher>
+			<date type="published" when="2008">12 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Detection of data drift and outliers affecting machine learning model performance over time</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ackerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Farchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Raz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zalmanovici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dube</surname></persName>
+		</author>
+		<ptr target="https://arxiv.org/abs/2012.09258" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Log-a-tec testbed outdoor localization using ble beacons</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bertalanič</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Morano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Cerar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2022 International Balkan Conference on Communications and Networking</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="115" to="119" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Deep neural network to extract high-level features and labels in multi-label classification problems</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Nápoles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sánchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Bello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vanhoof</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">413</biblScope>
+			<biblScope unit="page" from="259" to="270" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Online</surname></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/S0925231220311115" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Detection of data drift in a twodimensional stream using the kolmogorov-smirnov test</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Porwik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Dadzie</surname></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/S187705092200922X" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 26th International Conference KES2022</title>
+		<meeting>the 26th International Conference KES2022</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">207</biblScope>
+			<biblScope unit="page" from="168" to="175" />
+		</imprint>
+		<respStmt>
+			<orgName>Intelligent Information and Engineering Systems</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Concept drift detection based on kolmogorovsmirnov test</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Artificial Intelligence in China</title>
+		<editor>
+			<persName><forename type="first">W</forename><surname>Liang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">X</forename><surname>Mu</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Na</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Chen</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Singapore; Singapore</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="273" to="280" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">A cautionary note on the use of the kolmogorov-smirnov test for normality</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Steinskog</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kvamstø</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Monthly Weather Review -MON WEATHER REV</title>
+		<imprint>
+			<biblScope unit="volume">135</biblScope>
+			<biblScope unit="page" from="1151" to="1157" />
+			<date type="published" when="2007">03 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">An exploration of the kolmogorov-smirnov test as a competitor to mutual information analysis</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Whitnall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Oswald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mather</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-27257-8_15</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-27257-815" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 10th IFIP WG 8.8/11.2 International Conference on Smart Card Research and Advanced Applications, ser. CARDIS&apos;11</title>
+		<meeting>the 10th IFIP WG 8.8/11.2 International Conference on Smart Card Research and Advanced Applications, ser. CARDIS&apos;11<address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="234" to="251" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Weather prediction from imbalanced data stream using 1d-convolutional neural network</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Alex</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Ghosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Mohammad</surname></persName>
+		</author>
+		<idno>ICETET-SIP-22</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2022 10th International Conference on Emerging Trends in Engineering and Technology -Signal and Information Processing</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Tests concerning random points on a circle</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">H</forename><surname>Kuiper</surname></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/S1385725860500060" />
+	</analytic>
+	<monogr>
+		<title level="j">Indagationes Mathematicae (Proceedings)</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="page" from="38" to="47" />
+			<date type="published" when="1960">1960</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">On the composition of elementary errors</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">C</forename></persName>
+		</author>
+		<idno type="DOI">10.1080/03461238.1928.10416862</idno>
+		<ptr target="https://doi.org/10.1080/03461238.1928.10416862" />
+	</analytic>
+	<monogr>
+		<title level="j">Scandinavian Actuarial Journal</title>
+		<imprint>
+			<biblScope unit="volume">1928</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="13" to="74" />
+			<date type="published" when="1928">1928</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">The generalization of &apos;student&apos;s&apos; problem when several different population variances are involved</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Welch</surname></persName>
+		</author>
+		<ptr target="http://www.jstor.org/stable/2332510" />
+	</analytic>
+	<monogr>
+		<title level="j">Biometrika</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">1/2</biblScope>
+			<biblScope unit="page" from="28" to="35" />
+			<date type="published" when="1947">1947</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">on the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">P</forename></persName>
+		</author>
+		<idno type="DOI">10.1080/14786440009463897</idno>
+		<ptr target="https://doi.org/10.1080/14786440009463897" />
+	</analytic>
+	<monogr>
+		<title level="j">The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="issue">302</biblScope>
+			<biblScope unit="page" from="157" to="175" />
+			<date type="published" when="1900">1900</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">On a Test of Whether one of Two Random Variables is Stochastically Larger than the Other</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">B</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Whitney</surname></persName>
+		</author>
+		<idno type="DOI">10.1214/aoms/1177730491</idno>
+		<ptr target="https://doi.org/10.1214/aoms/1177730491" />
+	</analytic>
+	<monogr>
+		<title level="m">The Annals of Mathematical Statistics</title>
+		<imprint>
+			<date type="published" when="1947">1947</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="50" to="60" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">K-sample anderson-darling tests</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">W</forename><surname>Scholz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Stephens</surname></persName>
+		</author>
+		<ptr target="http://www.jstor.org/stable/2288805" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Statistical Association</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="issue">399</biblScope>
+			<biblScope unit="page" from="918" to="924" />
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">The kolmogorov-smirnov test for goodness of fit</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J M J</forename></persName>
+		</author>
+		<idno type="DOI">10.1080/01621459.1951.10500769</idno>
+		<ptr target="https://www.tandfonline.com/doi/abs/10.1080/01621459.1951.10500769" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Statistical Association</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">253</biblScope>
+			<biblScope unit="page" from="68" to="78" />
+			<date type="published" when="1951">1951</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Enterprise risk management: coping with model risk in a large bank</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L O</forename></persName>
+		</author>
+		<idno type="DOI">10.1057/jors.2008.144</idno>
+		<ptr target="https://doi.org/10.1057/jors.2008.144" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Operational Research Society</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="179" to="190" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Energy statistics: A class of statistics based on distances</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">J</forename><surname>Székely</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Rizzo</surname></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/S0378375813000633" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Statistical Planning and Inference</title>
+		<imprint>
+			<biblScope unit="volume">143</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="1249" to="1272" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">The earth mover&apos;s distance as a metric for image retrieval</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Rubner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tomasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">J</forename><surname>Guibas</surname></persName>
+		</author>
+		<idno type="DOI">10.1023/A:1026543900054</idno>
+		<ptr target="https://doi.org/10.1023/A:1026543900054" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer Vision</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="99" to="121" />
+			<date type="published" when="2000-11">Nov. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Frouros: An open-source python library for drift detection in machine learning systems</title>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Céspedes</forename><surname>Sisniega</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Álvaro</forename><surname>López</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">García</forename></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/S2352711024001043" />
+	</analytic>
+	<monogr>
+		<title level="j">SoftwareX</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page">101733</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Analysis of descriptors of concept drift and their impacts</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Costa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Giusti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Santos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Informatics</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">13</biblScope>
+			<date type="published" when="2025">2025</date>
+			<publisher>MDPI</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

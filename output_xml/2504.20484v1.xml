@@ -1,0 +1,1911 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Enhancing LLM Language Adaption through Cross-lingual In-Context Pre-training</title>
+				<funder>
+					<orgName type="full">Longyan City, Fujian Province, People&apos;s Republic of China</orgName>
+				</funder>
+				<funder ref="#_WvBnKfk">
+					<orgName type="full">unknown</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Linjuan</forename><surname>Wu</surname></persName>
+							<email>wulinjuan525@zju.edu.cn</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Zhejiang University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Haoran</forename><surname>Wei</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">Tongyi Lab, Alibaba Group</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Huan</forename><surname>Lin</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">Tongyi Lab, Alibaba Group</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tianhao</forename><surname>Li</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Baosong</forename><surname>Yang</surname></persName>
+							<email>yangbaosong.ybs@alibaba-inc.com</email>
+							<affiliation key="aff1">
+								<orgName type="laboratory">Tongyi Lab, Alibaba Group</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Weiming</forename><surname>Lu</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Zhejiang University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Akhil</forename><surname>Mathur</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Alan</forename><surname>Schelten</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Amy</forename><surname>Yang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Angela</forename><surname>Fan</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Anirudh</forename><surname>Goyal</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Anthony</forename><surname>Hartshorn</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aobo</forename><surname>Yang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Archi</forename><surname>Mitra</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Archie</forename><surname>Sravankumar</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Artem</forename><surname>Korenev</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Arthur</forename><surname>Hinsvark</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Arun</forename><surname>Rao</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aston</forename><surname>Zhang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Aurélien</forename><surname>Rodriguez</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Austen</forename><surname>Gregerson</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ava</forename><surname>Spataru</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bap- Tiste</forename><surname>Rozière</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bethany</forename><surname>Biron</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Binh</forename><surname>Tang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Bobbie</forename><surname>Chern</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Charlotte</forename><surname>Caucheteux</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Chaya</forename><surname>Nayak</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Chloe</forename><surname>Bi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Chris</forename><surname>Marra</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Chris</forename><surname>Mcconnell</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Christian</forename><surname>Keller</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Christophe</forename><surname>Touret</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Chunyang</forename><surname>Wu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Corinne</forename><surname>Wong</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Cristian</forename><forename type="middle">Canton</forename><surname>Ferrer</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Cyrus</forename><surname>Nikolaidis</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Damien</forename><surname>Al- Lonsius</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Daniel</forename><surname>Song</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">Tongyi Lab, Alibaba Group</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Danielle</forename><surname>Pintz</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Danny</forename><surname>Livshits</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">David</forename><surname>Esiobu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dhruv</forename><surname>Choudhary</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dhruv</forename><surname>Mahajan</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Diego</forename><surname>Garcia-Olano</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Diego</forename><surname>Perino</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dieuwke</forename><surname>Hupkes</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Egor</forename><surname>Lakomkin</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ehab</forename><surname>Albadawy</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Elina</forename><surname>Lobanova</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Emily</forename><surname>Dinan</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Eric</forename><forename type="middle">Michael</forename><surname>Smith</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Filip</forename><surname>Radenovic</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Frank</forename><surname>Zhang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gabriel</forename><surname>Synnaeve</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Gabrielle</forename><surname>Lee</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Geor- Gia</forename><forename type="middle">Lewis</forename><surname>Anderson</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Graeme</forename><surname>Nail</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Grégoire</forename><surname>Mialon</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Guan</forename><surname>Pang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Guillem</forename><surname>Cucurell</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Hailey</forename><surname>Nguyen</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Han- Nah</forename><surname>Korevaar</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Hu</forename><surname>Xu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Hugo</forename><surname>Touvron</surname></persName>
+						</author>
+						<author>
+							<persName><roleName>Imanol</roleName><forename type="first">Iliyan</forename><surname>Zarov</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Arrieta</forename><surname>Ibarra</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Isabel</forename><forename type="middle">M</forename><surname>Kloumann</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ishan</forename><surname>Misra</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ivan</forename><surname>Evtimov</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jade</forename><surname>Copet</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jaewon</forename><surname>Lee</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jan</forename><surname>Geffert</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jana</forename><surname>Vranes</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jason</forename><surname>Park</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jay</forename><surname>Mahadeokar</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jeet</forename><surname>Shah</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jelmer</forename><surname>Van Der Linde</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jennifer</forename><surname>Billock</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jenny</forename><surname>Hong</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jenya</forename><surname>Lee</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jeremy</forename><surname>Fu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jianfeng</forename><surname>Chi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jianyu</forename><surname>Huang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jiawen</forename><surname>Liu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jie</forename><surname>Wang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jiecao</forename><surname>Yu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Joanna</forename><surname>Bitton</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Joe</forename><surname>Spisak</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jongsoo</forename><surname>Park</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Joseph</forename><surname>Rocca</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Joshua</forename><surname>Johnstun</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Joshua</forename><surname>Saxe</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Junteng</forename><surname>Jia</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kalyan</forename><forename type="middle">Vasuden</forename><surname>Alwala</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kartikeya</forename><surname>Upasani</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kate</forename><surname>Plawiak</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ke</forename><surname>Li</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Kenneth</forename><surname>Heafield</surname></persName>
+						</author>
+						<title level="a" type="main">Enhancing LLM Language Adaption through Cross-lingual In-Context Pre-training</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">02BF26F211261199C168D3E75ECA9846</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:54+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>Changting County (Cángtīng (a) Randomly Mixed Multilingual In-Context Data (b) Semantically Related Multilingual In-Context Data</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Large language models (LLMs) exhibit remarkable multilingual capabilities despite Englishdominated pre-training, attributed to crosslingual mechanisms during pre-training. Existing methods for enhancing cross-lingual transfer remain constrained by parallel resources, suffering from limited linguistic and domain coverage. We propose Cross-lingual In-context Pre-training (CrossIC-PT), a simple and scalable approach that enhances cross-lingual transfer by leveraging semantically related bilingual texts via simple next-word prediction. We construct CrossIC-PT samples by interleaving semantic-related bilingual Wikipedia documents into a single context window. To access window size constraints, we implement a systematic segmentation policy to split long bilingual document pairs into chunks while adjusting the sliding window mechanism to preserve contextual coherence. We further extend data availability through a semantic retrieval framework to construct CrossIC-PT samples from web-crawled corpus. Experimental results demonstrate that CrossIC-PT improves multilingual performance on three models (Llama-3.1-8B, Qwen2.5-7B, and Qwen2.5-1.5B) across six target languages, yielding performance gains of 3.79%, 3.99%, and 1.95%, respectively, with additional improvements after data augmentation.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Recent state-of-the-art (SOTA) large language models (LLMs) <ref type="bibr" target="#b0">(Achiam et al., 2023;</ref><ref type="bibr">Anthropic;</ref><ref type="bibr" target="#b14">Reid et al., 2024)</ref> have demonstrated remarkable multilingual capabilities. These models are typically pretrained on massive web-crawled corpora, where English text overwhelmingly dominates in the quantity <ref type="bibr" target="#b2">(Brown et al., 2020;</ref><ref type="bibr">Dubey et al., 2024)</ref>. However, current LLMs exhibit unexpectedly strong performance on non-English languages that cannot be fully explained by their relative data proportions during pre-training. Researchers have attributed this phenomenon to cross-lingual transfer in LLM training, where linguistic patterns and knowledge acquired from high-resource languages (particularly English) appear to transfer effectively to enhance performance on the other languages <ref type="bibr">(Artetxe et al., 2020;</ref><ref type="bibr">Scao et al., 2022;</ref><ref type="bibr" target="#b20">Wang et al., 2024)</ref>.</p><p>A series of works have explored methods for interpreting and enhancing cross-lingual transfer during language model pre-training. <ref type="bibr" target="#b1">Blevins and Zettlemoyer (2022)</ref> revealed that even in English-dominated pre-training data, millions of non-English tokens can be identified, which are crucial for multilingual capabilities. Some studies have attempted to analyze cross-lingual transfer abilities from perspectives of shared vocabulary and representation similarity <ref type="bibr" target="#b13">(Patil et al., 2022;</ref><ref type="bibr">Lin et al., 2023)</ref>, though their conclusions primarily apply to specific language groups. The predominant research paradigm has focused on explicitly arXiv:2504.20484v1 [cs.CL] 29 Apr 2025 enhancing cross-lingual transfer through exploiting supervision signals, such as parallel corpora <ref type="bibr">(Zhang et al., 2024b;</ref><ref type="bibr" target="#b12">Ming et al., 2024;</ref><ref type="bibr" target="#b8">Ji et al., 2024;</ref><ref type="bibr" target="#b7">Gosal et al., 2024;</ref><ref type="bibr">Gilabert et al., 2024)</ref>, codeswitching datasets <ref type="bibr" target="#b17">(Singh et al., 2024;</ref><ref type="bibr" target="#b24">Yoo et al., 2024)</ref>, or fine-grained signals like cross lingual entity links <ref type="bibr" target="#b22">(Yamada and Ri, 2024)</ref>. These approaches, however, remain constrained by the limited quantity, domain coverage, and morphological diversity of available bilingual resources (e.g., dictionaries, and parallel sentence pairs).</p><p>Our approach builds upon the fundamental principle of LLM pre-training: contextual modeling through next-word prediction (NWP) loss optimization within fixed-length text windows. Since LLMs could effectively learn monolingual semantics through this mechanism, we hypothesize that extending NWP optimization on semantically related cross-lingual content -using source language context to predict target language sequences -could enhance cross-lingual transfer capabilities. As illustrated in Fig. <ref type="figure" target="#fig_0">1</ref>(b), our method constructs Crosslingual In-context samples by interleaving semantically related bilingual text pairs. Subsequently, we optimize LLMs through standard NWP loss computation on these composite samples. The proposed Cross-lingual In-Context Pre-Training (CrossIC-PT) eliminates the reliance on parallel corpora, and could be applied to different types of text, providing a simple and scalable paradigm for cross-lingual transfer learning.</p><p>To validate our method, we implement the proposed CrossIC-PT method through continued pretraining (CPT) on existing LLMs <ref type="bibr">(Dubey et al., 2024;</ref><ref type="bibr">Yang et al., 2024)</ref>. This strategy converges faster than training from scratch, providing a costeffective solution for multilingual experimentation <ref type="bibr" target="#b27">(Zheng et al., 2024)</ref>. Leveraging the readily available multilingual Wikipedia data, we construct a cross-lingual in-context corpus by concatenating two bilingual Wikipedia articles on the same entity, as illustrated in Fig. <ref type="figure" target="#fig_1">2</ref>. To mitigate context window length constraints, we segment article pairs into bilingual sub-pairs, using a dedicated [SPLIT] token as delimiters (Fig. <ref type="figure" target="#fig_1">2(b)</ref>). We further optimize the sliding window mechanism, ensuring that the next window starts from the token after the last [SPLIT] of the current window, thereby maintaining context coherence and enhancing cross-lingual alignment learning. To further assess the generalizability of our method, we develop a cross-lingual semantic retrieval framework build upon that ex-tends beyond Wikipedia data by incorporating webcrawled text. As shown in Fig. <ref type="figure" target="#fig_3">3</ref>, this framework retrieves semantically related paragraphs from the English Fineweb_edu <ref type="bibr" target="#b11">(Lozhkov et al., 2024)</ref> dataset using title and partial content keywords from the target-language Wikipedia articles as query.</p><p>We conducted experiments in six languages based on three LLMs (Llama-3.1-8B, Qwen2.5-7B, Qwen2.5-1.5B) and tested them on seven tasks. The CrossIC-PT model, built on Wikipedia, improved average performance by 3.79%, 3.99%, and 1.95% compared to the base models, respectively. The expansion of the data further boosted performance by 0.73% for Llama-3.1-8B.</p><p>Our contributions can be summarized as follows:</p><p>• We propose CrossIC-PT, a novel method that enhances LLMs' cross-lingual transfer by leveraging semantically related in-context data.</p><p>• To address input window length limitations, we design a window-split strategy with a [SPLIT] token and an optimized sliding window mechanism to maintain cross-lingual contextual coherence.</p><p>• We also design a cross-lingual semantic retrieval framework to augment training data, which further enhances model performance, proving the robustness and scalability of our approach.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related Work</head><p>Many existing works focus on collecting multilingual data to enhance LLMs' cross-lingual capabilities <ref type="bibr">(Yang et al., 2024;</ref><ref type="bibr">Dubey et al., 2024;</ref><ref type="bibr" target="#b12">Ming et al., 2024;</ref><ref type="bibr" target="#b8">Ji et al., 2024)</ref>. Samples from different languages are randomly packed into fixed window sizes (e.g., 4096) without cross-contamination in self-attention. Even so, these models already demonstrate multilingual ability. Based on this, we hypothesize that concatenating semantically related English and target language data (Fig. <ref type="figure" target="#fig_0">1(b</ref>)) could enhance cross-lingual transfer by leveraging implicit supervision signals.</p><p>Cross-lingual supervision signals have been proven effective in enhancing LLMs' cross-lingual transfer abilities <ref type="bibr" target="#b17">(Singh et al., 2024;</ref><ref type="bibr" target="#b22">Yamada and Ri, 2024)</ref>. Most methods rely on bilingual corpora as explicit supervision signals <ref type="bibr">(Zhang et al., 2024b;</ref><ref type="bibr" target="#b12">Ming et al., 2024;</ref><ref type="bibr" target="#b8">Ji et al., 2024;</ref><ref type="bibr" target="#b7">Gosal et al., 2024;</ref><ref type="bibr">Gilabert et al., 2024)</ref>. Some works, like <ref type="bibr">(Zhang et al., 2024b</ref>) distills translation pairs from LLMs through back-translation to create supervision signals. Others, such as <ref type="bibr" target="#b17">(Singh et al., 2024;</ref><ref type="bibr" target="#b22">Yamada and Ri, 2024)</ref>, apply code-switching techniques to replace or augment words with English translations. <ref type="bibr" target="#b24">(Yoo et al., 2024</ref>) also explores code-switching at various levels using curriculum learning. However, parallel corpora have restricted types, domains (most bilingual corpora are short sentence level bitexts, and usually extracted from news websites), and quantity. Synthetic parallel documents built by back-translation, however, are limited in text Quality. In contrast, our method constructs semantically related document pairs from the authentic data on the Internet, which is more scalable and less problematic.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Method</head><p>Multilingual LLM pre-training typically randomly packs documents from different languages into the fixed-size context window. We hypothesize that concatenating semantically related documents from English and a target language enhances crosslingual transfer. This approach allows the model to predict the next token using both monolingual and cross-lingual context within the concatenated sequence. We call this concatenated sample Crosslingual In-context data, where English serves as the guiding context for learning the target language.</p><p>Based on this, we propose CrossIC-PT, a pretraining method leveraging cross-lingual in-context data.</p><p>As LLMs are pre-trained with a fixed tokens window size (e.g. 4096 tokens), cross-lingual incontext data, which are usually two times longer than the vanilla monolingual documents, may exceed the size limit. Simplifying the packing by length may break the cross-lingual relationship.</p><p>To address this problem, we carefully design a bilingual-aware window-split strategy to construct cross-lingual in-context data. Additionally, to avoid the traditional sliding window mechanism from splitting the concatenated context, we further optimize the sliding window mechanism to ensure context coherence.</p><p>We take advantage of Wikipedia data to implement our method, as shown in Fig. <ref type="figure" target="#fig_1">2</ref>, consisting of three key steps: (1) Data preparation, where we extract and align bilingual article pairs from Wikipedia (Sec. 3.1); (2) Window-split crosslingual in-context construction, where we split multilingual contexts to match the length of the input window (Sec. 3.2); and (3) training with an optimized sliding window mechanism to enhance cross-lingual representation learning (Sec. 3.3). In order to test the generalization of our approach, we propose a cross-lingual semantic retrieval framework to augment the training data (Sec. 3.4).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Data Preparation</head><p>To obtain aligned article pairs in English and the target language (denoted L), we utilize three key tables from Wikimedia with three steps:</p><p>1. Langlinks Table <ref type="table">for</ref> Language L: It contains article ID mappings between language L and other languages with matching titles, along with the corresponding title names T . This table helps identify English article IDs and title names that match those in language L, mapping as (ID L , (ID en , T en )).</p><p>2. English Pages Table : The 'pages' table of English provides article IDs and their corresponding title. We use it to remove English articles with blank or invalid titles from the initial mappings in step (1), yielding the final ID pairs (ID L , ID en ).</p><p>3. Articles Tables for English and Language L: The 'articles' tables for both languages contain the article ID and full information on the web page, which includes the article content. Using the bilingual article ID pairs (ID L , ID en ), we extract the corresponding article pairs with matching titles.</p><p>To ensure completeness, we also perform the reverse mapping (ID en , ID L ), and combine the results with the forward mappings to obtain a comprehensive set of bilingual article pairs. This process ensures that we capture all possible title-matched articles between English and the target language.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Window-split Cross-lingual In-Context Construction</head><p>To fit within the context size N , we set a strategy for processing long article pairs by segmenting them into paragraphs and aligning them sequentially. Specifically, for each bilingual article pair (A en , A L ), we extract the title T and split the articles into paragraphs by signal "\n\n":</p><formula xml:id="formula_0">A en = [p en 1 , p en 2 , ..., p en n ], A L = [p L 1 , p L 2 , ..., p L m ].</formula><p>We iteratively select paragraph pairs (p en i , p L i ) until adding the k-th pair would exceed the length N , and then concat the paragraphs as follows:</p><p>(T en , p en 1 ; p en 2 ; ...; p en k-1 ; T L , p L 1 ; p L 2 ; ...; p L k-1 ), with all English paragraphs preceding the target language L paragraphs, and the delimiter as "\n\n". Each concatenated sequence is terminated with a special [SPLIT] token to mark the end of the context window. If the paragraphs of one language are exhausted before the other, we continue concatenating paragraphs from the remaining language until the length limit N is reached or all paragraphs are  used. This process converts each bilingual article pair into one or more window-split multilingual in-contexts, each fitting within the length limit N .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Pre-training Method</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.1">Sliding Window Mechanism</head><p>In standard pre-training, the sliding window mechanism concatenates all training data and sliding with a fixed window size. However, this can randomly break down our cross-lingual in-contexts, disrupting coherence. To address this, we optimize the sliding window by the introduced tag "[SPLIT]". Specifically, all the windows set the start boundary after the last "[SPLIT]" token, as shown in Fig. <ref type="figure" target="#fig_1">2</ref>. The tokens remain between the end boundary and the latest "[SPLIT]" token will be dropped. In this way we could try best to preserve the cross-lingual coherence within the window.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.2">Training Strategy</head><p>As discussed earlier, continual pre-training (CPT) is cost-effective for cross-lingual transfer. So we adopt it in all our experiments. Recent studies, such as <ref type="bibr" target="#b21">(Whitehouse et al., 2024)</ref>, show that Low-Rank Adaptation (LoRA) is highly competitive with full fine-tuning, especially in low-data and cross-lingual transfer scenarios. In our experiments, we also adopt LoRA during continual pretraining and results reveal that LoRA consistently provides better and more stable performance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Data Augmentation via Retrieval</head><p>To validate our approach, we use the Wikipedia corpus, which includes data in nearly 200 languages linked by matched titles. While the content across languages is not strictly parallel, it covers the same topics, making it suitable for our needs. To enhance the generalization of our method, we introduce a cross-lingual semantic retrieval framework based on the FAISS similarity search tool <ref type="bibr" target="#b9">(Johnson et al., 2019)</ref>, as shown in Fig. <ref type="figure" target="#fig_3">3</ref>. This framework augments the training data by incorporating relevant English articles from the Fineweb_edu <ref type="bibr" target="#b11">(Lozhkov et al., 2024)</ref> dataset, retrieved using title and content keywords (up to 10 per article) extracted from the Wikipedia data. First, keywords are extracted from the targetlanguage Wikipedia page and mapped to English via the langlinks table. Fineweb_edu is then indexed using FAISS for similarity calculations. We employ a two-step retrieval process using FAISS:</p><p>(1) retrieval based on title keywords, and (2) retrieval based on both title and content keywords. The final similarity score is the average of these two steps, balancing the importance of the titles (which may be ambiguous) and content keywords. Based on empirical observations, we set a similarity threshold of 0.75 and retrieved up to three relevant samples per target-language article to construct window-split cross-lingual in-context data. These samples are combined with the original Wikipedia data to form an augmented dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Experiments</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Training Data</head><p>Our training data is primarily sourced from Wikipedia (denoted as W), with token counts for English and each target language listed in Table 1. We selected six target languages L: Arabic (ar), Spanish (es), Japanese (ja), Korean (ko), Portuguese (pt), and Thai (th). To further expand the dataset, we retrieved relevant English data from a subset of Fineweb_edu (denoted as F), which has a file size of 17.44GB. The token counts for the augmented data are also provided in </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Training Settings</head><p>We conducted experiments on three base models: Llama-3.1-8B <ref type="bibr">(Dubey et al., 2024)</ref>, Qwen2.5-7B <ref type="bibr">(Yang et al., 2024)</ref>, and Qwen2.5-1.5B <ref type="bibr">(Yang et al., 2024)</ref>. For LoRA, we set the rank to 64, alpha to 128, and dropout to 0.05. The input window length N was set to 4096, with a batch size of 128. All models were trained for one epoch, using a warmup ratio of 0.05, a cosine learning rate scheduler, and the AdamW optimizer. We randomly selected 0.1% of the data as the validation set, with a seed number of 32. For Llama-3.1-8B and Qwen2.5-7B, the models after one epoch of training were used as the final models. For Qwen2.5-1.5B, we validated the model every 100 steps and saved the checkpoint with the lowest validation loss as the final model. The training was performed on 8 A100 GPUs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Benchmark</head><p>We evaluated our models on several tasks from the latest multilingual and multitask benchmark, P-MMEVAL <ref type="bibr">(Zhang et al., 2024a)</ref>, which includes: generation (FLORES-200 (Costa-jussà et al., 2022)), understanding (XNLI <ref type="bibr" target="#b4">(Conneau et al., 2018)</ref>, MHELLASWAG * ), knowledge (MMMLU † ), logical reasoning (MLOGIQA), and mathematical reasoning (MGSM <ref type="bibr" target="#b16">(Shi et al., 2023)</ref>).</p><p>To further assess the models' paragraph comprehension abilities, we incorporated a reading comprehension task (MRC). The MRC test data includes TydiQA-GoldP <ref type="bibr" target="#b3">(Clark et al., 2020)</ref> for Arabic (ar) and Korean (ko), XQuAD (Artetxe et al., 2020) for Spanish (es), Portuguese (pt), and Thai (th), and 1,200 samples from JaQuAD <ref type="bibr" target="#b18">(So et al., 2022)</ref> for Japanese (ja). Details of the evaluation setting can be found in Appendix A.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Baselines</head><p>In addition to the base models (Llama-3.1-8B, Qwen2.5-7B, and Qwen2.5-1.5B), we included the following baselines:</p><p>• EMMA-500 <ref type="bibr" target="#b8">(Ji et al., 2024)</ref>  reproduced this method using the provided code to construct the data and perform CPT on Llama-3.1-8B, ensuring the target-language token count matched ours. We conducted experiments with three random seeds <ref type="bibr">(32,</ref><ref type="bibr">111,</ref><ref type="bibr">222)</ref> and reported the mean and variance of the results. • Mix-PT: A method that uses our title-matched article pairs from Fig. <ref type="figure" target="#fig_1">2</ref>(a) for pre-training.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.1">Base Results</head><p>The average results of the baselines and our method, based on data from Wikipedia in six languages, are shown in Table <ref type="table" target="#tab_2">2</ref>. Detailed results for each task can be found in Appendix B. CrossIC-PT consistently improves the performance of the base LLMs and outperforms other baselines, demonstrating the effectiveness of using semantically related crosslingual in-context corpora for pre-training.</p><p>Compared to the base LLMs, our CrossIC-PT method improves performance by 3.79%, 3.99%, and 1.95% on Llama-3.1-8B, Qwen2.5-7B, and Qwen2.5-1.5B, respectively, across six languages. Notably, in Portuguese (pt), CrossIC-PT improves performance by 4.73% on Llama-3.1-8B, surpassing the strongest baseline by 2.64%. The performance gains for Qwen2.5 models are more pronounced as model size increases, which may be attributed to the fact that CPT performance is influenced by the initial capabilities of the model.</p><p>Our method consistently improves performance across all languages. The improvement in Thai is less noticeable on Qwen2.5-1.5B, likely due to the smaller dataset size. The LEIA method  shows significant gains in some languages (Spanish, Japanese, and Thai), but its performance is unstable and data-dependent. For instance, the standard deviation for Japanese and Thai exceeds 0.8. This suggests that the implicit supervision signals from our cross-lingual in-context data are more robust and adaptable across languages compared to the entity-alignment signals used by LEIA.</p><p>The Mix-PT model is a strong baseline, trained on non-concatenated title-matched article pairs from Wikipedia, and improves performance across all six languages compared to the three base LLMs. However, our method improves the average performance by 2.15% over the Mix-PT model on Llama-3.1-8B. Our method further enhances Mix-PT by concatenating cross-lingual data and designing an optimized sliding window mechanism.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.2">Results of Data Augmentation</head><p>To explore the generalization of our method, we propose a cross-lingual semantic retrieval framework (shown in Fig. <ref type="figure" target="#fig_3">3</ref>) to augment the training data, with results reported in Table <ref type="table" target="#tab_4">3</ref>. After retrieval, the data volume increased by 0.06B-0.23B. Although  this is a relatively small increase, it improved the average performance of our method by 0.73%. This demonstrates that even when English data is not perfectly aligned with target languages, semantically related still aids cross-lingual transfer. The simplicity of the semantic similarity retrieval process allows easy extension to various data sources. Additionally, we saved several intermediate checkpoints to assess the impact of data volume on performance. As shown in Fig. <ref type="figure">4</ref>, at earlier checkpoints, our method outperformed the baseline LLM in all six languages and surpassed the strong baseline Mix-PT in four languages. This suggests that CrossIC-PT can quickly acquire useful crosslingual transfer capabilities from the cross-lingual in-context data. Although performance improvements became slower as data volume increased, a consistent upward trend was still observed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.6">Ablation Study on Sliding Window Mechanism</head><p>We conduct an ablation study to assess the impact of our optimized sliding window mechanism (Opt-SWM), which introduces the [SPLIT] token and ensures each window starts after the last [SPLIT] token. Specifically, we compare the performance of CrossIC-PT with and without Opt-SWM, denoted as CrossIC-PT w/o Opt-SWM. The results shown in Fig. <ref type="figure">5</ref> reveal that even without Opt-SWM, using only window-split cross-lingual in-context data, CrossIC-PT consistently improves performance across all languages. The addition of the optimized sliding window mechanism further enhances performance, highlighting its role in maintaining cross-lingual in-context coherence and improving language transfer. This demonstrates the effectiveness of all the steps in our design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Analysis</head><p>We believe concatenating semantically related English and target language text in cross-lingual incontext data helps the model better understand the target language guided by the English context. Thus, we set the order as English first, followed by the target language. To verify if this direction is more beneficial, we analyze the concatenation order and test the model's performance in English to ensure there is no catastrophic forgetting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Analysis of Concatenation Direction</head><p>To evaluate the impact of concatenation direction on performance, we compare the original direction (English first, target language second) with the reverse direction (target language first, English second), as well as a 1:1 random mix of both directions. Previously, we only reported results for the en-xx direction in the translation task. In this experiment, we also provide results for the xx-en direction on FLORES-200.   are presented in Table <ref type="table" target="#tab_7">4</ref>. The effect of data concatenation order on translation tasks is most pronounced and fits the intuition. The best translation performance occurs when the concatenation direction matches the translation direction. When combining both directions, CrossIC-PT consistently outperforms the Mix-PT method in translation tasks, showing that even non-parallel bilingual data improves translation. Overall, the English-first, target language-second concatenation gives the best results, aligning with our intention of using English as context to guide the target language learning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Performance on English Tasks</head><p>To prevent catastrophic forgetting, it's important to ensure English performance is maintained. To verify this, we tested the performance of six target language models on English tasks, using the same tasks as before. The results are shown in Fig. <ref type="figure" target="#fig_5">6</ref>. The upper part of Fig. <ref type="figure" target="#fig_5">6</ref> shows the average performance of each target language model on English tasks, with the x-axis ordered by the performance gap between Llama-3.1-8B's performance on the target language and English. The trend suggests that a larger performance gap corresponds to a greater impact on English performance after training. For example, the English performance of Thai (th) and Arabic (ar) is lower. However, it is primarily due to a significant drop in one task. To further investigate, the lower part of Fig. <ref type="figure" target="#fig_5">6</ref> presents the statistical significance ("p") of the performance differences between target language models and the base model, Llama-3.1-8B, across seven tasks. The results show that, except for the Thai model trained with data augmentation (which exhibits a significant drop in English performance), there are no significant differences for other target language models. This suggests that CrossIC-PT improves performance in target languages while effectively preserving English capabilities. We believe this is likely due to the inclusion of at least 50% of English tokens in the cross-lingual in-context corpus, which helps mitigate severe forgetting. This result further validates the robustness and practicality of CrossIC-PT for cross-lingual transfer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusion</head><p>Our work explores a special angle by focusing on semantically related multilingual in-context to enhance the cross-lingual transfer capability of LLMs. We hypothesize that concatenating semantically related English and target language corpora as Crosslingual In-context data is easily accessible and provides an implicitly cross-lingual supervision signal. Building on this hypothesis, we propose CrossIC-PT, a pre-training method based on cross-lingual in-context data. We implement our method using Wikipedia data and employ continual pre-training of existing LLMs on this data. To address the limitations posed by input window length during model training, we design a window-split strategy coupled with an optimized window sliding mechanism. Experimental results demonstrate that CrossIC-PT enhances multilingual performance across three models-Llama-3.1-8B, Qwen2.5-7B, and Qwen2.5-1.5B-across six target languages, achieving performance gains of 3.79%, 3.99%, and 1.95%, respectively, compared to base models. Fur-ther improvements are observed after data augmentation using a semantic retrieval framework. Our approach is simple to scale for multilingual LLM pre-training and offers an efficient way to expand data volume.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>To our knowledge, this work has the following limitations:</p><p>• Due to resource constraints, our experiments were limited to a context window length of 4096 tokens. Longer windows could better preserve the completeness of articles and enable the concatenation of similar multilingual data from more than two languages, potentially further enhancing cross-lingual transfer.</p><p>• Our experiments focused on validating the effectiveness of concatenated cross-lingual incontext data, so we performed continued pretraining on monolingual data rather than mixing multilingual data. While this choice aligns with our research goals, our approach also provides valuable insights for developers working on multilingual LLMs.</p><p>• Our data expansion method, based on retrieval, currently demonstrates how to retrieve additional English data from external sources using target-language Wikipedia data. However, this approach can be easily extended to retrieve more diverse data. Wikipedia's broad domain coverage makes it an ideal hub for retrieving both target language and English data from other sources. By controlling the retrieval process with appropriate similarity thresholds, the retrieved bilingual data can be used to construct high-quality cross-lingual in-context data.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Existing works randomly mix multilingual texts (a) in an input window. Our approach groups semantically related texts (b) to enhance cross-lingual transfer.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: The implementation process of our method, CrossIC-PT, which constructs cross-lingual in-contexts based on Wikipedia data and performs continued pre-training (CPT) on existing multilingual models. Here, N represents the input window length of the model. The T indicates the title of the articles, and L indicates the target language.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fineweb_edu</head><label></label><figDesc>(Paris) Entiies in Content: 仏 (French), フランス (Frence), 首都 (Capital), イル＝ド＝フラン ス地域圏 (Île-de-France) ... Title: Paris Title and Entiies: Paris, French, Frence, Capital, Île-de-France... -France is a region of France. The capital city is Paris. It is also the capital city of France. In 2013 about 12 million people lived in the region... Paris is today one of the world\'s leading business and cultural centres, and its influences in politics, educatio n, entertainment, media, fashion, science, and... Paris is considered today to be one of the most beautiful and vibrant cities in Europe. It is located in the north bending arc of the River Seine...</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: The framework of cross-lingual semantic retrieval based on FAISS similarity search tool.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 4 :Figure 5 :</head><label>45</label><figDesc>Figure 4: Performance progression of CrossIC-PT across intermediate checkpoints based on Llama-3.1-8B. Our method outperforms the baseline LLM early on, indicating quick acquisition of cross-lingual transfer capabilities, maintaining a slow upward trend as data volume increases.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: The average results of each target language model in English tasks. The p is the significant score between the CrossIC-PT model and Llama-3.1-8B.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc></figDesc><table><row><cell cols="2">data language</cell><cell>ar</cell><cell>es</cell><cell>ja</cell><cell>ko</cell><cell>pt</cell><cell>th</cell></row><row><cell></cell><cell>en</cell><cell cols="6">1.53B 1.88B 1.32B 1.01B 1.48B 0.42B</cell></row><row><cell>W</cell><cell>L</cell><cell cols="6">0.67B 1.57B 1.28B 0.37B 0.81B 0.18B</cell></row><row><cell></cell><cell>en</cell><cell cols="6">0.12B 0.10B 0.06B 0.04B 0.05B 0.10B</cell></row><row><cell>W+F</cell><cell>L</cell><cell cols="6">0.12B 0.13B 0.08B 0.03B 0.05B 0.06B</cell></row></table><note><p><p><p>Table</p>1</p>: The token counts for the data from Wikipedia (W) and augmented data from Wikipedia and Fineweb_edu (F).</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>The average results of our CrossIC-PT model, based on three base LLMs (Llama-3.1-8B, Qwen2.5-7B, and Qwen2.5-1.5B), are compared with corresponding baselines across six target languages. The cross-lingual in-context datasets used in CrossIC-PT are sourced from Wikipedia.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 3 :</head><label>3</label><figDesc>The results of our CrossIC-PT model and Mix-PT baseline with Wikipedia-based data and augmented data constructed on Wikipedia and Fineweb_edu data.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>The average results of six languages across tasks</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">FLORESE-200</cell><cell></cell><cell></cell></row><row><cell>Model</cell><cell>XLOGIQA</cell><cell>XHELLASWAG</cell><cell>MMMLU</cell><cell>XNLI</cell><cell>MRC</cell><cell>en-xx</cell><cell>xx-en</cell><cell>MGSM</cell><cell>AVG.</cell></row><row><cell>Llama-3.1-8B</cell><cell>33.25</cell><cell>35.33</cell><cell>40.10</cell><cell>56.17</cell><cell>57.49</cell><cell>38.56</cell><cell>29.41</cell><cell>38.00</cell><cell>41.04</cell></row><row><cell>Mix-PT</cell><cell>34.75</cell><cell>36.68</cell><cell>43.05</cell><cell>59.17</cell><cell>60.36</cell><cell>39.63</cell><cell>32.72</cell><cell>36.96</cell><cell>42.92</cell></row><row><cell>CrossIC-PT</cell><cell>36.00</cell><cell>39.71</cell><cell>43.15</cell><cell>62.17</cell><cell>63.02</cell><cell>41.39</cell><cell>30.44</cell><cell>39.68</cell><cell>44.44</cell></row><row><cell>CrossIC-PT mix</cell><cell>34.75</cell><cell>32.33</cell><cell>43.55</cell><cell>58.33</cell><cell>62.20</cell><cell>40.75</cell><cell>33.53</cell><cell>36.96</cell><cell>42.80</cell></row><row><cell>CrossIC-PT reverse</cell><cell>35.50</cell><cell>33.69</cell><cell>43.00</cell><cell>57.67</cell><cell>62.41</cell><cell>39.51</cell><cell>34.12</cell><cell>36.40</cell><cell>42.79</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 4 :</head><label>4</label><figDesc>The average task results of CrossIC-PT with mix two directions (CrossIC-PT mix ) and the reverse direction (CrossIC-PT reverse ) of cross-lingual in-context data.</figDesc><table><row><cell cols="2">o Opt-SWM CrossIC-PT</cell><cell>55</cell><cell>53.90</cell><cell></cell><cell>54.27</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>54</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>53</cell><cell>53.21</cell><cell>52.54</cell><cell></cell><cell>53.08</cell><cell cols="2">Llama-3.1-8B: 52.90</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>53.12</cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>51 52 AVG.</cell><cell></cell><cell>52.41</cell><cell></cell><cell>51.84</cell><cell>50.39</cell><cell>51.00</cell></row><row><cell></cell><cell></cell><cell>50</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>50.44</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>50.11</cell></row><row><cell></cell><cell></cell><cell>49</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>W</cell><cell>W+F</cell></row><row><cell></cell><cell></cell><cell>48</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>pt</cell><cell>th</cell><cell></cell><cell>pt</cell><cell>ko</cell><cell>ja</cell><cell>es</cell><cell>th</cell><cell>ar</cell></row><row><cell></cell><cell></cell><cell>W</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.05</cell></row><row><cell></cell><cell></cell><cell>W+F</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &gt; 0.1</cell><cell>p &lt; 0.05</cell><cell>p &gt; 0.05</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgements</head><p>This work was supported by the <rs type="programName">Alibaba Research Intern Program</rs>.</p></div>
+			</div>
+			<div type="funding">
+<div><p>Xiàn) is a county-level administrative region under the jurisdiction of <rs type="funder">Longyan City, Fujian Province, People's Republic of China</rs>....</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_WvBnKfk">
+					<orgName type="program" subtype="full">Alibaba Research Intern Program</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A The Setting for Evaluation</head><p>The prompts of each task we used are shown in Table <ref type="table">5</ref>. Since our method aims to transfer English capabilities to target languages, the prompts are primarily designed in English, and the demonstrations are also selected from English data. For the mathematical reasoning task (MGSM), we conducted an 8-shot test; for the reading comprehension task (MRC), we adopted a zero-shot setting to evaluate the model's understanding of the target language; for other tasks, we set up a 5-shot test. For multiple-choice tasks (e.g., XNLI, MMLU, XHELLASWAG, XLOGIQA), we directly obtain answers by predicting the next logits. For other tasks, we use greedy search to generate answers and extract the final answer through regular expression matching.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Results of Tasks</head><p>The average results of our method and the baseline across six languages in each task are shown in Table <ref type="table">6</ref>. </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The claude 3 model family: Opus, sonnet, haiku. Mikel Artetxe, Sebastian Ruder, and Dani Yogatama</title>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Openai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Achiam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandhini</forename><surname>Adler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lama</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilge</forename><surname>Ahmad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florencia</forename><surname>Akkaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diogo</forename><surname>Leoni Aleman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janko</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Altenschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shyamal</forename><surname>Altman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Red</forename><surname>Anadkat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Igor</forename><surname>Avila</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Babuschkin</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.acl-main.421</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, ACL 2020</title>
+		<meeting>the 58th Annual Meeting of the Association for Computational Linguistics, ACL 2020</meeting>
+		<imprint>
+			<date type="published" when="2020">2023. 2020</date>
+			<biblScope unit="page" from="4623" to="4637" />
+		</imprint>
+	</monogr>
+	<note>On the cross-lingual transferability of monolingual representations</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Language contamination helps explains the cross-lingual capabilities of english pretrained models</title>
+		<author>
+			<persName><forename type="first">Terra</forename><surname>Blevins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2022.emnlp-main.233</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing</title>
+		<meeting>the 2022 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Abu Dhabi, United Arab Emirates</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2022-12-07">2022. December 7-11, 2022</date>
+			<biblScope unit="volume">2022</biblScope>
+			<biblScope unit="page" from="3563" to="3574" />
+		</imprint>
+	</monogr>
+	<note>Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Language models are few-shot learners</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Tom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Ryder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><surname>Subbiah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prafulla</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Dhariwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pranav</forename><surname>Neelakantan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Girish</forename><surname>Shyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Sastry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandhini</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariel</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gretchen</forename><surname>Herbert-Voss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Krueger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rewon</forename><surname>Henighan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Child</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">M</forename><surname>Ramesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Ziegler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clemens</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Winter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Hesse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sigler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Ma Teusz Litwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Chess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Berner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alec</forename><surname>Mccandlish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dario</forename><surname>Sutskever</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Amodei</surname></persName>
+		</author>
+		<idno>ArXiv, abs/2005.14165</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Tydi QA: A benchmark for information-seeking question answering in typologically diverse languages</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">H</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennimaria</forename><surname>Palomaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vitaly</forename><surname>Nikolaev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunsol</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Garrette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Collins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Kwiatkowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Trans. Assoc. Comput. Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="454" to="470" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">XNLI: evaluating crosslingual sentence representations</title>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruty</forename><surname>Rinott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Lample</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adina</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><forename type="middle">R</forename><surname>Bowman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Schwenk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Veselin</forename><surname>Stoyanov</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/d18-1269</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing</title>
+		<meeting>the 2018 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Brussels, Belgium</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2018-10-31">2018. October 31 -November 4, 2018</date>
+			<biblScope unit="page" from="2475" to="2485" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">No language left behind: Scaling human-centered machine translation</title>
+		<author>
+			<persName><forename type="first">Marta</forename><forename type="middle">R</forename><surname>Costa-Jussà</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Cross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Onur</forename><surname>Çelebi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maha</forename><surname>Elbayad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Heafield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Heffernan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elahe</forename><surname>Kalbassi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Licht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Maillard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">Y</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Skyler</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Al</forename><surname>Youngblood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bapi</forename><surname>Akula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loïc</forename><surname>Barrault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><forename type="middle">Mejia</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prangthip</forename><surname>Hansanti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Hoffman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Semarley</forename><surname>Jarrett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ram</forename><surname>Kaushik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dirk</forename><surname>Sadagopan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shannon</forename><surname>Rowe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chau</forename><surname>Spruit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Tran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Necip</forename><surname>Andrews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Fazil Ayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Bhosale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vedanuj</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Goswami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Guzmán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Koehn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christophe</forename><surname>Mourachko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Safiyyah</forename><surname>Ropers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Saleem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Schwenk</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2207.04672</idno>
+		<idno>CoRR, abs/2207.04672</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Aleix Sant Savall</title>
+		<author>
+			<persName><forename type="first">Abhimanyu</forename><surname>Dubey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhinav</forename><surname>Jauhri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhinav</forename><surname>Pandey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Kadian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmad</forename><surname>Al-Dahle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aiesha</forename><surname>Letman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Javier</forename><surname>García Gilabert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Escolano</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2406.09140</idno>
+		<idno>CoRR, abs/2406.09140</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Francesca de Luca Fornaciari, Audrey Mash, Xixian Liao, and Maite Melero. 2024. Investigating the translation capabilities of large language models trained on parallel data only</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Bilingual adaptation of monolingual foundation models</title>
+		<author>
+			<persName><forename type="first">Gurpreet</forename><surname>Gosal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yishi</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gokul</forename><surname>Ramakrishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rituraj</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Avraham</forename><surname>Sheinin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiming</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Biswajit</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalia</forename><surname>Vassilieva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Hestness</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2407.12869</idno>
+		<idno>abs/2407.12869</idno>
+		<editor>Neha Sengupta, Sunil Kumar Sahu, Bokang Jia, Onkar Pandit, Satheesh Katipomu, Samta Kamboj, Samujjwal Ghosh, Rahul Pal, Parvez Mullah, Soundar Doraiswamy, Mohamed El Karim Chami, and Preslav Nakov</editor>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<publisher>CoRR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Emma-500: Enhancing massively multilingual adaptation of large language models</title>
+		<author>
+			<persName><forename type="first">Shaoxiong</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zihao</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Indraneil</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaakko</forename><surname>Paavola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peiqin</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pinzhen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Dayyán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hengyu</forename><surname>Brien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hinrich</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jörg</forename><surname>Schütze</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tiedemann</surname></persName>
+		</author>
+		<idno>CoRR, abs/2409.17892</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Billion-scale similarity search with GPUs</title>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthijs</forename><surname>Douze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hervé</forename><surname>Jégou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Big Data</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="535" to="547" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">2023. mplm-sim: Better cross-lingual similarity and transfer in multilingual pretrained language models</title>
+		<author>
+			<persName><forename type="first">Peiqin</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chengzhi</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheyu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">T</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hinrich</forename><surname>Martins</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schütze</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>In Findings</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Anton</forename><surname>Lozhkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loubna</forename><surname>Ben Allal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leandro</forename><surname>Von Werra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Wolf</surname></persName>
+		</author>
+		<idno type="DOI">10.57967/hf/2497</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note>Fineweb-edu: the finest collection of educational content</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Marco-llm: Bridging languages via massive multilingual training for cross-lingual enhancement</title>
+		<author>
+			<persName><forename type="first">Lingfeng</forename><surname>Ming</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chenyang</forename><surname>Lyu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianqi</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xue</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yefeng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiyu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linlong</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yangyang</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaohu</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huifeng</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zifu</forename><surname>Shang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haijun</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Longyue</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weihua</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaifu</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno>CoRR, abs/2412.04003</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Overlap-based vocabulary generation improves cross-lingual transfer among related languages</title>
+		<author>
+			<persName><forename type="first">Vaidehi</forename><surname>Patil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Partha</forename><surname>Pratim Talukdar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunita</forename><surname>Sarawagi</surname></persName>
+		</author>
+		<idno>ArXiv, abs/2203.01976</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context</title>
+		<author>
+			<persName><forename type="first">Machel</forename><surname>Reid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikolay</forename><surname>Savinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Teplyashin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dmitry</forename><surname>Lepikhin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><forename type="middle">P</forename><surname>Lillicrap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Baptiste</forename><surname>Alayrac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Radu</forename><surname>Soricut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angeliki</forename><surname>Lazaridou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Orhan</forename><surname>Firat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julian</forename><surname>Schrittwieser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ioannis</forename><surname>Antonoglou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rohan</forename><surname>Anil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Borgeaud</surname></persName>
+		</author>
+		<idno>ArXiv, abs/2403.05530</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Teven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Scao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ellie</forename><surname>Akiki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suzana</forename><surname>Pavlick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Ilic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roman</forename><surname>Hesslow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Castagné</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">François</forename><surname>Sasha Luccioni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Yvon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Gallé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">M</forename><surname>Tow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stella</forename><surname>Rush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Biderman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pawan</forename><surname>Webson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Sasanka Ammanamanchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benoît</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niklas</forename><surname>Sagot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Muennighoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olatunji</forename><surname>Villanova Del Moral</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Ruwase</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stas</forename><surname>Bawden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angelina</forename><surname>Bekman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iz</forename><surname>Mcmillan-Major</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huu</forename><surname>Beltagy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucile</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samson</forename><surname>Saulnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pedro</forename><forename type="middle">Ortiz</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Suarez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Sanh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yacine</forename><surname>Laurençon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Jernite</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Launay</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mitchell</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2211.05100</idno>
+		<editor>Colin Raffel, Aaron Gokaslan, Adi Simhi, Aitor Soroa, Alham Fikri Aji, Amit Alfassy, Anna Rogers, Ariel Kreisberg Nitzav, Canwen Xu, Chenghao Mou, Chris Emezue, Christopher Klamm, Colin Leong, Daniel van Strien, David Ifeoluwa Adelani</editor>
+		<imprint/>
+	</monogr>
+	<note>and et al. 2022. BLOOM: A 176b-parameter open-access multilingual language model. CoRR, abs/2211.05100</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Language models are multilingual chain-of-thought reasoners</title>
+		<author>
+			<persName><forename type="first">Freda</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mirac</forename><surname>Suzgun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Freitag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuezhi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suraj</forename><surname>Srivats</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Soroush</forename><surname>Vosoughi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyung</forename><forename type="middle">Won</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Tay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Ruder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denny</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dipanjan</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Wei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Eleventh International Conference on Learning Representations</title>
+		<meeting><address><addrLine>Kigali, Rwanda</addrLine></address></meeting>
+		<imprint>
+			<publisher>OpenReview</publisher>
+			<date type="published" when="2023-05-01">2023. May 1-5, 2023</date>
+			<biblScope unit="volume">2023</biblScope>
+		</imprint>
+	</monogr>
+	<note>net</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">A three-pronged approach to cross-lingual adaptation with multilingual llms</title>
+		<author>
+			<persName><forename type="first">Vaibhav</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amrith</forename><surname>Krishna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Karthika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ganesh</forename><surname>Ramakrishnan</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/ARXIV.2406.17377</idno>
+		<idno>CoRR, abs/2406.17377</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Jaquad: Japanese question answering dataset for machine reading comprehension</title>
+		<author>
+			<persName><forename type="first">Byunghoon</forename><surname>So</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyuhong</forename><surname>Byun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyungwon</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seongjin</forename><surname>Cho</surname></persName>
+		</author>
+		<idno>CoRR, abs/2202.01764</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Touvron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Louis</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Stone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Albert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amjad</forename><surname>Almahairi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasmine</forename><surname>Babaei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikolay</forename><surname>Bashlykov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Soumya</forename><surname>Batra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prajjwal</forename><surname>Bhargava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Bhosale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Bikel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukas</forename><surname>Blecher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristian</forename><surname>Canton-Ferrer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moya</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillem</forename><surname>Cucurull</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Esiobu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jude</forename><surname>Fernandes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenyin</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Fuller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vedanuj</forename><surname>Goswami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Hartshorn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saghar</forename><surname>Hosseini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rui</forename><surname>Hou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hakan</forename><surname>Inan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcin</forename><surname>Kardas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Viktor</forename><surname>Kerkez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madian</forename><surname>Khabsa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isabel</forename><surname>Kloumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Artem</forename><surname>Korenev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Punit</forename><surname>Singh Koura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie-Anne</forename><surname>Lachaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thibaut</forename><surname>Lavril</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jenya</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Liskovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yinghai</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuning</forename><surname>Mao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xavier</forename><surname>Martinet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Todor</forename><surname>Mihaylov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pushkar</forename><surname>Mishra</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2307.09288</idno>
+		<title level="m">Igor Molybog</title>
+		<editor>
+			<persName><forename type="first">Yixin</forename><surname>Nie</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Andrew</forename><surname>Poulton</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Jeremy</forename><surname>Reizenstein</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Rashi</forename><surname>Rungta</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Kalyan</forename><surname>Saladi</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Alan</forename><surname>Schelten</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ruan</forename><surname>Silva</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Eric</forename><forename type="middle">Michael</forename><surname>Smith</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ranjan</forename><surname>Subramanian</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ellen</forename><surname>Xiaoqing</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Binh</forename><surname>Tan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ross</forename><surname>Tang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Adina</forename><surname>Taylor</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Jian</forename><surname>Williams</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Puxin</forename><surname>Xiang Kuan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Zheng</forename><surname>Xu</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Iliyan</forename><surname>Yan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Yuchen</forename><surname>Zarov</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Angela</forename><surname>Zhang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Melanie</forename><surname>Fan</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Sharan</forename><surname>Kambadur</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Narang</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Robert Stojnic, Sergey Edunov</addrLine></address></meeting>
+		<imprint>
+			<publisher>Aurélien Rodriguez</publisher>
+		</imprint>
+	</monogr>
+	<note>and Thomas Scialom. 2023. Llama 2: Open foundation and finechat models. CoRR, abs/2307.09288</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Probing the emergence of cross-lingual alignment during llm training</title>
+		<author>
+			<persName><forename type="first">Hetong</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pasquale</forename><surname>Minervini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ponti</surname></persName>
+		</author>
+		<idno>ArXiv, abs/2406.13229</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Low-rank adaptation for multilingual summarization: An empirical study</title>
+		<author>
+			<persName><forename type="first">Chenxi</forename><surname>Whitehouse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fantine</forename><surname>Huot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jasmijn</forename><surname>Bastings</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mostafa</forename><surname>Dehghani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chu-Cheng</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mirella</forename><surname>Lapata</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2024.findings-naacl.77</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics: NAACL 2024</title>
+		<meeting><address><addrLine>Mexico City, Mexico</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2024-06-16">2024. June 16-21, 2024</date>
+			<biblScope unit="page" from="1202" to="1228" />
+		</imprint>
+	</monogr>
+	<note>Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">LEIA: facilitating cross-lingual knowledge transfer in language models with entity-based data augmentation</title>
+		<author>
+			<persName><forename type="first">Ikuya</forename><surname>Yamada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryokan</forename><surname>Ri</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2024.findings-acl.419</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics, ACL 2024, Bangkok, Thailand and virtual meeting, August 11-16</title>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2024">2024. 2024</date>
+			<biblScope unit="page" from="7029" to="7039" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">An</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baosong</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beichen</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Binyuan</forename><surname>Hui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bowen</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chengyuan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dayiheng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fei</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haoran</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huan</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jianhong</forename><surname>Tu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jianwei</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jianxin</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiaxi</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jingren</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Junyang</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Dang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keming</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keqin</forename><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kexin</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Le</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mei</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingfeng</forename><surname>Xue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pei</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qin</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rui</forename><surname>Men</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Runji</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianhao</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tingyu</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xingzhang</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuancheng</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yichang</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Wan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuqiong</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zeyu</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhenru</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2412.15115</idno>
+		<imprint/>
+	</monogr>
+	<note>and Zihan Qiu. 2024. Qwen2.5 technical report. CoRR, abs/2412.15115</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Code-switching curriculum learning for multilingual transfer in llms</title>
+		<author>
+			<persName><forename type="first">Haneul</forename><surname>Yoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheonbok</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sangdoo</forename><surname>Yun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Oh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hwaran</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2411.02460</idno>
+		<idno>CoRR, abs/2411.02460</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">2024a. P-mmeval: A parallel multilingual multitask benchmark for consistent evaluation of llms</title>
+		<author>
+			<persName><forename type="first">Yidan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boyi</forename><surname>Deng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Wan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baosong</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haoran</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fei</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bowen</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Junyang</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jingren</forename><surname>Zhou</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2411.09116</idno>
+		<idno>CoRR, abs/2411.09116</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Enhancing multilingual capabilities of large language models through self-distillation from resource-rich languages</title>
+		<author>
+			<persName><forename type="first">Yuanchi</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yile</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zijun</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuo</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaolong</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maosong</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2024.acl-long.603</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics</title>
+		<meeting>the 62nd Annual Meeting of the Association for Computational Linguistics<address><addrLine>Bangkok, Thailand</addrLine></address></meeting>
+		<imprint>
+			<publisher>Long Papers</publisher>
+			<date type="published" when="2024-08-11">2024. August 11-16, 2024</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="11189" to="11204" />
+		</imprint>
+	</monogr>
+	<note>ACL 2024. Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Breaking language barriers: Cross-lingual continual pre-training at scale</title>
+		<author>
+			<persName><forename type="first">Wenzhen</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenbo</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xu</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Libo</forename><surname>Qin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Li</forename><surname>Yue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ming</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing</title>
+		<meeting>the 2024 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Miami, FL, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2024-11-12">2024. November 12-16, 2024</date>
+			<biblScope unit="volume">2024</biblScope>
+			<biblScope unit="page" from="7725" to="7738" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m">Llama-3.1-8B</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Table 6: The average results of our method and the baseline across six languages in each task</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

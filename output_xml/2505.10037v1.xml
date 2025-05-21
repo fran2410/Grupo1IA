@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">OPTIMAL NORMALIZATION IN QUANTUM-CLASSICAL HYBRID MODELS FOR ANTI-CANCER DRUG RESPONSE PREDICTION</title>
+				<funder ref="#_ZCzEyUZ">
+					<orgName type="full">The University of Tokyo</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">JSPS KAKENHI</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Takafumi</forename><surname>Ito</surname></persName>
+							<email>ito-takafumi0906@g.ecc.u-tokyo.ac.jp</email>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computational Biology and Medical Sciences</orgName>
+								<orgName type="laboratory">Laboratory for Medical Science Mathematics</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Graduate School of Frontier Sciences</orgName>
+								<orgName type="institution">The University of Tokyo</orgName>
+								<address>
+									<settlement>Tokyo</settlement>
+									<country key="JP">Japan</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Lysenko</forename><surname>Artem</surname></persName>
+							<email>alysenko@g.ecc.u-tokyo.ac.jp</email>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Biological Sciences</orgName>
+								<orgName type="laboratory">Laboratory for Medical Science Mathematics</orgName>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="department">School of Science</orgName>
+								<orgName type="institution">The University of Tokyo</orgName>
+								<address>
+									<settlement>Tokyo</settlement>
+									<country key="JP">Japan</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tatsuhiko</forename><surname>Tsunoda</surname></persName>
+							<email>tsunoda@bs.s.u-tokyo.ac.jp</email>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computational Biology and Medical Sciences</orgName>
+								<orgName type="laboratory">Laboratory for Medical Science Mathematics</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Graduate School of Frontier Sciences</orgName>
+								<orgName type="institution">The University of Tokyo</orgName>
+								<address>
+									<settlement>Tokyo</settlement>
+									<country key="JP">Japan</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Biological Sciences</orgName>
+								<orgName type="laboratory">Laboratory for Medical Science Mathematics</orgName>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="department">School of Science</orgName>
+								<orgName type="institution">The University of Tokyo</orgName>
+								<address>
+									<settlement>Tokyo</settlement>
+									<country key="JP">Japan</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">OPTIMAL NORMALIZATION IN QUANTUM-CLASSICAL HYBRID MODELS FOR ANTI-CANCER DRUG RESPONSE PREDICTION</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">02F884B1E4D343AF6F9F61D975EAD0BE</idno>
+					<idno type="arXiv">arXiv:2505.10037v1[cs.LG]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:43+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Anti-cancer drug response prediction</term>
+					<term>Quantum-classical hybrid machine learning</term>
+					<term>Normalization</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Quantum-classical Hybrid Machine Learning (QHML) models are recognized for their robust performance and high generalization ability even for relatively small datasets. These qualities offer unique advantages for anti-cancer drug response prediction, where the number of available samples is typically small. However, such hybrid models appear to be very sensitive to the data encoding used at the interface of a neural network and a quantum circuit, with suboptimal choices leading to stability issues. To address this problem, we propose a novel strategy that uses a normalization function based on a moderated gradient version of the tanh. This method transforms the outputs of the neural networks without concentrating them at the extreme value ranges. Our idea was evaluated on a dataset of gene expression and drug response measurements for various cancer cell lines, where we compared the prediction performance of a classical deep learning model and several QHML models. These results confirmed that QHML performed better than the classical models when data was optimally normalized. This study opens up new possibilities for biomedical data analysis using quantum computers.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Background</head><p>Due to extreme heterogeneity of cancers no therapies are universally effective, and therefore it is particularly important to select optimal anti-cancer drugs for each individual patient. Computational predictive models are becoming increasingly essential for streamlining such choices based on various evidence from previous studies. Among possible approaches, deep learning-based methods have a number of advantages over conventional machine learning due to their superior feature extraction ability <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2]</ref>. On the other hand, deep learning-based methods sometimes suffer from poor generalization ability due to the activation function, which is an important component for its nonlinearity. This is thought to occur because the gradient of the activation function changes abruptly when the input is close to zero, inappropriately amplifying small data fluctuations <ref type="bibr" target="#b2">[3]</ref>. This problem is especially significant when the dataset is small or high-dimensional, since the distances between data points are large, making it difficult to interpolate. Previous studies revealed that gene expression data are highly valuable for anti-cancer drug response prediction <ref type="bibr" target="#b3">[4]</ref>. Gene expression data are high-dimensional data with about 20,000 dimensions, and they are too large compared to the number of samples that can be used for prediction (∼1000). Therefore, deep learning models tend to lose their generalization ability. Quantum-classical Hybrid Machine Learning (QHML) is one of the emerging solutions for this problem. Previous studies found that QHML performs better than the classical model in some cases <ref type="bibr" target="#b4">[5]</ref>. QHML is a model that combines trainable quantum circuits and traditional neural networks to take advantage of both high generalization ability of quantum machine learning and feature extraction ability of deep learning. Because quantum machine learning models process input data based on smooth quantum operations, they are expected to successfully interpolate the gaps in a small number of high-dimensional data and achieve high generalization performance. One limitation is that quantum models currently struggle to directly handle high-dimensional data because of current hardware limitations, such as the limited number of qubits and short decoherence times. This can be effectively addressed by using a neural network to map the input data into some compact embeddings that are sufficiently small to accommodate. These characteristics of QHML make this system appear attractive for the task of anti-cancer drug response prediction. However, after some trials, we found that the performance of the trained QHML model is unstable. Among the possible causes, we considered the information flow between the deep learning part and the Parameterized Quantum Circuit (PQC) as one of the key aspects. In the proposed architecture, the embeddings extracted by the neural network are passed to the quantum circuit using rotation angle encoding. Quantum rotation gates have a periodicity of 2π, and several inputs could be considered identical, which may lead to unstable convergence during training. There is a study using tanh to normalize the input of the quantum circuit, but the gradients around zero are too steep, and many input values are mapped onto the most extreme upper and lower ranges of the scale. This can be mitigated by adjusting this normalization function by introducing a "gradual tanh". This function eliminates the periodicity and concentration of the output values and thus enables a more stable training. To evaluate this approach, we have conducted five response prediction runs for different anti-cancer drugs and found that appropriate normalization enhances the performance of the quantum-classical hybrid model. We also investigated how the normalization function transforms values in the trained model, suggesting that the proposed normalization function may solve two problems that hinder learning stability: the periodicity of quantum gates and the crowding of values due to normalization. This study provides insight on how to pass values with care when combining deep learning models with quantum machine learning for anti-cancer drug response prediction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Methods</head><p>In this section, we describe the detailed methods for anti-cancer drug response prediction with QHML. We used PyTorch <ref type="bibr" target="#b5">[6]</ref> and Pennylane <ref type="bibr" target="#b6">[7]</ref> to implement the entire model.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Quantum-classical hybrid machine learning model architecture</head><p>Here, we employed the quantum-classical hybrid model with three parts: a classical neural network encoder, a normalization function, and PQC (Figure <ref type="figure" target="#fig_0">1</ref>). In this study all quantum computation was done on a noiseless simulator, and the quantum states were calculated exactly. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.1">Classical neural network for data encoding</head><p>The model first transforms input gene expression data into a low-dimensional embedding suitable for input to the quantum circuit by using a neural network encoder. Specifically, it is a three-layer neural network, with SiLU <ref type="bibr" target="#b7">[8]</ref> as the activation function. In addition, batch normalization is applied between the linear layer and the activation function. The dimensions of hidden layer 1 and hidden layer 2 are fixed to 512 and 128, while the final layer was adjusted to match the size of the subsequent quantum circuit.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.2">Normalization function</head><p>In our model, the outputs of the encoder are used as angles of the initial rotation gates when initializing the circuit. The rotation gate has a periodicity of 2π and therefore multiple values represent the same angle of rotation, which can lead to unstable training. A previous study <ref type="bibr" target="#b8">[9]</ref> used a normalization function with tanh (1) in their implementation:</p><formula xml:id="formula_0">ϕ ′ = π 2 tanh(ϕ).<label>(1)</label></formula><p>ϕ is the output vector of the classical part, and ϕ ′ is the converted vector that is passed to the quantum circuit. This function smoothly converts values between -π 2 and π 2 and thereby avoiding the periodicity problem. One of the disadvantages of using the equation 1 is that the gradient around zero is too steep, and many converted inputs will take values very close to -π 2 or π 2 . This causes difficulty in training. The relationship between the tanh function and possible complications during training was already previously reported in the field of classical deep learning <ref type="bibr" target="#b9">[10]</ref>. Therefore, we propose to use the following transformation. ( <ref type="formula" target="#formula_1">2</ref>):</p><formula xml:id="formula_1">ϕ ′ = r • tanh( ϕ a ).<label>(2)</label></formula><p>This function is a generalization of Equation 1 and smoothly transforms any real number into the range -r ∼ r. By taking a sufficiently large value of a, we can make a function with a gentle gradient, which solves the problem of value crowding. We also consider the value of r in this study. Although a large value of r increases the range of possible values after normalization and may improve the expression ability, a periodicity problem arises when r is greater than π.</p><p>In addition, a small value of r is expected to have a positive effect on regularization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.3">Parameterized quantum circuit</head><p>After the normalization, the feature is passed to PQC. Figure <ref type="figure" target="#fig_1">2A</ref> shows the PQC design for our model. This circuit is almost the same as the one used in <ref type="bibr" target="#b10">[11]</ref>. The blue gates are Z-rotation gates, and the rotation angles are determined by the input of the quantum circuit. The red gates are X-rotation gates, and the angles are determined by adjustable parameters.</p><p>The PQC is divided into three parts: the encoding layer, the variational layer, and the measurement layer. We used n 1 qubits for PQC. In the encoding layer, normalized features are passed to the PQC as quantum states. This encoding method is proposed in <ref type="bibr" target="#b11">[12]</ref> and <ref type="bibr" target="#b12">[13]</ref>. Repetition of the encoding layers n 2 times allows for greater data encoding efficiently with a relatively small number of qubits. Next part is the variational layer, where parameterized gates change the quantum state. To achieve sufficient representation ability, this part is repeated n 3 times. The last part checks the state of the output qubits using a set of Pauli Z measurements. We prepared two types of measurement layers (Figure <ref type="figure" target="#fig_1">2B</ref>). When we used multiple measurements, we applied a single fully connected layer last to get scalar drug response values. The single measurements layer integrates values using CNOT gates and predicts the drug response with a single measurement. All the calculations in this study were done on a noiseless simulator, so the expectation values are calculated exactly. We implemented all the quantum circuits with Pennylane <ref type="bibr" target="#b6">[7]</ref>, which is a specialized library for quantum machine learning. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Experimental setup</head><p>We trained all the models with the same settings. We used mean squared error for the loss function and Adam <ref type="bibr" target="#b13">[14]</ref> for the optimizer. The batch size was 128, and we trained the model for 100 epochs.</p><p>For training and test data, we used cell line data obtained from the GDSC database. The GDSC database stores omics data on cell lines and their response values to various drugs <ref type="bibr" target="#b14">[15]</ref>. The data were used in a previous study <ref type="bibr" target="#b0">[1]</ref>, and were obtained in the preprocessed form from the Zenodo repository maintained by the original authors. </p><formula xml:id="formula_2">DrugResponse norm = tanh( log(IC50) -mean(log(IC50)) std(log(IC50)) )<label>(3)</label></formula><p>3 Results</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Performance evaluation with cross validation</head><p>We compared the prediction performance of the classical model, the proposed quantum-classical hybrid model, and quantum-classical hybrid models with different normalization methods. The classical model is the proposed model without the normalization and the quantum circuit, and with one additional linear layer instead. The quantum-classical hybrid model used for comparison consisted of three models: one without normalization (Equation <ref type="formula">4</ref>), one with normalization using nn.Layernorm from PyTorch (Equation <ref type="formula" target="#formula_3">5</ref>) (used in <ref type="bibr" target="#b15">[16]</ref>), and the last one with normalization using tanh (Equation <ref type="formula" target="#formula_0">1</ref>).</p><formula xml:id="formula_3">ϕ ′ = ϕ (4) ϕ ′ = nn.Layernorm(ϕ)<label>(5)</label></formula><p>We used multiple measurements for the measurement layer of these models. For the proposed method(Equation <ref type="formula" target="#formula_1">2</ref>), we prepared two models and employed each measurement layer. The hyperparameters a and r of the proposed method were set to a = 20 and r = π 2 . We conducted stratified 5-fold cross-validation 10 times and calculated the AUC for the validation split at each epoch to select the best hyperparameters. Here, we used only the training data obtained from a random 9:1 split of the entire dataset, as described in Section 2.2. The test data were reserved for model evaluation and were not used during training or hyperparameter tuning. Stratification was based on normalized drug response values, divided into 4 equal-width bins between their minimum and maximum values. We took the average of all 50 runs and defined the best AUC value among 100 epochs as the performance of the model. Hyperparameters were determined by grid search (Table <ref type="table" target="#tab_0">A1</ref>, Figure <ref type="figure" target="#fig_0">A1,</ref><ref type="figure" target="#fig_1">A2,</ref><ref type="figure" target="#fig_3">A3,</ref><ref type="figure">A4,</ref><ref type="figure">A5</ref>). After completing the hyperparameter search, we evaluated the performance of the model using their best hyperparameters on the test set. The training data was split 4:1 into training and validation data using a stratified approach, as we did for the cross-validation. We trained models using the best hyperparameters for 100 epochs, calculating the AUC of the models on the validation set at the end of each epoch. For early stopping to prevent overfitting, we stopped training when the performance of the models on the validation set did not improve for three epochs, and used the models from the epoch just before the performance stopped improving as the final trained models. For all drugs, one of the quantum-classical hybrid models with the proposed method performed best. On the other hand, when normalization methods other than the proposed method were used, performance was worse than the classical model in some cases. It is suggested that if there is no appropriate normalization, the integration of quantum circuits can make the performance rather poor. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Hyperparameters of the normalization function</head><p>To confirm the broad validity of this setup, we also investigated the effect of the hyperparameters a and r on the method's performance. For each drug, we examined the change given different values of a and r, for the best-performing model selected using cross-validation as described in section 3.1. As in 3.1, we trained the model using early stopping by splitting the training sample with a stratified approach and compared the performance on the test data. We fixed r to π 2 when changing a, and a to 20 when changing r. Multiple measurements were taken from the circuit, which were combined using a single neural network layer. For a, the performance was low when a was small (0.5, 1) in most cases.</p><p>On the other hand, the performance was high when a took on values larger than 10. Gemcitabine is the only exception, and its performance is best at a = 0.5. For r, the optimal r varies for each anticancer drug, suggesting that it is a parameter that needs to be adjusted. When r = 8π, there was a substantial decrease in performance for drugs other than Erlotinib, suggesting that the periodicity issue of the quantum gate could not be ignored. For Erlotinib, while r = 8π recorded the highest performance, the overall performance remained low. This suggests that most models performed close to random chance, indicating that the prediction task for Erlotinib was too difficult. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Data normalization strategy</head><p>To understand how the proposed method normalizes the data, we examined the overall distribution of the transformed values. The following results were obtained using the predictive model of Docetaxel with the best hyperparameters trained in Section 3.1, due to its superior performance compared to the classical model. Specifically, we have looked at the values returned at the embedding layer in the conventional method, and after their transformation using tanh (Equation <ref type="formula" target="#formula_0">1</ref>), or the proposed method (Equation <ref type="formula" target="#formula_1">2</ref>). We extracted 100 training samples, input them into those trained models, and plotted how they were distributed before and after normalization (Figure <ref type="figure" target="#fig_3">3</ref>). In the conventional method, many values far from 0 are densely converted to values close to -π 2 or π 2 , and the shape of the value distribution changes greatly from that before the normalization. On the other hand, the proposed method normalizes values keeping the shape of the original distribution. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Discussion</head><p>We found that combining quantum circuits with a classical model can deliver better performance in our application case of predicting anti-cancer drug response in cell line data for several drugs, but only when the proposed normalization function was used. We believe this to be the case because this transformation prevents extreme values from clustering densely after normalization. In this paper, we were only able to validate the performance using randomly split test data rather than independent external test data. As this is an important limitation, we would like to conduct such additional tests using real patient data in the future. We only compared our model with a simple neural network model, excluding quantum circuits, and do not claim a general performance advantage over classical models in the field of anti-cancer drug response prediction. We will consider more advanced quantum-classical hybrid anti-cancer drug response prediction models using the normalization method proposed. We found that small a and large r are not well suited for the proposed normalization function for most prediction models. The former is due to value crowding, and the latter due to the periodicity property of quantum gates. However, there are exceptions, such as the prediction model for Gemcitabine, which prefers a small a, and the prediction model for Erlotinib, which prefers a large r. The optimal values of a and r differ for each prediction model, and this parameter should be determined carefully. One potential method of determining a and r is to set a and r as parameters and adjust them during the training process to search for the optimal values. In future work, we plan to conduct experiments using noisy simulators and real quantum devices to investigate the effect of noise on the optimal hyperparameters a and r. This will be a crucial step towards understanding the performance of our method in realistic quantum devices. The applicability of the proposed normalization method to fields other than the prediction of response to anti-cancer drugs is one of the themes that should be studied in the future. In particular, the similar model architecture with normalization may be applicable to fields such as image recognition, where high-dimensional data is handled and the input method to quantum circuits is not obvious.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Conclusion</head><p>In this study, we found that appropriate normalization improves the performance of the quantum-classical hybrid model in the prediction of anti-cancer drug response using gene expression levels. The proposed normalization of the method enables stable learning by avoiding the periodicity problem of quantum gates and the crowding of values caused by the existing normalization methods. Quantum computers have developed remarkably in recent years, and their application in the field of biomedical science is expected to become more important in the future. Further progress in omics data analysis is expected through research that combines deep learning and quantum computers using this method.   </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Overview of the quantum-classical hybrid machine learning model. Our proposed normalization function normalizes features effectively for inputting to the quantum circuits.</figDesc><graphic coords="2,112.52,447.31,393.32,166.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Parameterized quantum circuit architecture. (A) The parameterized quantum circuit consists of three parts and is characterized by 3 hyperparameters (n 1 ,n 2 , and n 3 ). The measurement layer has two types described in Figure 2B. (B) We prepared two types of measurement layer. The difference is whether the integrations of values are done inside or outside of the quantum circuit.</figDesc><graphic coords="4,92.98,70.82,423.55,247.54" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>(https://zenodo.org/record/4036592) We randomly split the data 9:1 for training and test data. TGene expression data was the sole input and was already converted into TPM, log-transformed. In addition, standardized and homogenized to ensure compatibility between the data from different experiments<ref type="bibr" target="#b3">[4]</ref>. To exclude non-informative genes, we only used genes with training data variance above 0.1. For the drug response label, we have used continuous log(IC50) values for training and binary response labels for validation data. We used response data for five anti-cancer drugs with a sufficiently large sample size and relatively little bias in drug response: Cetuximab (Non-Responder(NR): 735 samples, Responder(R): 121 samples), Cisplatin (NR: 752 samples, R: 77 samples), Docetaxel (NR: 764 samples, R: 65 samples), Erlotinib (NR: 298 samples, R: 64 samples), and Gemcitabine (NR: 790 samples, R: 54 samples). We normalized log(IC50) values to -1 ∼ 1 with equation 3 so that the value range of the quantum circuit output matches:</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Distribution of values before and after normalization. The blue graph represents the features before normalization, and the orange graph represents the features after normalization. (A) Distribution of values before and after normalization of the model using the existing method described in Equation 1. After normalization, values far from 0 are more densely distributed than before normalization. (B) Distribution of values before and after normalization of the model using the proposed method described in Equation 2. (a = 20, r = π 2 ). The shape of the original distribution remains preserved after normalization with a change in scale.</figDesc><graphic coords="6,163.00,347.25,283.52,299.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure</head><label></label><figDesc>Figure A1: Cetuximab</figDesc><graphic coords="10,75.43,89.92,206.39,154.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure</head><label></label><figDesc>Figure A2: Cisplatin</figDesc><graphic coords="10,307.25,89.92,206.39,154.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure</head><label></label><figDesc>Figure A3: Docetaxel Figure A4: Erlotinib</figDesc><graphic coords="10,75.43,308.58,206.39,154.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Performance was evaluated on the randomly split test set. Proposed-multi means the proposed method with multiple measurements layer, and Proposed-single means that with a single measurement layer. The performance of the proposed methods is competitive or higher than other methods.</figDesc><table><row><cell>Type</cell><cell>Normalization</cell><cell cols="5">Cetuximab Cisplatin Docetaxel Erlotinib Gemcitabine</cell></row><row><cell>Classic</cell><cell></cell><cell>0.707</cell><cell>0.820</cell><cell>0.791</cell><cell>0.295</cell><cell>0.485</cell></row><row><cell cols="2">Hybrid Identity</cell><cell>0.673</cell><cell>0.782</cell><cell>0.806</cell><cell>0.381</cell><cell>0.633</cell></row><row><cell></cell><cell>Layernorm</cell><cell>0.618</cell><cell>0.835</cell><cell>0.842</cell><cell>0.424</cell><cell>0.580</cell></row><row><cell></cell><cell>tanh</cell><cell>0.432</cell><cell>0.580</cell><cell>0.795</cell><cell>0.429</cell><cell>0.139</cell></row><row><cell></cell><cell cols="2">Proposed-multi 0.709</cell><cell>0.827</cell><cell>0.868</cell><cell>0.443</cell><cell>0.679</cell></row><row><cell></cell><cell cols="2">Proposed-single 0.707</cell><cell>0.707</cell><cell>0.868</cell><cell>0.576</cell><cell>0.685</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Performance with different a. r was fixed to π 2 .</figDesc><table><row><cell></cell><cell cols="5">Cetuximab Cisplatin Docetaxel Erlotinib Gemcitabine</cell></row><row><cell cols="2">a = 0.5 0.577</cell><cell>0.495</cell><cell>0.539</cell><cell>0.371</cell><cell>0.790</cell></row><row><cell>a = 1</cell><cell>0.432</cell><cell>0.580</cell><cell>0.795</cell><cell>0.429</cell><cell>0.139</cell></row><row><cell>a = 10</cell><cell>0.700</cell><cell>0.716</cell><cell>0.885</cell><cell>0.514</cell><cell>0.620</cell></row><row><cell>a = 20</cell><cell>0.709</cell><cell>0.827</cell><cell>0.868</cell><cell>0.443</cell><cell>0.679</cell></row><row><cell cols="2">a = 100 0.734</cell><cell>0.727</cell><cell>0.872</cell><cell>0.448</cell><cell>0.614</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Performance with different r. a was fixed to 20. The optimal r varies for each anticancer drug.</figDesc><table><row><cell></cell><cell cols="5">Cetuximab Cisplatin Docetaxel Erlotinib Gemcitabine</cell></row><row><cell>r = π 4 r = π 2 r = 3π 4 r = π</cell><cell>0.716 0.709 0.668 0.756</cell><cell>0.782 0.827 0.730 0.722</cell><cell>0.883 0.868 0.883 0.885</cell><cell>0.386 0.443 0.476 0.324</cell><cell>0.660 0.679 0.645 0.454</cell></row><row><cell cols="2">r = 3π 2 r = 2π 0.711 0.742</cell><cell>0.766 0.749</cell><cell>0.857 0.816</cell><cell>0.429 0.352</cell><cell>0.596 0.620</cell></row><row><cell cols="2">r = 4π 0.675</cell><cell>0.802</cell><cell>0.855</cell><cell>0.414</cell><cell>0.685</cell></row><row><cell cols="2">r = 8π 0.601</cell><cell>0.584</cell><cell>0.812</cell><cell>0.538</cell><cell>0.404</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>We would like to thank <rs type="person">Drs. Mitsuhisa Sato</rs>, <rs type="person">Maxence Vandromme</rs>, <rs type="person">Miwako Tsuji</rs>, <rs type="person">Kengo Nakajima</rs>, <rs type="person">Yuetsu Kodama</rs>, and <rs type="person">Kazuya Yamazaki</rs> for their helpful discussions. This study was supported by the <rs type="programName">World-leading Innovative Graduate Study Program in Proactive Environmental Studies (WINGS-PES</rs>), <rs type="funder">The University of Tokyo</rs>. This work was also partly funded by <rs type="funder">JSPS KAKENHI</rs> Grant Numbers JP25K02261, Japan.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_ZCzEyUZ">
+					<orgName type="program" subtype="full">World-leading Innovative Graduate Study Program in Proactive Environmental Studies (WINGS-PES</orgName>
+				</org>
+			</listOrg>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Appendix</head><p>We determined the optimal parameters by cross-validation. We performed grid searches over the range in Table <ref type="table">A1</ref> for the hyperparameters and selected the combination that recorded the highest average AUC. We plotted the prediction performance of each model by epoch (Figure <ref type="figure">A1</ref>, A2, A3, A4, A5), showing the average of 50 runs of AUC for the validation data obtained from 10 times 5-fold cross-validation. The red dots indicate the points with the highest AUC. </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Moli: multi-omics late integration with deep neural networks for drug response prediction</title>
+		<author>
+			<persName><forename type="first">Hossein</forename><surname>Sharifi-Noghabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olga</forename><surname>Zolotareva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colin</forename><forename type="middle">C</forename><surname>Collins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Ester</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="501" to="509" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Deepinsight-3d architecture for anti-cancer drug response prediction with deep-learning on multi-omics</title>
+		<author>
+			<persName><forename type="first">Alok</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Artem</forename><surname>Lysenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keith</forename><forename type="middle">A</forename><surname>Boroevich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tatsuhiko</forename><surname>Tsunoda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Scientific reports</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">2483</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">Cihang</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingxing</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boqing</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Yuille</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quoc V</forename><surname>Le</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2006.14536</idno>
+		<title level="m">Smooth adversarial training</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Clinical drug response can be predicted using baseline gene expression levels and in vitro drug sensitivity in cell lines</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Geeleher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">J</forename><surname>Cox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Huang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome biology</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Quantum machine learning for image classification</title>
+		<author>
+			<persName><forename type="first">Arsenii</forename><surname>Senokosov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandr</forename><surname>Sedykh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Asel</forename><surname>Sagingalieva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Basil</forename><surname>Kyriacou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexey</forename><surname>Melnikov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Machine Learning: Science and Technology</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">15040</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Pytorch: An imperative style, high-performance deep learning library</title>
+		<author>
+			<persName><surname>Paszke</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1912.01703</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ville</forename><surname>Bergholm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Izaac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Schuld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Gogolin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shahnawaz</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vishnu</forename><surname>Ajith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sohaib Alam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillermo</forename><surname>Alonso-Linaje</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Akashnarayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Asadi</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1811.04968</idno>
+		<title level="m">Automatic differentiation of hybrid quantum-classical computations</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Hendrycks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Gimpel</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1606.08415</idno>
+		<title level="m">Gaussian error linear units (gelus)</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Transfer learning in hybrid classical-quantum neural networks</title>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Mari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">R</forename><surname>Bromley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Izaac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Schuld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Killoran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Quantum</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">340</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Understanding the difficulty of training deep feedforward neural networks</title>
+		<author>
+			<persName><forename type="first">Xavier</forename><surname>Glorot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoshua</forename><surname>Bengio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the thirteenth international conference on artificial intelligence and statistics</title>
+		<meeting>the thirteenth international conference on artificial intelligence and statistics</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="249" to="256" />
+		</imprint>
+	</monogr>
+	<note>JMLR Workshop and Conference Proceedings</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Hybrid quantum neural network for drug response prediction</title>
+		<author>
+			<persName><forename type="first">Asel</forename><surname>Sagingalieva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Kordzanganeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nurbolat</forename><surname>Kenbayev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daria</forename><surname>Kosichkina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tatiana</forename><surname>Tomashuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexey</forename><surname>Melnikov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cancers</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page">2705</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Data re-uploading for a universal quantum classifier</title>
+		<author>
+			<persName><forename type="first">Adrián</forename><surname>Pérez-Salinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alba</forename><surname>Cervera-Lierta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elies</forename><surname>Gil-Fuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">José I</forename><surname>Latorre</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">226</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Effect of data encoding on the expressive power of variational quantum-machine-learning models</title>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Schuld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Sweke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johannes</forename><forename type="middle">Jakob</forename><surname>Meyer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Physical Review A</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">32430</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><surname>Diederik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jimmy</forename><surname>Kingma</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ba</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1412.6980</idno>
+		<title level="m">Adam: A method for stochastic optimization</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Genomics of drug sensitivity in cancer (gdsc): a resource for therapeutic biomarker discovery in cancer cells</title>
+		<author>
+			<persName><forename type="first">Wanjuan</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jorge</forename><surname>Soares</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>Greninger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><forename type="middle">J</forename><surname>Edelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Howard</forename><surname>Lightfoot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Forbes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nidhi</forename><surname>Bindal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dave</forename><surname>Beare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">A</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Richard Thompson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic acids research</title>
+		<imprint>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="955" to="D961" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Quantum-classical hybrid machine learning for image classification (iccad special session paper)</title>
+		<author>
+			<persName><forename type="first">Mahabubul</forename><surname>Alam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satwik</forename><surname>Kundu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rasit</forename><surname>Onur Topaloglu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Swaroop</forename><surname>Ghosh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2021 IEEE/ACM International Conference On Computer Aided Design (ICCAD)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<biblScope unit="page">2021</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

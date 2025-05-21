@@ -1,0 +1,1690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Style Customization of Text-to-Vector Generation with Image Diffusion Priors</title>
+				<funder ref="#_yevBytg">
+					<orgName type="full">Research Grants Council</orgName>
+					<orgName type="abbreviated">RGC</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-15">15 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Peiying</forename><surname>Zhang</surname></persName>
+							<email>zhangpeiying17@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Nanxuan</forename><surname>Zhao</surname></persName>
+							<email>nanxuanzhao@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Jing</forename><surname>Liao</surname></persName>
+							<email>jingliao@cityu.edu.hk</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">City University of Hong</orgName>
+								<address>
+									<settlement>Kong Hong Kong</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Adobe Research San Jose</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">City University of Hong</orgName>
+								<address>
+									<settlement>Kong Hong Kong</settlement>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Style Customization of Text-to-Vector Generation with Image Diffusion Priors</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-15">15 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">468637B102FFDD52C33F0E53DEE32764</idno>
+					<idno type="arXiv">arXiv:2505.10558v1[cs.GR]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2025-05-19T11:43+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Vector Graphics</term>
+					<term>SVG</term>
+					<term>Diffusion Model</term>
+					<term>Style Customization</term>
+					<term>Text-Guided Generation</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>styles based on text prompts in an efficient feed-forward manner. The effectiveness of our method has been validated through extensive experiments. The project page is https://customsvg.github.io.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>(a) Exemplar Style (b) Style Customization of Text-to-Vector Generation</head><p>"boy" "house" "camera" "basket" "crown" "gift" "trophy"</p><p>Figure <ref type="figure">1</ref>: Examples of vector graphics generated from text prompts in custom styles using our method, showcasing structural regularity and expressive diversity. Exemplar SVGs: the 1 𝑠𝑡 and 3 𝑟𝑑 rows are from ©SVGRepo; the 2 𝑛𝑑 row is from ©iconfont.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ABSTRACT</head><p>Scalable Vector Graphics (SVGs) are highly favored by designers due to their resolution independence and well-organized layer structure.</p><p>Although existing text-to-vector (T2V) generation methods can create SVGs from text prompts, they often overlook an important need in practical applications: style customization, which is vital for producing a collection of vector graphics with consistent visual appearance and coherent aesthetics.</p><p>Extending existing T2V methods for style customization poses certain challenges. Optimization-based T2V models can utilize the priors of text-to-image (T2I) models for customization, but struggle with maintaining structural regularity. On the other hand, feedforward T2V models can ensure structural regularity, yet they encounter difficulties in disentangling content and style due to limited SVG training data.</p><p>To address these challenges, we propose a novel two-stage style customization pipeline for SVG generation, making use of the advantages of both feed-forward T2V models and T2I image priors. In the first stage, we train a T2V diffusion model with a path-level representation to ensure the structural regularity of SVGs while preserving diverse expressive capabilities. In the second stage, we customize the T2V diffusion model to different styles by distilling customized T2I models. By integrating these techniques, our pipeline can generate high-quality and diverse SVGs in custom</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Vector graphics, especially in the form of Scalable Vector Graphics (SVG), play an essential role in digital arts such as icons, clipart, and graphic design. By representing visual elements as geometric shapes, SVGs provide resolution independence, compact file sizes, and flexibility for layer-wise manipulation, making them highly favored by designers. Given the challenges of creating high-quality vector graphics, many recent works <ref type="bibr" target="#b19">[Jain et al. 2022;</ref><ref type="bibr" target="#b40">Thamizharasan et al. 2024;</ref><ref type="bibr" target="#b45">Wu et al. 2023;</ref><ref type="bibr" target="#b47">Xing et al. 2024]</ref> have proposed algorithms in text-to-vector (T2V) generation. However, these methods overlook an important need in practical applications -style customization. Designers often customize a set of vector graphics with consistent visual appearance and aesthetic coherence. This is crucial for ensuring design quality, particularly in contexts like branding, user interfaces, and themed illustrations.</p><p>Simply extending existing T2V methods for style customization is difficult. Current T2V methods can be categorized into optimization-based and feed-forward methods. Optimization-based T2V methods, which either optimize a set of vector elements (e.g., cubic Bézier curves) to fit the images generated by T2I models <ref type="bibr" target="#b24">[Ma et al. 2022;</ref><ref type="bibr">Zhang et al. 2023b]</ref>, or directly optimize shape parameters using Score Distillation Sampling (SDS) loss <ref type="bibr" target="#b28">[Poole et al. 2022]</ref> based on T2I models <ref type="bibr" target="#b19">[Jain et al. 2022;</ref><ref type="bibr">Xing et al. 2023b;</ref><ref type="bibr" target="#b54">Zhang et al. 2024]</ref>, can be extended for style customization by fine-tuning a T2I model on user-provided style examples. Although effective in adapting to new styles, these methods are time-consuming and often produce fragmented or cluttered paths. Such outputs overlook the inherent structural regularity and element relationships within SVG designs, making them difficult to edit or refine further.</p><p>Feed-forward T2V methods, on the other hand, are trained on SVG datasets using large language models (LLMs) <ref type="bibr" target="#b30">[Rodriguez et al. 2023;</ref><ref type="bibr" target="#b45">Wu et al. 2023]</ref> or diffusion models <ref type="bibr" target="#b40">[Thamizharasan et al. 2024;</ref><ref type="bibr" target="#b47">Xing et al. 2024]</ref>, maintaining SVG regularity and attaining high-quality outcomes within their respective training domains. However, style customization of the T2V model presents significant challenges. The absence of large-scale, general-purpose text-SVG datasets makes it difficult for the T2V model to disentangle content and style semantics, limiting its ability to generalize to new styles. Consequently, a straightforward approach of fine-tuning a base T2V model with only a few exemplar SVGs, following T2I customization techniques <ref type="bibr" target="#b16">[Hu et al. 2021;</ref><ref type="bibr" target="#b21">Kumari et al. 2022;</ref><ref type="bibr" target="#b32">Ruiz et al. 2022]</ref>, often leads to overfitting on the exemplar SVGs. Nevertheless, acquiring a sufficient number of consistent style sample SVGs for fine-tuning is impractical due to the scarcity of such data.</p><p>Addressing these limitations, we propose a novel two-stage style customization pipeline for SVG generation using only a few exemplar SVGs. It combines the strengths of feed-forward T2V methods to ensure SVG structural regularity and T2I models to acquire powerful customization capabilities. In the first stage, we train a T2V model on black-and-white SVG datasets to focus on learning the contents and structures of SVGs. In the second stage, we learn various styles of SVGs by distilling priors from different customized T2I models. Our two-stage pipeline also helps the T2V model explicitly disentangle content and style semantics.</p><p>The aim of the first stage is to train a T2V generative model tailored for style customization. Considering that LLM-based methods generate SVG code in an autoregressive manner, limiting their ability to utilize raster images as supervision, we adopt a diffusion model as the base model to enable customization from the T2I model. As for the representation, global SVG-level representations <ref type="bibr" target="#b47">[Xing et al. 2024]</ref> suffer from limited expressivity constrained by the dataset <ref type="bibr" target="#b31">[Rombach et al. 2022]</ref>, and point-level representations <ref type="bibr" target="#b40">[Thamizharasan et al. 2024</ref>] are inefficient for complex SVGs. Thus, we select a path-level representation <ref type="bibr" target="#b54">[Zhang et al. 2024</ref>] that ensures both compactness and expressivity. In this stage, our path-level T2V diffusion model learns to generate SVGs that feature text-aligned content and exhibit structural regularity.</p><p>In the second stage, we distill styles from a T2I diffusion model to enable style customization for the T2V diffusion model. Specifically, we fine-tune the T2I model using a small set of style images to generate diverse customized images, which serve as augmented data for training the T2V model. To facilitate image-based training, we employ a reparameterization technique <ref type="bibr" target="#b38">[Song et al. 2020]</ref> to compute SVG predictions and render them as images, enabling the T2V model to be updated via an image-level loss. After training, the T2V model can generate SVGs in learned custom styles corresponding to text prompts in a feed-forward manner.</p><p>We evaluate our method through comprehensive experiments across vector-level, image-level, and text-level metrics. The results demonstrate the effectiveness of our model in generating high-quality vector graphics with valid SVG structures and diverse customized styles, given input text prompts. Examples of style customization results produced by our framework are shown in Figure <ref type="figure">1</ref>. Our key contributions are:</p><p>• We propose a novel two-stage T2V pipeline to disentangle content and style in SVG generation, which is also the first feedforward T2V model capable of generating SVGs in custom styles. • We design a T2V diffusion model based on path-level representations, ensuring structural regularity of SVGs while maintaining diverse expressive capabilities. • We develop a style customization method for the T2V model by distilling styles from customized image diffusion models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 Optimization-based T2V Generation</head><p>Optimization-based methods leverage pre-trained vision-language models, such as CLIP <ref type="bibr" target="#b29">[Radford et al. 2021]</ref> or diffusion models <ref type="bibr" target="#b31">[Rombach et al. 2022]</ref>, combined with differentiable rendering <ref type="bibr" target="#b22">[Li et al. 2020]</ref> to directly optimize SVG paths. CLIP-based methods <ref type="bibr" target="#b9">[Frans et al. 2022;</ref><ref type="bibr" target="#b33">Schaldenbrand et al. 2022;</ref><ref type="bibr" target="#b37">Song et al. 2022;</ref><ref type="bibr" target="#b41">Vinker et al. 2022</ref>] maximize image-text alignment within CLIP latent space.</p><p>Recent works exploit Score Distillation Sampling (SDS) loss <ref type="bibr" target="#b28">[Poole et al. 2022;</ref><ref type="bibr">Wang et al. 2023b</ref>] to capitalize on the strong visual and semantic priors of T2I diffusion models. These methods can produce static <ref type="bibr" target="#b18">[Iluz et al. 2023;</ref><ref type="bibr" target="#b19">Jain et al. 2022;</ref><ref type="bibr">Xing et al. 2023a,b;</ref><ref type="bibr" target="#b54">Zhang et al. 2024]</ref> or animated <ref type="bibr" target="#b12">[Gal et al. 2023;</ref><ref type="bibr" target="#b46">Wu et al. 2024</ref>] SVGs aligned with text prompts. However, each optimization typically requires tens of minutes per SVG, making them impractical for real design scenarios. Alternatively, some commercial tools <ref type="bibr" target="#b17">[Illustrator 2023</ref>;</p><p>Illustroke 2024] integrate T2I models with vectorization techniques <ref type="bibr" target="#b6">[Dominici et al. 2020;</ref><ref type="bibr" target="#b8">Favreau et al. 2017;</ref><ref type="bibr" target="#b15">Hoshyari et al. 2018;</ref><ref type="bibr" target="#b20">Kopf and Lischinski 2011;</ref><ref type="bibr" target="#b24">Ma et al. 2022;</ref><ref type="bibr" target="#b35">Selinger 2003</ref>] to convert raster images into SVGs. Despite their visually appealing results, these methods often include multiple fragmented paths and lack coherent layer relationships in SVGs, complicating further edits. While some methods <ref type="bibr" target="#b44">[Warner et al. 2023;</ref><ref type="bibr">Zhang et al. 2023b</ref>] adapt paths from an exemplar SVG via semantic correspondences to preserve layer structure, they are unsuitable for style customization when the source and target differ significantly in semantics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Feed-forward T2V Generation</head><p>Feed-forward methods have explored to learn SVG properties from specialized datasets using large language models or diffusion models. LLM-based approaches <ref type="bibr" target="#b30">[Rodriguez et al. 2023;</ref><ref type="bibr" target="#b39">Tang et al. 2024;</ref><ref type="bibr" target="#b45">Wu et al. 2023]</ref>   the vector domain. Although these feed-forward pipelines are conceptually elegant, their generalization capabilities are constrained by the absence of large-scale, general-purpose vector graphics datasets. Consequently, they are limited to producing SVGs in fixed styles, while our approach supports diverse customized styles in a feed-forward manner.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Cusomization of T2I Generation</head><p>Recent advances in T2I customization have enabled flexible adaptation of concepts and styles using only a few reference images <ref type="bibr" target="#b11">[Gal et al. 2022;</ref><ref type="bibr" target="#b21">Kumari et al. 2022;</ref><ref type="bibr" target="#b32">Ruiz et al. 2022</ref>]. The pioneering approach DreamBooth <ref type="bibr" target="#b32">[Ruiz et al. 2022</ref>] fine-tunes the entire diffusion model by associating user-provided concepts with a unique token. Parameter-efficient fine-tuning (PEFT) methods <ref type="bibr" target="#b25">[Mangrulkar et al. 2022]</ref> propose modifying only specific network components, such as low-rank weight offsets <ref type="bibr" target="#b10">[Frenkel et al. 2025;</ref><ref type="bibr" target="#b16">Hu et al. 2021]</ref>, crossattention blocks <ref type="bibr" target="#b21">[Kumari et al. 2022;</ref><ref type="bibr" target="#b50">Ye et al. 2023]</ref>, or adapter layers <ref type="bibr" target="#b26">[Mou et al. 2024;</ref><ref type="bibr" target="#b36">Sohn et al. 2023]</ref>. While effective for customizing powerful T2I diffusion models, these techniques are challenging to apply to T2V models, which have limited generalization ability and struggle to disentangle content and style semantics, often leading to overfitting when fine-tuned with only a few exemplar SVGs. Our two-stage style customization pipeline addresses these limitations by leveraging T2I diffusion priors to help the T2V model learn various styles of SVGs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">OVERVIEW</head><p>Our goal is to generate SVGs that are customized to specific styles while aligning with the semantics of given text prompts and maintaining structural regularity. To achieve this, we propose a novel two-stage style customization pipeline designed to disentangle content and style in SVG generation. An illustration of the pipeline is shown in Figure <ref type="figure" target="#fig_0">2</ref>.</p><p>Path-Level Text-to-Vector Diffusion Training (Section 4). In the first stage, we train a T2V model that focuses on learning the contents and structures of SVGs. We adopt a path-level representation that ensures both compactness and expressivity, and train this path-level T2V diffusion model on black-and-white SVG datasets.</p><p>Style Customization with Image Diffusion Priors (Section 5). In the second stage, we aim to customize the T2V model to generate SVGs in diverse new styles with only a few exemplars. We fine-tune the T2I diffusion model on a small set of style images to produce diverse customized images, which are used as augmented data to train the T2V model through an image-level loss.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">PATH-LEVEL TEXT-TO-VECTOR DIFFUSION TRAINING</head><p>In the first stage, we train a T2V diffusion model to generate SVGs aligned with text semantics while ensuring structural regularity.</p><p>To achieve this, we adopt a compact and expressive path-level representation, and train the model on black-and-white datasets, focusing on learning SVG content and structure.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">SVG Representation</head><p>An SVG can be represented as a set of paths, denoted as 𝑆𝑉 𝐺 = {𝑃𝑎𝑡ℎ 1 , 𝑃𝑎𝑡ℎ 2 , . . . , 𝑃𝑎𝑡ℎ 𝑚 }. A parametric path can be defined as a series of cubic Bézier curves connected end-to-end and filled with a uniform color 𝑐, represented as 𝑃𝑎𝑡ℎ 𝑖 = (𝑝 1 , 𝑝 2 , . . . , 𝑝 𝑑 , 𝑐), where {𝑝 𝑗 } 𝑑 𝑗=1 are the 𝑑 control points used to define the cubic Bézier curves. In contrast to recent approaches that use global SVG-level representations <ref type="bibr" target="#b47">[Xing et al. 2024]</ref>, which are constrained in expressivity by the limitations of the SVG dataset, or pointlevel representations <ref type="bibr" target="#b40">[Thamizharasan et al. 2024</ref>], which become inefficient for complex SVGs, we adopt a path-level representation that balances compactness and expressivity.</p><p>T2V-NPR <ref type="bibr" target="#b54">[Zhang et al. 2024</ref>] introduced a path-level SVG VAE designed to effectively capture common shape patterns and geometric constraints within its latent space, ensuring smooth path outputs. Following the methodology of T2V-NPR, we leverage a pre-trained SVG VAE to encode the 𝑑 control points of each path into a latent vector 𝑧 𝑖 . This latent vector is then combined with the associated color 𝐶 𝑖 and transformation parameters 𝑇𝑟 𝑖 for the 𝑖-th path, denoted as P 𝑖 = (𝑧 𝑖 , 𝐶 𝑖 ,𝑇𝑟 𝑖 ). Using this path-level representation, an SVG tensor can be represented as a sequence of 𝑚 paths in the latent space, denoted as s 0 = (P 1 , P 2 , . . . , P 𝑚 ), where s 0 ∈ R 𝑑 𝑃 ×𝑚 and 𝑑 𝑃 is the dimension of the path embeddings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Vector Denoiser</head><p>The vector denoiser is trained to reverse a Gaussian diffusion process, enabling the generation of SVG tensors from noisy inputs. In the forward diffusion process, Gaussian noise is progressively added to a sample SVG tensor s 0 over 𝑇 time steps, ultimately transforming it into a unit Gaussian noise s 𝑇 ∼ N (0, I) <ref type="bibr" target="#b13">[Ho et al. 2020]</ref>. At each time step 𝑡 ∈ {1, 2, . . . ,𝑇 }, the vector denoiser predicts the noise content 𝝐 𝜃 to be removed from the noisy SVG representation s 𝑡 .</p><p>Model Architecture. We adopt a transformer architecture based on DiT <ref type="bibr" target="#b27">[Peebles and Xie 2023]</ref> as the backbone for our vector denoiser. As shown in Figure <ref type="figure" target="#fig_0">2</ref>(a), the model takes the noisy tensor s 𝑡 as input and is conditioned on both the text prompt y and the time step 𝑡. Each transformer block consists of self-attention, crossattention, and feed-forward layers. The text prompt y is encoded into feature embeddings using the CLIP text encoder <ref type="bibr" target="#b29">[Radford et al. 2021</ref>], which interact with vector features through cross-attention similar to <ref type="bibr" target="#b2">[Chen et al. 2023</ref>]. Time step embeddings are injected via adaptive layer normalization <ref type="bibr" target="#b3">[Chen et al. 2024]</ref> in each transformer block.</p><p>Training Objective. The training of the T2V diffusion model follows the denoising diffusion probabilistic model (DDPM) framework <ref type="bibr" target="#b13">[Ho et al. 2020]</ref>. At each time step 𝑡, Gaussian noise 𝝐 ∼ N (0, I) is added to the original SVG tensor s 0 , resulting in a noisy representation s 𝑡 = √ ᾱ𝑡 s 0 + √ 1 -ᾱ𝑡 𝝐, where ᾱ𝑡 is a time-dependent coefficient controlling the noise level. The vector denoiser is trained to predict the added noise 𝝐 in s 𝑡 , conditioned on the text prompt y and the time step 𝑡. The training objective is to minimize the 𝐿 2 distance between the predicted noise 𝝐 𝜃 and the actual noise 𝝐:</p><formula xml:id="formula_0">L DM = E s 0 ,y,𝝐,𝑡 ∥𝝐 -𝝐 𝜃 (s 𝑡 , 𝑡, y)∥ 2 2 .</formula><p>(1)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Training Details</head><p>We train our T2V diffusion model using the FIGR-8-SVG dataset <ref type="bibr" target="#b4">[Clouâtre and Demers 2019]</ref>, which consists of black-and-white vector icons. By eliminating stylistic variations, this dataset enables the model to focus on learning the structures and semantics of SVGs in the first stage. To preprocess the data, we follow the same steps as IconShop <ref type="bibr" target="#b45">[Wu et al. 2023</ref>] to obtain valid SVG data and their corresponding text descriptions. Examples from the dataset are shown in Figure <ref type="figure" target="#fig_1">3</ref>(a). For the raw SVG data, we convert all other primitive shapes (e.g., lines, rectangles and ellipses) into cubic Bézier curves, which are encoded as path embeddings as described in Section 4.1. Since the number of paths varies across SVGs, we pad the sequences of path tensors with zeros to a fixed length of 32 and filter out SVGs with more paths. This results in 210,000 samples for model training. In our implementation, we set 𝑑 𝑃 = 28 and 𝑚 = 32 for the SVG representation and normalize the SVG embeddings to the range of [-1, 1]. The model architecture consists of 28 transformer blocks, a hidden dimension of 800, and 12 attention heads. We configure the number of diffusion steps to 𝑇 = 1000 and employ a cosine noise schedule <ref type="bibr" target="#b13">[Ho et al. 2020]</ref>. During training, we apply classifier-free guidance <ref type="bibr" target="#b14">[Ho and Salimans 2022]</ref> by randomly zeroing the text prompt y with a probability of 10%. We use the Adam optimizer with an initial learning rate of 3 × 10 -5 . The T2V diffusion network is trained for 3000 epochs with a batch size of 64, taking approximately 6 days on 8 A6000 GPUs.</p><p>After the first stage of training, our T2V diffusion model generates high-quality SVGs that align with text prompts while maintaining the structural integrity of the SVGs. In Figure <ref type="figure" target="#fig_1">3</ref>(b), we show several SVG samples generated by our model from random noise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">STYLE CUSTOMIZATION WITH IMAGE DIFFUSION PRIORS</head><p>In the second stage, we aim to enable style customization for the T2V diffusion model using only a few exemplar SVGs. A straightforward method of fine-tuning the T2V model with such a small dataset leads to overfitting. To address this issue, we distill style priors from different customized T2I models to generate a diverse set of customized images, which serve as augmented data for training the T2V model via an image-level loss.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Style Distillation from Image Diffusion</head><p>T2I diffusion models serve as a powerful prior for generating diverse images in customized styles. To enable the model to produce images in desired styles, we fine-tune a base T2I diffusion model "SD-v1-5" checkpoint<ref type="foot" target="#foot_0">1</ref> , using a small set of style reference images. to train the student model, we apply a similar approach to generate customized images as guidance for training. Given a text prompt y, we randomly sample Gaussian noise 𝝐 and input both into the T2V model. The T2V model performs DDPM denoising process to generate an SVG representation s 𝑔 0 , which is then passed through a pre-trained path decoder <ref type="bibr" target="#b54">[Zhang et al. 2024</ref>] and a differentiable rasterizer R <ref type="bibr" target="#b22">[Li et al. 2020]</ref> to produce an image 𝐼 𝑔 0 = R (𝐷𝑒𝑐 (s 𝑔 0 )). At this stage, 𝐼 𝑔 0 is a black-and-white style image. To ensure that the guidance image generated by the T2I model aligns with the structure of 𝐼 𝑔 0 without significant deviations, we integrate Con-trolNet <ref type="bibr">[Zhang et al. 2023a</ref>] into the customized T2I model. This ensures overall structural alignment between the customized image 𝐼 𝑐 0 and 𝐼 𝑔 0 . By using the Canny edge map of 𝐼 𝑔 0 as a control image, we preserve the structural integrity of the original SVG while incorporating the desired style. Using this approach, we can generate the corresponding (s 𝑔 0 , 𝐼 𝑐 0 ) pair from random noise given a text prompt y, and fine-tune the T2V model with image-level loss.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Style Fine-tuning</head><p>Given a generated SVG representation s 𝑔 0 and the corresponding customized image 𝐼 𝑐 0 , we fine-tune the T2V model towards new custom styles using image-level loss and diffusion loss. In the forward diffusion process, Gaussian noise is added to s 𝑔 0 , resulting in a noisy representation s 𝑔 𝑡 . We apply a reparameterization technique <ref type="bibr" target="#b38">[Song et al. 2020]</ref> to predict the denoised SVG tensor ŝ𝑔 0 at each time step, by rewriting the closed-form sampling distribution for the forward diffusion process as:</p><formula xml:id="formula_1">ŝ𝑔 0 = (s 𝑔 𝑡 - √ 1 -ᾱ𝑡 • 𝝐 𝜃 (s 𝑔 𝑡 , 𝑡))/ √ ᾱ𝑡 .<label>(2)</label></formula><p>By predicting ŝ𝑔 0 , we obtain the rendered image Î𝑔 0 = R (Dec(ŝ 𝑔 0 )). The image loss is computed as the MSE between the rendered image Î𝑔 0 and the customized image 𝐼 𝑐 0 :</p><formula xml:id="formula_2">L img = 𝜔 𝑡 ∥ Î𝑔 0 -𝐼 𝑐 0 ∥ 2 ,<label>(3)</label></formula><p>where 𝜔 𝑡 is a time-dependent weighting function designed to stabilize training by deactivating the loss term for noisier time steps. We set 𝜔 𝑡 = (1 -ᾱ𝑡 ) empirically, following <ref type="bibr" target="#b5">[Crowson et al. 2024</ref>].</p><p>The image loss guides the T2V model to predict SVGs that match the customized image, reflecting the desired style. Additionally, we incorporate the diffusion loss L DM defined on ŝ𝑔 0 , as described in Equation <ref type="formula">1</ref>, to help the model learn the new data distribution of the predicted SVGs ŝ𝑔 0 . Specifically, Gaussian noise is added to ŝ𝑔 0 , and the model predicts this noise, with the diffusion loss calculated using Equation <ref type="formula">1</ref>. During training, the T2V model is updated based on the combined loss function L = L img + L DM .</p><p>To enable our T2V diffusion model to generate SVGs in diverse custom styles, we select 200 distinct style reference sets from SV-GRepo 2 , iconfont<ref type="foot" target="#foot_1">3</ref> and Freepik<ref type="foot" target="#foot_2">4</ref> , each set containing a small collection of exemplar SVGs (ranging from 1 to 30 SVGs per set). We train the T2V model simultaneously across all 200 styles, with each style distinguished by a unique token "[𝑉 * ]". The training process lasts for 80K iterations with a batch size of 20, where each iteration generates 20 pairs of (s 𝑔 0 , 𝐼 𝑐 0 ) from randomly sampled text prompts and Gaussian noise across different styles. We employ a learning rate of 4 × 10 -6 , taking approximately 6 days using 8 A6000 GPUs.</p><p>After style fine-tuning, our T2V model can generate SVGs in the learned custom styles based on text prompts in a feed-forward manner.</p><p>Our method also supports fine-tuning on a single style or incrementally adding a new style with only a few exemplars via either full-model or LoRA fine-tuning. Similar to DreamBooth <ref type="bibr" target="#b32">[Ruiz et al. 2022]</ref>, the former approach fine-tunes the full T2V model with a new style represented by a token "[𝑉 * ]" that is distinct from all existing style tokens. For a parameter-efficient alternative, we fine-tune external LoRA weights for the attention layers of DiT blocks <ref type="bibr" target="#b16">[Hu et al. 2021</ref>], adapting the model to a new style without introducing an additional style token.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">EXPERIMENTS</head><p>Experiment Setup. To evaluate our method, we randomly select 5 text prompts from the FIGR-8-SVG dataset <ref type="bibr" target="#b4">[Clouâtre and Demers 2019]</ref> for each of the 200 styles, resulting in a total of 1000 vector graphics. For each style, we append the special style token "in [𝑉 * ] style" to the respective text prompt. During testing, we use the DDPM sampler with 1000 steps and classifier-free guidance with a scale of 3 to achieve better results. Generating an SVG takes around 25 seconds on an NVIDIA-A6000.</p><p>Evaluation Metrics. We evaluate the quality of our results from vector-level, image-level, text-level perspectives. For vector-level evaluation, we use a path VAE <ref type="bibr" target="#b54">[Zhang et al. 2024</ref>] trained on the FIGR-8-SVG dataset to encode SVG paths into latent vectors. We calculate the FID between these latents and the ground truth paths from FIGR-8-SVG, to evaluate how well the paths align with welldesigned vector graphics. For image-level evaluation, we evaluate the style alignment and the visual aesthetics of SVGs. We measure style alignment by calculating the average cosine similarity between ClIP image features of style references and rendered SVG images <ref type="bibr" target="#b36">[Sohn et al. 2023</ref>]. We use the Aesthetic score <ref type="bibr" target="#b34">[Schuhmann 2022</ref>] to evaluate the overall image quality. For text-level evaluation, we calculate the CLIP cosine similarity <ref type="bibr" target="#b29">[Radford et al. 2021</ref>] between the text prompt and the rendered SVGs to measure semantic alignment.</p><p>Baselines. We compare our proposed pipeline with two types of T2V generation schemes: optimization-based methods and feedforward methods.</p><p>Optimization-based methods rely on pre-trained T2I models, so we first perform style-tuning on T2I diffusion models using the method described in Section 5.1. For vectorization with T2I methods, we generate customized images and optimize the SVGs to fit the images using two distinct vectorization techniques: a traditional method, Potrace <ref type="bibr" target="#b35">[Selinger 2003</ref>], and a deep learning-based method LIVE <ref type="bibr" target="#b24">[Ma et al. 2022]</ref>. For text-guided SVG optimization, we compare three approaches: VectorFusion <ref type="bibr" target="#b19">[Jain et al. 2022</ref>] using SDS loss, SVGDreamer <ref type="bibr">[Xing et al. 2023b</ref>] and T2I-NPR <ref type="bibr" target="#b54">[Zhang et al. 2024]</ref>, which use VSD loss. We use 64 paths for SVG optimization. To enhance alignment with the exemplar style, we begin by using the vectorized outputs from customized images as the initial SVGs.</p><p>Feed-forward methods include language-based and diffusionbased approaches. For the former, we use GPT-4o <ref type="bibr" target="#b0">[Achiam et al. 2023]</ref> to generate customized SVGs via providing curated in-context examples in the prompts. Specifically, we supply raster images and corresponding SVG scripts of the exemplar style and let GPT-4o act as an SVG code generator, to generate SVGs that match the style of the exemplars with the given text prompts. For the latter, since no diffusion-based T2V models are publicly available yet, we reproduce VecFusion <ref type="bibr" target="#b40">[Thamizharasan et al. 2024]</ref> as a base T2V model. To achieve style customization, we compare two approaches: (1) an vector-based fine-tuning method, in which we fine-tune VecFusion with a small set of exemplar SVGs <ref type="bibr" target="#b32">[Ruiz et al. 2022]</ref> ; (2) a neural style transfer (NST) method for SVG <ref type="bibr" target="#b7">[Efimova et al. 2023</ref>], where we first generate an SVG using the base model, then select an exemplar SVG as the style reference and apply style transfer to the model's output.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Comparisons</head><p>We evaluate the performance of our method by comparing it with baselines qualitatively and quantitatively. The quantitative results are provided in Table <ref type="table" target="#tab_2">1</ref> and the qualitative results are presented in Figure <ref type="figure" target="#fig_2">4</ref>, Figure <ref type="figure" target="#fig_4">5</ref>, Figure <ref type="figure">9</ref> and Figure <ref type="figure">10</ref>. As shown in Table <ref type="table" target="#tab_2">1</ref>, our method outperforms the others from a comprehensive perspective.</p><p>Comparisons with Optimization-based Methods. Vectorization with T2I methods reconstruct customized images through colorbased image segmentation and curve fitting. However, as shown in Figure <ref type="figure" target="#fig_2">4</ref> and Figure <ref type="figure">9</ref>(c), while Potrace <ref type="bibr" target="#b35">[Selinger 2003</ref>] produces visually appealing outputs by faithfully reconstructing the customized images, it struggles with overly complex vector elements and lacks layer organization, as indicated by the higher Path FID in Table <ref type="table" target="#tab_2">1</ref>. This results in disorganized structures, reduced semantic clarity, and increased complexity in the SVGs. Such issues are common in image vectorization methods and contradict professional design principles, which prioritize simplicity and clarity in vector graphics. LIVE <ref type="bibr" target="#b24">[Ma et al. 2022</ref>] faces similar challenges, producing SVGs containing numerous irregular and broken paths. Zoomed-in illustrations in Figure <ref type="figure">9</ref> highlight the issues of overcomplicated and fragmented paths (shown within green boxes).</p><p>Text-guided SVG optimization methods leverage score distillation in T2I diffusion models to optimize a set of shapes. VectorFusion <ref type="bibr" target="#b19">[Jain et al. 2022]</ref> and SVGDreamer <ref type="bibr">[Xing et al. 2023b</ref>] directly optimize the control points of paths to generate text-conforming SVGs. However, due to the high degrees of freedom, the paths may undergo complex transformations that result in jagged and cluttered shapes, leading to visually unappealing outcomes. T2V-NPR <ref type="bibr" target="#b54">[Zhang et al. 2024]</ref> tackles the issue of irregular paths by learning a latent representation of paths and reduces fragmentation by merging shapes with similar colors. However, while it produces smooth paths, it cannot guarantee the semantic integrity of the shapes, as the merging operation overlooks their semantic meaning. This can lead to semantically ambiguous paths, such as the merging of an owl's eye with its wing, as shown in the first row of Figure <ref type="figure" target="#fig_2">4</ref>.</p><p>Overall, optimization-based methods that rely only on image supervision overlook the inherent design principles and layer structure of SVGs. Consequently, the generated SVGs often contain redundant shapes and disorganized layers, making them difficult    to edit. Moreover, these methods are time-consuming due to their iterative optimization, typically requiring tens of minutes per SVG, which makes them impractical for real design scenarios. In contrast, our T2V diffusion model learns vector properties, such as valid path semantics and layer structure, by training on a well-designed SVG dataset. Our novel two-stage training strategy enables feedforward generation of well-structured SVGs in a few seconds, while achieving visually appealing results in diverse custom styles.</p><p>Comparisons with Feed-forward Methods. Regarding languagebased methods, though provided with in-context SVG examples, GPT-4o <ref type="bibr" target="#b0">[Achiam et al. 2023</ref>] can only generate simple combinations of basic primitive shapes (e.g., circles and rectangles) to align with text prompts, as illustrated in Figure <ref type="figure" target="#fig_4">5</ref>(a). It fails to produce the complex geometric details required for professional SVGs, resulting in outputs inadequate for graphic design.</p><p>Although the original VecFusion model <ref type="bibr" target="#b40">[Thamizharasan et al. 2024]</ref>, trained on the FIGR-8-SVG dataset, generates high-quality</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ours</head><p>Potrace GPT-4o T2V-NPR VecFusion + NST results within its trained domains, it cannot be extended to style customization using existing methods. When applying an vectorbased fine-tuning approach, where VecFusion is fine-tuned with a small set of exemplar SVGs <ref type="bibr" target="#b32">[Ruiz et al. 2022]</ref>, its limited generalization ability prevents it from generating semantically correct SVGs in new custom styles. Instead, the model overfits to the exemplar SVGs, simply reconstructing them rather than adapting to diverse prompts. As a result, the generated outputs exhibit high Style Alignment but poor Text Alignment in Table <ref type="table" target="#tab_2">1</ref>.</p><p>NST <ref type="bibr" target="#b7">[Efimova et al. 2023</ref>] applies style transfer to the SVGs generated by VecFusion using a style loss in image space. Although this method directly inherits the original layer-wise properties, the optimized SVGs often have messy visual appearances. Furthermore, it struggles to capture fine-grained style features, leading to poor style consistency.</p><p>In contrast, our method excels at adapting to the style, effectively capturing details from user-provided style, such as color schemes and design patterns. It achieves high visual quality while preserving the structure of the output SVGs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">User Study</head><p>We conducted a perceptual study to evaluate our style customization of T2V generation from three perspectives: overall SVG quality, style alignment and semantic alignment. We randomly selected 20 text prompts from the dataset and generated SVGs using both the baseline methods and our approach. Each question presented the results of different methods in a random order, and 30 participants were given unlimited time to select the best result among five options for each evaluation metric. Figure <ref type="figure" target="#fig_5">6</ref> demonstrates the superior performance of our method, as it achieves the highest preference in all evaluation metrics. Specifically, our method obtains 53.2% of votes for overall SVG quality, 51.8% for style alignment, and 51.7% for semantic alignment. The results show the effectiveness of our method in generating high-quality SVGs in custom styles from text prompts that align more closely with human perception.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Ablation Study</head><p>Ablation on SVG Representation. Instead of using our path-level representation for training the T2V diffusion model, another baseline is to use a global SVG-level representation. Following the Deep-SVG <ref type="bibr" target="#b1">[Carlier et al. 2020</ref>] architecture, we train a transformer-based VAE on the FIGR-8-SVG dataset, where all paths with their properties (including the path order, control points and color) are encoded into a single latent vector. We then replace our path-level representation with this SVG-level representation for T2V diffusion model  training and subsequent style distillation. However, the global SVGlevel representation is constrained by the geometry and color limitations of the dataset, which restricts its ability to generate SVGs in only a fixed style. As a result, it fails to adapt to new custom styles, as shown in Figure <ref type="figure" target="#fig_6">7</ref>(a). In contrast, our path-level representation maintains both compactness and expressivity, allowing for flexible and diverse SVG customizations.</p><p>Ablation on Style Customization with Image Diffusion Priors. We compare our image-based style customization method with a vectorbased fine-tuning approach. Specifically, in the second stage, we directly fine-tune our T2V model using a small set of exemplar SVGs, following the fine-tuning techniques of T2I diffusion models <ref type="bibr" target="#b32">[Ruiz et al. 2022</ref>]. However, as shown in Figure <ref type="figure" target="#fig_6">7</ref>(b), this method leads to overfitting on the exemplar SVGs, causing the model to simply reconstruct them rather than aligning with the text semantics, as reflected by a high style alignment score and a low text alignment score in Table <ref type="table" target="#tab_3">2</ref>. In contrast, our style distillation method from image diffusion takes advantage of the strong visual priors in T2I diffusion models to generate customized images as augmented data, enabling diverse style customizations of SVGs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>In this paper, we present a novel two-stage pipeline for style customization of SVGs. Our approach disentangles content and style semantics in the T2V diffusion model, ensuring structural regularity and expressive diversity in the generated SVGs. By employing a path-level T2V diffusion model and distilling styles from T2I diffusion priors, our method produces high-quality SVGs in custom styles from text prompts in a feed-forward manner. While our method excels at SVG style customization, it has limitations. First, our T2V model is trained on the FIGR-8-SVG dataset, which contains only simple class labels, limiting the model's semantic understanding of SVG content. For example, as shown in Figure <ref type="figure" target="#fig_7">8</ref>(a), semantic elements like "cello" and "cupcake" are inaccurate when the text descriptions exceed the training domain's capacity. This could be mitigated with a larger and higher-quality SVG dataset with detailed annotations. Second, it may lose fine-grained stylistic details for overly complex style references, as depicted in Figure <ref type="figure" target="#fig_7">8</ref>(b).</p><p>Our model can be used to synthesize SVG data, and with advanced diffusion model techniques, it enables flexible control and editing, which we plan to explore in future work.  "boy" "penguin" "owl" "backpack" "astronaut" "air conditioner" "spaceship" "cake" "hamburger" "backpack" "clock tower" "ancient village" "cake" "cat" "octopus" "castle" "crown" "bee" "cat" "astronaut" "house" "basket" "crown" "cat" "village" "bell" "bookshelf" "knight" "gift" "house" "ice cream" "crown"</p><p>Figure <ref type="figure">11</ref>: More results of our style customization of T2V generation. Exemplar SVGs: the 1 𝑠𝑡 , 2 𝑛𝑑 , 3 𝑟𝑑 , 4 𝑡ℎ , 5 𝑡ℎ and 7 𝑡ℎ rows are from ©SVGRepo; the 6 𝑡ℎ row is from ©Freepik.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Our two-stage style customization pipeline for SVGs. (a) In Stage 1, we train a path-level T2V diffusion model on black-and-white SVG datasets to focus on learning the contents and structures of SVGs. (b) In Stage 2, we learn various styles of SVGs by distilling priors from different customized T2I models. (c) After training, our T2V model can generate SVGs in custom styles learned during Stage 2 in a feed-forward manner by appending the corresponding style token to the text prompt. Exemplar SVGs are from ©SVGRepo.</figDesc><graphic coords="3,489.54,82.34,70.83,152.91" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: (a) SVG examples from the dataset. (b) SVG samples generated from random noise by our T2V diffusion model in Stage 1.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Qualitative comparison with optimization-based T2V methods. Exemplar SVGs are from ©SVGRepo.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Qualitative comparison to feed-forward T2V methods. Exemplar SVGs are from ©SVGRepo.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: User Study. We show the human preferences in %.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Qualitative results on ablation study. Exemplar SVGs are from ©SVGRepo.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Failure cases. The exemplar SVG is from ©iconfont.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 9 :Figure 10 :</head><label>910</label><figDesc>Figure 9: More qualitative comparison with optimization-based T2V methods. Exemplar SVGs: the 1 𝑠𝑡 , 2 𝑛𝑑 and 4 𝑡ℎ rows are from ©SVGRepo; the 3 𝑟𝑑 row is from ©Freepik.</figDesc><graphic coords="10,135.77,483.56,57.79,57.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 1 :</head><label>1</label><figDesc>Quantitative comparison with existing methods.</figDesc><table><row><cell cols="2">Methods</cell><cell>Path FID</cell><cell></cell><cell>Style Alignment </cell><cell>Visual Aesthetic </cell><cell>Text Alignment </cell></row><row><cell></cell><cell>Potrace</cell><cell cols="2">44.29</cell><cell>0.665</cell><cell>5.522</cell><cell>0.294</cell></row><row><cell></cell><cell>LIVE</cell><cell cols="2">52.43</cell><cell>0.578</cell><cell>4.686</cell><cell>0.258</cell></row><row><cell>Optimization</cell><cell>Vectorfusion</cell><cell cols="2">53.76</cell><cell>0.557</cell><cell>4.892</cell><cell>0.276</cell></row><row><cell></cell><cell>SVGDreamer</cell><cell cols="2">48.51</cell><cell>0.564</cell><cell>5.013</cell><cell>0.281</cell></row><row><cell></cell><cell>T2V-NPR</cell><cell cols="2">40.25</cell><cell>0.608</cell><cell>5.237</cell><cell>0.290</cell></row><row><cell></cell><cell>GPT-4o</cell><cell cols="2">38.14</cell><cell>0.549</cell><cell>5.041</cell><cell>0.251</cell></row><row><cell>Feed-forward</cell><cell cols="3">VecF + SVG-FT 45.05 VecF + NST 58.12</cell><cell>0.726 0.573</cell><cell>4.980 4.574</cell><cell>0.223 0.245</cell></row><row><cell></cell><cell>Ours</cell><cell cols="2">37.51</cell><cell>0.661</cell><cell>5.527</cell><cell>0.297</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 :</head><label>2</label><figDesc>Ablation study on SVG representation and style customization with image diffusion priors.</figDesc><table><row><cell>Methods</cell><cell>Path FID</cell><cell></cell><cell cols="2">Style Alignment </cell><cell>Visual Aesthetic </cell><cell>Text Alignment </cell></row><row><cell cols="3">SVG-level Rep 45.16</cell><cell>0.406</cell><cell></cell><cell>3.285</cell><cell>0.288</cell></row><row><cell>SVG-FT</cell><cell cols="2">57.32</cell><cell>0.722</cell><cell></cell><cell>4.926</cell><cell>0.221</cell></row><row><cell>Ours</cell><cell cols="2">37.51</cell><cell>0.661</cell><cell></cell><cell>5.527</cell><cell>0.297</cell></row><row><cell>"car"</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>"castle"</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Exemplar Style</cell><cell cols="3">(a) SVG-level Rep</cell><cell cols="2">(b) SVG-Finetuning</cell><cell>(c) Ours</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://huggingface.co/runwayml/stable-diffusion-v1-5</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1"><p>https://www.iconfont.cn</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2"><p>https://www.freepik.com</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>ACKNOWLEDGMENTS</head><p>The work described in this paper was substantially supported by a GRF grant from the <rs type="funder">Research Grants Council (RGC) of the Hong Kong Special Administrative Region, China</rs> [Project No. <rs type="grantNumber">CityU 11216122</rs>].</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_yevBytg">
+					<idno type="grant-number">CityU 11216122</idno>
+				</org>
+			</listOrg>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Achiam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Adler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandhini</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lama</forename><surname>Ahmad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilge</forename><surname>Akkaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florencia</forename><surname>Leoni Aleman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diogo</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janko</forename><surname>Altenschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Altman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2303.08774</idno>
+		<title level="m">Shyamal Anadkat, et al. 2023. Gpt-4 technical report</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Deepsvg: A hierarchical generative network for vector graphics animation. Advances in Neural Information Processing Systems</title>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Carlier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Danelljan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="16351" to="16361" />
+		</imprint>
+	</monogr>
+	<note>Alexandre Alahi, and Radu Timofte</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">Junsong</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jincheng</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chongjian</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lewei</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enze</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yue</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhongdao</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Kwok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ping</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huchuan</forename><surname>Lu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2310.00426</idno>
+		<title level="m">Pixart-𝛼: Fast training of diffusion transformer for photorealistic text-to-image synthesis</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruiyi</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yufan</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rajiv</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiqiang</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Rossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changyou</forename><surname>Chen</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2402.04754</idno>
+		<title level="m">Towards aligned layout generation via diffusion model with aesthetic constraints</title>
+		<imprint>
+			<date type="published" when="2024">2024. 2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">Louis</forename><surname>Clouâtre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Demers</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1901.02199</idno>
+		<title level="m">Figr: Few-shot image generation with reptile</title>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Scalable high-resolution pixel-space image synthesis with hourglass diffusion transformers</title>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Crowson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><forename type="middle">Andreas</forename><surname>Baumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Birch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mathew</forename><surname>Tanishq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">Z</forename><surname>Abraham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shippole</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Forty-first International Conference on Machine Learning</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Polyfit: Perception-aligned vectorization of raster clip-art via intermediate polygonal fitting</title>
+		<author>
+			<persName><forename type="first">Alberto</forename><surname>Edoardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nico</forename><surname>Dominici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Schertler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shayan</forename><surname>Griffin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonid</forename><surname>Hoshyari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alla</forename><surname>Sigal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sheffer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="77" to="78" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">Valeria</forename><surname>Efimova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Artyom</forename><surname>Chebykin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Jarsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evgenii</forename><surname>Prosvirnin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrey</forename><surname>Filchenkov</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2303.03405</idno>
+		<title level="m">Neural Style Transfer for Vector Graphics</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Photo2clipart: Image abstraction and vectorization using layered linear gradients</title>
+		<author>
+			<persName><forename type="first">Jean-Dominique</forename><surname>Favreau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florent</forename><surname>Lafarge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrien</forename><surname>Bousseau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Clipdraw: Exploring text-todrawing synthesis through language-image encoders</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Frans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Soros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olaf</forename><surname>Witkowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="5207" to="5218" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Implicit style-content separation using b-lora</title>
+		<author>
+			<persName><forename type="first">Yarden</forename><surname>Frenkel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yael</forename><surname>Vinker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariel</forename><surname>Shamir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Cohen-Or</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">European Conference on Computer Vision</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2025">2025</date>
+			<biblScope unit="page" from="181" to="198" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">An image is worth one word: Personalizing text-toimage generation using textual inversion</title>
+		<author>
+			<persName><forename type="first">Rinon</forename><surname>Gal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuval</forename><surname>Alaluf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuval</forename><surname>Atzmon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Or</forename><surname>Patashnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Amit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gal</forename><surname>Bermano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Chechik</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cohen-Or</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2208.01618</idno>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Rinon</forename><surname>Gal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yael</forename><surname>Vinker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuval</forename><surname>Alaluf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Amit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Bermano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariel</forename><surname>Cohen-Or</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gal</forename><surname>Shamir</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chechik</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2311.13608</idno>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Breathing Life Into Sketches Using Text-to-Video Priors. arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Denoising diffusion probabilistic models</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pieter</forename><surname>Abbeel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="6840" to="6851" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Ho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Salimans</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2207.12598</idno>
+		<title level="m">Classifier-free diffusion guidance</title>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Perception-driven semi-structured boundary vectorization</title>
+		<author>
+			<persName><forename type="first">Shayan</forename><surname>Hoshyari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alberto</forename><surname>Edoardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alla</forename><surname>Dominici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Sheffer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhaowen</forename><surname>Carr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duygu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I-Chao</forename><surname>Ceylan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Edward</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yelong</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phillip</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zeyuan</forename><surname>Wallis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanzhi</forename><surname>Allen-Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shean</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weizhu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2106.09685</idno>
+		<title level="m">Lora: Low-rank adaptation of large language models</title>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Turn ideas into illustrations with Text to Vector Graphic</title>
+		<author>
+			<persName><forename type="first">Adobe</forename><surname>Illustrator</surname></persName>
+		</author>
+		<ptr target="https://illustroke.com/" />
+	</analytic>
+	<monogr>
+		<title level="m">Stunning vector illustrations from text prompts</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<author>
+			<persName><forename type="first">Shir</forename><surname>Iluz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yael</forename><surname>Vinker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amir</forename><surname>Hertz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Berio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Cohen-Or</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariel</forename><surname>Shamir</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2303.01818</idno>
+		<title level="m">Word-as-image for semantic typography</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amber</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pieter</forename><surname>Abbeel</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2211.11319</idno>
+		<title level="m">VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models</title>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Depixelizing pixel art</title>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Kopf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dani</forename><surname>Lischinski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACM SIGGRAPH 2011 papers</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<author>
+			<persName><forename type="first">Nupur</forename><surname>Kumari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bingliang</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eli</forename><surname>Shechtman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun-Yan</forename><surname>Zhu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2212.04488</idno>
+		<title level="m">Multi-Concept Customization of Text-to-Image Diffusion</title>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Differentiable vector graphics rasterization for editing and learning</title>
+		<author>
+			<persName><forename type="first">Tzu-Mao</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michal</forename><surname>Lukáč</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michaël</forename><surname>Gharbi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Ragan-Kelley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="1" to="15" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Knowledge distillation in iterative generative models for improved sampling speed</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Luhman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Troy</forename><surname>Luhman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2101.02388</idno>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Towards layer-wise image vectorization</title>
+		<author>
+			<persName><forename type="first">Xu</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuqian</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xingqian</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bin</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valerii</forename><surname>Filev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikita</forename><surname>Orlov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yun</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Humphrey</forename><surname>Shi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</title>
+		<meeting>the IEEE/CVF Conference on Computer Vision and Pattern Recognition</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="16314" to="16323" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">PEFT: State-of-the-art Parameter-Efficient Fine-Tuning methods</title>
+		<author>
+			<persName><forename type="first">Sourab</forename><surname>Mangrulkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sylvain</forename><surname>Gugger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lysandre</forename><surname>Debut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Younes</forename><surname>Belkada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sayak</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Bossan</surname></persName>
+		</author>
+		<ptr target="https://github.com/huggingface/peft" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">T2i-adapter: Learning adapters to dig out more controllable ability for text-to-image diffusion models</title>
+		<author>
+			<persName><forename type="first">Chong</forename><surname>Mou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xintao</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liangbin</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanze</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhongang</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ying</forename><surname>Shan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the AAAI Conference on Artificial Intelligence</title>
+		<meeting>the AAAI Conference on Artificial Intelligence</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="4296" to="4304" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Scalable diffusion models with transformers</title>
+		<author>
+			<persName><forename type="first">William</forename><surname>Peebles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saining</forename><surname>Xie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF International Conference on Computer Vision</title>
+		<meeting>the IEEE/CVF International Conference on Computer Vision</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="4195" to="4205" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Poole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajay</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">T</forename><surname>Barron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Mildenhall</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2209.14988</idno>
+		<title level="m">Dreamfusion: Text-to-3d using 2d diffusion</title>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Learning transferable visual models from natural language supervision</title>
+		<author>
+			<persName><forename type="first">Alec</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jong</forename><forename type="middle">Wook</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Hallacy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Ramesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Goh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandhini</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Girish</forename><surname>Sastry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pamela</forename><surname>Mishkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Clark</surname></persName>
+		</author>
+		<idno>PMLR</idno>
+	</analytic>
+	<monogr>
+		<title level="m">International conference on machine learning</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="8748" to="8763" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">Juan</forename><forename type="middle">A</forename><surname>Rodriguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shubham</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Issam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pau</forename><surname>Laradji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Rodriguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Vazquez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Pal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pedersoli</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2312.11556</idno>
+		<title level="m">StarVector: Generating Scalable Vector Graphics Code from Images</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">High-resolution image synthesis with latent diffusion models</title>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Rombach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Blattmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Lorenz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Esser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Björn</forename><surname>Ommer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</title>
+		<meeting>the IEEE/CVF Conference on Computer Vision and Pattern Recognition</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="10684" to="10695" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Dreambooth: Fine tuning text-to-image diffusion models for subject-driven generation</title>
+		<author>
+			<persName><forename type="first">Nataniel</forename><surname>Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanzhen</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Varun</forename><surname>Jampani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yael</forename><surname>Pritch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Rubinstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kfir</forename><surname>Aberman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2208.12242</idno>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Schaldenbrand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhixuan</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Oh</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2202.12362</idno>
+		<title level="m">Styleclipdraw: Coupling content and style in text-to-drawing translation</title>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Schuhmann</surname></persName>
+		</author>
+		<ptr target="https://github.com/christophschuhmann/improved-aesthetic-predictor" />
+		<title level="m">Improved Aesthetic Predictor</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Potrace: a polygon-based tracing algorithm</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Selinger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<author>
+			<persName><forename type="first">Kihyuk</forename><surname>Sohn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nataniel</forename><surname>Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kimin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Castro Chin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irina</forename><surname>Blok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huiwen</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jarred</forename><surname>Barber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lu</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Glenn</forename><surname>Entis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanzhen</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2306.00983</idno>
+		<title level="m">Styledrop: Text-toimage generation in any style</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">CLIPVG: Text-Guided Image Manipulation Using Differentiable Vector Graphics</title>
+		<author>
+			<persName><forename type="first">Yiren</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xning</forename><surname>Shao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kang</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weidong</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minzhe</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhongliang</forename><surname>Jing</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2212.02122</idno>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jascha</forename><surname>Sohl-Dickstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Diederik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Kingma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Ermon</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Poole</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2011.13456</idno>
+		<title level="m">Score-based generative modeling through stochastic differential equations</title>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">StrokeNUWA: Tokenizing Strokes for Vector Graphic Synthesis</title>
+		<author>
+			<persName><forename type="first">Zecheng</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chenfei</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zekai</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingheng</forename><surname>Ni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shengming</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhengyuan</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lijuan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zicheng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juntao</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2401.17093</idno>
+		<imprint>
+			<date type="published" when="2024">2024. 2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">VecFusion: Vector Font Generation with Diffusion</title>
+		<author>
+			<persName><forename type="first">Difan</forename><surname>Vikas Thamizharasan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shantanu</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michaël</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Gharbi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alec</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evangelos</forename><surname>Jacobson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kalogerakis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</title>
+		<meeting>the IEEE/CVF Conference on Computer Vision and Pattern Recognition</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="7943" to="7952" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Clipasso: Semantically-aware object sketching</title>
+		<author>
+			<persName><forename type="first">Yael</forename><surname>Vinker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ehsan</forename><surname>Pajouheshgar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><forename type="middle">Y</forename><surname>Bo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roman</forename><surname>Christian Bachmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amit</forename><surname>Haim Bermano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Cohen-Or</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amir</forename><surname>Zamir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariel</forename><surname>Shamir</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Sketchknitter: Vectorized sketch generation with diffusion models</title>
+		<author>
+			<persName><forename type="first">Qiang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haoge</forename><surname>Deng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonggang</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Da</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi-Zhe</forename><surname>Song</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Eleventh International Conference on Learning Representations</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">ProlificDreamer: High-Fidelity and Diverse Text-to-3D Generation with Variational Score Distillation</title>
+		<author>
+			<persName><forename type="first">Zhengyi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheng</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yikai</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fan</forename><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chongxuan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hang</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Zhu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.16213</idno>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Interactive Flexible Style Transfer for Vector Graphics</title>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Warner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyu</forename><forename type="middle">Won</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bjoern</forename><surname>Hartmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology</title>
+		<meeting>the 36th Annual ACM Symposium on User Interface Software and Technology</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">IconShop: Text-Guided Vector Icon Synthesis with Autoregressive Transformers</title>
+		<author>
+			<persName><forename type="first">Ronghuan</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanchao</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kede</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Liao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">AniClipart: Clipart animation with text-to-video priors</title>
+		<author>
+			<persName><forename type="first">Ronghuan</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanchao</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kede</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Liao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer Vision</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2024">2024. 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ximing</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juncheng</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dong</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Yu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2412.10437</idno>
+		<title level="m">SVGFusion: Scalable Text-to-SVG Generation via Vector Space Diffusion</title>
+		<imprint>
+			<date type="published" when="2024">2024. 2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ximing</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chuang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haitao</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dong</forename><surname>Xu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2306.14685</idno>
+		<title level="m">Text Guided Vector Sketch Synthesis through Latent Diffusion Models</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ximing</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haitao</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chuang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dong</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Yu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2312.16476</idno>
+		<title level="m">SVGDreamer: Text Guided SVG Generation with Diffusion Model</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Hu Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sibo</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Yang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2308.06721</idno>
+		<title level="m">Ip-adapter: Text compatible image prompt adapter for text-to-image diffusion models</title>
+		<imprint>
+			<date type="published" when="2023">2023. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">One-step diffusion with distribution matching distillation</title>
+		<author>
+			<persName><forename type="first">Michaël</forename><surname>Tianwei Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Gharbi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eli</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fredo</forename><surname>Shechtman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">T</forename><surname>Durand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Taesung</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Park</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</title>
+		<meeting>the IEEE/CVF Conference on Computer Vision and Pattern Recognition</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="6613" to="6623" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">2023a. Adding conditional control to text-to-image diffusion models</title>
+		<author>
+			<persName><forename type="first">Lvmin</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anyi</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maneesh</forename><surname>Agrawala</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF International Conference on Computer Vision</title>
+		<meeting>the IEEE/CVF International Conference on Computer Vision</meeting>
+		<imprint>
+			<biblScope unit="page" from="3836" to="3847" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">2023b. Text-Guided Vector Graphics Customization</title>
+		<author>
+			<persName><forename type="first">Peiying</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nanxuan</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Liao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGGRAPH Asia 2023 Conference Papers</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Text-to-vector generation with neural path representation</title>
+		<author>
+			<persName><forename type="first">Peiying</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nanxuan</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Liao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics (TOG)</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="1" to="13" />
+			<date type="published" when="2024">2024. 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
