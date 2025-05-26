@@ -1,0 +1,86 @@
+{
+  "2405.17044v3.xml": {
+    "Jean-Baptiste": {
+      "autores_articulo": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 3,
+        "fn": 2
+      },
+      "personas_generales": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 3,
+        "fn": 1
+      },
+      "organizaciones": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  "2206.02983v2.xml": {
+    "Jean-Baptiste": {
+      "autores_articulo": {
+        "precision": 0,
+        "recall": 0.0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "personas_generales": {
+        "precision": 0,
+        "recall": 0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      },
+      "organizaciones": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  "Breast cancer detection through attention based feature integration model.xml": {
+    "Jean-Baptiste": {
+      "autores_articulo": {
+        "precision": 0,
+        "recall": 0.0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 2
+      },
+      "personas_generales": {
+        "precision": 0,
+        "recall": 0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      },
+      "organizaciones": {
+        "precision": 0,
+        "recall": 0,
+        "f1_score": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  }
+}

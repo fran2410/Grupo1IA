@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ex="http://example.org/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:schema1="http://schema.org/"
+>
+
+  <!-- Topics -->
+  <rdf:Description rdf:about="http://example.org/Topic_AI">
+    <rdf:type rdf:resource="http://schema.org/Thing"/>
+    <schema1:name>Artificial Intelligence</schema1:name>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/Topic_Healthcare">
+    <rdf:type rdf:resource="http://schema.org/Thing"/>
+    <schema1:name>Healthcare Applications</schema1:name>
+  </rdf:Description>
+
+  <!-- Papers -->
+  <rdf:Description rdf:about="http://example.org/2505.10450v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Genetic Algorithm Demystified for Cosmological Parameter Estimation</schema1:name>
+    <schema1:author rdf:resource="http://example.org/person/Reginald_Bernardo"/>
+    <schema1:author rdf:resource="http://example.org/person/Yun_Chen"/>
+    <ex:hasWord>genetic</ex:hasWord>
+    <ex:hasWord>algorithm</ex:hasWord>
+    <ex:hasWord>cosmology</ex:hasWord>
+    <ex:belongsToTopic rdf:resource="http://example.org/Topic_AI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/2504.18560v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Mind the Language Gap: Automated Bias Evaluation in LLMs</schema1:name>
+    <schema1:author rdf:resource="http://example.org/person/Alessio_Buscemi"/>
+    <schema1:author rdf:resource="http://example.org/person/Cédric_Lothritz"/>
+    <ex:hasWord>LLMs</ex:hasWord>
+    <ex:hasWord>bias</ex:hasWord>
+    <ex:hasWord>multilingual</ex:hasWord>
+    <ex:belongsToTopic rdf:resource="http://example.org/Topic_AI"/>
+  </rdf:Description>
+
+  <!-- Similarity Relationships -->
+  <rdf:Description rdf:about="http://example.org/2504.18560v1">
+    <ex:hasSimilarityTo rdf:resource="http://example.org/2505.10450v1"/>
+    <ex:similarityScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.85</ex:similarityScore>
+  </rdf:Description>
+
+</rdf:RDF>

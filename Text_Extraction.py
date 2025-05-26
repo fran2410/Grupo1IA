@@ -249,7 +249,8 @@ def process_xml_directory(xml_dir):
             words = extract_words_from_paper(xml_path)
             metadata = extract_metadata(xml_path)
 
-            output_data[filename] = {
+            safe_filename = filename.replace(" ", "_")
+            output_data[safe_filename] = {
                 'titulo': metadata['titulo'],
                 'id': metadata.get('id'),
                 'fecha': metadata['fecha'],
