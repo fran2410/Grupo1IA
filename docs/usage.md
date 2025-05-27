@@ -1,5 +1,4 @@
 You can use any folder to store the PDFs to be processed and any other to extract the results. They don’t have to be specifically named `paper`, `data`, or `results`; you just need to specify them when running the commands.
-
 ## Using GROBID for XML Extraction
 To extract structured XML data from PDFs using [GROBID](https://github.com/kermitt2/grobid), follow these steps:
 
@@ -15,7 +14,7 @@ This will start the [GROBID](https://github.com/kermitt2/grobid) service on port
 Once the [GROBID](https://github.com/kermitt2/grobid) server is running, you can extract XML from a folder of PDFs using the following command:
 
 ```bash
-curl -F input=@<path_to_pdf> "http://localhost:8070/api/processFulltextDocument" -o <output_xml>
+curl -F input=@<folder_with_pdf> "http://localhost:8070/api/processFulltextDocument" -o <output_xml>
 ```
 Alternatively, for batch processing of all PDFs in a directory:
 
@@ -24,30 +23,39 @@ for file in <pdf_folder>/*.pdf; do
     curl -F input=@$file "http://localhost:8070/api/processFulltextDocument" -o "<output_folder>/$(basename "$file" .pdf).xml"
 done
 ```
-
-## Generate Keyword Cloud  
-Extracts keywords from abstracts in XML files and creates a word cloud.
-
-**Command:**
-```bash
-python scripts/keywordCloud.py <folder_with_xmls> <output_folder>
-```
-**Output:** `<output_folder>/keywordCloud.jpg`
-
-## Chart Figures Count  
-Counts the number of figures in each XML file and generates a bar chart.
+## Script Execution
+### Extract entities and metadata from papers
+Extracts information such as authors, organizations, keywords, and metadata from GROBID-generated XML files.
 
 **Command:**
 ```bash
-python scripts/charts.py <folder_with_xmls> <output_folder>
+python scripts/Text_Extraction.py papersXML/
 ```
-**Output:** `<output_folder>/charts.jpg`
+**Output:** `<output_folder>/Text_Extraction_results.json`
 
-## Extract Links  
-Extracts links from XML files while ignoring references.
+### Compute similarities and generate RDF  
+Extracts abstracts, detects topics, computes similarity, and generates the semantic RDF.
 
 **Command:**
 ```bash
-python scripts/list.py <folder_with_xmls> <output_folder>
+python scripts/similarity_analysis.py Text_Extraction_results.json
 ```
-**Output:** `<output_folder>/links.txt`
+**Output:** `<output_folder>/similarity_matrix.png` `<output_folder>/dendrogram.png` `<output_folder>/similarity_data.rdf`
+
+### Complete RDF graph  
+Generates the final knowledge graph including metadata, entities, topics, and similarity relationships.
+
+**Command:**
+```bash
+python scripts/dict_to_rdf.py Text_Extraction_results.json
+```
+**Output:** `<output_folder>/knowledge_graph_linked.rdf` 
+
+### Web visualization
+Runs the interactive Streamlit demo to explore the knowledge graph.
+
+**Command:**
+```bash
+streamlit run app.py
+```
+**Input:** `<output_folder>/knowledge_graph_linked.rdf` `<output_folder>/similarity_data.rdf`
