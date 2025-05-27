@@ -22,6 +22,7 @@ Given a PDF file (or a directory with some of them) the tool will extract the da
 ## Project Structure
 
 ```
+├── docs/ # Additional documentation 
 ├── entrenamiento/ # All files used to train and validate our models
 │ ├── papers_pdf/ # Example research papers for the validation
 │ ├── xml_papers/ # Example XML files for the validation
@@ -41,9 +42,8 @@ Given a PDF file (or a directory with some of them) the tool will extract the da
 │ ├── pdfToXML # Uses Grobit to transform the papers into XML
 │ ├── similarity_analysis.py # Similarity analysis + topic modeling + RDF generation
 ├── xml_papers/ # Example XML files
-
 ├── requirements.txt # Proyect depencencies
-├── README.md # THis file
+├── README.md # This file
 ```
 
 # Installing fron Github
@@ -120,7 +120,7 @@ for file in <pdf_folder>/*.pdf; do
     curl -F input=@$file "http://localhost:8070/api/processFulltextDocument" -o "<output_folder>/$(basename "$file" .pdf).xml"
 done
 ```
-## Ejecución de scripts
+## Script Execution
 ### Extract entities and metadata from papers
 Extracts information such as authors, organizations, keywords, and metadata from GROBID-generated XML files.
 
