@@ -1,0 +1,4 @@
+
+Links in LoremIpsum.xml:
+https://es.wikipedia.org/
+https://www.google.es

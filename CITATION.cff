@@ -1,0 +1,17 @@
+title: "AI-Open-Science"
+license: Apache-2.0
+authors:
+  - family-names: Chicote
+    given-names: Francisco
+cff-version: 1.0.0
+date-released: 2025-02-04
+message: "If you use this software, please cite the software itself."
+preferred-citation:
+  authors:
+  - family-names: Chicote
+    given-names: Francisco
+  title: "AI-Open-Science"
+  type: software
+  year: 2025
+  doi: 10.5281/zenodo.14882667
+

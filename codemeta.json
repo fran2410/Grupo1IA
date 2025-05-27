@@ -1,0 +1,52 @@
+{
+    "@context": "https://w3id.org/codemeta/3.0",
+    "@type": "SoftwareSourceCode",
+    "license": {
+        "name": "Apache License 2.0",
+        "url": "https://raw.githubusercontent.com/fran2410/AI-Open-Science/main/LICENSE",
+        "identifier": "https://spdx.org/licenses/Apache-2.0"
+    },
+    "codeRepository": "https://github.com/fran2410/AI-Open-Science",
+    "issueTracker": "https://github.com/fran2410/AI-Open-Science/issues",
+    "dateCreated": "2025-02-04",
+    "dateModified": "2025-02-26",
+    "downloadUrl": "https://github.com/fran2410/AI-Open-Science/releases",
+    "name": "AI-Open-Science",
+    "keywords": "Docker, Python, GROBID, XML, data extraction, data visualization, keywordCloud, papers, links, figures",
+    "programmingLanguage": [
+        "Python",
+        "Dockerfile"
+    ],
+    "softwareRequirements": [
+        "Run the following command in the root of the repository to install dependencies:\n```bash\npoetry install\n```\n"
+    ],
+    "releaseNotes": "First release with full functionality, including all installation methods (GitHub and Docker), complete documentation, and citation. Ready for the Individual Project.",
+    "softwareVersion": "1.0.0",
+    "buildInstructions": [
+        "https://ai-open-science.readthedocs.io/",
+        "# Installing fron Github\n\n##  Clone the repository:\n   ```bash\n   git clone https://github.com/fran2410/AI-Open-Science.git\n   cd AI-Open-Science\n   ```\n## 1. Conda\n\nFor installing Conda on your system, please visit the official Conda documentation [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).\n\n#### Create and activate the Conda environment\n```bash\nconda create -n ai-open-science python=3.13 \nconda activate ai-open-science\n```\n\n## 2. Poetry\n\nFor installing Poetry on your system, please visit the official Poetry documentation [here](https://python-poetry.org/docs/#installation).\n\n#### Install project dependencies\nRun the following command in the root of the repository to install dependencies:\n```bash\npoetry install\n```\n\n# Installing through Docker\n\nWe provide a Docker image with the scripts already installed. To run through Docker, you may build the Dockerfile provided in the repository by running:\n\n```bash\ndocker build -t ai-open-science .\n```\n\nThen, to run your image just type:\n\n```bash\ndocker run --rm -it  ai-open-science\n```\n\nAnd you will be ready to use the scripts (see section below). If you want to have access to the results we recommend [mounting a volume](https://docs.docker.com/storage/volumes/). For example, the following command will mount the current directory as the `out` folder in the Docker image:\n\n```bash\ndocker run -it --rm -v $PWD/out:/AI-Open-Science/out ai-open-science \n```\nIf you move any files produced by the scripts or set the output folder to `/out`, you will be able to see them in your current directory in the `/out` folder.\n",
+        "https://github.com/fran2410/AI-Open-Science/tree/main/docs",
+        "https://raw.githubusercontent.com/fran2410/AI-Open-Science/main/README.md"
+    ],
+    "author": [
+        {
+            "@type": "Person",
+            "@id": "https://github.com/fran2410"
+        }
+    ],
+    "referencePublication": [
+        {
+            "@type": "ScholarlyArticle",
+            "name": "ai-open-science",
+            "identifier": "10.5281/zenodo.14882667",
+            "url": "https://doi.org/10.5281/zenodo.14882667"
+        }
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.14882666",
+    "readme": "https://raw.githubusercontent.com/fran2410/AI-Open-Science/main/README.md",
+    "description": [
+        "Repositorio para la realizacion y entrega de los trabajos de la asignatura Artificial Intelligence And Open Science In Research Software Engineering",
+        "This repository provides tools for extracting and visualizing information from scientific papers in XML format. Using [GROBID](https://github.com/kermitt2/grobid). for document processing, the scripts generate keyword clouds, charts displaying the number of figures per document, and extract links from XML files.\n",
+        "```\n\u251c\u2500\u2500 papers/              # Example research papers\n\u251c\u2500\u2500 data/                # Example XML files \n\u251c\u2500\u2500 results/             # Example directory for generated files\n\u251c\u2500\u2500 scripts/             # Python scripts for data extraction and visualization\n\u2502   \u251c\u2500\u2500 keywordCloud.py  # Generates a keyword cloud from abstracts\n\u2502   \u251c\u2500\u2500 charts.py        # Creates charts showing the number of figures per document\n\u2502   \u251c\u2500\u2500 list.py          # Extracts links from XML files (excluding references)\n\u251c\u2500\u2500 docs/                # Additional documentation \n\u251c\u2500\u2500 tests/               # Tests to check functionality \n```\n \n"
+    ]
+}
