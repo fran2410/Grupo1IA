@@ -61,6 +61,7 @@ def load_similarity_rdf():
 def execute_sparql_query(graph, query_string):
     """Ejecuta una consulta SPARQL y retorna los resultados"""
     try:
+        print(f"Ejecutando consulta SPARQL: {query_string}")
         results = graph.query(query_string)
         return list(results)
     except Exception as e:
@@ -203,29 +204,7 @@ def create_similarity_networkx_graph(_rdf_graph, _similarity_graph):
         topic_id = str(row.topic).split('/')[-1]
         topic_name = str(row.topicName)
         G.add_node(topic_id, type="Topic", label=topic_name)
-    
-    # Consulta para obtener similarity scores
-    similarity_query = """
-    PREFIX ex: <http://example.org/>
-    PREFIX schema: <http://schema.org/>
-    SELECT ?paper1 ?paper2 ?score WHERE {
-        ?paper1 ex:hasSimilarityTo ?paper2 ;
-                ex:similarityScore ?score .
-    }
-    """
-    
-    similarity_results = execute_sparql_query(_similarity_graph, similarity_query)
-    
-    # Agregar edges con similarity scores
-    for row in similarity_results:
-        paper1_id = str(row.paper1).split('/')[-1]
-        paper2_id = str(row.paper2).split('/')[-1]
-        score = float(str(row.score))
-        
-        # Solo agregar si ambos papers existen en el grafo
-        if paper1_id in G.nodes() and paper2_id in G.nodes():
-            G.add_edge(paper1_id, paper2_id, relation="similarity", score=score)
-            
+     
     # Agregar relaciones paper-topic desde el grafo de similarity
     paper_topic_query = """
     PREFIX schema: <http://schema.org/>
@@ -310,8 +289,8 @@ def create_agraph_visualization(G):
 def create_similarity_agraph_visualization(G):
     """Crea un grafo interactivo para similarity scores"""
     node_config = {
-        'ScholarlyArticle': {'color': "#DB1C1C", 'size': 25, 'shape': 'dot'},
-        'Topic': {'color': "#B20FD3", 'size': 35, 'shape': 'diamond'},
+        'ScholarlyArticle': {'color': "#DB1C1C", 'size': 35, 'shape': 'dot'},
+        'Topic': {'color': "#0713B6", 'size': 25, 'shape': 'diamond'},
         'unknown': {'color': '#999999', 'size': 15, 'shape': 'dot'}
     }
     # Crear nodos para agraph (solo papers)
@@ -340,48 +319,14 @@ def create_similarity_agraph_visualization(G):
     edges = []
     for edge in G.edges(data=True):
         source, target, edge_data = edge
-        if edge_data.get('relation') == "similarity":
-            score = edge_data.get('score', 0)
-            
-            # Calcular color y grosor basado en el score
-            # Colores: rojo (baja similitud) -> amarillo -> verde (alta similitud)
-            if score >= 0.8:
-                edge_color = '#00FF00'  # Verde para alta similitud
-                width = 6
-            elif score >= 0.6:
-                edge_color = '#7FFF00'  # Verde amarillento
-                width = 5
-            elif score >= 0.4:
-                edge_color = '#FFFF00'  # Amarillo
-                width = 4
-            elif score >= 0.2:
-                edge_color = '#FF7F00'  # Naranja
-                width = 3
-            else:
-                edge_color = '#FF0000'  # Rojo para baja similitud
-                width = 2
-            
-            # Mostrar porcentaje en la etiqueta
-            score_percentage = f"{score * 100:.1f}%"
-            
-            edges.append(Edge(
-                source=source,
-                target=target,
-                label=score_percentage,
-                color=edge_color,
-                width=width,
-                font={'size': 9, 'color': "#FFFFFF",'face': "Arial", 'align': "center",  'strokeWidth': 1, 'strokeColor': "#000000"},
-                title=f"Similitud: {score_percentage}"
-            ))
-        else:
-            edges.append(Edge(
-            source=source,
-            target=target,
-            label="belongsToTopic",
-            color="#B20FD3",
-            width=2,
-            font={'size': 9, 'color': "#C0C0C0",'face': "Arial", 'align': "center",  'strokeWidth': 0},
-            title=f"Relación: belongsToTopic"
+        edges.append(Edge(
+        source=source,
+        target=target,
+        label="belongsToTopic",
+        color="#0713B6",
+        width=2,
+        font={'size': 9, 'color': "#C0C0C0",'face': "Arial", 'align': "center",  'strokeWidth': 0},
+        title=f"Relación: belongsToTopic"
         ))
     return nodes, edges
 
@@ -432,7 +377,6 @@ def get_paper_details(rdf_graph, similarity_graph, paper_id):
     """
     
     results = execute_sparql_query(rdf_graph, query)
-    print(results)
     if not results:
         return None
     
@@ -550,7 +494,6 @@ def main():
         with col2:
             st.subheader("🎛️ Controles")
             physics_enabled = st.checkbox("Física habilitada", value=True)
-            show_labels = st.checkbox("Mostrar etiquetas", value=True)
             
             if graph_type == "Grafo Personas y Organizaciones":
                 st.markdown("**Leyenda:**")
@@ -566,27 +509,19 @@ def main():
                                         if st.session_state.nx_graph.nodes[n].get('type') == 'Person']))
                 st.metric("Organizaciones", len([n for n in st.session_state.nx_graph.nodes() 
                                                if st.session_state.nx_graph.nodes[n].get('type') == 'Organization']))
-                st.metric("Topics", len([n for n in st.session_state.nx_graph.nodes() 
-                                       if st.session_state.nx_graph.nodes[n].get('type') == 'Topic']))
                 st.metric("Conexiones", st.session_state.nx_graph.number_of_edges())
             
             else:  # Grafo de Similarity
                 st.markdown("**Leyenda:**")
                 st.markdown("🔴 Papers")
-                st.markdown("🟣 Topics")
-                
-                st.markdown("**Leyenda de Similitud:**")
-                st.markdown("🟢 **Verde**: Alta similitud (≥80%)")
-                st.markdown("🟡 **Amarillo**: Media similitud (60-79%)")
-                st.markdown("🟠 **Naranja**: Baja similitud (20-59%)")
-                st.markdown("🔴 **Rojo**: Muy baja similitud (<20%)")
-                
+                st.markdown("🔵 Topics")
                 # Mostrar métricas del grafo de similarity
                 st.subheader("📈 Estadísticas de Similarity")
+                paper = len([n for n in st.session_state.nx_graph.nodes() 
+                                       if st.session_state.nx_graph.nodes[n].get('type') == 'ScholarlyArticle'])
                 similarity_graph = st.session_state.similarity_nx_graph
-                st.metric("Papers", similarity_graph.number_of_nodes())
-                st.metric("Conexiones de Similitud", similarity_graph.number_of_edges())
-                
+                st.metric("Papers", paper)
+                st.metric("Topics", similarity_graph.number_of_nodes() - paper)
                 # Calcular estadísticas de similarity scores
                 if similarity_graph.number_of_edges() > 0:
                     scores = [data['score'] for _, _, data in similarity_graph.edges(data=True) 
@@ -831,7 +766,7 @@ def main():
                 
                 with col1:
                     if similarity_score is not None:
-                        st.metric("Similarity Score", f"{similarity_score* 100}%")
+                        st.metric("Similarity Score", f"{(abs(similarity_score) * 100):.2f}%")
                         
                         # Interpretación del score
                         if similarity_score >= 0.8:
