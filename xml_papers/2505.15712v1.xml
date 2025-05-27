@@ -1,0 +1,1869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">TURNABOUTLLM: A Deductive Reasoning Benchmark from Detective Games</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Yuan</forename><surname>Yuan</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Muyu</forename><surname>He</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Muhammad</forename><surname>Adil</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Shahid</forename><forename type="middle">Jiani</forename><surname>Huang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ziyang</forename><surname>Li</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Li</forename><surname>Zhang</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Pennsylvania Drexel University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">E3 Testimonies Evidences Contradiction!</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">TURNABOUTLLM: A Deductive Reasoning Benchmark from Detective Games</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">64D053A3AB30DDA201D59493AD6C23AB</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>This paper introduces TURNABOUTLLM , a novel framework and dataset for evaluating the deductive reasoning abilities of Large Language Models (LLMs) by leveraging the interactive gameplay of detective games Ace Attorney and Danganronpa. The framework tasks LLMs with identifying contradictions between testimonies and evidences within long narrative contexts, a challenging task due to the large answer space and diverse reasoning types presented by its questions. We evaluate twelve state-of-the-art LLMs on the dataset, hinting at limitations of popular strategies for enhancing deductive reasoning such as extensive thinking and Chain-of-Thought prompting. The results also suggest varying effects of context size, the number of reasoning step and answer space size on model performance. Overall, TURN-ABOUTLLM presents a substantial challenge for LLMs' deductive reasoning abilities in complex, narrative-rich environments. 1  </p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Detective stories contain some of the most difficult reasoning problems, meticulously crafted to be intriguing and illusive for even the most intelligent readers. To perform said deduction requires various abilities. Some include information retrieval from long passages of narrative with attention to particular details. Others include piecing together facts with knowledge of physical laws, social norms, timeline of events, and so on. As large language models (LLMs) are increasingly coveted for their reasoning ability, evaluating them on detective stories brings about unique challenges.</p><p>Unfortunately, evaluating LLMs' deductive reasoning via detective stories is often infeasible. For example, Sherlock Holmes involves rich reasoning Sahwit claimed he saw the woman dead at 1PM, but the autopsy says she died between 4 and 5PM.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>T1</head><p>T2 T3 T4</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E1 E2</head><p>Reasoning Figure 1: An illustration of a problem from Ace Attorney, a detective game where players are instructed to pinpoint a contradiction between a piece of evidence and a testimony. Adapted to a task in TURNABOUT-LLM, the input is a list of testimonies and a list of evidences with their corresponding textual descriptions.</p><p>The output is the pair of testimony (T4) and evidence (E2) that contradict each other. The example shown is from the introductory episode and is likely the easiest.</p><p>but does not contain explicit questions to pose to models. As a result, existing work that leveraged detective stories for evaluation either only considered simple snippets as the context <ref type="bibr" target="#b2">(Del and Fishel, 2023a)</ref> or character relationship prediction as the task <ref type="bibr" target="#b20">(Zhao et al., 2024)</ref>. Some also focus on textual understandings that require simple reasoning abilities <ref type="bibr">(Xu et al., 2025)</ref>. To overcome this limitation, we take advantage of a unique asset, detective games, as their interactive gameplay provides a natural interface for evaluating LLMs. We propose TURNABOUTLLM 2 , a framework and textual dataset to evaluate LLMs' deductive Dataset Sym. SLC LAS Nat. MH Het.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BIG-Bench Hard</head><formula xml:id="formula_0">✗ ✗ ✗ ✓ ✓ ✗ LogicQA ✗ ✗ ✗ ✓ ✓ ✗ ReClor ✗ ✗ ✗ ✓ ✓ ✗ ZebraLogic ✗ ✗ ✓ ✓ ✓ ✗ ProofWriter ✓ ✗ ✗ ✗ ✓ ✗ FOLIO ✓ ✗ ✗ ✓ ✓ ✗ ProntoQA ✓ ✗ ✗ ✗ ✗ ✗ LogicBench ✓ ✗ ✗ ✗ ✗ ✗ TurnaboutLLM ✓ ✓ ✓ ✓ ✓ ✓</formula><p>Table <ref type="table">1</ref>: Qualitative comparison of TURNABOUTLLM against other deductive reasoning benchmarks. There are no previous benchmarks that satisfy all six desiderata simultaneously. Our proposed TURNABOUTLLM is the first benchmark to include symbolic logical annotations (Sym.) for reasoning tasks situated in natural scenarios (Nat.) with super-long contexts (SLC), large answer spaces (LAS), multi-hop (MH) reasoning steps, and heterogeneous (Het.) reasoning types.</p><p>reasoning ability in a long narrative context. TURN-ABOUTLLM is constructed using two critically acclaimed detective games Ace Attorney<ref type="foot" target="#foot_1">3</ref> and Danganronpa<ref type="foot" target="#foot_2">4</ref> . The core gameplay mechanism, adapted as our task format, is to read through a story, examine existing evidences, examine witness testimonies, deduce likely conclusions, and find a contradiction between an evidence and a testimony in each turn of gameplay, all in text. One example from the 306 turns can be seen in Figure <ref type="figure">1</ref>. TURNABOUTLLM is superior to existing reasoning benchmarks in that: 1. it includes natural contexts written by human authors that sometimes exceeds 100K words; 2. it presents a large answer space that can contain 300 candidate answers; 3. it consists of rigorous yet heterogeneous questions that demands temporal, spatial, behavior, object state, causal, and numerical understanding, 4. all of the examples contain expert annotations of evidence spans, context summary, reasoning type, and the complete reasoning steps. We conducted 26 experiments on 12 state-of-the-art LLMs using TURNABOUTLLM, revealing several intriguing insights detailed in Section 5. The results establish TURNABOUTLLM as a substantial challenge for current LLMs outside their training corpus, as the top-performing DeepSeek-R1 only obtains an accuracy score of 45.72%. We observe the generation of extensive reasoning tokens does not directly help with model performance but is negatively correlated with accuracy. The traditionally effective Chain-of-Thought prompting method also presents minimal benefits on complex deductive tasks. When presented with excessive contextual information, only large models, not small and medium-sized ones, can leverage needle-in-ahaystack retrieval to improve reasoning outcomes. We find that performance declines as the number of reasoning steps increases but is unaffected by the size of the answer space, and conversely performance improves with larger parameter counts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related Work</head><p>General Reasoning Benchmarks To broadly assess models' reasoning capacities, multiple generalpurpose benchmarks have been widely studies. They include MMLU <ref type="bibr" target="#b7">(Hendrycks et al., 2021)</ref>, Su-perGLUE <ref type="bibr" target="#b17">(Wang et al., 2020)</ref>, <ref type="bibr">BIG-Bench (Srivastava et al., 2023)</ref>, and BIG-Bench Hard <ref type="bibr" target="#b15">(Suzgun et al., 2022)</ref>. While these benchmarks provide a useful overview, they are not exclusively focused on reasoning tasks, resulting in a limited reflection of models' actual reasoning skills.</p><p>In contrast, several benchmarks explicitly target deductive reasoning capacities. LogiGLUE <ref type="bibr" target="#b10">(Luo et al., 2024)</ref> integrates 24 reasoning-focused datasets into a unified benchmark. LogiQA <ref type="bibr" target="#b9">(Liu et al., 2020)</ref> and ReClor <ref type="bibr" target="#b19">(Yu et al., 2020)</ref> draw logical reasoning questions from standardized exams like the LSAT in multi-choice formats. <ref type="bibr">Ze-braLogic (Lin et al., 2025)</ref> constructs constraintsatisfaction problems that feature expansive answer spaces. However, these benchmarks lack symbolic annotations of logical structures, limiting insights into underlying reasoning processes.</p><p>Synthetic Datasets for LLM Reasoning Synthetic datasets fulfill the need for symbolic annotations by using LLMs to generate examples based on logical rules. PrOntoQA <ref type="bibr">(Saparov and He, 2023)</ref> and LogicBench <ref type="bibr" target="#b11">(Parmar et al., 2024)</ref> synthesize questions from logical rules applied to ontological entities, while JustLogic <ref type="bibr" target="#b0">(Chen et al., 2025)</ref> uses randomly sampled real-world sentences as premises for reasoning chains. Nonetheless, they typically focus on single inference rules rather than multi-hop reasoning. To address this gap, Multi-LogiEval <ref type="bibr" target="#b12">(Patel et al., 2024)</ref>   In addition to labeling which testimony-evidence pairs are contradictory, we provide a per-contradiction explanation and a ground-truth reasoning chain used to derive the contradiction. Each reasoning chain forms a tree structure: leaf nodes represent observed facts, while internal (non-leaf) nodes correspond to intermediate atomic propositions that perform derivations. <ref type="bibr" target="#b16">(Tafjord et al., 2021)</ref>, an improvement to RuleTaker <ref type="bibr" target="#b1">(Clark et al., 2020)</ref>, require models to validate synthetic conclusions involving multiple logical steps. However, along with the expert-curated multi-hop FOLIO <ref type="bibr">(Han et al., 2024)</ref>, these datasets suffer from limited context sizes and answer spaces.</p><p>Reasoning Datasets from Detective Stories Detective stories naturally engage readers in multi-hop deduction, thus well-suited for deductive reasoning evaluations. MuSR <ref type="bibr" target="#b13">(Sprague et al., 2024)</ref> and True Detective <ref type="bibr" target="#b3">(Del and Fishel, 2023b)</ref> synthesize detective stories from predefined facts or online detective games, yet they face inherent limitations of small context sizes. Benchmarks derived from authentic novels or high-quality puzzles, such as WhoDunIt <ref type="bibr" target="#b5">(Gupta, 2025)</ref>, DetectBench <ref type="bibr" target="#b4">(Gu et al., 2024)</ref>, and DetectiveQA <ref type="bibr">(Xu et al., 2025)</ref>, address this context size limitation. However, their answer spaces remain relatively constrained. To the best of our knowledge, there is no existing benchmark that leverages the detective story format to combine symbolic annotations with reasoning tasks characterized by large contexts and answer spaces. A comprehensive overview of each benchmark's attributes is presented in Table <ref type="table">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Dataset and Task</head><p>Our TURNABOUTLLM dataset is based on 11 titles of critically acclaimed Ace Attorney series and Danganronpa. In this section, we detail our process of creating the TURNABOUTLLM dataset (Section 3.1), the additional annotations (Section 3.2), and the overall statistics (Section 3.3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Data Creation</head><p>Extraction To obtain data, we crawl and parse an Ace Attorney Wiki<ref type="foot" target="#foot_3">5</ref> and a Danganronpa archive<ref type="foot" target="#foot_4">6</ref> . We extract the following data: 1) character information, including name, gender, age, and a description; 2) evidence information<ref type="foot" target="#foot_5">7</ref> , including name, source, and a description; 3) testimonies in the core gameplay<ref type="foot" target="#foot_6">8</ref> , including speaker, content, and the correct evidence to present if the testimony can be contradicted; and 4) transcript of the full gameplay<ref type="foot" target="#foot_7">9</ref> , including dialogues, information, and flavor text, used as the full context. While the games are originally visual novels in nature, we only consider the textual elements, which are sufficient for reasoning in most cases. Whenever visuals are indispensable for reasoning, they are manually captioned so that key visual features are provided.</p><p>Modification Using the data acquired above, we construct each each example, referred to as a turn, as follows. The input to a model is:</p><p>1. C i : information of every character 2. E i : information of every evidence 3. T i : an array of testimonies 4. X (optional): a context that may provide additional information required for the reasoning The output of a model is a pair of (T i , E j ) where The victim was wearing a plain shirt.</p><p>He was always walking around with a flowery shirt.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Spelling</head><p>The defendant is Maggey Byrde. The blood writing was the defendant's name, "Maggie".</p><p>Table <ref type="table">2</ref>: Examples (edited for brevity and clarity) of evidences and testimonies of each reasoning type.</p><p>an evidence is presented to contradict a testimony. At times, there can be multiple ground-truth pairs. Thus, the task is essentially a multiple-choice format with an action space of |T | × |E|, on the order of hundreds. While our dataset is mostly faithful to the original games, we made various types of modification (change of wording, removing turns with loose contradictions, adding information for logic leaps, etc.) to ensure the rigorousness of reasoning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Annotations</head><p>To improve rigorousness of evaluation and enable fine-grained insights into TURNABOUTLLM, we annotate the following aspects of each turn: metadata, reasoning chains, and reasoning types.</p><p>Metadata First, we annotate a one-sentence summary of the current story that provides necessary information for identifying the contradiction for each turn. We provide the span from the evidence and from the testimony that critically constitutes the contradiction. We next label whether a turn is self-contained, where a contradiction can be deducted using only information of characters, evidences, and testimonies, without any other context such as the dialogue transcripts. Whenever a turn is not self-contained, a model needs to perform a needle-in-a-haystack retrieval from the full context (all transcript until the current moment) to gather necessary information (Figure <ref type="figure" target="#fig_6">8</ref>). In this case, we manually annotate an expected context span.</p><p>Reasoning Chain Next, we annotate a reasoning chain used for deriving the contradiction for each turn (Figure <ref type="figure" target="#fig_0">2</ref>). A reason chain is a tree structure with three components. First, observed facts, represented as leaf nodes, are paraphrased directly from evidence, testimony, or context. Atomic propositions (non-leaf nodes) are handwritten modus ponens rules that operates upon the facts and derive new facts. Finally, a contradiction (root node) is implied based on two obviously contradiction facts. As the reasoning in TURNABOUTLLM is based on natural narrative texts, subjectivity in the reasoning chain is unavoidable. Therefore, when annotating the propositions, we uphold the desiderata of only considering general rules in the real world (neglecting what-ifs and extremities) and making them as reasonably atomic as possible.</p><p>Reasoning Types Lastly, we annotate a finegrained type of deductive reasoning for each turn. We define 7 reasoning types, including spatial, temporal, causal, behavioral, numerical, physical, and spelling with examples shown in Table <ref type="table">2</ref>. We assign one or more types to a turn based on the type of reasoning that underlies the propositions in the annotated reasoning chain (Figure <ref type="figure" target="#fig_0">2</ref>). Each reasoning category contains a non-trivial number of turns (Figure <ref type="figure" target="#fig_2">3b</ref>), demonstrating that our dataset demands heterogeneous reasoning capabilities. On average, annotation for each turn takes 20 minutes for a trained annotator, resulting in a total labor of approximately 100 hours.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Statistics</head><p>Table <ref type="table" target="#tab_3">3</ref> summarizes the statistics of TURNABOUT-LLM. In total, there are 306 turns in TURNABOUT-LLM, with an average of 12 game characters, 38 evidences, 11 testimonies, and 25K text characters.</p><p>Figure <ref type="figure" target="#fig_2">3a</ref> demonstrates a large answer-space in TURNABOUTLLM, with an average of 200 evidence-testimony pairs to choose from. Figure <ref type="figure" target="#fig_2">3b</ref> shows the distribution of different types of reasoning ability required. Combined, these statistics are evidence that TURNABOUTLLM is a challenging and complex benchmark for LLM capabilities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Evaluation Protocol</head><p>To evaluate a model on the dataset, we extract specific fields from each data point in the game to form a single prompt, and we prompt the model one-time for a single turn. The model is asked to give the indices of the contradicting evidence and testimony. As there may be multiple contradicting   pairs in each turn, we regard the output as correct if the proposed pair is included in the list of ground truth contradicting pairs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evaluation Metrics</head><p>We compute the overall accuracy of the model as the percentage of correct answers across all turns, and we compute the evidence accuracy and testimony accuracy respectively as the percentage of correct evidence and testimony presented across all turns.</p><p>Data Splits We do not endorse any particular train-develop-test split of TURNABOUTLLM and leave that decision to future users. In this work, we treat the entirety of the Ace Attorney dataset as the evaluation set, since we do not attempt any hyperparameter tuning or modeling improvement.</p><p>Evaluation Settings To better gauge different aspects of models' reasoning abilities, we propose 4 variations of the evaluation prompt templates based on available property fields in the data. First, We start with a basic zero-shot prompt 10 with an average of 1,686 words, which sequentially includes descriptions of all the characters, evidences, and 10 Our experiments show that few-shot prompting leads to worse results which are omitted. testimonies in the current turn. In case more context than mere evidence descriptions are needed for reasoning, we append a short "context span", an excerpt from the context field that guarantees to fills in the most relevant context information, to the corresponding evidence description.</p><p>Second, we use a one-shot, Chain-of-Thought (CoT) prompt with an average of 2,280 words, which uses an example to direct the model to think before answering the question. Besides the use of a one-shot example, the prompt adds a "let's think step by step" instruction at the end of the prompt to enforce the prolonged thinking. We do this for all models except those already trained to do so, such as DeepSeek-R1 or OpenAI's o-series models.</p><p>Third, we use a full-context prompt averaging 44K words, which includes the complete context of all prior turns within the same court case leading up to the current one. This is a challenging but realistic setting, as all human players experience the game this way. As such, needle-in-a-haystack retrieval of critical information from the context is necessary for turns that are not self-contained by merely characters, evidences, and testimonies.</p><p>Fourth, to study whether the model is memorizing the game from its training corpus, we provide   While performance vary a lot across models, causal reasoning is usually the weakest.</p><formula xml:id="formula_1">D S -R 1 -8 B L 3 .1 -8 B D S -R 1 -3 2 B D S -R 1 -7 0 B G 4 .1 -M in i L 3 .1 -7 0 B O 3 -M in i D S -C O 4 -M in i G 4 .1 Q -3 2 B D S -</formula><formula xml:id="formula_2">&lt; 6 0 &lt; 8 5 &lt; 1 0 5 &lt; 1 2 6 &lt; 1 5 0 &lt; 1 8 0 ≥ 1 8 0 Answer space: |T | × |E| DS-R1 Q-32B G4.1 O4-M</formula><p>(c) Accuracy with respect to size of answer space. Results does not show strong negative correlation.</p><p>Figure <ref type="figure">5</ref>: Model accuracies plotted against the number of reasoning steps, required reasoning types, and size of answer space. Due to space constraints, we only show the performance of 6 representative models. A more comprehensive illustration is shown in the appendix.</p><p>an ablation prompt with an average of 537 words where all descriptions of the characters and evidences are removed. The model will have to reason based on the names of the characters and evidences alone, which is often insufficient. Therefore, we would expect a significant drop in its performance if it does not memorize key events in the game.</p><p>As is previously discussed, evidences and sometimes testimonies come with images that are occasionally crucial for reasoning about the contradiction. While we have fully captioned them in this work, we also provide all the images and clearly label whenever they are required so that a multimodal evaluation is available for future work.</p><p>Experiments We evaluate 12 LLMs on our 4 variations of prompts. The LLMs come from 4 model families: the DeepSeek series which includes the 671B DeepSeek-R1 (DS-R1) and V3 (DS-V3) and the smaller distilled DeepSeek-R1-70B (DS-R1-70B), DeepSeek-R1-32B (DS-R1-32B), and DeepSeek-R1-8B (DS-R1-8B) models, the OpenAI family including GPT-4.1 (G4.1), GPT-4.1-mini (G4.1-M) and the reasoning models o3mini (O3-M) and o4-mini (O4-M), the Llama-3.1instruct family including Llama-70B (L3.1-70B) and Llama-8B (L3.1-8B), and the reasoning model QwQ-32B (Q-32B) exceling in reasoning and coding. Except for OpenAI models and the two largest DeepSeek models that are run via their APIs, we run all other models locally on 8 H100 GPUs using HuggingFace and KANI <ref type="bibr" target="#b21">(Zhu et al., 2023)</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Results and Analysis</head><p>In this section, we present our primary empirical findings regarding LLMs' reasoning abilities. We begin by highlighting the overall accuracies of all 12 models on TURNABOUTLLM summarized in Figure <ref type="figure" target="#fig_3">4</ref>. Subsequently, we provided detailed analyses that dissect model performance by factors such as numbers of reasoning steps (Figure <ref type="figure">5a</ref>), reasoning types (Figure <ref type="figure">5b</ref>), answer space sizes (Figure <ref type="figure">5c</ref>), numbers of reasoning tokens (Figure <ref type="figure">6</ref>) and prompting strategies (Figure <ref type="figure" target="#fig_3">4, 7</ref>). The dataset poses a significant challenge in longcontext deductive reasoning for state-of-the-art models. All 12 models demonstrate considerable diffuculty in correctly identifying evidencetestimony pairs within TURNABOUTLLM (Figure <ref type="figure" target="#fig_3">4</ref>). Among them, DS-R1 achieves the highest accuracy of 45.72% using the basic prompt. All models, except G4.1, achieve higher accuracy in selecting the correct evidence than in selecting the correct testimony. This trend aligns with the fact that there are typically fewer candidate evidences than testimonies to evaluate. These findings illustrate that TURNABOUTLLM represents a substantial challenge for even the most advanced LLMs.</p><p>Minimal memorization makes the dataset a reliable independent benchmark for LLMs. The dataset is uncontaminated by the models' training corpus, as is suggested by the performances of 4 models evaluated on the ablation prompt with no evidence descriptions. Scoring consistently at merely 15% on average, these models' reasoning traces reveal that they are making the most likely "bet" based on evidence names alone. Therefore, we conclude that major models only have minimum memorization and that TURNABOUTLLM establishes a novel and fair ground for LLM evaluations.</p><p>Incorrect results consume more reasoning tokens than correct ones, and more output tokens do not necessarily yield better results. We define "reasoning tokens" as intermediate tokens generated by the model before arriving at the final answer. Across all models, incorrect responses exhibit higher median and maximum numbers of reasoning tokens compared to correct ones (Figure <ref type="figure">6</ref>), indicating a negative correlation between model accuracy and the number of reasoning tokens. This potentially shows that when the model produces incorrect answers, outputing additional reasoning tokens does not yield more improvements.</p><p>We observe a surplus of reasoning tokens produced by Q-32B and DS-R1 over other models in Figure <ref type="figure">6</ref> using a logarithmic scale. However, despite using far fewer reasoning tokens than Q-32B, G4.1 achieves approximately equal accuracy, exhibiting superior reasoning efficiency under a limited token budget. This could further corroborate with the conjecture that intentional exploration of the answer space is more decisive to model performance than extensive output of reasoning tokens.</p><p>Full context benefits large models but hurts smaller ones. Including the complete context in the evaluation prompt has contrasting effects depending on the size of the model (Figure <ref type="figure">7</ref>). Large models such as G4.1 and DS-R1 exhibit notable accuracy improvements of approximately 15% compared to their basic prompt performances. Conversely, small and medium-sized models, such as L3.1-70B and L3.1-8B, suffer performance declines. This could suggest that smaller models, limited by their parameter size, not only under-utilize additional contextual information but are also "confused" by the influx of supplementary data.</p><p>Model performance deteriorates with increasing reasoning steps, but not with larger answer spaces. There is a negative correlation between average accuracy within a model architecture family and the number of reasoning steps (Figure <ref type="figure">5a</ref>). As the number of reasoning steps increases, performance gradually declines, signaling that questions requiring more logical connections tend to be more difficult. This supports the validity of using annotated reasoning chains as an indicator of difficulty.</p><p>In contrast, the size of the answer space does not appear to impact model accuracy (Figure <ref type="figure">5c</ref>). By categorizing answer spaces into seven bins with approximately equal numbers of data points, we observe consistent model performance across all bins. Further analysis reveals that reasoning models tend to use many reasoning tokens to exhaustively enumerate possible testimony-evidence pairs without engaging in deeper reasoning.</p><p>CoT prompting does not enhance model performance. We notice minimal benefits of CoT prompting on reasoning performance (see Figure <ref type="figure" target="#fig_3">4</ref>). For all 5 models except the smallest L3.1-8b, this prompting method either results in no improvement or minor performance decreases. The models' reasoning traces reveal that CoT prompting delays the time the model first reaches its final conclusion and allows it to "think" more. However, the extended thinking often hinges on a single evidence-testimony pair, failing to conduct an extensive search in the answer space. This appears to imply that CoT prompting is ineffective in solving deductive reasoning tasks with extensive answer spaces and large context sizes.</p><p>Models benefit from longer explorations of the answer space. Models can effectively extend explorations of the answer space to boost their accuracy, as is shown by the qualitative example in Figure <ref type="figure" target="#fig_6">8</ref>. In the example, we observe distinct behaviors in G4.1 and DS-R1's reasoning traces. G4.1, generating only 111 tokens, merely considers one possible evidence before finalizing on a wrong answer. In contrast, DS-R1, generating 1,418 tokens, explores multiple evidences before narrowing down to 3 most likely candidates and arriving at the correct answer. We conjecture that when in a large answer space, successful deductive reasoning is grounded in extensive, trial-and-error search and does not have a cognitive shortcut.</p><p>Different models excel at different reasoning types and scale with increasing parameter size. Different models have particular strengths and weaknesses depending on the type of reasoning required (Figure <ref type="figure">5b</ref>). Models generally perform best on numerical tasks involving counting and comparison, whereas most exhibit their lowest scores on temporal or causal reasoning. Furthermore, model performance tends to improve as the parameter size increases (Figure <ref type="figure" target="#fig_3">4</ref>), with the notable exception of Q-32B, which outperforms all larger models except the 671B DS-R1. The positive correlation between parameter size and model accuracy could imply that larger models may possess inherently stronger deductive reasoning capabilities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusion</head><p>We introduce TURNABOUTLLM , the first benchmark that embeds symbolic-logic puzzles inside narrative-rich, super-long contexts drawn from detective visual novels. By performing an extensive empirical study across twelve contemporary LLMs, we show that TURNABOUTLLM is challenging and poses a fair ground to evaluate LLMs' reasoning abilities. We release the dataset, annotation toolkit, and evaluation code to spur research on (i) scalable long-context reasoning, (ii) controllable chain-of-thought generation, and (iii) unified metrics for symbolic-narrative tasks. We hope TURN-ABOUTLLM will serve as a stepping-stone toward LLMs that can navigate the messy, open-world logic of real human discourse.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Limitation</head><p>Despite its breadth, TURNABOUTLLM still faces several constraints. First, its detective-courtroom focus targets contradiction spotting, leaving other deductive settings-such as scientific discovery or regulatory compliance-largely untested. Second, because the narratives originate from Japanese visual novels, they may encode culture-specific norms and idioms that bias evaluation toward models already familiar with such text. Third, although we supply descriptive captions for in-game images, true multimodal reasoning is only approximated, not fully exercised. Fourth, the dataset's manually crafted reasoning chains (≈ 100 annotatorhours) introduce subjectivity and hamper scalability, though future releases will report interannotator agreement and provide semi-automated validation tools. Fifth, while the raw scripts are publicly available, their copyright status could change; We are committed to honoring any takedown requests from the rights holders. Finally, evaluation with 100K-token prompts imposes a heavy computational footprint, and researchers with limited resources may need chunk-wise retrieval strategies that we have not yet benchmarked. Acknowledging these limitations helps define the benchmark's current scope and highlights directions for future expansion. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>T1 T2 T3</head><p>[caption] …the victim is standing to the right, facing left. The prisoner is standing to the left.</p><p>One kind of chip is worth 100 points, other kind is worth 1,000.</p><p>One who was winning was the victim!</p><p>The game began with 3,500 point in chips for each man.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>T1 T2 T3</head><p>Defendant &amp; victim's chips when crime took place.  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: An example data point from TURNABOUTLLM, where testimonies, marked as T1 to T3, are shown horizontally in green and evidences E1, E2 and more are shown vertically in orange. In addition to labeling which testimony-evidence pairs are contradictory, we provide a per-contradiction explanation and a ground-truth reasoning chain used to derive the contradiction. Each reasoning chain forms a tree structure: leaf nodes represent observed facts, while internal (non-leaf) nodes correspond to intermediate atomic propositions that perform derivations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>An illustration of the number of turns in TURNABOUTLLM (size of each circle) with respect to the number of available evidences (horizontal) and testimonies (vertical) to choose from. Spa. Tem. Cau. Beh. Num. Phy. Spe. The number of TURNABOUTLLM turns with respect to the reasoning capabilities required (e.g., Spatial, Temporal, etc.) to find the contradiction, classified by the incorporated title.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Illustrations of further statistics of our TURNABOUTLLM dataset.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Performance comparison on TURNABOUTLLM across 12 models, ordered from left to right. Bars indicate correctness accuracy (%) using a base prompt, along with accuracy for evidence and testimony. For models without native reasoning capabilities, arrows show the performance change when applying chain-of-thought prompting.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>accuracy among each model family declines as the number of annotated reasoning steps increases. Spa. Tem. Cau. Beh. Num. Phy. Spe. with respect to the reasoning types.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 6 :Figure 7 :</head><label>67</label><figDesc>Figure 6: Distributions of the number of generated reasoning tokens, separated by whether a correct answer is derived.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: A qualitative comparison between DeepSeek-R1 and GPT-4.1's reasoning on answering the 2nd turn of AA6-5-4. GPT-4.1 failed by jumping straight into conclusion, while DS-R1 carefully examines all evidences and testimonies, producing over 1.4K reasoning tokens as well as the correct answer.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>…Figure 10 :</head><label>10</label><figDesc>Figure 10: A highly challenging data point from TURNABOUTLLM involving numerical and spatial reasoning, even with a touch of abductive reasoning.</figDesc><graphic coords="13,180.07,383.35,161.41,161.41" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 11 :</head><label>11</label><figDesc>Figure 11: Model accuracies plotted against the number of reasoning steps, required reasoning types, and size of answer space. Additional experiments not covered in the main body text are presented here.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>and ProofWriter E3</head><label></label><figDesc></figDesc><table><row><cell>There was a</cell><cell>That's why</cell><cell>Terribly</cell></row><row><cell>voice saying the</cell><cell>I thought</cell><cell>sorry about</cell></row><row><cell>time... probably</cell><cell>it was 4:00</cell><cell>the misunde-</cell></row><row><cell>from</cell><cell>PM!</cell><cell>rstanding.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>television. T1 T2 T3 Electricity was out from noon to 6 PM on the day.</head><label></label><figDesc></figDesc><table><row><cell>Frank Sahwit</cell><cell></cell><cell></cell><cell></cell><cell cols="3">Reasoning Chain (Labeled)</cell></row><row><cell>Newspaper salesman who</cell><cell></cell><cell></cell><cell></cell><cell cols="3">Contradiction</cell><cell>Physical</cell></row><row><cell>discovered body and saw…</cell><cell></cell><cell></cell><cell></cell><cell cols="4">TV can't be on and off simultaneously</cell></row><row><cell>E1</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Blackout Record</cell><cell>Contradiction</cell><cell>Contradiction</cell><cell>Benign</cell><cell>Proposition 1</cell><cell>Causal</cell><cell cols="2">Proposition 2</cell></row><row><cell></cell><cell>Explanation: One cannot hear the time coming from a TV when there is</cell><cell>Explanation: This thought is founded in an</cell><cell>Explanation: N/A</cell><cell cols="2">If electricity is out, TV must be off</cell><cell></cell><cell>If TV plays sound, the TV must be on</cell></row><row><cell></cell><cell>a blackout.</cell><cell>ungrounded claim.</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>E2</cell><cell></cell><cell></cell><cell></cell><cell cols="2">Assumption 1 [E1]</cell><cell cols="2">Assumption 2 [T1+T2]</cell></row><row><cell>Cindy's</cell><cell>Benign</cell><cell>Benign</cell><cell>Benign</cell><cell cols="2">Electricity was</cell><cell cols="2">Witness heard voice</cell></row><row><cell>Autopsy</cell><cell></cell><cell></cell><cell></cell><cell>out 12-6PM</cell><cell></cell><cell></cell><cell>from TV at 4PM</cell></row><row><cell>…</cell><cell>…</cell><cell>…</cell><cell>…</cell><cell cols="4">Temporal &amp; Numerical</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>SpatialDeath was caused by a gunshot to the chest. ...fired on the English civilian! And from the back... Temporal Shots were fired just after midnight on 12/25. When she said "It's almost Christmas!" shots fired! Causal ...weapon bears the defendant's prints... I never touched the murder weapon. Behavioral Victim's diary: Meet with Hugh. Important. Huge: I didn't talk to anyone until the final bell. Numerical Cause of death: single blunt force trauma. You see? You hit her twice! Physical</figDesc><table><row><cell>Type</cell><cell>Evidence example</cell><cell>Testimony example</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>Overall statistics of TURNABOUTLLM, categorized by the incorporated detective game titles. AA123 stands for Phoenix Wright: Ace Attorney Trilogy. AA456 stands for Apollo Justice Ace Attorney Trilogy. GAA12 stands for The Great Ace Attorney Chronicles. AAI12 stands for Ace Attorney Investigations Collection. DGRP1 stands for Danganronpa: Trigger Happy Havoc.</figDesc><table><row><cell>Statistics</cell><cell>AA123</cell><cell>AA456</cell><cell>GAA12</cell><cell>AAI12</cell><cell>DGRP1</cell><cell>Overall</cell></row><row><cell># Data points Avg. context length (# chars) Avg. # characters Avg./Max. # testimonies Avg./Max. # evidences Avg./Max. length of reasoning chain</cell><cell cols="6">85 19K 10.6 5.9 / 10 20.2 / 32 21.1 / 33 18.6 / 30 25.3 / 38 18.0 / 21 21.1 / 38 72 43 69 37 306 29K 36K 34K 2.2K 25K 13.6 13.2 12.6 17 12.3 5.6 / 8 5.7 / 7 5.1 / 8 6.7 / 11 5.7 / 11 3.5 / 9 3.8 / 10 3.6 / 6 3.5 / 8 3.3 / 5 3.6 / 10</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_0">The name "Turnabout" is a wordplay from Ace Attorney as a nod to the playable character's knack for completely changing the direction of a trial, against all odds.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_1">https://en.wikipedia.org/wiki/Ace_Attorney</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_2">https://en.wikipedia.org/wiki/Danganronpa</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_3">aceattorney.fandom.com/wiki</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_4">lparchive.org/Danganronpa-Trigger-Happy-Havoc/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_5">"Evidence" in Ace Attorney" and "Truth Bullets" in Danganronpa.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_6">8"Cross examination" in Ace Attorney and "non-stop debate" in</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9" xml:id="foot_7">Danganronpa.  9  Non-core gameplay such as investigation in Ace Attorney or social activities in Danganronpa is lumped into the context.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgment</head><p>We thank Sesh Sadasivam for the initial ideation of this work. We thank Manvi Kaul for the initial efforts of modeling. We thank Bowen Jiang for her wonderful comments on and edits to the writing of this paper. We thank Shu Takumi, Kazutaka Kodaka, and their teams for the marvelous gift to the Ace Attorney and Danganronpa community that makes this work possible.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A License and Intended Use</head><p>The data utilized in this research is sourced from fandom.com. As stipulated by fandom.com, their resources are made available under the Creative Commons Attribution-Share Alike License 3.0 (Unported) (CC BY-SA). This license permits the sharing and adaptation of the material, provided that appropriate attribution is given to the original source, a link to the license is provided, and that if the material is remixed, transformed, or built upon, the contributions are distributed under the same or a compatible license. Our intended use of this data is strictly for academic research and analysis within this paper, fully adhering to the terms and conditions set forth by the CC BY-SA license.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B Annotator demographics</head><p>Five annotators contribute to authoring and verifying each data point's reasoning types, reasoning steps, and evidence and context span. All are U.S.based university students and avid Ace Attorney and Danganropa players, thus ideally suited to examine each case data's key attributes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C Additional Data Examples and Statistics</head><p>Figure <ref type="figure">9</ref> and 10 present two highly challenging examples from TURNABOUTLLM. Figure <ref type="figure">11</ref> shows additional performance breakdown of models that are not included in the main section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Witness' Photo</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E2</head><p>From the south, the person to the right is to the east.  </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Justlogic: A comprehensive benchmark for evaluating deductive reasoning in large language models</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xikun</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dacheng</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tao</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.14851</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oyvind</forename><surname>Tafjord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Richardson</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2002.05867</idno>
+		<title level="m">Transformers as soft reasoners over language</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">True detective: A deep abductive reasoning benchmark undoable for GPT-3 and challenging for GPT-4</title>
+		<author>
+			<persName><forename type="first">Maksym</forename><surname>Del</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Fishel</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2023.starsem-1.28</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th Joint Conference on Lexical and Computational Semantics (*SEM 2023)</title>
+				<meeting>the 12th Joint Conference on Lexical and Computational Semantics (*SEM 2023)<address><addrLine>Toronto, Canada</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2023">2023a</date>
+			<biblScope unit="page" from="314" to="322" />
+		</imprint>
+	</monogr>
+	<note>Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">True detective: A deep abductive reasoning benchmark undoable for gpt-3 and challenging for gpt-4</title>
+		<author>
+			<persName><forename type="first">Maksym</forename><surname>Del</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Fishel</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2212.10114</idno>
+		<imprint>
+			<date type="published" when="2023">2023b</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">Zhouhong</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lin</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoxuan</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiangjie</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenhao</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yikai</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shusen</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheyu</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yan</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongwei</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanghua</forename><surname>Xiao</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2406.12641</idno>
+		<title level="m">Detectbench: Can large language model detect and piece together implicit evidence? Preprint</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Whodunit: Evaluation benchmark for culprit detection in mystery stories</title>
+		<author>
+			<persName><forename type="first">Kshitij</forename><surname>Gupta</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2502.07747</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<author>
+			<persName><forename type="first">Simeng</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hailey</forename><surname>Schoelkopf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yilun</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhenting</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Riddell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenfei</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Coady</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yujie</forename><surname>Qiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Benson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Wardle-Solano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Szabo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ekaterina</forename><surname>Zubova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Burtell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yixin</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Malcolm</forename><surname>Sailor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ansong</forename><surname>Ni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linyong</forename><surname>Nan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jungo</forename><surname>Kasai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rui</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">R</forename><surname>Fabbri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wojciech</forename><surname>Kryscinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Semih</forename><surname>Yavuz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ye</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xi</forename><surname>Victoria Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shafiq</forename><surname>Joty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yingbo</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caiming</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rex</forename><surname>Ying</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2209.00840</idno>
+		<title level="m">Arman Cohan, and Dragomir Radev. 2024. Folio: Natural language reasoning with first-order logic</title>
+				<imprint/>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Measuring massive multitask language understanding</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Hendrycks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Collin</forename><surname>Burns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Basart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mantas</forename><surname>Mazeika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Steinhardt</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2009.03300</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Zebralogic: On the scaling limits of llms for logical reasoning</title>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Bill Yuchen Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Le Bras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ashish</forename><surname>Richardson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Radha</forename><surname>Sabharwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Poovendran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yejin</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Choi</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2502.01100</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Logiqa: A challenge dataset for machine reading comprehension with logical reasoning</title>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leyang</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanmeng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dandan</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yile</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yue</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2007.08124</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Towards logiglue: A brief survey and a benchmark for analyzing logical reasoning capabilities of language models</title>
+		<author>
+			<persName><forename type="first">Man</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shrinidhi</forename><surname>Kumbhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ming</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihir</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neeraj</forename><surname>Varshney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pratyay</forename><surname>Banerjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Somak</forename><surname>Aditya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chitta</forename><surname>Baral</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2310.00836</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Logicbench: Towards systematic evaluation of logical reasoning ability of large language models</title>
+		<author>
+			<persName><forename type="first">Mihir</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nisarg</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neeraj</forename><surname>Varshney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mutsumi</forename><surname>Nakamura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Man</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Santosh</forename><surname>Mashetty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arindam</forename><surname>Mitra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chitta</forename><surname>Baral</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2404.15522</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Abulhair Saparov and He He. 2023. Language models are greedy reasoners: A systematic formal analysis of chain-of-thought</title>
+		<author>
+			<persName><forename type="first">Nisarg</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohith</forename><surname>Kulkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihir</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aashna</forename><surname>Budhiraja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mutsumi</forename><surname>Nakamura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neeraj</forename><surname>Varshney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chitta</forename><surname>Baral</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2406.17169</idno>
+		<idno>arXiv:2210.01240</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+	<note>Multi-logieval: Towards evaluating multi-step logical reasoning ability of large language models</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Musr: Testing the limits of chain-of-thought with multistep soft reasoning</title>
+		<author>
+			<persName><forename type="first">Zayne</forename><surname>Sprague</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xi</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaj</forename><surname>Bostrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Swarat</forename><surname>Chaudhuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Durrett</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2310.16049</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<author>
+			<persName><forename type="first">Aarohi</forename><surname>Srivastava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhinav</forename><surname>Rastogi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abhishek</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abu</forename><surname>Awal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Md</forename><surname>Shoeb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abubakar</forename><surname>Abid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Fisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">R</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Santoro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrià</forename><surname>Garriga-Alonso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Agnieszka</forename><surname>Kluska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aitor</forename><surname>Lewkowycz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Akshat</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alethea</forename><surname>Power</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Ray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Warstadt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">W</forename><surname>Kocurek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Safaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Tazarv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Xiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alicia</forename><surname>Parrish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allen</forename><surname>Nie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aman</forename><surname>Hussain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Dsouza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ambrose</forename><surname>Slone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ameet</forename><surname>Rahane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anantharaman</forename><forename type="middle">S</forename><surname>Iyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anders</forename><surname>Andreassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Madotto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Santilli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Stuhlmüller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>La</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angelica</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anh</forename><surname>Vuong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Animesh</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Gottardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Norelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anu</forename><surname>Venkatesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arash</forename><surname>Gholamidavoodi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arfa</forename><surname>Tabassum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arul</forename><surname>Menezes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arun</forename><surname>Kirubarajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Asher</forename><surname>Mullokandov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ashish</forename><surname>Sabharwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Austin</forename><surname>Herrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Avia</forename><surname>Efrat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aykut</forename><surname>Erdem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayla</forename><surname>Karakaş</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">Ryan</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bao</forename><forename type="middle">Sheng</forename><surname>Loe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barret</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bartłomiej</forename><surname>Bojanowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Batuhan</forename><surname>Özyurt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Behnam</forename><surname>Hedayatnia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Behnam</forename><surname>Neyshabur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Inden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benno</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Berk</forename><surname>Ekmekci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bill</forename><forename type="middle">Yuchen</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blake</forename><surname>Howald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryan</forename><surname>Orinion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cameron</forename><surname>Diao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cameron</forename><surname>Dour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Stinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cedrick</forename><surname>Argueta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">César</forename><surname>Ferri Ramírez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chandan</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Rathkopf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chenlin</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chitta</forename><surname>Baral</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chiyu</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Callison-Burch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Waites</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Voigt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">D</forename><surname>Manning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Potts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cindy</forename><surname>Ramirez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clara</forename><forename type="middle">E</forename><surname>Rivera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clemencia</forename><surname>Siro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>Raffel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Courtney</forename><surname>Ashcraft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristina</forename><surname>Garbacea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damien</forename><surname>Sileo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Garrette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Hendrycks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Kilman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Roth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Khashabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Moseguí González</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danielle</forename><surname>Perszyk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danny</forename><surname>Hernandez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danqi</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daphne</forename><surname>Ippolito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dar</forename><surname>Gilboa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Dohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Drakard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Jurgens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debajyoti</forename><surname>Datta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deep</forename><surname>Ganguli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Emelin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Kleyko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deniz</forename><surname>Yuret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Derek</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Derek</forename><surname>Tam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dieuwke</forename><surname>Hupkes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diganta</forename><surname>Misra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dilyar</forename><surname>Buzan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dimitri</forename><forename type="middle">Coelho</forename><surname>Mollo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diyi</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dong-Ho</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dylan</forename><surname>Schrader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ekaterina</forename><surname>Shutova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ekin</forename><surname>Dogus Cubuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elad</forename><surname>Segal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eleanor</forename><surname>Hagerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Barnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Donoway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ellie</forename><surname>Pavlick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emanuele</forename><surname>Rodola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emma</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erkut</forename><surname>Erdem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ernie</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ethan</forename><forename type="middle">A</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ethan</forename><surname>Dyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ethan</forename><surname>Jerzak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ethan</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunice</forename><forename type="middle">Engefu</forename><surname>Manyasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evgenii</forename><surname>Zheltonozhskii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fanyue</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fatemeh</forename><surname>Siar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fernando</forename><surname>Martínez-Plumed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francesca</forename><surname>Happé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francois</forename><surname>Chollet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frieda</forename><surname>Rong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gaurav</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Genta</forename><surname>Indra Winata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerard</forename><surname>De Melo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Germán</forename><surname>Kruszewski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giambattista</forename><surname>Parascandolo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giorgio</forename><surname>Mariani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gloria</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gonzalo</forename><surname>Jaimovitch-López</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregor</forename><surname>Betz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guy</forename><surname>Gur-Ari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hana</forename><surname>Galijasevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Rashkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannaneh</forename><surname>Hajishirzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harsh</forename><surname>Mehta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hayden</forename><surname>Bogar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Shevlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hinrich</forename><surname>Schütze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hiromu</forename><surname>Yakura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hongming</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugh</forename><forename type="middle">Mee</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isaac</forename><surname>Noble</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaap</forename><surname>Jumelet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Geissinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jackson</forename><surname>Kernion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Hilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaehoon</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><forename type="middle">Fernández</forename><surname>Fisac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">B</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Koppel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Kocoń</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jana</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janelle</forename><surname>Wingfield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jarema</forename><surname>Radom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jascha</forename><surname>Sohl-Dickstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Phang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Yosinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jekaterina</forename><surname>Novikova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jelle</forename><surname>Bosscher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Marsh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeroen</forename><surname>Taal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesse</forename><surname>Engel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesujoba</forename><surname>Alabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiacheng</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiaming</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jillian</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joan</forename><surname>Waweru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Burden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">U</forename><surname>Balis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Batchelder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Berant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jörg</forename><surname>Frohberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jos</forename><surname>Rozen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jose</forename><surname>Hernandez-Orallo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Boudeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Guerr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><forename type="middle">B</forename><surname>Tenenbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><forename type="middle">S</forename><surname>Rule</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joyce</forename><surname>Chua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kamil</forename><surname>Kanclerz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Livescu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karl</forename><surname>Krauth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Gopalakrishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katerina</forename><surname>Ignatyeva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katja</forename><surname>Markert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kaustubh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Dhole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Gimpel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kory</forename><surname>Omondi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Mathewson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ksenia</forename><surname>Chiafullo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kumar</forename><surname>Shkaruta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Shridhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Mc-Donell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laria</forename><surname>Richardson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leo</forename><surname>Reynolds</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Li</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liam</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lianhui</forename><surname>Dugan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lidia</forename><surname>Qin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Louis-Philippe</forename><surname>Contreras-Ochando</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luca</forename><surname>Morency</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Moschella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ludwig</forename><surname>Noble</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luheng</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luis</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Oliveros Colón</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Metz ; Maheen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manaal</forename><surname>Farooqi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mantas</forename><surname>Faruqui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Mazeika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Baturan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Marelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Maru</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jose Ramírez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Quintana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mario</forename><surname>Tolkiehn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martha</forename><surname>Giulianelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">L</forename><surname>Potthast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Leavitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Hagen ; Ritt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michał</forename><surname>Strube</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Swędrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michihiro</forename><surname>Bevilacqua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihir</forename><surname>Yasunaga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Kale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mimee</forename><surname>Cain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mirac</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mitch</forename><surname>Suzgun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mo</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohit</forename><surname>Tiwari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moin</forename><surname>Bansal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename><surname>Aminnaseri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mozhdeh</forename><surname>Geva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mukund</forename><surname>Gheini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Varma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nanyun</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><forename type="middle">A</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nayeon</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neta</forename><surname>Gur-</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ari</forename><surname>Krakover</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Niveditha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Iyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><surname>Constant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><surname>Fiedel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nuan</forename><surname>Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Agha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Elbaghdadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Samuel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schoenholz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanghyun</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanjeev</forename><surname>Kwatra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">A</forename><surname>Rous</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarik</forename><surname>Ghazarian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sayan</forename><surname>Ghosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Casey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Bischoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Gehrmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Schuster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sepideh</forename><surname>Sadeghi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shadi</forename><surname>Hamdan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharon</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shashank</forename><surname>Srivastava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sherry</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shikhar</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shima</forename><surname>Asaadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shane</forename><surname>Shixiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shubh</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shubham</forename><surname>Pachchigar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shyam</forename><surname>Toshniwal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Upadhyay</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shyamolima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siamak</forename><surname>Debnath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Shakeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Thormeyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siva</forename><surname>Melzi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Priscilla</forename><surname>Sneha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Soo-Hwan</forename><surname>Makini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Spencer</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sriharsha</forename><surname>Torene</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hatwar ; Tao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tariq</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tatsu</forename><surname>Ali</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hashimoto ; Yasaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yejin</forename><surname>Bahri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yichi</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiding</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yifu</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonatan</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Belinkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yufang</forename><surname>Hou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuntao</forename><surname>Hou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zachary</forename><surname>Bai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhuoye</forename><surname>Seid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zijian</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zijie</forename><forename type="middle">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zirui</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2206.04615</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Lütfi Kerem Şenel, Maarten Bosma, Maarten Sap, Maartje ter Hoeve</title>
+		<title level="s">Stanislas Dehaene</title>
+		<editor>
+			<persName><forename type="first">Trishala</forename><surname>Neeraj</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Tushar</forename><surname>Khot</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Tyler</forename><surname>Shultz</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Uri</forename><surname>Shaham</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Vedant</forename><surname>Misra</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Vera</forename><surname>Demberg</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Victoria</forename><surname>Nyamai</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Medina Orduna Baitemirova, Melody Arnaud, Melvin McElrath, Michael A. Yee, Michael Cohen, Michael Gu, Michael Ivanitskiy, Michael Star-; Nicholas Cameron, Nicholas Roberts, Nick Doiron, Nicole Martinez, Nikita Nangia, Niklas Deckers, Niklas Muennighoff; Omer Levy, Owain Evans, Pablo Antonio Moreno Casares; Sajant Anand, Sam Dillavou, Sam Shleifer, Sam Wiseman; Théo Desbordes, Theodore Rothschild, Thomas Phan, Tianle Wang, Tiberius Nkinyili, Timo Schick, Timofei Kornev, Titus Tunduny; Trenton Chang</addrLine></address></meeting>
+		<imprint>
+			<publisher>Tobias Gerstenberg</publisher>
+		</imprint>
+		<respStmt>
+			<orgName>Svetlana Kiritchenko, Swaroop Mishra, Tal Linzen, Tal Schuster,</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Preprint</note>
+	<note>Vikas Raunak, Vinay Ramasesh, Vinay Uday Prabhu. Vishakh Padmakumar, Vivek Srikumar, William Fedus, William Saunders, William Zhang, Wout Vossen, Xiang Ren, Xiaoyu Tong, Xinran Zhao, Xinyi Wu, Xudong Shen, Yadollah Yaghoobzadeh, Yair Lakretz, Yangqiu Song,. and Ziyi Wu. 2023. Beyond the imitation game: Quantifying and extrapolating the capabilities of language models</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Challenging big-bench tasks and whether chain-of-thought can solve them</title>
+		<author>
+			<persName><forename type="first">Mirac</forename><surname>Suzgun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Scales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathanael</forename><surname>Schärli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Gehrmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Tay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyung</forename><forename type="middle">Won</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aakanksha</forename><surname>Chowdhery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quoc</forename><forename type="middle">V</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><forename type="middle">H</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denny</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Wei</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2210.09261</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Proofwriter: Generating implications, proofs, and abductive statements over natural language</title>
+		<author>
+			<persName><forename type="first">Oyvind</forename><surname>Tafjord</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bhavana</forename><surname>Dalvi Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Clark</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2012.13048</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Superglue: A stickier benchmark for general-purpose language understanding systems</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yada</forename><surname>Pruksachatkun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikita</forename><surname>Nangia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanpreet</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julian</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omer</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><forename type="middle">R</forename><surname>Bowman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1905.00537</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<author>
+			<persName><forename type="first">Zhe</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiasheng</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoran</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiangyang</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianxiang</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhigeng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qipeng</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linlin</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qun</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2409.02465</idno>
+		<title level="m">Xuanjing Huang, and Xipeng Qiu. 2025. Detectiveqa: Evaluating long-context reasoning on detective novels</title>
+				<imprint/>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Reclor: A reading comprehension dataset requiring logical reasoning</title>
+		<author>
+			<persName><forename type="first">Weihao</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zihang</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanfei</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiashi</forename><surname>Feng</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2002.04326</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Large language models fall short: Understanding complex relationships in detective narratives</title>
+		<author>
+			<persName><forename type="first">Runcong</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qinglin</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hainiu</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiazheng</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuxiang</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yulan</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lin</forename><surname>Gui</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2024.findings-acl.454</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics: ACL 2024</title>
+				<meeting><address><addrLine>Bangkok, Thailand</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="7618" to="7638" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Kani: A lightweight and highly hackable framework for building language model applications</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liam</forename><surname>Dugan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alyssa</forename><surname>Hwang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Callison-Burch</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2023.nlposs-1.8</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023)</title>
+				<meeting>the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023)<address><addrLine>Singapore</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="65" to="77" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

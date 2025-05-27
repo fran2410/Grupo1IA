@@ -1,0 +1,1575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Shared Path: Unraveling Memorization in Multilingual LLMs through Language Similarities</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-21">21 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Xiaoyu</forename><surname>Luo</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Electronic Systems</orgName>
+								<orgName type="institution">Aalborg University</orgName>
+								<address>
+									<settlement>Copenhagen</settlement>
+									<country key="DK">Denmark</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yiyi</forename><surname>Chen</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Johannes</forename><surname>Bjerva</surname></persName>
+							<email>jbjerva@cs.aau.dk</email>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Qiongxiu</forename><surname>Li</surname></persName>
+							<email>qili@es.aau.dk</email>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Electronic Systems</orgName>
+								<orgName type="institution">Aalborg University</orgName>
+								<address>
+									<settlement>Copenhagen</settlement>
+									<country key="DK">Denmark</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Memorization</forename><surname>Metrics</surname></persName>
+						</author>
+						<title level="a" type="main">Shared Path: Unraveling Memorization in Multilingual LLMs through Language Similarities</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-21">21 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">EFFB51F027BAF8BF2B4B41C78086F4C8</idno>
+					<idno type="arXiv">arXiv:2505.15722v1[cs.CL]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We present the first comprehensive study of Memorization in Multilingual Large Language Models (MLLMs), analyzing 95 languages using models across diverse model scales, architectures, and memorization definitions. As MLLMs are increasingly deployed, understanding their memorization behavior has become critical. Yet prior work has focused primarily on monolingual models, leaving multilingual memorization underexplored, despite the inherently long-tailed nature of training corpora. We find that the prevailing assumption, that memorization is highly correlated with training data availability, fails to fully explain memorization patterns in MLLMs. We hypothesize that treating languages in isolation -ignoring their similarities -obscures the true patterns of memorization. To address this, we propose a novel graph-based correlation metric that incorporates language similarity to analyze cross-lingual memorization. Our analysis reveals that among similar languages, those with fewer training tokens tend to exhibit higher memorization, a trend that only emerges when cross-lingual relationships are explicitly modeled. These findings underscore the importance of a language-aware perspective in evaluating and mitigating memorization vulnerabilities in MLLMs. This also constitutes empirical evidence that language similarity both explains Memorization in MLLMs and underpins Crosslingual Transferability, with broad implications for multilingual NLP 1 .</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Large Language Models (LLMs) demonstrate increasingly strong capabilities in processing and understanding multiple languages <ref type="bibr" target="#b15">(Conneau et al., 2020)</ref>, resulting in advancements across a wide range of natural language processing (NLP) tasks  <ref type="bibr" target="#b13">(Choi et al., 2021;</ref><ref type="bibr" target="#b37">Pikuliak et al., 2021)</ref>. MLLMs, in particular, empower global users to interact in their native languages, offering wide-reaching benefits in accessibility and productivity.</p><p>However, LLMs are also known to memorize portions of their training data <ref type="bibr" target="#b6">(Carlini et al., 2021)</ref>, raising serious concerns such as the leakage of copyrighted content <ref type="bibr" target="#b9">(Chang et al., 2023)</ref> and personal information <ref type="bibr">(Staab et al.)</ref>. While memorization in monolingual LLMs has been widely studied, how it manifests in multilingual models remains underexplored.</p><p>Prior work predominantly attributes memorization to data volume, positing that frequent tokens or duplicated content are disproportionately memorized <ref type="bibr" target="#b4">(Carlini et al., 2022)</ref>. This echoes findings from computer vision, where long-tail examples are disproportionately memorized <ref type="bibr" target="#b18">(Feldman and Zhang, 2020;</ref><ref type="bibr" target="#b21">Jiang et al., 2020;</ref><ref type="bibr" target="#b20">Garg et al., 2023)</ref>, resulting in increased privacy and fairness risks <ref type="bibr" target="#b27">(Li et al., 2024;</ref><ref type="bibr" target="#b19">Gao et al., 2023;</ref><ref type="bibr" target="#b43">Tramèr et al., 2022)</ref>. However, MLLMs introduce a unique complexity: languages are not processed independently but in a joint space, often sharing lexical, morphological, and syntactic features. For instance, typologically similar languages like Turkish and Azerbaijani may interact during training in ways that affect their memorization patterns. Moreover, low-resource languages naturally occupy the long tail of the data distribution, introducing complex dynamics that are poorly understood. Together, these challenges raise important questions that motivate our investigation. For example, to what extent does memorization in MLLMs correspond to training data volume, as suggested by long-tail distribution assumptions? How might cross-lingual relationships influence memorization behavior across languages? And can memorization in one language lead to unintended leakage in another, particularly among similar languages?</p><p>To answer these questions, we conduct the first large-scale study of memorization in MLLMs, uncovering critical limitations of existing research and offering a novel language-aware perspective (see Fig. <ref type="figure" target="#fig_0">1</ref> for an overview of our framework). Our key contributions are:</p><p>• Revisiting the Long-Tail Assumption: We show that memorization in multilingual settings cannot be fully explained by training data volume or token frequency. In many cases, low-resource languages exhibit lower memorization rates than high-resource counterparts.</p><p>• Language Similarity-Aware Correlation Metric: We introduce a novel graph-based correlation metric that incorporates typological and statistical similarities between languages, enabling structured analysis of crosslingual memorization dynamics.</p><p>• Cross-Lingual Memorization Insights: Using our metric, we find that languages with high similarity exhibit interconnected memorization behaviors, affording fundamental grounding for cross-lingual transferability.</p><p>• Comprehensive and Robust Evaluation: We assess memorization using both generation-based and likelihood-based metrics, and validate our findings across over 95 languages, multiple LLM architectures (encoder-only and decoder-based) of varying scales, demonstrating consistent and generalizable trends.</p><p>2 Related work</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Memorization in LLM</head><p>Memorization in deep neural networks has long been recognized as a critical issue, with implications for privacy, fairness, and generalization <ref type="bibr" target="#b18">(Feldman and Zhang, 2020;</ref><ref type="bibr" target="#b20">Garg et al., 2023;</ref><ref type="bibr" target="#b8">Chang and Shokri, 2021;</ref><ref type="bibr" target="#b26">Li et al., 2025)</ref>. These concerns have been empirically confirmed in LLMs. Recent work has formalized memorization risk, particularly distinguishing between discoverable and extractable memorization <ref type="bibr" target="#b6">(Carlini et al., 2021;</ref><ref type="bibr" target="#b33">Nasr et al., 2023)</ref>. The latter refers to information that an adversary can extract without direct access to the training set, posing realistic threats to deployed models. Studies have shown that LLMsacross GPT, T5, and others -can leak hundreds to millions of training sequences, depending on model size, duplication, and prompt strategy <ref type="bibr" target="#b33">(Nasr et al., 2023;</ref><ref type="bibr" target="#b4">Carlini et al., 2022)</ref>. While such risks have been studied in monolingual settings, memorization behavior in multilingual LLMs remains underexplored, with the exception of <ref type="bibr" target="#b7">Cavalin et al. (2024)</ref>, especially for low-resource languages occupying the long tail of the training distribution.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Cross-lingual Transferability &amp; Language Similarity</head><p>Cross-lingual transfer entails the representation of texts in multiple natural languages in a shared multilingual space. The paradigm of representations for cross-lingual transfer has shifted from word embeddings <ref type="bibr" target="#b32">(Mikolov et al., 2013;</ref><ref type="bibr" target="#b2">Ammar et al., 2016;</ref><ref type="bibr" target="#b44">Vulić et al., 2019)</ref> to contextual embeddings <ref type="bibr" target="#b14">(Conneau et al., 2019;</ref><ref type="bibr" target="#b17">Devlin et al., 2019;</ref><ref type="bibr" target="#b39">Raffel et al., 2020)</ref>. Previous work investigating cross-lingual transferability mainly leverages downstream task performance to measure the transfer from a source language or languages to target languages through selective fine-tuning <ref type="bibr" target="#b11">(Choenni et al., 2023)</ref> or using zero-shot or few-shot transfer with pre-trained MLLMs <ref type="bibr" target="#b24">(Lauscher et al., 2020;</ref><ref type="bibr" target="#b1">Adelani et al., 2022;</ref><ref type="bibr" target="#b16">de Vries et al., 2022;</ref><ref type="bibr" target="#b3">Blaschke et al., 2025)</ref>. Language similarity based on linguistic data has been heavily referred to in cross-lingual transferability studies <ref type="bibr" target="#b45">(Wichmann et al., 2011;</ref><ref type="bibr" target="#b31">Littell et al., 2017)</ref>, not without faulty representations <ref type="bibr" target="#b42">(Toossi et al., 2024;</ref><ref type="bibr" target="#b22">Khan et al., 2025)</ref>. Moreover, the findings on leveraging language similarity for improving downstream cross-lingual transfer remain mixed and sometimes contradictory <ref type="bibr" target="#b36">(Philippy et al., 2023)</ref>. Recently, different language similarity measures have been deployed to enhance crosslingual transfer performance under different NLP tasks <ref type="bibr" target="#b3">(Blaschke et al., 2025)</ref> and analyze MLLM language distribution patterns <ref type="bibr" target="#b10">(Chen et al., 2025)</ref>.</p><p>We share the perspective that language similarity is not a static concept, and different measures can be pertinent to different scenarios.</p><p>Prior research in MLLM embedding spaces has shown that sentence embeddings are composed of a language-specific and language-agnostic components <ref type="bibr" target="#b38">(Pires et al., 2019;</ref><ref type="bibr" target="#b28">Libovický et al., 2020;</ref><ref type="bibr" target="#b46">Xie et al., 2024)</ref>, which have been leveraged to improve downstream performance <ref type="bibr" target="#b41">(Tiyajamorn et al., 2021)</ref> and investigate language relations in MLLMs <ref type="bibr" target="#b12">(Choenni and Shutova, 2022)</ref>. In addition, <ref type="bibr" target="#b30">Lin et al. (2024)</ref> shows language similarity extracted from pretrained MLLMs with parallel sentences exhibits moderately high correlations with linguistic similarity measures, further motivating our language-aware memorization analysis. In this paper, we extract language-specific embeddings from each MLLM as language representations to compute language similarity (cf. Section 4.1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Language Model Memorization</head><p>We define Memorization in the context of LLMs and examine its key formulations from different perspectives. Given an LM f and a string x from its training data, we split x into a prefix p and a suffix s, so that x = p||s. Let the prefix p consist of n tokens, noted as p = (p 1 , . . . , p n ); and let the suffix s consist of m tokens, noted as s = (s 1 , • • • , s m ).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Measuring MLLM Memorization</head><p>Exact Memorization Following the definition of extractable memorization by <ref type="bibr" target="#b4">Carlini et al. (2022)</ref>, whether a language model can reproduce a training sequence when prompted with part of it using greedy decoding, we define Exact Memorization Ratio as n n+m to measure the fraction of the sequence required for exact reconstruction. Given a set of samples, we define the Exact Memorization Rate (EM) as the fraction of samples where the model, when prompted with the prefix, reproduces the suffix exactly:</p><formula xml:id="formula_0">EM = 1 N N i=1 1( ŝi = s i ),</formula><p>where N is the total number of samples, s i is the true suffix of the ith sample, ŝi is the output given the prefix and 1(•) is the indicator function.</p><p>Relaxed Memorization As Exact Memorization is a stringent criterion, we additionally define a relaxed version of memorization that evaluates the predicted suffix against the ground truth suffix using approximate string matching metrics rather than exact match. We use BLEU <ref type="bibr" target="#b35">(Papineni et al., 2002)</ref> and Rouge-L <ref type="bibr" target="#b29">(Lin, 2004)</ref> as our Relaxed Memorization Scores (RM), serving as continuous indicators of memorization.</p><p>Reconstruct Likelihood Memorization Complementary to previous generation-based memorization metrics, we adopt reconstruct likelihood from <ref type="bibr" target="#b23">Kim et al. (2023)</ref> to define a probabilitybased metric Reconstruct Likelihood Memorization, noted as PM. which quantifies memorization by the likelihood the model assigns to a known sequence under its learned distribution, i.e., its internal probability of reconstructing the suffix given its prefix.</p><p>Our goal is to evaluate how likely the model finds the suffix s when conditioned on the prefix p. We define the log-likelihood of s given p as:</p><formula xml:id="formula_1">log Pr(s | p) = m r=1 log p(s r | p, s &lt;r ),</formula><p>where s &lt;r denotes the preceding r − 1 tokens of the suffix.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Memorization for Encoder-Decoders</head><p>The definitions above primarily assume a decoderonly architecture of LLMs where predictions are made in a left-to-right autoregressive manner. In contrast, encoder-decoder models such as T5 are trained with a span-denoising objective <ref type="bibr" target="#b39">(Raffel et al., 2020)</ref>. Following <ref type="bibr" target="#b4">Carlini et al. (2022)</ref>, we randomly mask a set of non-contiguous token spans from a sampled data sequence. To evaluate Exact Memorization, the model reconstructs these missing spans given surrounding context, and we consider a string to be memorized if the generated output exactly matches the masked content.</p><p>To evaluate Reconstruct Likelihood Memorization, we follow the span corruption setup and treat the masked spans as targets. We then compute the sum of log-probabilities assigned to these tokens, conditioned on the visible parts of the sequence. T5's span corruption objective typically mask very short spans (about three tokens on average under default settings <ref type="bibr" target="#b39">(Raffel et al., 2020)</ref>), so tokenlevel similarity becomes uninformative, hence we do not assess the relaxed memorization for T5based encoder-decoder models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Methodology</head><p>Previous work on LLM Memorization has mainly focused on data duplication and frequency in monolingual settings, with limited analysis across languages. Although correlation metrics such as Pearson can quantify global trends (e.g., measuring how token counts and memorization rates linearly covary), they overlook the structured dependencies among languages. Our analysis (Fig. <ref type="figure" target="#fig_1">2</ref>) shows that languages with similar frequency distributions can exhibit divergent memorization patterns, underscoring the importance of language-aware evaluation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Measuring Language Similarity</head><p>We leverage language-specific subspace in multilingual embedding space to measure language similarities. Let L be a set of languages. To extract language representations from MLLMs, we use a parallel dataset D, in our case Flores+ <ref type="bibr" target="#b34">(NLLB Team et al., 2024)</ref>. Suppose we have m sentences for each language l ∈ L in D, we first extract the mean embedding µ l = 1 m m i=1 e i l for each hidden layer h, where e i l ∈ R d is a sentence embedding. We then form a matrix M ∈ R d×|L| by concatenating µ l across all languages. We extract the languagespecific subspace M s using Algorithm 1 <ref type="bibr" target="#b46">(Xie et al., 2024)</ref>, then project each language embedding into this subspace s l = M s M T s e l . For each hidden layer h in a MLLM, we measure the pair-wise language similarity for a language pair {l 1 , l 2 }, where l 1 , l 2 ∈ L using cosine similarity between language-specific embeddings:</p><formula xml:id="formula_2">cos (s l 1 , s l 2 ) = s l 1 • s l 2 ||s l 1 || • ||s l 2 || .</formula><p>Empirically, we find that the language similarity drawn from the final layer embeddings of MLLMs shows a stronger correlation with linguistically grounded similarity measures overall (cf. Appendix B.4).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Graph-based Correlation Analysis</head><p>We introduce our topology-based framework, which captures cross-lingual dependencies by modeling signal propagation over a language similarity graph. It rests on two empirical observations: (1) Memorization patterns tend to propagate across related languages, and (2) Standard correlation metrics fail to capture these structured transfer effects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Graph Construction via Language Similarity</head><p>We represent the language space as an undirected graph G = (V, E), where each node corresponds to a language, and edges encode pairwise language similarity. Let n be the number of languages and A ∈ R n×n the adjacency matrix, where A ij represents the similarity between languages i and j. To sparsify the graph and remove self-loops, we apply thresholding with θ:</p><formula xml:id="formula_3">A ij = 1, if sim(i, j) ≥ θ 0, otherwise .<label>(1)</label></formula><p>We then construct the unnormalized graph Laplacian matrix L = D − A, where D ii = j A ij is the degree matrix.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Information analysis over the Graph</head><p>To understand how language-level signals behave over this graph structure, we begin with the concept of graph smoothness, which quantifies how much a signal varies across adjacent nodes. For a scalar-valued signal x ∈ R n defined over graph, the smoothness is defined as <ref type="bibr" target="#b48">(Zhou and Schölkopf, 2004)</ref>:</p><formula xml:id="formula_4">x ⊤ Lx = (i,j)∈E A ij (x i − x j ) 2 .</formula><p>Smaller values indicate that the signal x changes slowly over similar nodes, i.e., it is smooth with respect to the graph topology.</p><p>To compare how two signals (e.g., memorization scores and the number of tokens) vary together across languages, we define the graph crosssmoothness:</p><formula xml:id="formula_5">x ⊤ Ly = (i,j)∈E A ij (x i − x j )(y i − y j ),</formula><p>where y ∈ R n refers to a scalar-valued signal different from x. This measures whether the two signals increase and decrease in tandem over topologically similar languages.</p><p>Graph-based Correlation Coefficient Based on the above definitions, we define the proposed Graph-based Correlation Coefficient between signals m (e.g., memorization scores) and t (e.g., token counts) as:</p><formula xml:id="formula_6">ρ G (m, t) = m ⊤ Lt (m ⊤ Lm)(t ⊤ Lt)</formula><p>Note that the defined coefficient is bounded by the Cauchy-Schwarz inequality:</p><formula xml:id="formula_7">|m ⊤ Lt| ≤ (m ⊤ Lm)(t ⊤ Lt) Hence, ρ G (m, t) ∈ [−1, 1]</formula><p>and it captures the structural alignment between the two signals over the graph. A value close to 1 implies that memorization and token frequency change similarly across related languages, while values near −1 implies inverse alignment. ρ G accounts for the topological structure of language space, enabling us to uncover subtle, structure-respecting relationships in MLLM memorization, which would otherwise be missed by flat, language-agnostic analyses such as Pearson correlation (cf. Table <ref type="table">1</ref> for details).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Intra-Topology &amp; Cross-Topology Analysis</head><p>To further interpret the structure of memorization alignment, we partition the graph into subgraphs by thresholding edge weights. Each subgraph represents a cluster of similar languages; disconnected components reflect cross-topological groups. To enable meaningful comparison across different language topology clusters, we aggregate node-level features into a single representative vector per subgraph. This aggregation is performed within each subgraph, it is weighted by language prominence (node degrees) and normalized by global edge weights to preserve topological information. Specifically, for a subgraph G ′ = (V ′ , E ′ ), where each node i ∈ V ′ has features t i (tokens) and m i (memorization), we define the subgraph-level representations as:</p><formula xml:id="formula_8">t = i∈V ′ n i j∈V ′ n j • t i</formula><p>where</p><formula xml:id="formula_9">n i = |{j | (i, j) ∈ E ′ }| is the degree of node i.</formula><p>The aggregated memorization m is computed similarly.</p><p>We refer intra-topo as the set of language nodes connected by edges in the graph, while cross-topo refers to language groups that remain disconnected. The resulting subgraph-level representations enable cross-topology correlation analysis via Pearson correlation. This approach remains faithful to the internal structure of each language cluster, while capturing the relationship between memorization and training tokens across topologically dissimilar clusters. It complements our topology-aware metric ρ G by offering a cluster-level, interpretable view of memorization-complexity alignment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Experimental Setup</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Model Selection &amp; Corpus Details</head><p>Studying memorization in MLLMs requires i) publicly available models with ii) fully disclosed pre-training data and iii) broad language coverage. For fair cross-architecture comparisons, we also align models by their training corpora and tokenizers whenever feasible. We use the MT5 encoder-decoder family <ref type="bibr">(Xue et al., 2020)</ref>, trained on MC4 <ref type="bibr" target="#b39">(Raffel et al., 2020)</ref> covering 100+ languages, and the MGPT decoder-only series for architectural comparison. Specifically, MGPT-101 shares the tokenizer and mC4 training data with MT5-BASE. Additionally, we select MGPT-1.3B and MGPT-13B to assess scale effects, which are trained on more balanced and filtered MC4 (cf. Table 5 for details).</p><p>As shown in Fig. <ref type="figure" target="#fig_10">9</ref> and 10 in Appendix B.7, the data distribution of MC4 across languages exhibits a clear long-tailed pattern. A small number of high-resource languages (such as English, Russian, and Spanish) dominate the corpus in terms of token count, while the vast majority of other languages are represented with significantly fewer tokens. This long-tailed distribution serves as an important factor in analysing how memorization behaviors vary across languages in MLLMs. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Prompt sampling</head><p>MC4 contains a substantial amount of noisy and duplicated content. For pre-processing, we sample text passages with more than 600 characters, and filter the content containing "http://", garbled tokens, repeated strings, and long sequences of meaningless digits. To ensure accurate language representation, we use CLD3 (cld) for language identification. Specifically, we retain only those samples where both the predicted language confidence and the proportion of the target language exceed 90%.</p><p>Duplicated content can disproportionately impact memorization, where sequences that appear more frequently in the training set are more likely to be memorized, following a near log-linear trend <ref type="bibr" target="#b25">(Lee et al., 2021)</ref>. To control repetition for minimizing potential bias and ensure a more balanced representation across the dataset, we randomly sample 50,000 filtered examples per language with a 5 million shuffle buffer, following the sample size in <ref type="bibr" target="#b4">Carlini et al. (2022)</ref>. A handful of low-resource languages with insufficient examples are marked with an asterisk and boldface in Fig. <ref type="figure" target="#fig_10">9</ref>; 10.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Analysis &amp; Results</head><p>We investigate Memorization in MLLMs across multiple dimensions: languages, model architectures, prompt length and model scale. In each dimension, we measure the Memorization Rates (cf. Section 3) and correlate with training data (in token counts) in languages, using both the Pearson correlation (r) and Graph-based Correlation (ρ G ) metrics. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Constructing Language Graphs</head><p>To use our graph-based correlation to analyze memorization in MLLMs, we construct language similarity-based graphs, at varying thresholds θ based on equation 1, which specifies the minimum similarity required for two languages to be considered meaningfully related. Thus, θ directly controls the sparsity of the resulting language graph. Fig. <ref type="figure" target="#fig_2">3</ref> illustrates this effect using a subset of MGPT-101 pre-training languages, showing how edge density and connectivity increase as θ increases. As expected, higher language similarity thresholds θ, the fewer connected graphs. By varying θ, we adjust the granularity of the language similarity topology, enabling analysis under different levels of relational strictness.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Data Availability in Memorization</head><p>We evaluate the relationship between per-language memorization rates and the token counts in training data in a MLLM, for example, MGPT-101. As shown in Table <ref type="table">1</ref>, our graph-based metric ρ G , by incorporating language similarity, largely accentuates the negative correlation between languagewise memorization and token count, in comparison to the Pearson correlation coefficient. This negative trend suggests that, among similar languages, those with fewer training tokens tend to exhibit higher memorization, which further corroborates our hypothesis that memorization in MLLMs cannot be explained by training data volume alone.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Cross-lingual Transferability vs. Memorization</head><p>Leveraging the constructed language graph, we measure the topology-based correlation for both intra-topo and cross-topo at various θ. As shown in Fig. <ref type="figure" target="#fig_4">4</ref>, among cross-topo languages, EM and RM become largely uncorrelated with token counts, spanning from −0.2 to 0.05 with the growing number of language groups. While PM has a stronger Top: Memorization Rates across Thresholds. Bottom: Topology graph information via subgraph and singleton counts at varying threshold (x-axis), from 6 to 20 language groups (y-axis), with a total of 95 languages.</p><p>Takeaway: Cross-lingual transferability among similar languages impact memorization.</p><p>negative correlation, the correlation becomes generally weaker as more cross-topo language groups are created, from −0.6 to −0.4. This highlights that, across distinctive language groups, the correlation between memorization and data volume becomes weaker. In contrast, consistent with previous findings (cf. Section 6.2), intra-topo ρ G values grow increasing negative (down to −0.6) across memorization metrics, as more similar languages are grouped together (as θ becomes higher), indicating an inverse relationship between training data and memorization within similar languages.</p><p>From both cross-topo and intrar-topo perspectives, our results show that as MLLMs are trained with richer data from similar languages, memorization decreases --evidence that cross-lingual transferability among similar languages plays an essential role in memorization in MLLMs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.4">Memorization across Model Architectures &amp; Scales</head><p>Since language similarity is model-specific, its scores exhibit different distributions across models. We select the specific threshold θ to better incorporate structural patterns based on language similarity, while confirming that the observed trends hold across a range of thresholds (cf. Appendix B.2). and MGPT-13B -trained on a corpus with a less pronounced long-tailed distribution, r appears positive, seemingly contradictory to previous findings (cf. Sections 6.2; 6.4). However, leveraging language similarity and filtering out noisy language pairs, ρ G shows negative correlations, consistent with prior findings. Notably, with PM, MGPT-13B presents the strongest negative correlation, suggesting that larger models trained on a more balanced corpus reveal the strongest inverse link between memorization and data availability in similar languages. In contrary, MT5's EM results exhibit a different trend compared to MGPT models, which might be attributed to its encoder-decoder architecture. As RM is not applicable to MT5-based models (cf. Section 3.2), we show the relaxed memorization metrics for MGPT models in Table <ref type="table" target="#tab_3">3</ref>. We observe a consistent trend aligns with our earlier findings: memorization is negatively correlated with training data quantity among similar languages. In summary, our analysis and results support the claim that memorization in MLLMs is not shaped solely by training data volume -as commonly observed in computer vision task -but also by intricacies among languages. Specifically, when language similarity is incorporated via a topologybased metric, we show that languages with fewer training tokens tend to exhibit higher memorization -a pattern that only becomes evident when language relations are explicitly modeled. To investigate the effects of experimental setup on memorization, we measure memorization across models of different architectures and scales at varying prompt-length <ref type="bibr">(35,</ref><ref type="bibr">85,</ref><ref type="bibr">135)</ref>, with the fixed output token length of 15. The prompt-length refers to prefix-length in the context of decoder-only models. As shown in Table <ref type="table" target="#tab_4">4</ref>, across all model types, we observe a consistent trend: longer prompts lead to higher memorization. This pattern holds across the memorization metrics, with a few exceptions, as underlined, and aligns with prior findings on memorization in monolingual LMs, indicating that longer contexts offer more cues for memorization <ref type="bibr" target="#b6">(Carlini et al., 2021</ref><ref type="bibr" target="#b4">(Carlini et al., , 2022))</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.5">Effect of</head><p>In GPT-3-based decoder-only models, we also observe a clear scaling effect: larger models exhibit stronger memorization, particularly in exact memorization. For example, EM increases from 0.32% in MGPT-1.3B to 1.56% in MGPT-13B with the prefix of length 135. Results in other metrics (e.g., PM, RM) follow this trend with few exceptions. In comparison, the encoder-decoder models tells a different story. While memorization generally increases with growing scale (e.g., MT5-SMALL to MT5-BASE), the largest model (MT5-LARGE) exhibits lower memorization when com-pared to MT5-BASE.</p><p>In addition, we observe that MT5-LARGEwithout downstream finetuning -produces more broken completions for masked tokens. We hypothesize that this instability may lead to reduced memorization rates in MT5-LARGE, especially in a masked language modeling context. We provide a random example of such unstable generation in Appendix B.6.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.6">Language-Level Memorization across Prompt Lengths &amp; Model Scales</head><p>We analyze how language-level memorization varies across different prompt lengths and model scales by computing Pearson correlations of perlanguage memorization rates under each condition. Across all models, Language-Level memorization distributions at different prompt lengths remain strongly correlated. For decoder-only models, Pearson correlations consistently exceed 0.9 in all memorization metrics, while for the MT5 models, they are generally above 0.8, with the lowest still above 0.66. These results indicate that languages with high memorization tend to remain highly memorized regardless of prompt length. See Table <ref type="table" target="#tab_2">12</ref> and 13 for detailed results.</p><p>A similar trend holds across model scales. Across all metrics and model scales, the Pearson correlation is consistently shows a strong positive correlation, with the lowest value being 0.71. These results suggest that memorization tendencies are stable, intrinsic language-level characteristics that generalize across both prompt length and model scale. We observe a "the poorer get poorer" phenomenon, where languages with high memorization consistently remain high across settings. See Table <ref type="table" target="#tab_4">14</ref> for full results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Conclusion and Future Work</head><p>We present the first large-scale study of memorization in MLLMs, grounding observed memorization patterns through language similarity and revealing cross-linguality as a key factor shaping memorization in MLLMs. To this end, we define memorization metrics tailored to language models and propose a graph-based correlation measure that incorporates language similarity, uncovering patterns that linear metrics fail to capture. Notably, the tendency for languages with fewer training tokens to exhibit higher memorization, a trend that only becomes apparent when language relationships are explicitly modeled. We experiment on a range of language models, across architectures, scales and 95 languages, showing consistent memorization trends. Our findings urge a paradigm shift toward language-aware memorization audits in MLLMs, particularly for under-resourced languages vulnerable to cross-lingual leakage. We encourage further work at the intersection of multilingualism and memorization to develop effective strategies to mitigate memorization in MLLMs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>While our work provides the first large-scale analysis of memorization in MLLMs, we primarily analyze models in their pre-trained state and do not explore how fine-tuning or instruction tuning might alter memorization behavior-especially in taskspecific or alignment-sensitive contexts. Nonetheless, we offer a principled and extensible foundation for understanding memorization through the lens of language similarity in multilingual models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ethics Statement</head><p>We comply with the ACL Ethics Policy. This work aims to improve understanding of memorization risks in multilingual language models, with the broader goal of enabling safer and more privacypreserving NLP systems. All experiments are conducted on publicly available pre-trained models and benchmark datasets. We do not train on, extract from, or attempt to infer sensitive personal information from proprietary or private data.  EM Intra -0.13 -0.17 -0.20 -0.26 -0.24 -0.24 -0.19 -0.17 EM Cross -0.15 -0.01 -0.03 -0.01 -0.02 0.04 0.04 -0.09 PM Intra -0.31 -0.33 -0.38 -0.43 -0.51 -0.56 -0.54 -0.57 PM Cross -0.53 -0.46 -0.42 -0.42 -0.45 -0.35 -0.36 -0.36 RM (B) Intra -0.27 -0.32 -0.35 -0.39 -0.38 -0.36 -0.33 -0.31 RM (B) Cross -0.07 0.09 -0.00 0.02 -0.03 0.04 0.04 -0.12 RM (R) Intra -0.20 -0.26 -0.27 -0.28 -0.32 -0.30 -0.26 -0.24 RM (R) Cross 0.05 0.10 0.06 0.05 0.05 0.41 0.42 0.18       </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.4 Layer-wise Lang2Vec correlation</head><p>We include supplementary visualizations showing how various linguistic feature correlations evolve across layers for different multilingual models.       </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Overview of our Framework for Analyzing Memorization in MLLMs using Language Similarity Graph-based Correlation Analysis.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Example graphs considering Intra-Topology and Cross-Topology.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Graph Construction at Different Thresholds θ.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>Correlations between Memorization Rates and Training Data in Token Counts of MGPT-101. The ρ G with graph-based metric threshold θ = 0.41. Takeaway: the proposed ρ G accentuates the correlation.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Intra-Topology and Cross-Topology Correlation Coefficients (ρ G ) across varying thresholds θ.Top: Memorization Rates across Thresholds. Bottom: Topology graph information via subgraph and singleton counts at varying threshold (x-axis), from 6 to 20 language groups (y-axis), with a total of 95 languages. Takeaway: Cross-lingual transferability among similar languages impact memorization.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Layer-wise trend for Lang2Vec (Syntax).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head></head><label></label><figDesc>Figure 6:Layer-wise trend for Lang2Vec (Phonology).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Layer-wise trend for ASJP (SVD).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Layer-wise trend for ASJP (UMAP).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: MGPT-101 &amp; MT5 family analyzed language tokens distribution. The Languages marked with * have fewer than 50,000 sampled examples, averaging 33,960 examples per language.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 10 :</head><label>10</label><figDesc>Figure 10: MGPT-61 (1.3B &amp; 13 B) family analyzed language tokens distribution. The language marked with * has fewer than 50,000 sampled examples, with a total of 17,339 examples.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2</head><label>2</label><figDesc></figDesc><table><row><cell>presents the intra-topology correlations</cell></row><row><cell>with model-specific thresholds. For MGPT-1.3B</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>Correlations between Memorization Rates and Training Data across Models and Scales, with specific θ for Intra-Topology Correlation. Takeaway: In contrast to r, ρ G presents stronger correlations and more consistent alignment with prior memorization analyses. Bold values indicate the highest-magnitude correlation.</figDesc><table><row><cell cols="5">Mem. Metric RM (BLEU) RM (Rouge-L)</cell></row><row><cell>Model</cell><cell>r</cell><cell>ρG</cell><cell>r</cell><cell>ρG</cell></row><row><cell>MGPT-1.3B</cell><cell cols="3">-0.18 -0.53 0.42</cell><cell>-0.42</cell></row><row><cell>MGPT-13B</cell><cell cols="2">-0.21 -0.31</cell><cell>0.4</cell><cell>-0.04</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>Relaxed Memorization Rates across MGPT models, with specific θ for Intra-Topology Correlation.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 :</head><label>4</label><figDesc></figDesc><table><row><cell></cell><cell cols="5">Prompt Length &amp; Model Scale</cell></row><row><cell cols="3">on Memorization</cell><cell></cell><cell></cell><cell></cell></row><row><cell>Model</cell><cell cols="2">Prompt. Len. EM (%)</cell><cell>PM</cell><cell cols="2">RM (B) RM (R)</cell></row><row><cell cols="2">GPT2 Decoder-only: MGPT-101</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>50</cell><cell>0.22</cell><cell>-44.4</cell><cell>3.2</cell><cell>9.8</cell></row><row><cell>MGPT-101</cell><cell>100</cell><cell>0.42</cell><cell>-41.9</cell><cell>3.6</cell><cell>10.1</cell></row><row><cell></cell><cell>150</cell><cell>0.56</cell><cell>−40.9</cell><cell>3.9</cell><cell>10.1</cell></row><row><cell cols="3">GPT3 Decoder-only: MGPT-1.3B / 13B</cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>50</cell><cell>0.31</cell><cell>-33.7</cell><cell>4.1</cell><cell>5.7</cell></row><row><cell>MGPT-1.3B</cell><cell>100</cell><cell>0.29</cell><cell>-32.0</cell><cell>3.7</cell><cell>5.7</cell></row><row><cell></cell><cell>150</cell><cell>0.32</cell><cell>−31.1</cell><cell>3.5</cell><cell>4.8</cell></row><row><cell></cell><cell>50</cell><cell>1.01</cell><cell>-32.2</cell><cell>7.1</cell><cell>7.6</cell></row><row><cell>MGPT-13B</cell><cell>100</cell><cell>1.38</cell><cell>-30.2</cell><cell>8.1</cell><cell>8.2</cell></row><row><cell></cell><cell>150</cell><cell>1.56</cell><cell>−29.5</cell><cell>8.6</cell><cell>8.4</cell></row><row><cell cols="2">Encoder-Decoder: MT5 family</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>50</cell><cell>0.02</cell><cell>-66.1</cell><cell>-</cell><cell>-</cell></row><row><cell>MT5-SMALL</cell><cell>100</cell><cell>0.15</cell><cell>−56.9</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>150</cell><cell>0.25</cell><cell>-61.3</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>50</cell><cell>0.07</cell><cell>-45.7</cell><cell>-</cell><cell>-</cell></row><row><cell>MT5-BASE</cell><cell>100</cell><cell>0.50</cell><cell>-35.0</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>150</cell><cell>0.90</cell><cell>−31.4</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>50</cell><cell>0.02</cell><cell>-78.4</cell><cell>-</cell><cell>-</cell></row><row><cell>MT5-LARGE</cell><cell>100</cell><cell>0.23</cell><cell>-52.6</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>150</cell><cell>0.49</cell><cell>−39.0</cell><cell>-</cell><cell>-</cell></row></table><note>Memorization Rates across various prompt lengths(35, 85, 135), model architectures, and model scales. The predicted token length is fixed at 15. The highest memorization rates for each model are bold. Takeaway: Overall, the memorization rates increase with the increasing prompt lengths, with a few exceptions.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 5 :</head><label>5</label><figDesc>MLLMs and their Scale, Datasets, Languages (analyzed), Architectures.</figDesc><table><row><cell cols="6">B.2 Cross-lingual correlation</cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">Threshold θ</cell><cell></cell><cell></cell><cell></cell></row><row><cell>MGPT-101</cell><cell cols="8">0.31 0.33 0.35 0.37 0.39 0.41 0.43 0.45</cell></row><row><cell># Subgraph</cell><cell>11</cell><cell>14</cell><cell>16</cell><cell>18</cell><cell>19</cell><cell>25</cell><cell>26</cell><cell>35</cell></row><row><cell># Single Point</cell><cell>7</cell><cell>9</cell><cell>10</cell><cell>11</cell><cell>11</cell><cell>18</cell><cell>18</cell><cell>24</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 6 :</head><label>6</label><figDesc>Cross-topo vs. intra-topo correlation at low thresholds for mGPT-101.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>Table 7 :</head><label>7</label><figDesc>Cross-topo vs. intra-topo correlation at high thresholds for mGPT-1.3B.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">Threshold θ</cell><cell></cell><cell></cell><cell></cell></row><row><cell>MGPT-1.3B</cell><cell cols="8">0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89</cell></row><row><cell># Subgraph</cell><cell>8</cell><cell>11</cell><cell>12</cell><cell>13</cell><cell>22</cell><cell>28</cell><cell>31</cell><cell>33</cell></row><row><cell># Single Point</cell><cell>5</cell><cell>7</cell><cell>8</cell><cell>9</cell><cell>17</cell><cell>23</cell><cell>26</cell><cell>27</cell></row><row><cell>EM Intra</cell><cell cols="8">-0.04 -0.09 -0.12 -0.11 -0.16 -0.26 -0.49 -0.43</cell></row><row><cell>EM Cross</cell><cell cols="8">0.74 0.76 0.56 0.55 0.25 0.19 0.20 0.19</cell></row><row><cell>PM Intra</cell><cell cols="8">-0.45 -0.46 -0.49 -0.51 -0.59 -0.50 -0.60 -0.63</cell></row><row><cell>PM Cross</cell><cell cols="8">0.05 0.18 0.18 0.14 -0.06 -0.13 -0.20 -0.22</cell></row><row><cell>RM (B) Intra</cell><cell cols="8">-0.20 -0.22 -0.27 -0.29 -0.35 -0.40 -0.53 -0.50</cell></row><row><cell>RM (B) Cross</cell><cell cols="8">0.34 0.43 0.40 0.34 0.04 -0.06 -0.09 -0.11</cell></row><row><cell>RM (R) Intra</cell><cell cols="8">0.24 0.19 0.09 0.05 -0.14 -0.27 -0.42 -0.35</cell></row><row><cell cols="9">RM (R) Cross -0.03 -0.17 -0.16 -0.14 0.00 0.25 0.28 0.32</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">Threshold θ</cell><cell></cell><cell></cell><cell></cell></row><row><cell>MGPT-13B</cell><cell cols="8">0.28 0.30 0.32 0.34 0.36 0.38 0.40 0.42</cell></row><row><cell># Subgraph</cell><cell>4</cell><cell>8</cell><cell>10</cell><cell>14</cell><cell>22</cell><cell>26</cell><cell>31</cell><cell>31</cell></row><row><cell># Single Point</cell><cell>2</cell><cell>5</cell><cell>7</cell><cell>10</cell><cell>13</cell><cell>17</cell><cell>21</cell><cell>21</cell></row><row><cell>EM Intra</cell><cell cols="8">-0.07 -0.12 -0.10 -0.10 0.18 0.19 0.17 0.17</cell></row><row><cell>EM Cross</cell><cell cols="8">0.15 0.29 0.23 0.11 0.37 0.31 0.30 0.30</cell></row><row><cell>PM Intra</cell><cell cols="8">-0.35 -0.42 -0.46 -0.55 -0.57 -0.65 -0.78 -0.78</cell></row><row><cell>PM Cross</cell><cell cols="8">-0.85 0.28 0.28 0.17 -0.00 -0.12 -0.25 -0.25</cell></row><row><cell>RM (B) Intra</cell><cell cols="8">-0.21 -0.27 -0.27 -0.31 -0.18 -0.21 -0.33 -0.33</cell></row><row><cell cols="9">RM (B) Cross -0.96 0.26 0.27 0.14 0.19 0.08 -0.07 -0.07</cell></row><row><cell>RM (R) Intra</cell><cell cols="8">0.08 0.10 -0.01 -0.04 0.12 0.23 0.20 0.20</cell></row><row><cell>RM (R) Cross</cell><cell cols="8">0.56 0.02 0.01 0.08 0.32 0.34 0.44 0.44</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head>Table 8 :</head><label>8</label><figDesc>Cross-topology vs. intra-topology Pearson correlation at varying thresholds for MGPT-13B.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_9"><head>Table 9 :</head><label>9</label><figDesc>Cross-topology vs. intra-topology Pearson correlation at varying thresholds for MT5-SMALL.</figDesc><table><row><cell>Threshold θ</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_10"><head>Table 10 :</head><label>10</label><figDesc>Cross-topology vs. intra-topology Pearson correlation at varying thresholds for MT5-BASE.</figDesc><table><row><cell>Threshold θ</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_12"><head>Table 11 :</head><label>11</label><figDesc>Cross-topology vs. intra-topology Pearson correlation at varying thresholds for MT5-LARGE.</figDesc><table><row><cell cols="3">B.3 Prompt length impact</cell><cell></cell><cell></cell></row><row><cell>Model</cell><cell>EM</cell><cell></cell><cell>PM</cell><cell></cell></row><row><cell></cell><cell cols="4">50 vs. 100 100 vs. 150 50 vs. 100 100 vs. 150</cell></row><row><cell cols="3">GPT2 Decoder-only: MGPT-101</cell><cell></cell><cell></cell></row><row><cell>MGPT-101</cell><cell>0.97</cell><cell>0.98</cell><cell>0.99</cell><cell>0.99</cell></row><row><cell cols="3">GPT3 Decoder-only: MGPT-1.3B / 13B</cell><cell></cell><cell></cell></row><row><cell>MGPT-1.3B</cell><cell>0.90</cell><cell>0.98</cell><cell>0.99</cell><cell>0.99</cell></row><row><cell>MGPT-13B</cell><cell>0.96</cell><cell>0.99</cell><cell>0.99</cell><cell>0.99</cell></row><row><cell cols="2">Encoder-Decoder: MT5 family</cell><cell></cell><cell></cell><cell></cell></row><row><cell>MT5-SMALL</cell><cell>0.81</cell><cell>0.96</cell><cell>0.84</cell><cell>0.88</cell></row><row><cell>MT5-BASE</cell><cell>0.86</cell><cell>0.97</cell><cell>0.99</cell><cell>0.98</cell></row><row><cell>MT5-LARGE</cell><cell>0.66</cell><cell>0.94</cell><cell>0.94</cell><cell>0.97</cell></row><row><cell cols="5">Table 12: Correlation of memorization metrics (exact</cell></row><row><cell cols="5">and family vs probability) between prompt lengths 50</cell></row><row><cell cols="5">vs 100 and 100 vs 150 across model families. EM =</cell></row><row><cell cols="5">Exact Memorization, PM = Probability Memorization.</cell></row><row><cell>Model</cell><cell cols="2">RM BLEU</cell><cell cols="2">RM ROUGE-L</cell></row><row><cell></cell><cell cols="4">50 vs. 100 100 vs. 150 50 vs. 100 100 vs. 150</cell></row><row><cell cols="3">GPT2 Decoder-only: MGPT-101</cell><cell></cell><cell></cell></row><row><cell>MGPT-101</cell><cell>0.92</cell><cell>0.97</cell><cell>0.99</cell><cell>0.99</cell></row><row><cell cols="3">GPT3 Decoder-only: MGPT-1.3B / 13B</cell><cell></cell><cell></cell></row><row><cell>MGPT-1.3B</cell><cell>0.95</cell><cell>0.99</cell><cell>0.99</cell><cell>0.99</cell></row><row><cell>MGPT-13B</cell><cell>0.99</cell><cell>0.99</cell><cell>0.99</cell><cell>0.99</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_13"><head>Table 13 :</head><label>13</label><figDesc>Correlation of relaxed memorization metrics between different prompt lengths.</figDesc><table><row><cell>Model Pair</cell><cell>Mem. Metric</cell><cell>r</cell></row><row><cell>MT5-SMALL vs. MT5-BASE</cell><cell>EM PM</cell><cell>0.71 0.76</cell></row><row><cell>MT5-BASE vs. MT5-LARGE</cell><cell>EM PM</cell><cell>0.81 0.72</cell></row><row><cell></cell><cell>EM</cell><cell>0.92</cell></row><row><cell>MGPT-1.3B vs. MGPT-13B</cell><cell>PM RM (BLEU)</cell><cell>0.99 0.97</cell></row><row><cell></cell><cell cols="2">RM (ROUGE-L) 0.99</cell></row><row><cell cols="3">Table 14: Pairwise memorization correlation (r) be-</cell></row><row><cell cols="3">tween adjacent model scales for exact memorization</cell></row><row><cell cols="3">(EM), probability memorization (PM), and reference</cell></row><row><cell>match metrics (RM).</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_14"><head></head><label></label><figDesc>You can also look for some pictures that related to Modern Ideas Sports Wallpapers Backgrounds Hd On The App Store by scroll down to collection on below this picture. If you want to find the other picture or article about Sports Wallpapers just push the next button or previous button; or if you are interested in similar pictures of Modern Ideas Sports Wallpapers Backgrounds Hd On &lt;extra_id_2&gt; with Alzheimer's disease and their families and care &lt;extra_id_3&gt;requires giving them the tools that they need, helping to plan for future needs, and ensuring that safety and dignity are &lt;extra_id_4&gt;ed," the report says. The announcement proposes an investment</figDesc><table><row><cell>B.5 Examples of Exact Memorization Danish MGPT-101 Prompt: Americas Best Value Inn Santa Rosa tilbyder også mange faciliteter der vil berige dit ophold i Santa Rosa (CA). Hotellet tilbyder sine gaester adgang til et stort udvalg af servicetilbud, som trådløst internet i faellesområder, parkering, familievaerelse. Hotellets bekvemmeligheder er saerligt udvalgt for at sikre den højeste komfort. På nogle af vaerelserne kan gaesterne finde internetadgang -trådløst, Reference: ikke-rygervaerelser, aircondition, skrivebord Prediction: ikke-rygervaerelser, aircondition, skrivebord B.6 Example of Unstable generation Unstable Generation Example (MT5-LARGE) Reference: &lt;extra_id_0&gt; beneficiaries of &lt;extra_id_1&gt; the &lt;extra_id_2&gt; the bond &lt;extra_id_3&gt;, &lt;extra_id_1&gt;their families: Reference: agreeing to invest &lt;extra_id_4&gt; $56.6 million in &lt;extra_id_0&gt; for people &lt;extra_id_1&gt;'s disease and &lt;extra_id_2&gt; "Supporting people &lt;extra_id_3&gt;givers Predicted: &lt;extra_id_0&gt; . public bond.. mill for parents school students vote mill projects &lt;extra_id_4&gt;maintain &lt;extra_id_4&gt;maintain people &lt;extra_id_3&gt;givers disease and &lt;extra_id_2&gt; "Supporting &lt;extra_id_0&gt; for people &lt;extra_id_1&gt;'s Prediction: B.7 Corpus Distribution</cell><cell>Reference: るため、 Prediction: man sich selbsttätig seine Favoriten intuitiv raussuchen German MT5-BASE Prompt: die Versandkosten ungeachtet dessen Japanese MGPT-101 Prompt: 最高です。 義実家の姑・義姉は良い人なので すが、クーポンの服には出費を惜しまないた めおすすめしていないと大変です。自分が惚 れ込んだ物は用品が合わなくたって「いつか 着れる」と買ってしまうので、用品がドンピ シャの頃には収納に埋もれていたり、出して もアウトドアテーブル 120 80だって着たがら überaus nie &lt;extra_id_0&gt;halten werden oder keineswegs erst anfallen. Zu diesem Zweck gehören die Leistung, die getrennten ないんですよね。オーセンティックな感じの 商品の服だと品質さえ良ければクーポンのこ とは考えなくて済むのに、カードの趣味 Einstellungen, die Größe des Körpers und der genaue Einsatzbereich. Das Reference: &lt;extra_id_1&gt; ein außergewöhnlich breites や私の反対意見などには耳も貸さずに購入す &lt;extra_id_4&gt;t, weil die Prediction: Häufig werden lediglich wenige be &lt;extra_id_2&gt;roduzenten ak &lt;extra_id_3&gt;. るため、 Angebot von Erzeugnissen fix や私の反対意見などには耳も貸さずに購入す</cell></row><row><cell>Danish MT5-BASE Prompt: -Se på kort Chinese MGPT-101 Mere Prompt: 大。 新宝gg游戏平台网页版第88届奥斯卡颁奖 om Pensjonat</cell><cell>&lt;extra_id_0&gt;drig ge &lt;extra_id_1&gt; Kaufportal offeriert &lt;extra_id_2&gt; vom P &lt;extra_id_3&gt;kurat wie von Händlern Japanese MT5-BASE &lt;extra_id_4&gt;rücksichtig Promp t</cell></row><row><cell>Mi &lt;extra_id_0&gt; Miłosna er indrettet til &lt;extra_id_1&gt;-og forretningsrejse &lt;extra_id_2&gt;er idéelt i Kwidzyn; én af byens mest populaere beliggenheder. Herfra har gaester glaede af nem adgang til alt, hvad denne livlige by kan tilbyde. Med sin praktisk &lt;extra_id_3&gt; b &lt;extra_id_4&gt; dette hotel nem adgang til byens vigtigste sev Reference: &lt;extra_id_0&gt;łosna Pensjonat &lt;extra_id_1&gt; 礼已经落下帷幕,与其有关的话题还在持续。获 奖的近20部影片中有不少改编自小说,单是入 围"最佳影片"角逐的9部影片就有5部改编自小 说。其中,像《荒野猎人》《房间》等获奖影片 的原著小说都出版了中文版。此外,获提名的 《火星救援》《卡罗尔》等四部电影的原著小 说也有了中文版。看过电影后,不妨去读读这些 原著小说。 昨日早上5时 Reference: 许,在距离爆炸现场南侧不到400米处的天津港 både ferie &lt;extra_id_2&gt;nde og ligg &lt;extra_id_3&gt;e &lt;extra_id_4&gt;eliggenhed 进口</cell><cell>Prediction: &lt;extra_id_0&gt;drig ge &lt;extra_id_1&gt; Kaufportal offeriert &lt;extra_id_2&gt; vom P &lt;extra_id_3&gt;kurat wie von Händlern &lt;extra_id_4&gt;rücksichtig の無料を聞いていない &lt;extra_id_0&gt;。用品が 話しているときは夢中になるくせに、用品が 念を押したことや予約 &lt;extra_id_1&gt;てしまう ようです。アウトドアテーブル 120 80だって 仕事だってひと通りこなしてきて、クーポン がないわけではないのですが、ポイントもな い様子で、パソコンがいまいち噛み合わない のです。クーポンが &lt;extra_id_2&gt;言いません English MGPT-101 が、サービスの妻はその傾向が強いです。 夏 日になる日も増えてきましたが、私は昔から Prompt: モバイル &lt;extra_id_3&gt;ダメで exactly dimension of Modern Ideas Sports &lt;extra_id_4&gt;。この用品</cell></row><row><cell>tilbyder Prediction: &lt;extra_id_0&gt;łosna Pensjonat &lt;extra_id_1&gt; både ferie &lt;extra_id_2&gt;nde og ligg &lt;extra_id_3&gt;e &lt;extra_id_4&gt;eliggenhed tilbyder German MGPT-101 Prompt: Wir denken ebenfalls, dass solcherlei akzeptabel recherchierte Tests, überaus hilfreich sind. Trotzdem wollen wir du jene Gattung von Produktvorstellungen Prediction: 许,在距离爆炸现场南侧不到400米处的天津港 进口 Chinese MT5-BASE Prompt: 也反映了国内垂直电商的困境 &lt;extra_id_0&gt;平 台型电商,垂直电商的 &lt;extra_id_1&gt;了,很难形 成核心壁垒。"他说到。途棋牌在外贸方面,广 为49.0%,比上年提高2.0个百分点。从区域看 东全年进出口顺差为1.54万亿元,出口增速快于 进口4.5个百分点;一般贸易 &lt;extra_id_2&gt;比重</cell><cell>Wallpapers Backgrounds Hd On The App Store Reference: &lt;extra_id_0&gt;と感じることが多いです &lt;extra_id_1&gt;はなぜか記憶から落ち &lt;extra_id_2&gt;みんなそうだとは &lt;extra_id_3&gt;が &lt;extra_id_4&gt;湿疹が出てしま います Prediction: &lt;extra_id_0&gt;と感じることが多いです &lt;extra_id_1&gt;はなぜか記憶から落ち &lt;extra_id_2&gt;みんなそうだとは was 246x246 pixels. Reference: The App Store, you are free to browse through search feature that &lt;extra_id_3&gt;が &lt;extra_id_4&gt;湿疹が出てしま います</cell></row><row><cell>nicht anbieten, weil der Markt außerordentlich schnelllebig und &lt;extra_id_3&gt;一带一路"沿线国家进出口总额增 长6.3%。 途 &lt;extra_id_4&gt; 傲头傲脑 dynamisch ist und zum wiederholten Male neumodische Produktkette dazukommen und Reference:</cell><cell>Prediction: The App Store, you are free to browse through search feature that</cell></row><row><cell>die "alten" Produktmodelle uninteressant &lt;extra_id_0&gt;。"相对 &lt;extra_id_1&gt;获客成本</cell><cell></cell></row><row><cell>werden, egal um welches Produkt es geht. Deswegen bieten wir auf unserer Seite 太高 &lt;extra_id_2&gt;占进出口总额的 &lt;extra_id_3&gt;,对" &lt;extra_id_4&gt;棋牌</cell><cell>English MT5-BASE</cell></row><row><cell>ausschließlich eine Darstellung von den jetzigen 5 Produkte an. Somit kann Prediction:</cell><cell>Prompt:</cell></row><row><cell>&lt;extra_id_0&gt;。"相对 &lt;extra_id_1&gt;获客成本 Reference: 太高 &lt;extra_id_2&gt;占进出口总额的</cell><cell>the administration announced a $6 million investment over two years for provider</cell></row><row><cell>man sich selbsttätig seine Favoriten &lt;extra_id_3&gt;,对" &lt;extra_id_4&gt;棋牌</cell><cell>education and outreach. Expand support</cell></row><row><cell>intuitiv raussuchen</cell><cell>&lt;extra_id_0&gt; with Alzheimer</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgements</head><p>YC and JB are funded by the Carlsberg Foundation, under the Semper Ardens: Accelerate programme (project nr. CF21-0454). We further acknowledge the support of the AAU AI Cloud and express our gratitude to DeiC for providing computing resources on the LUMI cluster (project nr. DeiC-AAU-N5-2024085-H2-2024-28).</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A Language-specific Subspaces</head><p>The algorithm for identifying language-specific subspace is as in Algorithm 1, refer to <ref type="bibr" target="#b46">Xie et al. (2024)</ref> for more details.</p><p>Algorithm 1: Language-specific Subspace Identification 1 Input: Languages' mean Embeddings M , rank of subspace r. 2 Output: Language-agnostic component µ, language-specific subspace M s , coordinates Γ. </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<ptr target="https://github.com/google/cld3" />
+		<title level="m">Compact language detector v3 (cld3)</title>
+				<imprint>
+			<biblScope unit="page" from="2025" to="2029" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">MasakhaNER 2.0: Africa-centric transfer learning for named entity recognition</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Ifeoluwa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adelani</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Neubig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Ruder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Rijhwani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Beukman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chester</forename><surname>Palen-Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Constantine</forename><surname>Lignos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesujoba</forename><forename type="middle">O</forename><surname>Alabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Shamsuddeen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Muhammad</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nabende</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cheikh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andiswa</forename><surname>Bamba Dione</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rooweither</forename><surname>Bukula</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mabuya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">P</forename><surname>Bonaventure</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blessing</forename><surname>Dossou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Happy</forename><surname>Sibanda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Buzaaba</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mukiibi</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2022.emnlp-main.298</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing</title>
+				<meeting>the 2022 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Abu Dhabi, United Arab Emirates</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="4488" to="4508" />
+		</imprint>
+	</monogr>
+	<note>Godson Kalipe, Derguene Mbaye, and 26 others</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Many languages, one parser</title>
+		<author>
+			<persName><forename type="first">Waleed</forename><surname>Ammar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Mulcaire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miguel</forename><surname>Ballesteros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Dyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><forename type="middle">A</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Association for Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="431" to="444" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Analyzing the effect of linguistic similarity on cross-lingual transfer: Tasks and experimental setups matter</title>
+		<author>
+			<persName><forename type="first">Verena</forename><surname>Blaschke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masha</forename><surname>Fedzechkina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maartje</forename><surname>Ter Hoeve</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.14491</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Quantifying memorization across neural language models</title>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Carlini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daphne</forename><surname>Ippolito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Jagielski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Tramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chiyuan</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Eleventh International Conference on Learning Representations</title>
+				<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The secret sharer: Evaluating and testing unintended memorization in neural networks</title>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Carlini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chang</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Úlfar</forename><surname>Erlingsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jernej</forename><surname>Kos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Song</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">28th USENIX security symposium (USENIX security 19)</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="267" to="284" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Extracting training data from large language models</title>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Carlini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Tramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Wallace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Jagielski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariel</forename><surname>Herbert-Voss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Song</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">30th USENIX security symposium (USENIX Security 21)</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="2633" to="2650" />
+		</imprint>
+	</monogr>
+	<note>Ulfar Erlingsson, and 1 others</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Fixing rogue memorization in many-to-one multilingual translators of extremely-low-resource languages by rephrasing training samples</title>
+		<author>
+			<persName><forename type="first">Paulo</forename><surname>Cavalin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pedro</forename><forename type="middle">Henrique</forename><surname>Domingues</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claudio</forename><surname>Pinhanez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julio</forename><surname>Nogima</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2024.naacl-long.253</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2024 Conference of the North American Chapter</title>
+		<title level="s">the Association for Computational Linguistics: Human Language Technologies</title>
+		<meeting>the 2024 Conference of the North American Chapter<address><addrLine>Mexico City, Mexico</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="4503" to="4514" />
+		</imprint>
+	</monogr>
+	<note>Long Papers</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">On the privacy risks of algorithmic fairness</title>
+		<author>
+			<persName><forename type="first">Hongyan</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reza</forename><surname>Shokri</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>IEEE</publisher>
+			<biblScope unit="page" from="292" to="303" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Speak, memory: An archaeology of books known to chatgpt/gpt-4</title>
+		<author>
+			<persName><forename type="first">Kent</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mackenzie</forename><surname>Cramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandeep</forename><surname>Soni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Bamman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing</title>
+				<meeting>the 2023 Conference on Empirical Methods in Natural Language Processing</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="7312" to="7327" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Large language models are easily confused: A quantitative metric, security implications and typological analysis</title>
+		<author>
+			<persName><forename type="first">Yiyi</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiongxiu</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russa</forename><surname>Biswas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Bjerva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics: NAACL 2025</title>
+				<meeting><address><addrLine>Albuquerque, New Mexico</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2025">2025</date>
+			<biblScope unit="page" from="3810" to="3827" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">How do languages influence each other? studying cross-lingual data sharing during lm fine-tuning</title>
+		<author>
+			<persName><forename type="first">Rochelle</forename><surname>Choenni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Garrette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ekaterina</forename><surname>Shutova</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.13286</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Investigating language relationships in multilingual sentence encoders through the lens of linguistic typology</title>
+		<author>
+			<persName><forename type="first">Rochelle</forename><surname>Choenni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ekaterina</forename><surname>Shutova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="635" to="672" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Analyzing zero-shot cross-lingual transfer in supervised nlp tasks</title>
+		<author>
+			<persName><forename type="first">Hyunjin</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judong</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seongho</forename><surname>Joe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seungjai</forename><surname>Min</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Youngjune</forename><surname>Gwon</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2101.10649</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Unsupervised cross-lingual representation learning at scale</title>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kartikay</forename><surname>Khandelwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vishrav</forename><surname>Chaudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Guzmán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edouard</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Myle</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Veselin</forename><surname>Stoyanov</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1911.02116</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Unsupervised cross-lingual representation learning at scale</title>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kartikay</forename><surname>Khandelwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naman</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vishrav</forename><surname>Chaudhary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Guzmán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edouard</forename><surname>Grave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Myle</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Veselin</forename><surname>Stoyanov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 58th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="8440" to="8451" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Make the best of cross-lingual transfer: Evidence from POS tagging with over 100 languages</title>
+		<author>
+			<persName><forename type="first">Martijn</forename><surname>Wietse De Vries</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Malvina</forename><surname>Wieling</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nissim</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2022.acl-long.529</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics</title>
+		<title level="s">Long Papers</title>
+		<meeting>the 60th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Dublin, Ireland</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="7676" to="7685" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">BERT: Pre-training of deep bidirectional transformers for language understanding</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ming-Wei</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenton</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Toutanova</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/N19-1423</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</title>
+		<title level="s">Long and Short Papers</title>
+		<meeting>the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies<address><addrLine>Minneapolis, Minnesota</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="4171" to="4186" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">What neural networks memorize and why: Discovering the long tail via influence estimation</title>
+		<author>
+			<persName><forename type="first">Vitaly</forename><surname>Feldman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chiyuan</forename><surname>Zhang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="2881" to="2891" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Not all samples are born equal: Towards effective clean-label backdoor attacks</title>
+		<author>
+			<persName><forename type="first">Yinghua</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiming</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linghui</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dongxian</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yong</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shu-Tao</forename><surname>Xia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern Recognition</title>
+		<imprint>
+			<biblScope unit="volume">139</biblScope>
+			<biblScope unit="page">109512</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Memorization through the lens of curvature of loss function around samples</title>
+		<author>
+			<persName><forename type="first">Isha</forename><surname>Garg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deepak</forename><surname>Ravikumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaushik</forename><surname>Roy</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2307.05831</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Exploring the memorization-generalization continuum in deep learning</title>
+		<author>
+			<persName><forename type="first">Ziheng</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chiyuan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kunal</forename><surname>Talwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">C</forename><surname>Mozer</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2002.03206</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">URIEL+: Enhancing linguistic inclusion and usability in a typological and multilingual knowledge base</title>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Khan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mason</forename><surname>Shipton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Anugraha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaiyao</forename><surname>Duan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phuong</forename><forename type="middle">H</forename><surname>Hoang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Khiu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Seza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">En-Shiun Annie</forename><surname>Dogruöz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 31st International Conference on Computational Linguistics</title>
+				<meeting>the 31st International Conference on Computational Linguistics<address><addrLine>Abu Dhabi, UAE</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2025">2025</date>
+			<biblScope unit="page" from="6937" to="6952" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Propile: Probing privacy leakage in large language models</title>
+		<author>
+			<persName><forename type="first">Siwon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sangdoo</forename><surname>Yun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hwaran</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Gubri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sungroh</forename><surname>Yoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seong Joon</forename><surname>Oh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="20750" to="20762" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">From zero to hero: On the limitations of zero-shot language transfer with multilingual transformers</title>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Lauscher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vinit</forename><surname>Ravishankar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Vulic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Goran</forename><surname>Glavas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Empirical Methods in Natural Language Processing</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daphne</forename><surname>Ippolito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Nystrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chiyuan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas</forename><surname>Eck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Callison-Burch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Carlini</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2107.06499</idno>
+		<title level="m">Deduplicating training data makes language models better</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Trustworthy machine learning via memorization and the granular long-tail: A survey on interactions, tradeoffs, and beyond</title>
+		<author>
+			<persName><forename type="first">Qiongxiu</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoyu</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiyi</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Bjerva</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2503.07501</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">On the privacy effect of data enhancement via the lens of memorization</title>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiongxiu</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhanhao</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaolin</forename><surname>Hu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">On the language neutrality of pre-trained multilingual representations</title>
+		<author>
+			<persName><forename type="first">Jindřich</forename><surname>Libovický</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rudolf</forename><surname>Rosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Fraser</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.findings-emnlp.150</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics: EMNLP 2020</title>
+				<imprint>
+			<publisher>Online. Association for Computational Linguistics</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1663" to="1674" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Rouge: A package for automatic evaluation of summaries</title>
+		<author>
+			<persName><forename type="first">Chin-Yew</forename><surname>Lin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Text summarization branches out</title>
+				<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="74" to="81" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">mPLM-sim: Better cross-lingual similarity and transfer in multilingual pretrained language models</title>
+		<author>
+			<persName><forename type="first">Peiqin</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chengzhi</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheyu</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics: EACL 2024</title>
+				<meeting><address><addrLine>St. Julian&apos;s, Malta</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2024">Andre Martins, and Hinrich Schuetze. 2024</date>
+			<biblScope unit="page" from="276" to="310" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Uriel and lang2vec: Representing languages as typological, geographical, and phylogenetic vectors</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Littell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ke</forename><surname>David R Mortensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlisle</forename><surname>Kairis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lori</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Levin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics</title>
+				<meeting>the 15th Conference of the European Chapter of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="8" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">Tomas</forename><surname>Mikolov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Corrado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Dean</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1301.3781</idno>
+		<title level="m">Efficient estimation of word representations in vector space</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Scalable extraction of training data from (production) language models</title>
+		<author>
+			<persName><forename type="first">Milad</forename><surname>Nasr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Carlini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Hayase</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Jagielski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daphne</forename><surname>Feder Cooper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">A</forename><surname>Ippolito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Choquette-Choo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Wallace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Tramèr</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lee</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2311.17035</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Scaling neural machine translation to 200 languages</title>
+		<author>
+			<persName><forename type="first">Marta</forename><forename type="middle">R</forename><surname>Nllb Team</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Costa-Jussà</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Onur</forename><surname>Cross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maha</forename><surname>Çelebi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Elbayad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Heafield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elahe</forename><surname>Heffernan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Kalbassi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Licht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Maillard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Skyler</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Al</forename><surname>Wenzek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bapi</forename><surname>Youngblood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loic</forename><surname>Akula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><forename type="middle">Mejia</forename><surname>Barrault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prangthip</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hansanti</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41586-024-07335-x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">630</biblScope>
+			<biblScope unit="issue">8018</biblScope>
+			<biblScope unit="page" from="841" to="846" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Bleu: a method for automatic evaluation of machine translation</title>
+		<author>
+			<persName><forename type="first">Kishore</forename><surname>Papineni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salim</forename><surname>Roukos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Todd</forename><surname>Ward</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Jing</forename><surname>Zhu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 40th annual meeting of the Association for Computational Linguistics</title>
+				<meeting>the 40th annual meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="311" to="318" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Towards a common understanding of contributing factors for cross-lingual transfer in multilingual language models: A review</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Philippy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siwen</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shohreh</forename><surname>Haddadan</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.16768</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Cross-lingual learning for text processing: A survey</title>
+		<author>
+			<persName><forename type="first">Matúš</forename><surname>Pikuliak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marián</forename><surname>Šimko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mária</forename><surname>Bieliková</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">165</biblScope>
+			<biblScope unit="page">113765</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">How multilingual is multilingual BERT?</title>
+		<author>
+			<persName><forename type="first">Telmo</forename><surname>Pires</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Schlinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Garrette</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/P19-1493</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 57th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Florence, Italy</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="4996" to="5001" />
+		</imprint>
+	</monogr>
+	<note>Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Exploring the limits of transfer learning with a unified text-to-text transformer</title>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>Raffel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharan</forename><surname>Narang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Matena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanqi</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">J</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of machine learning research</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">140</biblScope>
+			<biblScope unit="page" from="1" to="67" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Beyond memorization: Violating privacy via inference with large language models</title>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Staab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Vero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mislav</forename><surname>Balunovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Vechev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Twelfth International Conference on Learning Representations</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Languageagnostic representation from multilingual sentence encoders for cross-lingual similarity estimation</title>
+		<author>
+			<persName><forename type="first">Nattapong</forename><surname>Tiyajamorn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomoyuki</forename><surname>Kajiwara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuki</forename><surname>Arase</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Makoto</forename><surname>Onizuka</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2021.emnlp-main.612</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing</title>
+				<meeting>the 2021 Conference on Empirical Methods in Natural Language Processing</meeting>
+		<imprint>
+			<publisher>Dominican Republic. Association for Computational Linguistics</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="7764" to="7774" />
+		</imprint>
+		<respStmt>
+			<orgName>Online and Punta Cana</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">A reproducibility study on quantifying language similarity: The impact of missing values in the uriel knowledge base</title>
+		<author>
+			<persName><forename type="first">Hasti</forename><surname>Toossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qing</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinyu</forename><surname>Huai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khiu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Seza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">En-Shiun Annie</forename><surname>Dogruöz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">North American Chapter</title>
+				<imprint>
+			<publisher>the Association for Computational Linguistics</publisher>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Truth serum: Poisoning machine learning models to reveal their secrets</title>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Tramèr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reza</forename><surname>Shokri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayrton</forename><surname>San Joaquin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hoang</forename><surname>Le</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Jagielski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanghyun</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Carlini</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="2779" to="2792" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Do we really need fully unsupervised cross-lingual embeddings?</title>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Vulić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Goran</forename><surname>Glavaš</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roi</forename><surname>Reichart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Korhonen</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/D19-1449</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)</title>
+				<meeting>the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)<address><addrLine>Hong Kong, China</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="4407" to="4418" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<author>
+			<persName><forename type="first">Søren</forename><surname>Wichmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Taraka</forename><surname>Rama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><forename type="middle">W</forename><surname>Holman</surname></persName>
+		</author>
+		<title level="m">Phonological diversity, word length, and population sizes across languages: The asjp evidence</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Discovering low-rank subspaces for languageagnostic multilingual representations</title>
+		<author>
+			<persName><forename type="first">Zhihui</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Handong</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tong</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuai</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2401.05792</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<author>
+			<persName><forename type="first">Linting</forename><surname>Xue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><surname>Constant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihir</forename><surname>Kale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rami</forename><surname>Al-Rfou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Siddhant</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2010.11934</idno>
+		<title level="m">Aditya Barua, and Colin Raffel. 2020. mt5: A massively multilingual pre-trained text-to-text transformer</title>
+				<imprint/>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">A regularization framework for learning from graph data</title>
+		<author>
+			<persName><forename type="first">Dengyong</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bernhard</forename><surname>Schölkopf</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICML 2004 workshop on statistical relational learning and its connections to other fields (SRL 2004)</title>
+				<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="132" to="137" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

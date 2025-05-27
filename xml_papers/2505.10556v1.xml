@@ -1,0 +1,1212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">An AI-driven framework for the prediction of personalised health response to air pollution</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Nazanin</forename><surname>Zounemat Kermani</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Data Science institute</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Sadjad</forename><surname>Naderi</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Earth Science &amp; Engineering</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Claire</forename><forename type="middle">H</forename><surname>Dilliway</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Earth Science &amp; Engineering</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Claire</forename><forename type="middle">E</forename><surname>Heaney</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Earth Science &amp; Engineering</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Centre for AI-Physics Modelling</orgName>
+								<orgName type="institution" key="instit1">Imperial-X</orgName>
+								<orgName type="institution" key="instit2">Imperial College London</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Shrreya</forename><surname>Behll</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Earth Science &amp; Engineering</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Boyang</forename><surname>Chen</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Earth Science &amp; Engineering</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Hisham</forename><surname>Abubakar-Waziri</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">National Heart &amp; Lung Institute</orgName>
+								<orgName type="institution" key="instit2">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Alexandra</forename><forename type="middle">E</forename><surname>Porter</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Materials</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marc</forename><surname>Chadeau-Hyam</surname></persName>
+							<affiliation key="aff5">
+								<orgName type="department" key="dep1">Department of Epidemiology and Biostatistics</orgName>
+								<orgName type="department" key="dep2">School of Public Health</orgName>
+								<orgName type="laboratory">MRC/PHE Centre for Environment and Health</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Fangxin</forename><surname>Fang</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Data Science institute</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ian</forename><forename type="middle">M</forename><surname>Adcock</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">National Heart &amp; Lung Institute</orgName>
+								<orgName type="institution" key="instit2">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kian</forename><forename type="middle">Fan</forename><surname>Chung</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Data Science institute</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">National Heart &amp; Lung Institute</orgName>
+								<orgName type="institution" key="instit2">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christopher</forename><forename type="middle">C</forename><surname>Pain</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Data Science institute</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Earth Science &amp; Engineering</orgName>
+								<orgName type="institution">Imperial College London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Centre for AI-Physics Modelling</orgName>
+								<orgName type="institution" key="instit1">Imperial-X</orgName>
+								<orgName type="institution" key="instit2">Imperial College London</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">An AI-driven framework for the prediction of personalised health response to air pollution</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">3C1C6DA5AB425CD0BCF2C46360710B5F</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Air pollution poses a significant threat to public health, causing or exacerbating many respiratory and cardiovascular diseases. In addition, climate change is bringing about more extreme weather events such as wildfires and heatwaves, which can increase levels of pollution and worsen the effects of pollution exposure. Recent advances in personal sensing have transformed the collection of behavioural and physiological data, leading to the potential for new improvements in healthcare. We wish to capitalise on this data, alongside new capabilities in AI for making time series predictions, in order to monitor and predict health outcomes for an individual. Thus, we present a novel workflow for predicting personalised health responses to pollution by integrating physiological data from wearable fitness devices with real-time environmental exposures. The data is collected from various sources in a secure and ethical manner, and is used to train an AI model to predict individual health responses to pollution exposure within a cloud-based, modular framework. We demonstrate that the AI model -an Adversarial Autoencoder neural network in this case -accurately reconstructs time-dependent health signals and captures nonlinear responses to pollution. Transfer learning is applied using data from a personal smartwatch, which increases the generalisation abilities of the AI model and illustrates the adaptability of the approach to real-world, user-generated data.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Air pollution poses a significant threat to public health, contributing to approximately 7 million premature deaths annually worldwide <ref type="bibr" target="#b2">[1]</ref>, with over 90% of the global population exposed to excess levels of pollution. A range of diseases can be caused or exacerbated by pollution, including ischemic heart disease, stroke, chronic obstructive pulmonary disease (COPD), lung cancer and acute respiratory infections. In the UK, air pollution is recognised as a severe public health issue, comparable to cancer, obesity and heart disease <ref type="bibr" target="#b3">[2]</ref>. The annual mortality of human-made air pollution in the UK is estimated to be between 28,000 and 36,000 deaths every year <ref type="bibr" target="#b5">[3]</ref>. Despite efforts to reduce pollution levels, they remain high, and therefore there is a critical need to protect individuals by minimising their personal exposure, thus mitigating the adverse health effects of pollution <ref type="bibr" target="#b6">[4]</ref>.</p><p>As a result of climate change and extreme weather events, levels of air pollution are projected to rise. Global warming, a key part of climate change, is marked by an increase in temperature of the earth's surface, which will intensify the greenhouse effect by trapping heat, in turn, exacerbating climate change. In addition, the increasing occurrence of forest fires with the production of fine particulate matter (PM) and noxious gases, and the hot summers with increasing pollution emissions will increase the impact of air pollution on health <ref type="bibr" target="#b7">[5,</ref><ref type="bibr">6]</ref>.</p><p>The respiratory system is particularly vulnerable to air pollution as the initial point of contact for inhaled pollutants. Key pollutants, including PM, nitrogen oxides (NO x ), sulphur dioxide (SO 2 ), ozone (O 3 ) and volatile organic compounds have been shown to impair lung function, and cause airway inflammation <ref type="bibr" target="#b9">[7]</ref>. PM, categorised into coarse PM10 (2.5-10 μm), fine PM2.5 (&lt;2.5 μm) and ultrafine PM0.1 (&lt;0.1 μm), is particularly harmful, particularly in fine (PM 2.5 ) and ultra-fine (PM 0.1 ) size fractions, depositing more distally in the small airways. Both PM 2.5 and PM 0.1 may cross the blood vessels and traverse directly into the circulation, affecting other organs to exert multi-systemic effects.</p><p>Chronic respiratory conditions continue to be an important source of mortality and morbidity globally <ref type="bibr" target="#b10">[8]</ref>. Environmental factors play a significant role in determining the occurrence and progression of chronic respiratory diseases, of which asthma and COPD will be the most frequently affected <ref type="bibr" target="#b11">[9]</ref>. Exposure to air pollution reduces lung function and can induce both neutrophilic and eosinophilic inflammation in healthy and asthmatic subjects, with asthmatics being more sensitive <ref type="bibr" target="#b12">[10]</ref>. High spikes of pollution can be followed by an exacerbation of airway narrowing and inflammation particularly in people with asthma or COPD, who often need urgent treatment in hospitals. Extreme weather events have been associated with increased risk of asthma morbidity and mortality particularly in children and females <ref type="bibr" target="#b13">[11]</ref>.</p><p>Mitigating strategies for minimising environmental exposures to air pollution are consistently undergoing revision <ref type="bibr" target="#b14">[12,</ref><ref type="bibr">13]</ref>. However, further work is required to identify factors that quantify individual-level risks in order to identify those particularly susceptible. At present, there are no tools to help an individual to determine this risk at the personal level. Our hypothesis is that it is possible to predict an individual's responses to air pollution by using artificial intelligence (AI)-based analysis of personal exposure data and the specific constituents of the pollutants. Recent advances in personal sensing have transformed the collection of behavioural and physiological data, bringing many benefits to healthcare <ref type="bibr" target="#b16">[14]</ref>. For example, personal data from smartphones and wearables can enable early diagnosis of a number of conditions and diseases, including seizures, depression, anxiety, Parkinson's disease <ref type="bibr" target="#b17">[15]</ref> and pulmonary diseases <ref type="bibr" target="#b55">[53]</ref>. For a more complete picture of an individual's health and environment, personal health data can be linked to surrounding air quality data, meteorological data and traffic data <ref type="bibr" target="#b18">[16]</ref>. Dealing with multi-modal data is just one challenge for those wishing to analyse personal health data, in addition to other issues such as noisy measurements, and time-series data that could be sparse or highly detailed (highly resolved) and irregular or continuous <ref type="bibr" target="#b19">[17]</ref>. The PulsAir app was developed to integrate health data with environmental data avatars, points, and rewards to keep the user engaged <ref type="bibr" target="#b20">[18]</ref>. Concurrent to these advancements in personal sensing, breakthroughs in AI have significantly enhanced our ability to process and analyse complex, high-dimensional datasets efficiently. Techniques such as deep learning and transfer learning enable the rapid interpretation of large-scale, heterogeneous data streams, uncovering patterns and correlations that were previously inaccessible <ref type="bibr" target="#b21">[19,</ref><ref type="bibr" target="#b22">20]</ref>. By integrating these wearable sensing technologies with AI-driven analytical methods, it becomes possible to develop responsive systems that not only monitor but also predict health outcomes at the individual level <ref type="bibr" target="#b23">[21]</ref>. This convergence addresses the pressing challenge of air pollution and global warming with a level of precision and timeliness that traditional methods cannot achieve, paving the way for transformative advancements in personalised health monitoring and environmental interventions <ref type="bibr" target="#b24">[22]</ref><ref type="bibr" target="#b25">[23]</ref><ref type="bibr" target="#b26">[24]</ref>.</p><p>In our previous study, Health Assessment across Biological Length Scales for Personal Pollution Exposure and its Mitigation (INHALE) [25], we developed a physics-based, multi-scale approach across biological length scales starting from the cell and increasing to the lung, the individual and the neighbourhood scale, to assess the impact of air pollution on personal health in urban environments. Building on the results of INHALE, the primary goal of the AI-Respire project <ref type="bibr" target="#b28">[26]</ref>, has been to develop AI-driven models to predict individual health responses to pollution exposure. This article presents an integrated workflow developed during AI-Respire, which pipelines data collection from various sources and supports secure and ethical data interactions through an integrated data management platform (DMP) for AI model development and inference. The data sources used include: (i) existing health datasets from the INHALE project (n=10 healthy subjects), (ii) temporal and spatial air pollution data from OpenWeather [27], (iii) and real-time personal health and GPS data collected via a smartwatch using BreathBot, a mobile app developed during this project. An Adversarial Autoencoder (AAE) model <ref type="bibr" target="#b30">[28]</ref> is trained on the INHALE dataset to predict health outcomes related to pollution exposure is subsequently fine-tuned using transfer learning with individual smartwatch data, enabling continuous model updates and personalisation. Figure <ref type="figure" target="#fig_0">1</ref> provides an overview of the proposed workflow, illustrating the key modules and data flow. The paper is organised as follows: Section 2 introduces the data collection module, detailing the data sources and describing the datasets. This is followed in Section 3 by an explanation of the DMP and analytical engine. In Section 4, the methods for data processing and the development of AI models using the INHALE dataset are presented. The performance of these models is evaluated and discussed. Subsequently, in Section 5, the approach for implementing transfer learning on personal health data is described and analysed. Finally, the paper concludes with a discussion on the workflow application, highlighting its limitations and proposing directions for future work. pollen levels, wildfire smoke, and indoor sources of particulates) to be correlated with health metrics as they become relevant and/or available. This geolocation data enables spatial analysis, allowing the mapping of health events and identifying geographical patterns.</p><p>Data is routed through secure API endpoints and web hooks, allowing continuous data uploads to AWS (Amazon Web Service) <ref type="bibr" target="#b36">[34]</ref> for remote storage and processing. Each data request transmits a batch of user health metrics or geolocation data, timestamped to ensure accurate historical tracking and longitudinal analysis. Transfer of data between the participant and the BreathBot app database is handled through secure HTTP connections (HTTPS) <ref type="bibr" target="#b37">[35]</ref> which are encrypted in transit. Once transferred, the data is securely stored on AWS using Amazon RDS (Relational Database Service), a scalable and structured database solution designed for high-frequency, multivariate data collection. AWS's hybrid object storage enables efficient storage and retrieval of large volumes of data, essential for real-time health tracking. AWS security configurations, including encryption at rest and in transit, ensure data integrity and privacy compliance. Periodically, data from AWS is transferred to the DMP where it is integrated with other relevant datasets.</p><p>BreathBot follows strong security standards, incorporating robust authentication mechanisms at organisation level, including multi-factor authentication and public-key infrastructure for securing user data and access control where applicable. Access to data collection settings and historical data is limited by role-based access control to safeguard personal health information (PHI). All health and geolocation data collected is anonymised and encrypted, ensuring compliance with data protection regulations (e.g., GDPR). The API generates an access token for the user, which is stored in the secure storage provided by the mobile device (i.e. Keychain on iOS). Every request the app makes to the API is authenticated by this access token, which both allows us to restrict access to only registered users and allows the API to identify the user with whom to link the new data. Data is encrypted both in transit, using Transport Layer Security (TLS) protocols [36], and at rest within AWS, provided that encryption settings are enabled on the database configurations, ensuring user privacy across the entire data lifecycle.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Environmental Data Collection through OpenWeather</head><p>This study utilises environmental data sourced from OpenWeather, a meteorological data provider known for its comprehensive, hyperlocal forecasting models and extensive historical data archives. Its data ecosystem draws on a network of global sources, ensuring comprehensive geographical and temporal coverage that is augmented by satellite imagery. To achieve this breadth of data, OpenWeather integrates meteorological inputs from a range of reliable sources, including radar, global agency models (such as those from the UK Met Office, NOAA, and ECMWF), weather satellites, and an extensive network of weather stations worldwide. Sources of air quality information include anthropogenic emissions from the TNO-MACC [37] dataset, IS4FIRES [38] information on wild-land fires, as well as embedded emission computations for sea salt, pollen, wind-blown dust, and natural volatile organic compounds.</p><p>The One Call 3.0 API from OpenWeather provides an approach to accessing an array of weather-related datasets, catering to real-time, forecasted, and historical weather data needs. For real-time and forecast data, a single API request retrieves multiple datasets, which include current weather metrics, a minuteby-minute forecast of precipitation for the next hour, hourly weather forecasts for the upcoming 48 hours, and daily forecasts covering up to 8 days. Moreover, the API delivers national weather alerts specific to a user's location. Key weather parameters available through this API include air temperature, precipitation probability and volume, air pressure, humidity, dew point, cloud cover, visibility, UV index, wind metrics (speed, gusts and direction), and daily min-max temperatures. The API also offers critical astronomical information, such as sunrise, sunset, moonrise and moonset times. Furthermore, the system supports multiple units, time zones, and language options, with an extensive coverage of 46 languages, thus facilitating global applicability and ease of use. For long-term forecasting, users can access data projections up to 1.5 years in advance, offering a valuable resource for extended environmental trend analyses. Historical weather data is equally robust, with a 45-year archive accessible through a single API request. Researchers can retrieve data for specific timestamps or opt for daily aggregation to support longitudinal studies. Historical parameters mirror those provided for realtime and forecasted data, including air temperature, precipitation probability and volume, air pressure, humidity, dew point, cloud cover, visibility, UV index and wind characteristics.</p><p>Complementing its weather datasets, OpenWeather also provides access to air pollution data through its Air Quality API, a crucial feature for studies assessing environmental influences on respiratory health. This API delivers global, hourly data on the Air Quality Index (AQI) along with concentration levels of specific pollutants, including sulphur dioxide (SO₂), nitrogen dioxide (NO₂), particulate matter (PM₁₀ and PM₂.₅), ozone (O₃) and carbon monoxide (CO). Historical air quality data is available from November 27, 2020, while current and forecasted data can be accessed for hourly intervals over the next 5 days, supporting both retrospective and prospective analysis of air quality trends.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Overview of INHALE Dataset</head><p>The INHALE dataset contains data from 59 participants aged 20 to 75 years. These participants include 33 non-asthmatic and 26 asthmatic individuals, each equipped with wearable sensors: the AIRSpeck [39] and RESpeck [40] devices. These capture information on air pollution exposure, respiratory health, and physical activity. Participants were monitored for two, two-week periods; one in summer and the other in winter.</p><p>The AIRSpeck measures PM concentrations and ambient conditions at a resolution of 30 seconds via: (i) an optical particle counter which measures particle counts across 16 size bins (grouping them into PM₁₀, PM₂.₅ and PM₁ size fractions), and (ii) temperature and relative humidity sensors. The RESpeck is a tri-axial accelerometer that is attached to each participant's chest, and is validated in measuring respiratory rate, also measuring physical activity level, step count and classifying movement (e.g. sitting, standing, lying down), at one minute intervals. Additional weather and pollution data were supplemented from OpenWeather for corresponding timestamps and GPS location to enrich the dataset.</p><p>Participants resided mainly in West London. The dataset focuses on the degree of exposure to environmental pollution and its potential respiratory effects. For this pilot study, we used data from 10 non-asthmatic INHALE participants. Hourly data was available, for each subject, two weeks of readings were available across both summer and winter periods; enabling the analysis of seasonal variations and environmental impacts on respiratory health. Table <ref type="table" target="#tab_2">1</ref> summarises the primary features included in the analysis. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">DMP and Analytical Environment</head><p>To facilitate the integration and analysis of multi-modal data from a range of sources, we leverage an advanced DMP developed by the Data Science Institute (DSI) at Imperial College London. One foundational aspect of this DMP stems from its conceptual origins in tranSMART The platform architecture, shown in Figure <ref type="figure" target="#fig_2">2</ref>, demonstrates the key components and their interconnections, including: (i) data storage, (ii) backend operations, (iii) analytical environment, and (iv) web-based interface. This setup enables efficient data exchange, real-time synchronisation, and secure access to support health-related research. The infrastructure adheres to standards for data security, quality management, and accessibility. Hosted within an ISO-compliant data centre, the platform ensures information security by leveraging Imperial College London's advanced AI Cloud infrastructure, which provides a substantial 2-petabyte (PB) hybrid object storage. This storage capacity supports large-scale, high-dimensional data required for our detailed pollution and health analysis. Data storage within the platform is managed through an industry-standard database optimised for multimodel data, accommodating raw data files, metadata, standardised integrated data, and analytical results. The design of the platform emphasises data integrity and continuity, with all stored data mirrored in real time to prevent accidental loss. Moreover, bi-weekly snapshots are maintained as part of a comprehensive backup strategy, ensuring data availability and resilience. To ensure data security and controlled access, the platform implements a comprehensive user authentication and access management system. Multiple authentication options are available, including password-less methods, public-key authentication, and two-factor authentication combining passwords with time-based one-time passcodes (TOTP). Access control is managed through a role-based framework, allowing for fine-grained permissions that align with the specific roles and responsibilities of each user. This framework also includes account expiration controls, which are particularly useful for managing temporary users or time-bound project access. Furthermore, a detailed logging system tracks and records all user activities, providing a transparent and auditable history of interactions with the platform. These security measures collectively safeguard data and ensure that sensitive health and environmental information is accessible only to authorised personnel.</p><p>The platform also includes a secure analytical environment that supports the development and execution of scripts for data analysis. This environment includes file and job management services, ensuring that users can efficiently organise data and track analytical workflows. Interactive applications, including Jupyter Notebook, R Studio, and MATLAB, are integrated into the platform, providing a flexible workspace for researchers to perform in-depth analyses, run complex models, and visualise results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Data Integration, Model Development, and Training Strategy</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Data Acquisition</head><p>This study uses three main data streams: (1) physiological and environmental data from the INHALE cohort, (2) personal smartwatch data and (3) publicly available pollution and weather data via the OpenWeather API.</p><p>The subset of INHALE dataset used for this analysis included 10 healthy participants monitored using AIRSpeck (air quality) and RESpeck (respiratory rate and activity) sensors across two seasonal periods: Summer (P1) and Winter (P2) (Table <ref type="table" target="#tab_2">1</ref>). Data were recorded hourly and geotagged with GPS coordinates, enabling alignment with external datasets. This dataset was temporally and spatially matched with OpenWeather pollution and meteorological records, retrieved using timestamps and GPS coordinates.</p><p>Personal data were collected independently from a single user over 8 months via Apple Health (heart rate, step count) and Google Maps Timeline (location). This dataset was temporally and spatially matched with OpenWeather pollution and meteorological records, retrieved using timestamps and GPS coordinates.</p><p>All datasets were integrated into a secure, GDPR-compliant Data Management Platform and Analytical Environment (DMP-AE), supporting harmonised storage and scalable analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Data Cleaning</head><p>Initial exploratory analysis revealed temperature outliers in the INHALE dataset, with approximately 50% of participant records containing implausible values (e.g., 40°C in January). These were corrected by capping values to realistic regional bounds (-5°C to 35°C), informed by typical historical weather patterns in London.</p><p>Breathing rate values below 8 breaths per minute were flagged as physiologically implausible and replaced with the median value for the respective participant and seasonal period. Missing data were imputed in two stages: first, linear interpolation was performed within each participant-period group (P1: Summer, P2: Winter); second, any remaining missing values were filled using the group-specific mean. This approach preserved individual variability and seasonal trends while avoiding distortion from global averages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Correlation Analysis</head><p>The dataset was analysed to examine the minimum, maximum, and average values for all features across the P1 and P2 periods. Seasonal classification (P1 vs. P2) was used to account for environmental and physiological variations that may influence health outcomes. Temperature and breathing average showed the greatest variability, with notable seasonal effects observed in respiratory metrics. A Pearson correlation heatmap (Figure <ref type="figure" target="#fig_3">3</ref>) illustrates the relationship between environmental and physiological variables. Notable observations include: (i) weak or inconsistent Pearson correlation coefficients between features in the dataset. Correlation strength was classified according to: poor (0-30%), moderately strong (60-80%), and very strong (&gt;80%).</p><p>Weak to fair correlations (0-60%) were observed between pollution levels (e.g. PM 2.5 , PM 10 ) and respiratory metrics (e.g. breathing average), suggesting that individual factors -such as age, preexisting conditions, and activity levels -may modulate responses to pollution exposure. Moderately strong to very strong correlations (60%) were detected between environmental variables (e.g. temp and OW_temp representing temperature from personal dataset and OpenWeather with 𝑟 ≈ 0.99), confirming consistency across data sources. Specific subgroups (e.g. individuals with pre-existing respiratory conditions) exhibited stronger correlations between pollution levels and respiratory indicators, reinforcing the need for personalised models rather than relying on general population trends. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Data Preprocessing 4.4.1 Normalisation</head><p>Normalisation is a critical step in data preprocessing to prepare the data to train a model, particularly when working with time-series data that exhibit varying scales and ranges across features. Normalisation helps ensure that no single feature disproportionately influences the model due to its scale, which could otherwise slow convergence or lead to unstable training. All continuous features were scaled to the range [0, 1] using Min-Max normalisation. The Min-Max scaler was fitted exclusively on the training data to prevent data leakage, and the same transformation was then applied to the validation and test sets, maintaining consistency across all datasets. This approach ensures that the model is evaluated in a fair and unbiased manner. After normalisation, the scaled features were reintegrated with their corresponding identifiers (e.g. patient ID, timestamp, period) for subsequent analysis. Min-Max scaling brings all features within a bounded range, which is particularly beneficial when using neural networks with activation functions such as sigmoid or tanh <ref type="bibr" target="#b51">[49]</ref>. Categorical variables (e.g., time of day, day of week) were encoded cyclically using sine and cosine transformations to preserve their temporal structure.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.2">Time Series Construction</head><p>To model sequential patterns in the data, time-series windows were constructed using a sliding window approach. Each sample was reshaped into a three-dimensional tensor with dimensions:[samples × timesteps × features]. A window length of 8 time steps and a stride of 2 were selected after empirical testing. This configuration balanced the need to capture temporal dependencies while retaining sufficient training samples. Alternate window lengths (5 and 12) were tested but resulted in reduced model performance.</p><p>Cyclical features such as hour of day and day of week were encoded using sine and cosine transforms to reflect their periodic nature. This technique allows the model to capture recurring patterns, such as diurnal variations in pollution levels or weekly behavioural cycles, that might influence health responses. For the INHALE dataset, where pollution and health metrics exhibit temporal variability, this method is well-suited to capture both short-term fluctuations and long-term trends.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.3">Feature Engineering</head><p>The INHALE dataset includes features of air pollution exposure from size fraction particle counts categorised into bin values. These were excluded from the training process due to their limited relevance in capturing predictive signals for health responses to pollution exposure, as determined through exploratory analysis. Moreover, a manually derived feature, heart rate, was introduced based on the approximation that heart rate is ~4 times the respiratory rate to reflect a realistic metric commonly available in wearable health devices such as fitness trackers and smartwatches. Recognising variability in real-world measurements, a noise factor of ±10% was applied to the simulated heart rate values to better mimic data collected from such devices.</p><p>The addition of heart rate was motivated by its potential to strengthen the capacity of the model to capture physiological responses to pollution exposure. Although, the use of a fixed heart rate-torespiratory rate introduces assumptions that may not fully account for individual differences due to factors such as age, fitness level, or underlying health conditions. Future iterations could refine this feature by incorporating actual observed heart rate data or subject-specific adjustments where available.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Model Architecture</head><p>The AAE framework forms the foundation of the proposed model, integrating the principles of autoencoders with adversarial learning to achieve robust feature representation and well-structured latent spaces. To enhance its predictive capabilities, the architecture is extended with Long Short-Term Memory (LSTM) layers to capture temporal dependencies inherent in the time-series data <ref type="bibr" target="#b52">[50]</ref>. Moreover, convolutional layers are incorporated to model spatial correlations effectively <ref type="bibr" target="#b53">[51]</ref>. Given the limited size of the training dataset, attention mechanisms were excluded to avoid overfitting and maintain computational efficiency. This hybrid architecture enables the model to capture both shortterm dynamics and long-range spatial patterns.</p><p>Figure <ref type="figure" target="#fig_4">4</ref> provides a schematic representation of the model architecture, highlighting its key structural components: an encoder, a latent space regularisation mechanism, a decoder, LSTM layers to capture temporal dependencies, and convolutional layers for spatial correlations. Complementing these components are the objective function, the training process, and the model outputs. . The encoder includes two 2D convolutional layers with ReLU activations, followed by an LSTM layer and a fully connected layer projecting to a 1000-dimensional latent space (Vector Z). The decoder mirrors this process with a linear layer followed by two transposed convolutional layers using ReLU and tanh activations to reconstruct the output. A discriminator network, composed of two hidden layers and a sigmoid output, enforces adversarial regularisation by distinguishing real samples from the prior p(z). During training (20 epochs, Adam optimizer), the model learns from both reconstruction and adversarial losses. This architecture supports both prediction and inpainting of missing data across time by iteratively passing sequences through the trained model. Colour-coded blocks indicate key layers: green (linear), blue (convolutional), yellow (sigmoid), purple (LSTM), and red (ReLU).</p><p>The encoder 𝐸 maps the input data 𝒙 to a latent representation 𝒛 in a lower-dimensional space while preserving critical features. This process is defined as:</p><formula xml:id="formula_0">𝒛 = 𝐸(𝒙) = 𝑓 𝑒𝑛𝑐 (𝒙; 𝜃 𝑒𝑛𝑐 )<label>(1)</label></formula><p>where 𝑓 𝑒𝑛𝑐 is the encoding function parameterised by weights 𝜃 𝑒𝑛𝑐 . To impose structure on the latent space, a discriminator 𝐷 adversarially enforces similarity to a prior distribution 𝑃 𝑧 (e.g. a Gaussian distribution). The adversarial loss is given by:</p><formula xml:id="formula_1">ℒ 𝑎𝑑𝑣 = −𝔼 𝒛~𝑞 𝑧 [log𝐷(𝒛)] − 𝔼 𝒛~𝑃 𝑧 [log(1 − 𝐷(𝒛))]<label>(2)</label></formula><p>where 𝑞 𝒛 is the posterior distribution of the latent space. The decoder 𝐺 reconstructs the input 𝒙 from the latent representation 𝒛, optimising a reconstruction loss:</p><formula xml:id="formula_2">𝒙 ̂= 𝐺(𝒛) = 𝑓 𝑑𝑒𝑐 (𝒛; 𝜃 𝑑𝑒𝑐 )<label>(3)</label></formula><p>The reconstruction loss is defined as:</p><formula xml:id="formula_3">ℒ 𝑟𝑒𝑐 = 𝔼 𝒙~𝑃 𝑑𝑎𝑡𝑎 ‖𝒙 − 𝒙 ̂‖2<label>(4)</label></formula><p>The final objective combines the reconstruction loss, adversarial loss, and any additional regularisation terms:</p><formula xml:id="formula_4">ℒ 𝑡𝑜𝑡𝑎𝑙 = ℒ 𝑟𝑒𝑐 + 𝜆 𝑎𝑑𝑣 ℒ 𝑎𝑑𝑣<label>(5)</label></formula><p>where 𝜆 𝑎𝑑𝑣 balances the contribution of the adversarial loss with the reconstruction loss. The inpainting function is modelled using layers that account for temporal correlations with LSTMs and spatial dependencies with convolutional operations. During training, the inpainting module operates in parallel with the AAE, ensuring that reconstructed sequences align with the regularised latent space structure. The reconstructed data, after inpainting, undergoes feature extraction in the encoder, representation in the latent space, and subsequent decoding for predictions or reconstructions. By augmenting the dataset, this approach not only improves the generalisability of the model but also ensures that temporal and spatial patterns are preserved within the learned representations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Model Training and Evaluation</head><p>The training and prediction workflow for the proposed AAE model involves three main stages: training, inpainting-based prediction, and evaluation. During training, the encoder and decoder learn feature representations and reconstruct the input data, while the discriminator ensures latent space regularisation using adversarial loss. The model is optimised iteratively using a combination of reconstruction and adversarial objectives. For prediction, missing values are iteratively reconstructed using inpainting, where the model leverages its learned representations to infer plausible data points. Finally, evaluation metrics such as MSE and visualisation techniques are used to assess the performance of the model. A detailed outline of the process is provided in Algorithm 1.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Effect of Pollution Levels on Respiratory and Cardiovascular Health</head><p>The relationship between air pollution and physiological responses -specifically respiratory and cardiovascular metrics -was examined using the proposed AAE model. Initial analyses revealed poor correlations between pollution levels and both average breathing rate (br_avg) and heart rate (heart_rt).</p><p>To further investigate these associations under different environmental conditions, all measured pollution variables (PM2.5, PM10, NO₂, O₃ and CO) were systematically increased by 20%, 50%, and 100% to simulate escalating exposure scenarios. The results revealed that minor increases of 20% and 50% in all pollution levels did not produce significant changes in the average breathing rate or heart rate, suggesting that small fluctuations may not be sufficient to cause noticeable physiological changes for healthy people within the current model framework. To enhance the ability of the model to detect more subtle or complex relationships, a polynomial feature transformation was applied, expanding the feature set from 29 original features to 462 derived features. This transformation enabled the model to capture higher-order interactions and nonlinear dependencies within the dataset. As shown in Figure <ref type="figure" target="#fig_7">6</ref>, under conditions of a 100% increase in pollution levels, the enhanced model demonstrated clearer correlations. Specifically, the average breathing rate increased by ~3.5%, and the heart rate rose by ~2.5%. The impact of decreased pollution was evaluated by simulating pollution reductions of 20%, 50%, and 100%. Similar to the results for minor pollution increases, reductions of 20% and 50% did not produce significant changes in either the average breathing rate or heart rate. Even with a 100% reduction in pollution, no noticeable improvement in the breathing rate was observed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Transfer Learning for Personal Health Data using Smartwatch Measurements</head><p>To improve the adaptability of the neural network initially pre-trained on the INHALE dataset, we applied transfer learning by fine tuning the model using personal health data collected over eight months from a smartwatch. The dataset comprises time-series data with 5-minute time intervals, including physiological metrics such as heart rate and step count, coupled with environmental factors such as weather and air pollution levels. The weather and pollution data were sourced from the OpenWeather API, providing a feature set for model training.</p><p>The transfer learning process involved freezing the weights of the initial layers of the pre-trained model to retain their generalisable feature representations while fine-tuning the last two layers using the smartwatch dataset. This approach helps the model learn individual-level patterns while leveraging its prior knowledge, reducing training time and improving performance on the new dataset. Let the pre-trained model 𝑓 pre (𝑥; θ pre ) be parameterised by θ pre , where 𝑥 represents the input features. The adaptation process can be expressed as:</p><formula xml:id="formula_5">θ adapt = 𝑎𝑟𝑔 𝑚𝑖𝑛 𝜃 1 𝑁 ∑ ℒ(𝑓 adapt (𝑥 𝑖 ; θ), 𝑦 𝑖 ) 𝑁 𝑖=1<label>(7)</label></formula><p>where 𝑓 adapt (𝑥; θ) represents the adapted model with parameters θ; 𝑦 𝑖 denotes the ground truth for the 𝑖 𝑡ℎ sample; ℒ is the MSE loss function, defined as ℒ(𝑦, 𝑦 ̂) = ; and 𝑁 is the number of training samples. The smartwatch dataset was divided into training and test subsets, with 80% used for training the final two layers and 20% retained for evaluation. During training, the Adam optimiser was employed, with a learning rate of 10 −4 , to minimise the loss and update the model parameters of the last two layers.</p><p>The performance of the model on the unseen 20% of the smartwatch data was evaluated using the MSE, yielding a value of 4.24 × 10 −5 . When compared to the MSE values on the training and validation dataset, the model shows a similar performance, indicating its ability to generalise to a different and more complex dataset. A qualitative analysis of the predictions revealed that the model successfully captured trends and patterns in the physiological data, including variations influenced by environmental factors. This demonstrates its ability to adapt and perform well even when the input data differs significantly from the original training data.</p><p>The successful application of transfer learning highlights the flexibility of the proposed approach. The ability to generalise across datasets with distinct characteristics makes it a promising tool for broader applications, such as personalised health monitoring and environmental health assessments. Future work will aim to explore other transfer learning strategies, such as freezing intermediate layers or using domain adaptation techniques, to further enhance performance on diverse datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusions and Future Work</head><p>This study presents a novel framework for predicting personalised health responses to pollution by integrating physiological data from wearables with real-time environmental exposures. The core predictive model -an Adversarial Autoencoder augmented with LSTM and convolutional layersaccurately reconstructed temporal health signals and captured nonlinear responses to pollution, including simulated increases in particulate matter. Applying transfer learning to the core model using personal smartwatch data confirmed the ability of the model to generalise across datasets with differing resolution, structure and context. The framework was able to maintain performance (MSE ≈ 0.003) without the need to retrain the entire network, illustrating its adaptability to real-world, user-generated data. Although the core model used here was an adversarial autoencoder, any neural network could be chosen.</p><p>To support scalable, secure, and standardised data integration, we deployed a dedicated Data Management Platform and Analytical Environment (DMP-AE). This infrastructure enables compliant ingestion, harmonisation, and analysis of heterogeneous datasets -including INHALE cohort data, smartwatch time series, and API-linked environmental streams -through a modular, cloud-based architecture. Future development will expand the system to larger, more diverse populations and incorporate uncertainty quantification for personalised risk scoring. Together, this AI-and infrastructure-enabled approach offers a foundation for real-time, individualised environmental health monitoring and precision intervention.</p><p>Building on the findings of this study, we identify several key aspects that warrant further investigation to enhance our understanding of pollution exposure and its health implications at an individual level:  Identifying the main constituents of pollution that individuals are exposed to and quantifying their daily exposure levels.</p><p> Assessing the environmental factors that influence pollutant levels in an individual's surrounding and their role in modulating exposure.</p><p> Establishing measurable health indices that can serve as reliable surrogates for an individual's physiological response to air pollution.</p><p> Investigating potential biomarkers of risk that could provide early indicators of adverse health effects.</p><p> Developing methods to assess both exposure and respiratory system response at an individual level.</p><p> Exploring predictive models that link exposure patterns to long-term health outcomes at an individual scale.</p><p>Addressing such questions in future research will contribute to a more comprehensive framework for assessing the health impacts of air pollution and guiding personalised mitigation strategies.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Overview of the AI-Respire data pipeline and model development workflow. This schematic illustrates the end-to-end architecture developed in AI-Respire for predicting personalised health responses to air pollution. The pipeline integrates two datasets: (1) an offline dataset from the INHALE project containing air pollution exposure, respiratory health, environmental, and physical activity data; and (2) an online dataset collected in real-time via the BreathBot mobile app, including smartwatch-derived physiological data, GPS data, and pollution data synchronised through OpenWeather. Model #1, an Adversarial Autoencoder (AAE), is pre-trained on the INHALE dataset to learn general patterns of pollution-health interactions. Using transfer learning, Model #1 is then fine-tuned with personalised data (Dataset #2) to yield Model #2, which captures individual-level responses. Both models are deployed within a secure Data Management Platform (DMP), supporting predictions that feed back to the user (e.g., via the mobile app) for potential health insights or interventions. The system architecture ensures continuous data flow via secure AWS channels and supports scalable, ethical AI-driven personalised health monitoring.</figDesc><graphic coords="3,77.64,161.88,433.44,263.16" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>[ 41 ]</head><label>41</label><figDesc>, an open-source data management platform initially released in January 2012. tranSMART received significant contributions from various institutions, including IMI eTRIKS [42] and The Hyve [42], and has been instrumental in supporting projects such as U-BIOPRED [43] and RASP-UK [44]. DMP, first released in June 2020 by the DSI, was designed to serve as the dedicated data management solution for the IMI2 IDEA-FAST project [45], which focuses on identifying digital endpoints to assess fatigue, sleep, and activities of daily living. Since 2020, it has been used extensively within IDEA-FAST [46] and is scheduled to support additional research initiatives, including the EPSRC PREMIERE [47] and INHALE projects.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Data Management Platform (DMP) architecture in the AI-Respire project. It includes four core components: a secure web interface, backend processing engine, analytical environment, and data storage. The storage system supports raw and integrated data, metadata, and model outputs, enabling scalable, traceable, and secure AI-driven health analysis.The DMP supports data sharing and exploration functionalities through an integrated web-based user interface and an Application Programming Interface (API). This flexibility in data ingestion supports clinical data and environmental datasets. For data exploration, the platform includes a raw file explorer that provides dataset statistics for initial review. Also, a specialised clinical and device data explorer offers summary statistics and visualisations. The DMP adheres to Clinical Data Interchange Standards Consortium (CDISC) standards, which are widely used in industry and academia<ref type="bibr" target="#b50">[48]</ref>. By embedding CDISC-compliant data standardisation pipelines, the platform ensures consistency and interoperability in data handling. Moreover, it supports extensibility to customised formats and standards.</figDesc><graphic coords="7,162.36,161.88,270.60,145.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: A heatmap to depict correlations between the features in the INHALE dataset.</figDesc><graphic coords="9,77.40,129.00,451.32,313.32" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Overview of the adversarial autoencoder (AAE) architecture used in AI-Respire for time-series prediction of pollution-linked health outcomes. The input consists of an 8-timestep window of 29 features, reshaped to a 3D tensor [samples, 1, 8, 29]. The encoder includes two 2D convolutional layers with ReLU activations, followed by an LSTM layer and a fully connected layer projecting to a 1000-dimensional latent space (Vector Z). The decoder mirrors this process with a linear layer followed by two transposed convolutional layers using ReLU and tanh activations to reconstruct the output. A discriminator network, composed of two hidden layers and a sigmoid output, enforces adversarial regularisation by distinguishing real samples from the prior p(z). During training (20 epochs, Adam optimizer), the model learns from both reconstruction and adversarial losses. This architecture supports both prediction and inpainting of missing data across time by iteratively passing sequences through the trained model. Colour-coded blocks indicate key layers: green (linear), blue (convolutional), yellow (sigmoid), purple (LSTM), and red (ReLU).</figDesc><graphic coords="11,77.40,72.00,435.96,225.84" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Algorithm 1 :</head><label>1</label><figDesc>Training and prediction with AAE and inpaintingInput: Training data(DTrain),Test data(DTest) Output: Predicted values for missing data, Evaluation metrics 1: Initialise model parameters(qEnc, qEnc, qDis) 2: Set hyperparameters: maximum iterartions (NEpochs), noise level (e), inpainting iterations (NInpaint) 3: Load training data into(train_loader), test data into(test_loader) ---Training Phase ---4: for each epoch (e=1, …, NEpochs) do 5:for each batch (xBatch, yBatch) in (train_loader) do</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Comparison of actual and predicted normalised breathing rate (𝑏𝑟_𝑎𝑣𝑔) values over half-hourly intervals.</figDesc><graphic coords="14,77.40,72.00,440.28,288.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: Comparison of predicted and actual trends for average breath rate (top) and heart rate (bottom) under baseline and 100% increased pollution levels.</figDesc><graphic coords="15,126.72,72.00,341.40,429.12" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>2 Data Collection 2.1 BreathBot: Personal Health Data Collection</head><label></label><figDesc></figDesc><table><row><cell>BreathBot is a custom-designed mobile application developed to facilitate the acquisition of health data,</cell></row><row><cell>location, weather and air quality data in real-time. The app interfaces with third-party fitness devices</cell></row><row><cell>such as Garmin [</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>29] and Fitbit [30], and fitness apps such as Apple Health [31] and Android Health Connect [32], to</head><label></label><figDesc>retrieve sensor-recorded physiological and self-reported data from wearable devices (e.g., smartwatches, wearable sensors). The app leverages developer APIs (application programming interfaces) or regularly schedules data grabs via web-hooks to these companies to retrieve data in compliance with device-specific data structures and privacy standards. By consolidating data from these sources, BreathBot provides an efficient and scalable means of gathering and monitoring relevant health BreathBot triggers sync jobs with OpenWeather via APIs to return time-stamped air quality and weather data for each of the participants' GPS location data points. In addition, BreathBot runs an automated hourly check on participants' location data and, where this has not changed due to the participant being stationary, a sync job is triggered to ensure that the resolution of air quality and weather data is at least hourly and therefore sufficient for the analysis. The use of location-based data provides essential contextual insights, allowing these environmental factors (e.g.</figDesc><table><row><cell>metrics, geolocation and environmental data, supporting high-frequency data collection required for</cell></row><row><cell>temporal and spatial health analysis. Whilst the data types and resolution vary from one device or app</cell></row><row><cell>to another, key health parameters collected include heart rate, respiratory rate and other relevant</cell></row><row><cell>biometrics, as made available through connected wearables. BreathBot also collects self-reported data</cell></row><row><cell>such as blood pressure and weight, where available. By querying these health metrics at regular</cell></row><row><cell>intervals, it ensures continuous monitoring with a high degree of temporal precision. In addition to</cell></row><row><cell>physiological data, BreathBot captures real-time GPS coordinates, obtained through a third-party plug-</cell></row><row><cell>in supplied by TransistorSoftware Ltd. [33], which queries the background location tracking on</cell></row><row><cell>participants' phones to enable the geolocation of health events. This location data is accurate to 200m</cell></row><row><cell>and reports to BreathBot every time a participant moves more than 200m. Weather and air quality data</cell></row><row><cell>is provided by OpenWeather Ltd.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 1</head><label>1</label><figDesc>Hourly aggregates of physiological and environmental data were obtained from 10 non-asthmatic participants over two-week periods in winter and non-winter months. Table1lists the description of each feature, units, value range, data type, and source (RESpeck, AIRSpeck, or OpenWeather), supporting analysis of pollution exposure and respiratory health.</figDesc><table><row><cell>:</cell><cell cols="2">Summary</cell><cell>of</cell><cell>INHALE</cell><cell cols="2">dataset</cell><cell>features</cell><cell>used</cell><cell>for</cell><cell>model</cell><cell>training.</cell></row><row><cell>Feature</cell><cell></cell><cell cols="2">Description</cell><cell></cell><cell></cell><cell>Units</cell><cell cols="2">Data Type</cell><cell>Range</cell><cell>Source</cell></row><row><cell>Timestamp</cell><cell></cell><cell cols="4">Date and time of the measurement,</cell><cell>-</cell><cell cols="3">datetime __</cell><cell>Both Devices</cell></row><row><cell></cell><cell></cell><cell cols="3">with hourly resolution</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Breathing Rate</cell><cell></cell><cell cols="4">Average respiratory rate of the subject</cell><cell>bpm</cell><cell>float</cell><cell></cell><cell>8 -30</cell><cell>RESpeck</cell></row><row><cell></cell><cell></cell><cell>per minute</cell><cell></cell><cell></cell><cell></cell><cell cols="2">(breaths/min)</cell><cell></cell><cell></cell></row><row><cell cols="2">Breathing Rate STD</cell><cell cols="4">Standard deviation of the respiratory</cell><cell>bpm</cell><cell>float</cell><cell></cell><cell>0 -5</cell><cell>RESpeck</cell></row><row><cell></cell><cell></cell><cell cols="2">rate per minute</cell><cell></cell><cell></cell><cell cols="2">(breaths/min)</cell><cell></cell><cell></cell></row><row><cell>Activity Level</cell><cell></cell><cell cols="3">Intensity of the subject's activity</cell><cell></cell><cell>-</cell><cell>float</cell><cell></cell><cell>0-10</cell><cell>RESpeck</cell></row><row><cell>Step Count</cell><cell></cell><cell cols="4">Number of steps taken by the subject</cell><cell>steps</cell><cell cols="2">integer</cell><cell>0 -120</cell><cell>RESpeck</cell></row><row><cell></cell><cell></cell><cell>per minute</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Temperature</cell><cell></cell><cell cols="3">Ambient temperature</cell><cell></cell><cell>°C</cell><cell>float</cell><cell></cell><cell>-5 -40</cell><cell>AIRSpeck/OpenWeather</cell></row><row><cell>Humidity</cell><cell></cell><cell cols="2">Relative humidity</cell><cell></cell><cell></cell><cell>%</cell><cell>float</cell><cell></cell><cell>0 -100</cell><cell>AIRSpeck/OpenWeather</cell></row><row><cell cols="2">PM2.5 Concentration</cell><cell cols="5">Particulate matter ≤2.5 µm in diameter µg/m 3</cell><cell>float</cell><cell></cell><cell>0 -500</cell><cell>AIRSpeck/OpenWeather</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>To model temporal patterns, the latent representation 𝒛 𝑡 at each timestep 𝑡 is processed using LSTM layers. The LSTM captures dependencies between timestep 𝑡 and 𝑡 -𝑘 through its hidden states 𝒉 𝑡 and cell states 𝒄 𝑡 :𝒊 𝑡 =𝜎(𝑊 𝑖 𝒛 𝑡 + 𝑈 𝑖 𝒉 𝑡−1 + 𝑏 𝑖 ) 𝒇 𝑡 = 𝜎(𝑊 𝑓 𝒛 𝑡 + 𝑈 𝑓 𝒉 𝑡−1 + 𝑏 𝑓 ) 𝒐 𝑡 = 𝜎(𝑊 𝑜 𝒛 𝑡 + 𝑈 𝑜 𝒉 𝑡−1 + 𝑏 𝑜 ) 𝒄 𝑡 = 𝒇 𝑡 ⨀𝒄 𝑡−1 + 𝒊 𝑡 ⨀ tanh(𝑊 𝑐 𝒛 𝑡 + 𝑈 𝑐 𝒉 𝑡−1 + 𝑏 𝑐 ) 𝒉 𝑡 = 𝒐 𝑡 ⨀tanh(𝑐 𝑡 ) where 𝜎 is the sigmoid activation function, ⨀ is the Hadamard product which denotes entry-wise multiplication of tensors, and 𝑈and 𝑏are learnable weights and biases. Data inpainting is a technique used to reconstruct missing or corrupted portions of data by leveraging contextual information from the surrounding regions [52]. In this study, inpainting is integrated into the model to augment the dataset by filling gaps in time-series data caused by intermittent readings, or missing values. The inpainting process is formulated as a regression problem, where missing values 𝑥 missing are estimated based on the observed values 𝑥 observed and contextual dependencies. Mathematically, the reconstructed data 𝑋 reconstructed is defined as 𝑋 reconstructed = 𝑓(𝑥 observed , 𝒞), where 𝑓 represents the inpainting function and 𝒞 denotes temporal/spatial dependencies. For time-series data, the inpainting method uses the surrounding sequence {𝑥 𝑡−𝑘 , … , 𝑥 𝑡−1 , 𝑥 𝑡+1 , … , 𝑥 𝑡+𝑘 } to estimate the missing value 𝑥 𝑡 as 𝑥 𝑡 = 𝑔({𝑥 𝑡−𝑘 , … , 𝑥 𝑡−1 , 𝑥 𝑡+1 , … , 𝑥 𝑡+𝑘 }), where 𝑔 is a neural network trained for this purpose.</figDesc><table><row><cell>(6)</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Acknowledgements</head><p>We would like to thank the following people who have kindly contributed their time and expertise to this paper. Dmytro Chupryna (Business Development and Strategic Partnerships Manager) and Daniil Mintc (Business Development and Community Manager) from OpenWeather Ltd. for their review and suggestions, and Yifeng Mao (Computational Privacy Group) from Imperial College's Data Science Institute for help with issues concerning data management and privacy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Funding Sources</head><p>The authors acknowledge the following EPSRC and NERC grants: AI-Respire, "AI for personalised respiratory health and pollution" (EP/Y018680/1); INHALE, "Health assessment across biological length scales" (EP/T003189/1); D-XPERT, "AI-Powered Total Building Management System" (Innovate UK, TMF 10097909); the PREMIERE programme grant, "AI to enhance manufacturing, energy, and healthcare" (EP/T000414/1). Support from Imperial-X's Eric and Wendy Schmidt Centre for AI in Science (a Schmidt Sciences programme) is also gratefully acknowledged.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Encoder(xBatch; qEnc) 8: xRecon = Decoder(z; qDec) 9: Compute reconstruction loss(LRecon = MSE(xBatch, xRecon) 10: # Latent space regularisation 11: Generate (zFake ~ pLatent) and (zReal = z) 12: Compute adversarial loss (LAdv) using</title>
+		<author>
+			<persName><surname>Encoder-Decoder</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Discriminator(zFake, zReal; qDis)</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Update(qEnc, qDec) using (LRecon+ λAdvLAdv) 15: Update (qDis) using (LAdv) 16: end for 17: end for ---Prediction Phase with Inpainting ---18: for each sample (xSmaple) in (test_loader) 19: # Add noise to simulate missing values 20: xNoise = xSample+e 21: Initialise missing values: set last time step of (xNoise) to second-to-last time step 22: # Iterative inpainting 23: for iteration (i=1, … , NInpaint) do 24: Predict missing values: (xPred = Decoder(Encoder(xNoise; qEnc); qDec)) 25: Update noisy input: set missing values in (xNoise) to (xPred) 26: end for 27: Store final prediction: (xFinal = xNoise) 28: end for ---Evaluation ---29: Compute evaluation metrics (Mean Squared Error, R2) between (xFinal) and ground truth (yTruth) 30: Visualise results: plot actual vs. predicted values, latent space representations The performance of the proposed AAE was evaluated using a real-world dataset, focusing on the ability of the model to reconstruct and predict normalised values of breathing rate (𝑏𝑟_𝑎𝑣𝑔). Figure 5 shows the comparison between the actual and predicted values over a sample range, normalised for clarity. The results demonstrate that the predicted values (orange line) closely align with the actual values (blue line), capturing both short-term fluctuations and long-term trends. Quantitatively, the model achieved an MSE of 0.0029 on the validation dataset, which reflects its high accuracy in reconstructing breathing rate data</title>
+	</analytic>
+	<monogr>
+		<title level="j"># Update parameters</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+		</imprint>
+	</monogr>
+	<note>This low MSE suggests that the AAE framework, enhanced by convolutional and LSTM layers, effectively learns temporal dependencies and spatial correlations within the data, even in the absence of an attention mechanism. References</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">World Health Organization)</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">H O</forename></persName>
+		</author>
+		<ptr target="https://www.who.int/health-topics/air-pollution#tab=tab_2" />
+		<imprint/>
+	</monogr>
+	<note>Air pollution 2024</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">D</forename><surname>Bradley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><forename type="middle">;</forename><surname>Alec; Exley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jim</forename><forename type="middle">;</forename><surname>Stewart-Evans</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Aldridge</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Stuart; Craswell, Amanda</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sani</forename><forename type="middle">;</forename><surname>Dimitroulopoulou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><forename type="middle">;</forename><surname>Hodgson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lydia</forename><forename type="middle">;</forename><surname>Izon-Cooper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">;</forename><surname>Mitchem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><forename type="middle">;</forename><surname>Mitsakou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Robertson</surname></persName>
+		</author>
+		<title level="m">Review of interventions to improve outdoor air quality and public health</title>
+				<meeting><address><addrLine>UK</addrLine></address></meeting>
+		<imprint>
+			<publisher>London</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><forename type="first">Public</forename><surname>Health</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">England</forename></persName>
+		</author>
+		<title level="m">Review of interventions to improve outdoor air quality and public</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Air pollution and climate change. The Lancet Planetary Health</title>
+		<author>
+			<persName><forename type="first">A.-C</forename><surname>Pinho-Gomes</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="e727" to="e728" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Climate-mediated air pollution associated with COPD severity</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Tran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science of The Total Environment</title>
+		<imprint>
+			<biblScope unit="volume">843</biblScope>
+			<biblScope unit="page">156969</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The impact of air pollution on respiratory diseases in an era of climate change: A review of the current evidence</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Tran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science of the Total Environment</title>
+		<imprint>
+			<biblScope unit="page">166340</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Genome-wide analysis reveals mucociliary remodeling of the nasal airway epithelium induced by urban PM2. 5</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Montgomery</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Respiratory Cell and Molecular Biology</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="172" to="184" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Impact of air pollution on the burden of chronic respiratory diseases in China: time for urgent action</title>
+		<author>
+			<persName><forename type="first">W.-J</forename><surname>Guan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Lancet</title>
+		<imprint>
+			<biblScope unit="volume">388</biblScope>
+			<biblScope unit="page" from="1939" to="1951" />
+			<date type="published" when="2016">2016. 10054</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Chronic obstructive pulmonary disease in neversmokers: risk factors, pathogenesis, and implications for prevention and treatment. The Lancet Respiratory Medicine</title>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">A</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Jenkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">S</forename><surname>Salvi</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="497" to="511" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Respiratory effects of exposure to diesel traffic in persons with asthma</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mccreanor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New England Journal of Medicine</title>
+		<imprint>
+			<biblScope unit="volume">357</biblScope>
+			<biblScope unit="issue">23</biblScope>
+			<biblScope unit="page" from="2348" to="2358" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Extreme weather and asthma: a systematic review and meta-analysis</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Makrufardi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Respiratory Review</title>
+		<imprint>
+			<biblScope unit="issue">168</biblScope>
+			<biblScope unit="page">32</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">EAACI guidelines on environmental science for allergy and asthma: The impact of short-term exposure to outdoor air pollutants on asthma-related outcomes and recommendations for mitigation measures</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Agache</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Allergy</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Personal strategies to minimise effects of air pollution on respiratory health: advice for providers, patients and the public</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Carlsten</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Respiratory Journal</title>
+		<imprint>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">55</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">From personalized medicine to population health: a survey of mHealth sensing techniques</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Internet of Things Journal</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="15413" to="15434" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Digital phenotypes and digital biomarkers for health and diseases: a systematic review of machine learning approaches utilizing passive non-invasive signals collected via wearable devices and smartphones</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sameh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence Review</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">66</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Wearable sensors for human environmental exposure in urban settings</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Helbig</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Current Pollution Reports</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="417" to="433" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Human-centred artificial intelligence for mobile health sensing: challenges and opportunities</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Dang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Royal Society Open Science</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page">230806</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Empowering citizens through perceptual sensing of urban environmental and health data following a participative citizen science approach</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ottaviano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sensors</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page">2940</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Deep learning</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Lecun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bengio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hinton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">521</biblScope>
+			<biblScope unit="issue">7553</biblScope>
+			<biblScope unit="page" from="436" to="444" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Deep learning for visual understanding: A review</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">187</biblScope>
+			<biblScope unit="page" from="27" to="48" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Impacts of personalized sensor feedback regarding exposure to environmental stressors. Current Pollution Reports</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Becker</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="579" to="593" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">A perspective on managing cities and citizens&apos; well-being through smart sensing data</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Caratù</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Environmental Science &amp; Policy</title>
+		<imprint>
+			<biblScope unit="volume">147</biblScope>
+			<biblScope unit="page" from="169" to="176" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Improving Access Trust in Healthcare Through Multimodal Deep Learning for Affective Computing</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sakthidevi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Fathima</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human-Centric Intelligent Systems</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="16" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The triple integration of data, users and policies required for successful climate health solutions</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Becker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Rezabeigisani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NPJ Digital Medicine</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">106</biblScope>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Health assessment across biological length scales for personal pollution exposure and its mitigation (INHALE)</title>
+		<author>
+			<persName><forename type="first">College</forename><surname>Imperial</surname></persName>
+		</author>
+		<author>
+			<persName><surname>London</surname></persName>
+		</author>
+		<ptr target="https://gtr.ukri.org/projects?ref=EP%2FT003189%2F1" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">AI for Personalised Respiratory Health and Pollution (AI-Respire</title>
+		<author>
+			<persName><forename type="first">College</forename><surname>Imperial</surname></persName>
+		</author>
+		<author>
+			<persName><surname>London</surname></persName>
+		</author>
+		<ptr target="https://gtr.ukri.org/projects?ref=EP%2FY018680%2F1" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Weather data and API services</title>
+		<author>
+			<persName><surname>Openweather</surname></persName>
+		</author>
+		<ptr target="https://openweathermap.org" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Makhzani</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1511.05644</idno>
+		<title level="m">Adversarial autoencoders</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Review of validity and reliability of Garmin activity trackers</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Evenson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">L</forename><surname>Spade</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="170" to="185" />
+		</imprint>
+	</monogr>
+	<note>Journal for the measurement of physical behaviour</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Performance assessment of new-generation Fitbit technology in deriving sleep parameters and stages</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Haghayegh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Chronobiology International</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="47" to="59" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">The provenance of Apple Health data: A timeline of update history</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jennings</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sorell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">G</forename><surname>Espinosa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Forensic Science International: Digital Investigation</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page">301804</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">HealMA: a model-driven framework for automatic generation of IoT-based Android health monitoring applications. Automated Software Engineering</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mehrabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zamani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hamou-Lhadj</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page">56</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Transistor Software Ltd -Background Geolocation Solutions</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">S</forename><surname>Ltd</surname></persName>
+		</author>
+		<ptr target="https://www.transistorsoft.com/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Amazon Web Services -Cloud Computing Solutions</title>
+		<ptr target="https://aws.amazon.com" />
+	</analytic>
+	<monogr>
+		<title level="j">AWS</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">RFC2818: HTTP over TLS</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rescorla</surname></persName>
+		</author>
+		<idno type="DOI">10.17487/RFC2818</idno>
+		<ptr target="https://doi.org/10.17487/RFC2818" />
+	</analytic>
+	<monogr>
+		<title level="m">Request For Comments Editor</title>
+				<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">The transport layer security (TLS) protocol version 1.3</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Rescorla</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">TNO-MACC_II emission inventory; a multi-year (2003-2009) consistent high-resolution European emission inventory for air quality modelling. Atmospheric Chemistry and Physics</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kuenen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1920">2014. 20</date>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="10963" to="10976" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">A global wildfire emission and atmospheric composition: Refinement of the integrated system for wild-land fires IS4FIRES. in Air Pollution Modeling and its Application XXIII</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Soares</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sofiev</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The AirSpeck family of static and mobile wireless air quality monitors</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Arvind</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2016 Euromicro Conference on Digital System Design</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Characterisation of breathing and physical activity patterns in the general population using the wearable Respeck monitor</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Arvind</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Body Area Networks: Smart IoT and Big Data for Intelligent Health Management: 14th EAI International Conference, BODYNETS 2019</title>
+				<meeting><address><addrLine>Florence, Italy</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2019">October 2-3, 2019. 2019</date>
+			<biblScope unit="page">14</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">tranSMART: an open source knowledge management and high content data analytics platform</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Scheufele</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AMIA Summits on Translational Science Proceedings</title>
+		<imprint>
+			<biblScope unit="page">96</biblScope>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Data and knowledge management in translational research: implementation of the eTRIKS platform for the IMI OncoTrack consortium</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Clinical and inflammatory characteristics of the European U-BIOPRED adult severe asthma cohort</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Shaw</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Respiratory Journal</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">1308</biblScope>
+			<date type="published" when="2015">2015. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Research in progress: Medical Research Council United Kingdom refractory asthma stratification programme (RASP-UK)</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">G</forename><surname>Heaney</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Thorax</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="187" to="189" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">The Innovative Medicines Initiative neurodegeneration portfolio: From individual projects to collaborative networks</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>O'rourke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Neurology</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">994301</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Regulatory qualification of a cross-disease digital measure: benefits and challenges from the perspective of IMI Consortium IDEA-FAST</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Nobbs</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Digital Biomarkers</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="132" to="138" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Machine learning and physics-driven modelling and simulation of multiphase systems</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Basha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Multiphase Flow</title>
+		<imprint>
+			<biblScope unit="volume">179</biblScope>
+			<biblScope unit="page">104936</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<ptr target="https://www.cdisc.org" />
+		<title level="m">Clinical Data Interchange Standards Consortium, CDISC Standards: Enabling Clinical Data Interoperability</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Activation functions in deep learning: A comprehensive survey and benchmark</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Dubey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">B</forename><surname>Chaudhuri</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">503</biblScope>
+			<biblScope unit="page" from="92" to="108" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Understanding LSTM networks</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olah</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<author>
+			<persName><forename type="first">H</forename><surname>Habibi Aghdam</surname></persName>
+		</author>
+		<title level="m">Convolutional neural networks</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Smartbrush: Text and shape guided object inpainting with diffusion model</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Xie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</title>
+				<meeting>the IEEE/CVF Conference on Computer Vision and Pattern Recognition</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">A-spiro: Towards continuous respiration monitoring</title>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shubham</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Smart</forename><surname>Health</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.smhl.2019.100105</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">100105</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,2911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ex="http://example.org/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:schema1="http://schema.org/"
+>
+  <rdf:Description rdf:about="http://example.org/2505.10559v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Neural Thermodynamic Laws for Large Language Model Training</schema1:name>
+    <schema1:abstract>beyond neural scaling laws little is known about the laws underlying large language models llms we introduce neural thermodynamic laws ntl a new framework that offers fresh insights into llm training dynamics on the theoretical side we demonstrate that key thermodynamic quantities e g temperature entropy heat capacity thermal conduction and classical thermodynamic principles e g the three laws of thermodynamics and the equipartition theorem naturally emerge under river valley loss landscape assumptions on the practical side this scientific perspective yields intuitive guidelines for designing learning rate schedules introduction large neural networks bear striking similarities to thermodynamic systems both involve</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2011.13456</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Ziming_Liu"/>
+    <schema1:author rdf:resource="http://example.org/person/Yizhou_Liu"/>
+    <schema1:author rdf:resource="http://example.org/person/Jeff_Gore"/>
+    <schema1:author rdf:resource="http://example.org/person/Max_Tegmark"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/._Z._L."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/M.T."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Z.L."/>
+    <schema1:funder rdf:resource="http://example.org/org/Google"/>
+    <schema1:funder rdf:resource="http://example.org/org/IAIFI"/>
+    <schema1:funder rdf:resource="http://example.org/org/NSF"/>
+    <ex:hasWord>beyond</ex:hasWord>
+    <ex:hasWord>neural</ex:hasWord>
+    <ex:hasWord>scaling</ex:hasWord>
+    <ex:hasWord>laws</ex:hasWord>
+    <ex:hasWord>little</ex:hasWord>
+    <ex:hasWord>is</ex:hasWord>
+    <ex:hasWord>known</ex:hasWord>
+    <ex:hasWord>about</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Claire_Heaney">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Claire Heaney</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10464v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>HWA-UNETR: Hierarchical Window Aggregate UNETR for 3D Multimodal Gastric Lesion Segmentation</schema1:name>
+    <schema1:abstract>multimodal medical image segmentation faces significant challenges in the context of gastric cancer lesion analysis this clinical context is defined by the scarcity of independent multimodal datasets and the imperative to amalgamate inherently misaligned modalities as a result algorithms are constrained to train on approximate data and depend on application migration leading to substantial resource expenditure and a potential decline in analysis accuracy to address those challenges we have made two major contributions first we publicly disseminate the gcm 2025 dataset which serves as the first large scale open source collection of gastric cancer multimodal mri scans featuring professionally annotated</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2402.03526</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Jiaming_Liang"/>
+    <schema1:author rdf:resource="http://example.org/person/Lihuan_Dai"/>
+    <schema1:author rdf:resource="http://example.org/person/Xiaoqi_Sheng"/>
+    <schema1:author rdf:resource="http://example.org/person/Xianggua_Chen"/>
+    <schema1:author rdf:resource="http://example.org/person/Chun_Yao"/>
+    <schema1:author rdf:resource="http://example.org/person/Guihua_Tao"/>
+    <schema1:author rdf:resource="http://example.org/person/Qibin_Leng"/>
+    <schema1:author rdf:resource="http://example.org/person/Honming_Cai"/>
+    <schema1:author rdf:resource="http://example.org/person/Xi_Zhong"/>
+    <schema1:funder rdf:resource="http://example.org/org/City"/>
+    <schema1:funder rdf:resource="http://example.org/org/Hainan_University_High-level_Talent_Research_Launch_Fund"/>
+    <schema1:funder rdf:resource="http://example.org/org/National_Natural_Science_Foundation_of_China"/>
+    <schema1:funder rdf:resource="http://example.org/org/zhou_City"/>
+    <ex:hasWord>multimodal</ex:hasWord>
+    <ex:hasWord>medical</ex:hasWord>
+    <ex:hasWord>image</ex:hasWord>
+    <ex:hasWord>segmentation</ex:hasWord>
+    <ex:hasWord>faces</ex:hasWord>
+    <ex:hasWord>significant</ex:hasWord>
+    <ex:hasWord>challenges</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>context</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15700v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>"Alexa, can you forget me?" Machine Unlearning Benchmark in Spoken Language Understanding</schema1:name>
+    <schema1:abstract>machine unlearning the process of efficiently removing specific information from machine learning models is a growing area of interest for responsible ai however few studies have explored the effectiveness of unlearning methods on complex tasks particularly speech related ones this paper introduces unslu bench the first benchmark for machine unlearning in spoken language understanding slu focusing on four datasets spanning four languages we address the unlearning of data from specific speakers as a way to evaluate the quality of potential right to be forgotten requests we assess eight unlearning techniques and propose a novel metric to simultaneously better capture their</schema1:abstract>
+    <schema1:identifier>DOI:10.1145/3603620</schema1:identifier>
+    <schema1:datePublished>2025-05-21</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Alkis_Koudounas"/>
+    <schema1:author rdf:resource="http://example.org/person/Claudio_Savelli"/>
+    <schema1:author rdf:resource="http://example.org/person/Flavio_Giobergia"/>
+    <schema1:author rdf:resource="http://example.org/person/Elena_Baralis"/>
+    <schema1:funder rdf:resource="http://example.org/org/Centro_Nazionale_di_Ricerca_in_High-"/>
+    <schema1:funder rdf:resource="http://example.org/org/Computing,_Big_Data"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Commission"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Union"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Union_NextGenerationEU"/>
+    <schema1:funder rdf:resource="http://example.org/org/FAIR"/>
+    <schema1:funder rdf:resource="http://example.org/org/Future_Artificial_Intelligence_Research"/>
+    <schema1:funder rdf:resource="http://example.org/org/ICSC"/>
+    <schema1:funder rdf:resource="http://example.org/org/NextGenerationEU"/>
+    <schema1:funder rdf:resource="http://example.org/org/PIANO_NAZIONALE_DI_RIPRESA_E_RESILIENZA"/>
+    <schema1:funder rdf:resource="http://example.org/org/PNRR"/>
+    <schema1:funder rdf:resource="http://example.org/org/Quantum_Computing"/>
+    <ex:hasWord>machine</ex:hasWord>
+    <ex:hasWord>unlearning</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>process</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>efficiently</ex:hasWord>
+    <ex:hasWord>removing</ex:hasWord>
+    <ex:hasWord>specific</ex:hasWord>
+    <ex:hasWord>information</ex:hasWord>
+    <ex:hasWord>from</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Etienne_Decencière">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Etienne Decencière</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q59194121"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/FNR">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>FNR</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q19040391"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10490v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Campus AI vs Commercial AI: A Late-Breaking Study on How LLM As-A-Service Customizations Shape Trust and Usage Patterns</schema1:name>
+    <schema1:abstract>as the use of large language models llms by students lecturers and researchers becomes more prevalent universities like other organizations are pressed to develop coherent ai strategies llms as a service llmaas offer accessible pre trained models customizable to specific business needs while most studies prioritize data model or infrastructure adaptations e g model finetuning we focus on user salient customizations like interface changes and corporate branding which we argue influence users trust and usage patterns this study serves as a functional prequel to a large scale field study in which we examine how students and employees at a german</schema1:abstract>
+    <schema1:identifier>DOI:10.1007/s10916-024-02044-4</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Leon_Hannig"/>
+    <schema1:author rdf:resource="http://example.org/person/Annika_Bush"/>
+    <schema1:author rdf:resource="http://example.org/person/Steffen_Becker"/>
+    <schema1:author rdf:resource="http://example.org/person/Greta_Ontrup"/>
+    <schema1:funder rdf:resource="http://example.org/org/Research_Alliance_Centers"/>
+    <schema1:funder rdf:resource="http://example.org/org/Research_Center_Trustworthy_Data_Science_and_Security"/>
+    <schema1:funder rdf:resource="http://example.org/org/UA_Ruhr"/>
+    <schema1:funder rdf:resource="http://example.org/org/rc-trust"/>
+    <schema1:funder rdf:resource="http://example.org/org/uar"/>
+    <ex:hasWord>as</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>use</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>large</ex:hasWord>
+    <ex:hasWord>language</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+    <ex:hasWord>llms</ex:hasWord>
+    <ex:hasWord>by</ex:hasWord>
+    <ex:hasWord>students</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/RGC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>RGC</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q20894925"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.09489v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Radon Exposure Dataset</schema1:name>
+    <schema1:abstract>introduction exposure to elevated radon levels in the home is one of the leading causes of lung cancer in the world 1 2 3 the following study describes the creation of a comprehensive state level dataset designed to enable the modeling and prediction of household radon concentrations at zip code tabulation area zcta and sub kilometer scales details include the data collection and processing involved in compiling physical and demographic factors for pennsylvania and utah attempting to mitigate this risk requires identifying the underlying geological causes and the populations that might be at risk this work focuses on identifying at</schema1:abstract>
+    <schema1:identifier>DOI:10.1016/j.eiar.2020.106444</schema1:identifier>
+    <schema1:datePublished>2025-05-14</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Dakotah_Maguire"/>
+    <schema1:author rdf:resource="http://example.org/person/Jeremy_Logan"/>
+    <schema1:author rdf:resource="http://example.org/person/Heechan_Lee"/>
+    <schema1:author rdf:resource="http://example.org/person/Heidi_Hanson"/>
+    <schema1:funder rdf:resource="http://example.org/org/."/>
+    <schema1:funder rdf:resource="http://example.org/org/._DOE"/>
+    <schema1:funder rdf:resource="http://example.org/org/DOE"/>
+    <schema1:funder rdf:resource="http://example.org/org/Oak_Ridge_National_Laboratory"/>
+    <schema1:funder rdf:resource="http://example.org/org/Office_of_Biological_and_Environmental_Research"/>
+    <schema1:funder rdf:resource="http://example.org/org/Office_of_Science"/>
+    <schema1:funder rdf:resource="http://example.org/org/U.S._Department_of_Energy"/>
+    <schema1:funder rdf:resource="http://example.org/org/US_Department_of_Energy"/>
+    <schema1:funder rdf:resource="http://example.org/org/UT-Battelle_LLC"/>
+    <schema1:funder rdf:resource="http://example.org/org/UT-Battelle,_LLC"/>
+    <ex:hasWord>introduction</ex:hasWord>
+    <ex:hasWord>exposure</ex:hasWord>
+    <ex:hasWord>to</ex:hasWord>
+    <ex:hasWord>elevated</ex:hasWord>
+    <ex:hasWord>radon</ex:hasWord>
+    <ex:hasWord>levels</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>home</ex:hasWord>
+    <ex:hasWord>is</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10566v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>3D-Fixup: Advancing Photo Editing with 3D Priors</schema1:name>
+    <schema1:abstract>despite significant advances in modeling image priors via diffusion models 3d aware image editing remains challenging in part because the object is only specified via a single image to tackle this challenge we propose 3d fixup a new framework for editing 2d images guided by learned 3d priors the framework supports difficult editing situations such as object translation and 3d rotation to achieve this we leverage a training based approach that harnesses the generative power of diffusion models as video data naturally encodes real world physical dynamics we turn to video data for generating training data pairs i e a</schema1:abstract>
+    <schema1:identifier>DOI:10.1145/nnnnnnn.nnnnnnn</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Yen-Chi_Cheng"/>
+    <schema1:author rdf:resource="http://example.org/person/Krishna_Kumar_Singh"/>
+    <schema1:author rdf:resource="http://example.org/person/Adobe_Research"/>
+    <schema1:author rdf:resource="http://example.org/person/Jae_Yoon"/>
+    <schema1:author rdf:resource="http://example.org/person/Paul_Guerrero"/>
+    <schema1:author rdf:resource="http://example.org/person/Krishna_Singh"/>
+    <schema1:author rdf:resource="http://example.org/person/Chi_Cheng"/>
+    <schema1:author rdf:resource="http://example.org/person/Alexander_Schwing"/>
+    <schema1:author rdf:resource="http://example.org/person/Liang-Yan_Gui"/>
+    <schema1:author rdf:resource="http://example.org/person/Matheus_Gadelha"/>
+    <schema1:author rdf:resource="http://example.org/person/Nanxuan_Zhao"/>
+    <schema1:funder rdf:resource="http://example.org/org/Amazon-Illinois_Center_on_AI_for"/>
+    <schema1:funder rdf:resource="http://example.org/org/NIFA"/>
+    <schema1:funder rdf:resource="http://example.org/org/NSF"/>
+    <ex:hasWord>despite</ex:hasWord>
+    <ex:hasWord>significant</ex:hasWord>
+    <ex:hasWord>advances</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>modeling</ex:hasWord>
+    <ex:hasWord>image</ex:hasWord>
+    <ex:hasWord>priors</ex:hasWord>
+    <ex:hasWord>via</ex:hasWord>
+    <ex:hasWord>diffusion</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.07105v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Knowledge Distillation for Enhancing Walmart E-commerce Search Relevance Using Large Language Models</schema1:name>
+    <schema1:abstract>ensuring the products displayed in e commerce search results are relevant to users queries is crucial for improving the user experience with their advanced semantic understanding deep learning models have been widely used for relevance matching in search tasks while large language models llms offer superior ranking capabilities it is challenging to deploy llms in real time systems due to the high latency requirements to leverage the ranking power of llms while meeting the low latency demands of production systems we propose a novel framework that distills a highperforming llm into a more efficient low latency student model to help</schema1:abstract>
+    <schema1:identifier>DOI:10.1145/3701716.3715242</schema1:identifier>
+    <schema1:datePublished>2025-05-11</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Hongwei_Shang"/>
+    <schema1:author rdf:resource="http://example.org/person/Nguyen_Vo"/>
+    <schema1:author rdf:resource="http://example.org/person/Tian_Zhang"/>
+    <schema1:author rdf:resource="http://example.org/person/Shuyi_Chen"/>
+    <schema1:author rdf:resource="http://example.org/person/Prijith_Chandran"/>
+    <schema1:author rdf:resource="http://example.org/person/Changsung_Kang"/>
+    <schema1:author rdf:resource="http://example.org/person/Nitin_Yadav"/>
+    <schema1:author rdf:resource="http://example.org/person/Ajit_Puthenputhussery"/>
+    <schema1:author rdf:resource="http://example.org/person/Xunfan_Cai"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Atul_Singh"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Bhavin_Madhani"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Ciya_Liao"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Juexin_Lin"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Matthew_Mu"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Mossaab_Bagdouri"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Nick_Rossi"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Tony_Lee"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Yuan-Tai_Fu"/>
+    <ex:hasWord>ensuring</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>products</ex:hasWord>
+    <ex:hasWord>displayed</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>e</ex:hasWord>
+    <ex:hasWord>commerce</ex:hasWord>
+    <ex:hasWord>search</ex:hasWord>
+    <ex:hasWord>results</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Luqin_Gan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Luqin Gan</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10556v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>An AI-driven framework for the prediction of personalised health response to air pollution</schema1:name>
+    <schema1:abstract>air pollution poses a significant threat to public health causing or exacerbating many respiratory and cardiovascular diseases in addition climate change is bringing about more extreme weather events such as wildfires and heatwaves which can increase levels of pollution and worsen the effects of pollution exposure recent advances in personal sensing have transformed the collection of behavioural and physiological data leading to the potential for new improvements in healthcare we wish to capitalise on this data alongside new capabilities in ai for making time series predictions in order to monitor and predict health outcomes for an individual thus we present</schema1:abstract>
+    <schema1:identifier>DOI:10.17487/RFC2818</schema1:identifier>
+    <schema1:author rdf:resource="http://example.org/person/Nazanin_Zounemat_Kermani"/>
+    <schema1:author rdf:resource="http://example.org/person/Sadjad_Naderi"/>
+    <schema1:author rdf:resource="http://example.org/person/Claire_Dilliway"/>
+    <schema1:author rdf:resource="http://example.org/person/Claire_Heaney"/>
+    <schema1:author rdf:resource="http://example.org/person/Shrreya_Behll"/>
+    <schema1:author rdf:resource="http://example.org/person/Boyang_Chen"/>
+    <schema1:author rdf:resource="http://example.org/person/Hisham_Abubakar-Waziri"/>
+    <schema1:author rdf:resource="http://example.org/person/Alexandra_Porter"/>
+    <schema1:author rdf:resource="http://example.org/person/Marc_Chadeau-Hyam"/>
+    <schema1:author rdf:resource="http://example.org/person/Fangxin_Fang"/>
+    <schema1:author rdf:resource="http://example.org/person/Ian_Adcock"/>
+    <schema1:author rdf:resource="http://example.org/person/Kian_Chung"/>
+    <schema1:author rdf:resource="http://example.org/person/Christopher_Pain"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Daniil_Mintc"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Dmytro_Chupryna"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Eric"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Wendy_Schmidt"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Yifeng_Mao"/>
+    <schema1:funder rdf:resource="http://example.org/org/."/>
+    <schema1:funder rdf:resource="http://example.org/org/Centre_for"/>
+    <schema1:funder rdf:resource="http://example.org/org/Computational_Privacy_Group"/>
+    <schema1:funder rdf:resource="http://example.org/org/Data_Science_Institute"/>
+    <schema1:funder rdf:resource="http://example.org/org/EPSRC"/>
+    <schema1:funder rdf:resource="http://example.org/org/Imperial_College"/>
+    <schema1:funder rdf:resource="http://example.org/org/Imperial-X"/>
+    <schema1:funder rdf:resource="http://example.org/org/Innovate_UK"/>
+    <schema1:funder rdf:resource="http://example.org/org/NERC"/>
+    <schema1:funder rdf:resource="http://example.org/org/OpenWeather_Ltd."/>
+    <schema1:funder rdf:resource="http://example.org/org/Schmidt_Sciences"/>
+    <schema1:funder rdf:resource="http://example.org/org/Science"/>
+    <ex:hasWord>air</ex:hasWord>
+    <ex:hasWord>pollution</ex:hasWord>
+    <ex:hasWord>poses</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>significant</ex:hasWord>
+    <ex:hasWord>threat</ex:hasWord>
+    <ex:hasWord>to</ex:hasWord>
+    <ex:hasWord>public</ex:hasWord>
+    <ex:hasWord>health</ex:hasWord>
+    <ex:hasWord>causing</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Cédric_Lothritz">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Cédric Lothritz</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130878318"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Robert_Clarisó">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Robert Clarisó</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q56956859"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Attorney">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Attorney</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q40348"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Next_Generation_EU">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Next Generation EU</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q97621963"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10037v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>OPTIMAL NORMALIZATION IN QUANTUM-CLASSICAL HYBRID MODELS FOR ANTI-CANCER DRUG RESPONSE PREDICTION</schema1:name>
+    <schema1:abstract>quantum classical hybrid machine learning qhml models are recognized for their robust performance and high generalization ability even for relatively small datasets these qualities offer unique advantages for anti cancer drug response prediction where the number of available samples is typically small however such hybrid models appear to be very sensitive to the data encoding used at the interface of a neural network and a quantum circuit with suboptimal choices leading to stability issues to address this problem we propose a novel strategy that uses a normalization function based on a moderated gradient version of the tanh this method transforms</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:1412.6980</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Takafumi_Ito"/>
+    <schema1:author rdf:resource="http://example.org/person/Lysenko_Artem"/>
+    <schema1:author rdf:resource="http://example.org/person/Tatsuhiko_Tsunoda"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Kazuya_Yamazaki"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Kengo_Nakajima"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Maxence_Vandromme"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Mitsuhisa_Sato"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Miwako_Tsuji"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Yuetsu_Kodama"/>
+    <schema1:funder rdf:resource="http://example.org/org/JSPS_KAKENHI"/>
+    <schema1:funder rdf:resource="http://example.org/org/The_University_of_Tokyo"/>
+    <ex:hasWord>quantum</ex:hasWord>
+    <ex:hasWord>classical</ex:hasWord>
+    <ex:hasWord>hybrid</ex:hasWord>
+    <ex:hasWord>machine</ex:hasWord>
+    <ex:hasWord>learning</ex:hasWord>
+    <ex:hasWord>qhml</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+    <ex:hasWord>recognized</ex:hasWord>
+    <ex:hasWord>for</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10530v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Exploring Variational Entanglement Hamiltonians</schema1:name>
+    <schema1:abstract>recent advances in analog and digital quantum simulation platforms have enabled exploration of the spectrum of entanglement hamiltonians via variational algorithms in this work we analyze the convergence properties of the variationally obtained solutions and compare them to numerically exact calculations in quantum critical systems we demonstrate that interpreting the cost functional as an integral permits the deployment of iterative quadrature schemes thereby reducing the required number of measurements by several orders of magnitude we further show that a modified ansatz captures deviations from the bisognano wichmann form in lattice models improves convergence and provides a cost function level diagnostic</schema1:abstract>
+    <schema1:identifier>DOI:10.1007/BF02650179</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Yanick_Kind"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Bhuvanesh_Sundar"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Christian_Kokail"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Peter_Zoller"/>
+    <ex:hasWord>recent</ex:hasWord>
+    <ex:hasWord>advances</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>analog</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>digital</ex:hasWord>
+    <ex:hasWord>quantum</ex:hasWord>
+    <ex:hasWord>simulation</ex:hasWord>
+    <ex:hasWord>platforms</ex:hasWord>
+    <ex:hasWord>have</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jessica_Bader">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jessica Bader</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Miwako_Tsuji">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Miwako Tsuji</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/G.I.A">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>G.I.A</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q131233996"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.09993v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Automated grading and staging of ovarian cancer using deep learning on the transmission optical microscopy bright-field images of thin biopsy tissue samples</schema1:name>
+    <schema1:abstract>ovarian cancer remains a challenging malignancy to diagnose and manage with prognosis heavily dependent on the stage at detection accurate grading and staging primarily based on histopathological examination of biopsy tissue samples are crucial for treatment planning and predicting outcomes however this manual process is time consuming and subject to inter observer variability among pathologists the increasing volume of digital histopathology slides necessitates the development of robust automated methods to assist in this critical diagnostic step for ovarian cancer methods this study presents a deep learning framework for the automated prediction of ovarian cancer stage classified into five categories 0</schema1:abstract>
+    <schema1:identifier>MD5:FB26104CEAD09375B7CF969315064C45</schema1:identifier>
+    <schema1:author rdf:resource="http://example.org/person/Ashmit_Mishra"/>
+    <schema1:author rdf:resource="http://example.org/person/Mousa_Alrubayan"/>
+    <schema1:author rdf:resource="http://example.org/person/Prabhakar_Pradhan"/>
+    <schema1:funder rdf:resource="http://example.org/org/."/>
+    <schema1:funder rdf:resource="http://example.org/org/MSU"/>
+    <schema1:funder rdf:resource="http://example.org/org/Mississippi_State."/>
+    <schema1:funder rdf:resource="http://example.org/org/NIH"/>
+    <schema1:funder rdf:resource="http://example.org/org/National_Institutes_of_Health"/>
+    <schema1:funder rdf:resource="http://example.org/org/ORED"/>
+    <ex:hasWord>ovarian</ex:hasWord>
+    <ex:hasWord>cancer</ex:hasWord>
+    <ex:hasWord>remains</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>challenging</ex:hasWord>
+    <ex:hasWord>malignancy</ex:hasWord>
+    <ex:hasWord>to</ex:hasWord>
+    <ex:hasWord>diagnose</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>manage</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2504.18560v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Mind the Language Gap: Automated and Augmented Evaluation of Bias in LLMs for High-and Low-Resource Languages</schema1:name>
+    <schema1:abstract>large language models llms have exhibited impressive natural language processing capabilities but often perpetuate social biases inherent in their training data to address this we introduce multilingual augmented bias testing mla bite a framework that improves prior bias evaluation methods by enabling systematic multilingual bias testing mla bite leverages automated translation and paraphrasing techniques to support comprehensive assessments across diverse linguistic settings in this study we evaluate the effectiveness of mla bite by testing four state of the art llms in six languages including two low resource languages focusing on seven sensitive categories of discrimination introduction large language models llms</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2112.04359</schema1:identifier>
+    <schema1:datePublished>2025-04-19</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Alessio_Buscemi"/>
+    <schema1:author rdf:resource="http://example.org/person/Cédric_Lothritz"/>
+    <schema1:author rdf:resource="http://example.org/person/Sergio_Morales"/>
+    <schema1:author rdf:resource="http://example.org/person/Marcos_Gomez-Vazquez"/>
+    <schema1:author rdf:resource="http://example.org/person/Robert_Clarisó"/>
+    <schema1:author rdf:resource="http://example.org/person/Jordi_Cabot"/>
+    <schema1:author rdf:resource="http://example.org/person/Germán_Castignani"/>
+    <schema1:funder rdf:resource="http://example.org/org/FNR"/>
+    <schema1:funder rdf:resource="http://example.org/org/Luxembourg_National_Research_Fund"/>
+    <schema1:funder rdf:resource="http://example.org/org/MCIN_AEI"/>
+    <ex:hasWord>large</ex:hasWord>
+    <ex:hasWord>language</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+    <ex:hasWord>llms</ex:hasWord>
+    <ex:hasWord>have</ex:hasWord>
+    <ex:hasWord>exhibited</ex:hasWord>
+    <ex:hasWord>impressive</ex:hasWord>
+    <ex:hasWord>natural</ex:hasWord>
+    <ex:hasWord>processing</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10545v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Pharmacophore-Conditioned Diffusion Model for Ligand-Based De Novo Drug Design</schema1:name>
+    <schema1:abstract>developing bioactive molecules remains a central time and cost heavy challenge in drug discovery particularly for novel targets lacking structural or functional data pharmacophore modeling presents an alternative for capturing the key features required for molecular bioactivity against a biological target in this work we present pharmadiff a pharmacophore conditioned diffusion model for 3d molecular generation pharmadiff employs a transformer based architecture to integrate an atom based representation of the 3d pharmacophore into the generative process enabling the precise generation of 3d molecular graphs that align with predefined pharmacophore hypotheses through comprehensive testing pharmadiff demonstrates superior performance in matching 3d</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2505.10545v1[cs.LG]</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Amira_Alakhdar"/>
+    <schema1:author rdf:resource="http://example.org/person/Barnabas_Poczos"/>
+    <schema1:author rdf:resource="http://example.org/person/Newell_Washburn"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/A.A."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/N.W."/>
+    <schema1:funder rdf:resource="http://example.org/org/NSF"/>
+    <ex:hasWord>developing</ex:hasWord>
+    <ex:hasWord>bioactive</ex:hasWord>
+    <ex:hasWord>molecules</ex:hasWord>
+    <ex:hasWord>remains</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>central</ex:hasWord>
+    <ex:hasWord>time</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>cost</ex:hasWord>
+    <ex:hasWord>heavy</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10463v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>A possible periodic RM evolution in the repeating FRB 20220529</schema1:name>
+    <schema1:abstract>fast radio bursts frbs are mysterious millisecond duration radio transients from the distant universe some of them repeat while others do not in order to explore their origin periodic examinations have been conducted on repeating frbs most of them show irregular properties including burst rate dispersion measure dm and rotation measure rm a notable exception is frb 20180916b which shows a significant 16 day periodic burst rate possible periodic activities have also been reported in frb 20121102a and frb 20240209a however periodic studies of other properties are sparse frb 20220529 was monitored by the five hundred meter aperture spherical radio</schema1:abstract>
+    <schema1:identifier>DOI:10.3847/0004-637X/824/2/105</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Yi-Fang_Liang"/>
+    <schema1:author rdf:resource="http://example.org/person/Ye_Li"/>
+    <schema1:author rdf:resource="http://example.org/person/Zhen-Fan_Tang"/>
+    <schema1:author rdf:resource="http://example.org/person/Xuan_Yang"/>
+    <schema1:author rdf:resource="http://example.org/person/Song-Bo_Zhang"/>
+    <schema1:author rdf:resource="http://example.org/person/Yuan-Pei_Yang"/>
+    <schema1:author rdf:resource="http://example.org/person/Fa-Yin_Wang"/>
+    <schema1:author rdf:resource="http://example.org/person/Bao_Wang"/>
+    <schema1:author rdf:resource="http://example.org/person/Di_Xiao"/>
+    <schema1:author rdf:resource="http://example.org/person/Qing_Zhao"/>
+    <schema1:author rdf:resource="http://example.org/person/Jun-Jie_Wei"/>
+    <schema1:author rdf:resource="http://example.org/person/Jin-Jun_Geng"/>
+    <schema1:author rdf:resource="http://example.org/person/Jia-Rui_Niu"/>
+    <schema1:author rdf:resource="http://example.org/person/Jun-Shuo_Zhang"/>
+    <schema1:author rdf:resource="http://example.org/person/Guo_Chen"/>
+    <schema1:author rdf:resource="http://example.org/person/Min_Fang"/>
+    <schema1:author rdf:resource="http://example.org/person/Xue-Feng_Wu"/>
+    <schema1:author rdf:resource="http://example.org/person/Zi-Gao_Dai"/>
+    <schema1:author rdf:resource="http://example.org/person/Wei-Wei_Zhu"/>
+    <schema1:author rdf:resource="http://example.org/person/Peng_Jiang"/>
+    <schema1:author rdf:resource="http://example.org/person/Bing_Zhang"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Qiang_Yuan"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Tiancong_Wang"/>
+    <schema1:funder rdf:resource="http://example.org/org/CAS_Organizational_Scientific_Research_Platform_for_National_Major_Scientific_and_Techn"/>
+    <schema1:funder rdf:resource="http://example.org/org/Challenges"/>
+    <schema1:funder rdf:resource="http://example.org/org/Chinese_Academy_of_Sciences_for"/>
+    <schema1:funder rdf:resource="http://example.org/org/Infrastructure"/>
+    <schema1:funder rdf:resource="http://example.org/org/Natural_Science_Foundation_of_China"/>
+    <schema1:funder rdf:resource="http://example.org/org/Natural_Science_Foundation_of_Jiangsu_Province"/>
+    <schema1:funder rdf:resource="http://example.org/org/YFL"/>
+    <schema1:funder rdf:resource="http://example.org/org/YL"/>
+    <ex:hasWord>fast</ex:hasWord>
+    <ex:hasWord>radio</ex:hasWord>
+    <ex:hasWord>bursts</ex:hasWord>
+    <ex:hasWord>frbs</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+    <ex:hasWord>mysterious</ex:hasWord>
+    <ex:hasWord>millisecond</ex:hasWord>
+    <ex:hasWord>duration</ex:hasWord>
+    <ex:hasWord>transients</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10142v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Knowledge-Based Aerospace Engineering -A Systematic Literature Review</schema1:name>
+    <schema1:abstract>json ld json for linked data kadmos knowledge and graph based agile design with multi disciplinary optimization system kbe knowledge based engineering kif knowledge interchange format km knowledge management mbse model based systems engineering i introduction the aerospace industry operates at the frontier of technological innovation combining complex systems and cutting edge research to achieve advancements in design manufacturing and operational efficiency with the current trend towards new system architectures including novel technologies the complexity of aircraft design and its verification and validation is significantly growing and can no longer be handled with traditional engineering approaches at the same time</schema1:abstract>
+    <schema1:identifier>DOI:10.1007/978-3-319-13776-6_10</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Tim_Wittenborg"/>
+    <schema1:author rdf:resource="http://example.org/person/Ildar_Baimuratov"/>
+    <schema1:author rdf:resource="http://example.org/person/Ludvig_Knöös_Franzén"/>
+    <schema1:author rdf:resource="http://example.org/person/Ingo_Staack"/>
+    <schema1:author rdf:resource="http://example.org/person/Ulrich_Römer"/>
+    <schema1:author rdf:resource="http://example.org/person/Sören_Auer"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Ihar_Antonau"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Susanna_Baars"/>
+    <schema1:funder rdf:resource="http://example.org/org/SE"/>
+    <ex:hasWord>json</ex:hasWord>
+    <ex:hasWord>ld</ex:hasWord>
+    <ex:hasWord>for</ex:hasWord>
+    <ex:hasWord>linked</ex:hasWord>
+    <ex:hasWord>data</ex:hasWord>
+    <ex:hasWord>kadmos</ex:hasWord>
+    <ex:hasWord>knowledge</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>graph</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Tomaž_Pisanski">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tomaž Pisanski</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q6960377"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2504.12897v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>OntoPortal-Astro, a Semantic Artefact Catalogue for Astronomy</schema1:name>
+    <schema1:abstract>the astronomy communities are widely recognised as mature communities for their open science practices however while their data ecosystems are rather advanced and permit efficient data interoperability there are still gaps between these ecosystems semantic artefacts e g ontologies thesauri vocabularies or metadata schemas are a means to bridge that gap as they allow to semantically described the data and map the underlying concepts the increasing use of semantic artefacts in astronomy presents challenges in description selection evaluation trust and mappings the landscape remains fragmented with semantic artefacts scattered across various registries in diverse formats and structures not yet fully</schema1:abstract>
+    <schema1:identifier>DOI:10.1186/1880-5981-66-133</schema1:identifier>
+    <schema1:datePublished>2025-04-18</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Baptiste_Cecconi"/>
+    <schema1:author rdf:resource="http://example.org/person/Laura_Debisschop"/>
+    <schema1:author rdf:resource="http://example.org/person/Sébastien_Derrière"/>
+    <schema1:author rdf:resource="http://example.org/person/Mireille_Louys"/>
+    <schema1:author rdf:resource="http://example.org/person/Carmen_Corre"/>
+    <schema1:author rdf:resource="http://example.org/person/Nina_Grau"/>
+    <schema1:author rdf:resource="http://example.org/person/Clément_Jonquet"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Markus_Demleitner"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Sophie_Aubin"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Commission"/>
+    <schema1:funder rdf:resource="http://example.org/org/IHDEA"/>
+    <schema1:funder rdf:resource="http://example.org/org/INRAE"/>
+    <schema1:funder rdf:resource="http://example.org/org/IPDA"/>
+    <schema1:funder rdf:resource="http://example.org/org/IVOA"/>
+    <schema1:funder rdf:resource="http://example.org/org/IVOA_Semantics"/>
+    <schema1:funder rdf:resource="http://example.org/org/Observatoire_de_Paris-PSL"/>
+    <schema1:funder rdf:resource="http://example.org/org/OntoPortal_Alliance"/>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>astronomy</ex:hasWord>
+    <ex:hasWord>communities</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+    <ex:hasWord>widely</ex:hasWord>
+    <ex:hasWord>recognised</ex:hasWord>
+    <ex:hasWord>as</ex:hasWord>
+    <ex:hasWord>mature</ex:hasWord>
+    <ex:hasWord>for</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Haoran_Wei">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Haoran Wei</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q45015813"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10558v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Style Customization of Text-to-Vector Generation with Image Diffusion Priors</schema1:name>
+    <schema1:abstract>styles based on text prompts in an efficient feed forward manner the effectiveness of our method has been validated through extensive experiments the project page is https customsvg github io a exemplar style b style customization of text to vector generation boy house camera basket crown gift trophy figure 1 examples of vector graphics generated from text prompts in custom styles using our method showcasing structural regularity and expressive diversity exemplar svgs the 1 𝑠𝑡 and 3 𝑟𝑑 rows are from svgrepo the 2 𝑛𝑑 row is from iconfont abstract scalable vector graphics svgs are highly favored by designers due</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2308.06721</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Peiying_Zhang"/>
+    <schema1:author rdf:resource="http://example.org/person/Nanxuan_Zhao"/>
+    <schema1:author rdf:resource="http://example.org/person/Jing_Liao"/>
+    <schema1:funder rdf:resource="http://example.org/org/GRF"/>
+    <schema1:funder rdf:resource="http://example.org/org/RGC"/>
+    <schema1:funder rdf:resource="http://example.org/org/Research_Grants_Council"/>
+    <ex:hasWord>styles</ex:hasWord>
+    <ex:hasWord>based</ex:hasWord>
+    <ex:hasWord>on</ex:hasWord>
+    <ex:hasWord>text</ex:hasWord>
+    <ex:hasWord>prompts</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>an</ex:hasWord>
+    <ex:hasWord>efficient</ex:hasWord>
+    <ex:hasWord>feed</ex:hasWord>
+    <ex:hasWord>forward</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15694v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>A Unified Theoretical Analysis of Private and Robust Offline Alignment: from RLHF to DPO</schema1:name>
+    <schema1:abstract>in this paper we theoretically investigate the effects of noisy labels in offline alignment with a focus on the interplay between privacy and robustness against adversarial corruption specifically under linear modeling assumptions we present a unified analysis covering both reinforcement learning from human feedback rlhf and direct preference optimization dpo under different privacy corruption scenarios such as local differential privacy then corruption ltc where human preference labels are privatized before being corrupted by an adversary and corruption then local differential privacy ctl where labels are corrupted before privacy protection our analysis leverages a reduction framework that reduces the offline alignment</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:1909.08593</schema1:identifier>
+    <schema1:datePublished>2025-05-21</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Xingyu_Zhou"/>
+    <schema1:author rdf:resource="http://example.org/person/Yulian_Wu"/>
+    <schema1:author rdf:resource="http://example.org/person/Francesco_Orabona"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Weihao_Kong"/>
+    <schema1:funder rdf:resource="http://example.org/org/NSF"/>
+    <schema1:funder rdf:resource="http://example.org/org/XZ"/>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>this</ex:hasWord>
+    <ex:hasWord>paper</ex:hasWord>
+    <ex:hasWord>we</ex:hasWord>
+    <ex:hasWord>theoretically</ex:hasWord>
+    <ex:hasWord>investigate</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>effects</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>noisy</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Baptiste_Cecconi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Baptiste Cecconi</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q56742654"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/uar">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>uar</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q170468"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10454v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Emotion-sensitive Explanation Model</schema1:name>
+    <schema1:abstract>explainable ai xai research has traditionally focused on rational users aiming to improve understanding and reduce cognitive biases however emotional factors play a critical role in how explanations are perceived and processed prior work shows that prior and task generated emotions can negatively impact the understanding of explanation building on these insights we propose a three stage model for emotion sensitive explanation grounding 1 emotional or epistemic arousal 2 understanding and 3 agreement this model provides a conceptual basis for developing xai systems that dynamically adapt explanation strategies to users emotional states ultimately supporting more effective and user centered decision</schema1:abstract>
+    <schema1:identifier>DOI:10.54941/ahfe1002861</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Christian_Schütze"/>
+    <schema1:author rdf:resource="http://example.org/person/Birte_Richter"/>
+    <schema1:author rdf:resource="http://example.org/person/Britta_Wrede"/>
+    <schema1:funder rdf:resource="http://example.org/org/DFG"/>
+    <schema1:funder rdf:resource="http://example.org/org/Deutsche_Forschungsgemeinschaft"/>
+    <schema1:funder rdf:resource="http://example.org/org/German_Research_Foundation"/>
+    <ex:hasWord>explainable</ex:hasWord>
+    <ex:hasWord>ai</ex:hasWord>
+    <ex:hasWord>xai</ex:hasWord>
+    <ex:hasWord>research</ex:hasWord>
+    <ex:hasWord>has</ex:hasWord>
+    <ex:hasWord>traditionally</ex:hasWord>
+    <ex:hasWord>focused</ex:hasWord>
+    <ex:hasWord>on</ex:hasWord>
+    <ex:hasWord>rational</ex:hasWord>
+    <ex:hasWord>users</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Anupam_Yadav">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Anupam Yadav</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NSF">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NSF</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q304878"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jin-Jun_Geng">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jin-Jun Geng</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15693v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Average Reward Reinforcement Learning for Omega-Regular and Mean-Payoff Objectives MILAD KAZEMI, King's College London, UK</schema1:name>
+    <schema1:abstract>recent advances in reinforcement learning rl have renewed focus on the design of reward functions that shape agent behavior manually designing reward functions is tedious and error prone a principled alternative is to specify behaviors in a formal language that can be automatically translated into rewards omega regular languages are a natural choice for this purpose given their established role in formal verification and synthesis however existing methods using omega regular specifications typically rely on discounted reward rl in episodic settings with periodic resets this setup misaligns with the semantics of omega regular specifications which describe properties over infinite behavior</schema1:abstract>
+    <schema1:identifier>DOI:10.1145/nnnnnnn.nnnnnnn</schema1:identifier>
+    <schema1:datePublished>2025-05-21</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Mateo_Perez"/>
+    <schema1:author rdf:resource="http://example.org/person/Milad_Kazemi"/>
+    <schema1:author rdf:resource="http://example.org/person/Fabio_Somenzi"/>
+    <schema1:author rdf:resource="http://example.org/person/Sadegh_Soudjani"/>
+    <schema1:author rdf:resource="http://example.org/person/Ashutosh_Trivedi"/>
+    <schema1:author rdf:resource="http://example.org/person/Alvaro_Velasquez"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Ashutosh_Trivedi"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/S._Soudjani"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Wolf"/>
+    <schema1:funder rdf:resource="http://example.org/org/NSF"/>
+    <schema1:funder rdf:resource="http://example.org/org/National_Science_Foundation"/>
+    <schema1:funder rdf:resource="http://example.org/org/Royal_Society"/>
+    <schema1:funder rdf:resource="http://example.org/org/Wolfson_Foundation"/>
+    <ex:hasWord>recent</ex:hasWord>
+    <ex:hasWord>advances</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>reinforcement</ex:hasWord>
+    <ex:hasWord>learning</ex:hasWord>
+    <ex:hasWord>rl</ex:hasWord>
+    <ex:hasWord>have</ex:hasWord>
+    <ex:hasWord>renewed</ex:hasWord>
+    <ex:hasWord>focus</ex:hasWord>
+    <ex:hasWord>on</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/N.W.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>N.W.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/DeiC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>DeiC</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q21714344"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10294v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>MIPHEI-VIT: MULTIPLEX IMMUNOFLUORESCENCE PREDICTION FROM H&amp;E IMAGES USING VIT FOUNDATION MODELS A PREPRINT</schema1:name>
+    <schema1:abstract>histopathological analysis is a cornerstone of cancer diagnosis with hematoxylin and eosin h e staining routinely acquired for every patient to visualize cell morphology and tissue architecture on the other hand multiplex immunofluorescence mif enables more precise cell type identification via proteomic markers but has yet to achieve widespread clinical adoption due to cost and logistical constraints to bridge this gap we introduce miphei multiplex immunofluorescence prediction from h e a u net inspired architecture that integrates state of the art vit foundation models as encoders to predict mif signals from h e images miphei targets a comprehensive panel of</schema1:abstract>
+    <schema1:identifier>DOI:10.5281/zenodo.7637988</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Guillaume_Balezo"/>
+    <schema1:author rdf:resource="http://example.org/person/Roger_Trullo"/>
+    <schema1:author rdf:resource="http://example.org/person/Albert_Planas"/>
+    <schema1:author rdf:resource="http://example.org/person/Etienne_Decencière"/>
+    <schema1:author rdf:resource="http://example.org/person/Thomas_Walter"/>
+    <schema1:funder rdf:resource="http://example.org/org/EFPIA"/>
+    <schema1:funder rdf:resource="http://example.org/org/IMI2_JU"/>
+    <ex:hasWord>histopathological</ex:hasWord>
+    <ex:hasWord>analysis</ex:hasWord>
+    <ex:hasWord>is</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>cornerstone</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>cancer</ex:hasWord>
+    <ex:hasWord>diagnosis</ex:hasWord>
+    <ex:hasWord>with</ex:hasWord>
+    <ex:hasWord>hematoxylin</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Alexander_von_Humboldt_Foundation">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Alexander von Humboldt Foundation</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q590267"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2504.11011v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Document Quality Scoring for Web Crawling</schema1:name>
+    <schema1:abstract>the internet contains large amounts of low quality content yet users expect web search engines to deliver high quality relevant results the abundant presence of low quality pages can negatively impact retrieval and crawling processes by wasting resources on these documents therefore search engines can greatly benefit from techniques that leverage efficient quality estimation methods to mitigate these negative impacts quality scoring methods for web pages are useful for many processes typical for web search systems including static index pruning index tiering and crawling building on work by chang et al 1 who proposed using neural estimators of semantic quality</schema1:abstract>
+    <schema1:identifier>DOI:10.5281/zenodo.13784624</schema1:identifier>
+    <schema1:datePublished>2025-04-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Francesca_Pezzuti"/>
+    <schema1:author rdf:resource="http://example.org/person/Ariane_Mueller"/>
+    <schema1:author rdf:resource="http://example.org/person/Sean_Macavaney"/>
+    <schema1:author rdf:resource="http://example.org/person/Nicola_Tonellotto"/>
+    <schema1:funder rdf:resource="http://example.org/org/Centro_Nazionale_di_Ricerca_in"/>
+    <schema1:funder rdf:resource="http://example.org/org/Computing"/>
+    <schema1:funder rdf:resource="http://example.org/org/Cross"/>
+    <schema1:funder rdf:resource="http://example.org/org/Departments_of_Excellence"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Union"/>
+    <schema1:funder rdf:resource="http://example.org/org/FUN"/>
+    <schema1:funder rdf:resource="http://example.org/org/ICSC"/>
+    <schema1:funder rdf:resource="http://example.org/org/Ministry_of_Education_and_Research"/>
+    <schema1:funder rdf:resource="http://example.org/org/Next_Generation_EU"/>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>internet</ex:hasWord>
+    <ex:hasWord>contains</ex:hasWord>
+    <ex:hasWord>large</ex:hasWord>
+    <ex:hasWord>amounts</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>low</ex:hasWord>
+    <ex:hasWord>quality</ex:hasWord>
+    <ex:hasWord>content</ex:hasWord>
+    <ex:hasWord>yet</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Tony_Lee">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tony Lee</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Eric">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Eric</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2405.17044v3">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Interesting Scientific Idea Generation using Knowledge Graphs and LLMs: Evaluations with 100 Research Group Leaders</schema1:name>
+    <schema1:abstract>the rapid growth of scientific literature makes it challenging for researchers to identify novel and impactful ideas especially across disciplines modern artificial intelligence ai systems offer new approaches potentially inspiring ideas not conceived by humans alone but how compelling are these ai generated ideas and how can we improve their quality here we introduce scimuse which uses 58 million research papers and a large language model to generate research ideas we conduct a large scale evaluation in which over 100 research group leaders from natural sciences to humanities ranked more than 4 400 personalized ideas based on their interest this</schema1:abstract>
+    <schema1:identifier>DOI:10.1126/science.aao0185</schema1:identifier>
+    <schema1:datePublished>2025-01-07</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Xuemei_Gu"/>
+    <schema1:author rdf:resource="http://example.org/person/Mario_Krenn"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/,"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/._X.G."/>
+    <schema1:funder rdf:resource="http://example.org/org/Alexander_von_Humboldt_Foundation"/>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>rapid</ex:hasWord>
+    <ex:hasWord>growth</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>scientific</ex:hasWord>
+    <ex:hasWord>literature</ex:hasWord>
+    <ex:hasWord>makes</ex:hasWord>
+    <ex:hasWord>it</ex:hasWord>
+    <ex:hasWord>challenging</ex:hasWord>
+    <ex:hasWord>for</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Takafumi_Ito">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Takafumi Ito</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q104693304"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/A_Mártinez-Pérez">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>A Mártinez-Pérez</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Centro_Nazionale_di_Ricerca_in">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Centro Nazionale di Ricerca in</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q4106097"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10375v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Are Sparse Autoencoders Useful for Java Function Bug Detection?</schema1:name>
+    <schema1:abstract>software vulnerabilities such as buffer overflows and sql injections are a major source of security breaches traditional methods for vulnerability detection remain essential but are limited by high false positive rates scalability issues and reliance on manual effort these constraints have driven interest in ai based approaches to automated vulnerability detection and secure code generation while large language models llms have opened new avenues for classification tasks their complexity and opacity pose challenges for interpretability and deployment sparse autoencoder offer a promising solution to this problem we explore whether saes can serve as a lightweight interpretable alternative for bug detection</schema1:abstract>
+    <schema1:identifier>DOI:10.1145/2610384.2628055</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Rui_Melo"/>
+    <schema1:author rdf:resource="http://example.org/person/Claudia_Mamede"/>
+    <schema1:author rdf:resource="http://example.org/person/Andre_Catarino"/>
+    <schema1:author rdf:resource="http://example.org/person/Rui_Abreu"/>
+    <schema1:author rdf:resource="http://example.org/person/Henrique_Lopes_Cardoso"/>
+    <schema1:funder rdf:resource="http://example.org/org/AIS"/>
+    <schema1:funder rdf:resource="http://example.org/org/ERDF"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Regional_Development_Fund"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Union"/>
+    <schema1:funder rdf:resource="http://example.org/org/FCT"/>
+    <schema1:funder rdf:resource="http://example.org/org/LIACC"/>
+    <schema1:funder rdf:resource="http://example.org/org/NextGeneration_EU"/>
+    <ex:hasWord>software</ex:hasWord>
+    <ex:hasWord>vulnerabilities</ex:hasWord>
+    <ex:hasWord>such</ex:hasWord>
+    <ex:hasWord>as</ex:hasWord>
+    <ex:hasWord>buffer</ex:hasWord>
+    <ex:hasWord>overflows</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>sql</ex:hasWord>
+    <ex:hasWord>injections</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Research_Center_Trustworthy_Data_Science_and_Security">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Research Center Trustworthy Data Science and Security</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xianggua_Chen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xianggua Chen</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10427v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Influence of prior and task generated emotions on XAI explanation retention and understanding</schema1:name>
+    <schema1:abstract>the explanation of ai results and how they are received by users is an increasingly active research field however there is a surprising lack of knowledge about how social factors such as emotions affect the process of explanation by a decision support system dss while previous research has shown effects of emotions on dss supported decision making it remains unknown in how far emotions affect cognitive processing during an explanation in this study we therefore investigated the influence of prior emotions and task related arousal on the retention and understanding of explained feature relevance to investigate the influence of prior</schema1:abstract>
+    <schema1:identifier>DOI:10.54941/ahfe1002861</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Birte_Richter"/>
+    <schema1:author rdf:resource="http://example.org/person/Christian_Schütze"/>
+    <schema1:author rdf:resource="http://example.org/person/Anna_Aksonova"/>
+    <schema1:author rdf:resource="http://example.org/person/Britta_Wrede"/>
+    <schema1:funder rdf:resource="http://example.org/org/DFG"/>
+    <schema1:funder rdf:resource="http://example.org/org/Deutsche_Forschungsgemeinschaft"/>
+    <schema1:funder rdf:resource="http://example.org/org/German_Research_Foundation"/>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>explanation</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>ai</ex:hasWord>
+    <ex:hasWord>results</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>how</ex:hasWord>
+    <ex:hasWord>they</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+    <ex:hasWord>received</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Joaquín_Salvachúa">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Joaquín Salvachúa</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q95656954"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Bapi_Dutta">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Bapi Dutta</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Thomas_Walter">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Thomas Walter</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1596408"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Korean_Government">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Korean Government</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q12600580"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Kengo_Nakajima">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Kengo Nakajima</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Christian_Schütze">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Christian Schütze</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q95297070"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Fabio_Somenzi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Fabio Somenzi</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102320675"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/,">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>,</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yuan-Pei_Yang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yuan-Pei Yang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q97458014"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Mireille_Louys">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mireille Louys</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/ORED">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>ORED</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q109266104"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10551v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Does Feasibility Matter? Understanding the Impact of Feasibility on Synthetic Training Data</schema1:name>
+    <schema1:abstract>with the development of photorealistic diffusion models models trained in part or fully on synthetic data achieve progressively better results however diffusion models still routinely generate images that would not exist in reality such as a dog floating above the ground or with unrealistic texture artifacts we define the concept of feasibility as whether attributes in a synthetic image could realistically exist in the real world domain synthetic images containing attributes that violate this criterion are considered infeasible intuitively infeasible images are typically considered out of distribution thus training on such images is expected to hinder a model s ability</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2409.17115</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Yiwen_Liu"/>
+    <schema1:author rdf:resource="http://example.org/person/Jessica_Bader"/>
+    <schema1:author rdf:resource="http://example.org/person/Jae_Kim"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Jae_Myung_Kim"/>
+    <schema1:funder rdf:resource="http://example.org/org/."/>
+    <schema1:funder rdf:resource="http://example.org/org/ELLIS"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Laboratory_for_Learning_and_Intelligent_Systems"/>
+    <schema1:funder rdf:resource="http://example.org/org/IMPRS-IS"/>
+    <schema1:funder rdf:resource="http://example.org/org/International_Max_Planck_Research_School_for_Intelligent_Systems"/>
+    <ex:hasWord>with</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>development</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>photorealistic</ex:hasWord>
+    <ex:hasWord>diffusion</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+    <ex:hasWord>trained</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Schmidt_Sciences">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Schmidt Sciences</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q133190183"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/A_Agents">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>A Agents</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Johannes_Bjerva">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Johannes Bjerva</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q43969995"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Manvi_Kaul">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Manvi Kaul</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Natural_Science_Foundation_of_Jiangsu_Province">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Natural Science Foundation of Jiangsu Province</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q45134565"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Jared_Quincy_Davis">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jared Quincy Davis</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.00912v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Towards a format for describing networks 1. Networks and knowledge graphs</schema1:name>
+    <schema1:abstract>the relationship between the concepts of network and knowledge graph is explored a knowledge graph can be considered a special type of network when using a knowledge graph various networks can be obtained from it and network analysis procedures can be applied to them rdf is a formalization of the knowledge graph concept for the semantic web but some of its solutions are also extensible to a format for describing general networks introduction open data plays a crucial role in ensuring the computational reproducibility and verifiability of published results collections of similar datasets are also crucial for developing methods to</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2505.00912v1[cs.SI]</schema1:identifier>
+    <schema1:datePublished>2025-05-01</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Vladimir_Batagelj"/>
+    <schema1:author rdf:resource="http://example.org/person/Tomaž_Pisanski"/>
+    <schema1:author rdf:resource="http://example.org/person/Iztok_Savnik"/>
+    <schema1:author rdf:resource="http://example.org/person/Ana_Slavec"/>
+    <schema1:author rdf:resource="http://example.org/person/Nino_Bašić"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/N._Bašić"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/T._Pisanski"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/V._Batagelj"/>
+    <schema1:funder rdf:resource="http://example.org/org/Github_Bavla"/>
+    <schema1:funder rdf:resource="http://example.org/org/Slovenian_Research_Agency"/>
+    <schema1:funder rdf:resource="http://example.org/org/University_of_Primorska"/>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>relationship</ex:hasWord>
+    <ex:hasWord>between</ex:hasWord>
+    <ex:hasWord>concepts</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>network</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>knowledge</ex:hasWord>
+    <ex:hasWord>graph</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Sesh_Sadasivam">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sesh Sadasivam</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jing_Liao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jing Liao</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q88498428"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sadegh_Soudjani">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sadegh Soudjani</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130906289"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Iztok_Savnik">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Iztok Savnik</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q114326218"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.09794v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Automated Detection of Clinical Entities in Lung and Breast Cancer Reports Using NLP Techniques</schema1:name>
+    <schema1:abstract>many clinical research projects including those focused on cancer rely on the manual extraction of information from clinical reports this process is both timeconsuming and prone to errors limiting the efficiency of data driven approaches in healthcare to address these challenges natural language processing nlp offers an alternative for automating the extraction of relevant data from electronic health records ehrs in this study we focus on lung and breast cancer due to their high incidence and the significant impact they have on public health early detection and effective data management in both types of cancer are crucial for improving patient</schema1:abstract>
+    <schema1:identifier>DOI:10.1016/j.semcancer.2023.01.006</schema1:identifier>
+    <schema1:datePublished>2025-05-14</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/J_Moreno-Casanova"/>
+    <schema1:author rdf:resource="http://example.org/person/J_Auñón"/>
+    <schema1:author rdf:resource="http://example.org/person/A_Mártinez-Pérez"/>
+    <schema1:author rdf:resource="http://example.org/person/M_Pérez-Martínez"/>
+    <schema1:author rdf:resource="http://example.org/person/M_Gas-López"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Union"/>
+    <schema1:funder rdf:resource="http://example.org/org/GMV"/>
+    <schema1:funder rdf:resource="http://example.org/org/Next"/>
+    <schema1:funder rdf:resource="http://example.org/org/R&amp;"/>
+    <ex:hasWord>many</ex:hasWord>
+    <ex:hasWord>clinical</ex:hasWord>
+    <ex:hasWord>research</ex:hasWord>
+    <ex:hasWord>projects</ex:hasWord>
+    <ex:hasWord>including</ex:hasWord>
+    <ex:hasWord>those</ex:hasWord>
+    <ex:hasWord>focused</ex:hasWord>
+    <ex:hasWord>on</ex:hasWord>
+    <ex:hasWord>cancer</ex:hasWord>
+    <ex:hasWord>rely</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15712v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>TURNABOUTLLM: A Deductive Reasoning Benchmark from Detective Games</schema1:name>
+    <schema1:abstract>this paper introduces turnaboutllm a novel framework and dataset for evaluating the deductive reasoning abilities of large language models llms by leveraging the interactive gameplay of detective games ace attorney and danganronpa the framework tasks llms with identifying contradictions between testimonies and evidences within long narrative contexts a challenging task due to the large answer space and diverse reasoning types presented by its questions we evaluate twelve state of the art llms on the dataset hinting at limitations of popular strategies for enhancing deductive reasoning such as extensive thinking and chain of thought prompting the results also suggest varying effects</schema1:abstract>
+    <schema1:identifier>DOI:10.18653/v1/2023.starsem-1.28</schema1:identifier>
+    <schema1:author rdf:resource="http://example.org/person/Yuan_Yuan"/>
+    <schema1:author rdf:resource="http://example.org/person/Muyu_He"/>
+    <schema1:author rdf:resource="http://example.org/person/Muhammad_Adil"/>
+    <schema1:author rdf:resource="http://example.org/person/Shahid_Huang"/>
+    <schema1:author rdf:resource="http://example.org/person/Ziyang_Li"/>
+    <schema1:author rdf:resource="http://example.org/person/Li_Zhang"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Bowen_Jiang"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Kazutaka_Kodaka"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Manvi_Kaul"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Sesh_Sadasivam"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Shu_Takumi"/>
+    <schema1:funder rdf:resource="http://example.org/org/Attorney"/>
+    <ex:hasWord>this</ex:hasWord>
+    <ex:hasWord>paper</ex:hasWord>
+    <ex:hasWord>introduces</ex:hasWord>
+    <ex:hasWord>turnaboutllm</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>novel</ex:hasWord>
+    <ex:hasWord>framework</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>dataset</ex:hasWord>
+    <ex:hasWord>for</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Lysenko_Artem">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Lysenko Artem</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Nick_Rossi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nick Rossi</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.02271v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>REAL-TIME SPATIAL RETRIEVAL AUGMENTED GENERATION FOR URBAN ENVIRONMENTS A PREPRINT</schema1:name>
+    <schema1:abstract>the proliferation of generative artificial ingelligence ai especially large language models presents transformative opportunities for urban applications through urban foundation models however base models face limitations as they only contain the knowledge available at the time of training and updating them is both time consuming and costly retrieval augmented generation rag has emerged in the literature as the preferred approach for injecting contextual information into foundation models it prevails over techniques such as fine tuning which are less effective in dynamic real time scenarios like those found in urban environments however traditional rag architectures based on semantic databases knowledge graphs</schema1:abstract>
+    <schema1:identifier>DOI:10.18653/v1/2024.emnlp-main.15</schema1:identifier>
+    <schema1:datePublished>2025-04-30</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/David_Campo"/>
+    <schema1:author rdf:resource="http://example.org/person/Javier_Conde"/>
+    <schema1:author rdf:resource="http://example.org/person/Álvaro_Alonso"/>
+    <schema1:author rdf:resource="http://example.org/person/Gabriel_Huecas"/>
+    <schema1:author rdf:resource="http://example.org/person/Joaquín_Salvachúa"/>
+    <schema1:author rdf:resource="http://example.org/person/Pedro_Reviriego"/>
+    <schema1:funder rdf:resource="http://example.org/org/Agencia_Estatal_de_Investigación"/>
+    <schema1:funder rdf:resource="http://example.org/org/CM"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Commission"/>
+    <schema1:funder rdf:resource="http://example.org/org/FUN4DATE"/>
+    <schema1:funder rdf:resource="http://example.org/org/SMARTY"/>
+    <schema1:funder rdf:resource="http://example.org/org/TUCAN"/>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>proliferation</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>generative</ex:hasWord>
+    <ex:hasWord>artificial</ex:hasWord>
+    <ex:hasWord>ingelligence</ex:hasWord>
+    <ex:hasWord>ai</ex:hasWord>
+    <ex:hasWord>especially</ex:hasWord>
+    <ex:hasWord>large</ex:hasWord>
+    <ex:hasWord>language</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Krishna_Kumar_Singh">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Krishna Kumar Singh</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q96096670"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/N._Bašić">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>N. Bašić</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15722v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Shared Path: Unraveling Memorization in Multilingual LLMs through Language Similarities</schema1:name>
+    <schema1:abstract>we present the first comprehensive study of memorization in multilingual large language models mllms analyzing 95 languages using models across diverse model scales architectures and memorization definitions as mllms are increasingly deployed understanding their memorization behavior has become critical yet prior work has focused primarily on monolingual models leaving multilingual memorization underexplored despite the inherently long tailed nature of training corpora we find that the prevailing assumption that memorization is highly correlated with training data availability fails to fully explain memorization patterns in mllms we hypothesize that treating languages in isolation ignoring their similarities obscures the true patterns of memorization</schema1:abstract>
+    <schema1:identifier>DOI:10.18653/v1/2022.emnlp-main.298</schema1:identifier>
+    <schema1:datePublished>2025-05-21</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Xiaoyu_Luo"/>
+    <schema1:author rdf:resource="http://example.org/person/Yiyi_Chen"/>
+    <schema1:author rdf:resource="http://example.org/person/Johannes_Bjerva"/>
+    <schema1:author rdf:resource="http://example.org/person/Qiongxiu_Li"/>
+    <schema1:author rdf:resource="http://example.org/person/Memorization_Metrics"/>
+    <schema1:funder rdf:resource="http://example.org/org/AAU_AI_Cloud"/>
+    <schema1:funder rdf:resource="http://example.org/org/Carlsberg_Foundation"/>
+    <schema1:funder rdf:resource="http://example.org/org/DeiC"/>
+    <schema1:funder rdf:resource="http://example.org/org/JB"/>
+    <schema1:funder rdf:resource="http://example.org/org/LUMI"/>
+    <schema1:funder rdf:resource="http://example.org/org/U"/>
+    <schema1:funder rdf:resource="http://example.org/org/YC"/>
+    <schema1:funder rdf:resource="http://example.org/org/i"/>
+    <ex:hasWord>we</ex:hasWord>
+    <ex:hasWord>present</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>first</ex:hasWord>
+    <ex:hasWord>comprehensive</ex:hasWord>
+    <ex:hasWord>study</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>memorization</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>multilingual</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NextGeneration_EU">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NextGeneration EU</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15741v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Evolutionary Computation and Large Language Models: A Survey of Methods, Synergies, and Applications</schema1:name>
+    <schema1:abstract>integrating large language models llms and evolutionary computation ec represents a promising avenue for advancing artificial intelligence by combining powerful natural language understanding with optimization and search capabilities this manuscript explores the synergistic potential of llms and ec reviewing their intersections complementary strengths and emerging applications we identify key opportunities where ec can enhance llm training fine tuning prompt engineering and architecture search while llms can in turn aid in automating the design analysis and interpretation of ecs the manuscript explores the synergistic integration of ec and llms highlighting their bidirectional contributions to advancing artificial intelligence it first examines how</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2411.16638</schema1:identifier>
+    <schema1:datePublished>2025-05-21</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Dikshit_Chauhan"/>
+    <schema1:author rdf:resource="http://example.org/person/Bapi_Dutta"/>
+    <schema1:author rdf:resource="http://example.org/person/Indu_Bala"/>
+    <schema1:author rdf:resource="http://example.org/person/Niki_Van_Stein"/>
+    <schema1:author rdf:resource="http://example.org/person/Thomas_Bäck"/>
+    <schema1:author rdf:resource="http://example.org/person/Anupam_Yadav"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/."/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/B._R._Ambedkar"/>
+    <schema1:funder rdf:resource="http://example.org/org/Anusandhan_National_Research_Foundation"/>
+    <schema1:funder rdf:resource="http://example.org/org/Australian_Researcher_Cooperation_Hub"/>
+    <schema1:funder rdf:resource="http://example.org/org/Ministry_of_Economy_and_Competitiveness"/>
+    <schema1:funder rdf:resource="http://example.org/org/National_Institute_of_Technology_Jalandhar"/>
+    <schema1:funder rdf:resource="http://example.org/org/Ramón_y_Cajal"/>
+    <ex:hasWord>integrating</ex:hasWord>
+    <ex:hasWord>large</ex:hasWord>
+    <ex:hasWord>language</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+    <ex:hasWord>llms</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>evolutionary</ex:hasWord>
+    <ex:hasWord>computation</ex:hasWord>
+    <ex:hasWord>ec</ex:hasWord>
+    <ex:hasWord>represents</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/FCT">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>FCT</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q3787"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10325v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>A Representation Learning Approach to Feature Drift Detection in Wireless Networks</schema1:name>
+    <schema1:abstract>artificial intelligence ai is foreseen to be a centerpiece in next generation wireless networks enabling enabling ubiquitous communication as well as new services however in real deployment feature distribution changes may degrade the performance of ai models and lead to undesired behaviors to counter for undetected model degradation we propose alert a method that can detect feature distribution changes and trigger model re training that works well on two wireless network use cases wireless fingerprinting and link anomaly detection alert includes three components representation learning statistical testing and utility assessment we rely on multi layer perceptron mlp for designing the</schema1:abstract>
+    <schema1:identifier>DOI:10.1007/s42488-024-00119-y</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Athanasios_Tziouvaras"/>
+    <schema1:author rdf:resource="http://example.org/person/Blaž_Bertalanič"/>
+    <schema1:author rdf:resource="http://example.org/person/George_Floros"/>
+    <schema1:author rdf:resource="http://example.org/person/Kostas_Kolomvatsos"/>
+    <schema1:author rdf:resource="http://example.org/person/Panagiotis_Sarigiannidis"/>
+    <schema1:author rdf:resource="http://example.org/person/Carolina_Fortuna"/>
+    <schema1:funder rdf:resource="http://example.org/org/European_Union"/>
+    <schema1:funder rdf:resource="http://example.org/org/Slovenian_Research_and_Innovation_Agency"/>
+    <ex:hasWord>artificial</ex:hasWord>
+    <ex:hasWord>intelligence</ex:hasWord>
+    <ex:hasWord>ai</ex:hasWord>
+    <ex:hasWord>is</ex:hasWord>
+    <ex:hasWord>foreseen</ex:hasWord>
+    <ex:hasWord>to</ex:hasWord>
+    <ex:hasWord>be</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>centerpiece</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Wei-Wei_Zhu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Wei-Wei Zhu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q89093410"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Athanasios_Tziouvaras">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Athanasios Tziouvaras</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Muhammad_Adil">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Muhammad Adil</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q87491040"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Office_of_Biological_and_Environmental_Research">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Office of Biological and Environmental Research</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q30296514"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/.">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>.</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q42332"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IMI2_JU">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IMI2 JU</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Innovate_UK">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Innovate UK</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q7692585"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Peiying_Zhang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Peiying Zhang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q90218821"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10450v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Genetic algorithm demystified for cosmological parameter estimation</schema1:name>
+    <schema1:abstract>genetic algorithm ga belongs to a class of nature inspired evolutionary algorithms that leverage concepts from natural selection to perform optimization tasks in cosmology the standard method for estimating parameters is the markov chain monte carlo mcmc approach renowned for its reliability in determining cosmological parameters this paper presents a pedagogical examination of ga as a potential corroborative tool to mcmc for cosmological parameter estimation utilizing data sets from cosmic chronometers and supernovae with a curved λcdm model we explore the impact of ga s key hyperparameters such as the fitness function crossover rate and mutation rate on the population</schema1:abstract>
+    <schema1:identifier>DOI:10.1007/JHEP04(2010)057</schema1:identifier>
+    <schema1:datePublished>2025-05-16</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Reginald_Bernardo"/>
+    <schema1:author rdf:resource="http://example.org/person/Yun_Chen"/>
+    <schema1:funder rdf:resource="http://example.org/org/APCTP"/>
+    <schema1:funder rdf:resource="http://example.org/org/Academia_Sinica"/>
+    <schema1:funder rdf:resource="http://example.org/org/Institute_of_Physics"/>
+    <schema1:funder rdf:resource="http://example.org/org/Korean_Government"/>
+    <schema1:funder rdf:resource="http://example.org/org/NCTS_Taiwan"/>
+    <schema1:funder rdf:resource="http://example.org/org/RCB"/>
+    <schema1:funder rdf:resource="http://example.org/org/Science_and_Technology_Promotion_Fund_and_Lottery_Fund"/>
+    <ex:hasWord>genetic</ex:hasWord>
+    <ex:hasWord>algorithm</ex:hasWord>
+    <ex:hasWord>ga</ex:hasWord>
+    <ex:hasWord>belongs</ex:hasWord>
+    <ex:hasWord>to</ex:hasWord>
+    <ex:hasWord>a</ex:hasWord>
+    <ex:hasWord>class</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>nature</ex:hasWord>
+    <ex:hasWord>inspired</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Barnabas_Poczos">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Barnabas Poczos</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q44731622"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15690v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Toward Open Earth Science as Fast and Accessible as Natural Language</schema1:name>
+    <schema1:abstract>is natural language driven earth observation data analysis now feasible with the assistance of large language models llms for open science in service of public interest feasibility requires reliably high accuracy interactive latencies low sustainable costs open llms and openly maintainable software hence the challenge what are the techniques and programming system requirements necessary for satisfying these constraints and what is the corresponding development and maintenance burden in practice this study lays the groundwork for exploring these questions introducing an impactful earth science use case and providing a software framework with evaluation data and metrics along with initial results from</schema1:abstract>
+    <schema1:identifier>DOI:10.5281/zenodo.7261897</schema1:identifier>
+    <schema1:author rdf:resource="http://example.org/person/Marquita_Ellis"/>
+    <schema1:author rdf:resource="http://example.org/person/Iksha_Gurung"/>
+    <schema1:author rdf:resource="http://example.org/person/Muthukumaran_Ramasubramanian"/>
+    <schema1:author rdf:resource="http://example.org/person/Rahul_Ramachandran"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Jared_Quincy_Davis"/>
+    <schema1:acknowledges rdf:resource="http://example.org/ack_person/Paul_Castro"/>
+    <schema1:funder rdf:resource="http://example.org/org/NASA"/>
+    <ex:hasWord>is</ex:hasWord>
+    <ex:hasWord>natural</ex:hasWord>
+    <ex:hasWord>language</ex:hasWord>
+    <ex:hasWord>driven</ex:hasWord>
+    <ex:hasWord>earth</ex:hasWord>
+    <ex:hasWord>observation</ex:hasWord>
+    <ex:hasWord>data</ex:hasWord>
+    <ex:hasWord>analysis</ex:hasWord>
+    <ex:hasWord>now</ex:hasWord>
+    <ex:hasWord>feasible</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xiaoyu_Luo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xiaoyu Luo</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q34004409"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ashmit_Mishra">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ashmit Mishra</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Steffen_Becker">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Steffen Becker</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q112543881"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Maxence_Vandromme">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Maxence Vandromme</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Alvaro_Velasquez">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Alvaro Velasquez</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q17781863"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Ihar_Antonau">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ihar Antonau</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Data_Science_Institute">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Data Science Institute</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q50386370"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yen-Chi_Cheng">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yen-Chi Cheng</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/David_Campo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>David Campo</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q50419284"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ye_Li">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ye Li</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102393717"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Mario_Krenn">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mario Krenn</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q59544053"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Huan_Lin">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Huan Lin</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q101216712"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Peng_Jiang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Peng Jiang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q104065518"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.15728v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Are machine learning interpretations reliable? A stability study on global interpretations</schema1:name>
+    <schema1:abstract>as machine learning systems are increasingly used in high stakes domains there is a growing emphasis placed on making them interpretable to improve trust in these systems in response a range of interpretable machine learning iml methods have been developed to generate human understandable insights into otherwise black box models with these methods a fundamental question arises are these interpretations reliable unlike with prediction accuracy or other evaluation metrics for supervised models the proximity to the true interpretation is difficult to define instead we ask a closely related question that we argue is a prerequisite for reliability are these interpretations</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:1904.12991</schema1:identifier>
+    <schema1:datePublished>2025-05-21</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Luqin_Gan"/>
+    <schema1:author rdf:resource="http://example.org/person/Tarek_Zikry"/>
+    <schema1:author rdf:resource="http://example.org/person/Genevera_Allen"/>
+    <schema1:funder rdf:resource="http://example.org/org/."/>
+    <schema1:funder rdf:resource="http://example.org/org/G.I.A"/>
+    <schema1:funder rdf:resource="http://example.org/org/NSF"/>
+    <ex:hasWord>as</ex:hasWord>
+    <ex:hasWord>machine</ex:hasWord>
+    <ex:hasWord>learning</ex:hasWord>
+    <ex:hasWord>systems</ex:hasWord>
+    <ex:hasWord>are</ex:hasWord>
+    <ex:hasWord>increasingly</ex:hasWord>
+    <ex:hasWord>used</ex:hasWord>
+    <ex:hasWord>in</ex:hasWord>
+    <ex:hasWord>high</ex:hasWord>
+    <ex:hasWord>stakes</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Boyang_Chen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Boyang Chen</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q50892397"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xunfan_Cai">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xunfan Cai</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ian_Adcock">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ian Adcock</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q38803002"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/University_of_Primorska">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>University of Primorska</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1378123"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/National_Institute_of_Technology_Jalandhar">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>National Institute of Technology Jalandhar</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/EPSRC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>EPSRC</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q5377871"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Juexin_Lin">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Juexin Lin</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NextGenerationEU">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NextGenerationEU</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q97621963"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xue-Feng_Wu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xue-Feng Wu</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/A.A.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>A.A.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/i">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>i</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q668"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Indu_Bala">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Indu Bala</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q89872884"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/R&amp;">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>R&amp;</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q45981"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sadjad_Naderi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sadjad Naderi</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Quantum_Computing">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Quantum Computing</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q17995793"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/XZ">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>XZ</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q165399"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Birte_Richter">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Birte Richter</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q97673358"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/._X.G.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>. X.G.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Bing_Zhang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Bing Zhang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q104682305"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/YC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>YC</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q6352575"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Cross">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Cross</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q5188229"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yiyi_Chen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yiyi Chen</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q100695153"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/INRAE">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>INRAE</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q70571774"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2504.20484v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Enhancing LLM Language Adaption through Cross-lingual In-Context Pre-training</schema1:name>
+    <schema1:abstract>large language models llms exhibit remarkable multilingual capabilities despite englishdominated pre training attributed to crosslingual mechanisms during pre training existing methods for enhancing cross lingual transfer remain constrained by parallel resources suffering from limited linguistic and domain coverage we propose cross lingual in context pre training crossic pt a simple and scalable approach that enhances cross lingual transfer by leveraging semantically related bilingual texts via simple next word prediction we construct crossic pt samples by interleaving semantic related bilingual wikipedia documents into a single context window to access window size constraints we implement a systematic segmentation policy to split long</schema1:abstract>
+    <schema1:identifier>DOI:10.18653/v1/2020.acl-main.421</schema1:identifier>
+    <schema1:datePublished>2025-04-29</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Linjuan_Wu"/>
+    <schema1:author rdf:resource="http://example.org/person/Haoran_Wei"/>
+    <schema1:author rdf:resource="http://example.org/person/Huan_Lin"/>
+    <schema1:author rdf:resource="http://example.org/person/Tianhao_Li"/>
+    <schema1:author rdf:resource="http://example.org/person/Baosong_Yang"/>
+    <schema1:author rdf:resource="http://example.org/person/Weiming_Lu"/>
+    <ex:hasWord>large</ex:hasWord>
+    <ex:hasWord>language</ex:hasWord>
+    <ex:hasWord>models</ex:hasWord>
+    <ex:hasWord>llms</ex:hasWord>
+    <ex:hasWord>exhibit</ex:hasWord>
+    <ex:hasWord>remarkable</ex:hasWord>
+    <ex:hasWord>multilingual</ex:hasWord>
+    <ex:hasWord>capabilities</ex:hasWord>
+    <ex:hasWord>despite</ex:hasWord>
+    <ex:hasWord>englishdominated</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Slovenian_Research_and_Innovation_Agency">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Slovenian Research and Innovation Agency</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q12792240"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Gabriel_Huecas">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Gabriel Huecas</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Tianhao_Li">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tianhao Li</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q100535692"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/National_Natural_Science_Foundation_of_China">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>National Natural Science Foundation of China</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q4501917"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Carolina_Fortuna">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Carolina Fortuna</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130841829"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/APCTP">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>APCTP</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q16166593"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Manoj_Karkee">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Manoj Karkee</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q124627944"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ludvig_Knöös_Franzén">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ludvig Knöös Franzén</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Kazutaka_Kodaka">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Kazutaka Kodaka</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/German_Research_Foundation">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>German Research Foundation</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q707283"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IPDA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IPDA</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1674522"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Ciya_Liao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ciya Liao</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Computational_Intelligence_LAB">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Computational Intelligence LAB</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Atul_Singh">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Atul Singh</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Adobe_Research">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Adobe Research</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Kostas_Kolomvatsos">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Kostas Kolomvatsos</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/FUN4DATE">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>FUN4DATE</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Claudia_Mamede">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Claudia Mamede</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130907380"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Computing">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Computing</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q21198"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Tarek_Zikry">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tarek Zikry</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nina_Grau">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nina Grau</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q104687301"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/FUN">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>FUN</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q25444"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/zhou_City">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>zhou City</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2206.02983v2">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>Review on Multiple Plagiarism: A Performance Comparison Study</schema1:name>
+    <schema1:abstract>plagiarism is the practice of claiming to be someone else s content thoughts or ideas as one s own without any proper credit and citations this paper is a survey paper that represent the some of the great research paper and its comparison that is work done on plagiarism now a days plagiarism became one of the most interesting and crucial research points in natural language processing nlp area we review some old research paper based on different types of plagiarism detection and their models and algorithm and comparison of the accuracy of those papers there are many several ways</schema1:abstract>
+    <schema1:identifier>DOI:10.1109/tensymp50017.2020.9230801</schema1:identifier>
+    <schema1:author rdf:resource="http://example.org/person/Jabir_Al_Nahian"/>
+    <schema1:author rdf:resource="http://example.org/person/Abu_Kaisar"/>
+    <schema1:author rdf:resource="http://example.org/person/Mohammad_Masum"/>
+    <schema1:funder rdf:resource="http://example.org/org/Computational_Intelligence_LAB"/>
+    <ex:hasWord>plagiarism</ex:hasWord>
+    <ex:hasWord>is</ex:hasWord>
+    <ex:hasWord>the</ex:hasWord>
+    <ex:hasWord>practice</ex:hasWord>
+    <ex:hasWord>of</ex:hasWord>
+    <ex:hasWord>claiming</ex:hasWord>
+    <ex:hasWord>to</ex:hasWord>
+    <ex:hasWord>be</ex:hasWord>
+    <ex:hasWord>someone</ex:hasWord>
+    <ex:hasWord>else</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/National_Institutes_of_Health">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>National Institutes of Health</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q390551"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Christopher_Pain">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Christopher Pain</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q16988006"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/European_Union_NextGenerationEU">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>European Union NextGenerationEU</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ziming_Liu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ziming Liu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q97349986"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/MSU">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>MSU</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q13164"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Shuyi_Chen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Shuyi Chen</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q103206033"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Deutsche_Forschungsgemeinschaft">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Deutsche Forschungsgemeinschaft</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q707283"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Muthukumaran_Ramasubramanian">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Muthukumaran Ramasubramanian</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Ramón_y_Cajal">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Ramón y Cajal</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q150526"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NIFA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NIFA</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q11683311"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Min_Fang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Min Fang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q100652256"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nitin_Yadav">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nitin Yadav</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q57008677"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jae_Kim">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jae Kim</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q43130925"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/M_Gas-López">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>M Gas-López</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Matthew_Mu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Matthew Mu</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Rui_Melo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Rui Melo</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q81640683"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Paul_Guerrero">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Paul Guerrero</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q57450700"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sébastien_Derrière">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sébastien Derrière</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q58906789"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Francesca_Pezzuti">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Francesca Pezzuti</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nino_Bašić">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nino Bašić</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102471937"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Muyu_He">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Muyu He</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Lihuan_Dai">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Lihuan Dai</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ashutosh_Trivedi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ashutosh Trivedi</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102112267"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Flavio_Giobergia">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Flavio Giobergia</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Vladimir_Batagelj">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Vladimir Batagelj</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q7938266"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Jae_Myung_Kim">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jae Myung Kim</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/International_Max_Planck_Research_School_for_Intelligent_Systems">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>International Max Planck Research School for Intelligent Systems</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yi-Fang_Liang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yi-Fang Liang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Slovenian_Research_Agency">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Slovenian Research Agency</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q12792240"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Marcos_Gomez-Vazquez">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Marcos Gomez-Vazquez</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130835898"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ariane_Mueller">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ariane Mueller</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jeremy_Logan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jeremy Logan</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q82929454"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xi_Zhong">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xi Zhong</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q8044054"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ingo_Staack">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ingo Staack</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jabir_Al_Nahian">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jabir Al Nahian</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Tiancong_Wang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tiancong Wang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Baosong_Yang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Baosong Yang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Ministry_of_Education_and_Research">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Ministry of Education and Research</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q4294535"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nguyen_Vo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nguyen Vo</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q6864881"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Peter_Zoller">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Peter Zoller</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/LIACC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>LIACC</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/FAIR">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>FAIR</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q25114509"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Ashutosh_Trivedi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ashutosh Trivedi</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yun_Chen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yun Chen</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q107498943"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jae_Yoon">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jae Yoon</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q18126146"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/RCB">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>RCB</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q920941"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sean_Macavaney">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sean Macavaney</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q92727070"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Agencia_Estatal_de_Investigación">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Agencia Estatal de Investigación</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q32826443"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/European_Union">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>European Union</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q458"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Mitsuhisa_Sato">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mitsuhisa Sato</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Memorization_Metrics">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Memorization Metrics</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Thomas_Bäck">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Thomas Bäck</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q87285728"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/JB">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>JB</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q867727"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yuan_Yuan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yuan Yuan</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q103277502"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Carmen_Corre">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Carmen Corre</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q109793830"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Challenges">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Challenges</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q50815379"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IVOA_Semantics">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IVOA Semantics</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Agentic_Ai">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Agentic Ai</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q132451509"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Rahul_Ramachandran">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Rahul Ramachandran</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q108471178"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/United_States_Department_of_Agriculture">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>United States Department of Agriculture</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q501542"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yiwen_Liu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yiwen Liu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102141399"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Bao_Wang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Bao Wang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102461512"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Álvaro_Alonso">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Álvaro Alonso</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q39964242"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Chun_Yao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Chun Yao</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q90764019"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Carlsberg_Foundation">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Carlsberg Foundation</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1043358"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Royal_Society">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Royal Society</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q123885"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/2505.10468v1">
+    <rdf:type rdf:resource="http://schema.org/ScholarlyArticle"/>
+    <schema1:name>AI Agents vs. Agentic AI: A Conceptual Taxonomy, Applications and Challenges</schema1:name>
+    <schema1:abstract>this review critically distinguishes between ai agents and agentic ai offering a structured conceptual taxonomy application mapping and challenge analysis to clarify their divergent design philosophies and capabilities we begin by outlining the search strategy and foundational definitions characterizing ai agents as modular systems driven by llms and lims for narrow task specific automation generative ai is positioned as a precursor with ai agents advancing through tool integration prompt engineering and reasoning enhancements in contrast agentic ai systems represent a paradigmatic shift marked by multi agent collaboration dynamic task decomposition persistent memory and orchestrated autonomy through a sequential evaluation of</schema1:abstract>
+    <schema1:identifier>ARXIV:arXiv:2404.04442</schema1:identifier>
+    <schema1:datePublished>2025-05-15</schema1:datePublished>
+    <schema1:author rdf:resource="http://example.org/person/Ranjan_Sapkota"/>
+    <schema1:author rdf:resource="http://example.org/person/Konstantinos_Roumeliotis"/>
+    <schema1:author rdf:resource="http://example.org/person/Manoj_Karkee"/>
+    <schema1:author rdf:resource="http://example.org/person/A_Agents"/>
+    <schema1:author rdf:resource="http://example.org/person/Agentic_Ai"/>
+    <schema1:author rdf:resource="http://example.org/person/Agents_Agentic"/>
+    <schema1:funder rdf:resource="http://example.org/org/National_Institute_of_Food_and_Agriculture"/>
+    <schema1:funder rdf:resource="http://example.org/org/National_Science_Foundation"/>
+    <schema1:funder rdf:resource="http://example.org/org/United_States_Department_of_Agriculture"/>
+    <ex:hasWord>this</ex:hasWord>
+    <ex:hasWord>review</ex:hasWord>
+    <ex:hasWord>critically</ex:hasWord>
+    <ex:hasWord>distinguishes</ex:hasWord>
+    <ex:hasWord>between</ex:hasWord>
+    <ex:hasWord>ai</ex:hasWord>
+    <ex:hasWord>agents</ex:hasWord>
+    <ex:hasWord>and</ex:hasWord>
+    <ex:hasWord>agentic</ex:hasWord>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Claire_Dilliway">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Claire Dilliway</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jun-Shuo_Zhang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jun-Shuo Zhang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jia-Rui_Niu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jia-Rui Niu</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IHDEA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IHDEA</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Hongwei_Shang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Hongwei Shang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102414270"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Infrastructure">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Infrastructure</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q121359"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NCTS_Taiwan">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NCTS Taiwan</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Roger_Trullo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Roger Trullo</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Qing_Zhao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Qing Zhao</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102191142"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Hainan_University_High-level_Talent_Research_Launch_Fund">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Hainan University High-level Talent Research Launch Fund</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Mossaab_Bagdouri">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mossaab Bagdouri</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Chi_Cheng">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Chi Cheng</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q595805"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Li_Zhang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Li Zhang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102243247"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/City">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>City</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q515"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Elena_Baralis">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Elena Baralis</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102257432"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IAIFI">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IAIFI</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q106412008"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Dakotah_Maguire">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Dakotah Maguire</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/M.T.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>M.T.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/National_Institute_of_Food_and_Agriculture">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>National Institute of Food and Agriculture</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q11683311"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Krishna_Singh">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Krishna Singh</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q63991306"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Greta_Ontrup">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Greta Ontrup</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q90521512"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xiaoqi_Sheng">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xiaoqi Sheng</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q93376117"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Weiming_Lu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Weiming Lu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q92893779"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Marc_Chadeau-Hyam">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Marc Chadeau-Hyam</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q41606161"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/TUCAN">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>TUCAN</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q10567"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Mateo_Perez">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mateo Perez</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q68909267"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Song-Bo_Zhang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Song-Bo Zhang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Institute_of_Physics">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Institute of Physics</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q513283"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Imperial-X">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Imperial-X</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/V._Batagelj">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>V. Batagelj</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Heidi_Hanson">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Heidi Hanson</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q57304058"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Germán_Castignani">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Germán Castignani</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Javier_Conde">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Javier Conde</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q58049453"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ranjan_Sapkota">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ranjan Sapkota</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Anusandhan_National_Research_Foundation">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Anusandhan National Research Foundation</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q122925971"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Tian_Zhang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tian Zhang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102265720"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/GRF">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>GRF</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q409489"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/CM">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>CM</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1009"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Mississippi_State.">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Mississippi State.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Britta_Wrede">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Britta Wrede</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q125298343"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Yifeng_Mao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yifeng Mao</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/UT-Battelle,_LLC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>UT-Battelle, LLC</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Dmytro_Chupryna">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Dmytro Chupryna</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Amazon-Illinois_Center_on_AI_for">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Amazon-Illinois Center on AI for</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ildar_Baimuratov">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ildar Baimuratov</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130975281"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Heechan_Lee">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Heechan Lee</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q89869365"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Fangxin_Fang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Fangxin Fang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/U.S._Department_of_Energy">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>U.S. Department of Energy</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q217810"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Qiongxiu_Li">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Qiongxiu Li</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Centro_Nazionale_di_Ricerca_in_High-">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Centro Nazionale di Ricerca in High-</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/National_Science_Foundation">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>National Science Foundation</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q304878"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jiaming_Liang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jiaming Liang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q96308537"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Prabhakar_Pradhan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Prabhakar Pradhan</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102149404"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/SMARTY">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>SMARTY</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q726196"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Daniil_Mintc">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Daniil Mintc</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/EFPIA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>EFPIA</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1376562"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/U">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>U</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1098"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Yuetsu_Kodama">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yuetsu Kodama</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/European_Laboratory_for_Learning_and_Intelligent_Systems">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>European Laboratory for Learning and Intelligent Systems</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q78151117"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Genevera_Allen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Genevera Allen</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q61747758"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jeff_Gore">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jeff Gore</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q22073811"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Wendy_Schmidt">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Wendy Schmidt</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Susanna_Baars">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Susanna Baars</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Bhuvanesh_Sundar">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Bhuvanesh Sundar</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Ministry_of_Economy_and_Competitiveness">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Ministry of Economy and Competitiveness</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Anna_Aksonova">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Anna Aksonova</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/AAU_AI_Cloud">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>AAU AI Cloud</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/M_Pérez-Martínez">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>M Pérez-Martínez</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Clément_Jonquet">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Clément Jonquet</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q46457352"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IVOA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IVOA</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q62643584"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Alexandra_Porter">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Alexandra Porter</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q92482950"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Alkis_Koudounas">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Alkis Koudounas</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Sophie_Aubin">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sophie Aubin</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Kian_Chung">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Kian Chung</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Zhen-Fan_Tang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Zhen-Fan Tang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/YFL">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>YFL</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q3912754"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yizhou_Liu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yizhou Liu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q101211709"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nazanin_Zounemat_Kermani">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nazanin Zounemat Kermani</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Dikshit_Chauhan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Dikshit Chauhan</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sergio_Morales">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sergio Morales</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q55113326"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/GMV">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>GMV</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1550912"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Christian_Kokail">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Christian Kokail</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Konstantinos_Roumeliotis">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Konstantinos Roumeliotis</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Di_Xiao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Di Xiao</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102354683"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Imperial_College">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Imperial College</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q189022"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/ERDF">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>ERDF</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1361297"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Next">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Next</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q308993"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Panagiotis_Sarigiannidis">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Panagiotis Sarigiannidis</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q59830500"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Andre_Catarino">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Andre Catarino</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/S._Soudjani">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>S. Soudjani</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Marquita_Ellis">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Marquita Ellis</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nicola_Tonellotto">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nicola Tonellotto</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q109778037"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Changsung_Kang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Changsung Kang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Office_of_Science">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Office of Science</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q7079302"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yanick_Kind">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yanick Kind</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q29018732"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Kazuya_Yamazaki">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Kazuya Yamazaki</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/US_Department_of_Energy">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>US Department of Energy</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q217810"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Mousa_Alrubayan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mousa Alrubayan</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Zi-Gao_Dai">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Zi-Gao Dai</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Shrreya_Behll">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Shrreya Behll</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NIH">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NIH</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q390551"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Tatsuhiko_Tsunoda">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tatsuhiko Tsunoda</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q88268765"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Shahid_Huang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Shahid Huang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/T._Pisanski">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>T. Pisanski</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Computing,_Big_Data">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Computing, Big Data</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/YL">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>YL</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q54718"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Alexander_Schwing">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Alexander Schwing</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q44685124"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Markus_Demleitner">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Markus Demleitner</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Agents_Agentic">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Agents Agentic</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Claudio_Savelli">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Claudio Savelli</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/AIS">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>AIS</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q47465"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/PIANO_NAZIONALE_DI_RIPRESA_E_RESILIENZA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>PIANO NAZIONALE DI RIPRESA E RESILIENZA</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q107314758"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Computational_Privacy_Group">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Computational Privacy Group</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Mohammad_Masum">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Mohammad Masum</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q27050124"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Matheus_Gadelha">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Matheus Gadelha</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q131161669"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Francesco_Orabona">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Francesco Orabona</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ana_Slavec">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ana Slavec</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q114335844"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/JSPS_KAKENHI">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>JSPS KAKENHI</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Academia_Sinica">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Academia Sinica</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q337266"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Guillaume_Balezo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Guillaume Balezo</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Newell_Washburn">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Newell Washburn</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q86979176"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Wolfson_Foundation">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Wolfson Foundation</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q8030215"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/J_Moreno-Casanova">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>J Moreno-Casanova</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/UA_Ruhr">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>UA Ruhr</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q23038563"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/George_Floros">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>George Floros</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q42681183"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/ICSC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>ICSC</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q2799385"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/SE">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>SE</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q34"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/J_Auñón">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>J Auñón</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Abu_Kaisar">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Abu Kaisar</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/rc-trust">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>rc-trust</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Blaž_Bertalanič">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Blaž Bertalanič</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q114324397"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Shu_Takumi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Shu Takumi</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NERC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NERC</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q837"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Leon_Hannig">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Leon Hannig</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Max_Tegmark">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Max Tegmark</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q2076321"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/LUMI">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>LUMI</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q11879779"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Z.L.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Z.L.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sören_Auer">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Sören Auer</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q27453085"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/._Z._L.">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>. Z. L.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Iksha_Gurung">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Iksha Gurung</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Centre_for">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Centre for</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q25892981"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Tim_Wittenborg">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Tim Wittenborg</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Henrique_Lopes_Cardoso">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Henrique Lopes Cardoso</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q62055330"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Luxembourg_National_Research_Fund">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Luxembourg National Research Fund</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q13102615"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/DFG">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>DFG</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q707283"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Honming_Cai">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Honming Cai</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jordi_Cabot">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jordi Cabot</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q57166194"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Oak_Ridge_National_Laboratory">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Oak Ridge National Laboratory</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q714439"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/UT-Battelle_LLC">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>UT-Battelle LLC</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Github_Bavla">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Github/Bavla</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Albert_Planas">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Albert Planas</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q115614711"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Paul_Castro">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Paul Castro</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xuemei_Gu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xuemei Gu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q104584946"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Departments_of_Excellence">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Departments of Excellence</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/CAS_Organizational_Scientific_Research_Platform_for_National_Major_Scientific_and_Techn">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>CAS Organizational Scientific Research Platform for National Major Scientific and Techn</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Pedro_Reviriego">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Pedro Reviriego</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130820385"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Qibin_Leng">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Qibin Leng</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q85938552"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/NASA">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>NASA</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q309751"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/IMPRS-IS">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>IMPRS-IS</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/B._R._Ambedkar">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>B. R. Ambedkar</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Amira_Alakhdar">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Amira Alakhdar</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Liang-Yan_Gui">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Liang-Yan Gui</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Milad_Kazemi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Milad Kazemi</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q90130720"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/PNRR">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>PNRR</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q7164019"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Rui_Abreu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Rui Abreu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q64517973"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Linjuan_Wu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Linjuan Wu</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Jun-Jie_Wei">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Jun-Jie Wei</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q57281239"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/OntoPortal_Alliance">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>OntoPortal Alliance</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Science_and_Technology_Promotion_Fund_and_Lottery_Fund">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Science and Technology Promotion Fund and Lottery Fund</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Bhavin_Madhani">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Bhavin Madhani</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/OpenWeather_Ltd.">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>OpenWeather Ltd.</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ziyang_Li">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ziyang Li</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q103740322"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Reginald_Bernardo">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Reginald Bernardo</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Weihao_Kong">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Weihao Kong</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Research_Alliance_Centers">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Research Alliance Centers</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Google">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Google</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q95"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/European_Regional_Development_Fund">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>European Regional Development Fund</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1361297"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Research_Grants_Council">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Research Grants Council</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q45133538"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Nanxuan_Zhao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Nanxuan Zhao</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130946865"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Guo_Chen">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Guo Chen</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102263916"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Yuan-Tai_Fu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yuan-Tai Fu</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xuan_Yang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xuan Yang</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102400497"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Yulian_Wu">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Yulian Wu</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q96436724"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Niki_Van_Stein">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Niki Van Stein</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130906085"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/DOE">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>DOE</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q37110043"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Observatoire_de_Paris-PSL">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Observatoire de Paris-PSL</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Hisham_Abubakar-Waziri">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Hisham Abubakar-Waziri</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/._DOE">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>. DOE</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Prijith_Chandran">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Prijith Chandran</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q130861703"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Bowen_Jiang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Bowen Jiang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Guihua_Tao">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Guihua Tao</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Australian_Researcher_Cooperation_Hub">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Australian Researcher Cooperation Hub</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ulrich_Römer">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ulrich Römer</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q102431245"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/European_Commission">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>European Commission</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q8880"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Future_Artificial_Intelligence_Research">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Future Artificial Intelligence Research</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Annika_Bush">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Annika Bush</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Laura_Debisschop">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Laura Debisschop</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/MCIN_AEI">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>MCIN/AEI</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Ajit_Puthenputhussery">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Ajit Puthenputhussery</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Fa-Yin_Wang">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Fa-Yin Wang</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Natural_Science_Foundation_of_China">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Natural Science Foundation of China</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/The_University_of_Tokyo">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>The University of Tokyo</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q7842"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Wolf">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Wolf</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Science">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Science</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q192864"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/Chinese_Academy_of_Sciences_for">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>Chinese Academy of Sciences for</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Alessio_Buscemi">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Alessio Buscemi</schema1:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Xingyu_Zhou">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Xingyu Zhou</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q100316383"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/org/ELLIS">
+    <rdf:type rdf:resource="http://schema.org/Organization"/>
+    <schema1:name>ELLIS</schema1:name>
+    <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q21452033"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ack_person/Qiang_Yuan">
+    <rdf:type rdf:resource="http://schema.org/Person"/>
+    <schema1:name>Qiang Yuan</schema1:name>
+  </rdf:Description>
+</rdf:RDF>

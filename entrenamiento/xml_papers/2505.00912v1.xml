@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Towards a format for describing networks 1. Networks and knowledge graphs</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-01">1 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Vladimir</forename><surname>Batagelj</surname></persName>
+							<email>vladimir.batagelj@fmf.uni-lj.si</email>
+							<affiliation key="aff0">
+								<address>
+									<country>FAMNIT Koper</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">IMFM Ljubljana</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution">UL FMF Ljubljana</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tomaž</forename><surname>Pisanski</surname></persName>
+							<affiliation key="aff0">
+								<address>
+									<country>FAMNIT Koper</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">IMFM Ljubljana</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Iztok</forename><surname>Savnik</surname></persName>
+							<affiliation key="aff0">
+								<address>
+									<country>FAMNIT Koper</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Ana</forename><surname>Slavec</surname></persName>
+							<affiliation key="aff0">
+								<address>
+									<country>FAMNIT Koper</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution">InnoRenew CoE Izola</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nino</forename><surname>Bašić</surname></persName>
+							<affiliation key="aff0">
+								<address>
+									<country>FAMNIT Koper</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">IMFM Ljubljana</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Towards a format for describing networks 1. Networks and knowledge graphs</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-01">1 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E98FE9FDA835CE8AC686C8C01C8E233F</idno>
+					<idno type="arXiv">arXiv:2505.00912v1[cs.SI]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:45+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Network types</term>
+					<term>Knowledge graph</term>
+					<term>RDF</term>
+					<term>Identification</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The relationship between the concepts of network and knowledge graph is explored. A knowledge graph can be considered a special type of network. When using a knowledge graph, various networks can be obtained from it, and network analysis procedures can be applied to them. RDF is a formalization of the knowledge graph concept for the Semantic Web, but some of its solutions are also extensible to a format for describing general networks.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Open data plays a crucial role in ensuring the computational reproducibility and verifiability of published results. Collections of similar datasets are also crucial for developing methods to analyze specific types of data. When preparing such data, it is essential to adhere to the FAIR principles -Findability, Accessibility, Interoperability, and Reusability. To facilitate ease of use, data should ideally be stored in a text format that preserves the structure of the data and includes relevant metadata. Datasets are alive. Their connection to open repositories is important for their accessibility and maintenance.</p><p>Network analysis is an area where data is often stored in diverse file formats. Adopting a common format for storing network data would be highly beneficial. Such a format would allow us to obtain the specific descriptions required by various network analysis programs using relatively simple scripts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Graphs and networks</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Unit identification</head><p>The fundamental task in transforming data about the selected topic into a structured dataset to be used in further analyses is the identification of units (en-tity recognition). Often, the source data are available as unstructured or semistructured text. In this case, the transformation is a task of the computer-assisted text analysis (CaTA). Terms considered in TA are collected in a dictionary (it can be fixed in advance, or built dynamically). The two main problems with terms are equivalence -different words representing the same term, and ambiguity -same words representing different terms.</p><p>Because of these, the coding -the transformation of raw text data into formal description -is often done manually or semiautomatically.</p><p>We assume that unit identification assigns a unique identifier (ID) to each unit. For some types of units, such IDs are standardized: ISO 3166- In data displays, often IDs are replaced by corresponding (short) labels/names. Besides the semantic units or concepts related to the selected topic, we can identify in the raw data also syntactic units -parts of the text. As syntactic units of TA we usually consider clauses, statements, paragraphs, news, messages, etc.</p><p>In thematic TA the units are coded as a rectangular matrix Syntactic units × Concepts which can be considered as a two-mode network.</p><p>In semantic TA the units (often clauses) are encoded according to the S-V-O (Subject-Verb-Object) model or its improvements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>subject verb object</head><p>This coding can be directly considered as a network with Subjects ∪ Objects as nodes and links (arcs) labeled with Verbs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Networks</head><p>A network is based on two sets -a set of nodes (vertices), that represent the selected units, and a set of links (lines), that represent ties between units. They determine a graph. A link can be directed -an arc, or undirected -an edge.</p><p>Additional data about nodes or links can be known -their properties (attributes). For example: name/label, type, value, etc.</p><p>Network = Graph + Data The data can be measured or computed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Networks Formally</head><p>A network N = (V, L, P, W) consists of: </p><formula xml:id="formula_0">-a graph G = (V, L),</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Types of networks</head><p>Besides ordinary (directed, undirected, mixed) networks, some extended types of networks are also used:</p><p>-2-mode networks, bipartite (valued) graphs -networks between two disjoint sets of nodes. multi-relational networks.</p><p>linked networks and collections of networks.</p><p>multilevel networks.</p><p>temporal networks, dynamic graphs -networks changing over time.</p><p>specialized networks: representation of genealogies as p-graphs; Petri's nets, etc.</p><p>Network (input) file formats should provide a means of expressing all of these types of networks. All interesting data should be recorded (respecting privacy).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Two-mode networks</head><p>In a two-mode network N = ((U, V), L, P, W) the set of nodes consists of two disjoint sets of nodes U and V, and all the links from L have one end node in U and the other in V. Often also a weight w : L → R ∈ W is given; if not, we assume w(u, v) = 1 for all (u, v) ∈ L.</p><p>A two-mode network can also be described by a rectangular matrix A = [a uv ] U ×V .</p><formula xml:id="formula_1">a uv = w(u, v) (u, v) ∈ L 0 otherwise</formula><p>Examples: (persons, societies, years of membership), (buyers/consumers, goods, quantity), (parliamentarians, problems, positive vote), (persons, journals, reading), (authors, works, is an author). A classical example of a two-mode network is the Southern women (Davis 1941). .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Multi-relational networks</head><p>A multi-relational network is denoted by</p><formula xml:id="formula_2">N = (V, (L 1 , L 2 , . . . , L k ), P, W)</formula><p>and contains different relations L i (sets of links) over the same set of nodes. Also, the weights from W are defined on different relations or their union.</p><p>Examples of such networks are the transportation system in a city (stations, lines); WordNet (words, semantic relations: synonymy, antonymy, hyponymy, meronymy, etc.), KEDS -Kansas Event Data System networks (states, relations between states: Visit, Ask information, Warn, Expel person, etc.).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Linked networks and collections of networks</head><p>In a linked or multimodal network</p><formula xml:id="formula_3">N = ((V 1 , V 2 , . . . , V j ), (L 1 , L 2 , . . . , L k ), P, W) the set of nodes V is partitioned into subsets (modes) V i , L s ⊆ V p × V q ,</formula><p>and properties and weights are usually partial functions.</p><p>A set of networks {N 1 , N 2 , . . . , N k } in which each network shares a set of nodes with some other network is called a collection of networks.</p><p>A linked network can be transformed into a collection of networks and vice versa.</p><p>Bibliographical information is usually represented as a collection of bibliographical networks {WA, Cite, WK, WC, WI, . . .} (W -works, A -authors, K -keywords, C -countries, I -institutions) <ref type="bibr" target="#b1">[2]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Multilevel networks</head><p>A multilevel network organizes nodes into hierarchical levels, where each level represents a different scale or granularity of interaction or connectivity. It is a special case of a linked network. Key characteristics of multilevel networks are: hierarchical levels, inter-level links, scale-specific dynamics, and modularity.</p><p>Each level may have its unique dynamics, rules, or behaviors. For example, in a biological network, one level might represent protein-protein interactions, while another level represents cellular interactions. They often exhibit modularity, where nodes within a level are more densely linked to each other than to nodes in other levels. This modularity can help in understanding the functional or structural organization of the network.</p><p>Example: a multilevel network in the context of a university: Level 1: Individual students and faculty members, Level 2: Departments or academic units, Level 3: The entire university.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5">Temporal networks</head><p>In a temporal network, the presence/activity of a node/link can change through time T .</p><p>Temporal quantities. To describe changes, we introduce a notion of a temporal quantity (TQ) <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4]</ref> </p><formula xml:id="formula_4">a(t) = a ′ (t) t ∈ T a t ∈ T \ T a</formula><p>where T a is the activity time set of a and a ′ (t) is the value of a in an instant t ∈ T a , and denotes the value undefined . We assume that the values of temporal quantities belong to a set A which is a semiring (A, +, •, 0, 1) for binary operations + :</p><formula xml:id="formula_5">A × A → A and • : A × A → A. A = A ∪ { }.</formula><p>Let A (T ) denote the set of all temporal quantities over A in time T . To extend the operations to networks and their matrices we first define the sum (parallel links) a + b as</p><formula xml:id="formula_6">(a + b)(t) = a(t) + b(t) and T a+b = T a ∪ T b . The product (sequential links) a • b is defined as (a • b)(t) = a(t) • b(t) and T a•b = T a ∩ T b .</formula><p>Let us define TQs 0 and 1 with requirements 0(t) = and 1(t) = 1 for all t ∈ T . Again, the structure (A (T ), +, •, 0, 1) is a semiring.</p><p>To produce software support for computation with TQs, we limit it to TQs that can be described as a sequence of disjoint time intervals with a constant value</p><formula xml:id="formula_7">a = [(s i , f i , v i )] i∈1..k</formula><p>where s i is the starting time and f i the finishing time of the i-th time interval [s i , f i ), s i &lt; f i and f i ≤ s i+1 , and v i is the value of a on this interval. Outside the intervals, the value of TQ a is undefined, .</p><p>For example a = [(1, 5, 2), (6, 8, 1), <ref type="bibr" target="#b10">(11,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b2">3)</ref>, (14, 16, 2), (17, 18, 5), (19, 20, 1)]. Assuming discrete time, the TQ a has at time points 1, 2, 3, 4 value 2; it is undefined at time point 5; has at time points 6, 7 value 1; etc.</p><p>A temporal network</p><formula xml:id="formula_8">N T = (V, L, P, W, T )</formula><p>is obtained if the time T is attached to an ordinary network. T is a linearly ordered set of time points t ∈ T . In a temporal network, some node properties and/or link weights are assigned TQs.</p><p>In a temporal network, nodes v ∈ V and links l ∈ L are not necessarily present or active all time points. If a link l(u, v) is active at time point t then also its end nodes u and v should be active in time t.</p><p>We will denote the network consisting of links and nodes active in time t ∈ T by N (t) and call it a time slice in time point t.</p><p>Program Pajek also supports descriptions of temporal networks based on events -a sequence of transformations (add, remove, change, time point, etc.). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.6">Multi-relational temporal network -KEDS/WEIS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Knowledge graphs</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Knowledge graph</head><p>A knowledge graph is a structured representation of knowledge that captures entities, relationships, and attributes in a graph-based format. New entities, relationships, and attributes can be added dynamically. Knowledge graphs have evolved from early semantic networks (1960s) and ontologies to become powerful tools for representing and reasoning about complex knowledge. The Austrian linguist Edgar W. Schneider coined the term "knowledge graph" in 1972.</p><p>A knowledge graph is a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent potentially different relations between these entities <ref type="bibr" target="#b10">[11]</ref>. It acquires and integrates information into an ontology and applies a reasoner to derive new knowledge <ref type="bibr" target="#b6">[7]</ref>.</p><p>Knowledge graphs are widely used in applications like semantic search, recommendation systems, natural language processing, and artificial intelligence. They are often built using standards like RDF (Resource Description Framework) and queried using languages like SPARQL <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b12">13]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Knowledge graphs formally</head><p>There is no generally definition of a knowledge graph. Most approaches are based on the view that it is a set of facts F, where each fact is a triple of the form (e 1 , r, e 2 ) or (e, a, v), with: e, e 1 , e 2 ∈ E, r ∈ R, a ∈ A, and v (value, which can be a literal or another entity). E is a set of entities (nodes), representing real-world objects, concepts, or instances. R is a set of relationships (arcs), representing directed links between entities. A is a set of attributes, representing properties or characteristics of entities or relationships. The set of facts F can be represented with a knowledge graph (network)</p><formula xml:id="formula_9">G = (V, A, λ)</formula><p>such that for every arc ℓ(u, v) ∈ A the triple (λ(u), λ(ℓ), λ(v)) ∈ F and there is an arc in A for each triple from F. There is no isolated node in V. The function λ : V ∪ A → L, where L is a set of labels, provides semantic meaning to entities, relationships, and attributes.</p><p>In a network, the labels on nodes are considered standard node properties; arcs with the same label determine the corresponding relation. Therefore, the knowledge graph G is a multi-relational network. Usually, the attribute arcs and attribute value nodes are transformed into functions (node properties). Example. As an example, let us describe a part of the bibliography determined by the following works: Generalized blockmodeling, Clustering with relational constraint, Partitioning signed social networks, The Strength of Weak Ties.</p><p>There are nodes of different types (modes): persons, papers, books, series, journals, publishers; different relations between them: author of, editor of, contained in, cites, published by; and attributes: sex and country. See Figure <ref type="figure" target="#fig_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Limitations</head><p>An S-V-O triple on which the knowledge graph is based corresponds in logic to a binary predicate V (S, O). In sentences describing facts predicates of larger -arity can appear.</p><p>An approach would be to use hypergraphs instead of graphs. An alternative approach is to express a k-ary predicate as a binary predicate. Consider a 4ary predicate P (x, y, t, z). The quadruple (x, y, t, z) can be expressed as a pair in three ways (x, (y, t, z)), (x, y), (t, z)), and ((x, y, t), z). Defining a binary predicate P ′ (x, (y, t, z)) = P (x, y, t, z) we get the triple (x, P ′ , (y, t, z)). Now, we have to consider the triple (y, t, z) as an object. This is called a reification. In knowledge representation, the reification is the process of turning a predicate or statement into an addressable object. Reification allows the representation of assertions so that they can be referred to or qualified by other assertions <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b11">12]</ref>.</p><p>Another problem is how to express an existence fact in which an entity is not known -we only know that it exists. In logic, this is resolved by Skolemization. We can deal with both problems by introducing blank nodes <ref type="bibr" target="#b4">[5]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">RDF Graphs</head><p>RDF is a standard model for data interchange on the web, developed by the World Wide Web Consortium (W3C). It is designed to represent information about resources in a way that can be easily processed by machines. It is a key component of the Semantic Web, which aims to make web data more meaningful and interconnected. RDF provides a universal framework for describing and linking data, making it easier for machines to understand and process information across different systems. It plays a crucial role in enabling the vision of a more intelligent and interconnected web.</p><p>In <ref type="bibr" target="#b8">[9]</ref> we learn "There can be four kinds of nodes in an RDF graph: IRIs (Internationalized Resource Identifier), literals, blank nodes, and triple terms" (see "1.2 Resources and Statements"). An IRI is a Unicode string for unambiguously identifying nodes and arcs. IRIs are internationalized versions of URIs, which are generalizations of URLs. A blank node is appropriate when the node does not need to be referenced directly. Blank nodes can be reached by following their incident arcs from other nodes. Literals are concrete values used to represent data.</p><p>In "3. RDF Graphs" a definition of an RDF graph is given: An RDF graph is a set of RDF triples. An RDF triple is said to be asserted in an RDF graph if it is an element of the RDF graph. An RDF triple (often simply called "triple") is a 3-tuple that is defined inductively as follows: In the proposed approach an RDF graph is a network K = ((S, T ), A, λ). S is the set of simple nodes, T is the set of triple nodes, and V = S ∪ T is the set of nodes. A is the set of arcs (directed links) and λ is the label function -for the example triple λ(u) = s, λ(v) = o, and λ(t) = p.</p><p>Labels are from three sets L -literals, B = { } -blank, and I -IRI. The inductive definition of an RDF graph can be transformed as follows. Let IK be the set of RDF networks. Then RDFb. Empty network K = ((∅, ∅), ∅, ∅) ∈ IK.</p><p>Let K ∈ IK and K ′ = ((S ′ , T ′ ), A ′ , λ ′ ) be the expanded network. Then for every u ∈ V we have λ ′ (u) = λ(u).  In applications, the set of facts of the knowledge graph is augmented by general (common) knowledge about the application field (ontology -also expressed as triples <ref type="bibr" target="#b13">[14]</ref>). See Figure <ref type="figure" target="#fig_2">2</ref>. This allows for more effective use of logic in solving problems in a given field.</p><formula xml:id="formula_10">RDFs. If λ ′ (u) ∈ I ∪ B, λ ′ (v) ∈ I ∪ B ∪ L, t ∈ S, and λ ′ (t) ∈ I then S ′ = S ∪ {u, v}, T ′ = T ∪ {t}, A ′ = A ∪ {(u, t), (t, v)}, and the network K ′ ∈ IK. RDFt. If v ∈ T , u ∈ S, λ ′ (u) ∈ I ∪ B then S ′ = S ∪ {u}, T ′ = T ∪ {t}, A ′ = A ∪ {(u, t), (t, v)},</formula><p>From the knowledge graph, we can create various networks, from which we can obtain useful information using network analysis procedures.</p><p>If we are only interested in the structure of the network, we can forget about the predicate/relation labels and analyze the resulting simplified network.</p><p>Another option is to obtain subnetworks of individual predicates/relations and, using network multiplication (and other operations), create meaningful derived networks, which are then analyzed.</p><p>For example, from the bibliographic knowledge graph we can obtain the networks mentioned in subsection 3. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Conclusions</head><p>Knowledge graphs can have a very diverse structure (a large number of types of units and predicates), which allows for a fairly accurate description of facts from a selected field and solving problems about it. Network analysis methods are particularly useful in analyzing one or a few relational (sub)networks of a knowledge graph.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Bibliography as knowledge graph</figDesc><graphic coords="7,134.77,378.26,345.82,261.99" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>and the network K ′ ∈ IK. Let n S = |S|, n T = |T |, and m = |A|. For the initial empty network n S = n T = m = 0. For each application of the rules RDFs and RDFt we have n ′ T = n T + 1 and m ′ = m + 2. Therefore, after k applications of these rules, it holds n T = k and m = 2k.Some interesting questions about the RDF networks: Can a graph K = ((S, T ), A) be recognized as a graph of an RDF network? The oriented K 4 with n S = 1 and n T = 3 is not in IK. Can we obtain the corresponding construction sequence?</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Barcelona (Data Expo 2025)</figDesc><graphic coords="10,165.95,390.75,283.46,171.17" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>3 .</head><label>3</label><figDesc>The product Co = WA T * WA gives us the co-authorship network. Its entry Co[a, b] counts the number of works in which a and b are co-authors. Similarly, AK[a, k] from the derived network AK = WA T * WK tells us in how many works author a has dealt with the topic described by the keyword k. The derived network ACi = WA T * Cite * WA describes citations between authors -the entry ACi[a, b] counts how many times author a cited author b, etc. [2].</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>1 alpha-2 two-letter country codes, ISO 9362 Bank Identifier Codes (BIC), ORCID -Open Researcher and Contributor ID, ISSN -International Standard Serial Number, DOI -Digital Object Identifier, URI -Uniform Resource Identifier, etc.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>where V is the set of nodes, A is the set of arcs, E is the set of edges, and L = E ∪ A is the set of links. n = |V|, m = |L| -P is a set of node value functions / properties: p : V → A -W is a set of link value functions / weights: w : L → B</figDesc><table><row><cell>Additional information/data about values:</cell></row><row><cell>-How can we compute with values -algebraic structures: semigroup, monoid,</cell></row><row><cell>group, semiring, etc.</cell></row><row><cell>-Properties of values -in a molecular graph, an atom is assigned to each</cell></row><row><cell>node; properties of relevant atoms are such additional data.</cell></row><row><cell>2.4 Some terminology</cell></row><row><cell>unit, actor -node, vertex</cell></row><row><cell>tie, line -link, edge, arc</cell></row><row><cell>arc = directed link, (a, d)</cell></row><row><cell>a is the initial node,</cell></row><row><cell>d is the terminal node.</cell></row><row><cell>edge = undirected link, (c: d)</cell></row><row><cell>c and d are end nodes.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>Types of networks can be combined. Here is a fragment from the Balkans Data Set of KEDS data</figDesc><table><row><cell>890402 YUG</cell><cell>KSV</cell><cell cols="2">224 (RIOT) RIOT-TORN</cell></row><row><cell>890404 YUG</cell><cell cols="3">ETHALB 212 (ARREST PERSON) ALB ETHNIC JAILED IN YUG</cell></row><row><cell>890407 ALB</cell><cell cols="2">ETHALB 224 (RIOT) RIOTS</cell><cell></cell></row><row><cell cols="2">890408 ETHALB KSV</cell><cell>123 (INVESTIGATE)</cell><cell>PROBING</cell></row><row><cell>...</cell><cell></cell><cell></cell><cell></cell></row><row><cell>030731 GER</cell><cell>CYP</cell><cell>042 (ENDORSE)</cell><cell>GAVE SUPPORT</cell></row><row><cell>030731 UNWCT</cell><cell cols="3">BOSSER 212 (ARREST PERSON) SENTENCED TO PRISON</cell></row><row><cell>030731 VAT</cell><cell>EUR</cell><cell>043 (RALLY) RALLIED</cell><cell></cell></row><row><cell>030731 UNWCT</cell><cell cols="2">BOSSER 013 (RETRACT)</cell><cell>CLEARED</cell></row><row><cell>030731 UNWCT</cell><cell>BAL</cell><cell>121 (CRITICIZE)</cell><cell>CHARGES</cell></row><row><cell>030731 SER</cell><cell>UNWCT</cell><cell>122 (DENIGRATE)</cell><cell>TESTIFIED</cell></row><row><cell cols="2">030731 BOSSER UNWCT</cell><cell>121 (CRITICIZE)</cell><cell>ACCUSED</cell></row><row><cell>...</cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="4">that determines a multi-relational temporal network.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>1. If s is an IRI or a blank node, p is an IRI, and o is an IRI, a blank node, or a literal, then (s, p, o) is an RDF triple. 2. If s is an IRI or a blank node, p is an IRI, and o is an RDF triple, then (s, p, o) is an RDF triple.The three components (s, p, o) of an RDF triple are respectively called the subject, predicate, and object of the triple. Note: The definition of triple is recursive. That is, a triple can itself have an object component that is another triple. However, by this definition, cycles of triples cannot be created.</figDesc><table><row><cell cols="7">IRIs, literals, blank nodes, and triple terms are collectively known as RDF</cell></row><row><cell>terms.</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="7">Instead of traditional RDF graph triple representation with labeled nodes</cell></row><row><cell>and arcs s</cell><cell>p</cell><cell>o</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="6">we propose a representation based on the following alternative</cell><cell></cell></row><row><cell>s u</cell><cell>p t</cell><cell>o v</cell><cell>or</cell><cell>s u</cell><cell>p t</cell><cell>o v</cell></row><row><cell cols="2">5.1 RDF networks</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Acknowledgments</head><p>The computational work reported in this paper was performed using programs R and Pajek <ref type="bibr" target="#b5">[6]</ref>. The code and data are available at Github/Bavla <ref type="bibr" target="#b7">[8]</ref>.</p><p>V. Batagelj is supported in part by the Slovenian Research Agency (research program P1-0294, research program CogniCom (0013103) at the University of Primorska, and research projects J5-2557, J1-2481, and J5-4596) and prepared within the framework of the COST action CA21163 (HiTEc). T. Pisanski is supported in part by the Slovenian Research Agency (research program P1-0294 and research projects BI-HR/23-24-012, J1-4351, and J5-4596). N. Bašić is supported in part by the Slovenian Research Agency (research program P1-0294 and research project J5-4596).</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The expressive power of SPARQL</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Angles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gutierrez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Semantic Web Conference</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="114" to="129" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">On bibliographic networks</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Batagelj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cerinšek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Scientometrics</title>
+		<imprint>
+			<biblScope unit="volume">96</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="845" to="864" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Temporal bibliographic networks</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Batagelj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Maltseva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Informetrics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">101006</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">An algebraic approach to temporal network analysis based on temporal quantities</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Batagelj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Praprotnik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Network Analysis and Mining</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Blank nodes in RDF</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Guo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Softw</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1993" to="1999" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Exploratory social network analysis with Pajek</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>De Nooy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mrvar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Batagelj</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Cambridge university press</publisher>
+			<biblScope unit="volume">46</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Towards a definition of knowledge graphs</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ehrlinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Wöß</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SEMANTiCS (Posters, Demos, SuCCESS)</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="1" to="4" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">/</forename><surname>Github</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bavla</surname></persName>
+		</author>
+		<ptr target="https://github.com/bavla/netsJSON/tree/master/example/bib" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="2025" to="2028" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<persName><forename type="first">O</forename><surname>Hartig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Champin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kellogg</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/rdf12-concepts/" />
+		<title level="m">RDF 1.2 Concepts and Abstract Syntax</title>
+				<editor>
+			<persName><forename type="first">A</forename><surname>Seaborne</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2025-02-25">25 February 2025</date>
+		</imprint>
+	</monogr>
+	<note>W3C Working Draft</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Defining N-ary Relations on the Semantic Web. W3C Working Group Note</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Welty</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/swbp-n-aryRelations/" />
+		<imprint>
+			<date type="published" when="2006-04-12">12 April 2006. 2006</date>
+			<biblScope unit="page" from="2025" to="2028" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Knowledge graphs</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hogan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Blomqvist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cochez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Amato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Melo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gutierrez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kirrane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">E L</forename><surname>Gayo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Navigli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Neumaier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Computing Surveys (Csur)</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1" to="37" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">4.3 RDF Reification in RDF Primer. W3C Recommendation</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Manola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Miller</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/2004/REC-rdf-primer-20040210/#reification" />
+		<imprint>
+			<date type="published" when="2004-02-10">10 February 2004. 2004</date>
+			<biblScope unit="page" from="2025" to="2028" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">SPARQL 1.2 Overview. W3C Group Draft Note</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Seaborne</surname></persName>
+		</author>
+		<ptr target="https://w3c.github.io/sparql-concepts/spec/" />
+		<imprint>
+			<date type="published" when="2024-12-19">19 December 2024. 2024</date>
+			<biblScope unit="page" from="2025" to="2028" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">OWL 2 Web Ontology Language Document Overview</title>
+		<ptr target="https://www.w3.org/TR/owl2-overview/" />
+	</analytic>
+	<monogr>
+		<title level="m">W3C Recommendation</title>
+				<imprint>
+			<date type="published" when="2012-12-11">11 December 2012. 2012</date>
+			<biblScope unit="page" from="2025" to="2028" />
+		</imprint>
+		<respStmt>
+			<orgName>W3C OWL Working Group</orgName>
+		</respStmt>
+	</monogr>
+	<note>Second Edition</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

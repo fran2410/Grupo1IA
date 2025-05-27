@@ -1,0 +1,2585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">OntoPortal-Astro, a Semantic Artefact Catalogue for Astronomy</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-04-18">April 18, 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Baptiste</forename><surname>Cecconi</surname></persName>
+							<email>baptiste.cecconi@observatoiredeparis.psl.eu</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LIRA</orgName>
+								<orgName type="institution" key="instit1">Observatoire de Paris</orgName>
+								<orgName type="institution" key="instit2">Université PSL</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit5">Université Paris Cité</orgName>
+								<address>
+									<addrLine>5 Place Janssen</addrLine>
+									<postCode>92190</postCode>
+									<settlement>Meudon</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Laura</forename><surname>Debisschop</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="laboratory">LIRA</orgName>
+								<orgName type="institution" key="instit1">Observatoire de Paris</orgName>
+								<orgName type="institution" key="instit2">Université PSL</orgName>
+								<orgName type="institution" key="instit3">CNRS</orgName>
+								<orgName type="institution" key="instit4">Sorbonne Université</orgName>
+								<orgName type="institution" key="instit5">Université Paris Cité</orgName>
+								<address>
+									<addrLine>5 Place Janssen</addrLine>
+									<postCode>92190</postCode>
+									<settlement>Meudon</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Sébastien</forename><surname>Derrière</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">UMR7550</orgName>
+								<orgName type="institution" key="instit1">Observatoire Astronomique de Strasbourg</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Université de Strasbourg</orgName>
+								<address>
+									<addrLine>11, rue de l&apos;Université</addrLine>
+									<postCode>67000</postCode>
+									<settlement>Strasbourg</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Mireille</forename><surname>Louys</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="laboratory">UMR7550</orgName>
+								<orgName type="institution" key="instit1">Observatoire Astronomique de Strasbourg</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Université de Strasbourg</orgName>
+								<address>
+									<addrLine>11, rue de l&apos;Université</addrLine>
+									<postCode>67000</postCode>
+									<settlement>Strasbourg</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Carmen</forename><surname>Corre</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">INRAE</orgName>
+								<address>
+									<postCode>49070</postCode>
+									<settlement>DipSO, Beaucouzé</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nina</forename><surname>Grau</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">CODATA</orgName>
+								<orgName type="institution" key="instit2">the Committee on Data of the International Science Council</orgName>
+								<address>
+									<settlement>Paris</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Clément</forename><surname>Jonquet</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="institution" key="instit1">MISTEA</orgName>
+								<orgName type="institution" key="instit2">INRAE</orgName>
+								<orgName type="institution" key="instit3">Institut Agro de Montpelier</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff5">
+								<orgName type="laboratory">LIRMM</orgName>
+								<orgName type="institution" key="instit1">CNRS</orgName>
+								<orgName type="institution" key="instit2">University of Montpellier</orgName>
+								<address>
+									<settlement>Montpellier</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">OntoPortal-Astro, a Semantic Artefact Catalogue for Astronomy</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-04-18">April 18, 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">2D293649C4F05C6C7C264756CEDB3D20</idno>
+					<idno type="arXiv">arXiv:2504.12897v1[astro-ph.IM]</idno>
+					<note type="submission">Preprint submitted to Astronomy &amp; Computing</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:45+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Astronomy</term>
+					<term>Heliophysics</term>
+					<term>Planetary Sciences</term>
+					<term>Semantic artefact</term>
+					<term>Vocabularies</term>
+					<term>Ontologies</term>
+					<term>Thesaurus</term>
+					<term>Terminologies</term>
+					<term>Open Science</term>
+					<term>Semantic Artefact Catalogue</term>
+					<term>OntoPortal</term>
+					<term>Semantic Web</term>
+					<term>Metadata</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The astronomy communities are widely recognised as mature communities for their open science practices. However, while their data ecosystems are rather advanced and permit efficient data interoperability, there are still gaps between these ecosystems. Semantic artefacts (e.g., ontologies, thesauri, vocabularies or metadata schemas) are a means to bridge that gap as they allow to semantically described the data and map the underlying concepts. The increasing use of semantic artefacts in astronomy presents challenges in description, selection, evaluation, trust, and mappings. The landscape remains fragmented, with semantic artefacts scattered across various registries in diverse formats and structures -not yet fully developed or encoded with rich semantic web standards like OWL or SKOS -and often with overlapping scopes. Enhancing data semantic interoperability requires common platforms to catalog, align, and facilitate the sharing of FAIR semantic artefacts. In the frame of the FAIR-IMPACT project, we prototyped a semantic artefact catalogue for astronomy, heliophysics and planetary sciences. This exercise resulted in improved vocabulary and ontology management in the communities, and is now paving the way for better interdisciplinary data discovery and reuse. This article presents current practices in our discipline, reviews candidate SAs for such a catalogue, presents driving use cases and the perspective of a real production service for the astronomy community based on the OntoPortal technology, that will be called OntoPortal-Astro.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>The set of resources of the so-called "astronomy virtual observatory" is a web of related data products, catalogues, services and tools allowing researchers to access and process data for their research. This is implemented thanks to the International Virtual Observation Alliance 1 (IVOA) framework <ref type="bibr" target="#b4">(Arviset et al., 2018)</ref>, which proposes a registry <ref type="bibr" target="#b20">(Demleitner et al., 2019)</ref> gathering endpoints for services, datasets and catalogues, and is used by tools to discover and provide access to resources. This astronomy framework is an example of an open linked-data ecosystem.</p><p>The linked-data architecture has been defined at the inception times of the world-wide-web <ref type="bibr" target="#b9">(Berners-Lee and Hendler, 2001)</ref>. The original framework -called RDF: Resource Description Framework - <ref type="bibr" target="#b52">(Schreiber and Raimond, 2014)</ref> developed and published by the W3C proposes a description of resources and their relations, based on triples: a subject, a predicate and an object. The triples can be seen as sentences, the predicate being the verb. The set of triples creates an oriented and tagged graph of nodes. Nodes are resources (referred to as URI: Unified Resource Identifier). Predicates (or properties) designate the links connecting the ressources. The classes, their instances and the properties are usually defined in standard vocabularies or ontologies capturing a certain level of semantics that a machine will then rely to query and reason over the data. In the present case, this graph of nodes and relations is capturing knowledge about scientific data, hence we call it a "knowledge graph". Keeping this knowledge graph of web resources usable and interoperable while it grows requires semantic and technical coordination and synchronisation, so that terms are globally understood by the tools and actors providing the content and enabling the access. This semantic and technical coordination is achieved by methods, technologies and tools coming from a domain called, the Semantic Web for which semantics artefacts, are at the core <ref type="bibr" target="#b18">(Corcho et al., 2024)</ref>. A semantic artefact (hereafter referred to as SA) -a broader term to include ontologies, terminologies, taxonomies, thesauri, vocabularies, metadata schemas -can be a simple list of terms (properties, classes of resources), or a more complex ontology allowing inference and logics between terms. We know that a unique absolute ontology is utopia. Each SAs encode contextual knowledge, which need to be understandable, shareable and reusable by humans and machines. advanced information model for planetary exploration science archives. The PDS is used by all major space agency archive with planetary exploration missions: NASA/PDS, ESA/PSA, JAXA, ISRO, etc. Moreover, planetary scientists studying the planetary surfaces are using the OGC (Open Geospatial Consortium) ecosystem, developed by the geoscience community (Earth observation). Technical interoperability between OGC and IVOA has been studied for some years <ref type="bibr" target="#b29">(Hare et al., 2018;</ref><ref type="bibr" target="#b43">Marmo et al., 2018;</ref><ref type="bibr" target="#b46">Minin et al., 2019;</ref><ref type="bibr">Erard and the VESPA team, 2024)</ref>. However, semantic interoperability still needs to be implemented.</p><p>In Europe, the development of open data frameworks has been supported by the European Commission framework programs for many years. A significant number of astronomy projects have been funded throughout the last two decades. Table 1 presents an already long (though non-exhaustive) list of such grants, ranked by starting years. The ESCAPE project, which ended in 2023, has initiated the merging of astronomy and particle physics infrastructures and standards.</p><p>The scope of this study covers the astronomy community along with its three sub-domains (celestial astronomy, solar system sciences and heliophysics). Recent publications (e.g., <ref type="bibr" target="#b32">Hurlburt and Timmons, 2022;</ref><ref type="bibr" target="#b10">Berriman, 2024;</ref><ref type="bibr" target="#b13">Cecconi, 2024;</ref><ref type="bibr" target="#b37">Landais et al., 2024;</ref><ref type="bibr" target="#b53">Servillat et al., 2024;</ref><ref type="bibr" target="#b44">Masson et al., 2024)</ref> show that each of these communities are claiming that they are producing a FAIR (Findable, Accessible, Interoperable and Reusable, <ref type="bibr" target="#b61">Wilkinson et al., 2016)</ref> ecosystem. The evaluation of the FAIRness of digital resources is discussed and studied by many groups, and is out of the scope of this paper. However, the fact that each sub-community is still rather siloed is a hint that things could be improved. In 2018, the IVOA Solar System interest group started to bring heliophysics and planetary sciences needs in the IVOA ecosystem. The uptake of IVOA protocols in heliophysics and planetary sciences is growing, but at lot remains to be done, in particular on the semantic interoperability side, so that it is more widely adopted. This means that we need to harmonise our SAs, so that communities can exchange data and transform these data into knowledge -semantically described, interoperable, actionable, and open. Moreover, the adoption of SAs across communities will improve the FAIRness of data products, since the metadata would be described with the same terms, or with terms that are related one to the other. The increasing use of SAs in astronomy presents challenges including their description, selection, evaluation, trustworthiness and mapping. The landscape remains fragmented, with SAs scattered across various registries in diverse formats and structures -not yet fully developed or encoded with rich semantic web standards based on RDF like OWL or SKOS -and often with overlapping scopes. There is thus need for a common place to catalogue, manage, assess, select and align FAIR SAs from several communities <ref type="bibr" target="#b27">(Gray, 2015;</ref><ref type="bibr" target="#b49">Ritschel et al., 2016;</ref><ref type="bibr" target="#b51">Rovetto, 2023)</ref>.</p><p>In this paper, we present the results of a prototyping exercise. Thanks to the FAIR-IMPACT project, we have implemented an instance of the OntoPortal technology <ref type="bibr" target="#b35">(Jonquet et al., 2023)</ref> to deploy a prototype SA catalogue for astronomy. Hereafter, we present current practices in our discipline, and review candidate SAs for such a cataloguing exercise. We report the use cases that have been driving this development. We present the first results, discuss the impact and outcomes, and layout a roadmap for the deployment of a real production service for the astronomy community based on the OntoPortal technology, that will be called OntoPortal-Astro. Throughout the paper, the astronomy OntoPortal instance and the OntoPortal-Astro instances refer respectively to the prototype instance development within the FAIR-IMPACT project, and the upcoming official server.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Current semantic artefact management in astronomy</head><p>The celestial astronomy community data alliance is the IVOA, which maintains an operational interoperability framework used by data repositories and science application platforms throughout the world. In this community, SAs are composed of vocabularies and schemas. The Semantics Working Group of the IVOA is managing the vocabularies used in the IVOA standards, following the Vocabularies in the VO specification <ref type="bibr" target="#b19">(Demleitner et al., 2023)</ref>. The vocabularies are available from a dedicated web page<ref type="foot" target="#foot_0">6</ref> , and are accessible using IVOA and RDF tooling. The Data Model working group of the IVOA is managing the schemas, following the Virtual Observatory Data Model Language specification <ref type="bibr" target="#b39">(Lemson et al., 2018)</ref>, but they are not available through the RDF tooling.</p><p>In the planetary science community, two main frameworks co-exist with different scopes: the IPDA, which proposes an advanced data archiving metadata schema for planetary exploration datasets, the Planetary Data System version 4 information model<ref type="foot" target="#foot_1">7</ref> (PDS4-IM) <ref type="bibr" target="#b31">(Hughes et al., 2017)</ref>; and the OGC (Open Geospatial Consortium<ref type="foot" target="#foot_2">8</ref> ), which is commonly used for the study of planetary surfaces.</p><p>The heliophysics community is proposing a set of tools and standards for finding and accessing datasets for the heliophysics community. Semantic artefacts in this community were historically of three kinds: the SPASE Ontology (available as an XML schema), which includes lists of terms, properties and classes for defining various objects and resources (Persons, Observatories, Instruments, Datasets, Repositories, etc); the VSO (Virtual Solar Observatory) metadata; and the SOLARNET set of keywords (dedicated to Solar observations).</p><p>The IVOA, IPDA and IHDEA alliances are all worldwide working groups, consensus and bottom-up driven, and based on best effort contributions. Interdisciplinary links between these communities have been mostly developed thanks to the Europlanet/VESPA<ref type="foot" target="#foot_3">9</ref> infrastructure <ref type="bibr" target="#b22">(Erard et al., 2018)</ref>. They focus on discoverability and implementation of plugins to extend the capabilities of existing tools. The semantic interoperability across the sub-communities approach started only recently, with the ongoing development of two common SAs: a vocabulary for "observation facilities" and another one for "reference frames".</p><p>Among the vocabularies that we included in the astronomy OntoPortal instance, we can list the following items: the Unified Astronomy Thesaurus<ref type="foot" target="#foot_4">10</ref> (Frey and Accomazzi, 2018) (UAT); the IVOA vocabularies (including properties and terms for the IVOA protocols interoperability); the EPNcore (Europlanet-VESPA core metdata) dictionary <ref type="bibr" target="#b21">(Erard et al., 2022)</ref>; the IHDEA community metadata including the SPASE schema<ref type="foot" target="#foot_5">11</ref> , the Virtual Solar Observatory data model<ref type="foot" target="#foot_6">12</ref> ; the IU-GONET schema<ref type="foot" target="#foot_7">13</ref> (Inter-university Upper atmosphere Global Observation NETwork); the SOLARNET metadata <ref type="bibr" target="#b30">(Haugan and Fredvik, 2021)</ref>; the CEF (Cluster Exchange Format) metadata <ref type="bibr" target="#b2">(Allen et al., 2009)</ref>; the IPDA information model<ref type="foot" target="#foot_8">14</ref> . Other SAs will be included, such as: the VAMDC (Virtual Atomic and Molecular Data Centre) metadata schema<ref type="foot" target="#foot_9">15</ref> , the OGC planetary frame registry <ref type="foot" target="#foot_10">16</ref> . The GEMET (GEneral Multilingual Environmental Thesaurus) thesaurus<ref type="foot" target="#foot_11">17</ref> could also be included, however we might federate with to EarthPortal (Earth sciences community OntoPortal instance) for this SA. Regarding particle physics, the CERN Open Data<ref type="foot" target="#foot_12">18</ref> terms and schemas will also be included.</p><p>The main challenge of this project is to produce SAs in a standard semantic web form (typically OWL -Ontology for the Web Language <ref type="bibr" target="#b7">(Bechhofer et al., 2004)</ref>, or SKOS -Simple Knowledge Organisation System <ref type="bibr" target="#b45">(Miles and Bechhofer, 2009)</ref>). Besides being a requirement for being ingested into the astronomy OntoPortal instance, it is also a logical evolution for our artefacts. Indeed, most of the current SAs (except those from the celestial astronomy community) are in diverse forms, from lists of terms embedded in XML schemas, to unformatted lists of metadata in specification documents (PDF files, HTML pages, etc.) This "semantic lifting" shall be done by the semantic working groups or authorities of the relevant communities (e.g., the IVOA Semantics WG or the IHDEA dedicated teams), with the support of expert in semantics and partners from the OntoPortal Alliance (mostly from the AgroPortal team, the Agri-food community OntoPortal instance developed by INRAE).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Use Cases</head><p>A series of use cases have been identified to trigger the developments of this SA catalogue dedicated to the astronomy communities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Exoplanets</head><p>Exoplanetary objects (defined as planets orbiting around other stars than the Sun) and their environments are studied with increasing resolution and capabilities. Comparisons with solar system object observations become very promising. Solar system observations should then be available and semantically compliant with the IVOA astronomy ecosystem. Currently, the IVOA object type vocabulary (objtyp, see Table <ref type="table">A</ref>.3 for all namespace definitions) lists the term objtyp:planet defined as an "Extra-solar Planet" (not including the solar system objects). On the other hand, the EPNcore dictionary includes a list of target classes (tarcls), where the terms tarcls:planet and tarcls:exoplanet respectively refer to "solar system planets" and "exoplanets". Similarly the UAT (uat) proposes two concepts: uat:1260 and uat:498 for "Solar system planet" and "Exoplanets" respectively. The IVOA UAT vocabulary (ivoauat) mirrors the UAT terms that thus also proposes the terms ivoauat:solar-system-planet and ivoauat:exoplanets. This requires careful management of the metadata across domains, with adequate mappings.</p><p>Currently, the uat and ivoauat thesauri are published as SKOS vocabularies. The objtyp and tarcls vocabularies are draft SAs prepared respectively by the IVOA Semantics working group, and by the Solar System interest group of the IVOA with the Europlanet team, and are being developed as OWL ontologies. Mapping these SAs is not a difficult task, but collecting them into a single OntoPortal instance makes is easier.</p><p>The current IVOA use of vocabularies is strongly implicit: the IVOA specifications list which SA should be used in controlled-valued fields of protocols and interfaces. The IVOA client software are built with this implicit knowledge, which is enabling a technical interoperability. The semantic mapping between terms, if required for a use case, have thus to be implemented in clients, upstream from the IVOA interfaces and protocol queries. The mappings are currently stored in the IVOA vocabularies: e.g., in the IVOA UAT, each term is semantically mapped to its twin concept in the UAT thesaurus, using a skos:exactMatch property.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Space Weather</head><p>A widely accepted definition of Space Weather is: "Space Weather is the physical and phenomenological state of natural space environments. The associated discipline aims, through observation, monitoring, analysis and modelling, at understanding and predicting the state of the Sun, the interplanetary and planetary environments, and the solar and non-solar driven perturbations that affect them; and also at forecasting and nowcasting the possible impacts on biological and technological systems" <ref type="bibr" target="#b41">(Lilensten and Belehaki, 2009)</ref>. Space weather is thus about heliophysics and its impact to the Earth environment. Space Weather services are being developed by "classical" weather organisations, such as the Met Office (UK), using mainly Earth observation software infrastructure (OGC), whereas the original data are produced by the heliophysics and astronomy communities (IHDEA and IVOA ecosystems). Collating and mapping SAs between OGC and the astronomy data ecosystems is required to efficiently exchange information, including mappings and coordination on the development of common ontologies. This implies mapping terms about reference frames, units of measure, physical quantities, sensor descriptions, etc.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.">Observation context</head><p>Modern instruments are getting very versatile with many modes of operations, thanks to the increasing digital processing capabilities, closer to the data acquisition devices, and implying automated data processing. Provenance metadata are increasingly implemented to trace these processing steps, requiring ontologies to efficiently model observational and instrumental contexts. Astronomy, heliophysics or particle physics ontologies need to be aligned and used in a coordinated manner to allow reuse in interdisciplinary studies.</p><p>The W3C has adopted a data model (Prov-DM) (Belhajjame et al., 2013) and an ontology (Prov-O) <ref type="bibr" target="#b38">(Lebo et al., 2013)</ref> for managing provenance metadata. The IVOA inspired from those recommendations with the VO-PROV data model <ref type="bibr" target="#b54">(Servillat et al., 2020)</ref>, extending the W3C Prov-DM. The IPDA and IHDEA have not yet standardised such metadata. Mapping VO-PROV to Prov-DM (and thus Prov-O) is straightforward, but should be implemented. We should also explore how the IPDA and IHDEA teams are individually managing their provenance metadata when applicable. Note that for the general domain-agnostic semantic web vocabularies, the OntoPortal FAIR-IMPACT partners are currently working on a specific portal (LovPortal) to host the content of the Linked Open Vocabulary platform.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4.">Harmonisation of nomenclature</head><p>Some concepts are used by all sub-communities of astronomy, such as the observed physical quantities, the observation facilities, the instrument types, or the coordinate reference frames. Harmonisation of these generic terms and concepts is needed for semantic interoperability. Such developments already started for observed parameters <ref type="bibr" target="#b16">(Cecconi et al., 2014)</ref>, observation facilities <ref type="bibr" target="#b15">(Cecconi et al., 2023)</ref>, as well as coordinate reference frames in an IHDEA working group. For observation facilities and reference frames, the current plan is to let the IVOA Semantics WG manage the merged vocabularies. The astronomy community OntoPortal instance will provide a platform to follow up and further develop these projects. Within OntoPortal every SA is automatically mapped one-another (at the lexical level) and term reuses are explicitly exposed and detected by the tool.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5.">Scientific Knowledge Graphs</head><p>Connecting research outputs to persons, institutions and funders is a key task for enabling the FAIR principles, discovering research products or measuring the scientific impact of the projects and infrastructures. Several tools are implementing so called SKG, which can mean either Scholarly Knowledge Graph (such as with the OpenAIRE Graph infrastructure <ref type="foot" target="#foot_13">19</ref> , or Scientific Knowledge Graph (such as with the SciLake project<ref type="foot" target="#foot_14">20</ref> ). Building efficient and FAIR knowledge graphs requires to use well-defined and cross-domain ontologies, so that term URIs can be used as search keys in queries (see, e.g., the "exoplanet" use case). OntoPortal implements a very rich metadata model to describe SAs -based on the MOD metadata vocabulary 21 (Dutta et al., 2017) -which will support the formal and semantic description of astronomy SAs in SKGs. Plus OntoPortal embeds a FAIRness assessment tool based on the O'FAIRe methodology (Ontology FAIRness Evaluation, <ref type="bibr" target="#b3">Amdouni et al., 2022)</ref> to help in the selection of SAs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.6.">Models and observations</head><p>Astronomy is an observation-based science, since the environmental conditions of the observed objects and phenomena can't be controlled. It is thus necessary to try and model the possible environmental conditions leading to the observations. Within the IVOA, the celestial astronomy community has developed the Simulation Data Model <ref type="bibr" target="#b40">(Lemson et al., 2012)</ref>, which can describe the astrophysical simulation parameters. However, due to its complexity, it has not been adopted by many teams. In the heliophysics community, the need to coupling measurements to simulations has been identified as a key issue <ref type="bibr" target="#b44">(Masson et al., 2024)</ref>, either to discover and reuse observational data as input for environment models, or to compare observations to output parameters of those models. Hence, the observed and modelled physical parameters must be described the same way. The same reasoning applies to planetary environment, such as the global atmospheric models of planets, or the planetary magnetosphere models (see, e.g., <ref type="bibr" target="#b22">Erard et al., 2018;</ref><ref type="bibr" target="#b1">Achilleos et al., 2019;</ref><ref type="bibr" target="#b6">Azria et al., 2021;</ref><ref type="bibr" target="#b58">Trompet et al., 2022)</ref>. The topic of representing observable properties (or scientific variables) is very present in multiple OntoPortal community such as Earth sciences (EarthPortal), Agri-food (AgroPortal) or Ecology (EcoPortal). In a near future, OntoPortal technology will support standard ways to represent variables (such as the Extensible Observation Ontology (OBOE, <ref type="bibr" target="#b42">Madin et al., 2007)</ref> or the InteroperAble Descriptions of Observable Property Terminology<ref type="foot" target="#foot_16">22</ref> (I-ADOPT)).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">First Results</head><p>Based on the use-cases presented in the previous section, work has been initiated mostly in the frame of the FAIR-IMPACT project.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Review of pre-exisiting Semantic Artefact catalogues</head><p>A recent landscape analysis of catalogues containing SA has identified three among the astronomy community: the IVOA vocabularies, the NASA/PDS data standards and the ESPAS Vocabulary broker <ref type="bibr" target="#b34">(Jonquet and Grau, 2024b)</ref>. SA catalogues have been classified according to their typology and the level of service offered. Listing SAC correspond to a simple online listing of SA, while Library represent structured online listing and the Repository is considered as an advance web application <ref type="bibr" target="#b33">(Jonquet and Grau, 2024a)</ref>. The IVOA vocabulary<ref type="foot" target="#foot_17">23</ref> web page is considered as a SA library, which gathers the vocabularies developed and maintained by the IVOA Semantics working group. The NASA/PDS data standard<ref type="foot" target="#foot_18">24</ref> web page is a SA listing, which provides all version of the NASA/PDS information model, and the associated vocabularies. The ESPAS Vocabulary Broker, which is consider as retired <ref type="bibr" target="#b33">(Jonquet and Grau, 2024a)</ref>, and is not accessible anymore at the time of writing, is a SA repository. It was providing access to the terms from the SPASE schema, the ESPAS project ontology, the GEMET ontology and the UAT thesaurus. Moreover, the ESPAS vocabulary used to offer mapping between terms of ontologies among the repository. Among those, solely the IVOA vocabulary library partly meets the SA catalogues FAIRness criteria proposed in <ref type="bibr" target="#b33">Jonquet and Grau (2024a)</ref>. Hence, no pre-existing solution satisfies the needs for a common astronomy SA catalogue. There is thus a need of harmonising and synchronising the different initiatives to avoid technical and semantic silos.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">OntoPortal-Astro, an astronomy community OntoPortal</head><p>In the FAIR-IMPACT projet, an astronomy SA catalogue use-case has been developed <ref type="bibr" target="#b14">(Cecconi et al., 2024</ref>). An On-toPortal instance for astronomy has been installed: http://ontoportal-astro.eu <ref type="foot" target="#foot_19">25</ref>The goal of the prototype was two-fold: testing the technology to expose, and assess SAs in astronomy. We selected about 40 vocabularies and ontologies that we would use as tests of the usage of the framework, see Table <ref type="table" target="#tab_2">2</ref>. In addition to all the IVOA Vocabularies, we also drafted OWL ontology versions of several community SAs (three schemas and one vocabulary): (i) the NASA/PDS4 information model, (ii) the IHDEA/SPASE data model, (iii) the VAMDC schema, and (iv) the CERN Open Data terms. The development of an ontology version of a schema is more than a format conversion, since it implies a full modelling of the concepts, classes and properties, as well as minting URIs for the terms. Hence, the development of these SAs have been used to exercise the astronomy team members. We interacted with the schema maintainers to share our explorations. The NASA/PDS4, IHDEA/SPASE and VAMDC teams expressed a strong interest in our approach. In the future, we envision the sharing in OntoPortal-Astro as part of the life cycle of each of these SAs as it is advocate by classic vocabulary development methodologies such as Linked Open Terms (LOT, <ref type="bibr" target="#b48">Poveda-Villalón et al., 2022)</ref> that has also include FAIR assessment steps to ensure the developed artefacts are FAIR by design and appropriately shared.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Improvement of IVOA vocabularies</head><p>Importing the IVOA vocabularies into our astronomy Onto-Portal instance revealed minor design issues in the IVOA vo-  cabularies management and their associated RDF artefacts, as defined in <ref type="bibr" target="#b19">Demleitner et al. (2023)</ref>. We fixed the SKOS vocabularies, which were missing top level concepts. This prevented tools to correctly build the concept hierarchies out of the ontology. We also fixed the way the URI were referenced internally in the ontologies. Finally, we started to add more metadata to our vocabularies, such as, preferred namespace prefix and URIs, using the multiple properties harvested and promoted by MOD. We also initiated a mapping exercise between some of our properties with more commonly used ones. For instance, we have two properties used to handle deprecated terms and redirect to a replacement term: ivoasem:deprecated and ivoasem:useInstead, as part of our IVOA Semantics vocabulary (IVOASEM). Section Appendix B shows a possible implementation of these mappings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.">Strong heliophysics support</head><p>Thanks to the Transform to Open Science (TOPS) project, the NASA contributors to IHDEA started several projects aiming at improving semantic interoperability of the heliophysics community. A first example is the conversion of the SPASE XML Schema into an OWL ontology<ref type="foot" target="#foot_20">26</ref> . A second ongoing work is the mapping of the SPASE XML Schema to schema.org<ref type="foot" target="#foot_21">27</ref> , in coordination with Science on Schema.org <ref type="bibr" target="#b55">(Shepherd et al., 2024)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Challenges and impact</head><p>As presented in the previous sections, the astronomy community is composed of several sub-communities (celestial astronomy, planetary sciences and heliophysics). Each community maintains and structures their SAs in heterogeneous forms. Since their drivers are also different, they have various maturity level concerning the management of SAs. They also store their ontologies in various repositories, using different technologies. However, the main goal of all the SAs is to enhance the FAIRness of research products (like, e.g., published datasets).</p><p>The OntoPortal technology has been identified to improve this situation, by bringing all SAs into a common catalogue with advanced capabilities. Nine impact factors have been identified by the FAIR-IMPACT team, which are directly linked to the adoption of the OntoPortal technology, and seven metrics are proposed to monitor the impact. The impact factors and metrics are listed in Figure <ref type="figure" target="#fig_0">1</ref>.</p><p>Most of the proposed metrics are based on monitoring the evolution of SAs using OntoPortal-Astro: (a) number of expanded or emerging SA; (b) number of new SAs; (c) number of new mappings between SAs; and (d) the number of connection with other SA catalogues. The adoption of SAs by data alliances could also be assessed through OntoPortal-Astro, if the metadata include the list of projects the SAs are used in. The adoption of SAs in data repositories requires to browse the community repositories to assess the presence in the repository record metadata of URIs emanating from SAs referenced in OntoPortal-Astro. For the last two assessment methods, the developments done within the SKG-IF (Scientific Knowledge Graph Interoperability Framework) working group of the Research Data Alliance (RDA) will provide a way to access repositories and registries homogeneously, facilitating thus the monitoring of, e.g., dct:subjects URIs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Discussion</head><p>The development of the astronomy OntoPortal prototype has been truly interdisciplinary. It was enabled by the FAIR-IMPACT project, which has been funded European Open Science Cloud (EOSC) infrastructure programme. One of the goals of FAIR-IMPACT was to develop a multi-disciplinary federation of SA catalogues. The project selected the OntoPortal technology. Although the astronomy communities are mature communities, with well-established data ecosystems and solid bottom-up metadata governance, their use of web-semantics technologies is not so much developed, compared to the practices in place in other communities like environmental or life sciences. The collaboration between the astronomy community on the one hand, and INRAE and the OntoPortal alliance on the other hand, brought astronomy the missing pieces to fastforward to the modern age of web-semantics, with state-of-art technologies. The collaborations initiated during this project will be continued, with upcoming activities on OntoPortal-Astro and other projects of the EOSC programme.</p><p>As shown in <ref type="bibr" target="#b47">Molinaro et al. (2020)</ref>, in the frame of the ESCAPE project, the IVOA Registry has been connected to B2Find (a service provided by EUDAT, in the frame of EOSC): https://b2find.eudat.eu/organization/ivoa. This provides a new venue for finding IVOA services and collections. However, the current connection is not implementing any of the implicit IVOA semantics (like, e.g., the IVOA UAT keywords, which are available as pure text terms, and not URIs). The goal of the FAIR-IMPACT project was to expand FAIR Solutions across EOSC, including web-semantics technologies. Once OntoPortal-Astro is operational, further work with the IVOA and EUDAT/B2Find will have to be conducted to connect this new SA catalogue to the B2Find search portal.</p><p>The developments around the astronomy OntoPortal prototype have been regularly discussed within the IVOA Semantics working group. While the working members are fully aware and positive about the open science challenges and the need for improving the astronomy SAs, the common ground is that the IVOA vocabularies are tailored for enabling interoperability within the IVOA. Hence, any development on the IVOA vocabularies shall be made backward compatible with the current uses and practices and shall not impose extra burden on the maintainers, tool developers and users of the vocabularies.</p><p>The IVOA vocabularies are setup so that they have as little external dependencies as much as possible. The main example is the UAT, which is developed independently from the IVOA. The Unified Astronomy Thesaurus (IVOA rendering) is a regularly updated copy of the UAT thesaurus. The IVOA version includes the relations to the original UAT terms, so that linked data applications can connect resources using the same terms. However, in the unfortunate event of discontinuation of the UAT reference thesaurus, the IVOA interfaces based on those terms will continue to work. The current design is thus trying to keep a strong infrastructure, as well as allowing linked and open data applications. For this, OntoPortal will also be a long term solution in case a vocabulary cease to be supported (e.g., URIs are not resolvable anymore) as the technology include a URI resolution and negotiation service for each hosted SA.</p><p>Improving the FAIRness of the astronomy vocabulary is also one of the key outcome of this study. We used FAIR assessment tools dedicated to ontologies and SAs, like FOOPS!<ref type="foot" target="#foot_22">28</ref>  <ref type="bibr" target="#b25">(Garijo et al., 2021)</ref>. Among all the assessment criteria, we can list the following aspects. The term URIs should be persistent, but the tools only consider a limited set of http domains as persistent. The metadata should include a list of contributors, for the ontology and the individual terms. It should also include provenance metadata. A versioning schema should also be in place. A preferred prefix should be advertised. Some criteria can easily be set up, and others (like the persistent identifier one) would require coordination with the FAIR assessment tool maintainers. On this aspect, the future OntoPortal-Astro will include O'FAIRe tool which provides a nice reporting on how to improve the FAIRness of each SAs.</p><p>This study is a first step towards improved management practices of SAs for astronomy. We focused here on vocabularies and ontologies, which are already in use by the astronomy communities. A further step is to ease and extend their usage for describing and annotating research objects. The Astronomy community pilot developed within the OSTrails project will make use of the FAIR SAs developed using OntoPortal for connecting resources through Science Knowledge Graph interfaces. Finally, another framework identified for annotated research products with description of measurements is I-ADOPT. It is proposing a simple template with design patterns and is making use of existing ontologies. We participated to the I-ADOPT Variable Modelling Challenge in 2024, with an example variable "electron density in the solar wind". From this simple test, the framework seems applicable, and we will explore more examples with astronomy use cases.</p><p>Keeping our astronomy ecosystem stable while opening up to linked data practices requires to build term mappings. Recently developed tools (see, e.g., MSCR -Metadata Schema and Crosswalk Registry, <ref type="bibr" target="#b36">Kesäniemi et al., 2025)</ref> are promising resources for storing mappings, including more complex conditional schema mappings than the current capabilities of Onto-Portal, as those developed during the SPASE XML Schema to Schema.org exercise. The mappings will then have to be stored, either in independent mapping registries (such as the MSCR or the native OntoPortal mapping repository) or integrated into our ontologies. Using artificial intelligence and large language models will also be tested for aligning vocabularies and building mappings.</p><p>Since January 2025, the OSCARS cascading grant "Ontology Portal for Astronomy Linked-data"<ref type="foot" target="#foot_23">29</ref> (OPAL) started. Its goal is to build a real production service, OntoPortal-Astro for the astronomy community building on the preliminary results from FAIR-IMPACT. Through this project, we plan to gather, update and produce SAs for all the astronomy subcommunities. We will also explore how to better expose our SAs so that they can be reused. For this, OntoPortal-Astro's team will join the Ontoportal Alliance, and the portal will federate with other OntoPortal instances, such as EarthPortal, which is serving ontologies we can relate our terms to (for the space weather community or the planetary surfaces). We also consider developing domain ontologies, which will allow us to annotate our research products in a more accurate manner.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Conclusion</head><p>OntoPortal-Astro may become the reference Semantic Artefact Catalogue for astronomy, it shall represent a significant step toward strengthening the semantic infrastructure in astronomy by providing a centralised service for FAIR astronomy SAs. By integrating and addressing the challenges from heliophysics to planetary sciences and across related astronomy disciplines, it will foster greater interoperability, data discoverability, and reuse. Through collaboration with the OntoPortal Alliance, this initiative will not only enhance the accessibility and management of SAs but also support interdisciplinary research across astronomy and beyond. Ultimately, OntoPortal-Astro will contribute to a more cohesive and FAIR-aligned semantic ecosystem, benefiting the broader scientific community.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Impact factors and metrics for assessing the impact of the OntoPortal technology on the astronomy community. Figure extracted from Aubin et al. (2025).</figDesc><graphic coords="9,89.62,81.22,416.02,315.72" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>Subset of the list of semantic artefacts implemented in the astronomy OntoPortal instance prototyped during FAIR-IMPACT. The topics column letter codes</figDesc><table /><note>are: A -Astronomy; H -Heliophysics; M -Metadata; PS -Planetary Sciences. The status can be: Test (for testing purposes); Develop (currently being developed); Ready (already in use).</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6" xml:id="foot_0">https://ivoa.net/rdf/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7" xml:id="foot_1">https://pds.nasa.gov/datastandards/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8" xml:id="foot_2">https://www.ogc.org/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9" xml:id="foot_3">http://www.europlanet-vespa.eu</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="10" xml:id="foot_4">https://astrothesaurus.org/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11" xml:id="foot_5">https://spase-group.org/data/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="12" xml:id="foot_6">http://docs.virtualsolar.org/wiki/DataModel18</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="13" xml:id="foot_7">http://www.iugonet.org/product/metadata.jsp</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="14" xml:id="foot_8">https://pds.nasa.gov/datastandards/documents/im/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="15" xml:id="foot_9">http://dictionary.vamdc.eu/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="16" xml:id="foot_10">http://voparis-vespa-crs.obspm.fr</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="17" xml:id="foot_11">https://www.eionet.europa.eu/gemet/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="18" xml:id="foot_12">https://github.com/cernopendata</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="19" xml:id="foot_13">https://graph.openaire.eu</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="20" xml:id="foot_14">https://scilake.eu</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="21" xml:id="foot_15">https://github.com/FAIR-IMPACT/MOD</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="22" xml:id="foot_16">https://i-adopt.github.io</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="23" xml:id="foot_17">https://ivoa.net/rdf/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="24" xml:id="foot_18">https://pds.nasa.gov/datastandards</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="25" xml:id="foot_19">At the time of writing, this server presents the astronomy OntoPortal prototype developed during the FAIR-IMPACT project, but will be replaced by the OntoPortal-Astro within a few months.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="26" xml:id="foot_20">https://github.com/polyneme/topst-spase-rdf-tools</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="27" xml:id="foot_21">https://github.com/clnsmth/soso</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="28" xml:id="foot_22">https://foops.linkeddata.es/FAIR_validator.html</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="29" xml:id="foot_23">https://oscars-project.eu/projects/ opal-ontology-portal-astronomy-linked-data</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgments</head><p>This work has been supported by the FAIR-IMPACT project, which received funding from the European Commission's Horizon Europe Research and Innovation programme under grant agreement number 101057344. The authors acknowledge the Observatoire de Paris-PSL for hosting the OntoPortal prototype used for this work and the OntoPortal Alliance for their support and technology. The authors also thank Markus Demleitner (former chair of the IVOA Semantics working group), as well as the IVOA, IHDEA and IPDA groups for their helpful discussions and feedback. The authors also acknowledge support from Sophie Aubin from INRAE.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Appendix B. Examples of mapping using OWL</head><p>The mappings presented in section 4.3 could be implemented within the IVOA Semantics Vocabulary using OWL statements as follows (represented in RDF Turtle): @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; . @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; . @prefix ivoasem: &lt;http://www.ivoa.net/rdf/ivoasem/#&gt; . @prefix dct: &lt;http://purl.org/dc/terms/&gt; . </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Progress of the IUGONET system -metadata database for upper atmosphere ground-based observation data</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Abe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Umemura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Koyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Tanaka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yagi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Yatagai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shinbori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ueno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Sato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kaneda</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/1880-5981-66-133</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Earth, Planets and Space</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="page">133</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">A magnetodisc model service for planetary space weather studies</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Achilleos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Guio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Sorba</surname></persName>
+		</author>
+		<idno type="DOI">10.1051/swsc/2019022</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Space Weather and Space Climate</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">A24</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Cluster Exchange Format -Data File Syntax</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Schwartz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Harvey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Perry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Huc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Robert</surname></persName>
+		</author>
+		<ptr target="https://caa.esac.esa.int/documents/DS-QMW-TN-0010.pdf" />
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">O&apos;FAIRe makes you an offer: metadata-based automatic FAIRness assessment for ontologies and semantic resources</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Amdouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bouazzouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<idno type="DOI">10.1504/IJMSO.2022.131133</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Metadata, Semantics and Ontologies</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="16" to="46" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">C</forename><surname>Arviset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aloisi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Berriman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ciardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Fabbiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Genova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Jenness</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mcglynn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Omullane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Schade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Stoehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zacchi</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.1803.07490</idno>
+		<idno type="arXiv">arXiv:1803.07490</idno>
+		<title level="m">The VO: A powerful tool for global astronomy</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Internal and external use case evaluation, demonstrators with D4.5 and D4.6 available</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Aubin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Corre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Scharnhorst</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.14967303</idno>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<author>
+			<persName><forename type="first">C</forename><surname>Azria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Määttänen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Millour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Schmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Andrieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Le Sidaner</surname></persName>
+		</author>
+		<idno type="DOI">10.5194/epsc2021-267</idno>
+		<title level="m">Planetary VO services on VESPA : MCD, SPICAM and EXOTOPO</title>
+				<imprint>
+			<publisher>European Planetary Science Congress</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="C2021" to="C2267" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bechhofer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Van Harmelen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hendler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Horrocks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Mcguinness</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">F</forename><surname>Patel-Schneider</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/owl-ref/" />
+		<title level="m">OWL web ontology language reference</title>
+				<meeting><address><addrLine>Stein, L.A.</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<author>
+			<persName><forename type="first">K</forename><surname>Belhajjame</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>B'far</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Cheney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Coppens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cresswell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Gil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Groth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Klyne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lebo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mccusker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Miles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sahoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tilmes</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/2013/REC-prov-dm-20130430/" />
+		<title level="m">PROV-DM: The PROV data model. W3C Recommendation</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Publishing on the semantic web</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Berners-Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hendler</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/35074206</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">410</biblScope>
+			<biblScope unit="page" from="1023" to="1024" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Berriman</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2412.07973</idno>
+		<idno type="arXiv">arXiv:2412.07973</idno>
+		<title level="m">The Benefits of the Virtual Observatory to Underserved Communities</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The ALADIN interactive sky atlas. A reference tool for identification of astronomical sources</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bonnarel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Fernique</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Bienaymé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Egret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Genova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Louys</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ochsenbein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Wenger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Bartlett</surname></persName>
+		</author>
+		<idno type="DOI">10.1051/aas:2000331</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Astron. &amp; Astrophys. Suppl</title>
+		<imprint>
+			<biblScope unit="volume">143</biblScope>
+			<biblScope unit="page" from="33" to="40" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><surname>Candey</surname></persName>
+		</author>
+		<ptr target="https://spdf.gsfc.nasa.gov/istp_guide/" />
+		<title level="m">ISTP Guidelines Page. NASA/SPDF Web Page</title>
+				<imprint>
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2401.03769</idno>
+		<idno type="arXiv">arXiv:2401.03769</idno>
+		<title level="m">FAIR approach for Low Frequency Radio Astronomy</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Semantic artefacts alignment for improving interoperability in astronomy</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Debisschop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Aubin</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.14192465</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Using Wikidata for an Observation Facility Vocabulary. IVOA Note</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Debisschop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Louys</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Perret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<ptr target="https://www.ivoa.net/documents/Notes/ObsFacilityWikidata/" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jacquey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Génot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Henry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Bonnin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Le Sidaner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chauvin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Fuller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">F</forename><surname>Braga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Aboudarham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Louys</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Derrière</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Preite-Martinez</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.3479165</idno>
+		<title level="m">Solar System UCDs: Assessment Study of Unified Content Descriptors (UCDs) for the Solar System Resources (Planetary sciences and Heliophysics</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">NASA Heliophysics Science Data Management Policy v. 1.2. NASA</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">W</forename><surname>Clarke</surname></persName>
+		</author>
+		<idno type="DOI">10.21978/P83P78</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">A maturity model for catalogues of semantic artefacts</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corcho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">J</forename><surname>Ekaputra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Heibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Micsik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Silvio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Storti</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41597-024-03185-4</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sci. Data</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Vocabularies in the VO Version 2.1. IVOA Recommendation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Taylor</surname></persName>
+		</author>
+		<idno type="DOI">10.5479/ADS/bib/2023ivoa.spec.0206D</idno>
+		<idno>doi:10.5479</idno>
+		<ptr target="/ADS/bib/2023ivoa.spec.0206D" />
+		<imprint>
+			<date type="published" when="2023-02-06">2023. 06 February 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">New Generation Metadata Vocabulary for Ontology Description and Publication</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Molinaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Greene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Dower</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Perdikeas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Dutta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Toulet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Emonet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-70863-8_17</idno>
+		<idno>doi:10.1007/ 978-3-319-70863-8_17</idno>
+		<ptr target="10.5479/ADS/bib/2019ivoa.spec.1011D" />
+	</analytic>
+	<monogr>
+		<title level="m">Metadata and Semantic Research</title>
+				<editor>
+			<persName><forename type="first">E</forename><surname>Garoufallou</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">S</forename><surname>Virkus</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Siatri</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Koutsomiha</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2017">2019. 11 October 2019. 2017. 2017</date>
+			<biblScope unit="volume">755</biblScope>
+			<biblScope unit="page" from="173" to="185" />
+		</imprint>
+	</monogr>
+	<note>IVOA Registry Relational Schema Version 1.1. IVOA Recommendation</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">EPN-TAP: Publishing Solar System Data to the Virtual Observatory Version 2.0. IVOA Recommendation 22</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Le Sidaner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Taylor</surname></persName>
+		</author>
+		<idno type="DOI">10.5479/ADS/bib/2022ivoa.spec.0822E</idno>
+		<idno>doi:10.5479</idno>
+		<ptr target="/ADS/bib/2022ivoa.spec.0822E" />
+		<imprint>
+			<date type="published" when="2022-08">2022. August 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">VESPA: a community-driven Virtual Observatory in Planetary Science</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Le Sidaner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Rossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Capria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Schmitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Génot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Vandaele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Scherf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hueso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Maatanen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Thuillot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Carry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Achilleos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marmo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Santolík</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">M</forename><surname>Benson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Fernique</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Beigbeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Rousseau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Andrieu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chauvin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Minin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Ivanovski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Longobardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Albert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gangloff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jourdane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bouchemit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Glorian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Trompet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Al-Ubaidi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Juaristi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Desmars</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Guio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Delaa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lagain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sou?ek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pisa</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.pss.2017.05.013</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Planet. Space Sci</title>
+		<imprint>
+			<biblScope unit="volume">150</biblScope>
+			<biblScope unit="page" from="65" to="85" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Virtual European Solar &amp; Planetary Access (VESPA) 2024: Legacy</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<idno type="DOI">10.5194/epsc2024-355</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Europlanet Science Congress</title>
+		<imprint>
+			<biblScope unit="page" from="C2024" to="C2355" />
+			<date type="published" when="2024">2024. 2024</date>
+		</imprint>
+	</monogr>
+	<note>the VESPA team</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">The Unified Astronomy Thesaurus: Semantic Metadata for Astronomy and Astrophysics</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Frey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Accomazzi</surname></persName>
+		</author>
+		<idno type="DOI">10.3847/1538-4365/aab760</idno>
+	</analytic>
+	<monogr>
+		<title level="j">AstroPhys. J. Suppl</title>
+		<imprint>
+			<biblScope unit="volume">236</biblScope>
+			<biblScope unit="page">24</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Foops!: An ontology pitfall scanner for the fair principles</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Garijo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Corcho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Poveda-Villalón</surname></persName>
+		</author>
+		<ptr target="http://ceur-ws.org/Vol-2980/paper321.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">International Semantic Web Conference (ISWC) 2021: Posters, Demos, and Industry Tracks, CEUR-WS.org</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Automated Multi-Dataset Analysis (AMDA): An on-line database and analysis tool for heliospheric and planetary plasma data</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Génot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Budnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jacquey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bouchemit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Renard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dufourg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Pitout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lavraud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fedorov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ganfloff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Plotnikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Modolo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Lormant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">S H</forename><surname>Mohand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Besson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Heulet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Boucon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Durand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bourrel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Brzustowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jourdane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hitier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Garnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Grison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Aunai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jeandet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Cabrolie</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.pss.2021.105214</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Planet. Space Sci</title>
+		<imprint>
+			<biblScope unit="volume">201</biblScope>
+			<biblScope unit="page">105214</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jordan</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jordan</forename></persName>
+		</author>
+		<idno type="DOI">10.29085/9781783302376</idno>
+	</analytic>
+	<monogr>
+		<title level="m">RDF, the Semantic Web</title>
+				<editor>
+			<persName><forename type="first">M</forename><surname>Moss</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Endicott-Popovsky</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="35" to="70" />
+		</imprint>
+	</monogr>
+	<note>Is Digital Different</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Hanisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Farris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">W</forename><surname>Greisen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">D</forename><surname>Pence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">M</forename><surname>Schlesinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Teuben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">W</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iii</forename><surname>Warnock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+		<idno type="DOI">10.1051/0004-6361:20010923</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Definition of the Flexible Image Transport System (FITS)</title>
+				<imprint>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="volume">376</biblScope>
+			<biblScope unit="page" from="359" to="380" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Interoperability in planetary research for geospatial data analysis</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Hare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Rossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Frigeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marmo</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.pss.2017.04.004</idno>
+		<ptr target="https://doi.org/10.1016/j.pss.2017.04.004" />
+	</analytic>
+	<monogr>
+		<title level="j">Planetary and Space Science</title>
+		<imprint>
+			<biblScope unit="volume">150</biblScope>
+			<biblScope unit="page" from="36" to="42" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Solarnet metadata recommendations for solar observations</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">V H</forename><surname>Haugan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Fredvik</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.5719255</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Enabling interoperability in planetary sciences and heliophysics: The case for an information model</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Hughes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Crichton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Raugh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">A</forename><surname>Guinness</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">E</forename><surname>Isbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">N</forename><surname>Mafi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">K</forename><surname>Gordon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H</forename><surname>Hardman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Joyner</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.pss.2017.04.005</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Planetary and Space Science</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Hurlburt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Timmons</surname></persName>
+		</author>
+		<title level="m">Heliophysics Events Knowledgebase for FAIR and citable data, in: 44th COSPAR Scientific Assembly. Held 16-24 July</title>
+				<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page">3491</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">M4.4 -Review of Semantic Artefact Catalogues and guidelines for serving FAIR semantic artefacts in EOSC</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Grau</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.12799796</idno>
+		<imprint>
+			<date type="published" when="2024">2024a</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">M4.4 (associated data) -FAIR-IMPACT Review of Semantic Artefact Catalogues and technologies</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Grau</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.12799862</idno>
+		<imprint>
+			<date type="published" when="2024">2024b</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Ontology Repositories and Semantic Artefact Catalogues with the OntoPortal Technology</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jonquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Graybeal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bouazzouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Fiore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Kechagioglou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Redmond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Rosati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Skrenchuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Vendetti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Musen</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-031-47243-5_3</idno>
+		<ptr target="https://hal.science/hal-04088537" />
+	</analytic>
+	<monogr>
+		<title level="m">Semantic Web, ISWC 2023</title>
+				<meeting><address><addrLine>Athens, Greece</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="38" to="58" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Implementing interoperability -Metadata Schema and Crosswalk Registry approach to FAIR metadata mappings</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kesäniemi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Suominen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Broeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Puuska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Desnos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Desnos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Bolis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Merakos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ferrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Tsili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+		<idno type="DOI">10.29007/khls</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of EUNIS 2024 annual congress in Athens</title>
+		<title level="s">EPiC Series in Computing</title>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Roumeliotis</surname></persName>
+		</editor>
+		<meeting>EUNIS 2024 annual congress in Athens</meeting>
+		<imprint>
+			<date type="published" when="2025">2025</date>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="page" from="58" to="68" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Build FAIR workflow for astronomical catalogues</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Landais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ocvirk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bonnarel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Perret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Vannier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Brouty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Fix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Monari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Astromical Data Analysis Software and Systems XXXI</title>
+				<editor>
+			<persName><forename type="first">B</forename><forename type="middle">V</forename><surname>Hugo</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Van Rooyen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">O</forename><forename type="middle">M</forename><surname>Smirnov</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page">295</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lebo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sahoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mcguinness</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/2013/REC-prov-o-20130430/" />
+		<title level="m">The PROV Ontology. W3C Recommendation</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">VO-DML: a consistent modeling language for IVOA data models Version 1.0. IVOA Recommendation</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Lemson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Laurino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bourges</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cresitello-Dittmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Donaldson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dowler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Graham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Salgado</surname></persName>
+		</author>
+		<idno type="DOI">10.5479/ADS/bib/2018ivoa.spec.0910L</idno>
+		<idno>doi:10.5479</idno>
+		<ptr target="/ADS/bib/2018ivoa.spec.0910L" />
+		<imprint>
+			<date type="published" when="2018-09-10">2018. 10 September 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Simulation Data Model Version 1.0. IVOA Recommendation 03</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Lemson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wozniak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Bourges</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Cervino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gheller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lepetit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Louys</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ooghe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Wagner</surname></persName>
+		</author>
+		<idno type="DOI">10.5479/ADS/bib/2012ivoa.spec.0503L</idno>
+		<idno type="arXiv">arXiv:1402.4744</idno>
+		<imprint>
+			<date type="published" when="2012-05">2012. May 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Developing the scientific basis for monitoring, modelling and predicting Space Weather</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lilensten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Belehaki</surname></persName>
+		</author>
+		<idno type="DOI">10.2478/s11600-008-0081-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Acta Geophys</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">An ontology for describing and synthesizing ecological observation data</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Madin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bowers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Schildhauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Krivov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Pennington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Villa</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ecoinf.2007.05.004</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Ecological Informatics</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="279" to="296" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Fits format for planetary surfaces: Definitions, applications, and best practices</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marmo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Hare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Minin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">X</forename><surname>Pineau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zinzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Rossi</surname></persName>
+		</author>
+		<idno type="DOI">10.1029/2018EA000388</idno>
+		<ptr target="https://doi.org/10.1029/2018EA000388" />
+	</analytic>
+	<monogr>
+		<title level="j">Earth and Space Science</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="640" to="651" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Heliophysics and space weather information architecture and innovative solutions: current status and ways forward</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Masson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Fung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Camporeale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Kuznetsova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Poedts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Barnum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ringuette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D</forename><surname>Zeeuw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Polson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">M</forename><surname>Sadykov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Navarro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Caplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Linker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Rastaetter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wiegand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Mc-Granaghan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Petrenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Didigu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Reerink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ireland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.asr.2024.05.052</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Space Research</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Miles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bechhofer</surname></persName>
+		</author>
+		<title level="m">SKOS simple knowledge organization system reference</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Bridging the gap between geographical information systems and planetary virtual observatory</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Minin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Rossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Marco Figuera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Unnithan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Marmo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">H G</forename><surname>Walter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Le Sidaner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">M</forename><surname>Hare</surname></persName>
+		</author>
+		<idno type="DOI">10.1029/2018EA000405</idno>
+		<ptr target="https://doi.org/10.1029/2018EA000405" />
+	</analytic>
+	<monogr>
+		<title level="j">Earth and Space Science</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="515" to="526" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">The Virtual Observatory ecosystem facing the European Open Science Cloud</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Molinaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Genova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Schaaff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Castro Neves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Demleitner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bertocco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bonnarel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Voutsinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Taffoni</surname></persName>
+		</author>
+		<idno type="DOI">10.1117/12.2562322</idno>
+		<ptr target="https://hal.science/hal-03377029v1" />
+	</analytic>
+	<monogr>
+		<title level="m">Observatory Operations: Strategies, Processes, and Systems VIII, International Society for Optics and Photonics. SPIE. p. 114491S</title>
+				<editor>
+			<persName><forename type="first">D</forename><forename type="middle">S</forename><surname>Adler</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Seaman</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">C</forename><forename type="middle">R</forename><surname>Benn</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">LOT: An industrial oriented ontology engineering framework</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Poveda-Villalón</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Fernández-Izquierdo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fernández-López</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>García-Castro</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.engappai.2022.104755</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Engineering Applications of Artificial Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">111</biblScope>
+			<biblScope unit="page">104755</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Experiments using Semantic Web technologies to connect IUGONET, ESPAS and GFZ ISDC data portals. Earth, Planets and Space 68</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ritschel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Borchert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Kneitschel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Neher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schildbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Iyemori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Koyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Yatagai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hapgood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Belehaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Galkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>King</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s40623-016-0542-x</idno>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page">181</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The SPASE Data Model: A Metadata Standard for Registering, Finding, Accessing, and Using Heliophysics Data Obtained From Observations and Modeling</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Thieman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Génot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>King</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gangloff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Perry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wiegand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D</forename><surname>Zeeuw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Fung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hess</surname></persName>
+		</author>
+		<idno type="DOI">10.1029/2018sw002038</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Space Weather</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="1899" to="1911" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Rovetto</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2309.10288</idno>
+		<title level="m">AstroPortal: An ontology repository concept for astronomy, astronautics and other space topics</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">RDF 1.1 primer. W3C Interest Group Note</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Schreiber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Raimond</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/TR/rdf11-primer/" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">FAIR high level data for Cherenkov astronomy</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Servillat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fuessling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Khelifi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Astromical Data Analysis Software and Systems</title>
+				<editor>
+			<persName><forename type="first">B</forename><forename type="middle">V</forename><surname>Hugo</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Van Rooyen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">O</forename><forename type="middle">M</forename><surname>Smirnov</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="volume">XXXI</biblScope>
+			<biblScope unit="page">315</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">IVOA Provenance Data Model Version 1.0. IVOA Recommendation 11</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Servillat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Riebe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Bonnarel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Galkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Louys</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Nullmeier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Renault-Tinacci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sanguillon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Streicher</surname></persName>
+		</author>
+		<idno type="DOI">10.5479/ADS/bib/2020ivoa.spec.0411S</idno>
+		<imprint>
+			<date type="published" when="2020-04">2020. April 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">A</forename><surname>Shepherd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jarboe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vieglais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Fils</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Duerr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Verhey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Minch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mecum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bentley</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.7884538</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note>org v1.3.2</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">TOPCAT: Tool for OPerations on Catalogues And Tables</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Taylor</surname></persName>
+		</author>
+		<idno>1101.010</idno>
+		<ptr target="https://ascl.net/1101.010" />
+	</analytic>
+	<monogr>
+		<title level="j">Astrophysics Source Code Library</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B</forename><surname>Taylor</surname></persName>
+		</author>
+		<title level="m">TOPCAT &amp; STIL: Starlink Table/VOTable Processing Software</title>
+				<editor>
+			<persName><forename type="first">P</forename><surname>Shopbell</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Britton</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Ebert</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page">29</biblScope>
+		</imprint>
+	</monogr>
+	<note>Astronomical Data Analysis Software and Systems XIV</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">GEM-Mars GCM products and tools available through the VESPA portal</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Trompet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Daerden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Neary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Erwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carine</forename><surname>Vandaele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Erard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+		<idno type="DOI">10.5194/epsc2022-4</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<publisher>European Planetary Science Congress</publisher>
+			<biblScope unit="page" from="C2022" to="2024" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">HAPI: An API Standard for Accessing Heliophysics Time Series Data</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Weigel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vandegriff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Faden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>King</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Candey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Lal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Boardsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lindholm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lindholm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Baltzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Grimes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Cecconi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Génot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Renard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Masson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Martinez</surname></persName>
+		</author>
+		<idno type="DOI">10.1029/2021ja029534</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. geophys. Res. Space Physics</title>
+		<imprint>
+			<biblScope unit="volume">126</biblScope>
+			<biblScope unit="page" from="1" to="8" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">International Coordination of Solar Terrestrial Science</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Whipple</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Lancaster</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BF00751325</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Space Science Reviews</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="page" from="41" to="54" />
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">D</forename><surname>Wilkinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dumontier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">J</forename><surname>Aalbersberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Appleton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Axton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Blomberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Boiten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">B D S</forename><surname>Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">E</forename><surname>Bourne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bouwman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Brookes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Crosas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Dillo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><surname>Dumon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Edmunds</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Evelo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Finkers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gonzalez-Beltran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J G</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Groth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Goble</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Grethe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Heringa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A C T</forename><surname>Hoen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hooft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kuhn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Lusher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">E</forename><surname>Martone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mons</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Packer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Persson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rocca-Serra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Roos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">V</forename><surname>Schaik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A</forename><surname>Sansone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Schultes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Sengstag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Slater</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Strawn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Swertz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">V D</forename><surname>Lei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">V</forename><surname>Mulligen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Velterop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Waagmeester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Wittenburg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wolstencroft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhao</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/sdata.2016.18</idno>
+		<title level="m">The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data 3</title>
+				<meeting><address><addrLine>Mons, B.</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

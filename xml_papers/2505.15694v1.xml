@@ -1,0 +1,1621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">A Unified Theoretical Analysis of Private and Robust Offline Alignment: from RLHF to DPO</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-21">21 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Xingyu</forename><surname>Zhou</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Yulian</forename><surname>Wu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Francesco</forename><surname>Orabona</surname></persName>
+						</author>
+						<title level="a" type="main">A Unified Theoretical Analysis of Private and Robust Offline Alignment: from RLHF to DPO</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-21">21 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">2A84C9AE77E93CC40197F641737B47BB</idno>
+					<idno type="arXiv">arXiv:2505.15694v1[cs.LG]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>In this paper, we theoretically investigate the effects of noisy labels in offline alignment, with a focus on the interplay between privacy and robustness against adversarial corruption. Specifically, under linear modeling assumptions, we present a unified analysis covering both reinforcement learning from human feedback (RLHF) and direct preference optimization (DPO) under different privacy-corruption scenarios, such as Local differential privacy-then-Corruption (LTC), where human preference labels are privatized before being corrupted by an adversary, and Corruption-then-Local differential privacy (CTL), where labels are corrupted before privacy protection. Our analysis leverages a reduction framework that reduces the offline alignment problem under linear modeling assumptions to parameter estimation in logistic regression. This framework allows us to establish an interesting separation result between LTC and CTL, demonstrating that LTC presents a greater challenge than CTL in offline alignment, even under linear models. As important by-products, our findings also advance the state-of-the-art theoretical results in offline alignment under privacy-only or corruption-only scenarios.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>The alignment training process in language models that utilizes a human-labeled preference dataset has been instrumental in producing more helpful, harmless, and honest responses <ref type="bibr" target="#b1">(Bai et al., 2022)</ref>. Leveraging an offline preference dataset, two prominent paradigms have emerged. The first is the indirect approach, such as Reinforcement Learning from Human Feedback (RLHF) <ref type="bibr" target="#b47">(Ziegler et al., 2019;</ref><ref type="bibr"></ref> Proceedings of the 42 nd International Conference on Machine <ref type="bibr">Learning, Vancouver, Canada. PMLR 267, 2025.</ref> Copyright 2025 by the author(s). <ref type="bibr" target="#b30">Ouyang et al., 2022)</ref>, which learns an intermediate reward model before optimizing the policy. The second is the direct approach, exemplified by Direct Preference Optimization (DPO) <ref type="bibr" target="#b33">(Rafailov et al., 2023)</ref>, which directly optimizes the policy via supervised learning on the preference dataset.</p><p>It is clear that the performance of both RLHF and DPO is significantly influenced by the quality of the preference labels in the dataset. However, in practice, these labels are often noisy due to various factors <ref type="bibr" target="#b26">(Lambert et al., 2023)</ref>. One potential noise source is corruption or misspecification during label generation or data collection, e.g., data poisoning attack <ref type="bibr" target="#b4">(Casper et al., 2023)</ref>. Additionally, privacy concerns in human preference (as illustrated in <ref type="bibr" target="#b19">Feng et al. (2024)</ref>) may prompt individuals to provide noisy or privatized preferences rather than their true rankings.</p><p>From a theoretical perspective, understanding the impact of these noisy labels-resulting from both corruption and privacy-is essential for improving offline alignment. Recent studies have made some initial attempts to address this issue <ref type="bibr" target="#b28">(Mandal et al., 2024;</ref><ref type="bibr" target="#b13">Chowdhury et al., 2024;</ref><ref type="bibr">2023;</ref><ref type="bibr" target="#b3">Bukharin et al., 2024)</ref>, but they face two fundamental limitations: (1) They often treat corruption and privacy separately and focus exclusively on either RLHF or DPO, while, in practice, noisy labels can stem from both factors simultaneously; (2) The theoretical guarantees provided by these studies are often suboptimal, even when privacy and corruption are separately considered. Motivated by these limitations and practical scenarios, we are particularly interested in the following question:</p><p>Can we provide a unified analysis of the interplay between privacy and robustness in both RLHF and DPO?</p><p>We provide an affirmative answer to the above question by presenting the following contributions:</p><p>1. A Unified Theoretical Framework. We present a unified theoretical framework for analyzing the interplay between privacy and robustness in offline alignment, covering both RLHF and DPO. Specifically, for privacy protection, we consider Local Differential Privacy (LDP) <ref type="bibr" target="#b25">(Kasiviswanathan et al., 2011;</ref><ref type="bibr" target="#b15">Duchi et al., 2013)</ref> for preference labels, while for robustness, we consider the strong adversary corruption model <ref type="bibr" target="#b14">(Diakonikolas &amp; Kane, 2023)</ref>, where an adaptively chosen fraction of labels can be corrupted. Our frame-work can simultaneously handle three privacy-corruption scenarios for both RLHF and DPO: Corruption-then-LDP (CTL), LDP-then-Corruption (LTC), and Corruption-LDP-Corruption (CLC), capturing different ways privacy and corruption may interact in practice.</p><p>2. Reduction to Logistic Regression. Our unified analytical framework leverages a reduction that transforms the offline alignment problem, under certain linear modeling assumptions, into parameter estimation in logistic regression. This reduction enables us to establish suboptimality bounds for both RLHF and DPO by focusing on parameter estimation in logistic regression under private and corrupted labels across different scenarios. Moreover, it highlights key differences between RLHF and DPO, providing insights into practical design considerations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Separation between CTL and LTC.</head><p>A key takeaway from our study of the interplay between privacy and robustness to corruption is that LTC is a more challenging setting than CTL, illustrating that the order in which privacy and corruption interact with each other significantly impacts the performance of offline alignment.</p><p>4. New State-of-the-art Guarantees. Our results, when reduced to privacy-only or corruption-only settings, set new state-of-the-art results on theoretical guarantees for RLHF and DPO. For instance, for DPO under "corrupted" labels, our result is the first one that achieves O(1/ √ n) rate (where n is the size of preference dataset), matching the standard rate without noise. Additionally, as a by-product of our reduction approach, we provide the first results on parameter estimation error in logistic regression under both private and corrupted labels, which may be of independent interest. Finally, we remark that, as in many previous related works, e.g., <ref type="bibr" target="#b46">Zhu et al. (2023)</ref>; <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref>, we consider linear modeling assumptions for the sake of theoretical analysis. However, we believe that our results could serve as important benchmarks for more general function classes. In fact, we have also verified our separation result between CTL and LTC in the general case via experiments on GPT2large, see Appendix D for a detailed discussion.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Related Work</head><p>In the main body, we only focus on the most related work on robust and private offline alignment, while relegating an additional discussion to Appendix A.</p><p>Provably robust alignment under corruption. Mandal et al. ( <ref type="formula">2024</ref>) considers offline RLHF with corrupted preference datasets and establishes upper bounds on the suboptimality gap under various coverage assumptions of the offline dataset. As will be discussed in Section 6.1, their results are either suboptimal or lack rigor due to gaps in their proof. For robust DPO, <ref type="bibr" target="#b13">Chowdhury et al. (2024)</ref> considers a strictly weaker corruption model and derives a suboptimality bound of rate O(1/n 1/4 ). In contrast, our general result, when reduced to the same corruption model, achieves a better rate of O(1/ √ n). <ref type="bibr" target="#b3">Bukharin et al. (2024)</ref> also considers a specific corruption model in the label generation process of RLHF but only provides the estimation error of the reward model, without a performance guarantee for the final policy.</p><p>Provably Private Alignment. The most related work in this aspect is <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref>, which mainly focuses on the reward model estimation in RLHF under various privacy constraints (i.e., local and central label differential privacy). Our intermediate result on estimation error (Section 5) recovers the one in <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref> when the corruption parameter is set to zero. Moreover, compared to the implicit suboptimality bound in <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref>, we provide the first explicit bound in terms of the relative condition number <ref type="bibr" target="#b0">(Agarwal et al., 2021)</ref>, which parallels similar results in standard (robust) offline RL <ref type="bibr" target="#b44">(Zhang et al., 2022)</ref>, i.e., reward-based rather than preference-based.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Preliminaries</head><p>Background on Offline Alignment. The goal of offline alignment is to further tune the Supervised Fine-Tuning (SFT) model to match human preferences using an offline preference dataset. The preference dataset D = (s i , a 0 i , a 1 i , y i ) n i=1 consists of n samples, each has one context/state s i (e.g., prompt), two actions a 0 i , a 1 i (e.g., two answers from language models) and label/preference feedback y i ∈ {0, 1} indicating which one is preferred by humans. We assume s i to be sampled independently from a distribution ρ. A widely used approach for modeling y i is Bradley-Terry model <ref type="bibr" target="#b2">(Bradley &amp; Terry, 1952)</ref>:</p><formula xml:id="formula_0">P y i = l|s i , a 0 i , a 1 i = exp(r ⋆ (si,a l i )) exp(r ⋆ (si,a 0 i ))+exp(r ⋆ (si,a 1 i )) ,<label>(1)</label></formula><p>for l ∈ {0, 1}, where r ⋆ (•, •) is a ground truth reward model.</p><p>Based on this preference dataset, offline alignment aims to learn a good policy π. In particular, the performance of the learned policy π is evaluated by the suboptimality gap between π and a comparator policy π † , defined as</p><formula xml:id="formula_1">SubOpt( π, π † ) = J(π † ) − J( π),<label>(2)</label></formula><p>where J(π) := E s∼ρ,a∼π(•|s) [r ⋆ (s, a)] and π † is not necessarily the optimal policy.</p><p>RLHF and DPO. As already mentioned, there are two major paradigms in alignment for finding π: indirect and direct approaches. The former, exemplified by RLHF <ref type="bibr" target="#b47">(Ziegler et al., 2019)</ref>, involves an intermediate reward model learning process from preference dataset D before the policy optimization. The latter, represented by DPO <ref type="bibr" target="#b33">(Rafailov et al., 2023)</ref>, employs a direct policy optimization, i.e., using a supervised-learning loss function to optimize the policy directly over the preference dataset D.</p><p>Privacy Protection in Human Feedback. The preference signal y i in D could reveal sensitive personal information <ref type="bibr" target="#b19">(Feng et al., 2024;</ref><ref type="bibr" target="#b12">Chowdhury et al., 2023)</ref>, hence requiring a rigorous privacy protection. To this end, we consider the local label Differential Privacy (DP) <ref type="bibr" target="#b6">(Chaudhuri &amp; Hsu, 2011;</ref><ref type="bibr" target="#b20">Ghazi et al., 2021)</ref>, which means that the learner now only has access to a privatized label rather than the raw one. More specifically, we have the following definition.</p><p>Definition 3.1 (Label DP in Local Model <ref type="bibr" target="#b12">(Chowdhury et al., 2023)</ref>). Let ε &gt; 0 and δ ∈ [0, 1]. If each label is privatized by a local randomizer R, which satisfies for any y, y ′ and any subset S in the range of R that</p><formula xml:id="formula_2">P{R(y) ∈ S} ≤ e ε • P{R (y ′ ) ∈ S} + δ,</formula><p>then we say R is an (ε, δ)-label differentially private local randomizer, and this privatized dataset is called label-private preference dataset. The entire alignment process that operates with the privatized dataset is said to satisfy local label DP. When δ = 0, we simply say it is a ε-local label DP.</p><p>Remark 3.2 (Randomized Response). Given the binary data of the true label, we would like to maintain the binary data property after privatization. Thus, we will adopt the standard randomized response mechanism (Warner, 1965) as our local randomizer, which essentially injects controllable noise in labels by a random flipping. Here, by "controllable," we mean the noise injection method, and noise level is under our control based on the privacy parameter ε.</p><p>Corruption in Human Feedback. The human feedback y i can often be noisy and even be corrupted in the source or during the data collection process, which deviates from the assumed true generation process in (1). To this end, the final learned policy π needs to be robust with respect to corruption in labels. We consider a corruption model similar to strong corruption model from robust statistics literature <ref type="bibr" target="#b14">(Diakonikolas &amp; Kane, 2023)</ref>, which roughly says that an adversary can adaptively corrupt the labels of a fraction of samples, by inspecting the samples.</p><formula xml:id="formula_3">Definition 3.3 (Label Corruption Model). Let α ∈ [0, 1/2].</formula><p>We consider an α-corruption model: an adversary can inspect the samples in a preference dataset of size n and then assign any label value of 0 or 1 to at most αn samples.</p><p>Interplay between Privacy and Robustness. One key theme of this paper is to study the interplay between privacy and robustness in offline alignment. In particular, we are interested in the impact of the order between privacy protection and corruption in the labels on the suboptimality gap (cf. (2)), for both RLHF and DPO. To this end, we will mainly consider the following settings.</p><p>Definition 3.4 (CTL and LTC). Given a raw preference dataset D = (s i , a 0 i , a 1 i , y i ) n i=1 , we consider the following settings that differ in the order of privacy protection (see Definition 3.1) and corruption (see Definition 3.3). In all cases, the final input dataset for the learning algorithm will be denoted by D in = (s i , a 0 i , a 1 i , z i ) n i=1 . Corruption-then-LDP (CTL): An adversary first corrupts the labels in D to ȳi . Then, each label ȳi is privatized by a local randomizer.</p><p>LDP-then-Corruption (LTC): Each label y i in D is first privatized by a local randomizer, resulting in the private label y i . Then, the preference dataset with private labels is further corrupted by an adversary.</p><p>Remark 3.5. As a last setting, one may also consider the setting where corruption happens both before and after privacy protection, which turns out to be a simple combination of the results for CTL and LTC, hence omitted in our results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Reduction to Parameter Estimation</head><p>In this section, we will show that the key to establishing the suboptimality guarantees in both RLHF and DPO is a tight parameter estimation in logistic regression, under certain modeling assumptions. This allows us to focus on a singleparameter estimation problem under different settings (i.e., CTL and LTC) for both RLHF and DPO. More importantly, this unified perspective also enables us to easily see the connection and difference between RLHF and DPO.</p><p>Logistic Regression. Recall that given a feature vector x i ∈ R d , under logistic regression, the label y i ∈ {0, 1} is generated according to the following probability:</p><formula xml:id="formula_4">P{y i = 1|x i } = σ (⟨θ true , x i ⟩) ,<label>(3)</label></formula><p>where σ(z) = 1 1+e −z is the sigmoid function, θ true ∈ R d is the unknown true parameter and ⟨•, •⟩ denotes the inner product of two vectors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">RLHF with a Linear Reward Model</head><p>We show that when the reward model in (1) is a linear function, the key to bounding the suboptimality gap in RLHF is the parameter estimation in a logistic regression problem. To start with, we formally state the linear reward model, following common definitions used in prior work <ref type="bibr" target="#b46">(Zhu et al., 2023;</ref><ref type="bibr" target="#b40">Xiong et al., 2024;</ref><ref type="bibr" target="#b5">Cen et al., 2024;</ref><ref type="bibr" target="#b12">Chowdhury et al., 2023;</ref><ref type="bibr" target="#b28">Mandal et al., 2024)</ref>.</p><p>Assumption 4.1 (Linear Reward with Boundedness). We assume that the ground truth reward r ⋆ is linear, i.e., r ⋆ (s, a) = ⟨ϕ(s, a), θ ⋆ ⟩, where ϕ(s, a) : S × A → R d is some known and fixed feature map and S, A are the state space and the action space, respectively. We also assume the following standard boundedness conditions. For all s ∈ S and a ∈ A, without loss of generality, we assume ∥ϕ(s, a)∥ ≤ 1. Moreover, we assume θ ⋆ ∈ Θ B = {θ ∈ R d : ⟨1, θ⟩ = 0, ∥θ∥ ≤ B}, where the condition ⟨1, θ⟩ = 0 is to ensure the identifiability of θ ⋆ .</p><p>Under the above assumption, we consider the standard offline RLHF algorithm, but with an additional parameter η.</p><p>In particular, we consider two alternative outputs: When η = 0, the output policy is π = argmax π J(π) where J(π) = E s∼ρ,a∼π(•|s) [⟨ θ, ϕ(s, a)⟩], that is essentially a greedy algorithm with respect to an estimate θ; When η = 1, the output is π = argmax π J(π), where the objective function is defined via the principle of pessimism <ref type="bibr" target="#b46">(Zhu et al., 2023;</ref><ref type="bibr" target="#b23">Jin et al., 2021;</ref><ref type="bibr">Li et al., 2024)</ref> as</p><formula xml:id="formula_5">J(π) = min θ∈Θ( θ,λ) E s∼ρ,a∼π(•|s) [⟨θ, ϕ(s, a)⟩] − E s∼ρ,a∼π ref (•|s) [⟨θ, ϕ(s, a)⟩],</formula><p>by constructing a confidence set around an estimate θ:</p><formula xml:id="formula_6">Θ( θ, λ) = θ ∈ Θ B | θ − θ Σ+λI ≤ Γ(n, d, δ, λ) .</formula><p>For completeness and due to space limitations, the full algorithm is given in Algorithm 2 in the Appendix B.</p><p>Here, we use a reference policy π ref because the confidence set only measures the uncertainty of the difference in reward. That is, it does not measure the uncertainty for a single stateaction pair.</p><p>We have the following key theoretical result on Algorithm 2, with its proof in Appendix E.1. Proposition 4.2. Under Assumption 4.1, the labels {y i } i∈ <ref type="bibr">[n]</ref> in the preference dataset of RLHF follow the logistic regression model with θ true = θ ⋆ and</p><formula xml:id="formula_7">x i = ϕ(s i , a 1 i ) − ϕ(s i , a 0 i ). Algorithm 2 with η = 0 achieves SubOpt( π, π ⋆ ) ≤ 2 θ − θ true 2 ,<label>(4)</label></formula><p>where π ⋆ = argmax π J(π). Further, let Σ :=</p><formula xml:id="formula_8">1 n i x i x ⊤ i</formula><p>and λ &gt; 0 and suppose with probability at least 1 − δ the estimate θ satisfies</p><formula xml:id="formula_9">θ − θ true Σ+λI ≤ Γ(n, d, δ, λ) .<label>(5)</label></formula><p>Then, setting η = 1 in Algorithm 2, we have for any π † and ρ, with probability at least 1 − δ,</p><formula xml:id="formula_10">SubOpt( π, π † ) ≤ 2Γ(n, d, δ, λ) × E s∼ρ [ϕ(s, π † (s)) − ϕ(s, π ref (s))] ( Σ+λI) −1 ,<label>(6)</label></formula><p>for any reference policy π ref , where we define ϕ(s, π(s)</p><formula xml:id="formula_11">) := E a∼π(•|s) [ϕ(s, a)].</formula><p>We can further simplify the result in ( <ref type="formula" target="#formula_10">6</ref>) by introducing the following relative condition number, which can be viewed as the natural extension of standard one <ref type="bibr" target="#b44">(Zhang et al., 2022;</ref><ref type="bibr" target="#b0">Agarwal et al., 2021)</ref> to the RLHF setting.</p><p>Definition 4.3 (Relative Condition Number). For π 1 , π 2 and a feature map ϕ, we define ψ(s, a, a ′ ) = ϕ(s, a) − ϕ(s, a ′ ) and Σ π1,π2 as</p><formula xml:id="formula_12">E s∼ρ,a∼π1(•|s),a ′ ∼π2(•|s) ψ(s, a, a ′ )ψ(s, a, a ′ ) ⊤ . (7)</formula><p>For any comparator policy π † and any given reference policy π ref , we define</p><formula xml:id="formula_13">κ(π † , π ref ) := sup w∈R d w ⊤ Σ diff π † ,π ref w w ⊤ Σ diff π sft ,π sft w . (<label>8</label></formula><formula xml:id="formula_14">)</formula><p>We can now simplify our previous suboptimality bound using the relative condition number above in the following corollary, with its proof given by Appendix E.2.</p><p>Corollary 4.4. Let the same assumption in Proposition 4.2 hold and further assume λ ≥ Ω d n • ln(n/δ) . For any given comparator policy π † with κ(π † , π ref ) &lt; ∞, we can upper bound (6) as follows:</p><formula xml:id="formula_15">SubOpt( π, π † ) ≤ 2 √ 3 • Γ(n, d, δ, λ) • d • κ(π † , π ref ).</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.">DPO with a Log-Linear Policy Class</head><p>In this section, we will show that for a log-linear policy class (defined below), the suboptimality in DPO is also related to the parameter estimation in logistic regression.</p><p>We begin with a brief recap of DPO, following the original paper <ref type="bibr" target="#b33">(Rafailov et al., 2023)</ref>. The key idea is to reparameterize the reward model by the optimal policy of a KL-regularized problem. In particular, for the following KL-regularized optimization objective (with β &gt; 0)</p><formula xml:id="formula_16">J β (π) = E s∼ρ,a∼π(•|s) r ⋆ (s, a) − β ln π(a|s) π sft (a|s) ,</formula><p>the optimal solution has the closed-form expression</p><formula xml:id="formula_17">π ⋆ (a|s) = 1 Z β (s) π sft (a|s) exp(r ⋆ (s, a)/β),<label>(9)</label></formula><p>where Z β (s) = a∈A π sft (a|s) exp(r ⋆ (s, a)/β) is the normalization factor. This allows us to rewrite the reward r ⋆ in terms of π ⋆ as follows</p><formula xml:id="formula_18">r ⋆ (s, a) = β ln π ⋆ (a|s) π sft (a|s) + β ln Z β (s) . (<label>10</label></formula><formula xml:id="formula_19">)</formula><p>With the above re-parametrization of the reward using policy in ( <ref type="formula" target="#formula_18">10</ref>) and BT preference model in (1), DPO <ref type="bibr" target="#b33">(Rafailov et al., 2023)</ref> directly minimizes the following log-loss function:</p><formula xml:id="formula_20">L(π; π sft ) := − n i=1 1(y i = 0) ln σ β ln π(a 0 i |si) π sft (a 0 i |si) − β ln π(a 1 i |si) π sft (a 1 i |si) − n i=1 1(y i = 1) ln σ β ln π(a 1 i |si) π sft (a 1 i |si) − β ln π(a 0 i |si) π sft (a 0 i |si) .<label>(11)</label></formula><p>In this paper, we consider the log-linear policy class for the sake of theoretical analysis. Assumption 4.5 (Log-linear Policy Class). We assume that the optimal policy in ( <ref type="formula" target="#formula_17">9</ref>) satisfies π ⋆ ∈ Π and π sft ∈ Π where</p><formula xml:id="formula_21">Π = π θ (a|s) = exp(⟨θ, ϕ(s, a)⟩) a ′ ∈A exp(⟨θ, ϕ(s, a ′ )⟩) ,<label>(12)</label></formula><p>is the log-linear class for some known feature map ϕ(s, a) :</p><formula xml:id="formula_22">S ×A → R d with ∥ϕ(s, a)∥ ≤ 1. Moreover, θ ⋆ correspond- ing to π ⋆ satisfies that θ ⋆ ∈ Θ B = {θ ∈ R d : ⟨1, θ⟩ = 0, ∥θ∥ ≤ B},</formula><p>where the condition ⟨1, θ⟩ = 0 is to ensure the identifiability of θ ⋆ .</p><p>The above policy realizability assumption is equivalent to the reward model realizability. In particular, by plugging log-linear policy into (11), we can establish that the labels y i again follow from the logistic regression in (3) with proper choices of θ true and x i . In particular, we have the following formal statement, with its proof in Appendix E.3. Proposition 4.6. Under Assumption 4.5, the labels</p><formula xml:id="formula_23">{y i } i∈[n]</formula><p>in the preference dataset of DPO follow the logistic regression model with</p><formula xml:id="formula_24">θ true = β(θ ⋆ − θ sft ) with β &gt; 0 and x i = ϕ(s i , a 1 i ) − ϕ(s i , a 0 i ).</formula><p>Suppose with probability at least 1 − δ, there exists an estimate θ that satisfies</p><formula xml:id="formula_25">θ − θ true Σ+λI ≤ Γ(n, d, δ, λ),<label>(13)</label></formula><p>where</p><formula xml:id="formula_26">Σ := 1 n i x i x ⊤ i and λ &gt; 0. Then, let θ ′ = θ/β + θ sft and λ ≥ Ω d n • ln(n/δ) , the corresponding policy π = π θ ′ with probability at least 1 − δ satisfies SubOpt( π, π ⋆ ) ≤ √ 3 √ 2 • √ κ Π • B • Γ(n, d, δ, λ),</formula><p>where κ Π := max π∈Π κ(π, π) is the maximum relative condition number across the entire policy class.</p><p>Remark 4.7. One can also rewrite the above bound using the maximum value of the implicit reward function, r max as</p><formula xml:id="formula_27">SubOpt( π, π ⋆ ) ≤ c • √ κ Π • r max β • Γ(n, d, δ, λ),</formula><p>for some constant c &gt; 0 and log-linear policy Π.</p><p>Remark 4.8 (single-policy vs. all-policy concentrability).</p><p>One nice thing about the above reduction is that it allows us to easily see the key difference between RLHF and DPO. In particular, from Corollary 4.4 and Proposition 4.6, we can see that the key (and only) difference lies in the choice of relative condition number (especially when considering the typical scaling of B = O( √ d) for the parameter), which is also closely related to the "concentratability coefficient" in offline RL <ref type="bibr" target="#b29">(Munos, 2007;</ref><ref type="bibr" target="#b23">Jin et al., 2021)</ref>. In particular, due to the use of pessimism in offline RLHF, one can achieve a bound in terms of κ(π † , π ref ), which is related to the "single-policy concentratability" <ref type="bibr" target="#b34">(Rashidinejad et al., 2021;</ref><ref type="bibr" target="#b23">Jin et al., 2021)</ref> for any comparator policy π † . On the other hand, due to the lack of uncertainty characterization in DPO, one needs "all-policy concentratability" (Chen &amp; Jiang, 2019) κ Π in the upper bound, which is often much larger. In fact, this kind of dependence in standard DPO is shown to be necessary <ref type="bibr" target="#b35">(Song et al., 2024)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Parameter Estimation Under Private and Corrupted Labels</head><p>As motivated by the last section, we now turn to designing algorithms for providing label privacy while accurately estimating the unknown parameter θ true in logistic regression, even under corrupted labels. As we will see, the key to the design is a new loss function, which allows us to adaptively handle the privacy-robustness interplays in a unified way.</p><p>To facilitate the upcoming discussion, we formally state the general problem setup for logistic regression under private and corrupted labels. Definition 5.1 (Private and robust parameter estimation problem). Let D be a dataset of i.i.d samples {x i , y i } n i=1 where x i ∼ µ and y i follows from the logistic regression model in (3). The input dataset</p><formula xml:id="formula_28">D in = {x i , z i } n i=1</formula><p>is the private and corrupted version of D, following Definition 3.4. The goal here is to design a local randomizer R for privatizing labels (cf. Definition 3.1) as well as an analyzer A that receives D in outputs an estimate θ that is close to the underlying true parameter θ true , measured by a proper choice of norm. We assume the following boundedness conditions: for any i ∈</p><formula xml:id="formula_29">[n], ∥x i ∥ ≤ 1 and θ true ∈ Θ B ′ = {θ ∈ R d : ⟨1, θ⟩ = 0, ∥θ∥ ≤ B ′ }.</formula><p>Remark 5.2. The boundedness assumption essentially follows from the reduction in the last section. Here, we assume ∥x i ∥ ≤ 1 rather than upper bounded by 2 for simplicity and B ′ can be properly chosen for RLHF and DPO, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.">Our Algorithm</head><p>As mentioned, our choice of local randomizer R for privacy protection is the simple Random Response (RR) mechanism with parameter ε &gt; 0 <ref type="bibr">(Warner, 1965)</ref>. That is, the binary output from RR equals the input with probability σ(ε) = Algorithm 1 Private and Robust Estimation 1: Procedure: ε-local label DP mechanism R 2: //Input:</p><formula xml:id="formula_30">U i ∈ {0, 1}, parameter: ε 3: Random response: U i = U i w.p. e ε e ε +1 1 − U i w.p. 1 e ε +1 4: Return U i 5: Procedure: Analyzer A 6: //Input: {(x i , z i )} n i=1 , parameter: ε 7: Let c(ε) = 1 2σ(ε)−1 = e ε +1 e ε −1 8: Compute θ = argmin θ∈Θ B ′ (θ) − 1 n n i=1 ℓ i (θ) where ℓ i (θ) = ln(1 − σ(θ ⊤ x i )) + (z i + σ(ε) − 1)c(ε)θ ⊤ x i 9: Return θ e ε</formula><p>1+e ε ; otherwise, the privatized binary output differs from the input. RR satisfies the ε-local label DP guarantee (cf. Definition 3.1) <ref type="bibr" target="#b17">(Dwork &amp; Roth, 2014)</ref>.</p><p>We now turn to the design of the analyzer A, which is responsible for outputting an estimate θ. We first point out that in the non-private non-corrupted case, the standard maximum likelihood estimator (MLE) that minimizes the loss function L(θ) = − 1 n n i=1 ℓ i (θ) enjoys a good concentration <ref type="bibr" target="#b46">(Zhu et al., 2023)</ref> with respect to θ true , where ℓ i (θ) is the standard log-loss:</p><formula xml:id="formula_31">ℓ i (θ) = y i log(σ(θ ⊤ x i )) + (1 − y i ) log(1 − σ(θ ⊤ x i )) = log(1 − σ(θ ⊤ x i )) + y i θ ⊤ x i .</formula><p>However, due to the private labels, our analyzer is designed to minimize a new loss L</p><formula xml:id="formula_32">(θ) = − 1 n n i=1 ℓ i (θ) where ℓ i (θ) = ln(1 − σ(θ ⊤ x i )) + (z i + σ(ε) − 1)c(ε)θ ⊤ x i , (14) and c(ε) := 1 2σ(ε)−1 = e ε +1</formula><p>e ε −1 . The key difference lies in the "shifting and scaling" of the received labels z i , which, in fact, enjoys exactly the same "shifting and scaling" intuition as in mean estimation under RR, i.e., it is an unbiased estimate. Putting the above choices of R and A together, yields the final Algorithm 1 above. Remark 5.3. We remark that a similar loss (up to some scaling) has been considered in <ref type="bibr" target="#b12">Chowdhury et al. (2023;</ref><ref type="bibr">2024)</ref>. However, they are motivated from a different perspective (e.g., logit) rather than our connection to standard mean estimation under RR for local privacy (i.e., shifting and scaling). The form we use here in (14) has not appeared before. This new form not only makes it easy to see that our new loss is an unbiased estimate of the standard log loss, but also allows us to easily show that our single algorithm is adaptive to different privacy-corruption settings, i.e., it does not know the specific setting in advance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.">Estimation Error Bounds</head><p>In this section, we will establish the estimation error bounds achieved by Algorithm 1. Throughout this section, we will let θ CTL , θ LTC be the estimates outputted by Algorithm 1 under CTL and LTC respectively. Our first result is the following theorem, which characterizes the estimator error in terms of a weighted norm, with proof in Appendix E.4. Theorem 5.4. Consider the problem in Definition 5.1. For any ε &gt; 0, α, ∈ [0, 1/2), δ ∈ (0, 1), and λ &gt; 0, with probability at least 1 − δ, the output of Algorithm 1 achieves</p><formula xml:id="formula_33">θ CTL − θ true Σ+λI ≤ Γ CTL (n, d, δ, λ) := C √ α γ + c(ε) γ d + ln(1/δ) n + B ′ √ λ , θ LTC − θ true Σ+λI ≤ Γ LTC (n, d, δ, λ) := C c(ε) √ α γ + c(ε) γ d + ln(1/δ) n + B ′ √ λ ,</formula><p>where</p><formula xml:id="formula_34">Σ = 1 n n i=1 x i x ⊤ i , c(ε) = e ε +1 e ε −1 , γ = 1/(2 + exp(−B ′ ) + exp(B ′ ))</formula><p>, and C is a universal constant.</p><p>Remark 5.5. First, when there is no corruption, our result matches the one in previous work on private parameter estimation <ref type="bibr" target="#b12">(Chowdhury et al., 2023)</ref>. Second, when corruption exists, the order of corruption and local privacy matters. In particular, LTC has an additional cost c(ε) in the first corruption term compared to CTL, highlighting the interplay between privacy and robustness.</p><p>Our second result is a concentration result under L 2 -norm with the additional condition of uniform coverage, which has been leveraged in prior work as well <ref type="bibr" target="#b28">(Mandal et al., 2024;</ref><ref type="bibr" target="#b44">Zhang et al., 2022;</ref><ref type="bibr" target="#b12">Chowdhury et al., 2023)</ref>. Assumption 5.6 (Uniform Coverage). There exists a positive constant ξ &gt; 0 such that the minimum eigenvalue λ min (Σ) ≥ ξ, where</p><formula xml:id="formula_35">Σ := E x∼µ [xx ⊤ ].</formula><p>Under the above assumption, we can have another estimation error bound for the underlying parameter, which is now in terms of L 2 -norm, with proof in Appendix E.5. Theorem 5.7. Under Assumption 5.6, for any ε &gt; 0, α ∈ [0, 1/2), δ ∈ (0, 1), and n ≥ 8 ln(d/δ) ξ , with probability at least 1 − δ, Algorithm 1 under CTL and LTC achieves</p><formula xml:id="formula_36">θ CTL − θ true 2 ≤ C   α γξ + c(ε) γξ ln 1 δ n   , θ LTC − θ true 2 ≤ C   c(ε)α γξ + c(ε) γξ ln 1 δ n   .</formula><p>Here, we see that the separation between CTL and LTC still exists, with an additional factor of c(ε) in LTC, illustrating a negative impact of LDP on robustness.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Putting It All Together: Suboptimality under RLHF and DPO</head><p>In this section, we are ready to present our main results on the suboptimality gap under RLHF and DPO by combining our reduction results with estimation error bounds.</p><p>6.1. Private and Robust RLHF Theorem 6.1. Under the conditions of Corollary 4.4 and Theorem 5.4, RLHF (Algorithm 2) achieves the following suboptimality with probability at least 1 − δ</p><formula xml:id="formula_37">SubOpt CTL ( π, π † ) ≤ C d • κ(π † , π ref ) ×   √ α γ + c(ε) γ d + ln 1 δ n + B √ λ   , SubOpt LTC ( π, π † ) ≤ C d • κ(π † , π ref ) ×   c(ε) √ α γ + c(ε) γ d + ln 1 δ n + B √ λ   ,</formula><p>for any comparator policy π † and λ ≥ Ω d n • ln(n/δ) .</p><p>The proof follows directly from the reduction result in Corollary 4.4 and estimation error bound in Theorem 5.4. To the best of our knowledge, this is the first result on the suboptimality performance of RLHF under both privacy and corruption. In particular, let λ = Θ(d/(B 2 γ 2 n)) ≥ Ω(d/n), the sample complexity part in the bounds (i.e., the last two terms) approaches zero with a rate of O( d/n), but with a multiplicative factor of c(ε) that captures the cost of privacy. Meanwhile, due to strong corruption, a non-vanishing bias term exists in all three cases in terms of corruption parameters, which illustrates an interesting interplay between privacy and robustness, discussed below.</p><p>Separation between CTL and LTC. One key observation is that LDP before corruption leads to an additional c(ε) factor in the bias term, which mimics the same phenomena in private and robust mean estimation problems <ref type="bibr" target="#b45">(Zhou &amp; Zhang, 2024;</ref><ref type="bibr" target="#b10">Cheu et al., 2021)</ref>.</p><p>Comparisons with Prior Work. We now highlight our contributions even in robust-only or private-only RLHF, by comparing our result above with existing ones where privacy and robustness are separately considered.</p><p>1. Robust RLHF: To our best knowledge, only recent work <ref type="bibr" target="#b28">(Mandal et al., 2024)</ref> establishes theoretical suboptimality bounds for RLHF under adversarial corruption. In particular, it takes a linear MDP view (rather than our linear bandit view) of RLHF under strong corruption of both features and labels. Under the same relative condition number assumption, their dependence on α is O(α 1/4 ) when reduced from MDP to bandit. In contrast, our result gives a better dependence O( √ α), although only with label corruption. It is worth noting that this O( √ α) dependence is state-of-the-art even in the easier setting of standard offline reinforcement learning <ref type="bibr" target="#b44">(Zhang et al., 2022)</ref>. Moreover, our Algorithm 1 is much simpler than the one in <ref type="bibr" target="#b28">(Mandal et al., 2024)</ref>. Thus, a fair conclusion here could be that our result offers a better algorithm and theoretical result in the easier label-only corruption setting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Private RLHF:</head><p>To our best knowledge, we are unaware of prior work that explicitly states the private suboptimality of RLHF in terms of relative condition number, often used in the standard offline RL. The most related one is Chowdhury et al. ( <ref type="formula">2023</ref>), which generalizes the non-private RLHF in <ref type="bibr" target="#b46">Zhu et al. (2023)</ref> to the same locally private one as ours. However, both <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref> and <ref type="bibr" target="#b46">Zhu et al. (2023)</ref> state their suboptimality as</p><formula xml:id="formula_38">SubOpt( π, π ⋆ ) ≤ ∥E s∼ρ [ϕ(s, π ⋆ (s)) − v]∥ ( Σ+λI) −1 × 2F (n, d, δ, λ),<label>(15)</label></formula><p>for any chosen reference vector v ∈ R d and some function F . This is similar to our intermediate result in (6) but has some key differences. One potential issue in ( <ref type="formula" target="#formula_38">15</ref>) is that it does not offer clear guidance on choosing the important vector v. In particular, if v = 0, then the suboptimality may not converge to zero as n → ∞. This is because in both papers, λ has to be on the order of 1/n so as to ensure that F (n, d, δ, λ) ≤ O(1/ √ n). However, in this case, if the minimum eigenvalue of the empirical matrix Σ is small, the norm term ∥E s∼ρ [ϕ(s, π ⋆ (s)) − v]∥ ( Σ+λI) −1 can be on the order of √ n, given the choice of λ. To partially address this, <ref type="bibr" target="#b46">Zhu et al. (2023)</ref> suggest a heuristic way of selecting v as the most common feature vector that appears in the data set. In contrast, we consider a reference policy π ref and offer a theory-grounded rule for selecting it via relative condition number along with Corollary 4.4.</p><p>Our next result is the suboptimality in RLHF under the assumption of uniform coverage (cf. Assumption 5.6). Theorem 6.2. Under the conditions of Proposition 4.2 and for n ≥ 8 ln(d/δ) ξ , RLHF (Algorithm 2) achieves the following suboptimality with probability at least 1 − δ</p><formula xml:id="formula_39">SubOpt CTL ( π, π ⋆ ) ≤ C   α γξ + c(ε) γξ ln 1 δ n   , SubOpt LTC ( π, π ⋆ ) ≤ C   c(ε)α γξ + c(ε) γξ ln 1 δ n   .</formula><p>The proof follows directly from Proposition 4.2 and Theorem 5.7. Compared with Theorem 6.1, the corruption term becomes α (with a factor of 1/ξ) rather than √ α while the concentration part has no explicit dependence on d but with 1/ξ factor, which however implicitly depends on d. As before, a separation exists between CTL and LTC, due to the additional c(ε) factor in LTC. It is worth noting that the O(α/ξ) dependence matches the best existing result in standard offline RL under corruption in <ref type="bibr" target="#b44">Zhang et al. (2022)</ref>.</p><p>Comparisons with Prior Work. Mandal et al. ( <ref type="formula">2024</ref>) also consider the uniform coverage case and establish a bias corruption term on the order of</p><formula xml:id="formula_40">√ dα 1−o(1) ξ</formula><p>when reduced from their MDP to bandit setting. In contrast, in our labelcorruption setting, we have no explicit dependence on d and a better dependence on α. Moreover, we highlight that the missing dependence of 1/γ in Mandal et al. ( <ref type="formula">2024</ref>) is actually due to an error in their proof (see Appendix G for a detailed discussion). That is, the correct bound of their algorithm also has a 1/γ factor. In the context of private RLHF under uniform coverage, our bound matches the stateof-the-art in <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref> when the corruption parameter is zero.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.">Private and Robust DPO</head><p>Thanks to our reduction result, we can also leverage the estimation error bound to give the first result on suboptimality in DPO-style algorithms under privacy and corruption. Theorem 6.3. Under the conditions of Proposition 4.6, the policy corresponding to the output of Algorithm 1 achieves the following suboptimality with probability at least 1 − δ</p><formula xml:id="formula_41">SubOpt CTL ( π, π ⋆ ) ≤ C • B √ κ Π ×   √ α γ + c(ε) γ d + ln 1 δ n + βB √ λ   , SubOpt LTC ( π, π ⋆ ) ≤ C • B √ κ Π ×   c(ε) √ α γ + c(ε) γ d + ln 1 δ n + βB √ λ   , for β &gt; 0, λ ≥ Ω d n • ln(n/δ) , γ = 1/(2 + exp(−βB) + exp(βB))</formula><p>, and some universal constant C &gt; 0.</p><p>Remark 6.4. The policy in the above theorem in fact corresponds to the output of the algorithm rDPO proposed in <ref type="bibr" target="#b13">Chowdhury et al. (2024)</ref>  Practical Implementation and Experiments. Given that Theorem 6.3 establishes the SOTA theoretical results of rDPO in both private and corruption cases, under the loglinear policy. One may also interested in its empirical performance in general with neural nets as the policy class. We have a series of experiments (see Appendix D for details), which demonstrate some interesting results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Discussion and Conclusion</head><p>While we present only upper bound results in the main body, we briefly discuss their tightness here; for further details, please refer to Appendix C. First, when α = 0, the additional factor c(ε) due to privacy matches the minimax lower bound established in <ref type="bibr" target="#b12">Chowdhury et al. (2023)</ref>. Furthermore, the dependence on 1/γ = Θ(e B ) = Θ(e rmax ) appears in nearly all existing results on both offline and online RLHF <ref type="bibr" target="#b46">(Zhu et al., 2023;</ref><ref type="bibr" target="#b42">Zhan et al., 2023;</ref><ref type="bibr" target="#b39">Xie et al., 2024;</ref><ref type="bibr" target="#b31">Pacchiano et al., 2021;</ref><ref type="bibr" target="#b9">Chen et al., 2022)</ref>, stemming from the non-linearity of the Bradley-Terry model. Second, in the limit ε → ∞ (non-private case), our dependence on α is O( √ α) and O(α/ζ) (under uniform coverage), both of which align with state-of-the-art results in standard offline RL settings, where rewards rather than preferences are observed. In fact, we conjecture that the O(α/ζ) dependence is optimal. Third, regarding the separation between CTL and LTC, the conclusion is nuanced. We tend to believe that the additional factor c(ε) in the uniform coverage case is tight, as it matches the known result in mean estimation and offline bandits <ref type="bibr" target="#b45">(Zhou &amp; Zhang, 2024)</ref>. However, under the O( √ α) dependence without coverage, we hypothesize that achieving an O( c(ε)) separation-rather than O(c(ε))is possible, presenting an exciting direction for future work. Looking ahead, our reduction analysis and new results on private and robust alignment may serve as key benchmarks and inspire further research in this domain.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Additional Related Work</head><p>We discuss here more relevant work that do not fit in the main text. In addition to the work discussed below, we refer readers to <ref type="bibr" target="#b22">Huang et al. (2024)</ref> for theoretical results on standard offline alignment, to the survey <ref type="bibr" target="#b4">Casper et al. (2023)</ref> for a more comprehensive overview of RLHF, and to <ref type="bibr" target="#b38">Wang et al. (2024)</ref> for the overview of LLM alignment in general.</p><p>Provably robust alignment under corruption. We would like to remark that our use of the strong corruption model from robust statistics literature is motivated by its popularity in robust offline and online reinforcement learning (i.e., when the actual rewards are observed) <ref type="bibr" target="#b44">(Zhang et al., 2022;</ref><ref type="bibr">2021)</ref>, as well as the recent interest in examining its interplay with local differential privacy across various statistical tasks <ref type="bibr" target="#b28">(Li et al., 2023;</ref><ref type="bibr" target="#b10">Cheu et al., 2021;</ref><ref type="bibr" target="#b11">Chhor &amp; Sentenac, 2023)</ref>. Moreover, this corruption model allows us to consider corruption occurring in both data generation and collection.</p><p>Provably robust offline RL. Without privacy constraints, our work can be seen as a non-trivial extension of the results in corruption-robust offline RL <ref type="bibr" target="#b44">(Zhang et al., 2022)</ref> to the setting of offline RLHF, where only relative rankings, rather than true rewards, are observed. As will be discussed in Appendix C, the lower bounds established for robust offline RL, along with their proof techniques, can be applied or adapted to derive lower bounds for offline RLHF.</p><p>Robust logistic regression under corruption. Among those works on logistic regression under adversary corruption <ref type="bibr" target="#b18">(Feng et al., 2014;</ref><ref type="bibr" target="#b32">Prasad et al., 2020;</ref><ref type="bibr" target="#b8">Chen et al., 2020;</ref><ref type="bibr" target="#b1">Awasthi et al., 2022)</ref>, the most relevant one is <ref type="bibr" target="#b1">Awasthi et al. (2022)</ref> that considers Binomial regression under label corruption, which includes logistic regression as a special case. <ref type="bibr" target="#b1">Awasthi et al. (2022)</ref> propose an alternating minimization method that achieves a recover rate of O(α ln(1/α)) in L 2 norm, where α ∈ [0, 1/2) is the corruption parameter. In contrast, our intermediate result in Section 5 implies a rate of O(α). Moreover, our rate is achieved by the simple maximum likelihood estimator rather than the inefficient trimmed maximum likelihood estimator in <ref type="bibr" target="#b1">Awasthi et al. (2022)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Algorithm</head><p>Algorithm 2 Offline RLHF 1: Input: The current parameter estimate θ, the empirical covariance matrix Σ, the regularizer λ, the concentration bound Γ(n, d, δ, λ), a reference policy π ref and a tuning parameter η ∈ {0, 1}. 2: if η = 0 then 3:</p><formula xml:id="formula_42">J(π) = E s∼ρ,a∼π(•|s) [⟨ θ, ϕ(s, a)⟩] 4: return π = argmax π J(π) 5: else 6: Construct confidence set Θ( θ, λ) = θ ∈ Θ B | θ − θ Σ+λI ≤ Γ(n, d, δ, λ) Compute pessimistic expected value J(π) = min θ∈Θ( θ,λ) E s∼ρ,a∼π(•|s) [⟨θ, ϕ(s, a)⟩] − E s∼ρ,a∼π ref (•|s) [⟨θ, ϕ(s, a)⟩] 7: return π = argmax π J(π) 8: end if</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. Discussions</head><p>In this section, we discuss the tightness of our suboptimality bounds. In particular, we primarily focus on the result in Theorem 6.1, as it offers stronger guarantees compared to Theorem 6.3.</p><p>Dependence on 1/γ. The dependence on 1/γ = Θ(e B ) = Θ(e rmax ) is present in nearly all existing results on both offline and online RLHF <ref type="bibr" target="#b46">(Zhu et al., 2023;</ref><ref type="bibr" target="#b42">Zhan et al., 2023;</ref><ref type="bibr" target="#b39">Xie et al., 2024;</ref><ref type="bibr" target="#b31">Pacchiano et al., 2021;</ref><ref type="bibr" target="#b9">Chen et al., 2022)</ref>. This stems from an intrinsic feature of the Bradley-Terry model, namely, the non-linearity of the sigmoid function.</p><p>The privacy cost of c(ε). Compared to the non-private (non-corrupted) case, our bound includes an additional multiplicative factor of c(ε), which we believe to be tight when ε ∈ [0, 1], i.e., c(ε) = Θ(1/ε). First, this factor appears even in simple mean estimation, where a matching lower bound is provided in <ref type="bibr" target="#b16">Duchi et al. (2018)</ref>. Second, a more concrete argument can be made by modifying the existing lower bound proof for the non-private case to show that c(ε) is necessary. Specifically, the key insight is that any LDP mechanism is a contraction of the KL divergence, as stated in <ref type="bibr">Duchi et al. (2018, Theorem 1)</ref>. Thus, in the lower bound proof for the private case, the non-private KL divergence is replaced with the private one, which is smaller by a factor of (e ε − 1)<ref type="foot" target="#foot_3">2</ref> , eventually leading to a factor of 1/ε.</p><p>The separation between CTL and LTC. We observe an additional factor of c(ε) in the corruption under LTC compared to CTL. We conjecture that this is tight for all ε &gt; 0, especially for the one in Theorem 6.2. First, the separation result is also seen in the mean estimation problem and is shown to be tight <ref type="bibr" target="#b45">(Zhou &amp; Zhang, 2024)</ref>. Second, a more concrete argument can be made by modifying the lower bound for standard offline linear bandits under corruption <ref type="bibr" target="#b44">(Zhang et al., 2022)</ref>.<ref type="foot" target="#foot_2">1</ref> This lower bound is valid for offline RLHF under CTL, 2 as offline RLHF is at least as hard as offline linear bandits, and CTL is harder than corruption-only settings. To demonstrate the additional c(ε) factor under LTC, a key fact is that any LDP mechanism contracts the total variation distance by a factor of c(ε) (cf. Lemma H.4). Using a standard coupling argument, one can then derive a lower bound with the additional factor of c(ε) for the LTC setting.</p><p>Dependence on α. Our current √ α dependence matches the best existing result, even in standard offline RL <ref type="bibr" target="#b44">(Zhang et al., 2022)</ref>. However, this √ α dependence does not align with the existing Ω(α) lower bound <ref type="bibr" target="#b44">(Zhang et al., 2022)</ref>. On the other hand, under the uniform coverage assumption, our result in Theorem 6.2 achieves the optimal dependence on α. Furthermore, we conjecture that the 1/ξ factor preceding α is optimal. Our reasoning is as follows: due to boundedness, we have ξ ≤ 1/d. In the best case, when ξ = 1/d, our upper bound matches the lower bound of dα in <ref type="bibr" target="#b44">Zhang et al. (2022)</ref>, which was established for standard offline linear RL, except for the difference of 1/γ due to the non-linearity.</p><p>Practical implementations. For the sake of theoretical analysis, we adopt linear modeling in the main paper. Nevertheless, we mention that our proposed method can be readily extended to the case with general function classes (albeit losing the current formal theoretical guarantees). Take DPO for an example, we can solve the following optimization problem:</p><formula xml:id="formula_43">π = argmin π∈Π − n i=1 ln(1 − σ(r π,π sft β,i )) + (z i + σ(ε) − 1)c(ε) ln σ(r π,π sft β,i ) 1 − σ(r π,π sft β,i ) ,<label>(16)</label></formula><p>where</p><formula xml:id="formula_44">r π,π sft β,i := β ln π(a 1 i |s i ) π sft (a 1 i |s i ) − β ln π(a 0 i |s i ) π sft (a 0 i |s i )</formula><p>.</p><p>Some sanity checks are in order. First, for the standard case (i.e., ε → ∞ and α = 0), we have σ(ε) = c(ε) = 1 and z i = y i , which leads us back to the standard DPO loss, see <ref type="bibr">(11)</ref>. Second, if we consider log-linear policy, (16) reduces to (14) (up to some scaling of β). Third, if there is only privacy (or similar random flipping noise with a known flipping rate as in Chowdhury et al. ( <ref type="formula">2024</ref>)), one can verify that the above loss is equivalent to the one in <ref type="bibr" target="#b13">Chowdhury et al. (2024)</ref> (see their Eq. 12, which is called rDPO), up to some simple rescaling. Thus, in this sense, compared to the sub-optimal rate of O(1/n 1/4 ) for the log-linear policy class established in <ref type="bibr" target="#b13">Chowdhury et al. (2024)</ref>, we give the first O(1/ √ n) rate for private or "robust" DPO. One can also follow a similar approach as above by simply replacing the policy-parameterized reward r π,π sft β,i by a reward function in a reward function class for RLHF. Then, a similar method as in Algorithm 1 of <ref type="bibr" target="#b42">Zhan et al. (2023)</ref> can be adopted for introducing pessimism.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D. Experiments on DPO and rDPO under Privacy and Corruption</head><p>As mentioned in the last section, we provide the first results for rDPO <ref type="bibr" target="#b13">(Chowdhury et al., 2024)</ref> under both privacy and corruption with a log-linear policy class (cf. Theorem 6.3). In this section, we would like to empirically demonstrate its performance with a general function class, i.e., neural nets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.1. Experiment Setup</head><p>Dataset. We utilize GPT-4o to generate a synthetic dataset, referred to as finance preference, which comprises 1697 preference samples. Each sample includes a prompt related to a financial scenario and two possible responses, where "rejected" represents the high-risk option and "chosen" represents the low-risk option. This labeling can be viewed as private or sensitive information. For illustrative examples from our dataset, please refer to Appendix I. For SFT training, we construct the finance sft dataset by simply concatenating the prompt with the corresponding "chosen" response.</p><p>SFT Training. We begin by fine-tuning GPT2-large using the finance sft dataset to obtain the SFT policy, π sft . For this, we directly utilize the SFT trainer from the Transformer Reinforcement Learning (TRL) library <ref type="bibr" target="#b37">(von Werra et al., 2020)</ref>, with the hyperparameters listed in Table <ref type="table" target="#tab_3">3</ref>.</p><p>DPO and rDPO Training. For alignment training, we split the dataset into 85% for training, 5% for validation, and 10% for testing. For DPO, we utilize the implementation provided in the TRL library, using the hyperparameters listed in Table <ref type="table" target="#tab_4">4</ref>. Similarly, for rDPO, we leverage the TRL implementation, which corresponds to DPO with lose type set to "robust." In the private setting with a privacy budget of ε, one can simply set label smoothing to the flip rate, given by 1 e ε +1 . This setting recovers the same algorithm presented in our main paper when the policy class is log-linear. Finally, we use the same set of hyperparameters for rDPO as in DPO training.</p><p>CTL and LTC Settings. The LDP mechanism follows the randomized response model, where the flip rate is given by 1 e ε +1 . For corruption, we assume that a randomly sampled subset of O(αn) labels are always flipped compared to the true label. To implement both privacy and corruption, we introduce a mask variable initialized to 0 for each sample. The LDP mechanism flips the mask variable with probability 1 e ε +1 , while the corruption mechanism sets the mask to 1 with probability α. Finally, after CTL or LTC processing, labels ("chosen" and "rejected") are flipped if the corresponding mask value is 1. At this point, an astute reader may notice that LTC results in a higher number of 1s in the final mask variables compared to CTL Evaluation. We evaluate our trained models π DPO , π rDPO , and π SFT by generating responses for the test dataset using the hyperparameters listed in Table <ref type="table" target="#tab_5">5</ref>. To assess performance, we employ the llama3:70b model as a judge, comparing responses from π DPO and π rDPO against those from π SFT . Finally, we use the win rate from these comparisons as our primary performance metric, following the methodology outlined in the DPO paper <ref type="bibr" target="#b33">(Rafailov et al., 2023)</ref>. We compute the average and standard deviation across five seeds.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D.2. Results</head><p>Private Case. We first compare the performance of DPO and rDPO in the private setting, as shown in Table <ref type="table" target="#tab_1">1</ref>. Due to the "shifting and scaling" loss used in rDPO, we observe that rDPO outperforms standard DPO in the private case. Interestingly, we make an additional observation: in the non-private setting, if we still introduce random label flips at a rate of approximately 1/(e 1 + 1), rDPO achieves even better performance than DPO. This suggests that deliberately adding noise to labels can enhance performance, resembling the well-known effect of label smoothing in classification tasks. We also tend to believe that this injected noise also somewhat help to address the overoptimization issues in DPO-style algorithms. We plan to further explore this phenomenon on a larger dataset. Finally, we note that this observation does not contradict our main theoretical result, which provides an upper bound in the worst case.</p><p>Private and Corruption Cases. We now examine whether the separation between CTL and LTC persists beyond the linear setting. As shown in Table <ref type="table" target="#tab_2">2</ref>, rDPO demonstrates better performance under CTL compared to LTC. Furthermore, the performance gap widens as ε decreases. These observations are consistent with the theoretical insights derived from the linear setting. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E. Proofs</head><p>This section presents the proofs for our main results in previous sections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E.1. Proof of Proposition 4.2</head><p>Proof. By definition, for any π † , we have</p><formula xml:id="formula_45">SubOpt( π, π † ) = J(π † ) − J( π) = J(π † ) − J(π † ) T1 + J(π † ) − J( π) T2 + J( π) − J( π) T3 ,</formula><p>holds for any function J(•). For the first case when η = 0, we have</p><formula xml:id="formula_46">J(π) = E s∼ρ,a∼π(•|s) [ϕ(s, a) ⊤ θ]</formula><p>. By the greedy algorithm in Algorithm 2, we have T 2 ≤ 0. Further, under Assumption 4.1, we can rewrite T 1 and T 3 as</p><formula xml:id="formula_47">T 1 = E s∼ρ,a∼π † (•|s) [ϕ(s, a) ⊤ (θ ⋆ − θ)], T 3 = E s∼ρ,a∼ π(•|s) [ϕ(s, a) ⊤ ( θ − θ ⋆ )] .</formula><p>By the boundedness assumption, both terms can be upper bounded by θ − ⋆ 2 , which implies the first result by the fact that θ true = θ ⋆ .</p><p>For the second case when η = 1, we introduce the following notation </p><formula xml:id="formula_48">SubOpt( π, π † ) = J(π † ) − J( π) = J(π † ; θ ⋆ ) − J(π ref ; θ ⋆ ) − (J( π; θ ⋆ ) − J(π ref ; θ ⋆ )) (a) ≤ J(π † ; θ ⋆ ) − J(π ref ; θ ⋆ ) − J(π † ; θ inf π † ) − J(π ref ; θ inf π † ) + J( π; θ inf π ) − J(π ref ; θ inf π ) − (J( π; θ ⋆ ) − J(π ref ; θ ⋆ )) (b) ≤ J(π † ; θ ⋆ ) − J(π ref ; θ ⋆ ) − J(π † ; θ inf π † ) − J(π ref ; θ inf π † ) = J(π † ; θ ⋆ ) − J(π ref ; θ ⋆ ) − J(π † ; θ) − J(π ref ; θ) T4 + J(π † ; θ) − J(π ref ; θ) − J(π † ; θ inf π † ) − J(π ref ; θ inf π † T5</formula><p>, where (a) holds by the greedy algorithm; (b) holds by the definition of θ inf π and the fact that θ ⋆ ∈ Θ( θ, λ) by (5). To bound T 4 and T 5 , we use the definition in (17), the concentration in (5) and the definition of Θ( θ, λ) with θ inf π † ∈ Θ( θ, λ), and obtain that</p><formula xml:id="formula_49">T 4 + T 5 ≤ 2Γ(n, d, δ, λ) E s∼ρ [ϕ(s, π † (s)) − ϕ(s, π ref (s))] ( Σ+λI) −1 ,</formula><p>where we let ϕ(s, π(s)) := E a∼π(•|s) <ref type="bibr">[ϕ(s, a)</ref>]. This finishes the proof.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>E.2. Proof of Corollary 4.4</head><p>Proof. We need only focus on the last term in (6). Note that</p><formula xml:id="formula_50">E s∼ρ [ϕ(s, π † (s)) − ϕ(s, π ref (s))] = E s∼ρ,a∼π † (•|s),a ′ ∼π ref (•|s) [ϕ(s, a) − ϕ(s, a ′ )] .</formula><p>Thus, we have Proof. We first show that under Assumption 4.5, the labels are generated via a logistic regression model. This follows from a direct computation. In particular, by ( <ref type="formula" target="#formula_0">1</ref>), ( <ref type="formula" target="#formula_18">10</ref>), ( <ref type="formula" target="#formula_21">12</ref>) , we have</p><formula xml:id="formula_51">E s∼ρ [ϕ(s, π † (s)) − ϕ(s, π ref (s))] 2 ( Σ+λI) −1 = E s∼ρ,a∼π † (•|s),a ′ ∼π ref (•|s) [ϕ(s, a) − ϕ(s, a ′ )] 2 ( Σ+λI) −1 (a) ≤ 3 E s∼ρ,a∼π † (•|s),a ′ ∼π ref (•|s) [ϕ(s, a) − ϕ(s, a ′ )] 2 (Σ diff π sft ,π sft +λI) −1 (b) ≤ 3 • κ(π † , π ref ) • E s∼ρ,a∼π † (•|s),a ′ ∼π ref (•|s) [ϕ(s, a) − ϕ(s, a ′ )] 2 Σ diff π † ,π ref −1 (c) ≤ 3 • κ(π † , π ref ) • E s∼ρ,a∼π † (•|s),a ′ ∼π ref (•|s) (ϕ(s, a) − ϕ(s, a ′ )) ⊤ Σ diff π † ,π ref −1 (ϕ(s, a) − ϕ(s, a ′ )) (d) = 3 • κ(π † , π ref ) • trace(I),</formula><formula xml:id="formula_52">P y i = 1|s i , a 0 i , a 1 i = 1 1 + exp(r ⋆ (s i , a 0 i ) − r ⋆ (s i , a 1 i )) = σ(r ⋆ (s i , a 1 i ) − r ⋆ (s i , a 0 i )) = σ β ln π ⋆ (a 1 i |s i ) π ⋆ (a 0 i |s i ) − β ln π sft (a 1 i |s i ) π sft (a 0 i |s i ) = σ ⟨β(θ ⋆ − θ sft ), ϕ(s i , a 1 i ) − ϕ(s i , a 0 i )⟩ .</formula><p>Thus, with θ true = β(θ ⋆ − θ sft ) and x i = ϕ(s i , a 1 i ) − ϕ(s i , a 0 i ), we have that each label y i follows from logistic regression in (3).</p><p>We now turn to the suboptimality part.</p><formula xml:id="formula_53">SubOpt( π, π ⋆ ) = E s∼ρ,a∼π ⋆ [r ⋆ (s, a)] − E s∼ρ,a∼ π [r ⋆ (s, a)] (a) ≤ ∆ max E s∼ρ [TV(π ⋆ (•|s), π(•|s))] (b) ≤ ∆ max E s∼ρ 1/2 • KL(π ⋆ (•|s), π(•|s)) (c) ≤ ∆ max 1/2 • E s∼ρ [KL(π ⋆ (•|s), π(•|s))],</formula><p>where in (a) we have ∆ max = max s,a (r ⋆ (s, a) − β ln Z β (s)) ≤ 2βB, (b) follows from Pinsker's inequality, and (c) holds by Jensen's inequality.</p><p>Then, since both π ⋆ and π ′ are log-linear policies with parameters θ ⋆ and θ ′ , respectively, by a direct calculation and Taylor expansion, we have</p><formula xml:id="formula_54">KL(π ⋆ (•|s), π(•|s)) = 1 2 ( θ ′ − θ ⋆ ) ⊤ A s (θ)( θ ′ − θ ⋆ ),</formula><p>for some universal constant C.</p><p>Thus, it remains to establish the high probability bound in (21) under the three settings. To this end, we will fully utilize the following claims. See Appendix F for the proofs.</p><p>Claim E.1. Let η i be zero-mean i.i.d sub-Gaussian with parameter σ, condition on x i . Then, for any δ ∈ (0, 1) and λ &gt; 0, with probability at least 1 − δ,</p><formula xml:id="formula_55">1 n n i=1 η i x i ( Σ+λI) −1 ≤ C • σ • d + ln(1/δ) n ,</formula><p>for some universal constant C.</p><p>Claim E.2. Let b = (b 1 , . . . , b n ) be a vector that at least 1 − αn elements are zero, and the rest are bounded by some constant ζ &gt; 0, i.e., |b i | ≤ ζ. Then, we have</p><formula xml:id="formula_56">1 n n i=1 b i x i ( Σ+λI) −1 ≤ ζ √ α .</formula><p>With the above claims in hand, we are going to establish (21) for CTL, LTC and CLC, respectively.</p><p>CTL case. In this case, we rewrite the gradient in (18) as follows</p><formula xml:id="formula_57">∇ L(θ true ) = − 1 n n i=1 c(ε)(z i + σ(ε) − 1) − ȳi + ȳi − y i + y i − σ(θ ⊤ x i ) x i ,</formula><p>where recall that under CTL, the true label y i is first corrupted to ȳi , which will then be privatized to generate z i . Thus, we have</p><formula xml:id="formula_58">∇ L(θ true ) ( Σ+λI) −1 ≤ 1 n i [c(ε)(z i + σ(ε) − 1) − ȳi ] x i ( Σ+λI) −1 Tprivacy + 1 n i (ȳ i − y i )x i ( Σ+λI) −1 Tcorruption + 1 n i y i − σ(θ ⊤ x i ) x i ( Σ+λI) −1 Tstandard . (<label>23</label></formula><formula xml:id="formula_59">)</formula><p>For T privacy and T standard , we can apply Claim E.1 due to zero-mean and sub-Gaussian with parameters O(c(ε)) and 1, respectively. Thus, we have with probability at least 1 − δ,</p><formula xml:id="formula_60">T privacy + T standard ≤ C 1 • c(ε) • d + ln(1/δ) n ,</formula><p>for some universal constant C 1 &gt; 0.</p><p>For T corruption , we can apply Claim E.2 with ζ = 1, and obtain that</p><formula xml:id="formula_61">T corruption ≤ √ α .</formula><p>Thus, combining these bounds with ( <ref type="formula">21</ref>) and ( <ref type="formula">22</ref>), yields the bound under CTL.</p><p>LTC case. In this case, we rewrite the gradient in (18) as follows</p><formula xml:id="formula_62">∇ L(θ true ) = − 1 n n i=1 c(ε)(z i + σ(ε) − 1 + y i − y i ) − σ(θ ⊤ x i ) x i , = − 1 n n i=1 c(ε)(z i − y i ) + c(ε)( y i + σ(ε) − 1) − σ(θ ⊤ x i ) x i ,</formula><p>where recall that under LTC, the true label y i is first privatized to be y i , which will then be corrupted to generate z i . Thus, we have</p><formula xml:id="formula_63">∇ L(θ true ) ( Σ+λI) −1 ≤ 1 n i [c(ε)(z i − y i )] x i ( Σ+λI) −1 Tcorruption + 1 n i c(ε)( y i + σ(ε) − 1) − σ(θ ⊤ x i ) x i ( Σ+λI) −1 Tprivacy .<label>(24)</label></formula><p>Similarly, for T privacy , we can again apply Claim E.1 due to zero-mean and sub-Gaussian with a parameter O(c(ε)). Thus, we have with probability at least 1 − δ,</p><formula xml:id="formula_64">T privacy ≤ C 1 • c(ε) • d + ln(1/δ) n ,</formula><p>for some universal constant C 1 &gt; 0.</p><p>For T corruption , we can apply Claim E.2 with ζ = c(ε), and obtain that</p><formula xml:id="formula_65">T corruption ≤ c(ε) √ α .</formula><p>Thus, combining these bounds with ( <ref type="formula">21</ref>) and ( <ref type="formula">22</ref>), yields the bound under LTC.</p><p>CLC case. With the results of the previous two cases in hand, we can now easily analyze the CLC case, as it is essentially the summation of the CTL and LTC. More specifically, we will now rewrite the gradient in (18) as follows</p><formula xml:id="formula_66">∇ L(θ true ) = − 1 n n i=1 c(ε)(z i + σ(ε) − 1) − c(ε)( y i + σ(ε) − 1) + c(ε)( y i + σ(ε) − 1) − ȳi + ȳi − σ(θ ⊤ x i ) x i = − 1 n n i=1 c(ε)(z i − y i ) + c(ε)( y i + σ(ε) − 1) − ȳi + ȳi − σ(θ ⊤ x i ) x i ,</formula><p>where recall that under CLC, the true label is first corrupted to ȳi (with parameter α 1 ) and then it is privatized to y i , which will then further corrupted to z i (with parameter α 2 ). By a direct utilization of the bounds in ( <ref type="formula" target="#formula_63">24</ref>) and ( <ref type="formula" target="#formula_58">23</ref>) (along with c(ε) ≥ 1), we have with probability at least 1 − δ,</p><formula xml:id="formula_67">∇ L(θ true ) ( Σ+λI) −1 ≤ C ′ • c(ε) • d + ln(1/δ) n + c(ε) √ α 2 + √ α 1 ,</formula><p>for some universal constant C ′ . Thus, combining these bounds with ( <ref type="formula">21</ref>) and ( <ref type="formula">22</ref>), yields the bound under CLC.</p><p>E.5. Proof of Theorem 5.7</p><p>Proof. As before, we present some common steps and results in all three cases. Similar to (20), we have γ ∥∆∥ Suppose for now we have the following high probability bound ∇ L(θ true ) 2 ≤ g(n, δ),</p><p>for some function g, and proceed to establish the final bound. In particular, we need a lower bound on ∥∆∥ 2 Σ in terms of ∥∆∥ 2 . To this end, by Lemma H.3 with X i = x i x ⊤ i , H = 1, µ min = nξ, we have with probability at least 1 − δ, λ min ( Σ) ≥ ξ/2, when n ≥ 8 ln(d/δ) ξ . Thus, we have</p><formula xml:id="formula_69">γξ 2 ∥∆∥ 2 2 ≤ g(n, d, δ, λ) ∥∆∥ 2 ,</formula><p>Proof of Claim E.3. The proof also relies on Lemma H.2. As before, we let X ∈ R n×d where x i ∈ R d is its i-th row and let η = (η 1 , . . . , η n ) be a column vector. Then, we have</p><formula xml:id="formula_70">1 n n i=1 η i x i 2 2</formula><p>= η ⊤ M η, where M := 1 n 2 XX ⊤ .</p><p>With simple linear algebra, we can have</p><formula xml:id="formula_71">trace(M ) ≤ 1 n , trace(M 2 ) ≤ 1 n 2 , ∥M ∥ ≤ 1 n .</formula><p>Thus, by Lemma H.2, we have with probability at least 1 − δ,</p><formula xml:id="formula_72">1 n n i=1 η i x i 2 ≤ C • σ • 1 + ln(1/δ) n ,</formula><p>for some universal constant C &gt; 0.</p><p>Proof of Claim E.4. This simply holds by algebra:</p><formula xml:id="formula_73">1 n n i=1 b i x i 2 ≤ 1 n n i=1 ∥x i ∥ |b i | ≤ ζα,</formula><p>which holds by the boundedness assumption of ∥x i ∥ ≤ 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>G. Discussion on the Gap in Prior Work</head><p>As we have pointed out in the main paper, the current stated result in <ref type="bibr" target="#b28">Mandal et al. (2024)</ref> (in particular, their Theorem 3.3) misses the 1/γ factor. This is due to a gap in their proof of Lemma 3.2. This happens on the last chain of equations on Page 20. In particular, the first inequality below has the wrong direction. x n x ⊤ n ,</p><p>where they claim to use e u + e −u ≥ 2. Notice that due to the negative sign, the inequality direction should be reversed. In order to have the right direction, we need to introduce γ, which in turn introduces 1/γ in the final bound.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>H. Auxiliary Results</head><p>Lemma H.1 (Concentration of Covariances, Lemma 39 in <ref type="bibr" target="#b41">(Zanette et al., 2021)</ref>). Let ϕ 1 , . . . , ϕ n ∈ R d be i.i.d samples from a distribution µ with ∥ϕ i ∥ ≤ 1. Let Σ := E ϕ∼µ ϕϕ ⊤ be the population matrix. If λ ≥ Ω d n • ln(n/δ) , then with probability at least 1 − δ,</p><formula xml:id="formula_74">1 3 (Σ + λI) ⪯ 1 n n i=1 ϕ i ϕ ⊤ i + λI ⪯ 5 3 (Σ + λI) .</formula><p>Lemma H.2 (Tail bound for quadratic forms, Theorem 1 in <ref type="bibr" target="#b21">(Hsu et al., 2011)</ref>). Let A ∈ R m×n be a matrix and let Σ := A ⊤ A. Suppose {x i } n i=1 is i.i.d<ref type="foot" target="#foot_4">3</ref> sub-Gaussian with parameter σ and let x = (x 1 , . . . , x n ) be a column vector. Then, for any δ ∈ (0, 1), with probability at least 1 − δ, ∥Ax∥ 2 = x ⊤ Σx ≤ σ 2 trace(Σ) + 2 trace(Σ 2 ) ln(1/δ)) + 2 ∥Σ∥ ln(1/δ) .</p><p>These examples illustrate the structured nature of our dataset and its alignment with decision-making scenarios across diverse financial categories.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I.2. Hyperparameters</head><p>The hyperparameters for the experiments are outlined below. Any hyperparameters not explicitly mentioned use the default values in the TRL library. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>J</head><label></label><figDesc>(π; θ ⋆ ) := E s∼ρ,a∼π(•|s) [ϕ(s, a) ⊤ θ ⋆ ] = J(π) . (17) Thus, we have E s∼ρ,a∼π(•|s) [⟨θ, ϕ(s, a)⟩] − E s∼ρ,a∼π ref (•|s) [⟨θ, ϕ(s, a)⟩] = J(π; θ) − J(π ref ; θ). Let θ inf π = argmin θ∈Θ( θ,λ) J(π; θ) − J(π ref ; θ). Hence J(π) = J(π; θ inf π ) − J(π ref ; θ inf π ). Then, we have</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>where (a) holds by Lemma H.1 for λ ≥ Ω d n • ln(n/δ) ; (b) follows by the definition of κ(π † , π ref ) in (8); (c) holds by Jensen's inequality; (d) simply follows from the interchange of trace and expectation along with the cyclic property of trace. Taking the square root, yields the required result. E.3. Proof of Proposition 4.6</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>2Σ</head><label></label><figDesc>≤ L(θ true + ∆) − L(θ true ) − ⟨∇ L(θ true ), ∆⟩ ≤ −⟨∇ L(θ true ), ∆⟩ ≤ ∇ L(θ true ) 2 ∥∆∥ 2 .</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>−o n ⟨θ, x⟩/2) + exp(o n ⟨θ, x⟩/2))</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>As before, we can see that the interplay of local privacy and adversarial corruption introduces a separation between CTL and LTC by a factor of c(ε). Moreover, our result also significantly advances the state-of-the-art for DPOstyle algorithms under privacy or corruption separately, as discussed in detail below.</figDesc><table><row><cell>Private DPO. Consider α = 0, λ = Θ(d/(β 2 B 2 γ 2 n)) ≥</cell></row><row><cell>Ω(d/n), we obtain the first suboptimality for private DPO with rate O(1/γ • c(ε) d/n • √ κ Π ), where c(ε) is the ad-</cell></row><row><cell>ditional cost due to local privacy. The rate matches the best</cell></row><row><cell>possible non-private one as ε → ∞ (Song et al., 2024).</cell></row><row><cell>Robust DPO. To the best of our knowledge, only the recent</cell></row><row><cell>work by Chowdhury et al. (2024) provides a formal theoreti-</cell></row><row><cell>cal bound on the suboptimality of rDPO under label corrup-</cell></row><row><cell>tion. In particular, it considers the random-flipping corrup-</cell></row><row><cell>tion model (i.</cell></row><row><cell>with a log-linear policy class,</cell></row><row><cell>see Appendix C for more details. That is, while Chowdhury</cell></row><row><cell>et al. (2024) only shows a suboptimal rate for rDPO, we are the first to attain O(1/ √ n) rate, see more discussion below.</cell></row></table><note>The proof follows from Proposition 4.6 and Theorem 5.4 with B ′ = O(βB). To our knowledge, this is the first theoretical result on DPO-style algorithms under privacy and corruption. e., with some known probability, the true label is flipped). This is a much weaker model than ours and, in fact, is equivalent to local privacy after re-parameterization. Under this weaker model,<ref type="bibr" target="#b13">Chowdhury et al. (2024)</ref> only established a suboptimal rate of O(1/n 1/4 ) in the general case, while our result implies a rate of O(1/n 1/2 ) (by using our private DPO result above) under the same corruption model. Moreover, moving from this weaker corruption model to a corruption model in the robust statistics literature (i.e., strong corruption model), our result above shows that rDPO now suffers a non-vanishing bias term.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>Comparison of win rates (%) for DPO and rDPO across different values of privacy budget ε.</figDesc><table><row><cell>ε</cell><cell cols="2">rDPO winrate (%) DPO winrate (%)</cell></row><row><cell>0.1</cell><cell>59.0 ± 4.7</cell><cell>55.4 ± 1.1</cell></row><row><cell>0.5</cell><cell>65.8 ± 5.6</cell><cell>60.4 ± 3.0</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 .</head><label>2</label><figDesc>Comparison of win rates (%) for rDPO under CTL and LTC.</figDesc><table><row><cell>(ε, α)</cell><cell cols="2">win rates (%) under CTL win rates (%) under LTC</cell></row><row><cell>(1, 0.1)</cell><cell>69.6 ± 5.1</cell><cell>65.4 ± 5.0</cell></row><row><cell>(0.5, 0.1)</cell><cell>64.4 ± 2.8</cell><cell>58.6 ± 2.6</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 .</head><label>3</label><figDesc>Hyperparameters used for SFT training.</figDesc><table><row><cell>Parameter</cell><cell>Value</cell></row><row><cell>learning rate</cell><cell>1e-5</cell></row><row><cell>batch size</cell><cell>8</cell></row><row><cell>num train epochs</cell><cell>3</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 .</head><label>4</label><figDesc>Hyperparameters used for DPO and rDPO training.</figDesc><table><row><cell>Parameter</cell><cell>Value</cell></row><row><cell>beta</cell><cell>0.1</cell></row><row><cell>learning rate</cell><cell>1e-6</cell></row><row><cell>batch size</cell><cell>8</cell></row><row><cell>num train epochs</cell><cell>1</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 5 .</head><label>5</label><figDesc>Hyperparameters used for response generation.</figDesc><table><row><cell cols="2">Parameter Value</cell></row><row><cell>temperature</cell><cell>0.25</cell></row><row><cell>max length</cell><cell>50</cell></row><row><cell>truncation</cell><cell>True</cell></row><row><cell>do sample</cell><cell>True</cell></row><row><cell>top k</cell><cell>30</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0">Wayne State University, USA</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1">King Abdullah University of Science and Technology, Saudi Arabia. Correspondence to: Xingyu Zhou &lt;xingyu.zhou@wayne.edu&gt;.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_2">Note that the hard instance in<ref type="bibr" target="#b44">Zhang et al. (2022)</ref> only requires corruption in rewards, not both features and rewards. Hence, it can be used for our setting.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_3">With a factor of two in the sample complexity.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_4">The original version can handle non-independent case.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgements</head><p>XZ is supported in part by NSF CNS-2153220 and CNS-2312835. XZ would like to thank Weihao Kong for insightful discussions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Impact Statements</head><p>This paper presents work whose goal is to advance the field of Machine Learning. There are many potential societal consequences of our work, none which we feel must be specifically highlighted here.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>where A s (θ) := E a∼π θ (•|s) [ϕ(s, a)ϕ(s, a) ⊤ ] − E a∼π θ (•|s) <ref type="bibr">[ϕ(s, a)</ref>]E a∼π θ (•|s) <ref type="bibr">[ϕ(s, a)</ref>] for some θ between θ ⋆ and θ ′ . By independently sampling of a, a ′ ∼ π θ (•|s), we have E s∼ρ [A s (θ)] = 1 2 Σ diff π θ ,π θ (cf. ( <ref type="formula">7</ref>)). Combing all of the above with the definition of κ Π in Definition 4.3, yields that</p><p>Note that Σ diff π sft ,π sft is the corresponding population matrix of Σ. Thus, by Lemma H.1, for λ ≥ Ω d n • ln(n/δ) , we have</p><p>Finally, note that θ ′ − θ ⋆ = ( θ − θ true )/β. Then, by ( <ref type="formula">13</ref>) and ∆ max ≤ 2βB, we have the final result</p><p>E.4. Proof of Theorem 5.4</p><p>Proof. We divide the proof into CTL, LTC, and CLC cases. Before that, we will present some common properties of our new loss, which will be used in all three cases.</p><p>Recall that our new loss is given by</p><p>e ε −1 . We will need its gradient and Hessian in our proof, given by</p><p>where we use the simple fact that σ ′ (z) = σ(z)(1 − σ(z)).</p><p>Let ∆ := θ − θ true , by the fact that θ minimizes the loss and ( <ref type="formula">19</ref>), we have</p><p>where γ = 1/(2 + exp(−B ′ ) + exp(B ′ )) by the boundedness condition. Thus, the key is to bound the term ∇ L(θ true ) ( Σ+λI) −1 , which will be handled separately for each case later.</p><p>For now, let us suppose we have the following high probability bound:</p><p>for some function f , and proceed to establish the final bound. In particular, by the boundedness condition for Θ B ′ and (20), we have</p><p>which implies that</p><p>Thus, it only remains to establish the bound in (25) under three cases. To this end, we will leverage the following two claims, the counterparts of our previous two claims, but in L 2 norm.</p><p>Claim E.3. Let η i be zero-mean i.i.d sub-Gaussian with parameter σ, condition on x i . Then, for any δ ∈ (0, 1) and λ &gt; 0, with probability at least 1 − δ,</p><p>for some universal constant C. </p><p>We are left to establish (25) for CTL, LTC, and CLC, respectively.</p><p>CTL case. Following the same process as before, replacing the weighted norm by L 2 norm and leveraging the new claims, yields the following result</p><p>which implies the final result by ( <ref type="formula">26</ref>).</p><p>LTC and CLC cases. Both of them follow the same process as above, which gives the final result by (26).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>F. Proofs for Claims</head><p>Proof of Claim E.1. As in <ref type="bibr" target="#b46">Zhu et al. (2023)</ref>, the proof mainly utilizes the concentration in Lemma H.2. To this end, we let X ∈ R n×d where x i ∈ R d is its i-th row and let η = (η 1 , . . . , η n ) be a column vector. Then, we have</p><p>With simple linear algebra, we can have</p><p>Thus, by Lemma H.2, we have with probability at least 1 − δ,</p><p>for some universal constant C &gt; 0.</p><p>Proof of Claim E.2. By a direct computation and recall M = 1 n 2 X( Σ + λI) −1 X ⊤ with ∥M ∥ ≤ 1/n in the above proof, we have</p><p>which implies the result by taking the square root.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">On the theory of policy gradient methods: Optimality, approximation, and distribution shift</title>
+		<author>
+			<persName><forename type="first">References</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kakade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Mahajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">98</biblScope>
+			<biblScope unit="page" from="1" to="76" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Trimmed maximum likelihood estimation for robust learning in generalized linear models</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Awasthi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Kong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ndousse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Das-Sarma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Drain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Fort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ganguli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Henighan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kadavath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kernion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Conerly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>El-Showk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Elhage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Hatfield-Dodds</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hernandez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Johnston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kravec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lovitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Nanda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amodei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Clark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mccandlish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Olah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kaplan</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2206.04777</idno>
+		<idno>arXiv:2204.05862</idno>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note>ment learning from human feedback</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Rank analysis of incomplete block designs: I. the method of paired comparisons</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Bradley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">E</forename><surname>Terry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biometrika</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">3/4</biblScope>
+			<biblScope unit="page" from="324" to="345" />
+			<date type="published" when="1952">1952</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bukharin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhao</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2406.15568</idno>
+		<title level="m">Robust reinforcement learning from corrupted human feedback</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Casper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Davies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">K</forename><surname>Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Scheurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Rando</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Freedman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Korbak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lindner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Freire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Marks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C.-R</forename><surname>Segerie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Carroll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Christoffersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Damani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Slocum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Anwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Siththaranjan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Nadeau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Michaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pfau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Krasheninnikov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Langosco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Hase</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bıyık</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dragan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Krueger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sadigh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hadfield-Menell</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2307.15217</idno>
+		<title level="m">Open problems and fundamental limitations of reinforcement learning from human feedback</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Value-incentivized preference optimization: A unified approach to online and offline RLHF</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Mei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Goshvadi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Schuurmans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Dai</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2405.19320</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Sample complexity bounds for differentially private learning</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Chaudhuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hsu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 24th Annual Conference on Learning Theory</title>
+				<meeting>the 24th Annual Conference on Learning Theory</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="155" to="186" />
+		</imprint>
+	</monogr>
+	<note>JMLR Workshop and Conference Proceedings</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Information-theoretic considerations in batch reinforcement learning</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jiang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1042" to="1051" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Classification under misspecification: Halfspaces, generalized linear models, and connections to evolvability</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Koehler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Moitra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Yau</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2006.04787</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Human-in-the-loop: Provably efficient preference-based reinforcement learning with general function approximation</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="3773" to="3793" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Manipulation attacks in local differential privacy</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cheu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ullman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2021 IEEE Symposium on Security and Privacy (SP)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="883" to="900" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Robust estimation of discrete distributions under local differential privacy</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chhor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Sentenac</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Algorithmic Learning Theory</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="411" to="446" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Differentially private reward estimation with preference feedback</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Chowdhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Natarajan</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2310.19733</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Provably robust DPO: Aligning language models with noisy feedback</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Chowdhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Natarajan</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2403.00409</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Algorithmic highdimensional robust statistics</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Diakonikolas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Kane</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<publisher>Cambridge university press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Local privacy and statistical minimax rates</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Duchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Wainwright</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2013 IEEE 54th annual symposium on foundations of computer science</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="429" to="438" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Minimax optimal procedures for locally private estimation</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Duchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Wainwright</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Statistical Association</title>
+		<imprint>
+			<biblScope unit="volume">113</biblScope>
+			<biblScope unit="issue">521</biblScope>
+			<biblScope unit="page" from="182" to="201" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The algorithmic foundations of differential privacy</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Dwork</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Roth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Foundations and Trends® in Theoretical Computer Science</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">3-4</biblScope>
+			<biblScope unit="page" from="211" to="407" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Robust logistic regression and classification. Advances in neural information processing systems</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mannor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">27</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Exposing privacy gaps: Membership inference attack on preference data for LLM alignment</title>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Kasa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Yun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">H</forename><surname>Teo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Bodapati</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.06443</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Deep learning with label differential privacy</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Ghazi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Golowich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Manurangsi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in neural information processing systems</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="27131" to="27145" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">A tail inequality for quadratic forms of subgaussian random vectors</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Kakade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1110.2842</idno>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Krishnamurthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Foster</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.13399</idno>
+		<title level="m">Correcting the mythos of KL-regularization: Direct alignment without overparameterization via Chi-squared preference optimization</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Is pessimism provably efficient for offline</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="5084" to="5096" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Extremal mechanisms for local differential privacy</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kairouz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Oh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Viswanath</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in neural information processing systems</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">27</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">What can we learn privately?</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Kasiviswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Nissim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Raskhodnikova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIAM Journal on Computing</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="793" to="826" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<author>
+			<persName><forename type="first">N</forename><surname>Lambert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Krendl Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zick</surname></persName>
+		</author>
+		<title level="m">The history and risks of reinforcement learning and human feedback</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page">2310</biblScope>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv e-prints</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Settling the sample complexity of model-based offline reinforcement learning</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Annals of Statistics</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="233" to="260" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">On robustness and local differential privacy. The Annals of Statistics</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">B</forename><surname>Berrett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mandal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kamalaruban</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Singla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Radanović</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2402.06734</idno>
+		<imprint>
+			<date type="published" when="2023">2023. 2024</date>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="717" to="737" />
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note>Corruption robust offline reinforcement learning with human feedback</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Performance bounds in L p -norm for approximate value iteration</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Munos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SIAM journal on control and optimization</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="541" to="561" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Training language models to follow instructions with human feedback</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ouyang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Almeida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wainwright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mishkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Slama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schulman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Kelton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Simens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Askell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Welinder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Christiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Leike</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lowe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in neural information processing systems</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="27730" to="27744" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Dueling RL: reinforcement learning with trajectory preferences</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pacchiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Saha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2111.04850</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Robust estimation via robust gradient estimation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Prasad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Suggala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Balakrishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ravikumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Royal Statistical Society Series B: Statistical Methodology</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="601" to="627" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Direct preference optimization: Your language model is secretly a reward model</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Rafailov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Manning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ermon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Finn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">36</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Bridging offline reinforcement learning and imitation learning: A tale of pessimism</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Rashidinejad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Russell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="11702" to="11716" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">The importance of online data: Understanding preference fine-tuning via coverage</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Swamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Bagnell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Sun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICML 2024 Workshop: Aligning Reinforcement Learning Experimentalists and Theorists</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">An introduction to matrix concentration inequalities</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Tropp</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Foundations and Trends® in Machine Learning</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="230" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><surname>Von Werra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Belkada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Tunstall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Beeching</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Thrush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Lambert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Rasul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Gallouédec</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Trl</surname></persName>
+		</author>
+		<ptr target="https://github.com/huggingface/trl" />
+		<title level="m">Transformer Reinforcement Learning</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Randomized response: A survey technique for eliminating evasive answer bias</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">K</forename><surname>Pentyala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ramnath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chaudhuri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mehrotra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X.-B</forename><surname>Mao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Asur</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.16216</idno>
+	</analytic>
+	<monogr>
+		<title level="m">A comprehensive survey of LLM alignment techniques: RLHF, RLAIF, PPO, DPO and more</title>
+				<editor>
+			<persName><forename type="first">S</forename><surname>Warner</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="1965">2024. 1965</date>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="page" from="63" to="69" />
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Exploratory preference optimization: Harnessing implicit Q*-approximation for sampleefficient RLHF</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Krishnamurthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rosset</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Awadallah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rakhlin</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2405.21046</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Iterative preference learning from human feedback: Bridging theory and practice for RLHF under KL-constraint</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Forty-first International Conference on Machine Learning</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Cautiously optimistic policy optimization and exploration with linear function approximation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zanette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C.-A</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Agarwal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Learning Theory</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="4473" to="4525" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Provable offline preference-based reinforcement learning</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Uehara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Kallus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Sun</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.14816</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Robust policy gradient against strong data corruption</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Sun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="12391" to="12401" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Corruptionrobust offline reinforcement learning</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Sun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Artificial Intelligence and Statistics</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="5757" to="5773" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Locally private and robust multiarmed bandits</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Thirty-eighth Annual Conference on Neural Information Processing Systems</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Principled reinforcement learning with human feedback from pairwise or K-wise comparisons</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jiao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning</title>
+				<imprint>
+			<publisher>PMLR</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="43037" to="43067" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Ziegler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Stiennon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">B</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Radford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amodei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Christiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Irving</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1909.08593</idno>
+		<title level="m">Fine-tuning language models from human preferences</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Consider a finite sequence {X i } of independent random, symmetric matrices in R d×d</title>
+	</analytic>
+	<monogr>
+		<title level="m">Assume that λ min (X i ) ≥ 0 and λ max (X i ) ≤ H for each i. Let Y = i X i and</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>Then, for any ε ∈ (0, 1). it holds P {λ min (Y ) ≤ εµ min } ≤ d • exp −(1 − ε) 2 µ min 2H</note>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">For any ε &gt; 0, let Q be any ε-LDP mechanism. Then, for any pair of distributions P 1 and P 2</title>
+		<author>
+			<persName><surname>Kairouz</surname></persName>
+		</author>
+		<idno>Lemma H.4 (Corollary 2.9</idno>
+	</analytic>
+	<monogr>
+		<title level="m">the induced marginals M 1 and M 2 via Q satisfy TV(M 1 M</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Category: Education &amp; Skill Development Prompt: &quot;You&apos;re saving $5,000 to attend a data visualization course. How do you proceed?&quot; Chosen: &quot;Enroll in a course with interactive projects and industry relevance</title>
+		<author>
+			<persName><forename type="first">I</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Apply the funds directly to reduce the principal and future interest</title>
+				<imprint/>
+	</monogr>
+	<note>Category: Miscellaneous Prompt. You want to save $4,500 to organize a youth art festival. How do you proceed?&quot; Chosen: &quot;Partner with local sponsors and focus on cost-effective exhibits. Rejected: &quot;Spend heavily on promotional campaigns without engaging artists</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Toward Open Earth Science as Fast and Accessible as Natural Language</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Marquita</forename><surname>Ellis</surname></persName>
+							<email>m.ellis@ibm.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">IBM Research</orgName>
+								<address>
+									<settlement>Almaden</settlement>
+									<region>CA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Iksha</forename><surname>Gurung</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Earth System Science Center</orgName>
+								<orgName type="institution">The University of Alabama in Huntsville</orgName>
+								<address>
+									<region>AL</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Muthukumaran</forename><surname>Ramasubramanian</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Earth System Science Center</orgName>
+								<orgName type="institution">The University of Alabama in Huntsville</orgName>
+								<address>
+									<region>AL</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Rahul</forename><surname>Ramachandran</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">NASA Marshall Space Flight Center</orgName>
+								<address>
+									<settlement>Huntsville</settlement>
+									<region>AL</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Toward Open Earth Science as Fast and Accessible as Natural Language</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">6A9BC9F108CA5BB8DD8A1EA484A6FF1A</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Is natural-language-driven earth observation data analysis now feasible with the assistance of Large Language Models (LLMs)? For open science in service of public interest, feasibility requires reliably high accuracy, interactive latencies, low (sustainable) costs, open LLMs, and openly maintainable software -hence, the challenge. What are the techniques and programming system requirements necessary for satisfying these constraints, and what is the corresponding development and maintenance burden in practice? This study lays the groundwork for exploring these questions, introducing an impactful earth science use-case, and providing a software framework with evaluation data and metrics, along with initial results from employing model scaling, prompt-optimization, and inference-time scaling optimization techniques. While we attain high accuracy (near 100%) across 10 of 11 metrics, the analysis further considers cost (token-spend), latency, and maintainability across this space of techniques. Finally, we enumerate opportunities for further research, general programming and evaluation framework development, and ongoing work for a comprehensive, deployable solution. This is a call for collaboration and contribution.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>The ever-increasing volume, velocity, and veracity of Earth observation data present significant challenges to efficient data discovery and analysis. While systems like the Common Metadata Repository (CMR), SpatioTemporal Asset Catalogs (Newman and ESCO, 2023), and Microsoft Planetary Computer (Microsoft Open Source et al., 2022) facilitate access, they often require specialized knowledge of query languages and data structures, creating a barrier for many researchers, particularly those outside of informatics. This limits the full potential of these valuable datasets for applications in atmospheric science, climate monitoring, policy planning, and emergency response. Large Language Models (LLMs), with their advanced Natural Language Processing (NLP) capabilities, offer a compelling solution to democratize access to this complex data, enabling intuitive query formulation using natural language.</p><p>This study investigates the feasibility of a LLMpowered interface for simplified Earth science data retrieval. A core challenge in such a system lies in the accurate interpretation of spatiotemporal relationships expressed in natural language. The system must robustly identify the geographic location, temporal window, and specific data type (e.g., event, observation) requested by the user. This requires not only extracting explicitly stated parameters (area, date, event type) but also inferring implicit constraints and performing sophisticated temporal reasoning, such as interpreting relative time references ("last week," "since 2020"). Furthermore, while the primary focus is on these core parameters, the system implicitly considers, and could be extended to explicitly handle, characteristics like data resolution and sensor type.</p><p>Our primary contribution is a novel system that reformulates geospatial data querying as a Named Entity Recognition (NER) task, extracting key parameters (area, date, event type) from natural language queries. We introduce a new, rigorously validated evaluation dataset comprising over 100 queryanswer pairs, developed in collaboration with domain scientists. This dataset, validated both manually and through automated checks, provides a benchmark for evaluating the performance of LLMbased geospatial query systems.</p><p>Furthermore, we explore and evaluate a range of optimization techniques to enhance system performance. These include model scaling, programmatic prompt optimization using the DSPy framework <ref type="bibr" target="#b7">(Khattab et al., 2024)</ref>, and inference-time strategies such as self-refinement and task decomposition <ref type="bibr" target="#b8">(Madaan et al., 2024)</ref>. We analyze the</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Parameter Definition area</head><p>The physical location of interest, anywhere on Earth. date</p><p>The date (range) of interest. event_type A descriptor corresponding to supported analysis types (e.g. flood).</p><p>Table <ref type="table">1</ref>: Key parameters for approach validation.</p><p>impact of these techniques on accuracy, cost, and latency, with a particular focus on improving temporal reasoning capabilities. The evaluation metrics employed to quantify system performance are detailed in Section 2.5, providing a framework for analyzing the strengths and weaknesses of different approaches. This research demonstrates the significant potential of LLMs to revolutionize access to Earth science data, empowering a wider range of users to leverage this information for critical scientific and societal applications.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Approach</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Problem Formulation</head><p>In order to retrieve and analyze earth observation data, past approaches require users to learn and employ specialized query languages and data structures. This constitutes a barrier for many researchers, particularly those outside informatics (Section 1). Our approach reformulates geospatial data querying as a Named Entity Recognition (NER) task. Instead of code, the user states queries in natural language, from which the system captures parameters for driving analysis and delivering processed images over the specified time scale.</p><p>This study explores and validates this approach in light of its simplicity and extensibility, including the ease of adding more powerful features, e.g. speech vs text driven analysis. Table <ref type="table">2</ref>.1 presents the minimal set of parameters identified for concept validation. Area and date(s) are required for image retrieval. The event_type corresponds to the analysis types supported via integrated Prithvi geospatial foundation models (Jakubik et al., 2023). Additional properties, such as bounding boxes, are derivable from these parameters. The parameters can also be easily extended to include e.g. sensor type, image granularity, etc.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Evaluation Data Set Creation</head><p>We developed an original evaluation data set for three main reasons: (1) systematic optimization of the overall system design (prompts, model choices, composition, etc.); (2) improving the system over time with grounded evaluation; (3) gaining confidence that the system meets end-user needs in practice, with data representing actual user (domain scientist) queries and accepted answers.</p><p>The evaluation data currently consists of over 100 unique query-answer pairs that were manually crafted with domain scientists and that underwent both manual and automated validation. The answers are JSON translations of representative user queries. Prior to this work, no standardized data set existed for this task. The following is an example.</p><p>Query: "July 14, 2023, flooding in Seoul" Answer: {"area": "Seoul", "date": "2023-07-14", "event_type":"flood"}</p><p>The queries vary in complexity, particularly in the dimension of temporal reference interpretation. In certain queries, such as the first example, the temporal window of interest is explicitly given and simply requires YYYY-MM-DD reformatting. Other queries contain relative time references, such as "yesterday", "this Friday", or "from the past week", which require not only identifying the pertinent words for date extraction, but also distinguishing the time of the query from that of its subject and reasoning about the distance and span. For simplicity, the first date in a time window of interest is preferred. See the following example.</p><p>Query: "Find burn scars in the Andes Mountains from last season." Answer: {"area": "Andes Mountains", "date ":"2024-03-01", "event_type":"burn_scars"}</p><p>Limitations of the current dataset version are discussed in Section 6.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Semi-Automatic Data Set Refinement</head><p>As part of the generation performance evaluation, we incorporated LLM-as-a-Judge <ref type="bibr" target="#b19">(Zheng et al., 2023)</ref>. Given an answer, the LLM-judge is prompted to determine whether the generated answer, particularly whether its date(s), are consistent with the user's query and to provide justification. We submitted the golden answers and queries to the LLM-judge. Rather than catching erroneous or problematic judgments in the queryanswer pairs that had been manually vetted multiple times, we found the LLM-judge correctly identified mistakes in the golden answers and ambiguities in the queries. Manually considering the LLMjudge's rationale alongside the answers flagged for inconsistency, we caught and corrected 4 off-byone date calculations, and 42 QA pairs embedding an assumption of "today's date", decipherable only from the golden answer. Despite the data set being relatively small (just over 100 QA pairs), this additional layer of automatic validation can facilitate systematic validation over time as the data set expands. For deterministic evaluation, queries with relative time references were augmented with a suffix, "Today is. . . ", where today was calculated relative to the accepted answer. The following is one example. In a deployment setting, today's date may similarly be injected into the prompt, but this is one (static versus dynamic) feature distinguishing the evaluation data from real-time user input.</p><p>Query: "Provide the latest imagery of flooding in Houston, Texas, from this past Tuesday. Today is June 4, 2024." Answer: {"area": "Houston, Texas", "date":</p><p>"2024-05-28","event_type":"flood"}</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Task Complexity</head><p>Considering the domain and range of valid input and output values is helpful for understanding the complexity of each subtask. The range of event types corresponds to the system's supported analysis types -currently powered by Privthi models (Jakubik et al., 2023; IBM and NASA, 2023). Hence as an independent practical limitation, the set cardinality is finite and relatively small. English references, variations and synonyms for these event types are also relatively limited. Recognizing the event type of interest in a user query is therefore the most constrained task, essentially multiple choice question answering. By contrast for area recognition, the domain and range is "any physical location on Earth". The evaluation data set currently includes nouns for location references, but a user may submit numerical coordinates. While filtering invalid queries is delegated to an external router, queries lacking sufficient specificity may be permitted. The language model is prompted not only to recognize the entities named in the query, but also to identify and explain errors encountered in processing the query. This presents a challenge both for generation and verification. For verification, identifying whether an expected error message is present (or not) may be simple, but deciding whether the error message supplied is valid is not as trivial.</p><p>Lastly, the temporal reasoning required varies significantly across queries as described in Sec-tion 2.2. Moreover, the valid domain and range are limited to the past, and the range is limited to dates or lists of dates that can be represented in the format, YYYY-MM-DD, but is otherwise unlimited.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Evaluation Metric Specification</head><p>Initial experiments showed generated answers contained an exact answer-match relatively frequently (55%). However, answer-match was uninformative for understanding the remaining performance gap. Furthermore, it did not represent the primary optimization criteria well, given the range and variability of valid answers, and nuances or implicit assumptions of real-world user queries. (See also Section 2.2.) From initial repeated experiments, we identified several expectations for high quality answers. Most became embedded in the handwritten prompt during rapid prototyping, but not all and not their relative priorities (weights). For systematic evaluation and optimization, we encoded these into 10 easily measurable, deterministic metrics and 1 LLM-assisted metric defined as follows.</p><p>1. Valid JSON ; whether an answer substring is syntactically correct JSON and can be parsed into a JSON object. In light of the multiple (changeable) system components supporting JSON structuring (embedded in e.g. the LLM, the provider's serving backend, etc.), this metric can help ensure valid JSON is consistently produced across software versions.</p><p>2. Contains Expected Error Message ; if any field cannot be extracted from the given query, an error message is expected. This metric determines whether that expectation has been met.</p><p>3. Valid Key Names ; whether keys outside the set {area, date, event_type, error}, have been generated. This metric was derived from early observations of LLM generated answers including erroneous key names.</p><p>4. All Required Keys Present ; whether all of the requested keys (area, date, event_type) are included in the answer. This serves as a minimal indicator that the components of the task are clear even if the task is not completed as desired.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Valid Event Type</head><p>; whether the answer's event type is in the set of supported event types (flood, burn_scars, crops). Early observations of LLM generated answers included creative alternatives, unsupported by the overall system. 6-7. Equivalent Event and Area Values ; if key values do not exactly match the golden answer, are they equivalent within a parametrized degree of freedom? Normalized insertion-deletion similarity is used as a measure equivalence. This is applied to both area and event-type values.</p><p>8-9. Consistent Event and Area Values ; whether the area and event type in the answer are mentioned in the user query. This metric was derived from early observations of LLM generated answers including areas and events not mentioned in the original query. Given the constraints on possible answers, especially for event types, implementation using synonyms, string manipulation, and string similarity was straightforward and effective. 10. Date Equivalence ; whether date(s) generated are numerically equivalent to the golden answer's.</p><p>11. Date Consistency ; whether the answer's date(s) can reasonably be derived from the original user query, independent of (in)equivalence to the golden answer. The implementation employs an LLM to make the determination and provide corresponding rationale.</p><p>Using these metrics in combination, we were able to construct meaningful approximations of exact-match and instruction-following, effectively distinguishing semantic and syntactic errors in answer generation. Furthermore, considering results for each metric in isolation revealed the relative difficulties of each subtask, and also measurable trade-offs across models and designs. In our empirical study, the most difficult subtask proved to be date extraction. While tuning the prompt, changing models, model compositions, and otherwise optimizing for date extraction, we were also able to monitor losses in other dimensions via this breakdown of metrics, and thus systematically compare design choices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.6">Implementation in DSPy</head><p>DSPy <ref type="bibr" target="#b7">(Khattab et al., 2024</ref>) is an open-source framework for programmatic prompt optimization in Python. Based on its success for other use-cases<ref type="foot" target="#foot_0">1</ref> , we decided to see how much the initial handwritten prompt could be improved using DSPy. The results of simply translating the original prompt into a DSPy Signature (prior to further prompt optimization) yielded immediate gains. Of perhaps even greater value however, using the framework facilitated implementation of a systematic evaluation process with codified metrics and data in a standardized format.</p><p>In the DSPy versions available at the time of this study, we also encountered certain short-comings using DSPy for our use-case, short-comings which influenced the initial implementation of our evaluation system. First, DSPy was initially designed for single-objective optimization. Support for expressing multiple optimization objectives is limited to (1) combining the objectives into a single function that produces a binary "pass" or "fail" result per sample, (2) using DSPy Assertions or Suggestions <ref type="bibr" target="#b14">(Singhvi et al., 2024)</ref> to catch-retry-fail when an objective is not met during optimization or runtime or (3) to separately, independently evaluate and optimize for each objective individually. Ultimately, we found (3) to be most informative for ablation studies while not requiring extensive auxiliary code. While (2) works well for its intended purpose, catching and reducing undesirable behavior, it was not designed to yield a performance breakdown across multiple objectives encoded as Suggestion/Assertion invariants. Violation of an invariant either halts the program or must be ignored before subsequent invariants are evaluated. With instrumentation, logging, and configuration specific to our purposes, this limitation could be overcome. However, (3) was the most readily usable approach for understanding the strengths and weaknesses of various design alternatives (prompting techniques, model choices, model compositions, etc.). For multi-objective optimization, all three approaches remain limited. Each objective is implicitly weighted equally.</p><p>DSPy was also originally designed for prompt optimization of a single LLM (module) at a time in a sequential pipeline. Expressing general program structures with the potential for task-parallel execution is under development<ref type="foot" target="#foot_2">2</ref> . We implemented workarounds to explore inference-time scaling and task decomposition optimizations. However, ongoing work in DSPy and alternative frameworks removing these limitations could reduce manual effort, code volume, and ease of exploiting taskparallelism.</p><p>3 Optimization Methods and Results</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Initial Evaluation and Model Selection</head><p>First, we examine the performance of a handwritten prompt developed during system prototyping. To understand attainable performance, we chose a well-vetted general-purpose and open model family with an extreme range of sizes, LLaMA 3.1 (Meta AI, 2024), and varied sizes between the extremes of 405B and 8B. With iterative manual tweaks to the original prompt, we attained 99.065 +/-0.935% accuracy across models and the 9 metrics unrelated to temporal reference interpretation. The significant performance gaps that remained (up to 35%) were in generating dates equivalent with the golden answers, and/or generating dates consistent with the user query. Date Equivalence is determined using deterministic heuristics that supports a single versus multiple valid interpretations of time references in the user query, whereas Date Consistency with the user query is determined by a LLM-judge (LLaMA 3.1 405B for all experiments). We needed not only to address this gap but also to formalize the prompt tuning process for software maintainability and extensibility. The following is a small case study highlighting extensibility and robustness concerns with respect to otherwise decoupled system changes.</p><p>Case Study: Part of the vision for the system is to introduce more analysis types over time, as more geospatial foundation model fine-tunes are integrated. With this in mind, we introduced a third event type, crops, into the user query set along with respective golden answers. Figure <ref type="figure" target="#fig_0">1</ref> (Left) shows an interesting difference between LLaMA 3.1 405B and 8B's answer-generation in this scenario. On the surface, it appears LLaMA 3.1 8B is more resilient than 405B to these changes. However, analysis of the traces shows both failed to follow instructions but in different ways. LLaMA 3.1 8B consistently generated the event_type key, and a valid event type value {flood, burns_scars}, even when the query only referenced crops and in no way referenced flood or burn_scars. Its answers thereby passed key-and event-typechecks except consistent_event_type, which requires consistency between the user query and the generated event_type value. In contrast, answers generated with 405B most often excluded the event_type key entirely, contrary to the instructions, but included an error message per the instructions. Hence, 405B's overall score for keys_required_present, valid_event_type, event_type_equivalent, and consistent_event_type was 68.2%, matching 8B's score on consistent_event_type.</p><p>Further enlightening, were the LLM-as-a-judge generated critiques from Date Consistency evaluation traces. First, the critiques were not restricted to dates as instructed, but also examined other aspects of the answer, including event types and error messages. For example, a common error message in LLaMA 3.1 405B-generated answers was, "Event type not specified". A respective LLM-judge critique correctly deeming the answer inconsistent was, "...the response also contains an error message stating that the event type is not specified". Among the minority of critiques for 405B answers, unrelated to event or error messages, 2 flagged truly inconsistent dates, 1 reported "somewhat consistent" instead of a binary e.g. True/False (appropriately reflecting the query ambiguity), and 1 was due to a common type of parsing error when working with LLM-generated text (parsing 'consistent.'). For LLaMA 3.1 8B-generated answers, all answers failing consistent_date were due to flood or burn_scars being used in place of crops as noted in the LLM-judge's critique. While not the originally intended role for the LLM-judge, the high accuracy of its critiques demonstrated potential for improving both generation and evaluation quality. Incorporating critique via iterative self-refinement <ref type="bibr" target="#b8">(Madaan et al., 2024)</ref>, and other approaches balancing generation versus verification complexity <ref type="bibr" target="#b5">(Davis et al., 2024)</ref> for different tasks, is described in Section 3.3. However, coupling generated critiques with deterministic heuristics provided essential grounding.</p><p>In this scenario, date_equivalent (Figure <ref type="figure" target="#fig_0">1</ref>, Left) better isolated temporal reference interpretation performance. Figure <ref type="figure" target="#fig_0">1</ref> (Right) shows the percentage of answers from LLaMA 3.1 405B failing this check in 3 categories. The predominant cause of failures (17%) was failing to follow instructions (or arguably, lack of instruction specificity), often with respect to date ranges. For example, multiple answers in this category listed every single day in the range rather than just the first and optionally last date of the range as instructed. A few of these, while ignoring at least 1 other instruction, also included dates in the future; a restriction (assumption) not stated in the instructions. Answers in the second largest category (3%) contained clear misinterpretations or miscalculations. For example, listing the dates for this season last year was counted as a clear misinterpretation of "last season". Failures where the golden answer or the generated answer appeared equally reasonable, with respect to natural language ambiguity in the query, constitute the final category (2%). For example, in (descriptive) North American English, the start of "this week" can refer to either Sunday or Monday without additional context. Similarly, an argument could be made for interpreting the start date of "this spring" as the first date of the first month of spring (March 1) according to the prompt instructions, or the date of the Vernal Equinox (March 20th) in the Northern Hemisphere... Example inputs and outputs are included in Appendix A.3. This case study is like many others emphasizing the need for clear specification mechanisms in developing maintainable, debuggable, etc. Agentic and Compound AI systems <ref type="bibr" target="#b15">(Stoica et al., 2024;</ref><ref type="bibr" target="#b18">Zaharia et al., 2024)</ref>. Furthermore, it highlights the importance of performance regression tracking and continuous evaluation systems that account for nuances from LLM behavior. In this vein, Section 3.2 presents the results of employing a leading opensource framework, DSPy, for programmatic prompt optimization and systematic evaluation. See Section 2.6 regarding implementation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Programmatic Prompt Optimization</head><p>We systematically explored the performance impact, cost (token usage), and throughput (queries/s) across prompting techniques and LLaMA 3.1 variants, 405B, 70B, and 8B. Specified using DSPy, we evaluated a simplified zero-shot version of the previously handwritten prompt ("Ad Hoc") alongside labeled few-shot <ref type="bibr" target="#b1">(Brown et al., 2020)</ref>, Chain of Thought (CoT) <ref type="bibr" target="#b17">(Wei et al., 2022)</ref>, and MIPRO (Opsahl-Ong et al., 2024). Overall, the metrics most significantly influenced were Date Equivalence and LLM-judged consistency, using Ad Hoc, CoT, and MIPRO, as shown in Figure <ref type="figure" target="#fig_1">2</ref>.</p><p>Ad Hoc is a more concise version of the original prompt as a DSPy Signature. DSPy automatically injects standardized prompt-formatting, which makes the expected output fields (fields for auto-completion) and expected output format abundantly clear. Its performance was nearly on par with the more optimized prompts.</p><p>Without adding development complexity, Chain of Thought (CoT) offered reasonably competitive performance along with explanations (rationale) useful for development-time analysis and deployment-time transparency. We also evaluated a few-shot approach, in which examples were randomly sampled from the curated data set and excluded from evaluation. However, across repeated samplings and varying sample pool sizes, the per-formance did not significantly differ from that achieved with CoT alone.</p><p>Lastly, we attempted to optimize the zero-shot CoT instructions with MIPRO (Opsahl-Ong et al., 2024) as implemented in DSPy 2.5. We varied the hyperparameters, specifically the number of candidates, trials, mini-batch, and candidatevalidation samples, using DSPy's automatic "light" and "heavy" configurations. While "heavy" optimization cost 1.8× as many tokens as "light" optimization, the resulting prompts and their performance were not significantly different. The bestperforming prompt from MIPRO optimization and the CoT prompt differed little. MIPRO optimization introduced a phrase at the beginning, "optimized for geographical events and phenomena", and at the end, "Consider the specific topics covered in the dataset, such as crop types, flooding, and burn scars, when generating the json mapping". The only other difference was the removal of newline characters unrelated to the desired output structure. The most significant performance impact was for LLaMA 3.1 8B, where consistency improved by 4.67%. However, date equivalence performance also dropped 5.61%, and the optimization process used approximately 1.5 million tokens over 2 thousand generations (750 tokens/trial). Since the resulting prompt can easily be saved and loaded, this cost can be amortized with use. Then again, the optimization needs to be repeated whenever the model choice or the pipeline changes significantly.</p><p>Figure <ref type="figure" target="#fig_1">2</ref> (right axis) also shows the average token-spend (post-optimization) per query across techniques and model variants as prompt tokens (input) plus tokens generated (output). Average token-spend gradually increased with the sophistication of the prompt and not necessarily with model scaling. Examining runtime speed improvements across model sizes, we observed on average 1.1× and 1.8× improvements in throughput over LLaMA 3.1 405B from LLaMA 3.1 70B and 8B, respectively. In conclusion, CoT offered a sweet spot with respect to development-and deployment-time token-spend, accuracy, and increased transparency, and LLaMA 3.1 8B offered sufficiently competitive performance and latency-cost savings as to be the focal point of ongoing optimization efforts, including those in Section 3.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Inference-Time Scaling Optimizations</head><p>Given the accuracy-speed potential of LLaMA 3.1 8B with CoT shown in Section 3.2, this section examines the potential of inference-time scaling for addressing the remaining Date Equivalence and Date Consistency gaps (6% and 28%, respectively). To establish baseline cost-accuracy gains for this direction, we begin with 1-step iterative self-refinement <ref type="bibr" target="#b8">(Madaan et al., 2024)</ref> and a simple task decomposition with mixed models, illustrated in Figure <ref type="figure" target="#fig_2">3</ref>. In contrast to the previously evaluated single-step CoT (Figure <ref type="figure" target="#fig_2">3</ref>(i)), self-refinement adds an additional inference layer (Figure <ref type="figure" target="#fig_2">3</ref>(ii)) in which Model b is prompted to consider the answer generated by Model a according to the same criteria and refine the response if necessary. In general, Model a and Model b (corresponding to generator and refiner) may be the same or different models. The task decomposition approach (Figure <ref type="figure" target="#fig_2">3(iii)</ref>) is a mixture-of-experts inspired approach. The most challenging task, date interpretation, is separated from the the tasks with high success rates by prompting models a and b to generate answers only for their respective subtasks. The final layer prompts Model c to synthesize the generated answers into a single coherent and refined answer. In general, model selection for a, b, and c may differ as parameterized in our code.</p><p>Figure <ref type="figure" target="#fig_3">4</ref> highlights the results employing LLaMA 3.1 8B for models a and c, and varying model b between LLaMA 3.1 8B and 405B. All methods improve LLM-judged consistency by 1.9 to 3.7 points. However, only Split-Generate-Synthesize with LLaMA 3.1 405B for date extraction (Model b in Figure <ref type="figure" target="#fig_2">3</ref>.iii, SGS 8B+405B in Figure <ref type="figure" target="#fig_3">4</ref>), improves both consistency and Date Equivalence, by 0.94 and 1.87 points respectively, over single-step CoT. The cost in average tokens spent processing each query on the other hand was 2.6× that of CoT. Single-step iterative self-refinement and SGS with LLaMA 3.1 8B for Models a, b, and c attained slightly higher consistency (within 1 to 2 points) at the cost of lower Date Equivalence (4.6 to 6.6 points lower). Scaling the number of iterations of self-refinement or the task decomposition could improve performance further. However, the cost would be multiplicative, and for a single iteration it is already 2× to 2.6× the cost of CoT. The development (prompt tuning, model selection, etc.) and maintenance cost of each inference layer also presents a drawback.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Discussion and Future Work</head><p>Highlighted in the context of our implementation and experimentation (Section 2.6-3) was the  need for multi-dimensional quality optimization; measuring accuracy, cost, latency simultaneously across techniques; and supporting a spectrum of techniques from prompt optimization to inferencetime scaling, in both the programming (specification) and evaluation system. Recent frameworks may address some of the gaps noted in Section 2.6, such as Archon for inference-time scaling (Saad-Falcon et al., 2024). However, managing the complexity and unifying these and other aspects of Agentic and Compound AI system development is still open as new methods for optimizing Compound AI systems emerge daily.</p><p>Moreover, we would like to understand optimization trade-offs not only at manually-triggered points in time, but also over time as the evaluation data changes and new optimization techniques become available. The effectiveness of LLM-assisted evaluation data vetting described in Section 2.3 sug-gests a scalable approach for curating more data over time. Methods ensuring the curated data is error-free and representative of user interactions, however requires further research. For efficiency and scalability, we envision a system that leverages LLM-infused batch-processing methods (e.g. LOTUS <ref type="bibr" target="#b12">(Patel et al., 2024</ref>)) for continuous evaluation and that automate failure diagnoses (Section 3.1) with new and traditional ML techniques (e.g. classification). In addition to generalizing our programming and evaluation system, our ongoing work includes evaluating human-in-the-loop and co-piloting approaches for improving accuracy. The above and other directions are expanded in Appendix Section A.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Summary and Conclusions</head><p>This study was a first exploring the potential of Large Language Models (LLMs) to democratize earth observation data analysis (Section 1) with open models and open-source software. We reformulated the problem as a Named Entity Recognition task and built an optimization and evaluation framework (Section 2). We established baseline accuracy, cost, and latency trade-offs across model scaling, prompt optimization, and certain inferencetime scaling techniques (Section 3). The combination of relatively small general purpose models (e.g. LLaMA 3.1 8B), simple techniques (e.g. Chain of Thought), and principled software engineering stood out. Interpreting relative spatiotemporal references from natural language queries with high accuracy, consistency, and safeguards remains a priority for ongoing work. Furthermore, we related our findings to the broader field, and enumerated requirements and opportunities for Agentic and Compound AI programming, evaluation, and opti-mization systems more generally (Sections 4, A.2). The assets developed for this study provide a foundation for tackling the research and deployment challenges of this important application. We welcome contributors and plan to release the data sets and software on HuggingFace and GitHub.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Limitations</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Safety</head><p>As noted in the introduction, the scope of this study is limited to the accuracy, cost, latency, and maintainability of a LLM-powered solution. Safety, however, is also critical to a deployable solution. This includes safe-guards to prevent hallucination, hijacking, DoS attacks, and other malicious attacks and behaviors that could negatively impact users, providers, or the system. It also includes addressing potential biases embedded within LLMs. While outside the scope of this initial study, our ongoing work prioritizes guardrailing mechanisms and rigorous grounding of the system's responses to ensure factual accuracy and mitigate environmental, political, and societal biases.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Model and Technique Selection &amp; Search</head><p>Agentic and Compound AI system development presents a large optimization space of cooptimizing model selection, prompts, model parameters such as temperature, et cetera. For tractability, we started with the LLaMA 3.1 family, as wellvetted open and general purposes models, varied model sizes, explored prompt optimization strategies, and set a baseline for exploring inferencetime scaling techniques. The inference-time scaling baseline designs increased width by 1 (task decomposition from 1 to 2) and depth by 1 (single iteration self-refinement, and separately synthesis) as illustrated in Figure <ref type="figure" target="#fig_2">3</ref>. Increasing the depth and width further may very well achieve higher accuracy. The relatively high cost (token-spend) of doing so (≥ 2× in our study) may be addressed with more concise models or alternative means of limiting output. One drawback of limiting output we encountered was that it cut rationale, valuable for system transparency and debuggability; however alternate methods for limiting output may simultaneously address this drawback. Evaluating ensembles of a variety of small models for balancing accuracy and cost <ref type="bibr" target="#b3">(Chen et al., 2023)</ref> is another welcome extension of this study. Lastly, the new generation of "reasoning" models, such as Deepseek-R1 <ref type="bibr" target="#b16">(Wang et al., 2025)</ref> and subsequent variants, may improve performance on spatiotemporal reference interpretation. In general, any change of models requires re-examination and re-optimizing of system instructions and hyperparameters, among many other aspects of the implementation. This is both a limitation of the study presented and an opportunity for future work as noted in Sections 4 and A.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Evaluation Data Set Limitations</head><p>The ambiguity inherent in natural language queries allows for multiple valid answers. However, the current data set presents golden queries and answers in a 1:1 ratio. There is an opportunity to expand the answer set, essentially loosening the optimization constraints in a helpful way.</p><p>Query and answer-generation complexity varies significantly and non-uniformly across the data set. Our discussion of the subtask complexity and variation (Section 2.4) may be applied to generating additional evaluation data of a target complexity, and also to classifying the difficulty of a given QA pair. This remains future work.</p><p>Lastly, multiple dates or date ranges from an individual query are supported by the evaluation procedures. However, multiple areas or event types in a single query are not represented in the evaluation data set or procedure. This might be natural to express in human language, but would require significant changes in the surrounding system. For example, tasking the router with creating multiple queries and rephrasing, or increasing specificity with human-in-the-loop are reasonable approaches and directions for future work. However, this study analyzed the potential of supporting single-topic queries with LLMs as a first step.</p><p>LiteLLM integration<ref type="foot" target="#foot_3">3</ref> <ref type="foot" target="#foot_4">4</ref> . 2. String equivalence measurements were computed using RapidFuzz 3.10<ref type="foot" target="#foot_5">5</ref> , with a normalized insertion-deletion similarity cutoff of 0.7.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.2 Extended Future Work Discussion</head><p>Semi-Automatic Evaluation-Data Generation.</p><p>Our experience developing an evaluation data set led to the following viewpoint: maintaining a balanced (representative) evaluation data set for system evaluation over time, has the potential and ought to be a continuously- Safety. As noted in the introduction, the scope of this study is limited to the accuracy, cost, latency, and maintainability of a LLM-powered solution. Safety, however, is also critical to a deployable solution. This includes safe-guards to prevent hallucination, hijacking, DoS attacks, and other malicious attacks that could negatively impact users, providers, or the system. It also includes addressing potential biases embedded within LLMs. Our ongoing work prioritizes guardrailing mechanisms and rigorous grounding of the system's responses to ensure factual accuracy and mitigate environmental, political, and societal biases.</p><p>Human-in-the-Loop (HIL) and Copiloting. This study focused on recognizing the minimally necessary set of parameters necessary for driving earth observation data analysis from a single natural language query. However, it may not be possible in general to determine exact intent from the initial query, due to for example, ambiguity inherent in natural language or missing information. Therefore, HIL may be most effective for achieving high accuracy (especially for temporal references) while avoiding resource waste (time, compute, etc.) from mis-speculation. A copiloting approach may provide greater workflow customizability. We are exploring these paths in the context of the overall system deployment. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Model and Technique</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: From the case study in Section 3.1, (Left) LLaMA 3.1 405B versus 8B performance across all metrics after introducing a new event type, "crops". (Right) Categorization and percentages of answers from LLaMA 3.1 405B failing Date Equivalence.</figDesc><graphic coords="5,70.87,70.86,217.70,158.12" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Date equivalence and LLM-judged consistency performance (left axis, 65-100%) across prompting techniques and LLaMA 3.1 variants, with tokensspend as total input+output tokens per sample -queryanswer pair (right axis, thousands).</figDesc><graphic coords="6,306.14,70.87,218.26,158.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Illustration of the inference scaling technique baselines (ii-iii) alongside single-step Chain of Thought (i) used to establish baseline costs and gains from inference-time scaling. White boxes indicate modifiable steps, inputs or outputs. Black boxes are treated as opaque, immutable processes.</figDesc><graphic coords="8,70.87,70.87,453.57,151.19" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Performance on Date Equivalence and LLM-Judged Consistency (left axis, 65-100%) and tokens per query (right axis, thousands) across optimization techniques described in Section 3.3. LLaMA 3.1 8B was used exclusively, except for SGS (8B+405B), which also employs 405B.</figDesc><graphic coords="8,70.87,261.51,218.26,158.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>Evaluation Frameworks. Section 2.6 described the advantages and limitations of DSPy and its evaluation subsystem for our use-case; we implemented a framework sufficient for our use-case in Python with DSPy, and generalizing it is part of ongoing work. Highlighted in particular was the need for general multi-objective optimization; measuring accuracy, cost, latency simultaneously across techniques; and supporting a spectrum of techniques from prompt optimization to inference-time scaling, in both the programming (specification) and evaluation system. More broadly, we would like to understand these trade-offs at not only manuallytriggered points in time, but over time as the evaluation data changes and new optimization techniques become available. Such continuous evaluation could mirror automated CI/CD pipelines, common for other software. Additionally, there exists an opportunity to accelerate continuous evaluation via emerging methods for LLM-integrated offline bulk-processing with new frameworks (Patel et al., 2024), as well as employing traditional ML techniques (e.g. classification) for diagnosing failures as in Section 1.</figDesc><table><row><cell>running and semi-</cell></row><row><cell>automatic process including (a) ingesting data from</cell></row><row><cell>amenable users and data contributors, (b) filtering</cell></row><row><cell>and curating this data semi-automatically with ma-</cell></row><row><cell>chine learning methods, including but not limited</cell></row><row><cell>to employing LLMs as noted in Section 2.3, and</cell></row><row><cell>(c) manually approving the final, minimal set of</cell></row><row><cell>proposed changes per version update, mirroring</cell></row><row><cell>software release cycles. Mature storage and teleme-</cell></row><row><cell>try systems make part of this problem purely an</cell></row><row><cell>engineering effort. Automatic curation, ensuring</cell></row><row><cell>evaluation data is error-free and representative of</cell></row><row><cell>user interactions, however is an interesting problem</cell></row><row><cell>requiring further research.</cell></row><row><cell>Programming Frameworks. Agentic and Com-</cell></row><row><cell>pound AI system developers have a wide-range</cell></row><row><cell>of emerging programming frameworks to choose</cell></row><row><cell>from, from purpose-built frameworks (e.g. DSPy</cell></row><row><cell>for prompt-optimization (Khattab et al., 2024))</cell></row><row><cell>to catch-all frameworks (e.g. LangChain (Chase,</cell></row><row><cell>2022)). Our initial prototype used LangChain; we</cell></row><row><cell>shared our experience subsequently moving from</cell></row><row><cell>handwritten-to programmatic-prompt optimiza-</cell></row><row><cell>tion with DSPy. Newer frameworks may address</cell></row><row><cell>some of the gaps we noted in Section 2.6, e.g. Ar-</cell></row><row><cell>chon (Saad-Falcon et al., 2024). However, we be-</cell></row><row><cell>lieve there is still more work to do in unifying the</cell></row><row><cell>aspects of Compound AI system development we</cell></row><row><cell>discussed (model selection, prompt optimization,</cell></row><row><cell>inference-time scaling, model hyperparamter tun-</cell></row><row><cell>ing) as well as others e.g. safety, or providing true</cell></row><row><cell>interoperability across targeted solutions. This is</cell></row><row><cell>necessarily open research as new ways of optimiz-</cell></row><row><cell>ing Compound AI systems are emerging daily.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>Search and Selection. Section 6 noted limitations regarding model selection and the techniques examined. In particular, the new generation of "reasoning" models, such as Deepseek-R1<ref type="bibr" target="#b16">(Wang et al., 2025)</ref>, may address the performance gap we observed for spatiotemporal reference interpretation. However, with any change of model, other aspects such as re-optimizing system instructions, temperature, inference-time scaling architecture, etc. need to simultaneously be re-examined. Solutions accelerating parts of this process are emerging; Archon (Saad-Falcon et al., 2024) for example translates hyperparameter tuning to this context. For initial model selection, aside from manual sampling and reading model cards, popular mechanisms for model selection are based on general academic benchmarks and crowdsourced rankings<ref type="bibr" target="#b4">(Chiang et al., 2024;</ref><ref type="bibr" target="#b6">Dunlap et al., 2024)</ref>. There is yet an opportunity to accelerate model selection process from the start according to task complexity, and benchmarks meaningful for specific application workflows.A.3 Date-Equivalence Failure ExamplesUsing Llama 3.1 405BBelow are example traces supplementing the description in Section 3.1. In multiple examples, the generated answer includes every day in a range; for large ranges, dates in the middle are displayed with ellipses for brevity.</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0">https://dspy.ai/dspy-usecases/. Last access: Feb 12,</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2025" xml:id="foot_1">.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_2">https://github.com/stanfordnlp/dspy/releases. Last accessed March 10, 2025.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_3">https://dspy.ai/learn/programming/language_ models/?h=litellm#__tabbed_1_6. Last accessed Feb. 7, 2025.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_4">https://docs.litellm.ai/docs/providers/ watsonx. Last accessed Feb. 7, 2025.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5" xml:id="foot_5">https://rapidfuzz.github.io/RapidFuzz/Usage/ fuzz.html#ratio. Last accessed Feb. 7, 2025.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgments</head><p>This work is supported by NASA Grant 80MSFC22M004. We thank Jared Quincy Davis and Paul Castro for their early support.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<ptr target="https://www.earthdata.nasa.gov/about/esdis/eosdis/cmr" />
+		<title level="m">Common Metadata Repository</title>
+				<imprint>
+			<date type="published" when="2025-02">Feb-2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Language models are few-shot learners</title>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Ryder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Subbiah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><forename type="middle">D</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prafulla</forename><surname>Dhariwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Neelakantan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pranav</forename><surname>Shyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Girish</forename><surname>Sastry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Askell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="1877" to="1901" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Harrison</forename><surname>Chase</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<publisher>LangChain</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Frugalgpt: How to use large language models while reducing cost and improving performance</title>
+		<author>
+			<persName><forename type="first">Lingjiao</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Zou</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2305.05176</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Chatbot arena: An open platform for evaluating llms by human preference</title>
+		<author>
+			<persName><forename type="first">Wei-Lin</forename><surname>Chiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lianmin</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ying</forename><surname>Sheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anastasios</forename><surname>Nikolas Angelopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianle</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dacheng</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Banghua</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">E</forename><surname>Gonzalez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Forty-first International Conference on Machine Learning</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Networks of networks: Complexity class principles applied to compound ai systems design</title>
+		<author>
+			<persName><forename type="first">Jared Quincy</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boris</forename><surname>Hanin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lingjiao</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Bailis</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<publisher>CoRR</publisher>
+		</imprint>
+	</monogr>
+	<note>Ion Stoica, and Matei Zaharia</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Foundation models for generalist geospatial artificial intelligence</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Dunlap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krishna</forename><surname>Mandal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trevor</forename><surname>Darrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Steinhardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">E</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Jakubik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sujit</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denys</forename><surname>Fraccaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bianca</forename><surname>Godwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniela</forename><surname>Zadrozny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Szwarcman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabby</forename><surname>Gomes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blair</forename><surname>Nyirjesy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Edwards</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2410.12851.IBMandNASA.2023</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Vibecheck: Discover and quantify qualitative differences in large language models</title>
+				<imprint>
+			<publisher>CoRR</publisher>
+			<date type="published" when="2023">2024. 2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note>Ibm-nasa prithvi models family</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Dspy: Compiling declarative language model calls into self-improving pipelines</title>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Khattab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arnav</forename><surname>Singhvi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paridhi</forename><surname>Maheshwari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiyuan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keshav</forename><surname>Santhanam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sri</forename><surname>Vardhamanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saiful</forename><surname>Haq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ashutosh</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">T</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanna</forename><surname>Moazam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heather</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Potts</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Self-refine: Iterative refinement with self-feedback</title>
+		<author>
+			<persName><forename type="first">Aman</forename><surname>Madaan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niket</forename><surname>Tandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prakhar</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Skyler</forename><surname>Hallinan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luyu</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Wiegreffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Uri</forename><surname>Alon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nouha</forename><surname>Dziri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shrimai</forename><surname>Prabhumoye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiming</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page">36</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">The llama 3 herd of models. Microsoft Open Source</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">I</forename><surname>Meta</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.7261897</idno>
+		<imprint>
+			<date type="published" when="2022">2024. October 2022</date>
+			<pubPlace>Matt McFarland, Rob Emanuele, Dan Morris</pubPlace>
+		</imprint>
+	</monogr>
+	<note>and Tom Augspurger. 2022. microsoft/planetarycomputer</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Newman and ESDIS Standards Coordination Office ESCO</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename></persName>
+		</author>
+		<idno type="DOI">10.5067/DOC/ESCO/ESDS-RFC-044v1</idno>
+	</analytic>
+	<monogr>
+		<title level="m">SpatioTemporal Asset Catalogs (STAC). NASA Earth Science Data and Information System Standards Coordination Office</title>
+				<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<author>
+			<persName><forename type="first">Krista</forename><surname>Opsahl-Ong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">J</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Purtell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Broman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Potts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Khattab</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2406.11695</idno>
+		<title level="m">Optimizing instructions and demonstrations for multi-stage language model programs</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Lotus: Enabling semantic queries with llms over tables of unstructured and structured data</title>
+		<author>
+			<persName><forename type="first">Liana</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Jha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Guestrin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2407.11418</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Saad-Falcon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrian</forename><surname>Gamarra Lafuente</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shlok</forename><surname>Natarajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nahum</forename><surname>Maru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hristo</forename><surname>Todorov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Etash</forename><surname>Guha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">Kelly</forename><surname>Buchanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mayee</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neel</forename><surname>Guha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Ré</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Azalia</forename><surname>Mirhoseini</surname></persName>
+		</author>
+		<idno type="DOI">10.48550/arXiv.2409.15254</idno>
+		<title level="m">Archon: An architecture search framework for inference-time techniques</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Dspy assertions: Computational constraints for self-refining language model pipelines</title>
+		<author>
+			<persName><forename type="first">Arnav</forename><surname>Singhvi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manish</forename><surname>Shetty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shangyin</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Potts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Koushik</forename><surname>Sen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Khattab</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2312.13382</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Specifications: The missing link to making the development of llm systems an engineering discipline</title>
+		<author>
+			<persName><forename type="first">Ion</forename><surname>Stoica</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ken</forename><surname>Goldberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anastasios</forename><surname>Angelopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Shishir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lingjiao</forename><surname>Patil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Lin</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><forename type="middle">Q</forename><surname>Chiang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Davis</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2412.05299</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<persName><forename type="first">Yixuan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaohui</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiming</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiawei</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2501.12948</idno>
+		<title level="m">Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning</title>
+				<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Chain-of-thought prompting elicits reasoning in large language models</title>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuezhi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dale</forename><surname>Schuurmans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maarten</forename><surname>Bosma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fei</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denny</forename><surname>Quoc V Le</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="24824" to="24837" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">The shift from models to compound ai systems</title>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Khattab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lingjiao</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><forename type="middle">Quincy</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heather</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Potts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Carbin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Frankle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naveen</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Ghodsi</surname></persName>
+		</author>
+		<ptr target="https://bair.berkeley.edu/blog/2024/02/18/compound-ai-systems/" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Judging llm-as-a-judge with mt-bench and chatbot arena</title>
+		<author>
+			<persName><forename type="first">Lianmin</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Lin</forename><surname>Chiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ying</forename><surname>Sheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siyuan</forename><surname>Zhuang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhanghao</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yonghao</forename><surname>Zhuang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zi</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhuohan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dacheng</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">E</forename><surname>Gonzalez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ion</forename><surname>Stoica</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<imprint>
+			<publisher>Curran Associates, Inc</publisher>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="46595" to="46623" />
+		</imprint>
+	</monogr>
+	<note>Results presented were collected using IBM WatsonX model serving via DSPy &gt;=2.5</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Query: Provide the latest imagery of</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+			<pubPlace>Houston, Texas</pubPlace>
+		</imprint>
+	</monogr>
+	<note>from this past Tuesday. Today is</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Houston, Texas</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date&quot;: &quot;2024-05-28&quot;,&quot;event_type&quot;:&quot;flood&quot;}</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Query: Highlight recent flooding events in the UK from this past Spring. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Query: Display the latest flooding events in Toronto, Canada, from last month</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Toronto, Canada</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date&quot;: &quot;2024-05-01&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Query: Show satellite imagery of burn scars in Morocco from this year. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Query: Can you find crop types in Kansas as of the last 30 days? Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Query: Provide images of recent flooding in Cairo, Egypt, from the past week. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cairo</title>
+		<imprint/>
+	</monogr>
+	<note>Egypt&quot;, &quot; date&quot;: &quot;2024-05-28&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Query: Find burn scars in the Kalahari Desert from the past three months</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Kalahari Desert&quot;, &quot;date&quot;: &quot;2024-03-04&quot;,&quot;event_type&quot;:&quot; burn_scars&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Query: Can you show crop types in the Netherlands observed last weekend? Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Lima, Peru</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date &quot;: &quot;2024-03-01&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Query: Find burn scars in the Andes Mountains from last season. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">2023-12-31</title>
+		<idno>2024-02-01</idno>
+		<imprint/>
+	</monogr>
+	<note>Generated Answer: { &quot;area&quot;: &quot;Andes Mountains&quot;, &quot;date&quot;: [&quot;2023-12-01. 2024-02-28&quot;, &quot;2024-03-01&quot;, &quot;2024-03-31&quot;], &quot;event_type&quot;: &quot;burn_scars&quot;, &quot;error&quot;: &quot;&quot; }</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Andes Mountains&quot;, &quot;date&quot;: &quot;2024-03-01&quot;,&quot;event_type&quot;:&quot; burn_scars&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m">Display the latest crop types in Israel observed this Friday. Today is</title>
+				<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Israel&quot;, &quot;date&quot;: &quot;2024-05-31&quot;,&quot;event_type&quot;:&quot;crops&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m">Display recent flooding in New York City from the last 48 hours. Today is</title>
+				<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<title level="m">New York City</title>
+				<imprint/>
+	</monogr>
+	<note>date&quot;: &quot;2024-06-02&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Query: Find the most recent burn scars in Fiji from the past year. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Fiji&quot;, &quot;date&quot;: &quot;2023-06-04&quot;,&quot;event_type&quot;:&quot;burn_scars&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Paris, France</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date&quot;: &quot;2024-06-01&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Query: Display satellite imagery of burn scars in Tasmania from this summer. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Tasmania&quot;, &quot;date&quot;: &quot;2024-06-01&quot;,&quot;event_type&quot;:&quot;burn_scars&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Query: Can you find crop types in Egypt observed last Thursday? Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Event type not found. Also, &apos;crop types&apos; is not a valid event type. It should be either &apos;burn_scars&apos; or &apos;flood&apos;</title>
+		<imprint/>
+	</monogr>
+	<note>Generated Answer: {&quot;area&quot;: &quot;Egypt&quot;, &quot;error&quot;</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Egypt&quot;, &quot;date&quot;: &quot;2024-05-30&quot;,&quot;event_type&quot;:&quot;crops&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Query: Display burn scars in Nova Scotia from last month</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Nova Scotia&quot;, &quot; date&quot;: &quot;2024-05-01&quot;,&quot;event_type&quot;:&quot;burn_scars &quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">Query: Highlight crop types in Argentina seen this past weekend. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">Query: Show the most recent burn scars in the Pyrenees from this week. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Pyrenees&quot;, &quot;date&quot;: &quot;2024-06-02&quot;,&quot;event_type&quot;:&quot;burn_scars&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Query: Provide images of flooding in Lagos, Nigeria, from the last 72 hours</title>
+	</analytic>
+	<monogr>
+		<title level="j">Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-06">June 6, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Lagos, Nigeria</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date&quot;: &quot;2024-06-04&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Query: Show burn scars in the Everglades from last season. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">Query: Provide satellite images of flooding in Kyoto, Japan, from this year. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Kyoto, Japan</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date&quot;: &quot;2024-01-01&quot;,&quot;event_type&quot;:&quot;flood&quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Query: Highlight recent flooding events in Bangkok, Thailand, from the past week. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Generated</forename><surname>Answer</surname></persName>
+		</author>
+		<idno>2024-05-29</idno>
+		<imprint>
+			<pubPlace>Bangkok, Thailand</pubPlace>
+		</imprint>
+	</monogr>
+	<note>\ldots, &quot;2024-06-02&quot;, &quot;2024-06-03&quot;], &quot;event_type&quot;: &quot;flood&quot;, &quot;error&quot;: &quot;&quot; }</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Golden</forename><surname>Answer</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Bangkok, Thailand</pubPlace>
+		</imprint>
+	</monogr>
+	<note>date&quot;: &quot;2024-05-28&quot;,&quot;event_type&quot;:&quot;flood &quot;} ----</note>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">Query: Show burn scars in the Amazon from this Spring. Today is</title>
+		<imprint>
+			<date type="published" when="2024-06-04">June 4, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title level="m" type="main">Golden Answer: {&quot;area</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+		</imprint>
+	</monogr>
+	<note>Amazon&quot;, &quot;date&quot;: &quot;2024-03-01&quot;,&quot;event_type&quot;:&quot;burn_scars&quot;} ----</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

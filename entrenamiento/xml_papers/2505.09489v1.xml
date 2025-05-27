@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Radon Exposure Dataset</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-14">14 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Dakotah</forename><surname>Maguire</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Oak Ridge National Laboratory</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jeremy</forename><surname>Logan</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Oak Ridge National Laboratory</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Heechan</forename><surname>Lee</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">Georgia Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Heidi</forename><surname>Hanson</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Oak Ridge National Laboratory</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Radon Exposure Dataset</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-14">14 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">2CF7A68336881E1FD2D5BDEF92D2B88D</idno>
+					<idno type="arXiv">arXiv:2505.09489v1[cs.CE]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:46+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract/>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Exposure to elevated radon levels in the home is one of the leading causes of lung cancer in the world <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b2">3]</ref>. The following study describes the creation of a comprehensive, state-level dataset designed to enable the modeling and prediction of household radon concentrations at Zip Code Tabulation Area (ZCTA) and sub-kilometer scales. Details include the data collection and processing involved in compiling physical and demographic factors for Pennsylvania and Utah. Attempting to mitigate this risk requires identifying the underlying geological causes and the populations that might be at risk. This work focuses on identifying at-risk populations throughout Pennsylvania and Utah, where radon levels are some of the highest in the country <ref type="bibr" target="#b2">[3]</ref>.</p><p>The resulting dataset harmonizes geological and demographic factors from various sources and spatial resolutions, including temperature, geochemistry, and soil characteristics. Demographic variables such as the household heating fuel used, the age of building, and the housing type provide further insight into which populations could be most susceptible in areas with potentially high radon levels.</p><p>This dataset also serves as a foundational resource for two other studies conducted by the authors. The resolution of the data provides a novel approach to predicting potential radon exposure, and the data processing conducted for these states can be scaled up to larger spatial resolutions (e.g., the Contiguous United States [CONUS]) and allow for a broad reclassification of radon exposure potential in the United States.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Census Data</head><p>Data from the American Community Survey 5-Year (ACS5) and the Decennial Census (DEC) was collected for Pennsylvania and Utah at the block-group and ZCTA levels for the years 2000, 2013, 2015, and 2020. The variables collected are presented in Table <ref type="table" target="#tab_0">1</ref>. Next, block-group data for each variable was converted to H3 format by using the the area interpolate() function from the PySAL Tobler library <ref type="bibr" target="#b3">[4]</ref>.</p><p>Differences in census table definitions across surveys require adjustments before an analysis can be conducted. After the 2000 DEC, the long-form survey was replaced with the American Community Survey <ref type="bibr" target="#b4">[5]</ref>. The US Census Bureau and other organizations such as IPUMS provide cross walks and documentation on how to correctly modify the data to ensure the variables are as close to each other as possible for analysis <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b6">7]</ref>. (3) Two changes were made for the variables in the P088 DEC table to reflect changes made in the 2010 DEC. P08800: Total 0.50 to 0.74 and P088004: Total 0.75 to 0.99 were combined and summed to match C17002 003 Estimate Total 0.50 to 0.99. Likewise, P088007: Total 1.50 to 1.74 and P088008: Total 1.75 to 1.84 were combined to align with C17002 006: Estimate Total 1.50 to 1.84.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Urban-Rural Classification</head><p>The DEC provides a classification system of geospatial layers at varying spatial resolutions and assigns an urban or rural designation to each component of the layer <ref type="bibr" target="#b7">[8]</ref>. The data used was provided in a text file that contained urban block groups from the 2020 ACS5. This urban classification was appended to the other ACS5 data using the block-group geographic identifiers. Areas not classified as urban were considered rural.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Soil and Geological Data</head><p>The soil dataset was created by using the gridded National Soil Survey Geographic Database (gNATSGO) provided by the US Department of Agriculture's (USDA's) Natural Resources Conservation Service <ref type="bibr" target="#b8">[9]</ref>. Based on the available literature <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b10">11]</ref>, thirty variables that have either shown correlations or are thought to have correlations to elevated radon levels were chosen and are presented in Table <ref type="table" target="#tab_1">2</ref>. Various soil characteristics (e.g., density, composition) can influence radon levels by affecting fluid movement and gas permeability. Additionally, soil moisture and water retention capacity can both play a role in radon levels <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b12">13]</ref>. Other factors that may influence radon accumulation or release, such as soil surface conditions or the presence of a basement, were also included in the analysis. The ArcGIS Toolbox Soil Data Development Toolkit, designed and distributed by the US Geological Survey (USGS), and the 30-m CONUS gNATSGO grid were used to create this data. Variable processing criteria were standardized based on the data type (continuous or categorical). The data criteria included a soil depth of 0-200 cm, and the measure was represented as a weighted average or as a dominant condition for categorical data. Additional processing was required to format the data to make it usable for analysis. This process is described in How To Create an On Demand Soil Property or Interpretation Grid from gNATSGO <ref type="bibr" target="#b13">[14]</ref>. The definitions of the variables can be found in the SSURGO Metadata Table Column Descriptions document <ref type="bibr" target="#b14">[15]</ref>. After individual rasters were obtained for the gNATSGO variables, each raster was reprojected to EPSG:4326. Next, pixel values were extracted and reorganized into a GeoPandas DataFrame with each row containing the single pixel value along with a point geometry derived from the associated longitude and latitude of the pixel centroid. Using those values, zonal statistics for the target hexagons were computed using geo to h3 aggregate from the h3-pandas library <ref type="bibr" target="#b15">[16]</ref>. To avoid memory overrun, the raster data was processed by using overlapping tiles. While processing each tile, the number of pixels used to produce the hexagon value for that tile was also tracked. This allowed the selection of hexagon values for hexagons in overlapping tile areas to be from a tile in which all contributing pixels were present by simply choosing the computed hex value with the largest number of pixels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Lithology</head><p>Lithological data was obtained from the USGS <ref type="bibr" target="#b16">[17]</ref>. The dataset contained 12 generalized lithological layers, which were reassigned based on the USGS state geologic map compilation for the CONUS. Various elements across different lithologic layers can contribute to increased radon levels. The data was converted to H3 format by using Python and the polyfill function from the h3-pandas library.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Soil Geochemistry</head><p>Increased levels of potassium, uranium, and thorium in the soil can correlate with higher concentrations of radon <ref type="bibr" target="#b17">[18]</ref>. These variables were obtained from a USGS geochemical and mineralogical survey <ref type="bibr" target="#b18">[19]</ref>. The available data was divided into three soil depths: O horizon (0-2 in.), A horizon (2-10 in.), and C horizon (30-48 in.) <ref type="bibr" target="#b19">[20]</ref>.</p><p>The data was processed using the USGS-provided shapefiles and converted into H3 hexagons for ZCTA-level aggregation. GeoTIFF files that contain mineralogical data included separate bands to represent RGB values rather than a single value per element. To interpret this data, the color codes were matched with the legends provided by the USGS, which indicated categorical values. A new raster band was then generated with these categorical values and used zonal statistics (specifically, the mode statistic with the geo to h3 aggregate() function from the h3pandas library) to assign representative values to each H3 level-8 hexagon. This process ensured that each hexagon in the study area had a consistent categorical representation of geochemical attributes, thereby enhancing the granularity and reliability of the radon risk predictions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Elevation Data</head><p>Elevation data for Pennsylvania and Utah was collected from the USGS's Global Multiresolution Terrain Elevation Data 2010 (GMTED2010) <ref type="bibr" target="#b20">[21]</ref>, which provides 30 arc-second resolution data for the United States. After obtaining 30 arc-second resolution raster format data, the elevation data was re-gridded to H3 level-8 hexagons using the geo to h3 aggregate() function from the h3pandas library <ref type="bibr" target="#b15">[16]</ref>. The geo to h3 aggregate() function was passed raster data values, with the location of each raster pixel represented by its centroid. The function provides aggregated values for each hexagon that contains at least one raster pixel centroid by aggregating all such values according to a specified aggregation operation (mean, in this case) <ref type="bibr" target="#b15">[16]</ref>. To fill in missing hexagons (which occurred due to grid misalignment), the authors applied a ring smoothing technique in which the values of missing hexagons are computed by averaging the values of adjacent hexagons <ref type="bibr" target="#b15">[16]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Hydrologic Data</head><p>Hydrologic variables were acquired from the USGS Hydrologic Landscape Regions dataset <ref type="bibr" target="#b21">[22]</ref>. Four variables most relevant to hydrological influences on radon mobility were selected from the the dataset: Aquifer Permeability Class, Minimum Elevation in Watershed, Relief of Watershed, and Percent Flat Land in Watershed <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b23">24]</ref>. The raw hydrologic data was provided as a vector dataset represented by a shapefile at a 1 km 2 scale. To align with the other datasets, the data was first read into a Geopandas GeoDataFrame, and then the polyfill resample() method from the h3-pandas library was applied to obtain values for each target H3 level-8 hexagon <ref type="bibr" target="#b15">[16]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">The GLobal HYdrogeology MaPS</head><p>The GLobal HYdrogeology MaPS dataset provides permeability and porosity data as vector (nongridded) data with an average polygon size of approximately 100 km 2 <ref type="bibr" target="#b24">[25]</ref>. Soil porosity has been identified as a significant factor in radon levels <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b23">24]</ref>. Conversion from the original shapefile to H3 format was done by using Python and the polyfill function from the h3-pandas library.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Meteorological Data</head><p>The Daymet dataset consists of daily values for each variable, and each day is given as a raster layer of modeled values estimated over a 1 km 2 grid covering North America. For the analysis, data from the CONUS was used for the following four variables during the 2008-2017 time period <ref type="bibr" target="#b25">[26]</ref>: Daily Total Precipitation, Snow Water Equivalent, Daily Minimum/Maximum 2-m Air Temperature, and Vapor Pressure. These variables were chosen because they provide insight into the atmospheric and hydrological limitations to radon's movement. These variables can influence the airflow of a building or the emission of radon from the ground, both of which directly affect radon levels in a structure <ref type="bibr" target="#b26">[27,</ref><ref type="bibr" target="#b27">28]</ref>.</p><p>The daily Daymet grids were first aggregated into monthly averages by using NumPy, and the grid centroids were transformed from the provided Lambert Conformal Conic projection to EPSG:4326. Next, the monthly grids were re-gridded to H3 level-8 by using areal interpolation (specifically the area interpolate() function from the PySAL Tobler library), and finally a ring-smoothing technique was used to fill in missing hexagon values caused by misalignment between raster cells and the H3 hexagons <ref type="bibr" target="#b3">[4]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">ZCTA Aggregation</head><p>Non-census data was converted to h3 level-8 resolution. Because the radon measurements were conducted in residential buildings, hexagons that do not have residents were masked by using LandScan day and night population data. The remaining areas with population were then aggregated to ZCTA resolution. This was accomplished by using areal interpolation (specifically the area interpolate() function from the PySAL Tobler library <ref type="bibr" target="#b3">[4]</ref>). This data was then merged with the Pennsylvania ACS5 and DEC ZCTA data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">Conclusion</head><p>This effort produced a robust, high-resolution dataset that integrates area-based measures and demographic variables that are critical for understanding household radon concentrations in Pennsylvania and Utah. By harmonizing open-source data across multiple sources and spatial scales, the resulting dataset establishes a scalable framework for assessing radon risk at sub-kilometer resolution. This resource supports more precise modeling of exposure potential and insight into the spatial variability of radon at fine geographic scales.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Census Variables Mapping and Descriptions</figDesc><table><row><cell>DEC Code</cell><cell>ACS Code</cell><cell>Description</cell></row><row><cell>P053001</cell><cell>B19013</cell><cell>Median Household Income in 1999</cell></row><row><cell>P053</cell><cell>B19013</cell><cell>Median Household Income in the Past 12 Months (Inflation-</cell></row><row><cell></cell><cell></cell><cell>Adjusted Dollars)</cell></row><row><cell>P088</cell><cell>C17002</cell><cell>Ratio of Income to Poverty Level in the Past 12 Months</cell></row><row><cell>H001</cell><cell>B25001</cell><cell>Housing Units</cell></row><row><cell>H006</cell><cell>B25002</cell><cell>Occupancy Status</cell></row><row><cell>H008</cell><cell>B25004</cell><cell>Vacancy Status</cell></row><row><cell>H030</cell><cell>B25024</cell><cell>Units in Structure</cell></row><row><cell>H034</cell><cell>B25034</cell><cell>Year Structure Built</cell></row><row><cell>H023</cell><cell>B25017</cell><cell>Rooms</cell></row><row><cell>H024</cell><cell>B25018</cell><cell>Median Number of Rooms</cell></row><row><cell>H040</cell><cell>B25040</cell><cell>House Heating Fuel</cell></row><row><cell cols="3">Three tables in the collected data required modification.</cell></row><row><cell cols="3">(1) The variables in table P088 from the 2000 DEC and table C17002 from the ACS5 needed slight</cell></row><row><cell cols="3">adjustments due to changes in table structure made in the 2010 DEC. H008003 Total Rented or</cell></row><row><cell cols="3">sold, not occupied was split into Estimate Total Sold, not occupied and Estimate Total Rented, not</cell></row><row><cell cols="3">occupied. For analysis, these variables were summed under the new name, B25004 003 005.</cell></row><row><cell cols="3">(2) The H034: Year Structure Built table in the 2000 DEC ends with the year 2000. The 1990-2000</cell></row><row><cell cols="3">decade was broken up into three date ranges-(1) H034002: Built 1990 to 1994, (2) H034003:</cell></row></table><note>Built 1995 to 1998, and  (3) H034004: Built 1999 to March 2000. These three variables were summed to match the ACS5 variable B25034 004: Estimate Total Built 1990 to 1999.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Soil Variable Names and Their Dataset Abbreviations</figDesc><table><row><cell>Variable</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgement</head><p>Notice: This manuscript has been authored by UT-Battelle LLC under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript, or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in accordance with the DOE Public Access Plan (https://www.energy.gov/doepublic-access-plan).</p><p>Oak Ridge National Laboratory's work on the LUCID: Low-dose Understanding, Cellular Insights, and Molecular Discoveries program was supported by the U.S. Department of Energy, Office of Science, Office of Biological and Environmental Research, under Contract UT-Battelle, LLC-ERKPA71</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Surgeon general releases national health advisory on radon</title>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">S</forename></persName>
+		</author>
+		<ptr target="https://www.adph.org/radon/assets/surgeongeneralradon.pdf" />
+		<imprint>
+			<date type="published" when="2005-01-13">2005. January 13. 2005</date>
+		</imprint>
+	</monogr>
+	<note>Department of Health and Human Services</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Air pollution and urban form in 20 global cities</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>González</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Tayarani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Waddell</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.eiar.2020.106444</idno>
+		<ptr target="https://doi.org/10.1016/j.eiar.2020.106444" />
+	</analytic>
+	<monogr>
+		<title level="j">Environmental Impact Assessment Review</title>
+		<imprint>
+			<biblScope unit="volume">85</biblScope>
+			<biblScope unit="page">106444</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Geology of radon in the united states</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Gundersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Schumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Otton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Dubiel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Owen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Dickinson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Geologic Controls on Radon</title>
+				<imprint>
+			<publisher>Geological Society of America</publisher>
+			<date type="published" when="1992">1992</date>
+			<biblScope unit="volume">271</biblScope>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">PySAL: A Python Library of Spatial Analytical Methods</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Rey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Anselin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Review of Regional Studies</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="5" to="27" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Understanding and using american community survey data: What all data users need to know</title>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">S</forename><surname>Census</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bureau</surname></persName>
+		</author>
+		<ptr target="https://www.census.gov/content/dam/Census/library/publications/2018/acs/acsgeneral" />
+		<imprint>
+			<date>2018 ch09</date>
+		</imprint>
+	</monogr>
+	<note>chapter 9: Differences between the acs and the decennial census,&quot; 2018, available online at. pdf</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">IPUMS National Historical Geographic Information System: Version 19</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Manson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schroeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">V</forename><surname>Riper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Knowles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kugler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ruggles</surname></persName>
+		</author>
+		<idno type="DOI">10.18128/D050.V19.0</idno>
+		<ptr target="http://doi.org/10.18128/D050.V19.0" />
+		<imprint/>
+	</monogr>
+	<note>0 [dataset],&quot; 2024, minneapolis, MN: IPUMS. [Online</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Comparing acs data</title>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">S</forename><surname>Census</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bureau</surname></persName>
+		</author>
+		<ptr target="https://www.census.gov/programs-surveys/acs/guidance/comparing-acs-data.html" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">A List of 2020 Census Tabulation Blocks Classified as Urban in the 2020 Census with Associated 2020 Census Urban Area Census (UACE) Codes and Names for the</title>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">S</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Puerto</forename><surname>Rico</surname></persName>
+		</author>
+		<ptr target="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/urban-rural.html" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>282 MB],&quot; U.S. Census Bureau</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Gridded National Soil Survey Geographic (gNATSGO) Database for the Conterminous United States</title>
+		<author>
+			<persName><forename type="first">Survey</forename><surname>Soil</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Staff</surname></persName>
+		</author>
+		<ptr target="https://nrcs.app.box.com/v/soils" />
+		<imprint>
+			<date type="published" when="2023-12-19">December 19 2023</date>
+		</imprint>
+	</monogr>
+	<note>United States Department of Agriculture, Natural Resources Conservation Service. fY2024 official release</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Environmental toxicology of radon</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Guthrie</surname></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/0360544290900454" />
+	</analytic>
+	<monogr>
+		<title level="j">Energy</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="527" to="534" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Study of radon exhalation in soil and building materials: Factors affecting radon exhalation rate</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Barros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">A</forename><surname>Fajardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Veiga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Cortes</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10967-012-1841-8</idno>
+		<ptr target="https://link.springer.com/article/10.1007/s10967-012-1841-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Radioanalytical and Nuclear Chemistry</title>
+		<imprint>
+			<biblScope unit="volume">295</biblScope>
+			<biblScope unit="page" from="865" to="874" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Modeling of radon exhalation from soil influenced by environmental parameters</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Busen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Scherb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Hürkamp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tschiersch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science of The Total Environment</title>
+		<imprint>
+			<biblScope unit="volume">656</biblScope>
+			<biblScope unit="page" from="1304" to="1311" />
+			<date type="published" when="2019">2019</date>
+			<publisher>Pavlos Kassomenos</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The effect of some soil characteristics on soil radon concentration and radon exhalation from soil surface</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Cheng</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/18811248.2004.9726337</idno>
+		<ptr target="https://doi.org/10.1080/18811248.2004.9726337" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Nuclear Science and Technology</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1113" to="1117" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Create soil property or interpretation grid from gnatsgo instructions</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note>USDA Natural Resources Conservation Service. Insert access date here</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<ptr target="https://www.nrcs.usda.gov/sites/default/files/2022-08/SSURGO-Metadata-Table-Column-Descriptions-Report.pdf" />
+		<title level="m">Ssurgo metadata table column descriptions report</title>
+				<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">H3-pandas: Pandas integration with uber h3 hexagons</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Jahn</surname></persName>
+		</author>
+		<ptr target="https://github.com/DahnJ/H3-Pandas" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Generalized lithology for the conterminous united states</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Anning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ator</surname></persName>
+		</author>
+		<idno type="DOI">10.5066/F7R78D4N</idno>
+		<ptr target="https://doi.org/10.5066/F7R78D4N" />
+		<imprint/>
+	</monogr>
+	<note>2017, u.S. Geological Survey data release</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Generalized lithology and lithologic units of the united states</title>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">S</forename><surname>Survey</surname></persName>
+		</author>
+		<ptr target="https://pubs.usgs.gov/gip/7000018/report.pdf" />
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">open-File Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Geochemical and mineralogical maps, with interpretation, for soils of the conterminous united states</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Solano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Woodruff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Cannon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ellefsen</surname></persName>
+		</author>
+		<idno type="DOI">10.3133/sir20175118</idno>
+		<ptr target="https://doi.org/10.3133/sir20175118" />
+	</analytic>
+	<monogr>
+		<title level="m">Scientific Investigations Report</title>
+				<imprint>
+			<date type="published" when="2017">2017-5118, 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Natural Resources Conservation Service</title>
+		<ptr target="https://www.nrcs.usda.gov/resources/education-and-teaching-materials/a-soil-profile" />
+		<imprint/>
+	</monogr>
+	<note>A soil profile</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Geographic information systems (gis) data for the national atlas of the united states</title>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">S</forename><surname>Survey</surname></persName>
+		</author>
+		<idno>2011-1073</idno>
+		<ptr target="https://pubs.usgs.gov/publication/ofr20111073" />
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">open-File Report</note>
+	<note>United States Geological Survey</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Attributes for NHDPlus Catchments (Version 1.1) for the Conterminous United States: Hydrologic Landscape Regions [Data set]</title>
+		<idno type="DOI">10.5066/P9142BM0</idno>
+		<ptr target="https://doi.org/10.5066/P9142BM0" />
+	</analytic>
+	<monogr>
+		<title level="j">U.S. Geological Survey</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Measurement and Determination of Radon Source Potential</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename><surname>Tanner</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+			<publisher>US Department of Commerce</publisher>
+			<pubPlace>Gaithersburg, MD</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Radon hazards in utah</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Sprinkel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">J</forename><surname>Solomon</surname></persName>
+		</author>
+		<ptr target="https://ugspub.nr.utah.gov/publications/circular/C-81.pdf" />
+		<imprint>
+			<date type="published" when="1990">1990</date>
+			<biblScope unit="volume">81</biblScope>
+			<pubPlace>Salt Lake City, UT</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">A glimpse beneath earth&apos;s surface: Global hydrogeology maps (glhymps) of permeability and porosity</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Gleeson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Moosdorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hartmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Van Beek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Geophysical Research Letters</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="2014G" to="L59856" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Daily surface weather data on a 1-km grid for north america, version 4 r1</title>
+		<author>
+			<persName><surname>Daymet</surname></persName>
+		</author>
+		<idno type="DOI">10.3334/ORNLDAAC/2129</idno>
+		<ptr target="https://doi.org/10.3334/ORNLDAAC/2129" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Modeling of radon exhalation from soil influenced by environmental parameters</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H Q G J T H</forename><surname>Busen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Scherb</surname></persName>
+		</author>
+		<ptr target="https://www.sciencedirect.com/science/article/pii/S0048969718348198" />
+	</analytic>
+	<monogr>
+		<title level="j">Science of The Total Environment</title>
+		<imprint>
+			<biblScope unit="volume">656</biblScope>
+			<biblScope unit="page" from="1304" to="1311" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Daily variation of the radon concentration indoors and outdoors and the influence of meteorological parameters</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R J</forename><surname>Porstendorfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Butterweck</surname></persName>
+		</author>
+		<ptr target="https://journals.lww.com/health-physics/abstract/1994/09000/dailyvariationoftheradonconcentrationindoors.11.aspx" />
+	</analytic>
+	<monogr>
+		<title level="j">Health Physics</title>
+		<imprint>
+			<biblScope unit="volume">67</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="283" to="287" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

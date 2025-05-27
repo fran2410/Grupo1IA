@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">&quot;Alexa, can you forget me?&quot; Machine Unlearning Benchmark in Spoken Language Understanding</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2025-05-21">21 May 2025</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Alkis</forename><surname>Koudounas</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Politecnico di Torino</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Claudio</forename><surname>Savelli</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Politecnico di Torino</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Flavio</forename><surname>Giobergia</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Politecnico di Torino</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Elena</forename><surname>Baralis</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Politecnico di Torino</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">&quot;Alexa, can you forget me?&quot; Machine Unlearning Benchmark in Spoken Language Understanding</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2025-05-21">21 May 2025</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">7EF9C46E873F8E320C93CF66EE896DE2</idno>
+					<idno type="arXiv">arXiv:2505.15700v1[cs.CL]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.2" ident="GROBID" when="2025-05-26T20:51+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>machine unlearning</term>
+					<term>spoken language understanding</term>
+					<term>speech recognition</term>
+					<term>transformers</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Machine unlearning, the process of efficiently removing specific information from machine learning models, is a growing area of interest for responsible AI. However, few studies have explored the effectiveness of unlearning methods on complex tasks, particularly speech-related ones. This paper introduces UnSLU-BENCH, the first benchmark for machine unlearning in spoken language understanding (SLU), focusing on four datasets spanning four languages. We address the unlearning of data from specific speakers as a way to evaluate the quality of potential "right to be forgotten" requests. We assess eight unlearning techniques and propose a novel metric to simultaneously better capture their efficacy, utility, and efficiency. UnSLU-BENCH sets a foundation for unlearning in SLU and reveals significant differences in the effectiveness and computational feasibility of various techniques.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">Introduction</head><p>Machine unlearning (MU) refers to the process of efficiently removing specific data points from a trained machine learning model without the need for a complete retraining from scratch <ref type="bibr" target="#b0">[1]</ref>. This capability is crucial for complying with data privacy regulations, such as the European Union's General Data Protection Regulation (GDPR) <ref type="bibr" target="#b1">[2]</ref> and the California Consumer Privacy Act (CCPA) <ref type="bibr" target="#b2">[3]</ref>, which promote the "right to be forgotten". By removing the influence of specific data points on machine learning models, MU helps maintain compliance with legal standards and protects user privacy <ref type="bibr" target="#b3">[4]</ref>.</p><p>In the context of speech, MU plays an even more important role. Speech data often contains personally identifiable information, making it particularly sensitive <ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b6">[7]</ref>. The ability to unlearn specific data ensures that individuals can exercise control over their personal information, thus increasing trust in AI systems. In addition, unlearning mechanisms can help reduce the influence of unreliable data and mitigate biases, contributing to the development of more fair speech recognition models <ref type="bibr" target="#b7">[8]</ref><ref type="bibr" target="#b8">[9]</ref><ref type="bibr" target="#b9">[10]</ref>.</p><p>One important example is the interaction with vocal assistants. These models process large amounts of user speech data to perform tasks such as intent classification <ref type="bibr" target="#b10">[11]</ref>. Ensuring that these systems can unlearn data from individual users upon request is essential to maintain user autonomy and privacy <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b12">13]</ref>. Despite the critical nature of this capability, there is a non-negligible gap in existing research on MU tailored to speech tasks. While MU has been explored in other domains, * Both authors contributed equally to this work.</p><p>including text <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b14">15]</ref> and image <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b16">17]</ref> processing, its application to speech tasks remains under-developed.</p><p>The authors of <ref type="bibr" target="#b17">[18]</ref> first explore the application of MU techniques for audio and speech processing. However, their study is limited to audio classification tasks and uses only a single speech dataset focused on keyword spotting, a task semantically much less complex than the intent classification challenges faced in Spoken Language Understanding (SLU). This emphasizes the need for MU techniques specifically designed to handle the complexities of SLU tasks.</p><p>To fill this gap, we introduce UnSLU-BENCH, the first comprehensive benchmark for machine unlearning in SLU. It includes four intent classification datasets in four different languages: Fluent Speech Commands (FSC) <ref type="bibr" target="#b18">[19]</ref> and SLURP <ref type="bibr" target="#b19">[20]</ref> in English, ITALIC <ref type="bibr" target="#b20">[21]</ref> in Italian, and SpeechMASSIVE <ref type="bibr" target="#b21">[22]</ref> in both German and French. For each dataset, we evaluate two transformer models, wav2vec 2.0 <ref type="bibr" target="#b22">[23]</ref> and HuBERT <ref type="bibr" target="#b23">[24]</ref> for English datasets, and XLS-R-128 <ref type="bibr" target="#b24">[25]</ref> and XLS-R-53 <ref type="bibr" target="#b25">[26]</ref> for the other languages. The latter model has been fine-tuned on Automatic Speech Recognition (ASR) for each target language.</p><p>UnSLU-BENCH offers a complete analysis of the effectiveness of MU techniques across different model architectures and dataset complexities. We evaluate eight distinct unlearning methods, examining both their effectiveness and computational efficiency in removing specific speakers' data from the models.</p><p>Our contributions can be summarized in four points: (1) we introduce the first benchmark for machine unlearning in SLU, with four datasets in four languages and two models per dataset;</p><p>(2) we evaluate eight unlearning techniques, measuring their impact on data removal and model performance; (3) we propose GUM, a novel MU metric considering efficacy, efficiency, and utility of unlearning methods simultaneously; and (4) we provide an in-depth analysis of unlearning performance across datasets, languages, model sizes and architectures.</p><p>This benchmark<ref type="foot" target="#foot_0">1</ref> aims to advance the development of privacy-preserving techniques in speech tasks, facilitating future research on more trustworthy voice assistant systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">Machine Unlearning</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Problem definition</head><p>We assume a given model θ that has been trained on a SLU dataset D. Each data point is represented as a triplet (x, y, s) ∈ D, where x denotes the utterance, y indicates the target intent, and s is the speaker's identity. We refer to the set of all speakers in the training set as S. We now assume that a subset of speakers S f ⊂ S asks for their data to be deleted. From a data perspective, this simply implies deleting from the database all samples D f = {(x, y, s)|s ∈ S f )}, referred to as the forget set. However, those samples have affected the learning process of θ. We refer to the remaining samples, i.e., Dr = D \ D f as the retain set. MU is tasked to remove the influence of points in D f from θ. In other words, MU algorithms produce a new model θ = ϕ(θ, Dr, D f ). As introduced in <ref type="bibr" target="#b26">[27]</ref>, we adopt the idea of a gold model, i.e., the model θ ′ that has been trained using only Dr. The gold model represents MU's ideal target (i.e., we want θ ≈ θ ′ ). However, retraining the model from scratch for every forget request is generally unfeasible, especially for larger models -hence the need for unlearning methods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">Unlearning methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>UnSLU-BENCH includes eight MU techniques as follows.</head><p>Fine-Tuning (FT) continues to train the model using all Dr for one epoch. Thus, being D f unseen for one additional epoch, it should be less influential than Dr. This method is commonly used as a baseline in the unlearning framework.</p><p>Negative Gradients (NG) <ref type="bibr" target="#b26">[27]</ref> finetunes the model using all D f only. Instead of a normal FT, the gradient direction is reversed during the backpropagation to make the model forget D f . NegGrad+ (NG+) <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b28">29]</ref> was proposed as an extension to Negative Gradients to avoid the so-called "catastrophic forgetting", i.e., the destruction of the model's utility. To do this, in addition of NG on D f , FT is done on the whole Dr.</p><p>Catastrophically forgetting the last k layers (CF-k) <ref type="bibr" target="#b29">[30]</ref> applies FT only to the final k layers of the model. In this way, the unlearning model is faster, as it applies backpropagation on those layers with the most relevant representations and keeps the rest of the network untouched. <ref type="bibr" target="#b30">[31]</ref> includes two phases, first it destroys the model ("impair"), and then it rebuilds its utility ("repair"). In the first, an error-maximizing noise is created for each element of D f , which is then used to train the model in combination with FT. The second phase consists of another epoch of FT only. Bad Teaching (BT) <ref type="bibr" target="#b31">[32]</ref> uses a competent teacher, i.e., a copy of the original model, and an incompetent teacher, i.e., the same model not fine-tuned on the task, in a distillation setup to train a student to behave like the first on Dr and like the second on D f . We also evaluate a light variant (BT-L) of the method with a random prediction generator as the incompetent teacher. <ref type="bibr" target="#b28">[29]</ref> uses a teacher-student setup with a single teacher, i.e., a copy of the original model. This method combines three different losses: a first loss maximizes student similarity with the teacher on Dr, a second loss minimizes it on D f , while a third task loss improves the final model utility.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>UNSIR (UNSIR)</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SCRUB (SCRUB)</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.">Unlearning metrics</head><p>The evaluation of unlearning algorithms is not trivial. In literature <ref type="bibr" target="#b32">[33]</ref>, the three main aspects of interest are efficacy (whether the unlearning process effectively erased the required information), efficiency (how costly the unlearning process is) and utility (whether the unlearned model still successfully addresses the original task). We argue that all three aspects should be considered at the same time. Ignoring any one of them can lead to trivial solutions. If we ignore efficacy, the best "unlearned" model is simply the original model. Since we are not checking whether the model has actually forgotten anything, this maximizes efficiency (no computational cost) and utility (performance remains the same). If we ignore efficiency, the best solution is to retrain the model from scratch. As we do not consider the cost of retraining, this maximizes efficacy (the model has never seen the forget set) and utility (the model performs as well as possible). If we ignore utility, the best unlearning method is a model that predicts random values. Since we do not care about the quality of the results, this maximizes efficacy (the model does not retain any knowledge of the forget set) and efficiency (no additional computation is needed).</p><p>Despite these considerations, very few works in literature account for combinations of some metrics. NoMUS <ref type="bibr" target="#b27">[28]</ref> considers efficacy and utility together. The work in <ref type="bibr" target="#b33">[34]</ref> selects the most effective method given a utility threshold, while <ref type="bibr" target="#b34">[35]</ref> chooses the hyperparameter configuration that maximizes efficacy and then evaluates models based on their efficacy.</p><p>In addition, metrics in literature are typically not considered in relation to the gold model performance. Since MU aims to produce a model that resembles the model retrained from scratch, we argue that it is fundamental to ground all measures to the gold model. We acknowledge, of course, that having access to the gold model is a constraint that is generally only met during model validation and not in deployment. This is a limitation that affects the entire field of MU, and no general, gold-free solution has been proposed yet.</p><p>In this work, we introduce a new metric, the Global Unlearning Metric (GUM), which considers all three aspects simultaneously, with comparisons against the gold model. We quantify utility as the similarity in performance between the gold and the unlearned models as</p><formula xml:id="formula_0">U = 1 − |F 1 (g) T − F 1 (u)</formula><p>T |, based on the macro F1 scores<ref type="foot" target="#foot_1">2</ref> on a test set (F 1</p><formula xml:id="formula_1">(g) T and F 1 (u) T ).</formula><p>We use the MIA (Membership Inference Attack), a commonly adopted metric in unlearning <ref type="bibr" target="#b32">[33]</ref>, to quantify the efficacy of a method. More specifically, the MIA of the gold model (MIA (g) ) is the ideal target, whereas the MIA of the original model MIA (o) is the starting point. Based on these boundaries, we quantify the efficacy E as:</p><formula xml:id="formula_2">E = 1 − MIA ′(u) − MIA ′(g) MIA (o) − MIA ′(g) 2 ,</formula><p>where MIA ′(u) = min {MIA (u) , MIA (o) } and MIA ′(g) = min {MIA (g) , (MIA ′(u) + MIA (o) )/2} are saturated versions of the gold and unlearned MIA that guarantee that E ∈ [0, 1] in edge cases. The quantity is squared to increase similarities for small gold-unlearned MIA distances. Finally, we quantify the efficiency as the ratio of the logarithms of the unlearning time T (u) and gold retraining time T (g) .</p><formula xml:id="formula_3">T = 1 − log(T (u) + 1) log(T (g) + 1</formula><p>) .</p><p>We define GUM as the weighted harmonic mean between these three quantities:</p><formula xml:id="formula_4">GU M = (1 + α + β)U ET αET + βU T + U E .</formula><p>The α and β parameters assign different importance to the three quantities. Here, we weigh all quantities equally (α = β = 1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">Experimental Setup</head><p>Datasets. UnSLU-BENCH includes four publicly available datasets: FSC <ref type="bibr" target="#b18">[19]</ref> and SLURP <ref type="bibr" target="#b19">[20]</ref> for English, ITALIC <ref type="bibr" target="#b20">[21]</ref> for Italian, and SpeechMASSIVE <ref type="bibr" target="#b21">[22]</ref> for German and French.</p><p>The FSC dataset is relatively straightforward, containing 31 intents. In contrast, SLURP, ITALIC, and SpeechMASSIVE are substantially larger, with 60 intents and greater linguistic diversity. ITALIC and SpeechMASSIVE are multilingual extensions of SLURP, covering Italian, and German-French, respectively <ref type="foot" target="#foot_2">3</ref> . Unlike other datasets, SLURP does not provide speaker-independent splits, which are, however, required by MU techniques to be effective. In fact, the identities present in the retain, forget, and test sets must be exclusive to successfully apply and evaluate unlearning methods. To address this, we propose new speaker-independent splits<ref type="foot" target="#foot_3">4</ref> . In the following tables, we refer to the new dataset as SLURP*. For the other datasets, we use the original splits, with the identities already separated between train and test splits. To create the forget set, individuals with at least 100 associated audio samples were randomly taken from each dataset. This ensures that a sufficiently representative number of points were used for training the model for each individual to be forgotten. This implies that the size of D f with respect to Dt is 2.5-5% on the different datasets. In this way, we simulate a real case scenario of a possible request to delete one's personal data from a model's training. Models. For each dataset, we fine-tune two transformer models. For the English datasets, we use wav2vec 2.0 <ref type="bibr" target="#b22">[23]</ref> and Hu-BERT <ref type="bibr" target="#b23">[24]</ref> in their base sizes. For the multilingual datasets, we use XLS-R 128 <ref type="bibr" target="#b24">[25]</ref> and XLS-R 53 <ref type="bibr" target="#b25">[26]</ref>. The latter is ASR-finetuned for the target language (e.g., Italian, German, French). Unlearning Methods. For each unlearner, we use two different sets of learning rates as parameter tuning depending on how destructive they are. Specifically, we employ 5e-07, 1e-06, and 5e-06 for NG, NG+, BT, BT-L, SCRUB, and 1e-05, 5e-05, and 1e-04 for FT, CF-k, UNSIR. For each experiment, we consider the method that achieves the highest utility, efficacy, and efficiency as the best through the use of GUM. Moreover, considering that the original implementation of UNSIR was made to forget entire classes within the dataset, we use the version proposed by <ref type="bibr" target="#b27">[28]</ref>, applicable also to individual samples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Results</head><p>In the following, we present experiments conducted to explore the behavior of MU techniques in SLU.</p><p>Benchmark results. The analysis of Tables <ref type="table" target="#tab_2">1-3</ref> shows distinct patterns in unlearning methods for MU performance across different models and datasets. The best F1 and MIA results are measured by their distance from our target's gold model.</p><p>NG consistently achieves the highest GUM scores. For instance, for wav2vec 2.0, it outperforms the second-best approach by +35% on FSC and +26% in SLURP*. For the larger multilingual XLS-R 53 model, it improves GUM by +39% on ITALIC and SpeechMASSIVE de-DE and by +48% on Speech-MASSIVE fr-FR. This improvement comes from its exceptional efficiency (speedups up to 1748× on FSC) and strong efficacy (MIA close to gold models, often ranking first or second among competitors, especially in multilingual datasets). NG+ achieves slightly higher F 1T and F 1F scores than NG in some cases, with comparable MIA scores. However, its overall GUM score is significantly lower as its speedup is one order of magnitude lower than NG. NG+ also suffers the "catastrophic forgetting" phenomena in some cases, such as XLS-R 128 (F 1F = .001 on ITALIC, .008 on SpeechMASSIVE fr-FR). FT balances utility and efficacy well for complex models. For example, XLS-R 128 on ITALIC achieves F 1T = .638, close to the gold model (F 1T = 0.643). However, it is less efficient due to full-network updates, with speedups ranging from 7.96× to 83.78×. CF-k delivers mixed results. It is the second-most efficient method but focuses only on the final layers, which risks incomplete unlearning. This is evident in its higher MIA scores compared to gold models (e.g., .612-.624 vs. gold .493-.520 in SpeechMAS-SIVE de-DE and fr-FR). Bad Teaching variants (BT, BT-L) show dataset-dependent performance. They achieve good GUM scores on FSC and SLURP but perform poorly on larger multilingual models on ITALIC and SpeechMASSIVE. SCRUB and UNSIR perform poorly in GUM, as they achieve moderate speedups (6.21×-65.40× and 6.55×-64.07×, respectively) but have inconsistent efficacy.</p><p>In conclusion, while most prior works <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b35">[36]</ref><ref type="bibr" target="#b36">[37]</ref><ref type="bibr" target="#b37">[38]</ref> emphasize efficacy and utility, ignoring efficiency, GUM bridges this gap by integrating all three factors. Although more recent alternatives have been proposed, we show that NG remains one of the most well-rounded approaches, performing consistently well across all metrics, as summarized by its large GUM scores.</p><p>(Un)learning rate. Given a fixed computing budget, the learning rate (LR) is an important parameter influencing the final effect for gradient-based unlearning. A small LR implies a lighter effect on the model: the original utility is preserved, but the unlearning effect is limited. Instead, a large LR affects the model more significantly, producing better unlearning, but affecting the overall performance. We study this effect empirically for a fixed unlearning technique, NG. The trade-off between utility and efficacy is clearly shown in Figure <ref type="figure" target="#fig_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Advantages of GUM.</head><p>In Table <ref type="table" target="#tab_3">4</ref>, we compare GUM against NoMUS, the weighted average between model accuracy and MIA <ref type="bibr" target="#b27">[28]</ref>. We first note that both Original and Gold models (two trivial "unlearning" approaches) achieve large NoMUS scores but obtain -by definition -a 0 GUM score. UNSIR deteriorates the efficacy, with a MIA score worse than the original model. As a consequence, the model obtains GUM = 0. However, the same method achieves NoMUS = .700. This unexpectedly large value is due to the fact that NoMUS does not contextualize MIA scores w.r.t. gold and original values. Finally, NG and SCRUB score similarly in terms of utility (F 1T ) and efficacy (MIA), resulting in similar NoMUS scores. However, NG is 1748 times faster than retraining, whereas SCRUB is "only" 65 times faster. This (large!) gap in efficiency is reflected in GUM scores (.563 vs .429).</p><p>Unlearning in SLURP*. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Conclusion</head><p>This paper introduced UnSLU-BENCH, a novel benchmark for machine unlearning techniques in SLU. We analyzed eight MU techniques across four datasets and two model architectures and sizes each. We also introduced GUM, a new metric that simultaneously evaluates the three key MU targets: efficacy, efficiency, and utility. UnSLU-BENCH provides a foundation for evaluating MU in SLU, highlighting the need for further research to develop more trustworthy voice-based AI systems.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Trade-off between utility (test and forget F1) and efficacy (MIA) on NG, as the LR changes (ITALIC, XLS-R 53-IT).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Unlearning on FSC. F 1T denotes macro F1 on test set, while F 1F on forget set. Best results (i.e., closest to gold model for F1 and MIA, highest for others) are in bold, secondbest underlined. Original and gold models are highlighted. .994 .996 .506 .431 5.870× .993 .997 .506 .464 5.690× SCRUB .994 1.00 .506 .439 6.210× .993 .998 .508 .479 6.220×</figDesc><table><row><cell></cell><cell>FSC</cell><cell></cell></row><row><cell>Method</cell><cell>wav2vec 2.0</cell><cell>HuBERT</cell></row><row><cell></cell><cell cols="2">F1T F1F MIA GUM Speedup F1T F1F MIA GUM Speedup</cell></row><row><cell cols="3">Orig. .994 1.00 .508 .000 1.00× .993 1.00 .511 .000 1.00×</cell></row><row><cell cols="3">Gold .993 .997 .503 .000 1.00× .991 .996 .507 .000 1.00×</cell></row><row><cell>FT</cell><cell cols="2">.993 .999 .504 .517 7.960× .979 .993 .508 .514 7.690×</cell></row><row><cell>NG</cell><cell cols="2">.987 .976 .501 .816 206.9× .992 .996 .514 .000 201.1×</cell></row><row><cell cols="3">NG+ .994 .994 .493 .000 4.030× .979 .929 .510 .336 3.900×</cell></row><row><cell cols="3">CF-k .994 1.00 .501 .606 16.97× .993 1.00 .505 .642 26.70×</cell></row><row><cell cols="3">UNSIR .991 1.00 .506 .447 6.550× .994 .998 .508 .484 6.380×</cell></row><row><cell>BT</cell><cell cols="2">.993 1.00 .508 .000 4.780× .993 .999 .504 .363 4.650×</cell></row><row><cell>BT-L</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Comparison of unlearning methods on SLURP* and ITALIC. Best results are in bold, second-best underlined. F1T F1F MIA GUM Speedup F1T F1F MIA GUM Speedup F1T F1F MIA GUM Speedup F1T F1F MIA GUM Speedup Orig. .689 1.000 .628 .000 1.000× .712 1.000 .613 .000 1.000× .688 .894 .632 .000 1.000× .778 1.000 .615 .000 1.000× Gold .707 .711 .506 .000 1.000× .704 .715 .492 .000 1.000× .643 .568 .532 .000 1.000× .784 .736 .478 .000 1.000×</figDesc><table><row><cell></cell><cell>SLURP*</cell><cell></cell><cell>ITALIC</cell><cell></cell></row><row><cell>Method</cell><cell>wav2vec 2.0</cell><cell>HuBERT</cell><cell>XLS-R 128</cell><cell>XLS-R 53-IT</cell></row><row><cell>FT</cell><cell cols="4">.638 .970 .648 .000 83.78× .734 1.000 .611 .088 79.00× .638 .671 .555 .590 30.80× .711 .850 .550 .551 31.10×</cell></row><row><cell>NG</cell><cell cols="4">.695 .986 .604 .563 1748× .718 .959 .587 .587 1654× .679 .868 .603 .646 613.4× .590 .621 .525 .766 623.0×</cell></row><row><cell cols="5">NG+ .701 .995 .603 .446 41.63× .630 .852 .453 .578 39.30× .658 .001 .932 .000 15.14× .743 .936 .582 .418 15.37×</cell></row><row><cell cols="5">CF-k .709 1.000 .626 .089 291.9× .715 1.000 .608 .196 274.2× .677 .871 .626 .253 98.59× .781 1.000 .609 .201 98.99×</cell></row><row><cell cols="5">UNSIR .673 1.000 .637 .000 64.07× .722 1.000 .613 .000 60.44× .636 .830 .621 .328 22.01× .775 1.000 .612 .109 22.26×</cell></row><row><cell>BT</cell><cell cols="4">.710 .999 .619 .275 50.35× .711 1.000 .613 .000 47.42× .683 .639 .481 .504 17.90× .731 .848 .557 .491 17.94×</cell></row><row><cell cols="5">BT-L .680 .995 .637 .000 61.74× .685 .907 .558 .578 58.11× .686 .651 .518 .558 22.02× .729 .876 .564 .499 22.21×</cell></row><row><cell cols="5">SCRUB .697 .999 .608 .429 64.82× .704 1.000 .600 .350 65.40× .442 .357 .533 .536 23.25× .770 .990 .610 .164 22.66×</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Comparison of unlearning methods on SpeechMASSIVE de-DE and fr-FR. Best results are in bold, second-best underlined. MIA GUM Speedup F1T F1F MIA GUM Speedup F1T F1F MIA GUM Speedup F1T F1F MIA GUM Speedup Orig. .584 .841 .621 .000 1.000× .778 1.000 .622 .000 1.000× .410 .572 .629 .000 1.000× .756 1.000 .635 .000 1.000× Gold .566 .529 .513 .000 1.000× .745 .706 .493 .000 1.000× .469 .460 .509 .000 1.000× .772 .800 .520 .000 1.000× FT .498 .548 .543 .588 34.34× .661 .905 .585 .464 17.79× .400 .465 .539 .545 18.12× .759 .974 .627 .255 18.42× NG .550 .726 .562 .797 1078× .764 .957 .587 .643 558.7× .317 .349 .564 .749 597.3× .768 .935 .617 .501 610.2× NG+ .540 .567 .487 .522 16.89× .759 .878 .568 .431 8.770× .382 .008 .882 .000 8.900× .759 .943 .620 .317 9.230× CF-k .587 .865 .622 .000 109.9× .777 1.000 .616 .208 56.93× .436 .594 .612 .414 58.23× .770 1.000 .624 .338 58.86× UNSIR .565 .788 .616 .197 27.46× .785 1.000 .619 .114 14.23× .420 .591 .620 .259 14.67× .768 1.000 .633 .089 14.94× BT .584 .789 .582 .489 20.02× .726 .945 .585 .418 10.41× .411 .583 .597 .409 10.60× .772 .981 .621 .317 10.82× BT-L .584 .786 .576 .523 24.87× .729 .948 .587 .434 12.94× .412 .574 .591 .447 13.18× .727 .981 .623 .306 13.42× SCRUB .584 .780 .600 .429 26.86× .781 1.000 .615 .211 13.43× .409 .532 .611 .358 13.68× .769 1.000 .633 .089 13.94×</figDesc><table><row><cell>de-De</cell></row><row><cell>Method</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 4 :</head><label>4</label><figDesc>Table 5  finally studies the trade-off between model utility and unlearning efficacy tied to training duration. We consider SLURP*, and produce various Origi-Unlearning metrics on SLURP*, wav2vec 2.0.</figDesc><table><row><cell cols="6">Method F1T MIA Speedup NoMUS GUM</cell></row><row><cell>Orig.</cell><cell>.689</cell><cell>.628</cell><cell>1.000×</cell><cell>.717</cell><cell>.000</cell></row><row><cell>Gold</cell><cell>.707</cell><cell>.506</cell><cell>1.000×</cell><cell>.848</cell><cell>.000</cell></row><row><cell>NG</cell><cell>.695</cell><cell>.604</cell><cell>1748×</cell><cell>.744</cell><cell>.563</cell></row><row><cell>UNSIR</cell><cell>.673</cell><cell>.637</cell><cell>64.07×</cell><cell>.700</cell><cell>.000</cell></row><row><cell>SCRUB</cell><cell>.697</cell><cell>.608</cell><cell>64.82×</cell><cell>.741</cell><cell>.429</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 5 :</head><label>5</label><figDesc>Variation in the difficulty of unlearning as the number of training epochs changes, wav2vec 2.0, SLURP*. Each experiment uses NG+ with LR = 5e-07. fine-tuned for different numbers of epochs (5 to 60); then we apply unlearning with NG+. At 60 epochs, the unlearned model achieves near-gold utility (F 1T = .696 vs. F 1 .707) but shows limited forgetting: its MIA (.611) is close to the original model one (.628), indicating persistent memorization of the forget set. This suggests that the prolonged training creates rigid decision boundaries that retain speaker-specific patterns, making unlearning interventions less effective. In other words, the model is overfitting the training data, making it harder to forget. Conversely, shorter training durations (5-15 epochs) show better alignment with the gold model (MIA .480-.538 vs. gold .491-.515). The ideal operating point appears around 11 epochs -sufficient training to recover utility (F 1T = .499) while maintaining low memorization risk (MIA = .480), before overfitting dominates. This demonstrates that effective MU requires careful calibration of training duration to balance how well the model learns with how permanently training data gets encoded.</figDesc><table><row><cell cols="3">Epochs F1T F1 (g) T</cell><cell cols="4">MIA MIA (g) MIA (o) GUM</cell></row><row><cell>5</cell><cell>.395</cell><cell>.398</cell><cell>.496</cell><cell>.510</cell><cell>.561</cell><cell>.678</cell></row><row><cell>7</cell><cell>.383</cell><cell>.419</cell><cell>.524</cell><cell>.515</cell><cell>.566</cell><cell>.680</cell></row><row><cell>11</cell><cell>.499</cell><cell>.487</cell><cell>.480</cell><cell>.492</cell><cell>.593</cell><cell>.686</cell></row><row><cell>15</cell><cell>.564</cell><cell>.550</cell><cell>.538</cell><cell>.491</cell><cell>.589</cell><cell>.644</cell></row><row><cell>60</cell><cell>.696</cell><cell>.707</cell><cell>.611</cell><cell>.506</cell><cell>.628</cell><cell>.421</cell></row><row><cell cols="7">nal models, (g)</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>T</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0">github.com/koudounasalkis/UnSLU-BENCH</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1">Other scenarios may require a change in utility function.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2">SpeechMASSIVE covers 12 languages, but we focus on German and French only.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3">These splits are publicly available in our project repository.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.">Acknowledgments</head><p>This work is supported by the FAIR -Future Artificial Intelligence Research and received funding from the European Union NextGenerationEU (PIANO NAZIONALE DI RIPRESA E RESILIENZA (PNRR) -MISSIONE 4 COMPONENTE 2, IN-VESTIMENTO 1.3 -D.D. 1555 11/10/2022, PE00000013) and the spoke "FutureHPC &amp; BigData" of the ICSC -Centro Nazionale di Ricerca in High-Performance Computing, Big Data and Quantum Computing funded by the European Union -NextGenerationEU. This manuscript reflects only the authors' views and opinions, neither the European Union nor the European Commission can be considered responsible for them.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Machine unlearning: A survey</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">S</forename><surname>Yu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3603620</idno>
+		<ptr target="https://doi.org/10.1145/3603620" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Comput. Surv</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<date type="published" when="2023-08">Aug. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">The eu general data protection regulation (gdpr)</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Voigt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Von</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bussche</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="10" to="5555" />
+			<pubPlace>Cham</pubPlace>
+		</imprint>
+	</monogr>
+	<note>A Practical Guide. 1st Ed</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">An introduction to the california consumer privacy act (ccpa)</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Goldman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+		<respStmt>
+			<orgName>Santa Clara Univ. Legal Studies Research Paper</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Machine unlearning: Solutions and challenges</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Jia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Emerging Topics in Computational Intelligence</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">The gdpr &amp; speech data: Reflections of legal and technology communities, first steps towards a common understanding</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nautsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jasserand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kindt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Todisco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Trancoso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Evans</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1907.03458</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Leveraging confidence models for identifying challenging data subgroups in speech models</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Koudounas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pastor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Mazzia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Giollo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Gueudre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Reale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Attanasio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cagliero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cumani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">De</forename><surname>Alfaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Baralis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amberti</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2024 IEEE International Conference on Acoustics, Speech, and Signal Processing Workshops (ICASSPW)</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="134" to="138" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Privacy preserving data selection for bias mitigation in speech models</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Koudounas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pastor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Mazzia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Giollo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Gueudre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Reale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cagliero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cumani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>De Alfaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Baralis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Amberti</surname></persName>
+		</author>
+		<ptr target="https://openreview.net/forum?id=UGViDDIXKd" />
+	</analytic>
+	<monogr>
+		<title level="m">ACL 2025 Industry Track</title>
+				<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Fast model debias with machine unlearning</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NeurIPS</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">A contrastive learning approach to mitigate bias in speech models</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Koudounas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Giobergia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pastor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Baralis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interspeech</title>
+				<meeting>Interspeech</meeting>
+		<imprint>
+			<date type="published" when="2024">2024. 2024</date>
+			<biblScope unit="page" from="827" to="831" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Supporting trustworthy ai through machine unlearning</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Hine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Novelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Taddeo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Floridi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science and Engineering Ethics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">43</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">From speech to data: Unraveling google&apos;s use of voice data for user profiling</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chen</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2403.05586</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Profiling humans from their voice</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Singh</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Recent trends in deep learning based personality detection</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Mehta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Majumder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gelbukh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Cambria</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence Review</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="2313" to="2339" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Knowledge unlearning for mitigating privacy risks in language models</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Yoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Cha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Logeswaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Seo</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2210.01504</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Who&apos;s harry potter? approximate unlearning in llms</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Eldan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Russinovich</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2310.02238</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Machine unlearning for image-to-image generative models</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C.-F</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Marculescu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Twelfth International Conference on Learning Representations</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Machine unlearning in generative ai: A survey</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Tian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jiang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<publisher>CoRR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Machine unlearning in audio: Bridging the modality gap via the prune and regrow paradigm</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Mason-Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Yannakoudakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Mascolo</surname></persName>
+		</author>
+		<ptr target="https://openreview.net/forum?id=i3tBySZWrR" />
+		<imprint>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Speech model pre-training for end-to-end spoken language understanding</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lugosch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ravanelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ignoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">S</forename><surname>Tomar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Bengio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. INTERSPEECH</title>
+				<meeting>INTERSPEECH</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">SLURP: A spoken language understanding resource package</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bastianelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vanzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Swietojanski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Rieser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">ITALIC: An Italian Intent Classification Dataset</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Koudounas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>La Quatra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Vaiani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Colomba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Attanasio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pastor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cagliero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Baralis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. INTERSPEECH 2023</title>
+				<meeting>INTERSPEECH 2023</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="page" from="2153" to="2157" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Speech-massive: A multilingual speech dataset for slu and beyond</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Calapodescu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gaido</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Negri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Besacier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. INTERSPEECH 2024</title>
+				<meeting>INTERSPEECH 2024</meeting>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+			<biblScope unit="page" from="817" to="821" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">wav2vec 2.0: A framework for self-supervised learning of speech representations</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NeurIPS</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Hubert: Self-supervised speech representation learning by masked prediction of hidden units</title>
+		<author>
+			<persName><forename type="first">W.-N</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bolte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-H</forename><forename type="middle">H</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lakhotia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Salakhutdinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE/ACM transactions on audio</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>speech, and language processing</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">XLS-R: Self-supervised Cross-lingual Speech Representation Learning at Scale</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Babu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. INTERSPEECH</title>
+				<meeting>INTERSPEECH</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Unsupervised cross-lingual representation learning for speech recognition</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Conneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Baevski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Collobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Auli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. INTERSPEECH 2021</title>
+				<meeting>INTERSPEECH 2021</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Eternal sunshine of the spotless net: Selective forgetting in deep networks</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Golatkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Achille</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Soatto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CVPR</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Towards machine unlearning benchmarks: Forgetting the personal identities in facial recognition systems</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Na</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2311.02240</idno>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Towards unbounded machine unlearning</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kurmanji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Triantafillou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Triantafillou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NeurIPS</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Towards adversarial evaluations for inexact machine unlearning</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Goel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Prabhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sanyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S.-N</forename><surname>Lim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Torr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Kumaraguru</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2201.06640</idno>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Fast yet effective machine unlearning</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Tarun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">S</forename><surname>Chundawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mandal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kankanhalli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Neural Networks and Learning Systems</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Can bad teaching induce forgetting? unlearning in deep networks using an incompetent teacher</title>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">S</forename><surname>Chundawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K</forename><surname>Tarun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mandal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kankanhalli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the AAAI Conference on Artificial Intelligence</title>
+				<meeting>the AAAI Conference on Artificial Intelligence</meeting>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="7210" to="7217" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Inexact unlearning needs more careful evaluations to avoid a false sense of privacy</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Shumailov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Triantafillou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Khalifa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Papernot</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2403.01218</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Unlearning sensitive content from large language models -semeval 2025 challenge</title>
+		<idno>20-02-2025</idno>
+		<ptr target="https://llmunlearningsemeval2025.github.io/" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">F</forename><surname>Cadet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Borovykh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Malekzadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ahmadi-Abhari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Haddadi</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2410.01276</idno>
+		<title level="m">Deep unlearn: Benchmarking machine unlearning</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Gone but not forgotten: Improved benchmarks for machine unlearning</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Grimes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Abidi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Frank</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gallagher</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2405.19211</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Rwku: Benchmarking real-world knowledge unlearning for large language models</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhao</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2406.10890</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><surname>Maini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Schwarzschild</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">C</forename><surname>Lipton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Z</forename><surname>Kolter</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2401.06121</idno>
+		<title level="m">Tofu: A task of fictitious unlearning for llms</title>
+				<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
