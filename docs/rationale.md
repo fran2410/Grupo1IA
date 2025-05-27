@@ -1,46 +1,49 @@
 # Rationale
 
-This document explains the validation process carried out on the 10 test articles that we located in the `papers` folder, transformed into XML files using [GROBID](https://github.com/kermitt2/grobid), stored in `data`, and analyzed with the results presented in `results`.
-This process ensured the reliability of the extracted and validated data in the AI-Open-Science project.
+## Project Motivation
 
+The exponential growth of scientific literature has made manual exploration of research increasingly unmanageable. To address this challenge, this project proposes an automated pipeline that leverages Natural Language Processing (NLP) and Semantic Web technologies to extract, enrich, and visualize knowledge from scientific publications in PDF format.
 
-## Testing
+## Objectives
 
-A test suite has been implemented using unittest to verify the correctness of the scripts. The tests cover:
+- **Automate** the processing of scientific articles (PDF) into structured and semantically meaningful representations.
+- **Extract** relevant metadata, named entities, topics, and document similarities.
+- **Generate** an RDF knowledge graph that connects papers with authors, topics, and other related entities.
+- **Visualize** the information interactively to facilitate exploration and discovery.
 
-- Figure counting accuracy
+## Tool Selection Rationale
 
-- Abstract keyword extraction
+- **GROBID** was selected for its proven accuracy in extracting structured metadata and full text from scientific PDFs, especially generating well-formed TEI XML outputs.
+- **HuggingFace Transformers** offers state-of-the-art NLP models (e.g., for Named Entity Recognition), enabling precise identification of authors, organizations, and other entities within acknowledgments.
+- **Sentence Transformers** and **KeyBERT** were used to semantically analyze abstracts via embeddings, allowing the computation of document similarity and automatic topic detection.
+- **rdflib** is a mature and flexible Python library for building and manipulating RDF graphs, making it ideal for the semantic representation layer of the project.
+- **Streamlit** was used to create a lightweight, interactive demo for visualizing the resulting RDF knowledge graph and semantic insights.
 
-- Link extraction while ignoring references
+## Pipeline Design
 
-- Link filtering and cleaning logic
+The overall workflow was designed as a modular pipeline with the following stages:
 
-- Handling of multiple files and empty directories
+1. **PDF Preprocessing**: All papers are processed with GROBID to extract structured TEI XML.
+2. **Text & Metadata Extraction**: Named entities and metadata are extracted using a dedicated script (`Text_Extraction.py`) and stored in JSON format.
+3. **Topic Modeling & Similarity Analysis**: Abstracts are encoded and analyzed with `similarity_analysis.py` to derive topic distributions and inter-paper similarity metrics.
+4. **RDF Graph Construction**: A comprehensive graph is built with `dict_to_rdf.py`, integrating metadata, authors, organizations, topics, and similarity links.
+5. **Web-based Exploration**: Using `app.py` and Streamlit, users can interactively browse the RDF graph and explore semantic relationships.
 
-**Running Tests**
+## Open Science Practices
 
-To execute the test suite, run:
-```bash
-python -m unittest tests/tests_01.py
-```
+This project adheres to open science principles by:
 
-## Validation of the Keyword Cloud
-For the generation of the keyword cloud, the following steps were followed:
-1. The PDFs were processed using the [Contador de palabras](https://www.contadordepalabras.com/) platform to obtain the keyword count of the abstracts.
-2. The keyword cloud was generated using the `keywordCloud.py` script.
-3. The list of words provided by the platform were compared with:
-   - The size of the words in the generated image.
-   - The debug messages from the script, which displayed the number of detected words in each document and their content.
+- Releasing all code and documentation in a public GitHub repository.
+- Relying exclusively on open-source tools and publicly available models.
+- Providing detailed metadata and intermediate results for reproducibility.
+- Including manual validation data to assess the performance of entity recognition models.
 
+## Intended Impact
 
-## Validation of Figures and Links
-To verify that the number of extracted figures and links was correct, the following steps were taken:
-1. The `charts.py` script was executed to generate a chart displaying the number of figures per document.
-2. Each document in the `papers` folder was manually reviewed to check if the extracted number of figures matched the content of the article.
-3. The `list.py` script was executed to extract links from the XML documents.
-4. The extracted links were verified to ensure correctness and that they did not include bibliographic references.
+By combining NLP, embeddings, and semantic technologies, the project facilitates structured exploration of scientific corpora, supporting researchers in tasks such as:
 
-
-
+- Discovering similar research works.
+- Identifying key contributors and affiliations.
+- Understanding topic distributions across a collection of papers.
+- Building foundations for automatic recommendation or trend analysis systems.
 
