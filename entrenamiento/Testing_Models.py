@@ -280,17 +280,17 @@ def extract_metadata(xml_path):
     return metadata
 
 MODELS = {
-    # "UnBIAS":        "newsmediabias/UnBIAS-Named-Entity-Recognition",
-    # "ConfliBERT":    "eventdata-utd/conflibert-named-entity-recognition", 
-    # "AventIQ":       "AventIQ-AI/bert-named-entity-recognition",
-    # # Modelos basados en SciBERT fine‑tuned para NER científico
-    # "SciBERT-JNLPBA":       "siddharthtumre/scibert-finetuned-ner",              
-    # "SciBERT-JNLPBA-cased": "fran-martinez/scibert_scivocab_cased_ner_jnlpba",   
-    # "PCSciBERT":            "jmzk96/PCSciBERT_uncased",                           
-    # # Modelos genéricos de alto rendimiento en CoNLL‑2003
-    # "BERT-CoNLL-Base":      "dslim/bert-base-NER",                                
-    # "BERT-CoNLL-Cased":     "kamalkraj/bert-base-cased-ner-conll2003",            
-    # "BERT-CoNLL-Large":     "dbmdz/bert-large-cased-finetuned-conll03-english",   
+    "UnBIAS":        "newsmediabias/UnBIAS-Named-Entity-Recognition",
+    "ConfliBERT":    "eventdata-utd/conflibert-named-entity-recognition", 
+    "AventIQ":       "AventIQ-AI/bert-named-entity-recognition",
+    # Modelos basados en SciBERT fine‑tuned para NER científico
+    "SciBERT-JNLPBA":       "siddharthtumre/scibert-finetuned-ner",              
+    "SciBERT-JNLPBA-cased": "fran-martinez/scibert_scivocab_cased_ner_jnlpba",   
+    "PCSciBERT":            "jmzk96/PCSciBERT_uncased",                           
+    # Modelos genéricos de alto rendimiento en CoNLL‑2003
+    "BERT-CoNLL-Base":      "dslim/bert-base-NER",                                
+    "BERT-CoNLL-Cased":     "kamalkraj/bert-base-cased-ner-conll2003",            
+    "BERT-CoNLL-Large":     "dbmdz/bert-large-cased-finetuned-conll03-english",   
     "Jean-Baptiste" : "Jean-Baptiste/roberta-large-ner-english"
 }
 

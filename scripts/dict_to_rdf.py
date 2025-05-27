@@ -46,21 +46,25 @@ for file_id, paper_info in papers.items():
     # Título
     if paper_info.get('titulo'):
         g.add((paper_uri, SCHEMA.name, Literal(paper_info['titulo'])))
-
+    else:
+        g.add((paper_uri, SCHEMA.name, Literal("No title available")))
     # Abstract (opcional: reconstruido desde palabras si no tienes campo específico)
     if paper_info.get('words'):
         abstract = " ".join(paper_info['words'][:100])
         g.add((paper_uri, SCHEMA.abstract, Literal(abstract)))
-
+    else:
+        g.add((paper_uri, SCHEMA.abstract, Literal("No abstract available")))
     # ID
     if paper_info.get('id'):
         tipo, valor = paper_info['id']
         g.add((paper_uri, SCHEMA.identifier, Literal(f"{tipo}:{valor}")))
-
+    else:
+        g.add((paper_uri, SCHEMA.identifier, Literal("Unknown ID")))
     # Fecha
     if paper_info.get('fecha'):
         g.add((paper_uri, SCHEMA.datePublished, Literal(paper_info['fecha'])))
-
+    else: 
+        g.add((paper_uri, SCHEMA.datePublished, Literal("Unknown")))
     # Autores
     for author_name in paper_info.get('autores', []):
         person_uri = EX["person/" + quitar_espacios(author_name)]

@@ -239,11 +239,13 @@ def process_xml_directory(xml_dir):
                         entities = ner_pipeline(chunk)
                         for entity in entities:
                             text = entity['word'].strip()
-                            label = entity['entity_group']
-                            if label in ['PERSON', 'PER', 'Person']:
-                                models[model_name]['personas'].add(text)
-                            elif label in ['ORGANIZATION', 'ORG', 'Organisation']:
-                                models[model_name]['organizaciones'].add(text)
+                            if text != ".":
+
+                                label = entity['entity_group']
+                                if label in ['PERSON', 'PER', 'Person']:
+                                    models[model_name]['personas'].add(text)
+                                elif label in ['ORGANIZATION', 'ORG', 'Organisation']:
+                                    models[model_name]['organizaciones'].add(text)
                     except Exception as e:
                         print(f" - Error con {model_name}: {str(e)}")
                         continue

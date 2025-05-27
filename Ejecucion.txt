@@ -1,6 +1,8 @@
 Pdfs en la carpeta "papers_pdf"
 Ejecutamos "pdfToXML.py" para convertirlo en "xml_papers"
-Ahora "Text_extraction.py" para obtener la informacion que queremos de los xml
-Ejecutamos "dict_to_rdf.py" lo que nos devuelve: "knowledge_graph_linked.rdf"
+Ahora "Text_extraction.py" para obtener la informacion que queremos de los xml                  python scripts/Text_Extraction.py xml_papers
+
+Ejecutamos "dict_to_rdf.py" lo que nos devuelve: "knowledge_graph_linked.rdf"                   python scripts/dict_to_rdf.py
+
 A continuacion ejecutamos "similarity_analysis.py" que usa el Text_Extraction y genera: "similarity_data.rdf"
 Ejecutamos app.py con: streamlit run scripts/app.py
