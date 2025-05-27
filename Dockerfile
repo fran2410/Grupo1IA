@@ -1,14 +1,14 @@
 FROM python:3.13
 
 # Clonar el repositorio
-RUN git clone https://github.com/fran2410/AI-Open-Science.git
+RUN git clone https://github.com/fran2410/GRUPO1IA.git
 
 # Instalar Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 RUN pip install poetry
 
-WORKDIR "/AI-Open-Science"
+WORKDIR "/GRUPO1IA"
 
 # Instalar dependencias con Poetry
 RUN poetry install
