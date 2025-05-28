@@ -1,5 +1,5 @@
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Python](https://img.shields.io/badge/python-3.13-blue)](https://www.python.org/) 
+[![Python](https://img.shields.io/badge/python-3.9-blue)](https://www.python.org/) 
 [![DOI](https://zenodo.org/badge/963343911.svg)](https://doi.org/10.5281/zenodo.15534912)
 [![Documentation Status](https://readthedocs.org/projects/grupo-1-ia/badge/?version=latest)](https://grupo-1-ia.readthedocs.io/en/latest/) 
 [![GitHub release](https://img.shields.io/github/release/fran2410/GRUPO1IA.svg)](https://github.com/fran2410/GRUPO1IA/releases/)
