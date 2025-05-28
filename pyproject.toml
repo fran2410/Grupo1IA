@@ -1,16 +1,16 @@
 [project]
 name = "GRUPO1IA"
 version = "1.0.0"
-description = "This repository provides tools for extracting and visualizing information from scientific papers in XML format. Using for document processing, the scripts generate keyword clouds, charts displaying the number of figures per document, and extract links from XML files."
+description = "his repository provides a complete pipeline for the advanced analysis of scientific articles."
 authors = [
-    { name = "fran2410", email = "franciscochicotemartin@gmail.com" }
+    { name = "fran2410", email = "franciscochicotemartin@gmail.com" },
+    { name = "Angel-Astiazaran", email = "asga.angel@gmail.com" }
 ]
 license = { text = "http://www.apache.org/licenses/LICENSE-2.0.html" }
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "matplotlib>=3.10.0,<4.0.0",
-    "wordcloud>=1.9.4,<2.0.0",
     "streamlit",
     "pandas",
     "networkx",
@@ -25,7 +25,10 @@ dependencies = [
     "scipy",
     "scikit-learn",
     "sentence-transformers",
-    "keybert"
+    "keybert", 
+    "streamlit",
+    "streamlit-agraph"
+
 ]
 
 [build-system]

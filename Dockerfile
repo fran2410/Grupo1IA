@@ -14,4 +14,4 @@ WORKDIR "/GRUPO1IA"
 RUN poetry install
 
 # Agregar instrucciones de uso y abrir bash
-CMD ["/bin/bash", "-c", "echo 'Usage:\n  poetry run python scripts/keywordCloud.py <folder_with_xmls> <output_folder>\n  poetry run python scripts/charts.py <folder_with_xmls> <output_folder>\n  poetry run python scripts/list.py <folder_with_xmls> <output_folder>\n' && exec bash"]
+CMD ["/bin/bash", "-c", "echo 'Usage:\n  poetry run python scripts/Text_Extraction.py <xml_folder>\n  poetry run python scripts/similarity_analysis.py\n  poetry run python scripts/dict_to_rdf.py\n  poetry run streamlit run app.py\n' && exec bash"]

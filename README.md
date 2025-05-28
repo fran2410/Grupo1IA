@@ -1,4 +1,4 @@
-# AI-Open-Science
+# Grupo 1 IA
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Python](https://img.shields.io/badge/python-3.13-blue)](https://www.python.org/) 
@@ -8,7 +8,7 @@
 [![HuggingFace](https://img.shields.io/badge/models-HuggingFace-red)](https://huggingface.co/)
 
 ## Description
-This repository provides a complete pipeline for the advanced analysis of scientific articles. Starting from a corpus of 30 PDF papers, it processes them using [GROBID](https://github.com/kermitt2/grobid), extracts metadata and named entities, performs semantic analyses such as topic modeling and document similarity, and builds an enriched and visualizable RDF knowledge graph.
+This repository provides a complete pipeline for the advanced analysis of scientific articles. Starting from 30 PDF papers, it processes them using [GROBID](https://github.com/kermitt2/grobid), extracts metadata and named entities, performs semantic analyses such as topic modeling and document similarity, and builds an enriched and visualizable RDF knowledge graph.
 
 ## Features
 Given a PDF file (or a directory with some of them) the tool will extract the data and make:
@@ -39,11 +39,8 @@ Given a PDF file (or a directory with some of them) the tool will extract the da
 │ ├── Text_Extraction.py  # Metadata and entity extraction from XML
 │ ├── app.py # Application for graph and data visualization
 │ ├── dict_to_rdf.py # Main RDF graph generation from JSON
-│ ├── pdfToXML # Uses Grobit to transform the papers into XML
 │ ├── similarity_analysis.py # Similarity analysis + topic modeling + RDF generation
 ├── xml_papers/ # Example XML files
-├── requirements.txt # Proyect depencencies
-├── README.md # This file
 ```
 
 # Installing fron Github
@@ -59,8 +56,8 @@ For installing Conda on your system, please visit the official Conda documentati
 
 #### Create and activate the Conda environment
 ```bash
-conda create -n ai-open-science python=3.13  ***********************
-conda activate ai-open-science ***********************
+conda create -n grupo1IA python=3.13  
+conda activate grupo1IA 
 ```
 
 ## 2. Poetry
@@ -78,19 +75,19 @@ poetry install
 We provide a Docker image with the scripts already installed. To run through Docker, you may build the Dockerfile provided in the repository by running:
 
 ```bash
-docker build -t ai-open-science . ***********************
+docker build -t grupo1IA . 
 ```
 
 Then, to run your image just type:
 
 ```bash
-docker run --rm -it  ai-open-science ***********************
+docker run --rm -it  grupo1IA 
 ```
 
 And you will be ready to use the scripts (see section below). If you want to have access to the results we recommend [mounting a volume](https://docs.docker.com/storage/volumes/). For example, the following command will mount the current directory as the `out` folder in the Docker image:
 
 ```bash
-docker run -it --rm -v $PWD/out:/AI-Open-Science/out ai-open-science ***********************
+docker run -it --rm -v $PWD/out:/GRUPO1IA/out grupo1IA 
 ```
 If you move any files produced by the scripts or set the output folder to `/out`, you will be able to see them in your current directory in the `/out` folder.
 
@@ -122,31 +119,32 @@ done
 ```
 ## Script Execution
 ### Extract entities and metadata from papers
-Extracts information such as authors, organizations, keywords, and metadata from GROBID-generated XML files.
+Extracts information such as authors, organizations, keywords, and metadata from GROBID-generated XML files. We use the folder `xml_papers` as an input
 
 **Command:**
 ```bash
-python scripts/Text_Extraction.py papersXML/
+python scripts/Text_Extraction.py <xml_folder>
 ```
-**Output:** `<output_folder>/Text_Extraction_results.json`
+**Output:** `output_files/Text_Extraction_results.json`
 
 ### Compute similarities and generate RDF  
 Extracts abstracts, detects topics, computes similarity, and generates the semantic RDF.
 
 **Command:**
 ```bash
-python scripts/similarity_analysis.py Text_Extraction_results.json
+python scripts/similarity_analysis.py 
 ```
-**Output:** `<output_folder>/similarity_matrix.png` `<output_folder>/dendrogram.png` `<output_folder>/similarity_data.rdf`
+**Output:** `output_files/similarity_matrix.png` `output_files/dendrogram.png` `output_files/similarity_data.rdf`
+
 
 ### Complete RDF graph  
 Generates the final knowledge graph including metadata, entities, topics, and similarity relationships.
 
 **Command:**
 ```bash
-python scripts/dict_to_rdf.py Text_Extraction_results.json
+python scripts/dict_to_rdf.py 
 ```
-**Output:** `<output_folder>/knowledge_graph_linked.rdf` 
+**Output:** `output_files/knowledge_graph_linked.rdf` 
 
 ### Web visualization
 Runs the interactive Streamlit demo to explore the knowledge graph.
@@ -155,16 +153,16 @@ Runs the interactive Streamlit demo to explore the knowledge graph.
 ```bash
 streamlit run app.py
 ```
-**Input:** `<output_folder>/knowledge_graph_linked.rdf` `<output_folder>/similarity_data.rdf`
+**Input:** `output_files/knowledge_graph_linked.rdf` `output_files/similarity_data.rdf`
 
 
 ## Examples
 
-For a sample execution with provided XML data, see the `entrenamiento/` directory or run the scripts with sample files in `pdf_papers/`.
+For a sample execution with provided XML data, see the `output_files/` directory or run the scripts with sample files in `xml_papers/`.
 
 ## Where to Get Help
 
-For any issues or questions, please open an issue in the [project issues](https://github.com/fran2410/AI-Open-Science/issues).
+For any issues or questions, please open an issue in the [project issues](https://github.com/fran2410/GRUPO1IA/issues).
 
 ## Acknowledgements
 
