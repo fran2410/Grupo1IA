@@ -1,4 +1,4 @@
-FROM python:3.13
+FROM python:3.9
 
 # Clonar el repositorio
 RUN git clone https://github.com/fran2410/GRUPO1IA.git
@@ -9,6 +9,8 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN pip install poetry
 
 WORKDIR "/GRUPO1IA"
+
+RUN poetry lock
 
 # Instalar dependencias con Poetry
 RUN poetry install
