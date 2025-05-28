@@ -1,10 +1,10 @@
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Python](https://img.shields.io/badge/python-3.13-blue)](https://www.python.org/) 
 [![DOI](https://zenodo.org/badge/963343911.svg)](https://doi.org/10.5281/zenodo.15534912)
-
-[![Documentation Status]() 
+[![Documentation Status](https://readthedocs.org/projects/grupo-1-ia/badge/?version=latest)](https://grupo-1-ia.readthedocs.io/en/latest/) 
 [![GitHub release](https://img.shields.io/github/release/fran2410/GRUPO1IA.svg)](https://github.com/fran2410/GRUPO1IA/releases/)
 [![HuggingFace](https://img.shields.io/badge/models-HuggingFace-red)](https://huggingface.co/)
+
 
 ## Description
 This repository provides a complete pipeline for the advanced analysis of scientific articles. Starting from 30 PDF papers, it processes them using [GROBID](https://github.com/kermitt2/grobid), extracts metadata and named entities, performs semantic analyses such as topic modeling and document similarity, and builds an enriched and visualizable RDF knowledge graph.
