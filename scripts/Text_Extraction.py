@@ -1,6 +1,7 @@
 import os
 import re
 import xml.etree.ElementTree as ET
+import nltk
 import torch
 import sys
 from transformers import pipeline
@@ -8,6 +9,8 @@ from nltk.tokenize import sent_tokenize
 from lxml import etree
 import json
 
+# Descargar recursos de NLTK si no están disponibles
+nltk.download('punkt')
 
 def split_text(text, max_tokens=256):
     sentences = sent_tokenize(text)
