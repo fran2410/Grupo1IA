@@ -8,15 +8,12 @@ authors = [
 ]
 license = { text = "http://www.apache.org/licenses/LICENSE-2.0.html" }
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.9"
 dependencies = [
-    "matplotlib>=3.10.0,<4.0.0",
-    "streamlit",
     "pandas",
     "networkx",
     "plotly",
     "rdflib",
-    "streamlit-agraph",
     "nltk",
     "torch",
     "transformers",
