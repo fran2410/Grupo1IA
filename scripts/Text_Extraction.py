@@ -11,6 +11,7 @@ import json
 
 # Descargar recursos de NLTK si no están disponibles
 nltk.download('punkt')
+nltk.download('punkt_tab')
 
 def split_text(text, max_tokens=256):
     sentences = sent_tokenize(text)
