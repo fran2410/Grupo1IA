@@ -25,31 +25,32 @@ done
 ```
 ## Script Execution
 ### Extract entities and metadata from papers
-Extracts information such as authors, organizations, keywords, and metadata from GROBID-generated XML files.
+Extracts information such as authors, organizations, keywords, and metadata from GROBID-generated XML files. We use the folder `xml_papers` as an input
 
 **Command:**
 ```bash
-python scripts/Text_Extraction.py papersXML/
+python scripts/Text_Extraction.py <xml_folder>
 ```
-**Output:** `<output_folder>/Text_Extraction_results.json`
+**Output:** `output_files/Text_Extraction_results.json`
 
 ### Compute similarities and generate RDF  
 Extracts abstracts, detects topics, computes similarity, and generates the semantic RDF.
 
 **Command:**
 ```bash
-python scripts/similarity_analysis.py Text_Extraction_results.json
+python scripts/similarity_analysis.py 
 ```
-**Output:** `<output_folder>/similarity_matrix.png` `<output_folder>/dendrogram.png` `<output_folder>/similarity_data.rdf`
+**Output:** `output_files/similarity_matrix.png` `output_files/dendrogram.png` `output_files/similarity_data.rdf`
+
 
 ### Complete RDF graph  
 Generates the final knowledge graph including metadata, entities, topics, and similarity relationships.
 
 **Command:**
 ```bash
-python scripts/dict_to_rdf.py Text_Extraction_results.json
+python scripts/dict_to_rdf.py 
 ```
-**Output:** `<output_folder>/knowledge_graph_linked.rdf` 
+**Output:** `output_files/knowledge_graph_linked.rdf` 
 
 ### Web visualization
 Runs the interactive Streamlit demo to explore the knowledge graph.
@@ -58,4 +59,4 @@ Runs the interactive Streamlit demo to explore the knowledge graph.
 ```bash
 streamlit run app.py
 ```
-**Input:** `<output_folder>/knowledge_graph_linked.rdf` `<output_folder>/similarity_data.rdf`
+**Input:** `output_files/knowledge_graph_linked.rdf` `output_files/similarity_data.rdf`

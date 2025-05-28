@@ -2,9 +2,10 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Python](https://img.shields.io/badge/python-3.13-blue)](https://www.python.org/) 
-[![DOI]() 
+[![DOI](https://zenodo.org/badge/963343911.svg)](https://doi.org/10.5281/zenodo.15534912)
+
 [![Documentation Status]() 
-[![GitHub release]()
+[![GitHub release](https://img.shields.io/github/release/fran2410/GRUPO1IA.svg)](https://github.com/fran2410/GRUPO1IA/releases/)
 [![HuggingFace](https://img.shields.io/badge/models-HuggingFace-red)](https://huggingface.co/)
 
 ## Description
@@ -56,7 +57,7 @@ For installing Conda on your system, please visit the official Conda documentati
 
 #### Create and activate the Conda environment
 ```bash
-conda create -n grupo1ia python=3.13  
+conda create -n grupo1ia python=3.9 
 conda activate grupo1ia 
 ```
 

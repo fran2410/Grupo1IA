@@ -1,17 +1,22 @@
-title: "AI-Open-Science"
+title: "GRUPO-1-IA"
 license: Apache-2.0
 authors:
   - family-names: Chicote
     given-names: Francisco
-cff-version: 1.0.0
-date-released: 2025-02-04
+  - family-names: Astiazaran
+    given-names: Angel
+cff-version: 1.1.0
+date-released: 2025-28-05
 message: "If you use this software, please cite the software itself."
 preferred-citation:
   authors:
   - family-names: Chicote
     given-names: Francisco
-  title: "AI-Open-Science"
+  - family-names: Astiazaran
+    given-names: Angel
+  title: "GRUPO-1-IA"
   type: software
   year: 2025
-  doi: 10.5281/zenodo.14882667
+  doi: 10.5281/zenodo.15534913
+
 

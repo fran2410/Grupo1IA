@@ -1,3 +1,4 @@
+
 # Installing fron Github
 
 ##  Clone the repository:
@@ -11,8 +12,8 @@ For installing Conda on your system, please visit the official Conda documentati
 
 #### Create and activate the Conda environment
 ```bash
-conda create -n ai-open-science python=3.13  ***********************
-conda activate ai-open-science ***********************
+conda create -n grupo1ia python=3.9  
+conda activate grupo1ia 
 ```
 
 ## 2. Poetry
@@ -30,23 +31,18 @@ poetry install
 We provide a Docker image with the scripts already installed. To run through Docker, you may build the Dockerfile provided in the repository by running:
 
 ```bash
-docker build -t ai-open-science . ***********************
+docker build -t grupo1ia . 
 ```
 
 Then, to run your image just type:
 
 ```bash
-docker run --rm -it  ai-open-science ***********************
+docker run --rm -it  grupo1ia 
 ```
 
 And you will be ready to use the scripts (see section below). If you want to have access to the results we recommend [mounting a volume](https://docs.docker.com/storage/volumes/). For example, the following command will mount the current directory as the `out` folder in the Docker image:
 
 ```bash
-docker run -it --rm -v $PWD/out:/AI-Open-Science/out ai-open-science ***********************
-```
-If you move any files produced by the scripts or set the output folder to `/out`, you will be able to see them in your current directory in the `/out` folder.
-
-```bash
-docker run -it --rm -v $PWD/out:/AI-Open-Science/out ai-open-science 
+docker run -it --rm -v $PWD/out:/GRUPO1IA/out grupo1ia 
 ```
 If you move any files produced by the scripts or set the output folder to `/out`, you will be able to see them in your current directory in the `/out` folder.

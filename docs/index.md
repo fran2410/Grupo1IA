@@ -1,18 +1,13 @@
-
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Python](https://img.shields.io/badge/python-3.13-blue)](https://www.python.org/) 
-[![DOI]() 
+[![DOI](https://zenodo.org/badge/963343911.svg)](https://doi.org/10.5281/zenodo.15534912)
+
 [![Documentation Status]() 
-[![GitHub release]()
+[![GitHub release](https://img.shields.io/github/release/fran2410/GRUPO1IA.svg)](https://github.com/fran2410/GRUPO1IA/releases/)
 [![HuggingFace](https://img.shields.io/badge/models-HuggingFace-red)](https://huggingface.co/)
 
-
 ## Description
-
-This repository provides a complete pipeline for the advanced analysis of scientific articles. Starting from a corpus of 30 PDF papers, it processes them using [GROBID](https://github.com/kermitt2/grobid), extracts metadata and named entities, performs semantic analyses such as topic modeling and document similarity, and builds an enriched and visualizable RDF knowledge graph.
-
-!!! info
-    For any issues or questions, please open an issue in the [project issues](https://github.com/fran2410/Grupo1IA/issues).
+This repository provides a complete pipeline for the advanced analysis of scientific articles. Starting from 30 PDF papers, it processes them using [GROBID](https://github.com/kermitt2/grobid), extracts metadata and named entities, performs semantic analyses such as topic modeling and document similarity, and builds an enriched and visualizable RDF knowledge graph.
 
 ## Features
 Given a PDF file (or a directory with some of them) the tool will extract the data and make:
@@ -22,8 +17,6 @@ Given a PDF file (or a directory with some of them) the tool will extract the da
 - Named Entity Recognition (NER) in acknowledgment sections.
 - Knowledge graph (RDF) construction with metadata, topics, authors, and relationships.
 - Interactive visualization through a app.py demo.
-
-
 
 ## Project Structure
 
@@ -45,11 +38,8 @@ Given a PDF file (or a directory with some of them) the tool will extract the da
 │ ├── Text_Extraction.py  # Metadata and entity extraction from XML
 │ ├── app.py # Application for graph and data visualization
 │ ├── dict_to_rdf.py # Main RDF graph generation from JSON
-│ ├── pdfToXML # Uses Grobit to transform the papers into XML
 │ ├── similarity_analysis.py # Similarity analysis + topic modeling + RDF generation
 ├── xml_papers/ # Example XML files
-├── requirements.txt # Proyect depencencies
-├── README.md # This file
 ```
 
 ## Used Technologies and Standards
