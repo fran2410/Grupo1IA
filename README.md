@@ -56,8 +56,8 @@ For installing Conda on your system, please visit the official Conda documentati
 
 #### Create and activate the Conda environment
 ```bash
-conda create -n grupo1IA python=3.13  
-conda activate grupo1IA 
+conda create -n grupo1ia python=3.13  
+conda activate grupo1ia 
 ```
 
 ## 2. Poetry
