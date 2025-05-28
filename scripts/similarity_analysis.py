@@ -25,8 +25,142 @@ kw_model = KeyBERT(embed_model)  # Modelo para extracción de keywords
 
 # === Mapeo de categorías ===
 category_mapping = {
-    # ... (mapeo existente de categorías)
+    # Machine Learning
+    ('learning', 'model', 'training', 'algorithm', 'prediction', 'predictive', 'learner', 'parametric', 'nonparametric', 'overfitting', 'generalization', 'optimization', 'hyperparameter'): 'Machine Learning',
+
+    # Deep Learning
+    ('neural', 'network', 'deep', 'cnn', 'lstm', 'rnn', 'transformer', 'encoder', 'decoder', 'attention', 'gan', 'autoencoder', 'backpropagation', 'dropout', 'activation', 'convolution'): 'Deep Learning',
+
+    # Supervised Learning
+    ('classification', 'classifier', 'supervised', 'regression', 'label', 'decision tree', 'random forest', 'svm', 'support vector', 'linear model', 'logistic', 'ground truth', 'auc', 'precision', 'recall'): 'Supervised Learning',
+
+    # Unsupervised Learning
+    ('clustering', 'unsupervised', 'kmeans', 'cluster', 'dbscan', 'hierarchical', 'embedding', 'dimensionality', 'latent', 't-sne', 'manifold', 'density estimation', 'pca'): 'Unsupervised Learning',
+
+    # Reinforcement Learning
+    ('reinforcement', 'policy', 'agent', 'q-learning', 'reward', 'environment', 'markov', 'mdp', 'value function', 'exploration', 'exploitation', 'bellman'): 'Reinforcement Learning',
+
+    # Feature Engineering
+    ('feature', 'selection', 'extraction', 'reduction', 'engineering', 'dimensionality', 'normalization', 'scaling', 'encoding', 'binarization', 'discretization'): 'Feature Engineering',
+
+    # Bayesian Methods
+    ('bayesian', 'probabilistic', 'inference', 'posterior', 'prior', 'likelihood', 'distribution', 'markov chain', 'monte carlo', 'mcmc', 'variational', 'belief', 'graphical model'): 'Bayesian Methods',
+
+    # Artificial Intelligence
+    ('artificial', 'intelligence', 'ai', 'intelligent', 'agent', 'autonomy', 'cognitive', 'adaptive', 'symbolic', 'machine reasoning'): 'Artificial Intelligence',
+
+    # Knowledge Systems
+    ('reasoning', 'knowledge', 'expert', 'inference', 'ontologies', 'rules', 'facts', 'knowledge base', 'semantic', 'logic'): 'Knowledge Systems',
+
+    # Automated Planning
+    ('planning', 'decision', 'heuristic', 'search', 'pathfinding', 'plan', 'goals', 'actions', 'state space'): 'Automated Planning',
+
+    # NLP
+    ('text', 'language', 'nlp', 'natural', 'processing', 'semantic', 'syntax', 'sentence', 'linguistic', 'document', 'parsing', 'vocabulary'): 'Natural Language Processing',
+
+    # Text Analysis
+    ('sentiment', 'analysis', 'mining', 'extraction', 'opinion', 'topic modeling', 'tf-idf', 'keywords', 'summarization', 'information retrieval'): 'Text Analysis',
+
+    # Machine Translation
+    ('translation', 'machine', 'linguistic', 'syntax', 'semantic', 'translating', 'bilingual', 'alignment', 'dictionary'): 'Machine Translation',
+
+    # Text Representation
+    ('tokenization', 'embedding', 'word2vec', 'bert', 'vectorization', 'contextual', 'glove', 'elmo', 'transformers'): 'Text Representation',
+
+    # Computer Vision
+    ('image', 'vision', 'visual', 'recognition', 'detection', 'perception', 'scene', 'photograph', 'multiview', 'augmentation'): 'Computer Vision',
+
+    # Image Analysis
+    ('object', 'face', 'pattern', 'segmentation', 'edge', 'contour', 'feature map', 'bounding box', 'masking', 'histogram'): 'Image Analysis',
+
+    # Video Analysis
+    ('video', 'motion', 'tracking', 'frame', 'temporal', 'optical flow', 'keyframe', 'stream'): 'Video Analysis',
+
+    # 3D Vision
+    ('camera', 'stereo', 'depth', 'calibration', 'point cloud', '3d reconstruction', 'lidar', 'mesh'): '3D Vision',
+
+    # Speech Processing
+    ('speech', 'audio', 'sound', 'recognition', 'phoneme', 'asr', 'speaker', 'transcription', 'prosody'): 'Speech Processing',
+
+    # Audio Signal Processing
+    ('signal', 'frequency', 'waveform', 'acoustic', 'fft', 'spectrogram', 'noise reduction', 'pitch', 'echo'): 'Audio Signal Processing',
+
+    # Healthcare
+    ('medical', 'health', 'clinical', 'patient', 'disease', 'epidemiology', 'healthcare', 'symptom', 'screening'): 'Healthcare',
+
+    # Medical Systems
+    ('diagnosis', 'treatment', 'therapeutic', 'medicine', 'radiology', 'monitoring', 'biomedical', 'prognosis', 'intervention'): 'Medical Systems',
+
+    # Bioinformatics
+    ('genome', 'dna', 'bioinformatics', 'protein', 'rna', 'sequencing', 'genomic', 'mutation', 'alignment', 'biological'): 'Bioinformatics',
+
+    # Neuroscience
+    ('brain', 'neuro', 'eeg', 'cognitive', 'fmri', 'neuron', 'psychology', 'neuroscience', 'mental'): 'Neuroscience & Cognitive Science',
+
+    # Data Science
+    ('data', 'analytics', 'statistics', 'mining', 'big', 'science', 'pattern', 'processing', 'insight'): 'Data Science',
+
+    # Data Analytics
+    ('visualization', 'exploratory', 'statistical', 'dashboard', 'plot', 'chart', 'analytics', 'bar graph', 'histogram'): 'Data Analytics',
+
+    # Time Series
+    ('time', 'series', 'temporal', 'forecast', 'trend', 'seasonality', 'lag', 'signal', 'autocorrelation'): 'Time Series Analysis',
+
+    # Software Engineering
+    ('architecture', 'design', 'implementation', 'performance', 'maintainability', 'refactoring', 'testing', 'debugging'): 'Software Engineering',
+
+    # Systems & Tech
+    ('system', 'software', 'technology', 'application', 'deployment', 'platform', 'infrastructure', 'engineering'): 'Systems & Technology',
+
+    # Network Systems
+    ('network', 'distributed', 'cloud', 'computing', 'scalability', 'latency', 'bandwidth', 'throughput'): 'Network Systems',
+
+    # Embedded Systems
+    ('real-time', 'embedded', 'firmware', 'runtime', 'microcontroller', 'low-power', 'scheduling'): 'Embedded Systems',
+
+    # Parallel Computing
+    ('parallel', 'concurrent', 'thread', 'multicore', 'synchronization', 'gpu', 'mpi', 'openmp'): 'Parallel Computing',
+
+    # Cybersecurity
+    ('security', 'privacy', 'encryption', 'cyber', 'firewall', 'cryptography', 'confidentiality', 'integrity', 'authentication'): 'Cybersecurity',
+
+    # IoT
+    ('iot', 'sensor', 'wireless', 'mobile', 'networked', 'embedded', 'connectivity', 'smart', 'device', 'edge'): 'IoT & Mobile Systems',
+
+    # Robotics
+    ('robot', 'robotics', 'autonomous', 'control', 'servo', 'motor', 'feedback', 'controller', 'planner', 'localization'): 'Robotics',
+
+    # HCI
+    ('interface', 'user', 'interaction', 'usability', 'ui', 'ux', 'design', 'human-centered', 'input', 'accessibility'): 'Human-Computer Interaction',
+
+    # VR/AR
+    ('vr', 'ar', 'virtual', 'augmented', 'immersive', 'headset', 'hologram', 'reality'): 'Virtual & Augmented Reality',
+
+    # Ethics
+    ('ethics', 'bias', 'fairness', 'transparency', 'accountability', 'discrimination', 'explainability'): 'AI Ethics',
+
+    # Education
+    ('education', 'learning', 'teaching', 'student', 'e-learning', 'mooc', 'edtech', 'tutor', 'curriculum'): 'Educational Technology',
+
+    # Optimization
+    ('optimization', 'constraint', 'linear', 'solver', 'objective', 'gradient', 'minimization', 'convergence', 'lp', 'qp'): 'Optimization',
+
+    # Operations Research
+    ('scheduling', 'routing', 'resource', 'allocation', 'queue', 'inventory', 'logistics'): 'Operations Research',
+
+    # Theoretical CS
+    ('complexity', 'algorithmic', 'proof', 'theorem', 'hardness', 'automata', 'turing', 'np-complete'): 'Theoretical Computer Science',
+
+    # Graph Theory
+    ('graph', 'tree', 'node', 'edge', 'path', 'cycle', 'bipartite', 'clique', 'adjacency'): 'Graph Theory',
+
+    # Blockchain
+    ('blockchain', 'ledger', 'crypto', 'decentralized', 'consensus', 'smart contract', 'mining', 'ethereum'): 'Blockchain Technology',
+
+    # Quantum
+    ('quantum', 'qubit', 'entanglement', 'superposition', 'quantization', 'qiskit', 'quantum gate', 'measurement'): 'Quantum Computing',
 }
+
 
 def classify_paper_category(text, top_keywords=10):
     '''
