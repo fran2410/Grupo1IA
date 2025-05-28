@@ -75,19 +75,19 @@ poetry install
 We provide a Docker image with the scripts already installed. To run through Docker, you may build the Dockerfile provided in the repository by running:
 
 ```bash
-docker build -t grupo1IA . 
+docker build -t grupo1ia . 
 ```
 
 Then, to run your image just type:
 
 ```bash
-docker run --rm -it  grupo1IA 
+docker run --rm -it  grupo1ia 
 ```
 
 And you will be ready to use the scripts (see section below). If you want to have access to the results we recommend [mounting a volume](https://docs.docker.com/storage/volumes/). For example, the following command will mount the current directory as the `out` folder in the Docker image:
 
 ```bash
-docker run -it --rm -v $PWD/out:/GRUPO1IA/out grupo1IA 
+docker run -it --rm -v $PWD/out:/GRUPO1IA/out grupo1ia 
 ```
 If you move any files produced by the scripts or set the output folder to `/out`, you will be able to see them in your current directory in the `/out` folder.
 
