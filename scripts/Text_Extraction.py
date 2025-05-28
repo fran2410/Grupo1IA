@@ -1,7 +1,6 @@
 import os
 import re
 import xml.etree.ElementTree as ET
-import nltk
 import torch
 import sys
 from transformers import pipeline
@@ -9,14 +8,6 @@ from nltk.tokenize import sent_tokenize
 from lxml import etree
 import json
 
-# Redirige la salida estándar al archivo
-# sys.stdout = open("NER_results.txt", "w")
-
-# EJECUTAR CON:
-# python scripts/Text_Extraction.py xml_papers -e
-
-# Descargar recursos de NLTK si no están disponibles
-nltk.download('punkt')
 
 def split_text(text, max_tokens=256):
     sentences = sent_tokenize(text)
